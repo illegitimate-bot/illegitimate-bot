@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { color } = require('../options.json');
 
 module.exports = {
     name: 'send',
@@ -38,7 +39,7 @@ module.exports = {
                 {
                     title: interaction.guild.name,
                     description: message,
-                    color: 0x00ff00,
+                    color: color,
                     thumbnail: {
                         url: interaction.guild.iconURL({ dynamic: true })
                     },

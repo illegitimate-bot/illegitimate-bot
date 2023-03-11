@@ -17,6 +17,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+client.events = new Collection();
 
 //! commands
 const cmdPath = path.join(__dirname, 'commands');
@@ -52,6 +53,43 @@ client.on(Events.InteractionCreate, async interaction => {
         await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true })
     }
 });
+
+//! button events
+const btnPath = path.join(__dirname, 'events', 'buttons');
+const btnFiles = fs.readdirSync(btnPath).filter(file => file.endsWith('.js'));
+
+for (const file of btnFiles) {
+    
+        const filePath = path.join(btnPath, file);
+        const btn = require(filePath);
+    
+        if ('name' in btn && 'execute' in btn && btn.type === 'button') {
+            client.events.set(btn.name, btn);
+        } else {
+            console.log(`[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`);
+        }
+}
+
+//! button event handler
+client.on(Events.InteractionCreate, async event => {
+    if(!event.isButton()) return;
+
+    const event2 = event.client.events.get(event.customId);
+
+    if (!event2) {
+        console.error(`No event matching ${event.customId} was found.`);
+        return;
+    }
+
+    try {
+        await event2.execute(event);
+    } catch (error) {
+        console.error(error);
+        await event.reply({ content: 'There was an error while executing this event!', ephemeral: true })
+    }
+})
+
+
 
 client.once(Events.Ready, c => {
     console.log(`Logged in as ${c.user.tag}!`);

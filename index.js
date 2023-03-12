@@ -12,7 +12,8 @@ const client = new Client({
     ],
     partials: [
         Partials.GuildMember,
-        Partials.User
+        Partials.User,
+        Partials.Message
     ]
 });
 

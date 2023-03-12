@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const { color } = require('../../options.json');
 
 module.exports = {
@@ -21,7 +23,9 @@ module.exports = {
             }]
         });
 
+        const filePath = path.join(__dirname, `../../applications/${applicantId}`);
+        fs.rmSync(filePath, { force: true });
+        
         await channel.delete();
-
     }
 };

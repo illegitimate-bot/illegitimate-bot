@@ -1,5 +1,7 @@
 const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { color } = require('../../options.json');
+const path = require('path');
+const fs = require('fs');
 
 module.exports = {
     name: 'guildapply',
@@ -14,6 +16,14 @@ module.exports = {
 
         if (interaction.customId === 'guildapply') {
 
+            // check if there is a file in the applications folder with the user's id as the name
+            const applicationFile = path.join(__dirname, '../../applications/' + user.id);
+
+            if (fs.existsSync(applicationFile)) {
+                await interaction.reply({ content: "You already have an application in progress.", ephemeral: true });
+                return
+            }
+            
             const tooLong = new EmbedBuilder()
                 .setDescription("You took too long to respond.")
                 .setColor(embedColor)
@@ -214,6 +224,10 @@ module.exports = {
                     color: embedColor
                 }]
             })
+            
+            fs.writeFile(`./applications/${user.id}`, answer1_1, function (err) {
+                if (err) throw err;
+            });
 
             await guild.channels.create({
                 name: `Application-${user.username}`,
@@ -286,6 +300,12 @@ module.exports = {
                                 .setCustomId("guildapplicationdeny")
                                 .setLabel("Deny")
                                 .setStyle(ButtonStyle.Danger)
+                        ),
+                        new ActionRowBuilder().addComponents(
+                            new ButtonBuilder()
+                                .setCustomId("checkstats")
+                                .setLabel("Check Stats")
+                                .setStyle(ButtonStyle.Secondary)
                         )
                     ]
                 });

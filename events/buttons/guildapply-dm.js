@@ -2,9 +2,9 @@ const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowB
 const { color } = require('../../options.json');
 
 module.exports = {
-    // name: 'guildapply',
-    // description: 'Guild application button.',
-    // type: 'button',
+    name: 'guildapply',
+    description: 'Guild application button.',
+    type: 'button',
 
     async execute(interaction) {
 
@@ -30,56 +30,43 @@ module.exports = {
 
             }).then(async channel => {
 
-                await channel.send({
+                await interaction.user.send({
                     embeds: [{
                         title: 'Guild Application',
                         description: "Please answer the following questions to apply for the guild.\n" + 
                         "If you wish to cancel your application, please press the button below or type `cancel`.",
                         color: embedColor,
-                    }],
-
-                    components: [
-                        new ActionRowBuilder().addComponents(
-                            new ButtonBuilder()
-                                .setCustomId('guildapplycancel')
-                                .setLabel('Cancel')
-                                .setStyle(ButtonStyle.Danger)
-                                .setEmoji({ name: '❌' })
-                        )
-                    ]
-                    
+                    }]
                 });
 
-                const input = await channel.awaitMessages({
+                const input = await interaction.user.awaitMessages({
                     filter: m => m.author.id === user.id,
                     max: 1,
                     time: 1000 * 60
                 });
 
                 if (input.size === 0) {
-                    await channel.delete();
                     return
                 }
 
                 if (input.first().content.toLowerCase() !== 'yes') {
-                    await channel.delete();
+                    await interaction.user.send('Application cancelled.');
                     return
                 }
 
-                const question1 = await channel.send("1st")
-                const answer1 = await channel.awaitMessages({
+                const question1 = await interaction.user.send("1st")
+                const answer1 = await interaction.user.awaitMessages({
                     filter: m => m.author.id === user.id,
                     max: 1,
                     time: 1000 * 60 * 5
                 });
 
                 if (answer1.size === 0) {
-                    await channel.delete();
                     return
                 }
 
                 if (answer1.first().content.toLowerCase() === 'cancel') {
-                    await channel.delete();
+                    await interaction.user.send('Application cancelled.');
                     return
                 }
 

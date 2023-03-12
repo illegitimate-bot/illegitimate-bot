@@ -9,11 +9,13 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.MessageContent,
+        GatewayIntentBits.DirectMessages
     ],
     partials: [
         Partials.GuildMember,
         Partials.User,
-        Partials.Message
+        Partials.Message,
+        Partials.Channel
     ]
 });
 

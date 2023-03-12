@@ -50,43 +50,75 @@ module.exports = {
                     
                 });
 
+                // confiraaamtion message
                 const input = await channel.awaitMessages({
                     filter: m => m.author.id === user.id,
                     max: 1,
                     time: 1000 * 60
                 });
-
                 if (input.size === 0) {
                     await channel.delete();
                     return
                 }
-
                 if (input.first().content.toLowerCase() !== 'yes') {
                     await channel.delete();
                     return
                 }
 
+                // question 1
                 const question1 = await channel.send("1st")
                 const answer1 = await channel.awaitMessages({
                     filter: m => m.author.id === user.id,
                     max: 1,
                     time: 1000 * 60 * 5
                 });
-
                 if (answer1.size === 0) {
                     await channel.delete();
                     return
                 }
-
                 if (answer1.first().content.toLowerCase() === 'cancel') {
                     await channel.delete();
                     return
                 }
-
                 const answer1_1 = answer1.first().content
 
-                console.log(answer1_1)
+                // question 2
+                const question2 = await channel.send("2nd")
+                const answer2 = await channel.awaitMessages({
+                    filter: m => m.author.id === user.id,
+                    max: 1,
+                    time: 1000 * 60 * 15
+                });
+                if (answer2.size === 0) {
+                    await channel.delete();
+                    return
+                }
+                if (answer2.first().content.toLowerCase() === 'cancel') {
+                    await channel.delete();
+                    return
+                }
+                const answer2_1 = answer2.first().content
 
+                // question 3
+                const question3 = await channel.send("3rd")
+                const answer3 = await channel.awaitMessages({
+                    filter: m => m.author.id === user.id,
+                    max: 1,
+                    time: 1000 * 60 * 15
+                });
+                if (answer3.size === 0) {
+                    await channel.delete();
+                    return
+                }
+                if (answer3.first().content.toLowerCase() === 'cancel') {
+                    await channel.delete();
+                    return
+                }
+                const answer3_1 = answer3.first().content
+
+                // output message
+                await channel.bulkDelete(100);
+                await channel.send("Answer 1: " + answer1_1 + "\n" + "Answer 2: " + answer2_1 + "\n" + "Answer 3: " + answer3_1);
             });
 
             await interaction.reply({ content: 'Application channel created', ephemeral: true });

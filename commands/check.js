@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
-const { hypixelApiKey, dev } = require('../config.json');
+const { hypixelApiKey } = require('../config.json');
 const { color } = require('../options.json');
+const fetch = require('axios')
 
 module.exports = {
     name: 'check',
@@ -23,18 +24,12 @@ module.exports = {
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
         const slothPixel = "https://api.slothpixel.me/api/players/";
         const minotar = "https://minotar.net/helm/";
-        const fetch = require('axios');
         const embedColor = Number(color.replace("#", "0x"));
 
         const userCheck = await fetch(mojang + ign);
         const stats = await fetch(slothPixel + ign);
         const head = minotar + ign;
-
-        if (interaction.user.id !== dev) {
-            interaction.reply('This command is currently under development.')
-            return
-        }
-
+        
         if (!ign) {
             interaction.reply('Please provide a player\'s IGN.')
             return
@@ -49,9 +44,6 @@ module.exports = {
             interaction.reply('That player doesn\'t exist. [Hypixel]')
             return
         }
-
-        const level = stats.data.stats.SkyWars.level;
-
 
         await interaction.reply({
             embeds: [{

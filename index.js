@@ -1,5 +1,6 @@
 const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection } = require('discord.js');
-const { token, hypixelApiKey } = require('./config.json');
+const { token, mongoURI } = require('./config.json');
+const { connect } = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 
@@ -107,3 +108,7 @@ client.on(Events.ClientReady, () => {
 });
 
 client.login(token);
+
+connect(mongoURI, {}).then(() => {
+    console.log('Connected to MongoDB');
+})

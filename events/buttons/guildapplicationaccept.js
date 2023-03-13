@@ -24,6 +24,41 @@ module.exports = {
             }]
         });
 
+        // fetch the first message in the channel and disable the buttons on it
+
+        const message = await channel.messages.fetch({ limit: 1 });
+        const messageID = message.first().id;
+
+        await channel.messages.fetch(messageID).then(async (message) => {
+
+            await message.edit({
+                components: [
+                    new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("guildapplicationaccept")
+                            .setLabel("Accept")
+                            .setStyle(ButtonStyle.Primary)
+                            .setDisabled(true)
+                    ),
+                    new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("guildapplicationdeny")
+                            .setLabel("Deny")
+                            .setStyle(ButtonStyle.Danger)
+                            .setDisabled(true)
+                    ),
+                    new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("checkstats")
+                            .setLabel("Check Stats")
+                            .setStyle(ButtonStyle.Secondary)
+                            .setDisabled(true)
+                    )
+                ]
+            });
+
+        });
+
         await interaction.reply({
             embeds: [{ 
                 title: applicantUsername + " - Application",

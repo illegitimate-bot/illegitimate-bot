@@ -16,9 +16,7 @@ module.exports = {
 
         if (interaction.customId === 'guildapply') {
 
-            // check if there is a file in the applications folder with the user's id as the name
             const applicationFile = path.join(__dirname, '../../applications/' + user.id);
-
             if (fs.existsSync(applicationFile)) {
                 await interaction.reply({ content: "You already have an application in progress.", ephemeral: true });
                 return
@@ -27,25 +25,26 @@ module.exports = {
             const tooLong = new EmbedBuilder()
                 .setDescription("You took too long to respond.")
                 .setColor(embedColor)
-
             const cancelled = new EmbedBuilder()
                 .setDescription("You have cancelled your application.")
                 .setColor(embedColor)
 
-            await interaction.reply({ content: "Please check your DMs.", ephemeral: true})
-
-            if (!user.dmChannel) {
-                await user.createDM();
+            try {
+                await user.send({
+                    embeds: [{
+                        title: 'Guild Application',
+                        description: "Please answer the following questions to apply for the guild.\n" + 
+                        "If you wish to cancel your application, please press the button below or type `cancel`.",
+                        color: embedColor,
+                    }]
+                })
+            } catch (error) {
+                await interaction.reply({ content: "Please enable your DMs.", ephemeral: true });
+                return
             }
 
-            await user.send({
-                embeds: [{
-                    title: 'Guild Application',
-                    description: "Please answer the following questions to apply for the guild.\n" + 
-                    "If you wish to cancel your application, please press the button below or type `cancel`.",
-                    color: embedColor,
-                }]
-            });
+            await interaction.reply({ content: "Please check your DMs.", ephemeral: true})
+
 
             const input = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
@@ -228,6 +227,8 @@ module.exports = {
             fs.writeFile(`./applications/${user.id}`, answer1_1, function (err) {
                 if (err) throw err;
             });
+
+            await user.deleteDM();
 
             await guild.channels.create({
                 name: `Application-${user.username}`,

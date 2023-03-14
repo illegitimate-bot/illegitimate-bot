@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { color } = require('../../options.json');
+const { color } = require('../../config/options.json');
 
 module.exports = {
     name: 'guildapplicationdeny',

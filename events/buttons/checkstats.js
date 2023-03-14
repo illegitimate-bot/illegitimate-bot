@@ -1,4 +1,4 @@
-const { color } = require('../../options.json');
+const { color } = require('../../config/options.json');
 const { dev } = require('../../config.json');
 const fetch = require('axios');
 const fs = require('fs');

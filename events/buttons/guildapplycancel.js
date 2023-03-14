@@ -1,4 +1,4 @@
-const { color } = require('../../options.json');
+const { color } = require('../../config/options.json');
 
 module.exports = {
     name: 'guildapplycancel',

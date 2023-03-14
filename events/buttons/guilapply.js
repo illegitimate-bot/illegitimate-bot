@@ -1,5 +1,5 @@
 const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
-const { color } = require('../../options.json');
+const { color } = require('../../config/options.json');
 const path = require('path');
 const fs = require('fs');
 

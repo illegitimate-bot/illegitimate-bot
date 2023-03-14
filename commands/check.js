@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const { hypixelApiKey } = require('../config.json');
-const { color } = require('../options.json');
+const { color } = require('../config/options.json');
 const fetch = require('axios')
 
 module.exports = {

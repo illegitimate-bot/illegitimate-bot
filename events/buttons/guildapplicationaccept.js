@@ -1,5 +1,5 @@
 const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
-const { color } = require('../../options.json');
+const { color } = require('../../config/options.json');
 
 module.exports = {
     name: 'guildapplicationaccept',

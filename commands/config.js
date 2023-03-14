@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
-const { color } = require('../options.json');
+const { color } = require('../config/options.json');
 
 module.exports = {
     name: 'config',
@@ -37,6 +37,7 @@ module.exports = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
+                        iconURL: interaction.guild.iconURL({ dynamic: true })
                     },
                     thumbnail: {
                         url: interaction.guild.iconURL({ dynamic: true })

@@ -4,7 +4,7 @@ const fetch = require('axios');
 const { color } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
-const { gm, manager, moderator, beast, member, trialmember } = require('../config/options.json');
+const { gm, manager, moderator, beast, member, trialmember } = require('../config/roles.json');
 
 
 module.exports = {

@@ -39,7 +39,7 @@ module.exports = {
             return
         }
 
-        if (!userCheck.data.id) {
+        if (!userUUID) {
             interaction.reply('That player doesn\'t exist. [Mojang]')
             return
         }

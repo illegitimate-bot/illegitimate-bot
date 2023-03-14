@@ -33,8 +33,10 @@ module.exports = {
         const embedColor = Number(color.replace("#", "0x"));
 
         const userCheck = await fetch(mojang + ign);
-        const hypixelCheck = await fetch(slothPixel + ign);
-        const guildCheck = await fetch(guildAPI + ign);
+        const userUUID = userCheck.data.id;
+
+        const hypixelCheck = await fetch(slothPixel + userUUID);
+        const guildCheck = await fetch(guildAPI + userUUID);
         const head = minotar + ign;
 
         const GuildMembers = await guildCheck.data.members;
@@ -46,7 +48,7 @@ module.exports = {
             return
         }
 
-        if (!userCheck.data.id) {
+        if (!userUUID) {
             interaction.reply('That player doesn\'t exist. [Mojang]')
             return
         }

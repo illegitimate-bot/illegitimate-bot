@@ -1,6 +1,9 @@
 const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
+const { qu1, qu2, qu3, qu4, qu5, qu6, qu7, qu8 } = require('../../config/questions.json');
+const { gm, manager, moderator, beast, member, trialmember } = require('../../config/roles.json')
 const path = require('path');
+const fetch = require('axios');
 const fs = require('fs');
 
 module.exports = {
@@ -13,6 +16,15 @@ module.exports = {
         const user = interaction.user;
         const guild = interaction.guild;
         const embedColor = Number(color.replace("#", "0x"));
+
+        const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
+
+        const userRoles = guild.members.cache.get(user.id).roles.cache.map(role => role.id);
+
+        if (userRoles.includes ( gm || manager || moderator || beast || member || trialmember )) {
+            await interaction.reply({ content: "You are already a member of the guild.", ephemeral: true });
+            return
+        }
 
         if (interaction.customId === 'guildapply') {
 
@@ -34,7 +46,9 @@ module.exports = {
                     embeds: [{
                         title: 'Guild Application',
                         description: "Please answer the following questions to apply for the guild.\n" + 
-                        "If you wish to cancel your application, please press the button below or type `cancel`.",
+                        "If you wish to cancel your application, please press type `cancel` at any time.\n" + 
+                        "If you wish to proceed with your application, please type `yes`.\n\n" + 
+                        "You have a minute to respond to this message.",
                         color: embedColor,
                     }]
                 })
@@ -49,7 +63,7 @@ module.exports = {
             const input = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
-                time: 1000 * 60 * 5
+                time: 1000 * 60
             });
             if (input.size === 0) {
                 await user.send({ embeds: [tooLong] });
@@ -61,11 +75,18 @@ module.exports = {
             }
 
             // first question
-            const question1 = await user.send("1st")
+            const question1 = await user.send({
+                embeds: [{
+                    description: "**1. " + qu1 + "**\n\n" + 
+                    "Please type your answer below.\n" + 
+                    "You have 5 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer1 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
-                time: 1000 * 60 * 15
+                time: 1000 * 60 * 5
             });
             if (answer1.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -78,7 +99,14 @@ module.exports = {
             const answer1_1 = answer1.first().content
 
             // second question
-            const question2 = await user.send("2nd")
+            const question2 = await user.send({
+                embeds: [{
+                    description: "**2. " + qu2 + "**\n\n" +
+                    "Please type your answer below.\n" +
+                    "You have 15 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer2 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
@@ -95,7 +123,14 @@ module.exports = {
             const answer2_1 = answer2.first().content
 
             // third question
-            const question3 = await user.send("3rd")
+            const question3 = await user.send({
+                embeds: [{
+                    description: "**3. " + qu3 + "**\n\n" +
+                    "Please type your answer below.\n" +
+                    "You have 15 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer3 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
@@ -112,7 +147,14 @@ module.exports = {
             const answer3_1 = answer3.first().content
 
             // fourth question
-            const question4 = await user.send("4th")
+            const question4 = await user.send({
+                embeds: [{
+                    description: "**4. " + qu4 + "**\n\n" +
+                    "Please type your answer below.\n" +
+                    "You have 15 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer4 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
@@ -129,7 +171,14 @@ module.exports = {
             const answer4_1 = answer4.first().content
 
             // fifth question
-            const question5 = await user.send("5th")
+            const question5 = await user.send({
+                embeds: [{
+                    description: "**5. " + qu5 + "**\n\n" +
+                    "Please type your answer below.\n" +
+                    "You have 15 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer5 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
@@ -146,7 +195,14 @@ module.exports = {
             const answer5_1 = answer5.first().content
             
             // sixth question
-            const question6 = await user.send("6th")
+            const question6 = await user.send({
+                embeds: [{
+                    description: "**6. " + qu6 + "**\n\n" +
+                    "Please type your answer below.\n" +
+                    "You have 15 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer6 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
@@ -163,7 +219,14 @@ module.exports = {
             const answer6_1 = answer6.first().content
 
             // seventh question
-            const question7 = await user.send("7th")
+            const question7 = await user.send({
+                embeds: [{
+                    description: "**7. " + qu7 + "**\n\n" +
+                    "Please type your answer below.\n" +
+                    "You have 15 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer7 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
@@ -180,7 +243,14 @@ module.exports = {
             const answer7_1 = answer7.first().content
 
             // eighth question
-            const question8 = await user.send("8th")
+            const question8 = await user.send({
+                embeds: [{
+                    description: "**8. " + qu8 + "**\n\n" +
+                    "Please type your answer below.\n" +
+                    "You have 15 minutes to respond to this message.",
+                    color: embedColor
+                }]
+            })
             const answer8 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
@@ -223,8 +293,11 @@ module.exports = {
                     color: embedColor
                 }]
             })
+
+            const userCheck = await fetch(mojangAPI + answer1_1)
+            const uuid = userCheck.data.id
             
-            fs.writeFile(`./applications/${user.id}`, answer1_1, function (err) {
+            fs.writeFile(`./applications/${user.id}`, uuid, function (err) {
                 if (err) throw err;
             });
 
@@ -251,35 +324,35 @@ module.exports = {
                         },
                         fields: [
                             {
-                                name: "1st",
+                                name: qu1,
                                 value: answer1_1
                             },
                             {
-                                name: "2nd",
+                                name: qu2,
                                 value: answer2_1
                             },
                             {
-                                name: "3rd",
+                                name: qu3,
                                 value: answer3_1
                             },
                             {
-                                name: "4th",
+                                name: qu4,
                                 value: answer4_1
                             },
                             {
-                                name: "5th",
+                                name: qu5,
                                 value: answer5_1
                             },
                             {
-                                name: "6th",
+                                name: qu6,
                                 value: answer6_1
                             },
                             {
-                                name: "7th",
+                                name: qu7,
                                 value: answer7_1
                             },
                             {
-                                name: "8th",
+                                name: qu8,
                                 value: answer8_1
                             }
 

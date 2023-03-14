@@ -16,26 +16,19 @@ module.exports = {
 
         const filePath = path.join(__dirname, `../../applications/${applicantId}`);
 
-        const ign = fs.readFileSync(filePath, 'utf8');
+        const uuid = fs.readFileSync(filePath, 'utf8');
         
-        const mojang = "https://api.mojang.com/users/profiles/minecraft/"
+        const mojang = "https://api.mojang.com/user/profile/"
         const slothPixel = "https://api.slothpixel.me/api/players/";
+        const guildAPI = "https://api.slothpixel.me/api/guilds/"
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
-        const userCheck = await fetch(mojang + ign);
-        const stats = await fetch(slothPixel + ign);
+        const userCheck = await fetch(mojang + uuid);
+        const ign = userCheck.data.name;
+        const guildCheck = await fetch(guildAPI + uuid);
+        const stats = await fetch(slothPixel + uuid);
         const head = minotar + ign;
-
-        if (interaction.user.id !== dev) {
-            interaction.reply('This command is currently under development.')
-            return
-        }
-
-        if (!ign) {
-            interaction.reply('Please provide a player\'s IGN.')
-            return
-        }
 
         if (!userCheck.data.id) {
             interaction.reply('That player doesn\'t exist. [Mojang]')
@@ -50,30 +43,34 @@ module.exports = {
         await interaction.reply({
             embeds: [{
                 title: stats.data.username,
-                description: "**Stats:**",
+                description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + 
+                "**Current Guild:** `" +  guildCheck.data.name + "`",
                 color: embedColor,
                 thumbnail: {
                     url: head
                 },
                 footer: {
-                    text: "Developed by @Taken#0002"
+                    text: interaction.guild.name + " | Developed by @Taken#0002",
+                    icon_url: interaction.guild.iconURL()
                 },
                 fields: [
                     {
-                        name: "**Network Level**",
-                        value: stats.data.level.toString(),
-                    },
-                    {
                         name: "**Bedwars**",
-                        value: "**Stars:** " + stats.data.stats.BedWars.level.toString() + "\n" +
-                        "**FKDR:** " + stats.data.stats.BedWars.final_k_d.toString() + "\n" +
-                        "**Wins:** " + stats.data.stats.BedWars.wins.toString()
+                        value: "**• Stars:** `" + stats.data.stats.BedWars.level.toString() + "`\n" +
+                        "**• FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + "`\n" +
+                        "**• Wins:** `" + stats.data.stats.BedWars.wins.toString() + "`"
                     },
                     {
                         name: "**Skywars**",
-                        value: "**Stars:** " + stats.data.stats.SkyWars.level.toFixed(2).toString() + "\n" +
-                        "**KDR**: " + stats.data.stats.SkyWars.kill_death_ratio.toString() + "\n" +
-                        "**Wins:** " + stats.data.stats.SkyWars.wins.toString()
+                        value: "**• Stars:** `" + stats.data.stats.SkyWars.level.toFixed(2).toString() + "`\n" +
+                        "**• KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" +
+                        "**• Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
+                    },
+                    {
+                        name: "**Duels**",
+                        value: "**• Wins:** `" + stats.data.stats.Duels.general.wins.toString() + "`\n" + 
+                        "**• KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" + 
+                        "**• WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"
                     }
                 ]
             }]

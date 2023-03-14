@@ -113,6 +113,13 @@ module.exports = {
                 title: interaction.guild.name,
                 description: "You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
                 color: embedColor,
+                thumbnail: {
+                    url: head
+                },
+                footer: {
+                    icon_url: interaction.guild.iconURL(),
+                    text: interaction.guild.name + " | Developed by Taken#0002"
+                }
             }]
         });
 

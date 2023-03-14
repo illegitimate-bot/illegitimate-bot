@@ -40,6 +40,9 @@ module.exports = {
             const cancelled = new EmbedBuilder()
                 .setDescription("You have cancelled your application.")
                 .setColor(embedColor)
+            const attachments = new EmbedBuilder()
+                .setDescription("You have uploaded an attachment. Please do not upload images, videos, or GIFS.")
+                .setColor(embedColor)
 
             try {
                 await user.send({
@@ -48,6 +51,7 @@ module.exports = {
                         description: "Please answer the following questions to apply for the guild.\n" + 
                         "If you wish to cancel your application, please press type `cancel` at any time.\n" + 
                         "If you wish to proceed with your application, please type `yes`.\n\n" + 
+                        "**Do not upload images, videos, or GIFS.**\n" + 
                         "You have a minute to respond to this message.",
                         color: embedColor,
                     }]
@@ -65,6 +69,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60
             });
+            if (input.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (input.size === 0) {
                 await user.send({ embeds: [tooLong] });
                 return
@@ -77,17 +85,23 @@ module.exports = {
             // first question
             const question1 = await user.send({
                 embeds: [{
-                    description: "**1. " + qu1 + "**\n\n" + 
-                    "Please type your answer below.\n" + 
-                    "You have 5 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**1. " + qu1 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 5 minutes to respond to this message."
+                    }
                 }]
             })
             const answer1 = await user.dmChannel.awaitMessages({
                 filter: m => m.author.id === user.id,
                 max: 1,
-                time: 1000 * 60 * 5
+                time: 1000 * 60 * 5,
             });
+            if (answer1.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer1.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -101,10 +115,12 @@ module.exports = {
             // second question
             const question2 = await user.send({
                 embeds: [{
-                    description: "**2. " + qu2 + "**\n\n" +
-                    "Please type your answer below.\n" +
-                    "You have 15 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**2. " + qu2 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 15 minutes to respond to this message."
+                    }
                 }]
             })
             const answer2 = await user.dmChannel.awaitMessages({
@@ -112,6 +128,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer2.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer2.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -125,10 +145,12 @@ module.exports = {
             // third question
             const question3 = await user.send({
                 embeds: [{
-                    description: "**3. " + qu3 + "**\n\n" +
-                    "Please type your answer below.\n" +
-                    "You have 15 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**3. " + qu3 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 15 minutes to respond to this message."
+                    }
                 }]
             })
             const answer3 = await user.dmChannel.awaitMessages({
@@ -136,6 +158,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer3.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer3.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -149,10 +175,12 @@ module.exports = {
             // fourth question
             const question4 = await user.send({
                 embeds: [{
-                    description: "**4. " + qu4 + "**\n\n" +
-                    "Please type your answer below.\n" +
-                    "You have 15 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**4. " + qu4 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 15 minutes to respond to this message."
+                    }
                 }]
             })
             const answer4 = await user.dmChannel.awaitMessages({
@@ -160,6 +188,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer4.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer4.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -173,10 +205,12 @@ module.exports = {
             // fifth question
             const question5 = await user.send({
                 embeds: [{
-                    description: "**5. " + qu5 + "**\n\n" +
-                    "Please type your answer below.\n" +
-                    "You have 15 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**5. " + qu5 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 15 minutes to respond to this message."
+                    }
                 }]
             })
             const answer5 = await user.dmChannel.awaitMessages({
@@ -184,6 +218,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer5.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer5.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -197,10 +235,12 @@ module.exports = {
             // sixth question
             const question6 = await user.send({
                 embeds: [{
-                    description: "**6. " + qu6 + "**\n\n" +
-                    "Please type your answer below.\n" +
-                    "You have 15 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**6. " + qu6 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 15 minutes to respond to this message."
+                    }
                 }]
             })
             const answer6 = await user.dmChannel.awaitMessages({
@@ -208,6 +248,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer6.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer6.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -221,10 +265,12 @@ module.exports = {
             // seventh question
             const question7 = await user.send({
                 embeds: [{
-                    description: "**7. " + qu7 + "**\n\n" +
-                    "Please type your answer below.\n" +
-                    "You have 15 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**7. " + qu7 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 15 minutes to respond to this message."
+                    }
                 }]
             })
             const answer7 = await user.dmChannel.awaitMessages({
@@ -232,6 +278,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer7.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer7.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -245,10 +295,12 @@ module.exports = {
             // eighth question
             const question8 = await user.send({
                 embeds: [{
-                    description: "**8. " + qu8 + "**\n\n" +
-                    "Please type your answer below.\n" +
-                    "You have 15 minutes to respond to this message.",
-                    color: embedColor
+                    title : "**8. " + qu8 + "**",
+                    description: "Please type your answer below or type `cancel` to cancel your application.",
+                    color: embedColor,
+                    footer:{
+                        text: "You have 15 minutes to respond to this message."
+                    }
                 }]
             })
             const answer8 = await user.dmChannel.awaitMessages({
@@ -256,6 +308,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer8.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (answer8.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
@@ -278,6 +334,10 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 5
             });
+            if (final.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
             if (final.size === 0) {
                 await user.send({ embeds: [tooLong] });
                 return

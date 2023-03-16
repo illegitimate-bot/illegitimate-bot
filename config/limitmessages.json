@@ -1,0 +1,5 @@
+{
+    "largeM": "(256 characters or less)",
+    "smallM": "(128 characters or less)",
+    "ignM": "(16 characters or less)" 
+}

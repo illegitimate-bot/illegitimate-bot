@@ -1,10 +1,18 @@
 {
     "qu1": "What is your IGN?",
-    "qu2": "template questions",
-    "qu3": "template questions",
-    "qu4": "template questions",
-    "qu5": "template questions",
-    "qu6": "template questions",
-    "qu7": "template questions",
-    "qu8": "template questions"
+    "qu2": "What is your hypixel Network Level?",
+    "qu3": "What stats are you submitting? (ex. BW lv 135 or SW lv 12 etc..)? Please provide us your best stats of the gamemode you main the most.",
+    "qu4": "Which talents make you a good member for Illegitimate? Tell us about your accomplishments, hobbies and ambitions both on Hypixel and in real life.",
+    "qu5": "Will you be able to make from 100k to 150k gexp x week?",
+    "qu6": "Tell us about: your age, what you expect to gain from Illegitimate, whether you play on other accounts; if you often will be inactive; your punishment history; etc… This section is all yours and we expect a longer answer.",
+    "qu7": "How did you find about us? (Yt, advertisement in lobbies, friend..)",
+    "qu8": "What is your time zone? (Example: GMT+1)",
+    "rq1": "What is your IGN?",
+    "rq2": "What is your hypixel Network Level?",
+    "rq3": "What stats are you submitting?",
+    "rq4": "Which talents make you a good member for Illegitimate?",
+    "rq5": "Will you be able to make from 100k to 150k gexp x week?",
+    "rq6": "Tell us about yourself.",
+    "rq7": "How did you find about us?",
+    "rq8": "What is your time zone?"
 }

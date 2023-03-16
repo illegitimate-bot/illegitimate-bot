@@ -86,7 +86,7 @@ module.exports = {
         if (guildRank === "Moderator") {
             await user.roles.add(moderator);
         }
-
+        
         if (guildRank === "Beast") {
             await user.roles.add(beast);
         }

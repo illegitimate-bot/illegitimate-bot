@@ -1,6 +1,8 @@
-const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection, InteractionType } = require('discord.js');
 const { token, mongoURI } = require('./config.json');
+const { color } = require('./config/options.json');
 const { connect } = require('mongoose');
+const mineflayer = require('mineflayer');
 const path = require('path');
 const fs = require('fs');
 
@@ -22,6 +24,7 @@ const client = new Client({
 
 client.commands = new Collection();
 client.events = new Collection();
+client.modals = new Collection();
 
 //! commands
 const cmdPath = path.join(__dirname, 'commands');
@@ -93,7 +96,23 @@ client.on(Events.InteractionCreate, async event => {
     }
 })
 
+//! modals
 
+const modalPath = path.join(__dirname, 'events', 'modals');
+const modalFiles = fs.readdirSync(modalPath).filter(file => file.endsWith('.js'));
+
+for (const file of modalFiles) {
+
+    const filePath = path.join(modalPath, file);
+    const modal = require (filePath);
+
+    if ('name' in modal && 'execute' in modal && modal.type === 'modal') {
+        client.on(Events.InteractionCreate, modal.execute);
+    } else {
+        console.log(`[WARNING] The modal at ${filePath} is missing a required "name", "execute" or "type" property.`);
+    }
+
+}
 
 client.once(Events.Ready, c => {
     console.log(`Logged in as ${c.user.tag}!`);
@@ -101,14 +120,44 @@ client.once(Events.Ready, c => {
 
 
 client.on(Events.ClientReady, () => {
-    client.user.setActivity({ name: 'illegitimate guild.', type: ActivityType.Watching });
+    client.user.setActivity({ name: 'Illegitimate Guild.', type: ActivityType.Watching });
 });
 client.on(Events.ClientReady, () => {
-    client.user.setStatus('dnd');
+    client.user.setStatus('online');
 });
 
 client.login(token);
 
-connect(mongoURI, {}).then(() => {
-    console.log('Connected to MongoDB');
-})
+// connect(mongoURI, {}).then(() => {
+//     console.log('Connected to MongoDB');
+// })
+
+// const bot = mineflayer.createBot({
+//     host: 'mc.hypixel.net',
+//     port: 25565,
+//     username: 'privateinstagramante@gmail.com',
+// 
+//     version: '1.8.9',
+//     auth: 'microsoft'
+// });
+// 
+// const mfPath = path.join(__dirname, 'utils', 'mineflayer');
+// const mfFiles = fs.readdirSync(mfPath).filter(file => file.endsWith('.js'));
+// 
+// for (const file of mfFiles) {
+// 
+//     const filePath = path.join(mfPath, file);
+//     const mf = require (filePath);
+// 
+//     if ('name' in mf && 'execute' in mf && mf.type === 'mineflayer') {
+// 
+//         if (mf.once) {
+//             bot.once(mf.name, mf.execute);
+//         } else {
+//             bot.on(mf.name, mf.execute);
+//         }
+//     } else {
+//         console.log(`[WARNING] The mineflayer event at ${filePath} is missing a required "name", "execute" or "type" property.`);
+//     }
+// 
+// }

@@ -1,6 +1,7 @@
+const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+const { color } = require('../../config/options.json');
 const fs = require('fs');
 const path = require('path');
-const { color } = require('../../config/options.json');
 
 module.exports = {
     name: 'guildapplicationdeny',
@@ -16,16 +17,18 @@ module.exports = {
         const applicantId = await channel.topic
         const applicant = await guild.members.fetch(applicantId)
 
-        await applicant.send({
-            embeds: [{
-                description: `Your application for the Illegitimate guild has been denied.`,
-                color: embedColor
-            }]
-        });
-
-        const filePath = path.join(__dirname, `../../applications/${applicantId}`);
-        fs.rmSync(filePath, { force: true });
+        const modal = new ModalBuilder()
+            .setTitle('Deny Reason')
+            .setCustomId('denyreasonbox')
+            .setComponents(
+                new ActionRowBuilder().setComponents(
+                    new TextInputBuilder()
+                        .setLabel('Deny Reason')
+                        .setCustomId('denyreason')
+                        .setStyle(TextInputStyle.Paragraph)
+                )
+            )
         
-        await channel.delete();
+        await interaction.showModal(modal);
     }
 };

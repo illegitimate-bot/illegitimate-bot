@@ -108,8 +108,7 @@ module.exports = {
             if (answer1.first().content > 16) {
                 await user.send({
                     embeds: [{
-                        description: "That is not a valid Minecraft username.\n" +
-                        "Application cancelled.",
+                        description: "¸Max character limit is 16.",
                         color: embedColor
                     }]
                 })
@@ -164,6 +163,7 @@ module.exports = {
                         color: embedColor
                     }]
                 })
+                return
             }
             if (answer2.size === 0) {
                 await user.send({ embeds: [tooLong] })

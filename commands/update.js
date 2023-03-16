@@ -4,7 +4,7 @@ const fetch = require('axios');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
 const { color } = require('../config/options.json');
-const { gm, manager, moderator, beast, member, trialmember } = require('../config/roles.json');
+const { gm, manager, moderator, beast, member, trialmember, guildRole } = require('../config/roles.json');
 
 module.exports = {
     name: 'update',
@@ -54,50 +54,73 @@ module.exports = {
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
         if (guildRank === 'Guild Master') {
-            await interaction.reply({
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.add(guildRole)
+            await roleManage.add(gm)
+
+            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            interaction.reply({
                 embeds: [{
-                    description: "You are the Guild Master. Due to security reasons, you cannot update your rank.",
+                    description: "Your rank has been updated to `Guild Master`",
                     color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
                         icon_url: interaction.guild.iconURL({ dynamic: true })
                     }
                 }]
             })
-            return
         }
 
         if (guildRank === 'Manager') {
-            await interaction.reply({
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.add(guildRole)
+            await roleManage.add(manager)
+
+            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            interaction.reply({
                 embeds: [{
-                    description: "You are a Manager. Due to security reasons, you cannot update your rank.",
+                    description: "Your rank has been updated to `Manager`",
                     color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
                         icon_url: interaction.guild.iconURL({ dynamic: true })
                     }
                 }]
             })
-            return
         }
 
         if (guildRank === 'Moderator') {
-            await interaction.reply({
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.add(guildRole)
+            await roleManage.add(moderator)
+
+            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            interaction.reply({
                 embeds: [{
-                    description: "You are a Moderator. Due to security reasons, you cannot update your rank.",
+                    description: "Your rank has been updated to `Moderator`",
                     color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
                         icon_url: interaction.guild.iconURL({ dynamic: true })
                     }
                 }]
             })
-            return
+
         }
 
         if (guildRank === 'Beast') {
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.add(guildRole)
             await roleManage.add(beast)
-            await roleManage.remove(gm || manager || moderator || member || trialmember)
 
             await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
             interaction.reply({
@@ -117,8 +140,9 @@ module.exports = {
         }
 
         if (guildRank === 'Member') {
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.add(guildRole)
             await roleManage.add(member)
-            await roleManage.remove(gm || manager || moderator || beast || trialmember)
 
             await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
             interaction.reply({
@@ -138,8 +162,9 @@ module.exports = {
         }
 
         if (guildRank === 'Trial Member') {
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.add(guildRole)
             await roleManage.add(trialmember)
-            await roleManage.remove(gm || manager || moderator || beast || member)
 
             await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
             interaction.reply({

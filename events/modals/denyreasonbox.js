@@ -17,7 +17,7 @@ module.exports = {
         const applicantId = channel.topic;
         const guild = interaction.guild;
         const applicant = await guild.members.fetch(applicantId);
-        const reason = interaction.fields.fields.get('denyreason').value;
+        const reason = interaction.fields.fields.get('denyreason').value ?? "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));
         const filePath = path.join(__dirname, `../../applications/${applicantId}`);
 

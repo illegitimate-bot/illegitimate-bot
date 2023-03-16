@@ -26,6 +26,7 @@ module.exports = {
                         .setLabel('Deny Reason')
                         .setCustomId('denyreason')
                         .setStyle(TextInputStyle.Paragraph)
+                        .setPlaceholder('Enter a reason for denying the application')
                 )
             )
         

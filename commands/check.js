@@ -65,21 +65,21 @@ module.exports = {
                 fields: [
                     {
                         name: "**Bedwars**",
-                        value: "**• Stars:** `" + stats.data.stats.BedWars.level.toString() + "`\n" +
-                        "**• FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + "`\n" +
-                        "**• Wins:** `" + stats.data.stats.BedWars.wins.toString() + "`"
+                        value: "**➺ Stars:** `" + stats.data.stats.BedWars.level.toString() + "`\n" +
+                        "**➺ FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + "`\n" +
+                        "**➺ Wins:** `" + stats.data.stats.BedWars.wins.toString() + "`"
                     },
                     {
                         name: "**Skywars**",
-                        value: "**• Stars:** `" + stats.data.stats.SkyWars.level.toFixed(2).toString() + "`\n" +
-                        "**• KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" +
-                        "**• Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
+                        value: "**➺ Stars:** `" + stats.data.stats.SkyWars.level.toFixed(2).toString() + "`\n" +
+                        "**➺ KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" +
+                        "**➺ Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
                     },
                     {
                         name: "**Duels**",
-                        value: "**• Wins:** `" + stats.data.stats.Duels.general.wins.toString() + "`\n" + 
-                        "**• KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" + 
-                        "**• WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"
+                        value: "**➺ Wins:** `" + stats.data.stats.Duels.general.wins.toString() + "`\n" + 
+                        "**➺ KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" + 
+                        "**➺ WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"
                     }
                 ]
             }]

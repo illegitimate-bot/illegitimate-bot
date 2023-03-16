@@ -10,6 +10,8 @@ module.exports = {
     type: 'button',
 
     async execute(interaction) {
+
+        await interaction.deferReply();
         
         const channel = interaction.channel;
         const applicantId = await channel.topic

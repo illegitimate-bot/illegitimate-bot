@@ -21,6 +21,8 @@ module.exports = {
         .setDMPermission(false),
 
     async execute(interaction) {
+
+        await interaction.deferReply();
         
         const verifyData = await verify.findOne({ userID: user.id })
         const memberRoles = interaction.member.roles.cache;

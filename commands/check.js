@@ -20,6 +20,8 @@ module.exports = {
 
     async execute(interaction) {
 
+        await interaction.deferReply();
+
         const ign = interaction.options.getString('ign');
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
         const slothPixel = "https://api.slothpixel.me/api/players/";

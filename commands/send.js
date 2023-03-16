@@ -11,15 +11,18 @@ module.exports = {
         .setDescription('Send a message to a channel.')
         .addStringOption(option => 
             option
-            .setName('message')
-            .setDescription('The message to send.'))
+                .setName('message')
+                .setDescription('The message to send.'))
         .addChannelOption(option => 
             option
                 .setName('channel')
                 .setDescription('The channel to send the message to.'))
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
-
+        
     async execute(interaction) {
+
+        await interaction.deferReply();
 
         const message = interaction.options.getString('message');
         const channel = interaction.options.getChannel('channel');

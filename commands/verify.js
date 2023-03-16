@@ -23,6 +23,8 @@ module.exports = {
 
     async execute(interaction) {
 
+        await interaction.deferReply();
+
         const user = interaction.user;
         const fullUsername = user.username + "#" + user.discriminator
         const ign = interaction.options.getString('ign');

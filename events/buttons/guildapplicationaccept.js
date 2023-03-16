@@ -8,6 +8,8 @@ module.exports = {
 
     async execute(interaction) {
 
+        await interaction.deferReply();
+
         const user = interaction.user;
         const channel = interaction.channel;
         const guild = interaction.guild;

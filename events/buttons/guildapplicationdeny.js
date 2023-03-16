@@ -29,7 +29,6 @@ module.exports = {
                         .setPlaceholder('Enter a reason for denying the application')
                 )
             )
-        
         await interaction.showModal(modal);
     }
 };

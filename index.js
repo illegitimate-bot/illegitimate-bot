@@ -128,9 +128,9 @@ client.on(Events.ClientReady, () => {
 
 client.login(token);
 
-// connect(mongoURI, {}).then(() => {
-//     console.log('Connected to MongoDB');
-// })
+connect(mongoURI, {}).then(() => {
+    console.log('Connected to MongoDB');
+})
 
 // const bot = mineflayer.createBot({
 //     host: 'mc.hypixel.net',
@@ -140,6 +140,13 @@ client.login(token);
 //     version: '1.8.9',
 //     auth: 'microsoft'
 // });
+// 
+// module.exports = bot;
+// 
+// const { mineflayer: mineflayerViewer } = require('prismarine-viewer')
+// bot.once('spawn', () => {
+//   mineflayerViewer(bot, { port: 10000, firstPerson: true })
+// })
 // 
 // const mfPath = path.join(__dirname, 'utils', 'mineflayer');
 // const mfFiles = fs.readdirSync(mfPath).filter(file => file.endsWith('.js'));

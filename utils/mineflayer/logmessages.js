@@ -1,7 +1,7 @@
 module.exports = {
-    name: 'message',
+    name: 'Guild chat relay',
     description: 'Sends a message to the chat.',
-    type: 'mineflayer',
+    type: 'message',
 
     async execute(jsonMsg) {
 
@@ -15,7 +15,7 @@ module.exports = {
 
         if (annoyingMessages.includes(msg)) return;
 
-        // console.log(msg);
+        console.log("[Chat message] " + msg);
 
     }
 };

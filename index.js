@@ -156,12 +156,12 @@ connect(mongoURI, {}).then(() => {
 //     const filePath = path.join(mfPath, file);
 //     const mf = require (filePath);
 // 
-//     if ('name' in mf && 'execute' in mf && mf.type === 'mineflayer') {
+//     if ('name' in mf && 'execute' in mf && 'type' in mf) {
 // 
 //         if (mf.once) {
-//             bot.once(mf.name, mf.execute);
+//             bot.once(mf.type, mf.execute);
 //         } else {
-//             bot.on(mf.name, mf.execute);
+//             bot.on(mf.type, mf.execute);
 //         }
 //     } else {
 //         console.log(`[WARNING] The mineflayer event at ${filePath} is missing a required "name", "execute" or "type" property.`);

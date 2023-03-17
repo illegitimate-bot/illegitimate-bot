@@ -1,14 +1,10 @@
 module.exports = {
     name: 'login',
     description: 'Logs the bot in.',
-    type: 'mineflayer',
+    type: 'login',
 
     async execute() {
-
         const bot = require ('../../index.js');
-
-        console.log('Logging in...');
-        bot.chat("/lobby bedwars")
-
+        console.log('Logged in as ' + bot.username + '!')
     }
 }

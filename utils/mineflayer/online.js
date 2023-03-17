@@ -3,7 +3,12 @@ module.exports = {
     description: 'Logs the bot in.',
     type: 'mineflayer',
 
-    async execute(bot) {
-        console.log('Logged into Minecraft!');
+    async execute() {
+
+        const bot = require ('../../index.js');
+
+        console.log('Logging in...');
+        bot.chat("/lobby bedwars")
+
     }
 }

@@ -69,7 +69,7 @@ for (const file of btnFiles) {
     
         const filePath = path.join(btnPath, file);
         const btn = require(filePath);
-    
+
         if ('name' in btn && 'execute' in btn && btn.type === 'button') {
             client.events.set(btn.name, btn);
         } else {
@@ -97,7 +97,6 @@ client.on(Events.InteractionCreate, async event => {
 })
 
 //! modals
-
 const modalPath = path.join(__dirname, 'events', 'modals');
 const modalFiles = fs.readdirSync(modalPath).filter(file => file.endsWith('.js'));
 
@@ -111,21 +110,16 @@ for (const file of modalFiles) {
     } else {
         console.log(`[WARNING] The modal at ${filePath} is missing a required "name", "execute" or "type" property.`);
     }
-
 }
-
-client.once(Events.Ready, c => {
-    console.log(`Logged in as ${c.user.tag}!`);
-});
-
-
 client.on(Events.ClientReady, () => {
-    client.user.setActivity({ name: 'Illegitimate Guild.', type: ActivityType.Watching });
+    console.log("Logged in as " + client.user.tag + "!");
 });
 client.on(Events.ClientReady, () => {
-    client.user.setStatus('online');
+    client.user.setActivity({ name: 'over the Illegitimate Guild.', type: ActivityType.Watching });
 });
-
+client.on(Events.ClientReady, () => {
+    client.user.setStatus('dnd');
+});
 client.login(token);
 
 connect(mongoURI, {}).then(() => {

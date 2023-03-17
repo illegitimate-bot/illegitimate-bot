@@ -4,7 +4,7 @@ const fetch = require('axios');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
 const { color } = require('../config/options.json');
-const { gm, manager, moderator, beast, member, trialmember, guildRole } = require('../config/roles.json');
+const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff } = require('../config/roles.json');
 
 module.exports = {
     name: 'update',
@@ -56,8 +56,9 @@ module.exports = {
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
         if (guildRank === 'Guild Master') {
-            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole || guildStaff)
             await roleManage.add(guildRole)
+            await roleManage.add(guildStaff)
             await roleManage.add(gm)
 
             await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
@@ -77,8 +78,9 @@ module.exports = {
         }
 
         if (guildRank === 'Manager') {
-            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole || guildStaff)
             await roleManage.add(guildRole)
+            await roleManage.add(guildStaff)
             await roleManage.add(manager)
 
             await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
@@ -98,8 +100,9 @@ module.exports = {
         }
 
         if (guildRank === 'Moderator') {
-            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole || guildStaff)
             await roleManage.add(guildRole)
+            await roleManage.add(guildStaff)
             await roleManage.add(moderator)
 
             await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })

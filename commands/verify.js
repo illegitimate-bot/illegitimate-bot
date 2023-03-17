@@ -4,7 +4,7 @@ const fetch = require('axios');
 const { color } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
-const { gm, manager, moderator, beast, member, trialmember, guildRole } = require('../config/roles.json');
+const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff } = require('../config/roles.json');
 
 
 module.exports = {
@@ -80,16 +80,19 @@ module.exports = {
         if (guildRank === "Guild Master") {
             await user.roles.add(gm);
             await user.roles.add(guildRole)
+            await user.roles.add(guildStaff)
         }
 
         if (guildRank === "Manager") {
             await user.roles.add(manager);
             await user.roles.add(guildRole)
+            await user.roles.add(guildStaff)
         }
 
         if (guildRank === "Moderator") {
             await user.roles.add(moderator);
             await user.roles.add(guildRole)
+            await user.roles.add(guildStaff)
         }
         
         if (guildRank === "Beast") {

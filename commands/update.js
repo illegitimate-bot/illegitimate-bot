@@ -68,7 +68,7 @@ module.exports = {
             await roleManage.add(guildStaff)
             await roleManage.add(gm)
 
-            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            await verify.findOneAndUpdate({ userID: user.id })
             interaction.reply({
                 embeds: [{
                     description: "Your rank has been updated to `Guild Master`",
@@ -90,7 +90,7 @@ module.exports = {
             await roleManage.add(guildStaff)
             await roleManage.add(manager)
 
-            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            await verify.findOneAndUpdate({ userID: user.id })
             interaction.reply({
                 embeds: [{
                     description: "Your rank has been updated to `Manager`",
@@ -112,7 +112,7 @@ module.exports = {
             await roleManage.add(guildStaff)
             await roleManage.add(moderator)
 
-            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            await verify.findOneAndUpdate({ userID: user.id })
             interaction.reply({
                 embeds: [{
                     description: "Your rank has been updated to `Moderator`",
@@ -134,7 +134,7 @@ module.exports = {
             await roleManage.add(guildRole)
             await roleManage.add(beast)
 
-            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            await verify.findOneAndUpdate({ userID: user.id })
             interaction.reply({
                 embeds: [{
                     description: "Your rank has been updated to `Beast`.",
@@ -156,7 +156,7 @@ module.exports = {
             await roleManage.add(guildRole)
             await roleManage.add(member)
 
-            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            await verify.findOneAndUpdate({ userID: user.id })
             interaction.reply({
                 embeds: [{
                     description: "Your rank has been updated to `Member`.",
@@ -178,7 +178,7 @@ module.exports = {
             await roleManage.add(guildRole)
             await roleManage.add(trialmember)
 
-            await verify.findOneAndUpdate({ userID: user.id }, { rank: guildRank })
+            await verify.findOneAndUpdate({ userID: user.id })
             interaction.reply({
                 embeds: [{
                     description: "Your rank has been updated to `Trial Member`.",

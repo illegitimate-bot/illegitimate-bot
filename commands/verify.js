@@ -25,7 +25,8 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const user = interaction.user;
+        const user1 = interaction.options.getUser('user');
+        const user = interaction.guild.members.cache.get(user1.id);
         const fullUsername = user.username + "#" + user.discriminator
         const ign = interaction.options.getString('ign');
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"

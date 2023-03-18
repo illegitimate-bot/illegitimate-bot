@@ -29,7 +29,8 @@ module.exports = {
             return
         }
 
-        const user = interaction.user;
+        const user1 = interaction.options.getUser('user');
+        const user = interaction.guild.members.cache.get(user1.id);
         const slothPixel = "https://api.slothpixel.me/api/players/";
         const guildAPI = "https://api.slothpixel.me/api/guilds/"
         const mojangAPI = "https://api.mojang.com/user/profile/"

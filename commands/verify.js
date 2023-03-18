@@ -4,7 +4,7 @@ const fetch = require('axios');
 const { color } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
-const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff } = require('../config/roles.json');
+const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
 
 
 module.exports = {
@@ -42,7 +42,6 @@ module.exports = {
         const head = minotar + ign;
 
         const GuildMembers = await guildCheck.data.members;
-
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
         if (!ign) {
@@ -60,11 +59,6 @@ module.exports = {
             return
         }
 
-        if (guildCheck.data.id !== "5a353a170cf2e529044f2935") {
-            interaction.reply('You are not a member of the guild.')
-            return
-        }
-
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
             interaction.reply('Your Discord tag does not match your in-game tag.')
             return
@@ -77,46 +71,47 @@ module.exports = {
             return
         }
 
-        if (guildRank === "Guild Master") {
+        if (guildRank === "Guild Master" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
             await user.roles.add(gm);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
-        if (guildRank === "Manager") {
+        if (guildRank === "Manager" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
             await user.roles.add(manager);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
-        if (guildRank === "Moderator") {
+        if (guildRank === "Moderator" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
             await user.roles.add(moderator);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
         
-        if (guildRank === "Beast") {
+        if (guildRank === "Beast" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
             await user.roles.add(beast);
             await user.roles.add(guildRole)
         }
 
-        if (guildRank === "Member") {
+        if (guildRank === "Member" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
             await user.roles.add(member);
             await user.roles.add(guildRole)
         }
 
-        if (guildRank === "Trial Member") {
+        if (guildRank === "Trial Member" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
             await user.roles.add(trialmember);
             await user.roles.add(guildRole)
         }
 
-        // write to database using verifySchema
+        await user.roles.add(defaultMember)
+
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
             userID: user.id,
-            uuid: hypixelCheck.data.uuid,
-            rank: guildRank
+            uuid: userUUID
         })
+
         await newVerify.save()
 
         await interaction.reply({

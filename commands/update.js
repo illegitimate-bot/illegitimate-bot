@@ -14,10 +14,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('update')
         .setDescription('Update your guild rank.')
-        .addStringOption(option =>
-            option
-                .setName('user')
-                .setDescription('The user you want to update.'))
         .setDMPermission(false),
 
     async execute(interaction) {
@@ -32,15 +28,8 @@ module.exports = {
             interaction.reply('You are not verified.')
             return
         }
-        
-        if (interaction.options.getUser('user') && !memberRoles.has(moderator || manager || gm)) {
-            await interaction.reply({ content: "Only moderators can update other users", ephemeral: true })
-            return
-        }
-        
-        const user = interaction.options.getUser('user') ?? interaction.user;
-        
 
+        const user = interaction.user;
         const slothPixel = "https://api.slothpixel.me/api/players/";
         const guildAPI = "https://api.slothpixel.me/api/guilds/"
         const mojangAPI = "https://api.mojang.com/user/profile/"
@@ -54,6 +43,23 @@ module.exports = {
         const embedColor = Number(color.replace("#", "0x"));
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
+
+        if (guildCheck.data.id !== "5a353a170cf2e529044f2935") {
+            interaction.reply({
+                embeds: [{
+                    description: "Updating is only available for members of the guild.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
+                    footer: {
+                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        icon_url: interaction.guild.iconURL({ dynamic: true })
+                    }
+                }]
+            })
+            return
+        }
 
         if (guildRank === 'Guild Master') {
             await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole || guildStaff)

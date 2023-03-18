@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { hypixelApiKey } = require('../config.json');
 const fetch = require('axios');
-const { color } = require('../config/options.json');
+const { color, hypixelGuildID } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
 const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
@@ -71,35 +71,35 @@ module.exports = {
             return
         }
 
-        if (guildRank === "Guild Master" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
+        if (guildRank === "Guild Master" && guildCheck.data.id === hypixelGuildID) {
             await user.roles.add(gm);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
-        if (guildRank === "Manager" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
+        if (guildRank === "Manager" && guildCheck.data.id === hypixelGuildID) {
             await user.roles.add(manager);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
-        if (guildRank === "Moderator" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
+        if (guildRank === "Moderator" && guildCheck.data.id === hypixelGuildID) {
             await user.roles.add(moderator);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
         
-        if (guildRank === "Beast" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
+        if (guildRank === "Beast" && guildCheck.data.id === hypixelGuildID) {
             await user.roles.add(beast);
             await user.roles.add(guildRole)
         }
 
-        if (guildRank === "Member" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
+        if (guildRank === "Member" && guildCheck.data.id === hypixelGuildID) {
             await user.roles.add(member);
             await user.roles.add(guildRole)
         }
 
-        if (guildRank === "Trial Member" && guildCheck.data.id == "5a353a170cf2e529044f2935") {
+        if (guildRank === "Trial Member" && guildCheck.data.id === hypixelGuildID) {
             await user.roles.add(trialmember);
             await user.roles.add(guildRole)
         }

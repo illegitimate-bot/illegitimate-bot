@@ -3,7 +3,7 @@ const { hypixelApiKey } = require('../config.json');
 const fetch = require('axios');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
-const { color } = require('../config/options.json');
+const { color, hypixelGuildID } = require('../config/options.json');
 const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff } = require('../config/roles.json');
 
 module.exports = {
@@ -44,7 +44,7 @@ module.exports = {
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
-        if (guildCheck.data.id !== "5a353a170cf2e529044f2935") {
+        if (guildCheck.data.id !== hypixelGuildID) {
             interaction.reply({
                 embeds: [{
                     description: "Updating is only available for members of the guild.",

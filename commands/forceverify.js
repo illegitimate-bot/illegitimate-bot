@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { hypixelApiKey } = require('../config.json');
 const fetch = require('axios');
 const { color, hypixelGuildID } = require('../config/options.json');
@@ -8,19 +8,24 @@ const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaf
 
 
 module.exports = {
-    name: 'verify',
-    description: 'Verify yourself as a member of the server.',
+    name: 'forceverify',
+    description: 'Force verify a user.',
     type: 'slash',
 
     data: new SlashCommandBuilder()
-        .setName('verify')
-        .setDescription('Verify yourself as a member of the server.')
+        .setName('forceverify')
+        .setDescription('Force verify a user.')
+        .addUserOption(option => 
+            option
+                .setName('user')
+                .setDescription('The user to force verify.'))
         .addStringOption(option =>
             option
                 .setName('ign')
-                .setDescription('Your in-game name.'))
+                .setDescription('The user\'s in-game name.'))
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
-
+    
     async execute(interaction) {
 
         await interaction.deferReply();
@@ -29,6 +34,7 @@ module.exports = {
         const user = interaction.guild.members.cache.get(user1.id);
         const fullUsername = user1.username + "#" + user1.discriminator
         const ign = interaction.options.getString('ign');
+
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
         const slothPixel = "https://api.slothpixel.me/api/players/";
         const guildAPI = "https://api.slothpixel.me/api/guilds/"
@@ -45,6 +51,11 @@ module.exports = {
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
+        if (!user) {
+            interaction.reply('Please provide a user to force verify.')
+            return
+        }
+
         if (!ign) {
             interaction.reply('Please provide a player\'s IGN.')
             return
@@ -57,18 +68,6 @@ module.exports = {
 
         if (!hypixelCheck.data.uuid) {
             interaction.reply('That player doesn\'t exist. [Hypixel]')
-            return
-        }
-
-        if (hypixelCheck.data.links.DISCORD !== fullUsername) {
-            interaction.reply('Your Discord tag does not match your in-game tag.')
-            return
-        }
-
-        const verifyData = await verify.findOne({ userID: user.id })
-
-        if (verifyData) {
-            interaction.reply('You are already verified.')
             return
         }
 
@@ -105,7 +104,9 @@ module.exports = {
             await user.roles.add(guildRole)
         }
 
-        await user.roles.add(defaultMember)
+        await user.roles.add(defaultMember);
+
+        const verifyData = await verify.findOne({ userID: user.id })
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
@@ -113,12 +114,16 @@ module.exports = {
             uuid: userUUID
         })
 
-        await newVerify.save()
+        if (verifyData) {
+            await verify.findOneAndUpdate({ userID: user.id }, { uuid: userUUID })
+        } else {
+            await newVerify.save()
+        }
 
         await interaction.reply({
             embeds: [{
                 title: interaction.guild.name,
-                description: "You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
+                description: "You have successfully force verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
                 color: embedColor,
                 thumbnail: {
                     url: head

@@ -6,7 +6,7 @@ module.exports = {
     async execute() {
         const bot = require ('../../index.js');
 
-        bot.chat('/locraw');
+        bot.chat("\u00a7")
 
     }
 };

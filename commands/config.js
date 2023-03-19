@@ -12,7 +12,16 @@ module.exports = {
         .setDescription('Configure the bot.')
         .addSubcommand(subcommand =>
             subcommand
-                .setName('sendapplication')
+                .setName('sendguildapplication')
+                .setDescription('Send the application message to a channel.')
+                .addChannelOption(option =>
+                    option
+                        .setName('channel')
+                        .setDescription('The channel to send the application to.')
+                        .setRequired(true)))
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('sendstaffapplication')
                 .setDescription('Send the application message to a channel.')
                 .addChannelOption(option =>
                     option
@@ -47,6 +56,38 @@ module.exports = {
 
             await channel.send({
                 embeds: [{
+                    title: 'Staff Application',
+                    description: "You can apply for the staff team by clicking the button below.",
+                    color: embedColor,
+                    footer: {
+                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        iconURL: interaction.guild.iconURL({ dynamic: true })
+                    },
+                    thumbnail: {
+                        url: interaction.guild.iconURL({ dynamic: true })
+                    }
+                }],
+                components: [
+                    new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setCustomId('staffapply')
+                            .setLabel('Apply')
+                            .setStyle(ButtonStyle.Primary)
+                            .setEmoji({ name: '✅' })
+                    )
+                ]
+            })
+
+            await interaction.reply({ content: 'Message sent', ephemeral: true })
+
+        }
+
+        if (subcommand === 'sendstaffapplication') {
+
+            const channel = interaction.options.getChannel('channel');
+
+            await channel.send({
+                embeds: [{
                     title: 'Guild Application',
                     description: "You can apply for the guild by clicking the button below.",
                     color: embedColor,
@@ -70,7 +111,6 @@ module.exports = {
             })
 
             await interaction.reply({ content: 'Message sent', ephemeral: true })
-
         }
 
         if (subcommand === "sendguildinfo") {

@@ -108,7 +108,7 @@ module.exports = {
             if (answer1.first().content > 16) {
                 await user.send({
                     embeds: [{
-                        description: "¸Max character limit is 16.",
+                        description: "Max character limit is 16.",
                         color: embedColor
                     }]
                 })
@@ -459,7 +459,7 @@ module.exports = {
                 
                 await channel.send({
                     embeds: [{ 
-                        title: user.username + "#" + user.discriminator + " - Application",
+                        title: user.username + "#" + user.discriminator + " - Guild Application",
                         color: embedColor,
                         thumbnail: {
                             url: user.avatarURL()

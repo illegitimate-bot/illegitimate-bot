@@ -448,7 +448,7 @@ module.exports = {
             await user.deleteDM();
 
             await guild.channels.create({
-                name: `Application-${user.username}`,
+                name: `guild-app-${user.username}`,
                 type: ChannelType.GuildText,
                 topic: user.id,
                 permissionOverwrites: [

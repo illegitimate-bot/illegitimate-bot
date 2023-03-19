@@ -4,14 +4,14 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-    name: 'denyreasonbox',
+    name: 'staffdenyreasonbox',
     description: 'Deny reason box.',
     type: 'modal',
 
     async execute(interaction) {
     
         if (interaction.type !== InteractionType.ModalSubmit) return;
-        if (interaction.customId !== "denyreasonbox") return;
+        if (interaction.customId !== "staffdenyreasonbox") return;
         
         interaction.deferReply();
         
@@ -19,12 +19,12 @@ module.exports = {
         const applicantId = channel.topic;
         const guild = interaction.guild;
         const applicant = await guild.members.fetch(applicantId);
-        const reason = interaction.fields.fields.get('denyreason').value || "No reason provided";
+        const reason = interaction.fields.fields.get('staffdenyreason').value || "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));
-        const filePath = path.join(__dirname, `../../apps/guild/${applicantId}`);
+        const filePath = path.join(__dirname, `../../apps/staff/${applicantId}`);
 
         const dmMessage = new EmbedBuilder()
-            .setDescription("Your application for the Illegitimate guild has been denied\n" +
+            .setDescription("Your application for the Illegitimate guild staff has been denied\n" +
             "**Reason:** `" + reason + "`")
             .setColor(embedColor);
 

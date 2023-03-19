@@ -22,20 +22,21 @@ module.exports = {
         const userRoles = interaction.member.roles.cache;
         const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
 
-
-        if (!userRoles.has(guildRole)) {
-            await interaction.reply({content: "You must be a member of the guild to apply for staff.", ephemeral: true});
-        }
-
-        if (userRoles.has(guildStaff)) {
-            await interaction.reply({content: "You are already a staff member.", ephemeral: true});
-        }
-
         if (interaction.customId === "staffapply") {
 
-            const applicationFile = path.join(__dirname, '../../staffapplications/' + user.id);
+            await interaction.deferReply({ ephemeral: true });
+
+            //  if (!userRoles.has(guildRole)) {
+            //      await interaction.editReply({content: "You must be a member of the guild to apply for staff.", ephemeral: true});
+            //  }
+//  
+            //  if (userRoles.has(guildStaff)) {
+            //      await interaction.editReply({content: "You are already a staff member.", ephemeral: true});
+            //  }
+
+            const applicationFile = path.join(__dirname, '../../apps/staff/' + user.id);
             if (fs.existsSync(applicationFile)) {
-                await interaction.reply({ content: "You already have an application in progress.", ephemeral: true });
+                await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true });
                 return
             }
             
@@ -62,11 +63,11 @@ module.exports = {
                         }]
                     })
                 } catch (error) {
-                    await interaction.reply({ content: "Please enable your DMs.", ephemeral: true });
+                    await interaction.editReply({ content: "Please enable your DMs.", ephemeral: true });
                     return
                 }
     
-                await interaction.reply({ content: "Please check your DMs.", ephemeral: true})
+                await interaction.editReply({ content: "Please check your DMs.", ephemeral: true})
 
                 const input = await user.dmChannel.awaitMessages({
                     filter: m => m.author.id === user.id,
@@ -364,14 +365,14 @@ module.exports = {
                 const userCheck = await fetch(mojangAPI + answer1_1)
                 const uuid = userCheck.data.id
                 
-                fs.writeFile(`./applications/${user.id}`, uuid, function (err) {
+                fs.writeFile(`./apps/staff/${user.id}`, uuid, function (err) {
                     if (err) throw err;
                 });
     
                 await user.deleteDM();
 
                 await guild.channels.create({
-                    name: `Application-${user.username}`,
+                    name: `staff-app-${user.username}`,
                     type: ChannelType.GuildText,
                     topic: user.id,
                     permissionOverwrites: [

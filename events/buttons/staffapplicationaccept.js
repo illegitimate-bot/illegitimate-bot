@@ -1,9 +1,9 @@
-const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { color } = require('../../config/options.json');
 
 module.exports = {
-    name: 'guildapplicationaccept',
-    description: 'Accept a guild application.',
+    name: 'staffapplicationaccept',
+    description: 'Accept a staff application.',
     type: 'button',
 
     async execute(interaction) {
@@ -19,61 +19,57 @@ module.exports = {
 
         await applicant.send({
             embeds: [{
-            description: `Your application for the Illegitimate guild has been accepted.`,
+                description: `Your application for the Illegitimate staff team has been accepted.`,
                 color: embedColor
             }]
         });
 
-        const message = await channel.messages.fetch({ limit: 1 });
+        // fetcg the message with the buttons staffapplicationaccept and staffapplicationdeny
+
+        const message = await channel.messages.fetch({ limit: 10 });
         const messageID = message.first().id;
 
         await channel.messages.fetch(messageID).then(async (message) => {
-
+                
             await message.edit({
                 components: [
                     new ActionRowBuilder().addComponents(
                         new ButtonBuilder()
-                            .setCustomId("guildapplicationaccept")
+                            .setCustomId("staffapplicationaccept")
                             .setLabel("Accept")
                             .setStyle(ButtonStyle.Primary)
                             .setDisabled(true)
                     ),
                     new ActionRowBuilder().addComponents(
                         new ButtonBuilder()
-                            .setCustomId("guildapplicationdeny")
+                            .setCustomId("staffapplicationdeny")
                             .setLabel("Deny")
                             .setStyle(ButtonStyle.Danger)
-                            .setDisabled(true)
-                    ),
-                    new ActionRowBuilder().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("checkstats")
-                            .setLabel("Check Stats")
-                            .setStyle(ButtonStyle.Secondary)
                             .setDisabled(true)
                     )
                 ]
             });
-
         });
 
         await interaction.reply({
-            embeds: [{ 
-                title: applicantUsername + " - Guild Application",
-                description: "Application accepted by <@" + user.id + ">.\n\nPress the button below to delete this channel.\n**When the user is added to the guild.**",
+            embeds: [{
+                title: applicantUsername + " - Staff Application.",
+                description: "Application accepted by <@" + user.id + ">.\n\n" + 
+                "Press the button below to delete this channel.\n" + 
+                "**When the user was given their role**",
                 color: embedColor,
                 thumbnail: {
                     url: applicant.avatarURL()
                 },
                 footer: {
-                    iconURL: guild.iconURL(),
-                    text: "ID: " + applicant.id
+                    iconurl: guild.iconURL(),
+                    text: "ID: " + applicantId
                 }
             }],
             components: [
                 new ActionRowBuilder().addComponents(
                     new ButtonBuilder()
-                        .setCustomId("applicationdelete")
+                        .setCustomId("staffapplicationdelete")
                         .setLabel("Delete channel")
                         .setStyle(ButtonStyle.Danger)
                 )
@@ -81,4 +77,4 @@ module.exports = {
         });
 
     }
-};
+}

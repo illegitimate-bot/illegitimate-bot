@@ -10,6 +10,8 @@ module.exports = {
 
     async execute(interaction) {
 
+        if (interaction.type === InteractionType.ApplicationCommand) return;
+
         interaction.deferReply();
 
         if (interaction.type !== InteractionType.ModalSubmit) return;

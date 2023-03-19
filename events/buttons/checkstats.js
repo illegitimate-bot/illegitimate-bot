@@ -42,11 +42,13 @@ module.exports = {
             return
         }
 
+        const guildName = guildCheck.data.name ?? "None"
+
         await interaction.editReply({
             embeds: [{
                 title: stats.data.username,
                 description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + 
-                "**Current Guild:** `" +  guildCheck.data.name + "`",
+                "**Current Guild:** `" + guildName + "`",
                 color: embedColor,
                 thumbnail: {
                     url: head

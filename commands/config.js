@@ -56,7 +56,7 @@ module.exports = {
             await channel.send({
                 embeds: [{
                     title: 'Guild Application',
-                    description: "You can apply for the staff team by clicking the button below.",
+                    description: "You can apply for guild by clicking the button below.",
                     color: embedColor,
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
@@ -86,7 +86,7 @@ module.exports = {
             await channel.send({
                 embeds: [{
                     title: 'Staff Application',
-                    description: "You can apply for the guild by clicking the button below.",
+                    description: "You can apply for the staff team by clicking the button below.",
                     color: embedColor,
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",

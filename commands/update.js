@@ -4,7 +4,7 @@ const fetch = require('axios');
 const verify = require('../schemas/verifySchema.js')
 const mongoose = require('mongoose');
 const { color, hypixelGuildID } = require('../config/options.json');
-const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff } = require('../config/roles.json');
+const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
 
 module.exports = {
     name: 'update',
@@ -20,6 +20,8 @@ module.exports = {
 
         await interaction.deferReply();
         
+        const user1 = interaction.user;
+        const user = interaction.guild.members.cache.get(user1.id);
         const verifyData = await verify.findOne({ userID: user.id })
         const memberRoles = interaction.member.roles.cache;
         const roleManage = interaction.member.roles;
@@ -29,8 +31,6 @@ module.exports = {
             return
         }
 
-        const user1 = interaction.options.getUser('user');
-        const user = interaction.guild.members.cache.get(user1.id);
         const slothPixel = "https://api.slothpixel.me/api/players/";
         const guildAPI = "https://api.slothpixel.me/api/guilds/"
         const mojangAPI = "https://api.mojang.com/user/profile/"
@@ -46,7 +46,7 @@ module.exports = {
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
         if (guildCheck.data.id !== hypixelGuildID) {
-            interaction.reply({
+            interaction.editReply({
                 embeds: [{
                     description: "Updating is only available for members of the guild.",
                     color: embedColor,
@@ -63,13 +63,14 @@ module.exports = {
         }
 
         if (guildRank === 'Guild Master') {
-            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole || guildStaff)
+            await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole || guildStaff || defaultMember)
             await roleManage.add(guildRole)
             await roleManage.add(guildStaff)
             await roleManage.add(gm)
+            await roleManage.add(defaultMember)
 
             await verify.findOneAndUpdate({ userID: user.id })
-            interaction.reply({
+            interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Guild Master`",
                     color: embedColor,
@@ -89,9 +90,10 @@ module.exports = {
             await roleManage.add(guildRole)
             await roleManage.add(guildStaff)
             await roleManage.add(manager)
+            await roleManage.add(defaultMember)
 
             await verify.findOneAndUpdate({ userID: user.id })
-            interaction.reply({
+            interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Manager`",
                     color: embedColor,
@@ -111,9 +113,10 @@ module.exports = {
             await roleManage.add(guildRole)
             await roleManage.add(guildStaff)
             await roleManage.add(moderator)
+            await roleManage.add(defaultMember)
 
             await verify.findOneAndUpdate({ userID: user.id })
-            interaction.reply({
+            interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Moderator`",
                     color: embedColor,
@@ -133,9 +136,10 @@ module.exports = {
             await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
             await roleManage.add(guildRole)
             await roleManage.add(beast)
+            await roleManage.add(defaultMember)
 
             await verify.findOneAndUpdate({ userID: user.id })
-            interaction.reply({
+            interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Beast`.",
                     color: embedColor,
@@ -155,9 +159,10 @@ module.exports = {
             await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
             await roleManage.add(guildRole)
             await roleManage.add(member)
+            await roleManage.add(defaultMember)
 
             await verify.findOneAndUpdate({ userID: user.id })
-            interaction.reply({
+            interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Member`.",
                     color: embedColor,
@@ -177,9 +182,10 @@ module.exports = {
             await roleManage.remove(gm || manager || moderator || beast || member || trialmember || guildRole)
             await roleManage.add(guildRole)
             await roleManage.add(trialmember)
+            await roleManage.add(defaultMember)
 
             await verify.findOneAndUpdate({ userID: user.id })
-            interaction.reply({
+            interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Trial Member`.",
                     color: embedColor,

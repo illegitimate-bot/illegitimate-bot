@@ -25,9 +25,10 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const user1 = interaction.options.getUser('user');
-        const user = interaction.guild.members.cache.get(user1.id);
-        const fullUsername = user1.username + "#" + user1.discriminator
+        const user1 = interaction.user;
+        const user = await interaction.guild.members.fetch(user1.id);
+
+        const fullUsername = user.user.username + "#" + user.user.discriminator
         const ign = interaction.options.getString('ign');
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
         const slothPixel = "https://api.slothpixel.me/api/players/";
@@ -46,29 +47,29 @@ module.exports = {
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
         if (!ign) {
-            interaction.reply('Please provide a player\'s IGN.')
+            interaction.editReply('Please provide a player\'s IGN.')
             return
         }
 
         if (!userUUID) {
-            interaction.reply('That player doesn\'t exist. [Mojang]')
+            interaction.editReply('That player doesn\'t exist. [Mojang]')
             return
         }
 
         if (!hypixelCheck.data.uuid) {
-            interaction.reply('That player doesn\'t exist. [Hypixel]')
+            interaction.editReply('That player doesn\'t exist. [Hypixel]')
             return
         }
 
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
-            interaction.reply('Your Discord tag does not match your in-game tag.')
+            interaction.editReply('Your Discord tag does not match your in-game tag.')
             return
         }
 
         const verifyData = await verify.findOne({ userID: user.id })
 
         if (verifyData) {
-            interaction.reply('You are already verified.')
+            interaction.editReply('You are already verified.')
             return
         }
 
@@ -115,7 +116,7 @@ module.exports = {
 
         await newVerify.save()
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [{
                 title: interaction.guild.name,
                 description: "You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",

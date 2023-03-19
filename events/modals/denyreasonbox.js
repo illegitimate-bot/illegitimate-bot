@@ -10,6 +10,8 @@ module.exports = {
 
     async execute(interaction) {
 
+        interaction.deferReply();
+
         if (interaction.type !== InteractionType.ModalSubmit) return;
         if (interaction.customId !== "denyreasonbox") return;
 
@@ -19,7 +21,7 @@ module.exports = {
         const applicant = await guild.members.fetch(applicantId);
         const reason = interaction.fields.fields.get('denyreason').value || "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));
-        const filePath = path.join(__dirname, `../../applications/${applicantId}`);
+        const filePath = path.join(__dirname, `../../apps/guild/${applicantId}`);
 
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild has been denied\n" +
@@ -28,7 +30,7 @@ module.exports = {
 
         await applicant.send({ embeds: [dmMessage] });
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [{
                 description: "Application denied\n" +
                 "Channel will be deleted in 5 seconds...",

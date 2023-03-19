@@ -16,7 +16,7 @@ module.exports = {
         const channel = interaction.channel;
         const applicantId = await channel.topic
 
-        const filePath = path.join(__dirname, `../../applications/${applicantId}`);
+        const filePath = path.join(__dirname, `../../apps/guild/${applicantId}`);
 
         const uuid = fs.readFileSync(filePath, 'utf8');
         
@@ -42,7 +42,7 @@ module.exports = {
             return
         }
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [{
                 title: stats.data.username,
                 description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + 

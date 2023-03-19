@@ -31,9 +31,11 @@ module.exports = {
 
         if (interaction.customId === 'guildapply') {
 
-            const applicationFile = path.join(__dirname, '../../applications/' + user.id);
+            await interaction.deferReply();
+
+            const applicationFile = path.join(__dirname, '../../apps/guild/' + user.id);
             if (fs.existsSync(applicationFile)) {
-                await interaction.reply({ content: "You already have an application in progress.", ephemeral: true });
+                await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true });
                 return
             }
             
@@ -60,11 +62,11 @@ module.exports = {
                     }]
                 })
             } catch (error) {
-                await interaction.reply({ content: "Please enable your DMs.", ephemeral: true });
+                await interaction.editReply({ content: "Please enable your DMs.", ephemeral: true });
                 return
             }
 
-            await interaction.reply({ content: "Please check your DMs.", ephemeral: true})
+            await interaction.editReply({ content: "Please check your DMs.", ephemeral: true})
 
 
             const input = await user.dmChannel.awaitMessages({
@@ -439,7 +441,7 @@ module.exports = {
             const userCheck = await fetch(mojangAPI + answer1_1)
             const uuid = userCheck.data.id
             
-            fs.writeFile(`./applications/${user.id}`, uuid, function (err) {
+            fs.writeFile(`./apps/guild/${user.id}`, uuid, function (err) {
                 if (err) throw err;
             });
 

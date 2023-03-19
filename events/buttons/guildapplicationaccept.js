@@ -21,7 +21,7 @@ module.exports = {
 
         await applicant.send({
             embeds: [{
-                description: `Your application for the Illegitimate guild has been accepted.`,
+            description: `Your application for the Illegitimate guild has been accepted.`,
                 color: embedColor
             }]
         });
@@ -61,7 +61,7 @@ module.exports = {
 
         });
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [{ 
                 title: applicantUsername + " - Application",
                 description: "Application accepted by <@" + user.id + ">.\n\nPress the button below to delete this channel.\n**When the user is added to the guild.**",
@@ -78,7 +78,7 @@ module.exports = {
                 new ActionRowBuilder().addComponents(
                     new ButtonBuilder()
                         .setCustomId("applicationdelete")
-                        .setLabel("Delete Channel")
+                        .setLabel("Delete channel")
                         .setStyle(ButtonStyle.Danger)
                 )
             ]

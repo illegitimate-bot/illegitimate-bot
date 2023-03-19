@@ -33,12 +33,12 @@ module.exports = {
         const head = minotar + ign;
 
         if (!userCheck.data.id) {
-            interaction.reply('That player doesn\'t exist. [Mojang]')
+            interaction.editReply('That player doesn\'t exist. [Mojang]')
             return
         }
 
         if (!stats.data.uuid) {
-            interaction.reply('That player doesn\'t exist. [Hypixel]')
+            interaction.editReply('That player doesn\'t exist. [Hypixel]')
             return
         }
 

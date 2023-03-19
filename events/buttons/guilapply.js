@@ -23,15 +23,15 @@ module.exports = {
         const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
 
         const userRoles = guild.members.cache.get(user.id).roles.cache.map(role => role.id);
-
-        if (userRoles.includes(guildRole)) {
-            await interaction.reply({ content: "You are already a member of the guild.", ephemeral: true });
-            return
-        }
-
+        
         if (interaction.customId === 'guildapply') {
-
+            
             await interaction.deferReply();
+
+            if (userRoles.includes(guildRole)) {
+                await interaction.editReply({ content: "You are already a member of the guild.", ephemeral: true });
+                return
+            }
 
             const applicationFile = path.join(__dirname, '../../apps/guild/' + user.id);
             if (fs.existsSync(applicationFile)) {

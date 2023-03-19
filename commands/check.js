@@ -20,6 +20,9 @@ module.exports = {
 
     async execute(interaction) {
 
+        await interaction.reply({ content: 'This command is currently under development.', ephemeral: true })
+        return
+
         await interaction.deferReply();
 
         const ign = interaction.options.getString('ign');
@@ -32,16 +35,20 @@ module.exports = {
         const userCheck = await fetch(mojang + ign);
         const userUUID = userCheck.data.id;
 
+        console.log(userCheck)
+
         const stats = await fetch(slothPixel + userUUID);
         const guildCheck = await fetch(guildAPI + userUUID);
         const head = minotar + ign;
         
         if (!ign) {
-            interaction.reply('Please provide a player\'s IGN.')
+            interaction.editReply('Please provide a player\'s IGN.')
             return
         }
 
-        if (!userUUID) {
+        try {
+            await fetch(mojang + ign)
+        } catch (error) {
             interaction.reply('That player doesn\'t exist. [Mojang]')
             return
         }

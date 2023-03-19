@@ -1,7 +1,7 @@
 const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
 const { largeM, smallM, ignM } = require('../../config/limitmessages.json')
-const { applicationsCategory } = require('../../config/options.json');
+const { applicationsChannel } = require('../../config/options.json');
 const { qu1, qu2, qu3, qu4, qu5, qu6, qu7, qu8 } = require('../../config/questions.json');
 const { rq1, rq2, rq3, rq4, rq5, rq6, rq7, rq8 } = require('../../config/questions.json');
 const { guildRole } = require('../../config/roles.json')
@@ -26,12 +26,12 @@ module.exports = {
         
         if (interaction.customId === 'guildapply') {
             
-            await interaction.deferReply();
+            await interaction.deferReply({ ephemeral: true });
 
-            if (userRoles.includes(guildRole)) {
-                await interaction.editReply({ content: "You are already a member of the guild.", ephemeral: true });
-                return
-            }
+            // if (userRoles.includes(guildRole)) {
+            //     await interaction.editReply({ content: "You are already a member of the guild.", ephemeral: true });
+            //     return
+            // }
 
             const applicationFile = path.join(__dirname, '../../apps/guild/' + user.id);
             if (fs.existsSync(applicationFile)) {
@@ -446,89 +446,73 @@ module.exports = {
             });
 
             await user.deleteDM();
+            
+            const channel = guild.channels.cache.get(applicationsChannel);
 
-            await guild.channels.create({
-                name: `guild-app-${user.username}`,
-                type: ChannelType.GuildText,
-                topic: user.id,
-                permissionOverwrites: [
-                    {
-                        id: guild.roles.everyone,
-                        deny: [PermissionFlagsBits.ViewChannel]
-                    }
-                ]
-            }).then(async channel => {
-                
-                await channel.send({
-                    embeds: [{ 
-                        title: user.username + "#" + user.discriminator + " - Guild Application",
-                        color: embedColor,
-                        thumbnail: {
-                            url: user.avatarURL()
+            await channel.send({
+                embeds: [{ 
+                    title: user.username + "#" + user.discriminator + " - Guild Application",
+                    color: embedColor,
+                    thumbnail: {
+                        url: user.avatarURL()
+                    },
+                    fields: [
+                        {
+                            name: rq1,
+                            value: "```" + answer1_1 + "```"
                         },
-                        fields: [
-                            {
-                                name: rq1,
-                                value: "```" + answer1_1 + "```"
-                            },
-                            {
-                                name: rq2,
-                                value: "```" + answer2_1 + "```"
-                            },
-                            {
-                                name: rq3,
-                                value: "```" + answer3_1 + "```"
-                            },
-                            {
-                                name: rq4,
-                                value: "```" + answer4_1 + "```"
-                            },
-                            {
-                                name: rq5,
-                                value: "```" + answer5_1 + "```"
-                            },
-                            {
-                                name: rq6,
-                                value: "```" + answer6_1 + "```"
-                            },
-                            {
-                                name: rq7,
-                                value: "```" + answer7_1 + "```"
-                            },
-                            {
-                                name: rq8,
-                                value: "```" + answer8_1 + "```"
-                            }
-
-                        ],
-                        footer: {
-                            iconURL: guild.iconURL(),
-                            text: "ID: " + user.id
+                        {
+                            name: rq2,
+                            value: "```" + answer2_1 + "```"
+                        },
+                        {
+                            name: rq3,
+                            value: "```" + answer3_1 + "```"
+                        },
+                        {
+                            name: rq4,
+                            value: "```" + answer4_1 + "```"
+                        },
+                        {
+                            name: rq5,
+                            value: "```" + answer5_1 + "```"
+                        },
+                        {
+                            name: rq6,
+                            value: "```" + answer6_1 + "```"
+                        },
+                        {
+                            name: rq7,
+                            value: "```" + answer7_1 + "```"
+                        },
+                        {
+                            name: rq8,
+                            value: "```" + answer8_1 + "```"
                         }
-                    }],
-                    components: [
-                        new ActionRowBuilder().addComponents(
-                            new ButtonBuilder()
-                                .setCustomId("guildapplicationaccept")
-                                .setLabel("Accept")
-                                .setStyle(ButtonStyle.Primary)
-                        ),
-                        new ActionRowBuilder().addComponents(
-                            new ButtonBuilder()
-                                .setCustomId("guildapplicationdeny")
-                                .setLabel("Deny")
-                                .setStyle(ButtonStyle.Danger)
-                        ),
-                        new ActionRowBuilder().addComponents(
-                            new ButtonBuilder()
-                                .setCustomId("checkstats")
-                                .setLabel("Check Stats")
-                                .setStyle(ButtonStyle.Secondary)
-                        )
-                    ]
-                });
+                    ],
+                    footer: {
+                        iconURL: guild.iconURL(),
+                        text: "ID: " + user.id
+                    }
+                }],
+                components: [
+                    new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("guildapplicationaccept")
+                            .setLabel("Accept")
+                            .setStyle(ButtonStyle.Primary),
+                        new ButtonBuilder()
+                            .setCustomId("guildapplicationdeny")
+                            .setLabel("Deny")
+                            .setStyle(ButtonStyle.Danger),
+                        new ButtonBuilder()
+                            .setCustomId("checkstats")
+                            .setLabel("Check Stats")
+                            .setStyle(ButtonStyle.Secondary)
+                    )
+                ]
+            });
 
-            })
         }
     }
 }

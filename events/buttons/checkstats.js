@@ -12,12 +12,12 @@ module.exports = {
     async execute(interaction) {
 
         await interaction.deferReply();
-        
-        const channel = interaction.channel;
-        const applicantId = await channel.topic
+
+        const message = interaction.message;
+        const embed = message.embeds[0];
+        const applicantId = embed.footer.text.split(" ")[1]
 
         const filePath = path.join(__dirname, `../../apps/guild/${applicantId}`);
-
         const uuid = fs.readFileSync(filePath, 'utf8');
         
         const mojang = "https://api.mojang.com/user/profile/"

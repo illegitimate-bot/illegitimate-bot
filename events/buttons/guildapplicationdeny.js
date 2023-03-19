@@ -14,8 +14,7 @@ module.exports = {
         const guild = interaction.guild;
         const embedColor = Number(color.replace("#", "0x"));
 
-        const applicantId = await channel.topic
-        const applicant = await guild.members.fetch(applicantId)
+        const message = interaction.message;
 
         const modal = new ModalBuilder()
             .setTitle('Deny Reason')

@@ -1,4 +1,4 @@
-const { InteractionType, EmbedBuilder } = require('discord.js');
+const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
 const fs = require('fs');
 const path = require('path');
@@ -15,13 +15,38 @@ module.exports = {
         
         interaction.deferReply();
         
-        const channel = interaction.channel;
-        const applicantId = channel.topic;
         const guild = interaction.guild;
+
+        const message = interaction.message;
+        const embed = message.embeds[0];
+        const applicantId = embed.footer.text.split(" ")[1];
+
         const applicant = await guild.members.fetch(applicantId);
         const reason = interaction.fields.fields.get('denyreason').value || "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));
         const filePath = path.join(__dirname, `../../apps/guild/${applicantId}`);
+
+        await message.edit({
+            components: [
+                new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("guildapplicationaccept")
+                        .setLabel("Accept")
+                        .setStyle(ButtonStyle.Primary)
+                        .setDisabled(true),
+                    new ButtonBuilder()
+                        .setCustomId("guildapplicationdeny")
+                        .setLabel("Deny")
+                        .setStyle(ButtonStyle.Danger)
+                        .setDisabled(true),
+                    new ButtonBuilder()
+                        .setCustomId("checkstats")
+                        .setLabel("Check Stats")
+                        .setStyle(ButtonStyle.Secondary)
+                        .setDisabled(true)
+                )
+            ]
+        });
 
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild has been denied\n" +
@@ -30,17 +55,22 @@ module.exports = {
 
         await applicant.send({ embeds: [dmMessage] });
 
+        fs.rmSync(filePath);
+
         await interaction.editReply({
             embeds: [{
-                description: "Application denied\n" +
-                "Channel will be deleted in 5 seconds...",
-                color: embedColor
+                title: "Application Denied",
+                description: "The application has been denied by <@" + interaction.user.id + ">.\n" + 
+                "**Reason:** `" + reason + "`",
+                color: embedColor,
+                thumbnail: {
+                    url: applicant.avatarURL()
+                },
+                footer: {
+                    iconURL: guild.iconURL(),
+                    text: "ID: " + applicant.id
+                }
             }],
         });
-
-        setTimeout(() => {
-            fs.rmSync(filePath, { force: true });
-            channel.delete();
-        }, 5000);
     }
 }

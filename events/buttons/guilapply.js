@@ -30,10 +30,10 @@ module.exports = {
             
             await interaction.deferReply({ ephemeral: true });
 
-            // if (userRoles.includes(guildRole)) {
-            //     await interaction.editReply({ content: "You are already a member of the guild.", ephemeral: true });
-            //     return
-            // }
+            if (userRoles.includes(guildRole)) {
+                await interaction.editReply({ content: "You are already a member of the guild.", ephemeral: true });
+                return
+            }
 
             const application = await guildapp.findOne({ userID: user.id });
 

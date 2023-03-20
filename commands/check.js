@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const { hypixelApiKey } = require('../config.json');
 const { color } = require('../config/options.json');
-const axios = require('axios');
+const fetch = require('axios');
 
 module.exports = {
     name: 'check',
@@ -20,9 +20,7 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.reply({content: "command is currently under development.", ephemeral: true})
-
-        // await interaction.deferReply();
+        await interaction.deferReply({})
 
         const ign = interaction.options.getString('ign');
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
@@ -30,29 +28,43 @@ module.exports = {
         const guildAPI = "https://api.slothpixel.me/api/guilds/"
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
-
-        const userCheck = await axios.get(mojang + ign);
-        const userUUID = userCheck.data.id;
-
-        const stats = await axios.get(slothPixel + userUUID);
-        const guildCheck = await axios.get(guildAPI + userUUID);
-        const head = minotar + ign;
         
         if (!ign) {
-            interaction.editReply('Please provide a player\'s IGN.')
+            await interaction.editReply('Please provide a player\'s IGN.')
             return
         }
+
+        try {
+            await fetch(mojang + ign);
+        } catch (error) {
+            interaction.editReply('That player doesn\'t exist. [Mojang]')
+            return
+        }
+
+        const userCheck = await fetch(mojang + ign);
+        const userUUID = userCheck.data.id;
+
+        const stats = await fetch(slothPixel + userUUID);
+        const guildCheck = guildAPI + userUUID
+        const head = minotar + ign;
 
         if (!stats.data.uuid) {
-            interaction.reply('That player doesn\'t exist. [Hypixel]')
+            interaction.editReply('That player doesn\'t exist. [Hypixel]')
             return
         }
 
-        await interaction.reply({
+        try {
+            const guildCheck = await fetch(guildAPI + userUUID);
+            var guildName = guildCheck.data.name
+        } catch (error) {
+            var guildName = "None"
+        }
+
+        await interaction.editReply({
             embeds: [{
                 title: stats.data.username,
                 description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + 
-                "**Current Guild:** `" +  guildCheck.data.name + "`",
+                "**Current Guild:** `" + guildName + "`",
                 color: embedColor,
                 thumbnail: {
                     url: head
@@ -82,7 +94,6 @@ module.exports = {
                     }
                 ]
             }]
-
         })
     }
 };

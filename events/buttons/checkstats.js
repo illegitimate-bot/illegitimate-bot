@@ -1,6 +1,8 @@
 const { color } = require('../../config/options.json');
 const { dev } = require('../../config.json');
 const fetch = require('axios');
+const mongoose = require('mongoose');
+const guildapp = require('../../schemas/guildAppSchema.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,8 +19,8 @@ module.exports = {
         const embed = message.embeds[0];
         const applicantId = embed.footer.text.split(" ")[1]
 
-        const filePath = path.join(__dirname, `../../apps/guild/${applicantId}`);
-        const uuid = fs.readFileSync(filePath, 'utf8');
+        const guildappdata = await guildapp.findOne({ userID: applicantId })
+        const uuid = guildappdata.uuid;
         
         const mojang = "https://api.mojang.com/user/profile/"
         const slothPixel = "https://api.slothpixel.me/api/players/";
@@ -28,21 +30,16 @@ module.exports = {
 
         const userCheck = await fetch(mojang + uuid);
         const ign = userCheck.data.name;
-        const guildCheck = await fetch(guildAPI + uuid);
+
         const stats = await fetch(slothPixel + uuid);
         const head = minotar + ign;
 
-        if (!userCheck.data.id) {
-            interaction.editReply('That player doesn\'t exist. [Mojang]')
-            return
+        try {
+            const guildCheck = await fetch(guildAPI + uuid);
+            var guildName = guildCheck.data.name
+        } catch (error) {
+            var guildName = "None"
         }
-
-        if (!stats.data.uuid) {
-            interaction.editReply('That player doesn\'t exist. [Hypixel]')
-            return
-        }
-
-        const guildName = guildCheck.data.name ?? "None"
 
         await interaction.editReply({
             embeds: [{

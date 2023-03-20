@@ -1,5 +1,7 @@
-const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { color } = require('../../config/options.json');
+const mongoose = require('mongoose');
+const guildapp = require('../../schemas/guildAppSchema.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -55,7 +57,7 @@ module.exports = {
 
         await applicant.send({ embeds: [dmMessage] });
 
-        fs.rmSync(filePath);
+        await guildapp.findOneAndDelete({ userID: applicantId });
 
         await interaction.editReply({
             embeds: [{

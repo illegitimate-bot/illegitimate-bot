@@ -5,6 +5,8 @@ const { applicationsChannel } = require('../../config/options.json');
 const { qu1, qu2, qu3, qu4, qu5, qu6, qu7, qu8 } = require('../../config/questions.json');
 const { rq1, rq2, rq3, rq4, rq5, rq6, rq7, rq8 } = require('../../config/questions.json');
 const { guildRole } = require('../../config/roles.json')
+const mongoose = require('mongoose');
+const guildapp = require('../../schemas/guildAppSchema.js');
 const path = require('path');
 const fetch = require('axios');
 const fs = require('fs');
@@ -33,8 +35,9 @@ module.exports = {
             //     return
             // }
 
-            const applicationFile = path.join(__dirname, '../../apps/guild/' + user.id);
-            if (fs.existsSync(applicationFile)) {
+            const application = await guildapp.findOne({ userID: user.id });
+
+            if (application) {
                 await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true });
                 return
             }
@@ -440,15 +443,16 @@ module.exports = {
 
             const userCheck = await fetch(mojangAPI + answer1_1)
             const uuid = userCheck.data.id
-            
-            fs.writeFile(`./apps/guild/${user.id}`, uuid, function (err) {
-                if (err) throw err;
-            });
 
-            await user.deleteDM();
-            
+            const newGuildApp = new guildapp({
+                _id: new mongoose.Types.ObjectId(),
+                userID: user.id,
+                uuid: uuid,
+            })
+
+            await newGuildApp.save()
+
             const channel = guild.channels.cache.get(applicationsChannel);
-
             await channel.send({
                 embeds: [{ 
                     title: user.username + "#" + user.discriminator + " - Guild Application",

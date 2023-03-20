@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const { hypixelApiKey } = require('../config.json');
 const { color } = require('../config/options.json');
-const fetch = require('axios')
+const axios = require('axios');
 
 module.exports = {
     name: 'check',
@@ -20,10 +20,9 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.reply({ content: 'This command is currently under development.', ephemeral: true })
-        return
+        await interaction.reply({content: "command is currently under development.", ephemeral: true})
 
-        await interaction.deferReply();
+        // await interaction.deferReply();
 
         const ign = interaction.options.getString('ign');
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
@@ -32,24 +31,15 @@ module.exports = {
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
-        const userCheck = await fetch(mojang + ign);
+        const userCheck = await axios.get(mojang + ign);
         const userUUID = userCheck.data.id;
 
-        console.log(userCheck)
-
-        const stats = await fetch(slothPixel + userUUID);
-        const guildCheck = await fetch(guildAPI + userUUID);
+        const stats = await axios.get(slothPixel + userUUID);
+        const guildCheck = await axios.get(guildAPI + userUUID);
         const head = minotar + ign;
         
         if (!ign) {
             interaction.editReply('Please provide a player\'s IGN.')
-            return
-        }
-
-        try {
-            await fetch(mojang + ign)
-        } catch (error) {
-            interaction.reply('That player doesn\'t exist. [Mojang]')
             return
         }
 

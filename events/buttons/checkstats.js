@@ -3,6 +3,7 @@ const { dev } = require('../../config.json');
 const fetch = require('axios');
 const mongoose = require('mongoose');
 const guildapp = require('../../schemas/guildAppSchema.js');
+const { bwfdkr, bwstars, bwwins, duelswins, swstars } = require('../../config/reqs.json');
 const fs = require('fs');
 const path = require('path');
 
@@ -41,6 +42,30 @@ module.exports = {
             var guildName = "None"
         }
 
+        const hsbwstars = stats.data.stats.BedWars.level
+        const hsbwfkdr = stats.data.stats.BedWars.final_k_d
+        const hsbwwins = stats.data.stats.BedWars.wins
+        const hsswstars = stats.data.stats.SkyWars.level
+        const hsduelswins = stats.data.stats.Duels.general.wins
+
+        if (hsbwstars < bwstars && hsbwfkdr < bwfdkr && hsbwwins < bwwins) {
+            var bwtitle = "This player does not meet the BedWars requirements."
+        } else {
+            var bwtitle = "This player meets the BedWars requirements."
+        }
+
+        if (hsswstars < swstars) {
+            var swtitle = "This player does not meet the SkyWars requirements."
+        } else {
+            var swtitle = "This player meets the SkyWars requirements."
+        }
+
+        if (hsduelswins < duelswins) {
+            var duelstitle = "This player does not meet the Duels requirements."
+        } else {
+            var duelstitle = "This player meets the Duels requirements."
+        }
+
         await interaction.editReply({
             embeds: [{
                 title: stats.data.username,
@@ -56,19 +81,19 @@ module.exports = {
                 },
                 fields: [
                     {
-                        name: "**Bedwars**",
+                        name: bwtitle,
                         value: "**➺ Stars:** `" + stats.data.stats.BedWars.level.toString() + "`\n" +
                         "**➺ FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + "`\n" +
                         "**➺ Wins:** `" + stats.data.stats.BedWars.wins.toString() + "`"
                     },
                     {
-                        name: "**Skywars**",
+                        name: swtitle,
                         value: "**➺ Stars:** `" + stats.data.stats.SkyWars.level.toFixed(2).toString() + "`\n" +
                         "**➺ KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" +
                         "**➺ Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
                     },
                     {
-                        name: "**Duels**",
+                        name: duelstitle,
                         value: "**➺ Wins:** `" + stats.data.stats.Duels.general.wins.toString() + "`\n" + 
                         "**➺ KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" + 
                         "**➺ WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"

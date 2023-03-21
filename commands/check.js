@@ -45,13 +45,28 @@ module.exports = {
         const userCheck = await fetch(mojang + ign);
         const userUUID = userCheck.data.id;
 
+        try {
+            await fetch(slothPixel + userUUID);
+        } catch (error) {
+            interaction.editReply('That player doesn\'t exist. [Hypixel]')
+            return
+        }
+
         const stats = await fetch(slothPixel + userUUID);
-        const guildCheck = guildAPI + userUUID
         const head = minotar + ign;
 
         if (!stats.data.uuid) {
             interaction.editReply('That player doesn\'t exist. [Hypixel]')
             return
+        }
+
+        const rank_formatted = stats.data.rank_formatted
+        const rank2 = rank_formatted.replace(/&[0-9a-fk-or]/g, "")
+
+        if (rank2 === "") {
+            var rank = ""
+        } else {
+            var rank = rank2 + " "
         }
 
         try {
@@ -85,9 +100,18 @@ module.exports = {
             var duelstitle = "This player meets the Duels requirements."
         }
 
+        try {
+            const guildCheck = await fetch(guildAPI + userUUID);
+            const tag_formatted = guildCheck.data.tag_formatted
+            const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "")
+            var guildTag = " " + guildTag2
+        } catch (error) {
+            var guildTag = ""
+        }
+
         await interaction.editReply({
             embeds: [{
-                title: stats.data.username,
+                title: rank + stats.data.username + guildTag,
                 description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + 
                 "**Current Guild:** `" + guildName + "`",
                 color: embedColor,

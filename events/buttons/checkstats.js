@@ -65,21 +65,21 @@ module.exports = {
         const hsduelswins = stats.data.stats.Duels.general.wins
 
         if (hsbwstars < bwstars && hsbwfkdr < bwfdkr && hsbwwins < bwwins) {
-            var bwtitle = "This player does not meet the BedWars requirements."
+            var bwtitle = ":cross_a: This player does not meet the BedWars requirements."
         } else {
-            var bwtitle = "This player meets the BedWars requirements."
+            var bwtitle = ":check_a: This player meets the BedWars requirements."
         }
 
         if (hsswstars < swstars) {
-            var swtitle = "This player does not meet the SkyWars requirements."
+            var swtitle = ":cross_a: This player does not meet the SkyWars requirements."
         } else {
-            var swtitle = "This player meets the SkyWars requirements."
+            var swtitle = ":check_a: This player meets the SkyWars requirements."
         }
 
         if (hsduelswins < duelswins) {
-            var duelstitle = "This player does not meet the Duels requirements."
+            var duelstitle = ":cross_a: This player does not meet the Duels requirements."
         } else {
-            var duelstitle = "This player meets the Duels requirements."
+            var duelstitle = ":check_a: This player meets the Duels requirements."
         }
         
         try {

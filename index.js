@@ -1,6 +1,5 @@
 const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection, InteractionType } = require('discord.js');
 const { token, mongoURI } = require('./config.json');
-const { color } = require('./config/options.json');
 const { connect } = require('mongoose');
 const mineflayer = require('mineflayer');
 const path = require('path');

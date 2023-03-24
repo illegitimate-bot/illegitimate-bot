@@ -1,5 +1,7 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { color } = require('../../config/options.json');
+const mongoose = require('mongoose');
+const staffapp = require('../../schemas/staffAppSchema.js');
 
 module.exports = {
     name: 'staffapplicationaccept',
@@ -13,9 +15,11 @@ module.exports = {
         const guild = interaction.guild;
         const embedColor = Number(color.replace("#", "0x"));
 
-        const applicantId = await channel.topic
+        const message = interaction.message;
+        const embed = message.embeds[0];
+        const applicantId = embed.footer.text.split(" ")[1]
+
         const applicant = await guild.members.fetch(applicantId)
-        const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator;
 
         await applicant.send({
             embeds: [{
@@ -24,32 +28,26 @@ module.exports = {
             }]
         });
 
-        // fetcg the message with the buttons staffapplicationaccept and staffapplicationdeny
-
-        const message = await channel.messages.fetch({ limit: 10 });
-        const messageID = message.first().id;
-
-        await channel.messages.fetch(messageID).then(async (message) => {
-                
-            await message.edit({
-                components: [
-                    new ActionRowBuilder().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("staffapplicationaccept")
-                            .setLabel("Accept")
-                            .setStyle(ButtonStyle.Primary)
-                            .setDisabled(true)
-                    ),
-                    new ActionRowBuilder().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("staffapplicationdeny")
-                            .setLabel("Deny")
-                            .setStyle(ButtonStyle.Danger)
-                            .setDisabled(true)
-                    )
-                ]
-            });
+        await message.edit({
+            components: [
+                new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("staffapplicationaccept")
+                        .setLabel("Accept")
+                        .setStyle(ButtonStyle.Primary)
+                        .setDisabled(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("staffapplicationdeny")
+                        .setLabel("Deny")
+                        .setStyle(ButtonStyle.Danger)
+                        .setDisabled(true)
+                )
+            ]
         });
+
+        await staffapp.findOneAndDelete({ userId: applicantId });
 
         await interaction.reply({
             embeds: [{
@@ -65,15 +63,7 @@ module.exports = {
                     iconurl: guild.iconURL(),
                     text: "ID: " + applicantId
                 }
-            }],
-            components: [
-                new ActionRowBuilder().addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("staffapplicationdelete")
-                        .setLabel("Delete channel")
-                        .setStyle(ButtonStyle.Danger)
-                )
-            ]
+            }]
         });
 
     }

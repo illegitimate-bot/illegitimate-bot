@@ -10,13 +10,6 @@ module.exports = {
 
     async execute(interaction) {
 
-        const channel = interaction.channel;
-        const guild = interaction.guild;
-        const embedColor = Number(color.replace("#", "0x"));
-
-        const applicantId = await channel.topic
-        const applicant = await guild.members.fetch(applicantId)
-
         const modal = new ModalBuilder()
             .setTitle('Deny Reason')
             .setCustomId('staffdenyreasonbox')

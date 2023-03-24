@@ -1,10 +1,12 @@
 const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
 const { largeM, smallM, ignM } = require('../../config/limitmessages.json')
-const { applicationsCategory } = require('../../config/options.json');
+const { staffApplicationsChannel } = require('../../config/options.json');
 const { sq1, sq2, sq3, sq4, sq5, sq6 } = require('../../config/questions.json');
 const { rsq1, rsq2, rsq3, rsq4, rsq5, rsq6 } = require('../../config/questions.json');
 const { guildRole, guildStaff } = require('../../config/roles.json')
+const mongoose = require('mongoose');
+const staffapp = require('../../schemas/staffAppSchema.js');
 const path = require('path');
 const fetch = require('axios');
 const fs = require('fs');
@@ -34,10 +36,10 @@ module.exports = {
             //      await interaction.editReply({content: "You are already a staff member.", ephemeral: true});
             //  }
 
-            const applicationFile = path.join(__dirname, '../../apps/staff/' + user.id);
-            if (fs.existsSync(applicationFile)) {
+            const application = await staffapp.findOne({ userID: user.id });
+            
+            if (application) {
                 await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true });
-                return
             }
             
             const tooLong = new EmbedBuilder()
@@ -361,84 +363,71 @@ module.exports = {
                         color: embedColor
                     }]
                 })
-    
-                const userCheck = await fetch(mojangAPI + answer1_1)
-                const uuid = userCheck.data.id
-                
-                fs.writeFile(`./apps/staff/${user.id}`, uuid, function (err) {
-                    if (err) throw err;
-                });
-    
+
+                const newStaffApp = new staffapp({
+                    _id: new mongoose.Types.ObjectId(),
+                    userID: user.id,
+                })
+                newStaffApp.save()
                 await user.deleteDM();
 
-                await guild.channels.create({
-                    name: `staff-app-${user.username}`,
-                    type: ChannelType.GuildText,
-                    topic: user.id,
-                    permissionOverwrites: [
-                        {
-                            id: guild.roles.everyone,
-                            deny: [PermissionFlagsBits.ViewChannel]
-                        }
-                    ]
-                }).then(async channel => {
-                    
-                    await channel.send({
-                        embeds: [{ 
-                            title: user.username + "#" + user.discriminator + " - Staff Application",
-                            color: embedColor,
-                            thumbnail: {
-                                url: user.avatarURL()
+                const channel = guild.channels.cache.get(staffApplicationsChannel);
+
+                await channel.send({
+                    embeds: [{ 
+                        title: user.username + "#" + user.discriminator + " - Staff Application",
+                        color: embedColor,
+                        thumbnail: {
+                            url: user.avatarURL()
+                        },
+                        fields: [
+                            {
+                                name: rsq1,
+                                value: "```" + answer1_1 + "```"
                             },
-                            fields: [
-                                {
-                                    name: rsq1,
-                                    value: "```" + answer1_1 + "```"
-                                },
-                                {
-                                    name: rsq2,
-                                    value: "```" + answer2_1 + "```"
-                                },
-                                {
-                                    name: rsq3,
-                                    value: "```" + answer3_1 + "```"
-                                },
-                                {
-                                    name: rsq4,
-                                    value: "```" + answer4_1 + "```"
-                                },
-                                {
-                                    name: rsq5,
-                                    value: "```" + answer5_1 + "```"
-                                },
-                                {
-                                    name: rsq6,
-                                    value: "```" + answer6_1 + "```"
-                                }
-    
-                            ],
-                            footer: {
-                                iconURL: guild.iconURL(),
-                                text: "ID: " + user.id
+                            {
+                                name: rsq2,
+                                value: "```" + answer2_1 + "```"
+                            },
+                            {
+                                name: rsq3,
+                                value: "```" + answer3_1 + "```"
+                            },
+                            {
+                                name: rsq4,
+                                value: "```" + answer4_1 + "```"
+                            },
+                            {
+                                name: rsq5,
+                                value: "```" + answer5_1 + "```"
+                            },
+                            {
+                                name: rsq6,
+                                value: "```" + answer6_1 + "```"
                             }
-                        }],
-                        components: [
-                            new ActionRowBuilder().addComponents(
-                                new ButtonBuilder()
-                                    .setCustomId("staffapplicationaccept")
-                                    .setLabel("Accept")
-                                    .setStyle(ButtonStyle.Primary)
-                            ),
-                            new ActionRowBuilder().addComponents(
-                                new ButtonBuilder()
-                                    .setCustomId("staffapplicationdeny")
-                                    .setLabel("Deny")
-                                    .setStyle(ButtonStyle.Danger)
-                            )
-                        ]
-                    });
-    
-                })
+
+                        ],
+                        footer: {
+                            iconURL: guild.iconURL(),
+                            text: "ID: " + user.id
+                        }
+                    }],
+                    components: [
+                        new ActionRowBuilder().addComponents(
+                            new ButtonBuilder()
+                                .setCustomId("staffapplicationaccept")
+                                .setLabel("Accept")
+                                .setStyle(ButtonStyle.Primary)
+                        ),
+                        new ActionRowBuilder().addComponents(
+                            new ButtonBuilder()
+                                .setCustomId("staffapplicationdeny")
+                                .setLabel("Deny")
+                                .setStyle(ButtonStyle.Danger)
+                        )
+                    ]
+                }
+            );    
         }
     }
 }

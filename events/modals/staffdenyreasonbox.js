@@ -16,12 +16,14 @@ module.exports = {
         interaction.deferReply();
         
         const channel = interaction.channel;
-        const applicantId = channel.topic;
         const guild = interaction.guild;
-        const applicant = await guild.members.fetch(applicantId);
         const reason = interaction.fields.fields.get('staffdenyreason').value || "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));
-        const filePath = path.join(__dirname, `../../apps/staff/${applicantId}`);
+
+        const message = interaction.message;
+        const embed = message.embeds[0];
+        const applicantId = embed.footer.text.split(" ")[1]
+        const applicant = await guild.members.fetch(applicantId)
 
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild staff has been denied\n" +
@@ -32,15 +34,18 @@ module.exports = {
 
         await interaction.editReply({
             embeds: [{
-                description: "Application denied\n" +
-                "Channel will be deleted in 5 seconds...",
-                color: embedColor
+                title: "Application Denied",
+                description: "The application has been denied by <@" + interaction.user.id + ">.\n" + 
+                "**Reason:** `" + reason + "`",
+                color: embedColor,
+                thumbnail: {
+                    url: applicant.avatarURL()
+                },
+                footer: {
+                    iconURL: guild.iconURL(),
+                    text: "ID: " + applicant.id
+                }
             }],
-        });
-
-        setTimeout(() => {
-            fs.rmSync(filePath, { force: true });
-            channel.delete();
-        }, 5000);
+        });;
     }
 }

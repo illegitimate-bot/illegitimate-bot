@@ -144,7 +144,7 @@ module.exports = {
                 const question2 = await user.send({
                     embeds: [{
                         title : "**Question 2**",
-                        description: sq2 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(8 characters max)`",
+                        description: sq2 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
                         color: embedColor,
                         footer:{
                             text: "You have 15 minutes to respond to this message."
@@ -160,10 +160,10 @@ module.exports = {
                     await user.send({ embeds: [attachments] });
                     return
                 }
-                if (answer2.first().content > 8) {
+                if (answer2.first().content > 64) {
                     await user.send({
                         embeds: [{
-                            description: "Max character limit is 8.",
+                            description: "Max character limit is 64.",
                             color: embedColor
                         }]
                     })
@@ -183,7 +183,7 @@ module.exports = {
                 const question3 = await user.send({
                     embeds: [{
                         title : "**Question 3**",
-                        description: sq3 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
+                        description: sq3 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                         color: embedColor,
                         footer:{
                             text: "You have 15 minutes to respond to this message."
@@ -199,10 +199,10 @@ module.exports = {
                     await user.send({ embeds: [attachments] });
                     return
                 }
-                if (answer3.first().content > 128) {
+                if (answer3.first().content > 256) {
                     await user.send({
                         embeds: [{
-                            description: "Max character limit is 128.",
+                            description: "Max character limit is 256.",
                             color: embedColor
                         }]
                     })
@@ -221,8 +221,7 @@ module.exports = {
                 const question4 = await user.send({
                     embeds: [{
                         title : "**Question 4**",
-                        description: sq4 + "\n\nPlease type your answer below or type `cancel` to cancel your application." + 
-                        " `(We expect a longer answer.)`\n`" + largeM + "`",
+                        description: sq4 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                         color: embedColor,
                         footer:{
                             text: "You have 15 minutes to respond to this message."
@@ -260,7 +259,7 @@ module.exports = {
                 const question5 = await user.send({
                     embeds: [{
                         title : "**Question 5**",
-                        description: sq5 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
+                        description: sq5 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                         color: embedColor,
                         footer:{
                             text: "You have 15 minutes to respond to this message."
@@ -276,10 +275,10 @@ module.exports = {
                     await user.send({ embeds: [attachments] });
                     return
                 }
-                if (answer5.first().content > 128) {
+                if (answer5.first().content > 256) {
                     await user.send({
                         embeds: [{
-                            description: "Max character limit is 128.",
+                            description: "Max character limit is 256.",
                             color: embedColor
                         }]
                     })
@@ -298,7 +297,8 @@ module.exports = {
                 const question6 = await user.send({
                     embeds: [{
                         title : "**Question 6**",
-                        description: sq6 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
+                        description: sq6 + "\n\nPlease type your answer below or type `cancel` to cancel your application." + 
+                        "`(We expect a longer answer here)`\n`" + largeM + "`",
                         color: embedColor,
                         footer:{
                             text: "You have 15 minutes to respond to this message."
@@ -364,11 +364,16 @@ module.exports = {
                     }]
                 })
 
+                const userCheck = await fetch(mojangAPI + answer1_1)
+                const uuid = userCheck.data.id
+
                 const newStaffApp = new staffapp({
                     _id: new mongoose.Types.ObjectId(),
                     userID: user.id,
+                    uuid: uuid,
                 })
-                newStaffApp.save()
+
+                await newStaffApp.save()
                 await user.deleteDM();
 
                 const channel = guild.channels.cache.get(staffApplicationsChannel);
@@ -417,9 +422,7 @@ module.exports = {
                             new ButtonBuilder()
                                 .setCustomId("staffapplicationaccept")
                                 .setLabel("Accept")
-                                .setStyle(ButtonStyle.Primary)
-                        ),
-                        new ActionRowBuilder().addComponents(
+                                .setStyle(ButtonStyle.Primary),
                             new ButtonBuilder()
                                 .setCustomId("staffapplicationdeny")
                                 .setLabel("Deny")

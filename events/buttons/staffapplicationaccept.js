@@ -20,6 +20,7 @@ module.exports = {
         const applicantId = embed.footer.text.split(" ")[1]
 
         const applicant = await guild.members.fetch(applicantId)
+        const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator;
 
         await applicant.send({
             embeds: [{
@@ -35,9 +36,7 @@ module.exports = {
                         .setCustomId("staffapplicationaccept")
                         .setLabel("Accept")
                         .setStyle(ButtonStyle.Primary)
-                        .setDisabled(true)
-                ),
-                new ActionRowBuilder().addComponents(
+                        .setDisabled(true),
                     new ButtonBuilder()
                         .setCustomId("staffapplicationdeny")
                         .setLabel("Deny")
@@ -52,9 +51,7 @@ module.exports = {
         await interaction.reply({
             embeds: [{
                 title: applicantUsername + " - Staff Application.",
-                description: "Application accepted by <@" + user.id + ">.\n\n" + 
-                "Press the button below to delete this channel.\n" + 
-                "**When the user was given their role**",
+                description: "Application accepted by <@" + user.id + ">.",
                 color: embedColor,
                 thumbnail: {
                     url: applicant.avatarURL()

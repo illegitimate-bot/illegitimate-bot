@@ -1,5 +1,7 @@
-const { InteractionType, EmbedBuilder } = require('discord.js');
+const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { color } = require('../../config/options.json');
+const mongoose = require('mongoose');
+const staffapp = require('../../schemas/staffAppSchema.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -25,12 +27,31 @@ module.exports = {
         const applicantId = embed.footer.text.split(" ")[1]
         const applicant = await guild.members.fetch(applicantId)
 
+        await message.edit({
+            components: [
+                new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("staffapplicationaccept")
+                        .setLabel("Accept")
+                        .setStyle(ButtonStyle.Primary)
+                        .setDisabled(true),
+                    new ButtonBuilder()
+                        .setCustomId("staffapplicationdeny")
+                        .setLabel("Deny")
+                        .setStyle(ButtonStyle.Danger)
+                        .setDisabled(true),
+                )
+            ]
+        });
+
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild staff has been denied\n" +
             "**Reason:** `" + reason + "`")
             .setColor(embedColor);
 
         await applicant.send({ embeds: [dmMessage] });
+
+        await staffapp.findOneAndDelete({ userID: applicantId });
 
         await interaction.editReply({
             embeds: [{

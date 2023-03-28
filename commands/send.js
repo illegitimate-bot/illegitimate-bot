@@ -22,18 +22,19 @@ module.exports = {
         
     async execute(interaction) {
 
-        await interaction.deferReply();
+        await interaction.deferReply({ ephemeral: true });
 
         const message = interaction.options.getString('message');
         const channel = interaction.options.getChannel('channel');
+        const embedColor = Number(color.replace("#", "0x"));
 
         if (!message) {
-            interaction.reply({ content: 'Please provide a message to send.', ephemeral: true })
+            interaction.editReply({ content: 'Please provide a message to send.', ephemeral: true })
             return
         }
 
         if (!channel) {
-            interaction.reply({ content: 'Please provide a channel to send the message to.', ephemeral: true })
+            interaction.editReply({ content: 'Please provide a channel to send the message to.', ephemeral: true })
             return
         }
 
@@ -42,7 +43,7 @@ module.exports = {
                 {
                     title: interaction.guild.name,
                     description: message,
-                    color: color,
+                    color: embedColor,
                     thumbnail: {
                         url: interaction.guild.iconURL({ dynamic: true })
                     },

@@ -28,13 +28,13 @@ module.exports = {
 
             await interaction.deferReply({ ephemeral: true });
 
-            //  if (!userRoles.has(guildRole)) {
-            //      await interaction.editReply({content: "You must be a member of the guild to apply for staff.", ephemeral: true});
-            //  }
-//  
-            //  if (userRoles.has(guildStaff)) {
-            //      await interaction.editReply({content: "You are already a staff member.", ephemeral: true});
-            //  }
+            if (!userRoles.has(guildRole)) {
+                await interaction.editReply({content: "You must be a member of the guild to apply for staff.", ephemeral: true});
+            }
+
+            if (userRoles.has(guildStaff)) {
+                await interaction.editReply({content: "You are already a staff member.", ephemeral: true});
+            }
 
             const application = await staffapp.findOne({ userID: user.id });
             

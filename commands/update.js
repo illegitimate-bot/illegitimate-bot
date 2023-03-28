@@ -23,8 +23,7 @@ module.exports = {
         const user1 = interaction.user;
         const user = interaction.guild.members.cache.get(user1.id);
         const verifyData = await verify.findOne({ userID: user.id })
-        const memberRoles = interaction.member.roles.cache;
-        const roleManage = interaction.member.roles;
+        const roleManage = user.roles;
         
         if (!verifyData) {
             interaction.reply('You are not verified.')
@@ -39,10 +38,10 @@ module.exports = {
         const userCheck = await fetch(mojangAPI + verifyData.uuid);
         const hypixelCheck = await fetch(slothPixel + verifyData.uuid);
         const guildCheck = await fetch(guildAPI + verifyData.uuid);
-        const head = minotar + hypixelCheck.data.username;
+        const head = minotar + userCheck.data.name;
 
         const embedColor = Number(color.replace("#", "0x"));
-        const GuildMembers = await guildCheck.data.members;
+        const GuildMembers = guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
         if (guildCheck.data.id !== hypixelGuildID) {
@@ -69,7 +68,7 @@ module.exports = {
             await roleManage.add(gm)
             await roleManage.add(defaultMember)
 
-            await verify.findOneAndUpdate({ userID: user.id })
+            
             interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Guild Master`",
@@ -92,7 +91,7 @@ module.exports = {
             await roleManage.add(manager)
             await roleManage.add(defaultMember)
 
-            await verify.findOneAndUpdate({ userID: user.id })
+            
             interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Manager`",
@@ -115,7 +114,7 @@ module.exports = {
             await roleManage.add(moderator)
             await roleManage.add(defaultMember)
 
-            await verify.findOneAndUpdate({ userID: user.id })
+            
             interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Moderator`",
@@ -138,7 +137,7 @@ module.exports = {
             await roleManage.add(beast)
             await roleManage.add(defaultMember)
 
-            await verify.findOneAndUpdate({ userID: user.id })
+            
             interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Beast`.",
@@ -161,7 +160,7 @@ module.exports = {
             await roleManage.add(member)
             await roleManage.add(defaultMember)
 
-            await verify.findOneAndUpdate({ userID: user.id })
+            
             interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Member`.",
@@ -184,7 +183,7 @@ module.exports = {
             await roleManage.add(trialmember)
             await roleManage.add(defaultMember)
 
-            await verify.findOneAndUpdate({ userID: user.id })
+            
             interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Trial Member`.",

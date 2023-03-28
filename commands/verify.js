@@ -36,6 +36,25 @@ module.exports = {
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
+        if (!ign) {
+            interaction.editReply('Please provide a player\'s IGN.')
+            return
+        }
+
+        try {
+            await fetch(mojang + ign);
+        } catch (err) {
+            interaction.editReply('That player doesn\'t exist. [Mojang]')
+            return
+        }
+
+        try {
+            await fetch(slothPixel + ign);
+        } catch (err) {
+            interaction.editReply('That player doesn\'t exist. [Hypixel]')
+            return
+        }
+
         const userCheck = await fetch(mojang + ign);
         const userUUID = userCheck.data.id;
 
@@ -46,20 +65,6 @@ module.exports = {
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
-        if (!ign) {
-            interaction.editReply('Please provide a player\'s IGN.')
-            return
-        }
-
-        if (!userUUID) {
-            interaction.editReply('That player doesn\'t exist. [Mojang]')
-            return
-        }
-
-        if (!hypixelCheck.data.uuid) {
-            interaction.editReply('That player doesn\'t exist. [Hypixel]')
-            return
-        }
 
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
             interaction.editReply('Your Discord tag does not match your in-game tag.')
@@ -74,34 +79,40 @@ module.exports = {
         }
 
         if (guildRank === "Guild Master" && guildCheck.data.id === hypixelGuildID) {
+            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
             await user.roles.add(gm);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
         if (guildRank === "Manager" && guildCheck.data.id === hypixelGuildID) {
+            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
             await user.roles.add(manager);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
         if (guildRank === "Moderator" && guildCheck.data.id === hypixelGuildID) {
+            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
             await user.roles.add(moderator);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
         
         if (guildRank === "Beast" && guildCheck.data.id === hypixelGuildID) {
+            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
             await user.roles.add(beast);
             await user.roles.add(guildRole)
         }
 
         if (guildRank === "Member" && guildCheck.data.id === hypixelGuildID) {
+            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
             await user.roles.add(member);
             await user.roles.add(guildRole)
         }
 
         if (guildRank === "Trial Member" && guildCheck.data.id === hypixelGuildID) {
+            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
             await user.roles.add(trialmember);
             await user.roles.add(guildRole)
         }

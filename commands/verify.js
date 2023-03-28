@@ -36,6 +36,13 @@ module.exports = {
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
+        const verifyData = await verify.findOne({ userID: user.id })
+
+        if (verifyData) {
+            interaction.editReply('You are already verified.')
+            return
+        }
+
         if (!ign) {
             interaction.editReply('Please provide a player\'s IGN.')
             return
@@ -68,13 +75,6 @@ module.exports = {
 
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
             interaction.editReply('Your Discord tag does not match your in-game tag.')
-            return
-        }
-
-        const verifyData = await verify.findOne({ userID: user.id })
-
-        if (verifyData) {
-            interaction.editReply('You are already verified.')
             return
         }
 

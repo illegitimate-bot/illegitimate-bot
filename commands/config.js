@@ -56,25 +56,22 @@ module.exports = {
 
         if (subcommand === 'reload') {
             
-            await interaction.deferReply({ ephemeral: true })
+            await interaction.deferReply({ ephemeral: true });
 
-            const { spawn } = require('child_process');
-            const child = spawn('ls', );
-            child.stdout.on('data', (chunk) => {
-                console.log(`child stdout:\n${chunk}`);
-                var output = chunk.toString();
+            const { exec } = require('child_process');
+
+            // exec a command and check if it has an error
+
+            exec('pm2 restart 0', (error, stdout, stderr) => {
+
+                if (error) {
+                    interaction.editReply({ content: 'There was an error while reloading the bot.', ephemeral: true });
+                } else{
+                    interaction.editReply({ content: 'Bot reloaded.', ephemeral: true });
+                }
+
             });
-            child.on('close', (code) => {
-                console.log(`child process exited with code ${code}`);
-            });
-            
-            await interaction.editReply({
-                embeds: [{
-                    title: 'Reloaded',
-                    description: chunk,
-                }],
-                ephemeral: true
-            });
+
         }
 
         if (subcommand === 'sendguildapplication') {

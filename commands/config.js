@@ -39,6 +39,10 @@ module.exports = {
             subcommand
                 .setName('sendrules-info')
                 .setDescription('Send the rules and info message to a channel.'))
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('reload')
+                .setDescription('Reload the bot.'))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
@@ -48,6 +52,10 @@ module.exports = {
         const guild = interaction.guild;
         const subcommand = interaction.options.getSubcommand();
         const embedColor = Number(color.replace("#", "0x"));
+
+        if (subcommand === 'reload') {
+            await interaction.reply({ content: "In development.", ephemeral: true });
+        }
 
         if (subcommand === 'sendguildapplication') {
 
@@ -108,6 +116,10 @@ module.exports = {
             })
 
             await interaction.reply({ content: 'Message sent', ephemeral: true })
+        }
+
+        if (subcommand !== "sendguildinfo" || "sendrequirements" || "sendrules-info") {
+            await interaction.reply({ content: 'In development.', ephemeral: true });
         }
     }              
 };

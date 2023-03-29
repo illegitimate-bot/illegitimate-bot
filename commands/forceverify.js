@@ -41,6 +41,37 @@ module.exports = {
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
+        if (!user) {
+            interaction.editReply('Please provide a user to force verify.')
+            return
+        }
+
+        if (!ign) {
+            interaction.editReply('Please provide a player\'s IGN.')
+            return
+        }
+        
+        const verifyData = await verify.findOne({ userID: user.id })
+
+        if (verifyData) {
+            interaction.editReply('That user is already verified.')
+            return
+        }
+
+        try {
+            await fetch(mojang + ign);
+        } catch (err) {
+            interaction.editReply('That player doesn\'t exist. [Mojang]')
+            return
+        }
+
+        try {
+            await fetch(slothPixel + ign);
+        } catch (err) {
+            interaction.editReply('That player doesn\'t exist. [Hypixel]')
+            return
+        }
+
         const userCheck = await fetch(mojang + ign);
         const userUUID = userCheck.data.id;
 
@@ -50,26 +81,6 @@ module.exports = {
 
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
-
-        if (!user) {
-            interaction.reply('Please provide a user to force verify.')
-            return
-        }
-
-        if (!ign) {
-            interaction.reply('Please provide a player\'s IGN.')
-            return
-        }
-
-        if (!userUUID) {
-            interaction.reply('That player doesn\'t exist. [Mojang]')
-            return
-        }
-
-        if (!hypixelCheck.data.uuid) {
-            interaction.reply('That player doesn\'t exist. [Hypixel]')
-            return
-        }
 
         if (guildRank === "Guild Master" && guildCheck.data.id === hypixelGuildID) {
             await user.roles.add(gm);
@@ -106,21 +117,15 @@ module.exports = {
 
         await user.roles.add(defaultMember);
 
-        const verifyData = await verify.findOne({ userID: user.id })
-
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
             userID: user.id,
             uuid: userUUID
         })
 
-        if (verifyData) {
-            await verify.findOneAndUpdate({ userID: user.id }, { uuid: userUUID })
-        } else {
-            await newVerify.save()
-        }
+        await newVerify.save();
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [{
                 title: interaction.guild.name,
                 description: "You have successfully force verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",

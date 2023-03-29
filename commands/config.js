@@ -55,19 +55,9 @@ module.exports = {
         const embedColor = Number(color.replace("#", "0x"));
 
         if (subcommand === 'reload') {
-            
-            await interaction.deferReply({ ephemeral: true });
 
-            const { exec } = require('child_process');
-
-            const pm2 = exec('pm2 restart 0', )
-
-            if (pm2.stderr) {
-                await interaction.editReply("An error occurred while reloading the bot.")
-                return
-            }
-
-            await interaction.editReply("Bot reloaded.")
+            await interaction.reply({ content: 'In development', ephemeral: true })
+            return
 
         }
         

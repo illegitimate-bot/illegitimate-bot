@@ -54,7 +54,19 @@ module.exports = {
         const embedColor = Number(color.replace("#", "0x"));
 
         if (subcommand === 'reload') {
-            await interaction.reply({ content: "In development.", ephemeral: true });
+            
+            await interaction.deferReply({ ephemeral: true })
+
+            const { spawn } = require('child_process');
+            const child = spawn('ls', );
+            child.stdout.on('data', (chunk) => {
+                console.log(`child stdout:\n${chunk}`);
+            });
+            child.on('close', (code) => {
+                console.log(`child process exited with code ${code}`);
+            });
+            
+            await interaction.editReply({ content: "In development.", ephemeral: true });
         }
 
         if (subcommand === 'sendguildapplication') {

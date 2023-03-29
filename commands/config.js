@@ -60,20 +60,17 @@ module.exports = {
 
             const { exec } = require('child_process');
 
-            // exec a command and check if it has an error
+            const pm2 = exec('pm2 restart 0', )
 
-            exec('pm2 restart 0', (error, stdout, stderr) => {
+            if (pm2.stderr) {
+                await interaction.editReply("An error occurred while reloading the bot.")
+                return
+            }
 
-                if (error) {
-                    interaction.editReply({ content: 'There was an error while reloading the bot.', ephemeral: true });
-                } else{
-                    interaction.editReply({ content: 'Bot reloaded.', ephemeral: true });
-                }
-
-            });
+            await interaction.editReply("Bot reloaded.")
 
         }
-
+        
         if (subcommand === 'sendguildapplication') {
 
             const channel = interaction.options.getChannel('channel');

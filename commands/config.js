@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder, WebhookClient } = require('discord.js');
+const { title } = require('process');
 const { color } = require('../config/options.json');
 
 module.exports = {
@@ -61,12 +62,19 @@ module.exports = {
             const child = spawn('ls', );
             child.stdout.on('data', (chunk) => {
                 console.log(`child stdout:\n${chunk}`);
+                var output = chunk.toString();
             });
             child.on('close', (code) => {
                 console.log(`child process exited with code ${code}`);
             });
             
-            await interaction.editReply({ content: "In development.", ephemeral: true });
+            await interaction.editReply({
+                embeds: [{
+                    title: 'Reloaded',
+                    description: chunk,
+                }],
+                ephemeral: true
+            });
         }
 
         if (subcommand === 'sendguildapplication') {

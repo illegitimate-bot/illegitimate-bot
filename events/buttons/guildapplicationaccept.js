@@ -24,7 +24,6 @@ module.exports = {
 
         const applicant = await guild.members.fetch(applicantId)
         const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator;
-        const applicationFile = require(`../../apps/guild/${applicantId}`);
 
         await message.edit({
             components: [

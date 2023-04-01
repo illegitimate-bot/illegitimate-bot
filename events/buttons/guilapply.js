@@ -161,7 +161,7 @@ module.exports = {
                 await user.send({ embeds: [attachments] });
                 return
             }
-            if (answer2.first().content > 8) {
+            if (answer2.first().content.size > 8) {
                 await user.send({
                     embeds: [{
                         description: "Max character limit is 8.",

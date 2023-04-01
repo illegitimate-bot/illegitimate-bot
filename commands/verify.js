@@ -66,9 +66,16 @@ module.exports = {
         const userUUID = userCheck.data.id;
 
         const hypixelCheck = await fetch(slothPixel + userUUID);
-        const guildCheck = await fetch(guildAPI + userUUID);
         const head = minotar + ign;
+        
+        try {
+            await fetch(guildAPI + userUUID);
+            var responseGuildID = guildCheck.data.id;
+        } catch (err) {
+            var responseGuildID = null;
+        }
 
+        const guildCheck = await fetch(guildAPI + userUUID);
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
@@ -78,41 +85,56 @@ module.exports = {
             return
         }
 
-        if (guildRank === "Guild Master" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
+        if (responseGuildID !== hypixelGuildID) {
+
+            await user.roles.add(defaultMember)
+
+            await interaction.editReply({
+                embeds: [{
+                    title: interaction.guild.name,
+                    description: "You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
+                    footer: {
+                        icon_url: interaction.guild.iconURL(),
+                        text: interaction.guild.name + " | Developed by Taken#0002"
+                    }
+                }]
+            });
+            return
+        }
+
+        if (guildRank === "Guild Master" && responseGuildID === hypixelGuildID) {
             await user.roles.add(gm);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
-        if (guildRank === "Manager" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
+        if (guildRank === "Manager" && responseGuildID === hypixelGuildID) {
             await user.roles.add(manager);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
 
-        if (guildRank === "Moderator" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
+        if (guildRank === "Moderator" && responseGuildID === hypixelGuildID) {
             await user.roles.add(moderator);
             await user.roles.add(guildRole)
             await user.roles.add(guildStaff)
         }
         
-        if (guildRank === "Beast" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
+        if (guildRank === "Beast" && responseGuildID === hypixelGuildID) {
             await user.roles.add(beast);
             await user.roles.add(guildRole)
         }
 
-        if (guildRank === "Member" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
+        if (guildRank === "Member" && responseGuildID === hypixelGuildID) {
             await user.roles.add(member);
             await user.roles.add(guildRole)
         }
 
-        if (guildRank === "Trial Member" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
+        if (guildRank === "Trial Member" && responseGuildID === hypixelGuildID) {
             await user.roles.add(trialmember);
             await user.roles.add(guildRole)
         }

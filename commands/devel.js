@@ -68,7 +68,7 @@ module.exports = {
                 return
             }
 
-            const child = spawn('pm', ['restart 0'], {})
+            const child = spawn('pm restart 0', {})
 
             if (child.stderr) {
                 await interaction.editReply({ content: 'Error restarting bot.', ephemeral: true })

@@ -1,9 +1,8 @@
-const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
-const { dev } = require('../config.json');
-const mongoose = require('mongoose');
-const fetch = require('axios');
+const { SlashCommandBuilder, PermissionFlagsBits, userMention, EmbedBuilder } = require('discord.js');
+const { hypixelGuildID, color } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js');
-const { hypixelGuildID } = require('../config/options.json');
+const { dev } = require('../config.json');
+const fetch = require('axios');
 
 module.exports = {
     name: 'admin',
@@ -21,6 +20,10 @@ module.exports = {
             subcommand
                 .setName('reload')
                 .setDescription('Reload the bot.'))
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('listallverified')
+                .setDescription('List all verified users.'))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
@@ -63,5 +66,13 @@ module.exports = {
             return
 
         }
+
+        if (subcommand === 'listallverified') {
+
+            await interaction.reply({ content: 'In development', ephemeral: true })
+            return
+
+        }
+
     }
 };

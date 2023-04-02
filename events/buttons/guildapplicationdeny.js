@@ -1,7 +1,5 @@
 const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 const { color } = require('../../config/options.json');
-const fs = require('fs');
-const path = require('path');
 
 module.exports = {
     name: 'guildapplicationdeny',

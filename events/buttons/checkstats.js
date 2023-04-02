@@ -1,11 +1,7 @@
 const { color } = require('../../config/options.json');
-const { dev } = require('../../config.json');
 const fetch = require('axios');
-const mongoose = require('mongoose');
 const guildapp = require('../../schemas/guildAppSchema.js');
 const { bwfdkr, bwstars, bwwins, duelswins, swstars } = require('../../config/reqs.json');
-const fs = require('fs');
-const path = require('path');
 
 module.exports = {
     name: 'checkstats',

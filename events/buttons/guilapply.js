@@ -1,4 +1,4 @@
-const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
 const { largeM, smallM, ignM } = require('../../config/limitmessages.json')
 const { applicationsChannel } = require('../../config/options.json');
@@ -7,9 +7,7 @@ const { rq1, rq2, rq3, rq4, rq5, rq6, rq7, rq8 } = require('../../config/questio
 const { guildRole } = require('../../config/roles.json')
 const mongoose = require('mongoose');
 const guildapp = require('../../schemas/guildAppSchema.js');
-const path = require('path');
 const fetch = require('axios');
-const fs = require('fs');
 
 module.exports = {
     name: 'guildapply',

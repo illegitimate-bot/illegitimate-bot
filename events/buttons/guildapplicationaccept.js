@@ -1,9 +1,6 @@
 const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
-const mongoose = require('mongoose');
 const guildapp = require('../../schemas/guildAppSchema.js');
-const fs = require('fs');
-const path = require('path');
 
 module.exports = {
     name: 'guildapplicationaccept',

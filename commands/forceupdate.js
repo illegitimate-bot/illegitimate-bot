@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
 const { hypixelGuildID, color } = require('../config/options.json');
 const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
-const mongoose = require('mongoose');
 const verify = require('../schemas/verifySchema.js')
 const fetch = require('axios');
 const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff]

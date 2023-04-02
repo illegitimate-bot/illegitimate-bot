@@ -1,6 +1,5 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { color } = require('../../config/options.json');
-const mongoose = require('mongoose');
 const staffapp = require('../../schemas/staffAppSchema.js');
 
 module.exports = {

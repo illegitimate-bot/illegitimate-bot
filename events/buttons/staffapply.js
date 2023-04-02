@@ -1,4 +1,4 @@
-const { ChannelType, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
 const { largeM, smallM, ignM } = require('../../config/limitmessages.json')
 const { staffApplicationsChannel } = require('../../config/options.json');
@@ -7,9 +7,7 @@ const { rsq1, rsq2, rsq3, rsq4, rsq5, rsq6 } = require('../../config/questions.j
 const { guildRole, guildStaff } = require('../../config/roles.json')
 const mongoose = require('mongoose');
 const staffapp = require('../../schemas/staffAppSchema.js');
-const path = require('path');
 const fetch = require('axios');
-const fs = require('fs');
 
 module.exports = {
     name: 'staffapply',

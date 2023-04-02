@@ -17,6 +17,10 @@ module.exports = {
             subcommand
                 .setName('dbclearnonguildmembers')
                 .setDescription('Clears the database of non-guild members.'))
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('reload')
+                .setDescription('Reload the bot.'))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
@@ -53,5 +57,26 @@ module.exports = {
 
         }
 
+        if (subcommand === 'reload') {
+
+            await interaction.deferReply({ ephemeral: true })
+
+            const spawn = require('child_process').spawn;
+
+            if (user.id !== dev) {
+                await interaction.editReply({ content: 'Due to you not screwing something up this command is restricted to only ' + userMentioned, ephemeral: true })
+                return
+            }
+
+            const child = spawn('pm', ['restart 0'], {})
+
+            if (child.stderr) {
+                await interaction.editReply({ content: 'Error restarting bot.', ephemeral: true })
+                return
+            }
+
+            await interaction.editReply({ content: 'Restarting bot...', ephemeral: true })
+
+        }
     }
 };

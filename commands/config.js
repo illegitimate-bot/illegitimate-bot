@@ -40,10 +40,6 @@ module.exports = {
             subcommand
                 .setName('sendrules-info')
                 .setDescription('Send the rules and info message to a channel.'))
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('reload')
-                .setDescription('Reload the bot.'))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 

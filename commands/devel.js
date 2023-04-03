@@ -33,6 +33,7 @@ module.exports = {
         const user = interaction.user;
         const userMentioned = userMention(user.id);
         const guild = interaction.guild;
+        const embedColor = Number(color.replace("#", "0x"));
 
         if (subcommand === 'dbclearnonguildmembers') {
 
@@ -69,8 +70,33 @@ module.exports = {
 
         if (subcommand === 'listallverified') {
 
-            await interaction.reply({ content: 'In development', ephemeral: true })
-            return
+            const verifiedUsers = await verify.find()
+            const mojang = "https://api.mojang.com/user/profile/"
+
+            let embed = new EmbedBuilder()
+                .setTitle(guild.name)
+                .setColor(embedColor)
+                .setDescription('List of all verified users')
+
+            for (let i = 0; i < verifiedUsers.length; i++) {
+
+                const user = verifiedUsers[i];
+
+                const userCheck = await fetch(mojang + user.uuid);
+                const ign = userCheck.data.name;
+
+                const mentionedUser = userMention(user.userID);
+
+                embed.addFields({
+                    name: "**IGN:** " + ign,
+                    value: "**Discord:** " + mentionedUser
+                })
+
+            }
+
+            await interaction.reply({
+                embeds: [embed]
+            })
 
         }
 

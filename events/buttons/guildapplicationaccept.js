@@ -1,6 +1,7 @@
 const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
 const guildapp = require('../../schemas/guildAppSchema.js');
+const { waitingList } = require('../../config/roles.json');
 
 module.exports = {
     name: 'guildapplicationaccept',
@@ -51,6 +52,7 @@ module.exports = {
             }]
         });
 
+        await applicant.roles.add(waitingList);
         await guildapp.findOneAndDelete({ userID: applicantId });
 
         await interaction.editReply({

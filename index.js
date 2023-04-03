@@ -1,7 +1,6 @@
-const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection, InteractionType } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection } = require('discord.js');
 const { token, mongoURI } = require('./config.json');
 const { connect } = require('mongoose');
-const mineflayer = require('mineflayer');
 const path = require('path');
 const fs = require('fs');
 
@@ -20,8 +19,6 @@ const client = new Client({
         Partials.Channel
     ]
 });
-
-module.exports = client;
 
 client.commands = new Collection();
 client.events = new Collection();

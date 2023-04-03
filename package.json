@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rebuild": "node deploy-commands.js"
+    "prod:build": "node deploy-commands.js",
+    "dev:build": "node deploy-testing.js"
   },
   "author": "Taken",
   "license": "ISC",

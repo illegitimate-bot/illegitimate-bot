@@ -1,9 +1,13 @@
+const client = require('../../index.js');
+
 module.exports = {
     name: 'Guild chat relay',
     description: 'Sends a message to the chat.',
     type: 'message',
 
     async execute(jsonMsg) {
+
+        const gcchannel = "1092569207918575687"
 
         const msg = jsonMsg.getText();
         const annoyingMessages = [
@@ -16,6 +20,10 @@ module.exports = {
         if (annoyingMessages.includes(msg)) return;
 
         console.log("[Chat message] " + msg);
+
+        const channel = client.guild.channels.cache.get(gcchannel);
+
+        channel.send(msg);
 
     }
 };

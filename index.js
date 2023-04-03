@@ -21,6 +21,8 @@ const client = new Client({
     ]
 });
 
+module.exports = client;
+
 client.commands = new Collection();
 client.events = new Collection();
 client.modals = new Collection();
@@ -124,40 +126,3 @@ client.login(token);
 connect(mongoURI, {}).then(() => {
     console.log('Connected to MongoDB');
 })
-
-// const bot = mineflayer.createBot({
-//     host: 'mc.hypixel.net',
-//     port: 25565,
-//     username: 'privateinstagramante@gmail.com',
-// 
-//     version: '1.8.9',
-//     auth: 'microsoft'
-// });
-// 
-// module.exports = bot;
-// 
-// const { mineflayer: mineflayerViewer } = require('prismarine-viewer')
-// bot.once('spawn', () => {
-//   mineflayerViewer(bot, { port: 10000, firstPerson: true })
-// })
-// 
-// const mfPath = path.join(__dirname, 'utils', 'mineflayer');
-// const mfFiles = fs.readdirSync(mfPath).filter(file => file.endsWith('.js'));
-// 
-// for (const file of mfFiles) {
-// 
-//     const filePath = path.join(mfPath, file);
-//     const mf = require (filePath);
-// 
-//     if ('name' in mf && 'execute' in mf && 'type' in mf) {
-// 
-//         if (mf.once) {
-//             bot.once(mf.type, mf.execute);
-//         } else {
-//             bot.on(mf.type, mf.execute);
-//         }
-//     } else {
-//         console.log(`[WARNING] The mineflayer event at ${filePath} is missing a required "name", "execute" or "type" property.`);
-//     }
-// 
-// }

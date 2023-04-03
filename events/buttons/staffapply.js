@@ -28,16 +28,19 @@ module.exports = {
 
             if (!userRoles.has(guildRole)) {
                 await interaction.editReply({content: "You must be a member of the guild to apply for staff.", ephemeral: true});
+                return
             }
 
             if (userRoles.has(guildStaff)) {
                 await interaction.editReply({content: "You are already a staff member.", ephemeral: true});
+                return
             }
 
             const application = await staffapp.findOne({ userID: user.id });
             
             if (application) {
                 await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true });
+                return
             }
             
             const tooLong = new EmbedBuilder()

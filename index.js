@@ -40,6 +40,22 @@ for (const file of cmdFiles) {
     }
 }
 
+//! commands testing
+const cmdTestPath = path.join(__dirname, 'commands-testing');
+const cmdTestFiles = fs.readdirSync(cmdTestPath).filter(file => file.endsWith('.js'));
+
+for (const file of cmdTestFiles) {
+
+    const filePath = path.join(cmdTestPath, file);
+    const cmd = require(filePath);
+
+    if ('data' in cmd && 'execute' in cmd && cmd.type === 'slash') {
+        client.commands.set(cmd.data.name, cmd);
+    } else {
+        console.log(`[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`);
+    }
+}
+
 //! command handler
 client.on(Events.InteractionCreate, async interaction => {
     if(!interaction.isChatInputCommand()) return;

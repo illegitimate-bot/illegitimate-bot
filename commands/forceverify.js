@@ -76,9 +76,37 @@ module.exports = {
         const userUUID = userCheck.data.id;
 
         const hypixelCheck = await fetch(slothPixel + userUUID);
-        const guildCheck = await fetch(guildAPI + userUUID);
         const head = minotar + ign;
 
+        try {
+            const guildCheck = await fetch(guildAPI + userUUID);
+            var responseGuildID = guildCheck.data.id;
+        } catch (err) {
+            var responseGuildID = null;
+        }
+
+        if (responseGuildID !== hypixelGuildID) {
+
+            await user.roles.add(defaultMember);
+
+            await interaction.editReply({
+                embeds: [{
+                    title: interaction.guild.name,
+                    description: "You have successfully force verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
+                    footer: {
+                        icon_url: interaction.guild.iconURL(),
+                        text: interaction.guild.name + " | Developed by Taken#0002"
+                    }
+                }]
+            });
+            return
+        }
+
+        const guildCheck = await fetch(guildAPI + userUUID);
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 

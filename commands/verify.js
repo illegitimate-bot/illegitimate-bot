@@ -67,22 +67,17 @@ module.exports = {
 
         const hypixelCheck = await fetch(slothPixel + userUUID);
         const head = minotar + ign;
-        
-        try {
-            await fetch(guildAPI + userUUID);
-            var responseGuildID = guildCheck.data.id;
-        } catch (err) {
-            var responseGuildID = null;
-        }
-
-        const guildCheck = await fetch(guildAPI + userUUID);
-        const GuildMembers = await guildCheck.data.members;
-        const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
-
 
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
             interaction.editReply('Your Discord tag does not match your in-game tag.')
             return
+        }
+        
+        try {
+            const guildCheck = await fetch(guildAPI + userUUID);
+            var responseGuildID = guildCheck.data.id;
+        } catch (err) {
+            var responseGuildID = null;
         }
 
         if (responseGuildID !== hypixelGuildID) {
@@ -105,6 +100,10 @@ module.exports = {
             });
             return
         }
+
+        const guildCheck = await fetch(guildAPI + userUUID);
+        const GuildMembers = await guildCheck.data.members;
+        const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
         if (guildRank === "Guild Master" && responseGuildID === hypixelGuildID) {
             await user.roles.add(gm);

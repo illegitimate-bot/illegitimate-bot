@@ -38,6 +38,14 @@ module.exports = {
         
         const userCheck = await fetch(mojangAPI + verifyData.uuid);
         const hypixelCheck = await fetch(slothPixel + verifyData.uuid);
+
+        try {
+            const guildCheck = await fetch(guildAPI + verifyData.uuid);
+            var responseGuildID = guildCheck.data.id;
+        } catch (err) {
+            var responseGuildID = null;
+        }
+
         const guildCheck = await fetch(guildAPI + verifyData.uuid);
         const head = minotar + userCheck.data.name;
 
@@ -45,10 +53,15 @@ module.exports = {
         const GuildMembers = guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
-        if (guildCheck.data.id !== hypixelGuildID) {
+        if (responseGuildID !== hypixelGuildID) {
+
+            for (let i = 0; i < removeThese.length; i++) {
+                await roleManage.remove(removeThese[i])
+            }
+
             interaction.editReply({
                 embeds: [{
-                    description: "Updating is only available for members of the guild.",
+                    description: "Updated your roles to `Default Member`",
                     color: embedColor,
                     thumbnail: {
                         url: head

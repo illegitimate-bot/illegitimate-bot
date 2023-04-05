@@ -27,7 +27,24 @@ module.exports = {
         const roleManage = user.roles;
         
         if (!verifyData) {
-            interaction.editReply('You are not verified.')
+            
+            for (let i = 0; i < removeThese.length; i++) {
+                await roleManage.remove(removeThese[i])
+            }
+
+            await interaction.editReply({
+                embeds: [{
+                    description: "Updated your roles to `Default Member`",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
+                    footer: {
+                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        icon_url: interaction.guild.iconURL({ dynamic: true })
+                    }
+                }]
+            })
             return
         }
 
@@ -46,20 +63,15 @@ module.exports = {
             var responseGuildID = null;
         }
 
-        const guildCheck = await fetch(guildAPI + verifyData.uuid);
-        const head = minotar + userCheck.data.name;
-
-        const embedColor = Number(color.replace("#", "0x"));
-        const GuildMembers = guildCheck.data.members;
-        const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
-
         if (responseGuildID !== hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i])
             }
 
-            interaction.editReply({
+            await roleManage.add(defaultMember)
+
+            await interaction.editReply({
                 embeds: [{
                     description: "Updated your roles to `Default Member`",
                     color: embedColor,
@@ -74,8 +86,15 @@ module.exports = {
             })
             return
         }
+        
+        const guildCheck = await fetch(guildAPI + verifyData.uuid);
+        const head = minotar + userCheck.data.name;
 
-        if (guildRank === 'Guild Master') {
+        const embedColor = Number(color.replace("#", "0x"));
+        const GuildMembers = guildCheck.data.members;
+        const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
+
+        if (guildRank === 'Guild Master' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i])
@@ -87,7 +106,7 @@ module.exports = {
             await roleManage.add(defaultMember)
 
             
-            interaction.editReply({
+            await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Guild Master`",
                     color: embedColor,
@@ -102,7 +121,7 @@ module.exports = {
             })
         }
 
-        if (guildRank === 'Manager') {
+        if (guildRank === 'Manager' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i])
@@ -114,7 +133,7 @@ module.exports = {
             await roleManage.add(defaultMember)
 
             
-            interaction.editReply({
+            await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Manager`",
                     color: embedColor,
@@ -129,7 +148,7 @@ module.exports = {
             })
         }
 
-        if (guildRank === 'Moderator') {
+        if (guildRank === 'Moderator' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i])
@@ -141,7 +160,7 @@ module.exports = {
             await roleManage.add(defaultMember)
 
             
-            interaction.editReply({
+            await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Moderator`",
                     color: embedColor,
@@ -157,7 +176,7 @@ module.exports = {
 
         }
 
-        if (guildRank === 'Beast') {
+        if (guildRank === 'Beast' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i])
@@ -168,7 +187,7 @@ module.exports = {
             await roleManage.add(defaultMember)
 
             
-            interaction.editReply({
+            await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Beast`.",
                     color: embedColor,
@@ -184,7 +203,7 @@ module.exports = {
             return
         }
 
-        if (guildRank === 'Member') {
+        if (guildRank === 'Member' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i])
@@ -195,7 +214,7 @@ module.exports = {
             await roleManage.add(defaultMember)
 
             
-            interaction.editReply({
+            await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Member`.",
                     color: embedColor,
@@ -211,7 +230,7 @@ module.exports = {
             return
         }
 
-        if (guildRank === 'Trial Member') {
+        if (guildRank === 'Trial Member' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i])
@@ -222,7 +241,7 @@ module.exports = {
             await roleManage.add(defaultMember)
 
             
-            interaction.editReply({
+            await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Trial Member`.",
                     color: embedColor,

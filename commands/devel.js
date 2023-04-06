@@ -1,7 +1,8 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention, EmbedBuilder } = require('discord.js');
 const { hypixelGuildID, color } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js');
-const { dev } = require('../config.json');
+const env = require('dotenv').config();
+const dev = process.env.DEV;
 const fetch = require('axios');
 
 module.exports = {

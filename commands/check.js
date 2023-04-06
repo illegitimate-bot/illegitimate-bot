@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const { bwfdkr, bwstars, bwwins, duelswins, swstars } = require('../config/reqs.json')
-const { hypixelApiKey } = require('../config.json');
+const env = require('dotenv').config();
+const hypixelApiKey = process.env.HYPIXELAPI;
 const { color } = require('../config/options.json');
 const fetch = require('axios');
 

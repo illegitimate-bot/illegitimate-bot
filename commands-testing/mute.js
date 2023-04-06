@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
+const env = require('dotenv').config();
+const dev = process.env.DEV;
 const { color } = require('../config/options.json');
-const { dev } = require('../config.json');
 const { admin, helper, muted } = require('../config/roles.json');
 const { staffOtherChannel } = require('../config/options.json');
 

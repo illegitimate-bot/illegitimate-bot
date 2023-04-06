@@ -82,7 +82,7 @@ module.exports = {
 
         if (responseGuildID !== hypixelGuildID) {
 
-            await user.roles.add(defaultMember)
+            await user.roles.add(defaultMember, "Verification")
 
             await interaction.editReply({
                 embeds: [{
@@ -106,39 +106,39 @@ module.exports = {
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
         if (guildRank === "Guild Master" && responseGuildID === hypixelGuildID) {
-            await user.roles.add(gm);
-            await user.roles.add(guildRole)
-            await user.roles.add(guildStaff)
+            await user.roles.add(gm, "Verification");
+            await user.roles.add(guildRole, "Verification")
+            await user.roles.add(guildStaff, "Verification")
         }
 
         if (guildRank === "Manager" && responseGuildID === hypixelGuildID) {
-            await user.roles.add(manager);
-            await user.roles.add(guildRole)
-            await user.roles.add(guildStaff)
+            await user.roles.add(manager, "Verification");
+            await user.roles.add(guildRole, "Verification")
+            await user.roles.add(guildStaff, "Verification")
         }
 
         if (guildRank === "Moderator" && responseGuildID === hypixelGuildID) {
-            await user.roles.add(moderator);
-            await user.roles.add(guildRole)
-            await user.roles.add(guildStaff)
+            await user.roles.add(moderator, "Verification");
+            await user.roles.add(guildRole, "Verification")
+            await user.roles.add(guildStaff, "Verification")
         }
         
         if (guildRank === "Beast" && responseGuildID === hypixelGuildID) {
-            await user.roles.add(beast);
-            await user.roles.add(guildRole)
+            await user.roles.add(beast, "Verification");
+            await user.roles.add(guildRole, "Verification")
         }
 
         if (guildRank === "Member" && responseGuildID === hypixelGuildID) {
-            await user.roles.add(member);
-            await user.roles.add(guildRole)
+            await user.roles.add(member, "Verification");
+            await user.roles.add(guildRole, "Verification")
         }
 
         if (guildRank === "Trial Member" && responseGuildID === hypixelGuildID) {
-            await user.roles.add(trialmember);
-            await user.roles.add(guildRole)
+            await user.roles.add(trialmember, "Verification");
+            await user.roles.add(guildRole, "Verification")
         }
 
-        await user.roles.add(defaultMember)
+        await user.roles.add(defaultMember, "Verification")
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),

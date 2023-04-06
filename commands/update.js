@@ -29,7 +29,7 @@ module.exports = {
         if (!verifyData) {
             
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
 
             await interaction.editReply({
@@ -66,10 +66,10 @@ module.exports = {
         if (responseGuildID !== hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
 
-            await roleManage.add(defaultMember)
+            await roleManage.add(defaultMember, "User used the update command")
 
             await interaction.editReply({
                 embeds: [{
@@ -97,13 +97,13 @@ module.exports = {
         if (guildRank === 'Guild Master' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(guildStaff)
-            await roleManage.add(gm)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User used the update command")
+            await roleManage.add(guildStaff, "User used the update command")
+            await roleManage.add(gm, "User used the update command")
+            await roleManage.add(defaultMember, "User used the update command")
 
             
             await interaction.editReply({
@@ -124,13 +124,13 @@ module.exports = {
         if (guildRank === 'Manager' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(guildStaff)
-            await roleManage.add(manager)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User used the update command")
+            await roleManage.add(guildStaff, "User used the update command")
+            await roleManage.add(manager, "User used the update command")
+            await roleManage.add(defaultMember, "User used the update command")
 
             
             await interaction.editReply({
@@ -151,13 +151,13 @@ module.exports = {
         if (guildRank === 'Moderator' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(guildStaff)
-            await roleManage.add(moderator)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User used the update command")
+            await roleManage.add(guildStaff, "User used the update command")
+            await roleManage.add(moderator, "User used the update command")
+            await roleManage.add(defaultMember, "User used the update command")
 
             
             await interaction.editReply({
@@ -179,12 +179,12 @@ module.exports = {
         if (guildRank === 'Beast' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(beast)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User used the update command")
+            await roleManage.add(beast, "User used the update command")
+            await roleManage.add(defaultMember, "User used the update command")
 
             
             await interaction.editReply({
@@ -206,12 +206,12 @@ module.exports = {
         if (guildRank === 'Member' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
 
-            await roleManage.add(guildRole)
-            await roleManage.add(member)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User used the update command")
+            await roleManage.add(member, "User used the update command")
+            await roleManage.add(defaultMember, "User used the update command")
 
             
             await interaction.editReply({
@@ -233,12 +233,12 @@ module.exports = {
         if (guildRank === 'Trial Member' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(trialmember)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User used the update command")
+            await roleManage.add(trialmember, "User used the update command")
+            await roleManage.add(defaultMember, "User used the update command")
 
             
             await interaction.editReply({

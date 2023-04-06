@@ -34,6 +34,7 @@ module.exports = {
         const user = interaction.guild.members.cache.get(user1.id);
         const fullUsername = user1.username + "#" + user1.discriminator
         const ign = interaction.options.getString('ign');
+        const mod = interaction.user.username + "#" + interaction.user.discriminator
 
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
         const slothPixel = "https://api.slothpixel.me/api/players/";
@@ -87,7 +88,7 @@ module.exports = {
 
         if (responseGuildID !== hypixelGuildID) {
 
-            await user.roles.add(defaultMember);
+            await user.roles.add(defaultMember, "User was force verified by " + mod);
 
             await interaction.editReply({
                 embeds: [{
@@ -111,39 +112,39 @@ module.exports = {
         const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
 
         if (guildRank === "Guild Master" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(gm);
-            await user.roles.add(guildRole)
-            await user.roles.add(guildStaff)
+            await user.roles.add(gm, "User was force verified by " + mod);
+            await user.roles.add(guildRole, "User was force verified by " + mod)
+            await user.roles.add(guildStaff, "User was force verified by " + mod)
         }
 
         if (guildRank === "Manager" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(manager);
-            await user.roles.add(guildRole)
-            await user.roles.add(guildStaff)
+            await user.roles.add(manager, "User was force verified by " + mod);
+            await user.roles.add(guildRole, "User was force verified by " + mod)
+            await user.roles.add(guildStaff, "User was force verified by " + mod)
         }
 
         if (guildRank === "Moderator" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(moderator);
-            await user.roles.add(guildRole)
-            await user.roles.add(guildStaff)
+            await user.roles.add(moderator, "User was force verified by " + mod);
+            await user.roles.add(guildRole, "User was force verified by " + mod)
+            await user.roles.add(guildStaff, "User was force verified by " + mod)
         }
         
         if (guildRank === "Beast" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(beast);
-            await user.roles.add(guildRole)
+            await user.roles.add(beast, "User was force verified by " + mod);
+            await user.roles.add(guildRole, "User was force verified by " + mod)
         }
 
         if (guildRank === "Member" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(member);
-            await user.roles.add(guildRole)
+            await user.roles.add(member, "User was force verified by " + mod);
+            await user.roles.add(guildRole, "User was force verified by " + mod)
         }
 
         if (guildRank === "Trial Member" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(trialmember);
-            await user.roles.add(guildRole)
+            await user.roles.add(trialmember, "User was force verified by " + mod);
+            await user.roles.add(guildRole, "User was force verified by " + mod)
         }
 
-        await user.roles.add(defaultMember);
+        await user.roles.add(defaultMember, "User was force verified by " + mod);
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),

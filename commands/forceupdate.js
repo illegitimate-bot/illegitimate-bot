@@ -35,6 +35,10 @@ module.exports = {
 
         if (!verifyData) {
 
+            for (let i = 0; i < removeThese.length; i++) {
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
+            }
+
             await interaction.editReply({
                 embeds: [{
                     description: usermentioned + " was given the the Default Member role.",
@@ -48,7 +52,7 @@ module.exports = {
                     }
                 }]
             })
-            await roleManage.add(defaultMember)
+            await roleManage.add(defaultMember, "User was force updated.")
             return
         }
 
@@ -69,6 +73,11 @@ module.exports = {
         }
 
         if (responseGuildID !== hypixelGuildID) {
+
+            for (let i = 0; i < removeThese.length; i++) {
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
+            }
+
             await interaction.editReply({
                 embeds: [{
                     description: usermentioned + " was given the the Default Member role.",
@@ -94,13 +103,13 @@ module.exports = {
         if (guildRank === 'Guild Master' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(guildStaff)
-            await roleManage.add(gm)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User was force updated.")
+            await roleManage.add(guildStaff, "User was force updated.")
+            await roleManage.add(gm, "User was force updated.")
+            await roleManage.add(defaultMember, "User was force updated.")
 
             
             await interaction.editReply({
@@ -121,13 +130,13 @@ module.exports = {
         if (guildRank === 'Manager' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(guildStaff)
-            await roleManage.add(manager)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User was force updated.")
+            await roleManage.add(guildStaff, "User was force updated.")
+            await roleManage.add(manager, "User was force updated.")
+            await roleManage.add(defaultMember, "User was force updated.")
 
             
             await interaction.editReply({
@@ -148,13 +157,13 @@ module.exports = {
         if (guildRank === 'Moderator' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(guildStaff)
-            await roleManage.add(moderator)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User was force updated.")
+            await roleManage.add(guildStaff, "User was force updated.")
+            await roleManage.add(moderator, "User was force updated.")
+            await roleManage.add(defaultMember, "User was force updated.")
 
             
             await interaction.editReply({
@@ -176,12 +185,12 @@ module.exports = {
         if (guildRank === 'Beast' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(beast)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User was force updated.")
+            await roleManage.add(beast, "User was force updated.")
+            await roleManage.add(defaultMember, "User was force updated.")
 
             
             await interaction.editReply({
@@ -203,12 +212,12 @@ module.exports = {
         if (guildRank === 'Member' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
             }
             
-            await roleManage.add(guildRole)
-            await roleManage.add(member)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User was force updated.")
+            await roleManage.add(member, "User was force updated.")
+            await roleManage.add(defaultMember, "User was force updated.")
 
             
             await interaction.editReply({
@@ -230,13 +239,12 @@ module.exports = {
         if (guildRank === 'Trial Member' && responseGuildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i])
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
             }
             
-            await roleManage.remove(gm && manager && moderator && beast && member && trialmember && guildRole && guildStaff)
-            await roleManage.add(guildRole)
-            await roleManage.add(trialmember)
-            await roleManage.add(defaultMember)
+            await roleManage.add(guildRole, "User was force updated.")
+            await roleManage.add(trialmember, "User was force updated.")
+            await roleManage.add(defaultMember, "User was force updated.")
 
             
             await interaction.editReply({

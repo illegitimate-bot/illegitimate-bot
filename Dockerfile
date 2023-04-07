@@ -6,6 +6,6 @@ RUN rm -rf /app/.env
 
 WORKDIR /app
 
-CMD ["node", "index.js"]
-
 RUN npm install
+
+CMD ["node", "index.js"]

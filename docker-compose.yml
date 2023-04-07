@@ -1,0 +1,14 @@
+version: '1.0'
+services:
+  illegitimate:
+    image: "illegitimate-bot:latest"
+    environment:
+      - TOKEN=${TOKEN}
+      - MONGOURI=${MONGOURI}
+      - DEV=${DEV}
+      - CLIENTID=${CLIENTID}
+      - GUILDID=${GUILDID}
+      - HYPIXELKEY=${HYPIXELKEY}
+      - GUILDINFO=${GUILDINFO}
+      - REQUIREMENTS=${REQUIREMENTS}
+      - RULESINFO=${RULESINFO}

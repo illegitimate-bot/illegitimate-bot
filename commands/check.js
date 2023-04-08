@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const { bwfdkr, bwstars, bwwins, duelswins, swstars } = require('../config/reqs.json')
+const getuuid = require('../utils/functions');
 const env = require('dotenv').config();
 const hypixelApiKey = process.env.HYPIXELAPI;
 const { color } = require('../config/options.json');
@@ -36,15 +37,12 @@ module.exports = {
             return
         }
 
-        try {
-            await fetch(mojang + ign);
-        } catch (error) {
-            interaction.editReply('That player doesn\'t exist. [Mojang]')
+        if (await getuuid(ign) === null) {
+            await interaction.editReply('That player doesn\'t exist. [Mojang]')
             return
         }
 
-        const userCheck = await fetch(mojang + ign);
-        const userUUID = userCheck.data.id;
+        const userUUID = await getuuid(ign);
 
         try {
             await fetch(slothPixel + userUUID);

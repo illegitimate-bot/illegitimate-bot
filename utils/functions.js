@@ -11,4 +11,16 @@ async function getuuid(ign) {
     }    
 }
 
-module.exports = getuuid;
+async function getplayer(uuid) {
+    const slothPixel = "https://api.slothpixel.me/api/players/";
+
+    try {
+        const player = await fetch(slothPixel + uuid)
+        return player
+    } catch (error) {
+        return null;
+    }
+}
+
+module.exports = getuuid
+module.exports = getplayer

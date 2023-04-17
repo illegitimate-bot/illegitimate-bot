@@ -136,18 +136,39 @@ client.on(Events.ClientReady, () => {
     client.user.setActivity({ name: "over the Illegitimate Server", type: ActivityType.Watching });
 
     const activities = [
-        "over the Illegitimate Server",
-        "Jone be an idiot",
-        "Martina is definitely a bot",
-        "urTryhard steal finals",
-        "Perlcence be an AI",
-        "Taken my creator",
-        "ur mom in my bed"
+        {
+            name: "with Jone the idiot",
+            type: ActivityType.Playing
+        },
+        {
+            name: "with Martina the bot",
+            type: ActivityType.Playing
+        },
+        {
+            name: "urCryhard steal finals again",
+            type: ActivityType.Watching
+        },
+        {
+            name: "with Perlcence the AI",
+            type: ActivityType.Playing
+        },
+        {
+            name: "my creator Taken",
+            type: ActivityType.Watching
+        },
+        {
+            name: "with ur mom in my bed",
+            type: ActivityType.Playing
+        },
+        {
+            name: "over the Illegitimate Server",
+            type: ActivityType.Watching
+        }
     ];
 
     let i = 0;
     setInterval(() =>
-        client.user.setActivity({ name: `${activities[i++ % activities.length]}`, type: ActivityType.Watching }), 1000 * 60 * 30 
+        client.user.setActivity(activities[i++ % activities.length]), 1000 * 60 * 30
     )
 
 });

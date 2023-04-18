@@ -1,12 +1,12 @@
 const { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
-    name: 'Reset Nickname',
+    name: 'resetnick',
     description: 'Reset your nickname.',
     type: 'contextmenu',
 
     data: new ContextMenuCommandBuilder()
-        .setName('resetnick')
+        .setName('Reset Nickname')
         .setType(ApplicationCommandType.User)
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames),
 

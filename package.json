@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prod:build": "node deploy-commands.js",
-    "dev:build": "node deploy-testing.js"
+    "prod:build": "node deploy-commands.js --prod",
+    "prod:build:context": "node deploy-commands.js --contextmenu",
+    "dev:build": "node deploy-commands.js --dev"
   },
   "author": "Taken",
   "license": "ISC",

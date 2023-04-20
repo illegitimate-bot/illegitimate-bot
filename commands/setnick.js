@@ -31,7 +31,7 @@ module.exports = {
             return interaction.reply({ content: 'I cannot set the nickname for this user!', ephemeral: true });
         }
 
-        await member.setNickname(nickname, `Set by ${interaction.user.tag}#${interaction.user.discriminator}`);
+        await member.setNickname(nickname, `Set by ${interaction.user.tag}`);
 
         await interaction.reply({ content: "Set the nickname of " + userMention(member.id) + " to " + nickname, ephemeral: true });
 

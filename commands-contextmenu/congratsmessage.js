@@ -1,4 +1,4 @@
-const { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits} = require('discord.js');
+const { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits, userMention} = require('discord.js');
 
 module.exports = {
     name: 'congratsmessage',
@@ -13,13 +13,22 @@ module.exports = {
     async execute(interaction) {
 
         const { targetId } = interaction
-        const target = await interaction.guild.members.fetch(targetId);
+        const message = await interaction.channel.messages.fetch(targetId);
 
-        if (!target) {
+        if (!message) {
             return interaction.reply({ content: 'That user does not exist.', ephemeral: true });
         }
 
-        await interaction.reply({ content: `Congratulations ${target.user.username}!`, ephemeral: true });
+        const target = message.author;
 
+        await message.reply({
+            embeds:[{
+                title: 'Congratulations!',
+                description: `GG to ${userMention(target.id)}!`,
+            }]
+        });
+        await message.react('🎉');
+
+        await interaction.reply({ content: `Sent a congrats message`, ephemeral: true });
     }
 };

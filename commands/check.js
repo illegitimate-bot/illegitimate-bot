@@ -14,7 +14,11 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("check")
 		.setDescription("Check a player's stats.")
-		.addStringOption((option) => option.setName("ign").setDescription("The player's IGN.").setRequired(true))
+		.addStringOption((option) => 
+			option
+				.setName("ign")
+				.setDescription("The player's IGN.")
+				.setRequired(true))
 		.setDMPermission(false),
 
 	async execute(interaction) {
@@ -109,7 +113,8 @@ module.exports = {
 			embeds: [
 				{
 					title: rank + stats.data.username + guildTag,
-					description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + "**Current Guild:** `" + guildName + "`",
+					description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + 
+						"**Current Guild:** `" + guildName + "`",
 					color: embedColor,
 					thumbnail: {
 						url: head
@@ -121,15 +126,21 @@ module.exports = {
 					fields: [
 						{
 							name: bwtitle,
-							value: "**➺ Stars:** `" + stats.data.stats.BedWars.level.toString() + " / " + bwstars.toString() + "`\n" + "**➺ FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + " / " + bwfdkr.toString() + "`\n" + "**➺ Wins:** `" + stats.data.stats.BedWars.wins.toString() + " / " + bwwins.toString() + "`"
+							value: "**➺ Stars:** `" + stats.data.stats.BedWars.level.toString() + " / " + bwstars.toString() + "`\n" + 
+								"**➺ FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + " / " + bwfdkr.toString() + "`\n" + 
+								"**➺ Wins:** `" + stats.data.stats.BedWars.wins.toString() + " / " + bwwins.toString() + "`"
 						},
 						{
 							name: swtitle,
-							value: "**➺ Stars:** `" + stats.data.stats.SkyWars.level.toFixed(2).toString() + " / " + swstars.toString() + "`\n" + "**➺ KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" + "**➺ Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
+							value: "**➺ Stars:** `" + stats.data.stats.SkyWars.level.toFixed(2).toString() + " / " + swstars.toString() + "`\n" + 
+								"**➺ KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" + 
+								"**➺ Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
 						},
 						{
 							name: duelstitle,
-							value: "**➺ Wins:** `" + stats.data.stats.Duels.general.wins.toString() + " / " + duelswins.toString() + "`\n" + "**➺ KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" + "**➺ WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"
+							value: "**➺ Wins:** `" + stats.data.stats.Duels.general.wins.toString() + " / " + duelswins.toString() + "`\n" + 
+								"**➺ KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" + 
+								"**➺ WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"
 						}
 					]
 				}

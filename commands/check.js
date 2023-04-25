@@ -81,7 +81,7 @@ module.exports = {
         const hsswstars = stats.data.stats.SkyWars.level
         const hsduelswins = stats.data.stats.Duels.general.wins
 
-        if (hsbwstars < bwstars && hsbwfkdr < bwfdkr && hsbwwins < bwwins) {
+        if (hsbwstars < bwstars || hsbwfkdr < bwfdkr || hsbwwins < bwwins) {
             var bwtitle = "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
         } else {
             var bwtitle = "<a:check_a:1087808632172847134> This player meets the BedWars requirements."

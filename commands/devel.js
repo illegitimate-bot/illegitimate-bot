@@ -25,6 +25,14 @@ module.exports = {
             subcommand
                 .setName('listallverified')
                 .setDescription('List all verified users.'))
+				.addSubcommand(subcommand =>
+						subcommand
+								.setName('purgereactions')
+								.setDescription('Purge all reactions from a messages.')
+								.addIntegerOption(option =>
+										option
+												.setName('count')
+												.setDescription('Count of messages to purge reactions from.')))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
@@ -98,8 +106,26 @@ module.exports = {
             await interaction.reply({
                 embeds: [embed]
             })
-
         }
 
+				if (subcommand === 'purgereactions') {
+
+					const count = interaction.options.getInteger('count');
+					await interaction.deferReply({})
+
+					if (user.id !== dev) {
+						interaction.editReply({ content: 'Due to you not screwing something up this command is restricted to only ' + userMentioned, ephemeral: true })
+						return
+					}
+
+					const messages = await interaction.channel.messages.fetch({ limit: count });
+
+					messages.forEach(async (message) => {
+						await message.reactions.removeAll();
+					})
+
+					await interaction.editReply(`Purged reactions from ${count} message(s).`)
+
+				}
     }
 };

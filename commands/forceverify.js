@@ -67,15 +67,15 @@ module.exports = {
             return
         }
 
-        try {
-            await fetch(slothPixel + ign);
+				const userCheck = await fetch(mojang + ign);
+				const userUUID = userCheck.data.id;
+
+				try {
+            await fetch(slothPixel + userUUID);
         } catch (err) {
             interaction.editReply('That player doesn\'t exist. [Hypixel]')
             return
         }
-
-        const userCheck = await fetch(mojang + ign);
-        const userUUID = userCheck.data.id;
 
         const hypixelCheck = await fetch(slothPixel + userUUID);
         const head = minotar + ign;

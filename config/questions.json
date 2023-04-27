@@ -26,5 +26,11 @@
     "rsq3": "Have you been guild muted for any reason?",
     "rsq4": "Are you an active guild member?",
     "rsq5": "Do you have any experience as a staff member (guild moderator) at all?",
-    "rsq6": "Why should we choose you as a Guild Moderator?"
+    "rsq6": "Why should we choose you as a Guild Moderator?",
+		"ia1": "What is your IGN?",
+		"ia2": "Duration of the absence?",
+		"ia3": "Reason of the absence?",
+		"ria1": "What is your IGN?",
+		"ria2": "Duration of the absence?",
+		"ria3": "Reason of the absence?"
 }

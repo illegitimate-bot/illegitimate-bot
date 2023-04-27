@@ -145,7 +145,7 @@ module.exports = {
 				components: [
 					new ActionRowBuilder()
 						.addComponents(new ButtonBuilder()
-							.setCustomId("inactivitylog")
+							.setCustomId("guildinactivitylog")
 							.setLabel("Submit")
 							.setStyle(ButtonStyle.Primary)
 							.setEmoji({ name: "✅" }))

@@ -71,14 +71,14 @@ module.exports = {
 
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
             interaction.editReply({
-								embeds: [{
-									description: "The discord tag for `" + userCheck.data.name + "` is not `" + fullUsername + "`. Please link your discord account to your hypixel account.",
-									color: embedColor,
-									thumbnail: {
-										url: head
-									},
-								}]
-						})
+					embeds: [{
+						description: "The discord tag for `" + userCheck.data.name + "` is not `" + fullUsername + "`. Please link your discord account to your hypixel account.",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+					}]
+			})
             return
         }
         

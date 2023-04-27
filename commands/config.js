@@ -28,6 +28,15 @@ module.exports = {
 						.setName("channel")
 						.setDescription("The channel to send the application to.")
 						.setRequired(true)))
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName("sendinactivityapplication")
+				.setDescription("Send the application message to a channel.")
+				.addChannelOption((option) =>
+					option
+						.setName("channel")
+						.setDescription("The channel to send the application to.")
+						.setRequired(true)))
 		.addSubcommand((subcommand) => 
 			subcommand
 				.setName("sendguildinfo")
@@ -107,6 +116,37 @@ module.exports = {
 						.addComponents(new ButtonBuilder()
 							.setCustomId("staffapply")
 							.setLabel("Apply")
+							.setStyle(ButtonStyle.Primary)
+							.setEmoji({ name: "✅" }))
+				]
+			});
+
+			await interaction.reply({ content: "Message sent", ephemeral: true });
+		}
+
+		if (subcommand === "sendinactivityapplication") {
+			const channel = interaction.options.getChannel("channel");
+
+			await channel.send({
+				embeds: [
+					{
+						title: "Inactivity Log",
+						description: "You can send an inactivity log by clicking the button below.",
+						color: embedColor,
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							iconURL: interaction.guild.iconURL({ dynamic: true })
+						},
+						thumbnail: {
+							url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}
+				],
+				components: [
+					new ActionRowBuilder()
+						.addComponents(new ButtonBuilder()
+							.setCustomId("inactivitylog")
+							.setLabel("Submit")
 							.setStyle(ButtonStyle.Primary)
 							.setEmoji({ name: "✅" }))
 				]

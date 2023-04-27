@@ -70,7 +70,15 @@ module.exports = {
         const head = minotar + ign;
 
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
-            interaction.editReply('Your Discord tag does not match your in-game tag.')
+            interaction.editReply({
+								embeds: [{
+									description: "The discord tag for `" + userCheck.data.name + "` is not `" + fullUsername + "`. Please link your discord account to your hypixel account.",
+									color: embedColor,
+									thumbnail: {
+										url: head
+									},
+								}]
+						})
             return
         }
         

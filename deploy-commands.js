@@ -2,6 +2,7 @@ const { REST, Routes } = require('discord.js');
 const env = require('dotenv').config();
 const token = process.env.TOKEN;
 const clientId = process.env.CLIENTID;
+const guildId = process.env.GUILDID;
 const fs = require('node:fs');
 const args = process.argv.slice(2);
 const arg = args[0];
@@ -51,11 +52,11 @@ else if (arg === '--prod') {
 else if (arg === '--dev') {
 	const commands = [];
 	// Grab all the command files from the commands directory you created earlier
-	const commandFiles = fs.readdirSync('./commands-contextmenu').filter(file => file.endsWith('.js'));
+	const commandFiles = fs.readdirSync('./commands-testing').filter(file => file.endsWith('.js'));
 
 	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 	for (const file of commandFiles) {
-		const command = require(`./commands-contextmenu/${file}`);
+		const command = require(`./commands-testing/${file}`);
 		commands.push(command.data.toJSON());
 	}
 
@@ -70,7 +71,7 @@ else if (arg === '--dev') {
 
 			// The put method is used to fully refresh all commands in the guild with the current set
 			const data = await rest.put(
-				Routes.applicationCommands(clientId),
+				Routes.applicationGuildCommands(clientId, guildId),
 				{ body: commands },
 			);
 

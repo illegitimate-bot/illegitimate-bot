@@ -31,12 +31,18 @@ module.exports = {
         try {
             await fetch(slothPixel + uuid);
         } catch (error) {
-            interaction.editReply('That player doesn\'t exist. [Hypixel]')
+            interaction.editReply({
+							embeds: [{
+								description: "That player hasn't played Hypixel before.",
+								color: embedColor
+							}]
+						})
             return
         }
 
         const stats = await fetch(slothPixel + uuid);
         const head = minotar + ign;
+				const guildCheck = await fetch(guildAPI + uuid);
 
         const rank_formatted = stats.data.rank_formatted
         const rank2 = rank_formatted.replace(/&[0-9a-fk-or]/g, "")
@@ -48,7 +54,6 @@ module.exports = {
         }
 
         try {
-            const guildCheck = await fetch(guildAPI + uuid);
             var guildName = guildCheck.data.name
         } catch (error) {
             var guildName = "None"
@@ -79,7 +84,6 @@ module.exports = {
         }
         
         try {
-            const guildCheck = await fetch(guildAPI + userUUID);
             const tag_formatted = guildCheck.data.tag_formatted
             const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "")
             var guildTag = " " + guildTag2

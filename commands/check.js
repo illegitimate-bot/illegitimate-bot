@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const { bwfdkr, bwstars, bwwins, duelswins, swstars } = require("../config/reqs.json");
-const getuuid = require("../utils/functions.js");
 const env = require("dotenv").config();
 const hypixelApiKey = process.env.HYPIXELAPI;
 const { color } = require("../config/options.json");
@@ -39,29 +38,46 @@ module.exports = {
 		try {
 			await fetch(mojang + ign);
 		} catch (error) {
-			interaction.editReply("That player doesn't exist. [Mojang]");
+			interaction.editReply({
+				embeds: [{
+					description: "That player doesn't exist.",
+					color: embedColor
+				}]
+			});
 			return;
 		}
 
-		const uuid = await fetch(mojang + ign);
+		const userCheck = await fetch(mojang + ign);
+		const uuid = userCheck.data.id;
 
 		try {
-			await fetch(slothPixel + uuid.data.id);
+			await fetch(slothPixel + uuid);
 		} catch (error) {
-			interaction.editReply("That player doesn't exist. [Hypixel]");
+			interaction.editReply({
+				embeds: [{
+					description: "That player hasn't played Hypixel before.",
+					color: embedColor
+				}]
+			});
 			return;
 		}
 
-		const stats = await fetch(slothPixel + uuid.data.id);
+		const stats = await fetch(slothPixel + uuid);
 		const head = minotar + ign;
 
 		if (!stats.data.uuid) {
-			interaction.editReply("That player doesn't exist. [Hypixel]");
+			interaction.editReply({
+				embeds: [{
+					description: "That player hasn't played Hypixel before.",
+					color: embedColor
+				}]
+			});
 			return;
 		}
 
 		const rank_formatted = stats.data.rank_formatted;
 		const rank2 = rank_formatted.replace(/&[0-9a-fk-or]/g, "");
+		const guildCheck = await fetch(guildAPI + uuid);
 
 		if (rank2 === "") {
 			var rank = "";
@@ -70,7 +86,6 @@ module.exports = {
 		}
 
 		try {
-			const guildCheck = await fetch(guildAPI + userUUID);
 			var guildName = guildCheck.data.name;
 		} catch (error) {
 			var guildName = "None";
@@ -101,7 +116,6 @@ module.exports = {
 		}
 
 		try {
-			const guildCheck = await fetch(guildAPI + userUUID);
 			const tag_formatted = guildCheck.data.tag_formatted;
 			const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "");
 			var guildTag = " " + guildTag2;

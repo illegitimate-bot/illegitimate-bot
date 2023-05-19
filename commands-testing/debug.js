@@ -26,6 +26,9 @@ module.exports = {
 
     async execute(interaction) {
 
+      await interaction.reply({ content: 'In development', ephemeral: true });
+      return
+
       const user = interaction.options.getUser('user');
       const channel = interaction.options.getChannel('channel');
       const role = interaction.options.getRole('role');

@@ -83,9 +83,7 @@ module.exports = {
                     await interaction.reply({ content: 'Error while reloading: ' + err, ephemeral: true })
                 }
                 await interaction.reply({ content: 'Reloading...', ephemeral: true })
-            }).error(err => {
-                console.log(err)
-            }); 
+            })
         }
 
         if (subcommand === 'listallverified') {

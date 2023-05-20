@@ -5,6 +5,7 @@ const mongoURI = process.env.MONGOURI;
 const { connect } = require('mongoose');
 const path = require('path');
 const fs = require('fs');
+const { parseArgs } = require('util');
 
 const client = new Client({
     intents: [
@@ -165,22 +166,6 @@ for (const file of modalFiles) {
 client.on(Events.ClientReady, () => {
     console.log("Logged in as " + client.user.tag + "!");
 });
-
-// message events
-const msgPath = path.join(__dirname, 'events', 'messages');
-const msgFiles = fs.readdirSync(msgPath).filter(file => file.endsWith('.js'));
-
-for (const file of msgFiles) {
-    
-        const filePath = path.join(msgPath, file);
-        const msg = require(filePath);
-    
-        if ('name' in msg && 'execute' in msg && msg.type === 'message') {
-            client.on(Events.MessageCreate, msg.execute);
-        } else {
-            console.log(`[WARNING] The message at ${filePath} is missing a required "name", "execute" or "type" property.`);
-        }
-}
 
 client.on(Events.ClientReady, () => {
 

@@ -78,11 +78,12 @@ module.exports = {
         if (subcommand === 'reload') {
 
             const { exec } = require('child_process');
+            await interaction.reply({ content: 'Reloading...', ephemeral: true })
+
             exec('pm2 restart 0', async (err, stdout, stderr) => {
                 if (err) {
                     await interaction.reply({ content: 'Error while reloading: ' + err, ephemeral: true })
                 }
-                await interaction.reply({ content: 'Reloading...', ephemeral: true })
             })
         }
 

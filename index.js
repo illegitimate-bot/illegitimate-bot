@@ -1,4 +1,5 @@
 const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection } = require('discord.js');
+const { botLogChannel, color } = require('./config/options.json');
 const env = require('dotenv').config();
 const token = process.env.TOKEN;
 const mongoURI = process.env.MONGOURI;
@@ -165,6 +166,19 @@ for (const file of modalFiles) {
 }
 client.on(Events.ClientReady, () => {
     console.log("Logged in as " + client.user.tag + "!");
+    const channel = client.channels.cache.get(botLogChannel);
+    const embedColor = Number(color.replace('#', '0x'))
+
+    if (!channel) {
+        return;
+    }
+
+    channel.send({
+        embeds: [{
+            description: `Bot is online!`,
+            color: embedColor
+        }]
+    });    
 });
 
 client.on(Events.ClientReady, () => {

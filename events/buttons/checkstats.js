@@ -18,7 +18,7 @@ module.exports = {
 
         const guildappdata = await guildapp.findOne({ userID: applicantId })
         const uuid = guildappdata.uuid;
-        
+
         const mojang = "https://api.mojang.com/user/profile/"
         const slothPixel = "https://api.slothpixel.me/api/players/";
         const guildAPI = "https://api.slothpixel.me/api/guilds/"
@@ -32,17 +32,16 @@ module.exports = {
             await fetch(slothPixel + uuid);
         } catch (error) {
             interaction.editReply({
-							embeds: [{
-								description: "That player hasn't played Hypixel before.",
-								color: embedColor
-							}]
-						})
+                embeds: [{
+                    description: "That player hasn't played Hypixel before.",
+                    color: embedColor
+                }]
+            })
             return
         }
 
         const stats = await fetch(slothPixel + uuid);
         const head = minotar + ign;
-				const guildCheck = await fetch(guildAPI + uuid);
 
         const rank_formatted = stats.data.rank_formatted
         const rank2 = rank_formatted.replace(/&[0-9a-fk-or]/g, "")
@@ -54,6 +53,7 @@ module.exports = {
         }
 
         try {
+            const guildCheck = await fetch(guildAPI + uuid)
             var guildName = guildCheck.data.name
         } catch (error) {
             var guildName = "None"
@@ -82,8 +82,9 @@ module.exports = {
         } else {
             var duelstitle = "<a:check_a:1087808632172847134> This player meets the Duels requirements."
         }
-        
+
         try {
+            const guildCheck = await fetch(guildAPI + uuid)
             const tag_formatted = guildCheck.data.tag_formatted
             const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "")
             var guildTag = " " + guildTag2
@@ -94,8 +95,8 @@ module.exports = {
         await interaction.editReply({
             embeds: [{
                 title: rank + stats.data.username + guildTag,
-                description: "**Network Level:** `" + stats.data.level.toString() + "`\n" + 
-                "**Current Guild:** `" + guildName + "`",
+                description: "**Network Level:** `" + stats.data.level.toString() + "`\n" +
+                    "**Current Guild:** `" + guildName + "`",
                 color: embedColor,
                 thumbnail: {
                     url: head
@@ -108,20 +109,20 @@ module.exports = {
                     {
                         name: bwtitle,
                         value: "**➺ Stars:** `" + stats.data.stats.BedWars.level.toString() + "`\n" +
-                        "**➺ FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + "`\n" +
-                        "**➺ Wins:** `" + stats.data.stats.BedWars.wins.toString() + "`"
+                            "**➺ FKDR:** `" + stats.data.stats.BedWars.final_k_d.toString() + "`\n" +
+                            "**➺ Wins:** `" + stats.data.stats.BedWars.wins.toString() + "`"
                     },
                     {
                         name: swtitle,
                         value: "**➺ Stars:** `" + stats.data.stats.SkyWars.level.toFixed(2).toString() + "`\n" +
-                        "**➺ KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" +
-                        "**➺ Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
+                            "**➺ KDR:** `" + stats.data.stats.SkyWars.kill_death_ratio.toString() + "`\n" +
+                            "**➺ Wins:** `" + stats.data.stats.SkyWars.wins.toString() + "`"
                     },
                     {
                         name: duelstitle,
-                        value: "**➺ Wins:** `" + stats.data.stats.Duels.general.wins.toString() + "`\n" + 
-                        "**➺ KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" + 
-                        "**➺ WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"
+                        value: "**➺ Wins:** `" + stats.data.stats.Duels.general.wins.toString() + "`\n" +
+                            "**➺ KDR:** `" + stats.data.stats.Duels.general.kd_ratio.toFixed(2).toString() + "`\n" +
+                            "**➺ WLR:** `" + stats.data.stats.Duels.general.win_loss_ratio.toFixed(2).toString() + "`"
                     }
                 ]
             }]

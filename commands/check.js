@@ -77,15 +77,15 @@ module.exports = {
 
 		const rank_formatted = stats.data.rank_formatted;
 		const rank2 = rank_formatted.replace(/&[0-9a-fk-or]/g, "");
-		const guildCheck = await fetch(guildAPI + uuid);
-
+		
 		if (rank2 === "") {
 			var rank = "";
 		} else {
 			var rank = rank2 + " ";
 		}
-
+		
 		try {
+			const guildCheck = await fetch(guildAPI + uuid);
 			var guildName = guildCheck.data.name;
 		} catch (error) {
 			var guildName = "None";
@@ -116,6 +116,7 @@ module.exports = {
 		}
 
 		try {
+			const guildCheck = await fetch(guildAPI + uuid);	
 			const tag_formatted = guildCheck.data.tag_formatted;
 			const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "");
 			var guildTag = " " + guildTag2;

@@ -72,11 +72,8 @@ module.exports = {
         if (hypixelCheck.data.links.DISCORD !== fullUsername) {
             interaction.editReply({
 					embeds: [{
-						description: "The discord tag for `" + userCheck.data.name + "` is not `" + fullUsername + "`. Please link your discord account to your hypixel account.",
-						color: embedColor,
-						thumbnail: {
-							url: head
-						},
+						description: "<a:cross_a:1087808606897983539> The discord tag for `" + userCheck.data.name + "` is not `" + fullUsername + "`. Please link your discord account to your hypixel account.",
+						color: embedColor
 					}]
 			})
             return
@@ -96,7 +93,7 @@ module.exports = {
             await interaction.editReply({
                 embeds: [{
                     title: interaction.guild.name,
-                    description: "You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
+                    description: "<a:check_a:1087808632172847134> You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
                     color: embedColor,
                     thumbnail: {
                         url: head

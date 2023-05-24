@@ -164,6 +164,17 @@ for (const file of modalFiles) {
         console.log(`[WARNING] The modal at ${filePath} is missing a required "name", "execute" or "type" property.`);
     }
 }
+
+client.on(Events.InteractionCreate, async interaction => {
+
+	if (interaction.isCommand()) {
+		console.log(interaction.user.username + "#" + interaction.user.discriminator + " ran " + interaction.commandName);
+	} else if (interaction.isButton()) {
+		console.log(interaction.user.username + "#" + interaction.user.discriminator + " clicked " + interaction.customId);
+	}
+
+});
+
 client.on(Events.ClientReady, () => {
     console.log("Logged in as " + client.user.tag + "!");
     const channel = client.channels.cache.get(botLogChannel);

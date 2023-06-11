@@ -6,7 +6,6 @@ const mongoURI = process.env.MONGOURI;
 const { connect } = require('mongoose');
 const path = require('path');
 const fs = require('fs');
-const { parseArgs } = require('util');
 
 const client = new Client({
     intents: [

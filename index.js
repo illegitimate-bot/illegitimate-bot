@@ -1,5 +1,4 @@
-const {Client, GatewayIntentBits, Partials, ActivityType, Events, Collection} =
-    require('discord.js');
+const {Client, GatewayIntentBits, Partials, ActivityType, Events, Collection} = require('discord.js');
 const {botLogChannel, color} = require('./config/options.json');
 const env = require('dotenv').config();
 const token = process.env.TOKEN;
@@ -7,10 +6,6 @@ const mongoURI = process.env.MONGOURI;
 const {connect} = require('mongoose');
 const path = require('path');
 const fs = require('fs');
-<<<<<<< HEAD
-const {parseArgs} = require('util');
-=======
->>>>>>> ce5f0e69a420358f6ba11e9ad1dfa82c25e5ca90
 
 const client = new Client({
   intents : [
@@ -231,10 +226,6 @@ client.on(Events.ClientReady, () => {
 client.on(Events.ClientReady, () => { client.user.setStatus('dnd'); });
 client.login(token);
 
-<<<<<<< HEAD
-connect(mongoURI, {}).then(() => { console.log('Connected to MongoDB'); })
-=======
 connect(mongoURI, {}).then(() => {
     console.log('Connected to MongoDB');
 })
->>>>>>> ce5f0e69a420358f6ba11e9ad1dfa82c25e5ca90

@@ -22,5 +22,9 @@ async function getplayer(uuid) {
     }
 }
 
+getuuid("smhtaken").then(uuid => {
+    console.log(uuid)
+})
+
 module.exports = getuuid
 module.exports = getplayer

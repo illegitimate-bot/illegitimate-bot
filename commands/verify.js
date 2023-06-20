@@ -21,10 +21,8 @@ module.exports = {
 	async execute(interaction) {
 		await interaction.deferReply();
 
-		const user1 = interaction.user;
-		const user = await interaction.guild.members.fetch(user1.id);
+		const user = interaction.user;
 
-		const fullUsername = user.user.username + "#" + user.user.discriminator;
 		const ign = interaction.options.getString("ign");
 		const mojang = "https://api.mojang.com/users/profiles/minecraft/";
 		const slothPixel = "https://api.slothpixel.me/api/players/";
@@ -63,12 +61,21 @@ module.exports = {
 
 		const hypixelCheck = await fetch(slothPixel + userUUID);
 		const head = minotar + ign;
+      
+        if (user.discriminator === "0") {
+            var verifyUsername = user.username
+            var username = user.username + "#0000"
+        } else {
+            var verifyUsername = user.username + "#" + user.discriminator
+            var username = user.username + "#" + user.discriminator
+        }
 
-		if (hypixelCheck.data.links.DISCORD !== fullUsername) {
+		if (hypixelCheck.data.links.DISCORD !== username) {
 			interaction.editReply({
 				embeds: [
 					{
-						description: "<a:cross_a:1087808606897983539> The discord tag for `" + userCheck.data.name + "` is not `" + fullUsername + "`. Please link your discord account to your hypixel account.",
+						description: "<a:cross_a:1087808606897983539> The discord tag for `" + userCheck.data.name + "` is not `" + verifyUsername + "`. Please link your discord account to your hypixel account.\n" +
+                        "**If you are are using a new username then you will have to set your discord on hypixel to** `yourusername#0000`",
 						color: embedColor
 					}
 				]
@@ -90,7 +97,7 @@ module.exports = {
 				embeds: [
 					{
 						title: interaction.guild.name,
-						description: "<a:check_a:1087808632172847134> You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
+						description: "<a:check_a:1087808632172847134> You have successfully verified `" + username + "` with the account `" + hypixelCheck.data.username + "`.",
 						color: embedColor,
 						thumbnail: {
 							url: head
@@ -156,7 +163,7 @@ module.exports = {
 			embeds: [
 				{
 					title: interaction.guild.name,
-					description: "You have successfully verified `" + fullUsername + "` with the account `" + hypixelCheck.data.username + "`.",
+					description: "You have successfully verified `" + username + "` with the account `" + hypixelCheck.data.username + "`.",
 					color: embedColor,
 					thumbnail: {
 						url: head

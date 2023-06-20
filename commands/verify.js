@@ -21,8 +21,8 @@ module.exports = {
     async execute(interaction) {
         await interaction.deferReply();
 
-        const user = interaction.user;
-
+        const user1 = interaction.user
+        const user = interaction.guild.members.cache.get(user1.id);
         const ign = interaction.options.getString("ign");
         const mojang = "https://api.mojang.com/users/profiles/minecraft/";
         const slothPixel = "https://api.slothpixel.me/api/players/";
@@ -62,12 +62,12 @@ module.exports = {
         const hypixelCheck = await fetch(slothPixel + userUUID);
         const head = minotar + ign;
 
-        if (user.discriminator === "0") {
-            var verifyUsername = user.username + "#0000"
-            var username = user.username
+        if (user1.discriminator === "0") {
+            var verifyUsername = user1.username + "#0000"
+            var username = user1.username
         } else {
-            var verifyUsername = user.username + "#" + user.discriminator
-            var username = user.username + "#" + user.discriminator
+            var verifyUsername = user1.username + "#" + user1.discriminator
+            var username = user1.username + "#" + user1.discriminator
         }
 
         if (hypixelCheck.data.links.DISCORD !== verifyUsername) {

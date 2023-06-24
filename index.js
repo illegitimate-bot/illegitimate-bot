@@ -204,12 +204,12 @@ client.on(Events.ClientReady, () => {
         { name: "over the Illegitimate Server", type: ActivityType.Watching });
 
     const activities = [
-        { name: "with Jone the idiot", type: ActivityType.Playing },
-        { name: "with Martina the bot", type: ActivityType.Playing },
+        { name: "for Martina's return", type: ActivityType.Watching },
+        { name: "w vri's feelings", type: ActivityType.Playing },
         { name: "urCryhard steal finals again", type: ActivityType.Watching },
         { name: "with Perlcence the AI", type: ActivityType.Playing },
-        { name: "my creator Taken", type: ActivityType.Watching },
         { name: "with ur mom in my bed", type: ActivityType.Playing },
+        { name: "with Jone the idiot", type: ActivityType.Playing },
         { name: "over the Illegitimate Server", type: ActivityType.Watching }
     ];
 

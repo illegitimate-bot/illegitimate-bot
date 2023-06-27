@@ -2,12 +2,12 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const getuuid = require('../utils/functions');
 
 module.exports = {
-    name: 'functest',
+    name: 'dev-info',
     description: 'Test command for the bot.',
     type: 'slash',
 
     data: new SlashCommandBuilder()
-        .setName('functest')
+        .setName('dev-info')
         .setDescription('Test command for the bot.')
         .addStringOption(option =>
             option

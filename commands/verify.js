@@ -73,7 +73,7 @@ module.exports = {
 				embeds: [
 					{
 						description: "<a:cross_a:1087808606897983539> The discord tag for `" + userCheck.data.name + "` is not `" + username + "`. Please link your discord account to your hypixel account.\n" +
-							"**If you are are using a new username then you will have to set your discord on hypixel to** `yourusername#0000`",
+							"**If you are are using a new username then you will have to set your discord on hypixel to the new username without the #** ",
 						color: embedColor
 					}
 				]

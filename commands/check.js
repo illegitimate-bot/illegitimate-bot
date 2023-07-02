@@ -26,8 +26,6 @@ module.exports = {
 
 		const ign = interaction.options.getString("ign");
 		const mojang = "https://api.mojang.com/users/profiles/minecraft/";
-		// const slothPixel = "https://api.slothpixel.me/api/players/";
-		// const guildAPI = "https://api.slothpixel.me/api/guilds/";
 		const hypixel = "https://api.hypixel.net/player"
 		const guildAPI = "https://api.hypixel.net/guild"
 		const minotar = "https://minotar.net/helm/";
@@ -69,18 +67,17 @@ module.exports = {
 		const rank2 = stats.data.player.newPackageRank;
 		const monthlyRank = stats.data.player.monthlyPackageRank;
 
-		if (rank2 === 'VIP') {
-			var rank = "[VIP] "
-		} else if (rank2 === 'VIP_PLUS') {
-			var rank = "[VIP+] "
-		} else if (rank2 === 'MVP') {
-			var rank = "[MVP] "
-		} else if (rank2 === 'MVP_PLUS') {
-			var rank = "[MVP+] "
-		} else if (rank2 === 'MVP_PLUS' && monthlyRank === 'SUPERSTAR') {
-			var rank = "[MVP++] "
-		}
-
+        if (rank2 === 'VIP') {
+            var rank = "[VIP] "
+        } else if (rank2 === 'VIP_PLUS') {
+            var rank = "[VIP+] "
+        } else if (rank2 === 'MVP') {
+            var rank = "[MVP] "
+        } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'NONE') {
+            var rank = "[MVP+] "
+        } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'SUPERSTAR') {
+            var rank = "[MVP++] "
+        }
 
 		const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + uuid
 		const guildCheck = await fetch(guild);

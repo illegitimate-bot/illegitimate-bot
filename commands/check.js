@@ -53,18 +53,6 @@ module.exports = {
 		const userCheck = await fetch(mojang + ign);
 		const uuid = userCheck.data.id;
 
-		/* try {
-			await fetch(slothPixel + uuid);
-		} catch (error) {
-			interaction.editReply({
-				embeds: [{
-					description: "That player hasn't played Hypixel before.",
-					color: embedColor
-				}]
-			});
-			return;
-		} */
-
 		const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + uuid
 		const stats = await fetch(player);
 
@@ -93,12 +81,6 @@ module.exports = {
 			var rank = "[MVP++] "
 		}
 
-		/* try {
-			const guildCheck = await fetch(guildAPI + uuid);
-			var guildName = guildCheck.data.name;
-		} catch (error) {
-			var guildName = "None";
-		} */
 
 		const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + uuid
 		const guildCheck = await fetch(guild);
@@ -171,15 +153,6 @@ module.exports = {
 			var duelstitle =
 				"<a:check_a:1087808632172847134> This player meets the Duels requirements.";
 		}
-
-		/* try {
-			const guildCheck = await fetch(guildAPI + uuid);
-			const tag_formatted = guildCheck.data.tag_formatted;
-			const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "");
-			var guildTag = " " + guildTag2;
-		} catch (error) {
-			var guildTag = "";
-		} */
 
 		await interaction.editReply({
 			embeds: [{

@@ -5,7 +5,6 @@ const fetch = require('axios');
 const verify = require('../schemas/verifySchema.js')
 const { color, hypixelGuildID } = require('../config/options.json');
 const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
-
 const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff];
 
 module.exports = {
@@ -14,28 +13,24 @@ module.exports = {
     type: 'slash',
 
     data: new SlashCommandBuilder()
-        .setName('update')
-        .setDescription('Update your guild rank.')
-        .setDMPermission(false),
+    .setName('update')
+    .setDescription('Update your guild rank.')
+    .setDMPermission(false),
 
     async execute(interaction) {
 
         await interaction.deferReply();
-        
+
         const user1 = interaction.user;
         const user = interaction.guild.members.cache.get(user1.id);
         const verifyData = await verify.findOne({ userID: user.id })
         const roleManage = user.roles;
-        
-        if (!verifyData) {
-            
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
+        const embedColor = Number(color.replace("#", "0x"));
 
+        if (!verifyData) {
             await interaction.editReply({
                 embeds: [{
-                    description: "Updated your roles to `Default Member`",
+                    description: "You are not verified. Please run `/verify` to verify yourself",
                     color: embedColor,
                     thumbnail: {
                         url: head
@@ -49,22 +44,25 @@ module.exports = {
             return
         }
 
-        const slothPixel = "https://api.slothpixel.me/api/players/";
-        const guildAPI = "https://api.slothpixel.me/api/guilds/"
         const mojangAPI = "https://api.mojang.com/user/profile/"
+        const hypixel = "https://api.hypixel.net/player"
+        const guildAPI = "https://api.hypixel.net/guild"
         const minotar = "https://minotar.net/helm/";
-        
-        const userCheck = await fetch(mojangAPI + verifyData.uuid);
-        const hypixelCheck = await fetch(slothPixel + verifyData.uuid);
+        const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + verifyData.uuid
 
-        try {
-            const guildCheck = await fetch(guildAPI + verifyData.uuid);
-            var responseGuildID = guildCheck.data.id;
-        } catch (err) {
-            var responseGuildID = null;
+        const userCheck = await fetch(mojangAPI + verifyData.uuid);
+        const head = minotar + userCheck.data.name;
+
+        const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + verifyData.uuid
+        const guildCheck = await fetch(guild);
+
+        if (!guildCheck.data.guild) {
+            var guildID = null
+        } else {
+            var guildID = guildCheck.data.guild._id
         }
 
-        if (responseGuildID !== hypixelGuildID) {
+        if (guildID !== hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -87,26 +85,22 @@ module.exports = {
             })
             return
         }
-        
-        const guildCheck = await fetch(guildAPI + verifyData.uuid);
-        const head = minotar + userCheck.data.name;
 
-        const embedColor = Number(color.replace("#", "0x"));
-        const GuildMembers = guildCheck.data.members;
+        const GuildMembers = guildCheck.data.guild.members;
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
-        if (guildRank === 'Guild Master' && responseGuildID === hypixelGuildID) {
+        if (guildRank === 'Guild Master' && guildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
-            
+
             await roleManage.add(guildRole, "User used the update command")
             await roleManage.add(guildStaff, "User used the update command")
             await roleManage.add(gm, "User used the update command")
             await roleManage.add(defaultMember, "User used the update command")
 
-            
+
             await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Guild Master`",
@@ -122,18 +116,18 @@ module.exports = {
             })
         }
 
-        if (guildRank === 'Manager' && responseGuildID === hypixelGuildID) {
+        if (guildRank === 'Manager' && guildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
-            
+
             await roleManage.add(guildRole, "User used the update command")
             await roleManage.add(guildStaff, "User used the update command")
             await roleManage.add(manager, "User used the update command")
             await roleManage.add(defaultMember, "User used the update command")
 
-            
+
             await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Manager`",
@@ -149,18 +143,18 @@ module.exports = {
             })
         }
 
-        if (guildRank === 'Moderator' && responseGuildID === hypixelGuildID) {
+        if (guildRank === 'Moderator' && guildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
-            
+
             await roleManage.add(guildRole, "User used the update command")
             await roleManage.add(guildStaff, "User used the update command")
             await roleManage.add(moderator, "User used the update command")
             await roleManage.add(defaultMember, "User used the update command")
 
-            
+
             await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Moderator`",
@@ -177,17 +171,17 @@ module.exports = {
 
         }
 
-        if (guildRank === 'Beast' && responseGuildID === hypixelGuildID) {
+        if (guildRank === 'Beast' && guildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
-            
+
             await roleManage.add(guildRole, "User used the update command")
             await roleManage.add(beast, "User used the update command")
             await roleManage.add(defaultMember, "User used the update command")
 
-            
+
             await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Beast`.",
@@ -204,7 +198,7 @@ module.exports = {
             return
         }
 
-        if (guildRank === 'Member' && responseGuildID === hypixelGuildID) {
+        if (guildRank === 'Member' && guildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -214,7 +208,7 @@ module.exports = {
             await roleManage.add(member, "User used the update command")
             await roleManage.add(defaultMember, "User used the update command")
 
-            
+
             await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Member`.",
@@ -231,17 +225,17 @@ module.exports = {
             return
         }
 
-        if (guildRank === 'Trial Member' && responseGuildID === hypixelGuildID) {
+        if (guildRank === 'Trial Member' && guildID === hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
-            
+
             await roleManage.add(guildRole, "User used the update command")
             await roleManage.add(trialmember, "User used the update command")
             await roleManage.add(defaultMember, "User used the update command")
 
-            
+
             await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Trial Member`.",

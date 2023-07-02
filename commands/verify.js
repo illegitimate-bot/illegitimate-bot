@@ -96,7 +96,7 @@ module.exports = {
             var guildID = guildCheck.data.guild._id
         }
 
-        if (guildID !== hypixelGuildID) {
+        /* if (guildID !== hypixelGuildID) {
             await user.roles.add(defaultMember, "Verification");
 
             await interaction.editReply({
@@ -116,43 +116,44 @@ module.exports = {
                 ]
             });
             return;
-        }
+        } */
+            if (guildID === hypixelGuildID) {
+                const GuildMembers = guildCheck.data.guild.members
+                const guildRank = GuildMembers.find((member) => member.uuid === stats.data.player.uuid).rank;
 
-        const GuildMembers = guildCheck.data.guild.members
-        const guildRank = GuildMembers.find((member) => member.uuid === stats.data.player.uuid).rank;
+                if (guildRank === "Guild Master" && guildID === hypixelGuildID) {
+                    await user.roles.add(gm, "Verification");
+                    await user.roles.add(guildRole, "Verification");
+                    await user.roles.add(guildStaff, "Verification");
+                }
 
-        if (guildRank === "Guild Master" && guildID === hypixelGuildID) {
-            await user.roles.add(gm, "Verification");
-            await user.roles.add(guildRole, "Verification");
-            await user.roles.add(guildStaff, "Verification");
-        }
+                if (guildRank === "Manager" && guildID === hypixelGuildID) {
+                    await user.roles.add(manager, "Verification");
+                    await user.roles.add(guildRole, "Verification");
+                    await user.roles.add(guildStaff, "Verification");
+                }
 
-        if (guildRank === "Manager" && guildID === hypixelGuildID) {
-            await user.roles.add(manager, "Verification");
-            await user.roles.add(guildRole, "Verification");
-            await user.roles.add(guildStaff, "Verification");
-        }
+                if (guildRank === "Moderator" && guildID === hypixelGuildID) {
+                    await user.roles.add(moderator, "Verification");
+                    await user.roles.add(guildRole, "Verification");
+                    await user.roles.add(guildStaff, "Verification");
+                }
 
-        if (guildRank === "Moderator" && guildID === hypixelGuildID) {
-            await user.roles.add(moderator, "Verification");
-            await user.roles.add(guildRole, "Verification");
-            await user.roles.add(guildStaff, "Verification");
-        }
+                if (guildRank === "Beast" && guildID === hypixelGuildID) {
+                    await user.roles.add(beast, "Verification");
+                    await user.roles.add(guildRole, "Verification");
+                }
 
-        if (guildRank === "Beast" && guildID === hypixelGuildID) {
-            await user.roles.add(beast, "Verification");
-            await user.roles.add(guildRole, "Verification");
-        }
+                if (guildRank === "Member" && guildID === hypixelGuildID) {
+                    await user.roles.add(member, "Verification");
+                    await user.roles.add(guildRole, "Verification");
+                }
 
-        if (guildRank === "Member" && guildID === hypixelGuildID) {
-            await user.roles.add(member, "Verification");
-            await user.roles.add(guildRole, "Verification");
-        }
-
-        if (guildRank === "Trial Member" && guildID === hypixelGuildID) {
-            await user.roles.add(trialmember, "Verification");
-            await user.roles.add(guildRole, "Verification");
-        }
+                if (guildRank === "Trial Member" && guildID === hypixelGuildID) {
+                    await user.roles.add(trialmember, "Verification");
+                    await user.roles.add(guildRole, "Verification");
+                }
+            }
 
         await user.roles.add(defaultMember, "Verification");
 

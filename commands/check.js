@@ -1,188 +1,237 @@
-const {SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits} =
-    require("discord.js");
-const {bwfdkr, bwstars, bwwins, duelswins, swstars} =
-    require("../config/reqs.json");
+const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } =
+	require("discord.js");
+const { bwfdkr, bwstars, bwwins, duelswins, swstars } =
+	require("../config/reqs.json");
 const env = require("dotenv").config();
-const hypixelApiKey = process.env.HYPIXELAPI;
-const {color} = require("../config/options.json");
+const hypixelApiKey = process.env.HYPIXELAPIKEY;
+const { color } = require("../config/options.json");
 const fetch = require("axios");
+const { getExactLevel, skywarsLevel, getLevelForExp } = require("../utils/functions.js");
 
 module.exports = {
-  name : "check",
-  description : "Check a player's stats.",
-  type : "slash",
+	name: "check",
+	description: "Check a player's stats.",
+	type: "slash",
 
-  data : new SlashCommandBuilder()
-           .setName("check")
-           .setDescription("Check a player's stats.")
-           .addStringOption((option) => option.setName("ign")
-                                            .setDescription("The player's IGN.")
-                                            .setRequired(true))
-           .setDMPermission(false),
+	data: new SlashCommandBuilder()
+		.setName("check")
+		.setDescription("Check a player's stats.")
+		.addStringOption((option) => option.setName("ign")
+			.setDescription("The player's IGN.")
+			.setRequired(true))
+		.setDMPermission(false),
 
-       async execute(interaction) {
-         await interaction.deferReply({});
+	async execute(interaction) {
+		await interaction.deferReply({});
 
-         const ign = interaction.options.getString("ign");
-         const mojang = "https://api.mojang.com/users/profiles/minecraft/";
-         const slothPixel = "https://api.slothpixel.me/api/players/";
-         const guildAPI = "https://api.slothpixel.me/api/guilds/";
-         const minotar = "https://minotar.net/helm/";
-         const embedColor = Number(color.replace("#", "0x"));
+		const ign = interaction.options.getString("ign");
+		const mojang = "https://api.mojang.com/users/profiles/minecraft/";
+		// const slothPixel = "https://api.slothpixel.me/api/players/";
+		// const guildAPI = "https://api.slothpixel.me/api/guilds/";
+		const hypixel = "https://api.hypixel.net/player"
+		const guildAPI = "https://api.hypixel.net/guild"
+		const minotar = "https://minotar.net/helm/";
+		const embedColor = Number(color.replace("#", "0x"));
+		const head = minotar + ign;
 
-         if (!ign) {
-           await interaction.editReply("Please provide a player's IGN.");
-           return;
-         }
+		if (!ign) {
+			await interaction.editReply("Please provide a player's IGN.");
+			return;
+		}
 
-         try {
-           await fetch(mojang + ign);
-         } catch (error) {
-           interaction.editReply({
-             embeds : [
-               {description : "That player doesn't exist.", color : embedColor}
-             ]
-           });
-           return;
-         }
+		try {
+			await fetch(mojang + ign);
+		} catch (error) {
+			interaction.editReply({
+				embeds: [
+					{ description: "That player doesn't exist.", color: embedColor }
+				]
+			});
+			return;
+		}
 
-         const userCheck = await fetch(mojang + ign);
-         const uuid = userCheck.data.id;
+		const userCheck = await fetch(mojang + ign);
+		const uuid = userCheck.data.id;
 
-         try {
-           await fetch(slothPixel + uuid);
-         } catch (error) {
-           interaction.editReply({
-             embeds : [ {
-               description : "That player hasn't played Hypixel before.",
-               color : embedColor
-             } ]
-           });
-           return;
-         }
+		/* try {
+			await fetch(slothPixel + uuid);
+		} catch (error) {
+			interaction.editReply({
+				embeds: [{
+					description: "That player hasn't played Hypixel before.",
+					color: embedColor
+				}]
+			});
+			return;
+		} */
 
-         const stats = await fetch(slothPixel + uuid);
-         const head = minotar + ign;
+		const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + uuid
+		const stats = await fetch(player);
 
-         if (!stats.data.uuid) {
-           interaction.editReply({
-             embeds : [ {
-               description : "That player hasn't played Hypixel before.",
-               color : embedColor
-             } ]
-           });
-           return;
-         }
+		if (!stats.data.player) {
+			interaction.editReply({
+				embeds: [{
+					description: "That player hasn't played Hypixel before.",
+					color: embedColor
+				}]
+			});
+			return;
+		}
 
-         const rank_formatted = stats.data.rank_formatted;
-         const rank2 = rank_formatted.replace(/&[0-9a-fk-or]/g, "");
+		const rank2 = stats.data.player.newPackageRank;
+		const monthlyRank = stats.data.player.monthlyPackageRank;
 
-         if (rank2 === "") {
-           var rank = "";
-         } else {
-           var rank = rank2 + " ";
-         }
+		if (rank2 === 'VIP') {
+			var rank = "[VIP] "
+		} else if (rank2 === 'VIP_PLUS') {
+			var rank = "[VIP+] "
+		} else if (rank2 === 'MVP') {
+			var rank = "[MVP] "
+		} else if (rank2 === 'MVP_PLUS') {
+			var rank = "[MVP+] "
+		} else if (rank2 === 'MVP_PLUS' && monthlyRank === 'SUPERSTAR') {
+			var rank = "[MVP++] "
+		}
 
-         try {
-           const guildCheck = await fetch(guildAPI + uuid);
-           var guildName = guildCheck.data.name;
-         } catch (error) {
-           var guildName = "None";
-         }
+		/* try {
+			const guildCheck = await fetch(guildAPI + uuid);
+			var guildName = guildCheck.data.name;
+		} catch (error) {
+			var guildName = "None";
+		} */
 
-         const hsbwstars = stats.data.stats.BedWars.level;
-         const hsbwfkdr = stats.data.stats.BedWars.final_k_d;
-         const hsbwwins = stats.data.stats.BedWars.wins;
-         const hsswstars = stats.data.stats.SkyWars.level;
-         const hsduelswins = stats.data.stats.Duels.general.wins;
+		const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + uuid
+		const guildCheck = await fetch(guild);
 
-         if (hsbwstars < bwstars || hsbwfkdr < bwfdkr || hsbwwins < bwwins) {
-           var bwtitle =
-               "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements.";
-         } else {
-           var bwtitle =
-               "<a:check_a:1087808632172847134> This player meets the BedWars requirements.";
-         }
+		if (!guildCheck.data.guild) {
+			var guildName = "None";
+		} else {
+			var guildName = guildCheck.data.guild.name;
+		}
 
-         if (hsswstars < swstars) {
-           var swtitle =
-               "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements.";
-         } else {
-           var swtitle =
-               "<a:check_a:1087808632172847134> This player meets the SkyWars requirements.";
-         }
+		if (!guildCheck.data.guild) {
+			var guildTag = ""
+		} else if (!guildCheck.data.guild.tag) {
+			var guildTag = ""
+		} else {
+			var guildTag = " [" + guildCheck.data.guild.tag + "]"
+		}
 
-         if (hsduelswins < duelswins) {
-           var duelstitle =
-               "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements.";
-         } else {
-           var duelstitle =
-               "<a:check_a:1087808632172847134> This player meets the Duels requirements.";
-         }
+		//bedwars level
+		const hsbwexp = stats.data.player.stats.Bedwars.Experience;
+		const hsbwstars = getLevelForExp(hsbwexp);
+		// bedwars fkdr
+		const hsbwfk = stats.data.player.stats.Bedwars.final_kills_bedwars;
+		const hsbwfd = stats.data.player.stats.Bedwars.final_deaths_bedwars;
+		const hsbwfkdr = hsbwfk / hsbwfd;
+		// bedwars wins
+		const hsbwwins = stats.data.player.stats.Bedwars.wins_bedwars;
+		// skywars level
+		const hsswexp = stats.data.player.stats.SkyWars.skywars_experience;
+		const hsswstars = skywarsLevel(hsswexp);
+		// skywars kdr
+		const hsswkills = stats.data.player.stats.SkyWars.kills;
+		const hsswdeaths = stats.data.player.stats.SkyWars.deaths;
+		const hsswkd = hsswkills / hsswdeaths;
+		//skywars wins
+		const hsswwins = stats.data.player.stats.SkyWars.wins;
+		// dueks kdr
+		const hsduelskills = stats.data.player.stats.Duels.kills
+		const hsduelsdeaths = stats.data.player.stats.Duels.deaths
+		const hsduelskd = hsduelskills / hsduelsdeaths
+		// duels wins
+		const hsduelswins = stats.data.player.stats.Duels.wins;
+		// duels wlr
+		const hsduelslosses = stats.data.player.stats.Duels.losses;
+		const hsduelswlr = hsduelswins / hsduelslosses;
+		// network level
+		const hypixelExp = stats.data.player.networkExp;
+		const level = getExactLevel(hypixelExp);
+		
+		if (hsbwstars < bwstars || hsbwfkdr < bwfdkr || hsbwwins < bwwins) {
+			var bwtitle =
+				"<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements.";
+		} else {
+			var bwtitle =
+				"<a:check_a:1087808632172847134> This player meets the BedWars requirements.";
+		}
 
-         try {
-           const guildCheck = await fetch(guildAPI + uuid);
-           const tag_formatted = guildCheck.data.tag_formatted;
-           const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "");
-           var guildTag = " " + guildTag2;
-         } catch (error) {
-           var guildTag = "";
-         }
+		if (hsswstars < swstars) {
+			var swtitle =
+				"<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements.";
+		} else {
+			var swtitle =
+				"<a:check_a:1087808632172847134> This player meets the SkyWars requirements.";
+		}
 
-         await interaction.editReply({
-           embeds : [ {
-             title : rank + stats.data.username + guildTag,
-             description : "**Network Level:** `" +
-                               stats.data.level.toString() + "`\n" +
-                               "**Current Guild:** `" + guildName + "`",
-             color : embedColor,
-             thumbnail : {url : head},
-             footer : {
-               text : interaction.guild.name + " | Developed by @Taken#0002",
-               icon_url : interaction.guild.iconURL()
-             },
-             fields : [
-               {
-                 name : bwtitle,
-                 value : "**➺ Stars:** `" +
-                             stats.data.stats.BedWars.level.toString() + " / " +
-                             bwstars.toString() + "`\n" +
-                             "**➺ FKDR:** `" +
-                             stats.data.stats.BedWars.final_k_d.toString() +
-                             " / " + bwfdkr.toString() + "`\n" +
-                             "**➺ Wins:** `" +
-                             stats.data.stats.BedWars.wins.toString() + " / " +
-                             bwwins.toString() + "`"
-               },
-               {
-                 name : swtitle,
-                 value :
-                     "**➺ Stars:** `" +
-                         stats.data.stats.SkyWars.level.toFixed(2).toString() +
-                         " / " + swstars.toString() + "`\n" +
-                         "**➺ KDR:** `" +
-                         stats.data.stats.SkyWars.kill_death_ratio.toString() +
-                         "`\n" +
-                         "**➺ Wins:** `" +
-                         stats.data.stats.SkyWars.wins.toString() + "`"
-               },
-               {
-                 name : duelstitle,
-                 value : "**➺ Wins:** `" +
-                             stats.data.stats.Duels.general.wins.toString() +
-                             " / " + duelswins.toString() + "`\n" +
-                             "**➺ KDR:** `" +
-                             stats.data.stats.Duels.general.kd_ratio.toFixed(2)
-                                 .toString() +
-                             "`\n" +
-                             "**➺ WLR:** `" +
-                             stats.data.stats.Duels.general.win_loss_ratio
-                                 .toFixed(2)
-                                 .toString() +
-                             "`"
-               }
-             ]
-           } ]
-         });
-       }
+		if (hsduelswins < duelswins) {
+			var duelstitle =
+				"<a:cross_a:1087808606897983539> This player does not meet the Duels requirements.";
+		} else {
+			var duelstitle =
+				"<a:check_a:1087808632172847134> This player meets the Duels requirements.";
+		}
+
+		/* try {
+			const guildCheck = await fetch(guildAPI + uuid);
+			const tag_formatted = guildCheck.data.tag_formatted;
+			const guildTag2 = tag_formatted.replace(/&[0-9a-fk-or]/g, "");
+			var guildTag = " " + guildTag2;
+		} catch (error) {
+			var guildTag = "";
+		} */
+
+		await interaction.editReply({
+			embeds: [{
+				title: rank + stats.data.player.displayname + guildTag,
+				description: "**Network Level:** `" +
+					level.toFixed(2).toString() + "`\n" +
+					"**Current Guild:** `" + guildName + "`",
+				color: embedColor,
+				thumbnail: { url: head },
+				footer: {
+					text: interaction.guild.name + " | Developed by @Taken#0002",
+					icon_url: interaction.guild.iconURL()
+				},
+				fields: [
+					{
+						name: bwtitle,
+						value: "**➺ Stars:** `" +
+							hsbwstars.toFixed(2).toString() + " / " +
+							bwstars.toString() + "`\n" +
+							"**➺ FKDR:** `" +
+							hsbwfkdr.toFixed(2).toString() +
+							" / " + bwfdkr.toString() + "`\n" +
+							"**➺ Wins:** `" +
+							hsbwwins.toString() + " / " +
+							bwwins.toString() + "`"
+					},
+					{
+						name: swtitle,
+						value:
+							"**➺ Stars:** `" +
+							hsswstars.toFixed(2).toString() +
+							" / " + swstars.toString() + "`\n" +
+							"**➺ KDR:** `" +
+							hsswkd.toFixed(2).toString() +
+							"`\n" +
+							"**➺ Wins:** `" +
+							hsswwins.toString() + "`"
+					},
+					{
+						name: duelstitle,
+						value: "**➺ Wins:** `" +
+							hsduelswins.toString() +
+							" / " + duelswins.toString() + "`\n" +
+							"**➺ KDR:** `" +
+							hsduelskd.toFixed(2).toString() +
+							"`\n" +
+							"**➺ WLR:** `" +
+							hsduelswlr.toFixed(2).toString() +
+							"`"
+					}
+				]
+			}]
+		});
+	}
 };

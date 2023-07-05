@@ -13,10 +13,13 @@ module.exports = {
     type: "slash",
 
     data: new SlashCommandBuilder()
-    .setName("verify")
-    .setDescription("Verify yourself as a member of the server.")
-    .addStringOption((option) => option.setName("ign").setDescription("Your in-game name."))
-    .setDMPermission(false),
+        .setName("verify")
+        .setDescription("Verify yourself as a member of the server.")
+        .addStringOption((option) =>
+            option
+                .setName("ign")
+                .setDescription("Your in-game name."))
+        .setDMPermission(false),
 
     async execute(interaction) {
         await interaction.deferReply();
@@ -79,7 +82,7 @@ module.exports = {
                 embeds: [
                     {
                         description: "<a:cross_a:1087808606897983539> The discord tag for `" + userCheck.data.name + "` is not `" + username + "`. Please link your discord account `" + username + "` to your hypixel account.\n" +
-                        "**If you are are using a new username then you will have to set your discord on hypixel to the new username without the #** ",
+                            "**If you are are using a new username then you will have to set your discord on hypixel to the new username without the #** ",
                         color: embedColor
                     }
                 ]

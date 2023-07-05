@@ -73,13 +73,26 @@ module.exports = {
         }
 
         const linkedDiscord = stats.data.player.socialMedia.links.DISCORD
+        
+				if (!linkedDiscord) {
+            interaction.editReply({
+                embeds: [
+                    {
+                        description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + stats.data.player.displayname + "`.\n\n" +
+													"**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
+                        color: embedColor
+                    }
+                ]
+            });
+            return;
+        }
 
         if (linkedDiscord !== username) {
             interaction.editReply({
                 embeds: [
                     {
-                        description: "<a:cross_a:1087808606897983539> The discord tag for `" + userCheck.data.name + "` is not `" + username + "`. Please link your discord account `" + username + "` to your hypixel account.\n" +
-                        "**If you are are using a new username then you will have to set your discord on hypixel to the new username without the #** ",
+                        description: "<a:cross_a:1087808606897983539> The Discord account linked to `" + stats.data.player.displayname + "` is currently `" + linkedDiscord + "`.\n\n" +
+													"**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
                         color: embedColor
                     }
                 ]

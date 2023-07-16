@@ -42,14 +42,24 @@ module.exports = {
         }
 
         if (!ign) {
-            interaction.editReply("Please provide a player's IGN.");
+            interaction.editReply({
+                embeds: [{
+                    description: "<a:cross_a:1087808606897983539> Please provide your in-game name.",
+                    color: embedColor
+                }]
+            })
             return;
         }
 
         try {
             await fetch(mojang + ign);
         } catch (err) {
-            interaction.editReply("That player doesn't exist. [Mojang]");
+            interaction.editReply({
+                embeds: [{
+                    description: "<a:questionmark_pink:1130206038008803488> That player does not exist.",
+                    color: embedColor
+                }]
+            });
             return;
         }
 
@@ -62,7 +72,7 @@ module.exports = {
         if (!stats.data.player) {
             interaction.editReply({
                 embeds: [{
-                    description: "That player hasn't played Hypixel before.",
+                    description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
                     color: embedColor
                 }]
             });

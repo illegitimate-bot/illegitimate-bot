@@ -42,20 +42,15 @@ module.exports = {
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
-        if (user1.discriminator == "0") {
-            var username = user1.username
-        } else {
-            var username = user1.username + "#" + user.discriminator
-        }
-
-        if (mod.discriminator == "0") {
-            var modName = mod.username
-        } else {
-            var modName = mod.username + "#" + mod.discriminator
-        }
-
         if (!user) {
-            interaction.editReply('Please provide a user to force verify.')
+            interaction.editReply('Please provide a user to force verify.\nThis can also mean the user is not in the server.')
+            return
+        }
+
+        const verifyData = await verify.findOne({ userID: user.id })
+
+        if (verifyData) {
+            interaction.editReply('That user is already verified.')
             return
         }
 
@@ -63,12 +58,17 @@ module.exports = {
             interaction.editReply('Please provide a player\'s IGN.')
             return
         }
-        
-        const verifyData = await verify.findOne({ userID: user.id })
 
-        if (verifyData) {
-            interaction.editReply('That user is already verified.')
-            return
+        if (user1.discriminator == "0") {
+            var username = user1.username
+        } else {
+            var username = user1.username + "#" + user1.discriminator
+        }
+
+        if (mod.discriminator == "0") {
+            var modName = mod.username
+        } else {
+            var modName = mod.username + "#" + mod.discriminator
         }
 
         try {

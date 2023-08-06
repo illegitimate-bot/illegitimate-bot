@@ -4,8 +4,8 @@ const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const fetch = require('axios');
 const verify = require('../schemas/verifySchema.js')
 const { color, hypixelGuildID } = require('../config/options.json');
-const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
-const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff];
+const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
+const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff];
 
 module.exports = {
     name: 'update',
@@ -185,6 +185,33 @@ module.exports = {
             await interaction.editReply({
                 embeds: [{
                     description: "Your rank has been updated to `Beast`.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
+                    footer: {
+                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        icon_url: interaction.guild.iconURL({ dynamic: true })
+                    }
+                }]
+            })
+            return
+        }
+
+        if (guildRank === 'Elite' && guildID === hypixelGuildID) {
+
+            for (let i = 0; i < removeThese.length; i++) {
+                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+            }
+
+            await roleManage.add(guildRole, "User used the update command")
+            await roleManage.add(elite, "User used the update command")
+            await roleManage.add(defaultMember, "User used the update command")
+
+
+            await interaction.editReply({
+                embeds: [{
+                    description: "Your rank has been updated to `Elite`.",
                     color: embedColor,
                     thumbnail: {
                         url: head

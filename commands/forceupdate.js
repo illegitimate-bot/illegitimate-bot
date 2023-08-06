@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
 const { hypixelGuildID, color } = require('../config/options.json');
-const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
+const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
 const verify = require('../schemas/verifySchema.js')
 const fetch = require('axios');
-const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff]
+const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff]
 
 module.exports = {
     name: 'forceupdate',
@@ -29,6 +29,7 @@ module.exports = {
         const usermentioned = userMention(user.id);
         const guild = interaction.guild;
         const verifyData = await verify.findOne({ userID: user.id })
+        const embedColor = Number(color.replace("#", "0x"));
 
         const user1 = guild.members.cache.get(user.id);
         const roleManage = user1.roles;
@@ -43,9 +44,6 @@ module.exports = {
                 embeds: [{
                     description: usermentioned + " was given the the Default Member role.",
                     color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
                         icon_url: interaction.guild.iconURL({ dynamic: true })
@@ -96,7 +94,6 @@ module.exports = {
         }
 
         const guildCheck = await fetch(guildAPI + verifyData.uuid);
-        const embedColor = Number(color.replace("#", "0x"));
         const GuildMembers = await guildCheck.data.members;
         const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
@@ -196,6 +193,33 @@ module.exports = {
             await interaction.editReply({
                 embeds: [{
                     description: usermentioned + "'s rank has been updated to `Beast`.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
+                    footer: {
+                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        icon_url: interaction.guild.iconURL({ dynamic: true })
+                    }
+                }]
+            })
+            return
+        }
+
+        if (guildRank === 'Elite' && responseGuildID === hypixelGuildID) {
+
+            for (let i = 0; i < removeThese.length; i++) {
+                await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
+            }
+            
+            await roleManage.add(guildRole, "User was force updated.")
+            await roleManage.add(elite, "User was force updated.")
+            await roleManage.add(defaultMember, "User was force updated.")
+
+            
+            await interaction.editReply({
+                embeds: [{
+                    description: usermentioned + "'s rank has been updated to `Elite`.",
                     color: embedColor,
                     thumbnail: {
                         url: head

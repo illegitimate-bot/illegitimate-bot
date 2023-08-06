@@ -5,7 +5,7 @@ const fetch = require("axios");
 const { color, hypixelGuildID } = require("../config/options.json");
 const verify = require("../schemas/verifySchema.js");
 const mongoose = require("mongoose");
-const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json");
+const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json");
 
 module.exports = {
     name: "verify",
@@ -145,6 +145,11 @@ module.exports = {
 
             if (guildRank === "Beast" && guildID === hypixelGuildID) {
                 await user.roles.add(beast, "Verification");
+                await user.roles.add(guildRole, "Verification");
+            }
+
+            if (guildRank === "Elite" && guildID === hypixelGuildID) {
+                await user.roles.add(elite, "Verification");
                 await user.roles.add(guildRole, "Verification");
             }
 

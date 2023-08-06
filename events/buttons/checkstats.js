@@ -1,7 +1,7 @@
 const { color } = require('../../config/options.json');
 const fetch = require('axios');
 const guildapp = require('../../schemas/guildAppSchema.js');
-const { bwfdkr, bwstars, bwwins, duelswins, swstars } = require('../../config/reqs.json');
+const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require('../../config/reqs.json');
 const env = require("dotenv").config();
 const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const { getExactLevel, skywarsLevel, getLevelForExp } = require("../../utils/functions.js");
@@ -108,7 +108,7 @@ module.exports = {
         const hypixelExp = stats.data.player.networkExp;
         const level = getExactLevel(hypixelExp);
 
-        if (hsbwstars < bwstars || hsbwfkdr < bwfdkr || hsbwwins < bwwins) {
+        if (hsbwstars < bwstars || hsbwfkdr < bwfkdr || hsbwwins < bwwins) {
             var bwtitle = "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
         } else {
             var bwtitle = "<a:check_a:1087808632172847134> This player meets the BedWars requirements."
@@ -120,7 +120,7 @@ module.exports = {
             var swtitle = "<a:check_a:1087808632172847134> This player meets the SkyWars requirements."
         }
 
-        if (hsduelswins < duelswins) {
+        if (hsduelswins < duelswins || hsduelswlr < duelswlr) {
             var duelstitle = "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements."
         } else {
             var duelstitle = "<a:check_a:1087808632172847134> This player meets the Duels requirements."
@@ -146,7 +146,7 @@ module.exports = {
                         bwstars.toString() + "`\n" +
                         "**➺ FKDR:** `" +
                         hsbwfkdr.toFixed(2).toString() +
-                        " / " + bwfdkr.toString() + "`\n" +
+                        " / " + bwfkdr.toString() + "`\n" +
                         "**➺ Wins:** `" +
                         hsbwwins.toString() + " / " +
                         bwwins.toString() + "`"
@@ -158,8 +158,7 @@ module.exports = {
                         hsswstars.toFixed(2).toString() +
                         " / " + swstars.toString() + "`\n" +
                         "**➺ KDR:** `" +
-                        hsswkd.toFixed(2).toString() +
-                        "`\n" +
+                        hsswkd.toFixed(2).toString() + "`\n" +
                         "**➺ Wins:** `" +
                         hsswwins.toString() + "`"
                     },
@@ -168,12 +167,11 @@ module.exports = {
                         value: "**➺ Wins:** `" +
                         hsduelswins.toString() +
                         " / " + duelswins.toString() + "`\n" +
-                        "**➺ KDR:** `" +
-                        hsduelskd.toFixed(2).toString() +
-                        "`\n" +
                         "**➺ WLR:** `" +
-                        hsduelswlr.toFixed(2).toString() +
-                        "`"
+                        hsduelswlr.toFixed(2).toString() + 
+                        " / " + duelswlr.toString() + "`\n" +
+                        "**➺ KDR:** `" +
+                        hsduelskd.toFixed(2).toString() + "`"
                     }
                 ]
             }]

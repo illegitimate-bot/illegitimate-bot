@@ -1,7 +1,9 @@
 const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
+const mongoose = require("mongoose");
 const guildapp = require('../../schemas/guildAppSchema.js');
-const { waitingList } = require('../../config/roles.json');
+const waitingList = require('../../schemas/waitinglistSchema.js');
+const { waitingListRole } = require('../../config/roles.json');
 
 module.exports = {
     name: 'guildapplicationaccept',
@@ -19,6 +21,9 @@ module.exports = {
         const message = interaction.message;
         const embed = message.embeds[0];
         const applicantId = embed.footer.text.split(" ")[1]
+
+        const applicantIGN1 = embed.fields[0].value;
+        const applicantIGN = applicantIGN1.replaceAll("`", "");
 
         const applicant = await guild.members.fetch(applicantId)
         const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator;
@@ -52,8 +57,21 @@ module.exports = {
             }]
         });
 
-        await applicant.roles.add(waitingList);
+        const applicantEntry = await guildapp.findOne({ userID: applicantId })
+        const applicantUUID = applicantEntry.uuid;
+
+        const waitingListAdd = new waitingList({
+            _id: new mongoose.Types.ObjectId(),
+            userID: applicantId,
+            uuid: applicantUUID,
+            IGN: applicantIGN,
+        });
+
+        await waitingListAdd.save();
+
+        await applicant.roles.add(waitingListRole);
         await guildapp.findOneAndDelete({ userID: applicantId });
+
 
         await interaction.editReply({
             embeds: [{ 

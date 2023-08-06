@@ -28,6 +28,15 @@ module.exports = {
 						.setName("channel")
 						.setDescription("The channel to send the application to.")
 						.setRequired(true)))
+    	.addSubcommand((subcommand) =>
+            subcommand
+            	.setName("sendverfiymessage")
+            	.setDescription("Send the verfiy message to a channel.")
+            	.addChannelOption((option) =>
+                    option
+                    	.setName("channel")
+                    	.setDescription("The channel to send the verfiy message to.")
+                    	.setRequired(true)))
 		.addSubcommand((subcommand) =>
 			subcommand
 				.setName("sendinactivityapplication")
@@ -154,6 +163,34 @@ module.exports = {
 
 			await interaction.reply({ content: "Message sent", ephemeral: true });
 		}
+
+        if (subcommand === "sendverfiymessage") {
+            const channel = interaction.options.getChannel("channel");
+
+			await channel.send({
+				embeds: [{
+					title: "Verification",
+					description: "You can verify by clicking the button below.",
+					color: embedColor,
+					footer: {
+						text: interaction.guild.name + " | Developed by @Taken#0002",
+						iconURL: interaction.guild.iconURL({ dynamic: true })
+					},
+					thumbnail: {
+						url: interaction.guild.iconURL({ dynamic: true })
+					}
+				}],
+				components: [
+					new ActionRowBuilder()
+						.addComponents(new ButtonBuilder()
+									   .setCustomId("verifybutton")
+									   .setLabel("Verify")
+									   .setStyle(ButtonStyle.Primary)
+									   .setEmoji({ name: "✅" }))
+				]
+			});
+
+        }
 
 		if (subcommand !== "sendguildinfo" || "sendrequirements" || "sendrules-info") {
 			await interaction.reply({ content: "In development.", ephemeral: true });

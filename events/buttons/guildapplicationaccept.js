@@ -59,12 +59,14 @@ module.exports = {
 
         const applicantEntry = await guildapp.findOne({ userID: applicantId })
         const applicantUUID = applicantEntry.uuid;
+        const time = Date.now();
 
         const waitingListAdd = new waitingList({
             _id: new mongoose.Types.ObjectId(),
             userID: applicantId,
             uuid: applicantUUID,
             IGN: applicantIGN,
+            timestamp: time
         });
 
         await waitingListAdd.save();

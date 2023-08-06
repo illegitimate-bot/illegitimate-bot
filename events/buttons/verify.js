@@ -1,10 +1,10 @@
 const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
-const { color } = require('../config/options.json')
+const { color } = require('../../config/options.json')
 
 module.exports = {
   name: 'verify',
   description: 'Configure the bot.',
-  type: 'btn',
+  type: 'button',
 
   async execute(interaction) {
 

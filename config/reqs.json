@@ -1,7 +1,8 @@
 {
-    "bwstars": 120,
-    "bwfdkr": 2,
-    "bwwins": 1200,
+    "bwstars": 200,
+    "bwfkdr": 4,
+    "bwwins": 1500,
     "swstars": 15,
-    "duelswins": 5000
+    "duelswins": 6000,
+    "duelswlr": 3
 }

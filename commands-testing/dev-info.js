@@ -30,20 +30,13 @@ module.exports = {
         const test2 = interaction.options.getString('test2');
         const test3 = interaction.options.getString('test3');
 
-        const uuid = await getuuid(test);
+        const message = await interaction.channel.messages.fetch(test);
+        const embed = message.embeds[0];
+        const fields = embed.fields;
+        const field1 = fields[0];
 
-        if (uuid === null) {
-            await interaction.reply({
-                content: 'Invalid username.',
-                ephemeral: true
-            });
-            return
-        }
+        console.log(field1.value);
 
-        await interaction.reply({
-            content: uuid,
-            ephemeral: true
-        });
-
+        await interaction.reply({ content: 'Test command.', ephemeral: true });
     }
 };

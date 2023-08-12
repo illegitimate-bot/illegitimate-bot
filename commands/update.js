@@ -45,14 +45,10 @@ module.exports = {
         }
 
         const mojangAPI = "https://api.mojang.com/user/profile/"
-        const hypixel = "https://api.hypixel.net/player"
         const guildAPI = "https://api.hypixel.net/guild"
         const minotar = "https://minotar.net/helm/";
-        const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + verifyData.uuid
-
         const userCheck = await fetch(mojangAPI + verifyData.uuid);
         const head = minotar + userCheck.data.name;
-
         const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + verifyData.uuid
         const guildCheck = await fetch(guild);
 
@@ -86,198 +82,200 @@ module.exports = {
             return
         }
 
-        const GuildMembers = guildCheck.data.guild.members;
-        const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
+		if (guildID === hypixelGuildID) {
 
-        if (guildRank === 'Guild Master' && guildID === hypixelGuildID) {
+			const GuildMembers = guildCheck.data.guild.members;
+			const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
+			if (guildRank === 'Guild Master') {
 
-            await roleManage.add(guildRole, "User used the update command")
-            await roleManage.add(guildStaff, "User used the update command")
-            await roleManage.add(gm, "User used the update command")
-            await roleManage.add(defaultMember, "User used the update command")
+				for (let i = 0; i < removeThese.length; i++) {
+					await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+				}
 
-
-            await interaction.editReply({
-                embeds: [{
-                    description: "Your rank has been updated to `Guild Master`",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        icon_url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }]
-            })
-        }
-
-        if (guildRank === 'Manager' && guildID === hypixelGuildID) {
-
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
-
-            await roleManage.add(guildRole, "User used the update command")
-            await roleManage.add(guildStaff, "User used the update command")
-            await roleManage.add(manager, "User used the update command")
-            await roleManage.add(defaultMember, "User used the update command")
+				await roleManage.add(guildRole, "User used the update command")
+				await roleManage.add(guildStaff, "User used the update command")
+				await roleManage.add(gm, "User used the update command")
+				await roleManage.add(defaultMember, "User used the update command")
 
 
-            await interaction.editReply({
-                embeds: [{
-                    description: "Your rank has been updated to `Manager`",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        icon_url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }]
-            })
-        }
+				await interaction.editReply({
+					embeds: [{
+						description: "Your rank has been updated to `Guild Master`",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							icon_url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}]
+				})
+			}
 
-        if (guildRank === 'Moderator' && guildID === hypixelGuildID) {
+			if (guildRank === 'Manager') {
 
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
+				for (let i = 0; i < removeThese.length; i++) {
+					await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+				}
 
-            await roleManage.add(guildRole, "User used the update command")
-            await roleManage.add(guildStaff, "User used the update command")
-            await roleManage.add(moderator, "User used the update command")
-            await roleManage.add(defaultMember, "User used the update command")
-
-
-            await interaction.editReply({
-                embeds: [{
-                    description: "Your rank has been updated to `Moderator`",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        icon_url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }]
-            })
-
-        }
-
-        if (guildRank === 'Beast' && guildID === hypixelGuildID) {
-
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
-
-            await roleManage.add(guildRole, "User used the update command")
-            await roleManage.add(beast, "User used the update command")
-            await roleManage.add(defaultMember, "User used the update command")
+				await roleManage.add(guildRole, "User used the update command")
+				await roleManage.add(guildStaff, "User used the update command")
+				await roleManage.add(manager, "User used the update command")
+				await roleManage.add(defaultMember, "User used the update command")
 
 
-            await interaction.editReply({
-                embeds: [{
-                    description: "Your rank has been updated to `Beast`.",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        icon_url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }]
-            })
-            return
-        }
+				await interaction.editReply({
+					embeds: [{
+						description: "Your rank has been updated to `Manager`",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							icon_url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}]
+				})
+			}
 
-        if (guildRank === 'Elite' && guildID === hypixelGuildID) {
+			if (guildRank === 'Moderator') {
 
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
+				for (let i = 0; i < removeThese.length; i++) {
+					await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+				}
 
-            await roleManage.add(guildRole, "User used the update command")
-            await roleManage.add(elite, "User used the update command")
-            await roleManage.add(defaultMember, "User used the update command")
-
-
-            await interaction.editReply({
-                embeds: [{
-                    description: "Your rank has been updated to `Elite`.",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        icon_url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }]
-            })
-            return
-        }
-
-        if (guildRank === 'Member' && guildID === hypixelGuildID) {
-
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
-
-            await roleManage.add(guildRole, "User used the update command")
-            await roleManage.add(member, "User used the update command")
-            await roleManage.add(defaultMember, "User used the update command")
+				await roleManage.add(guildRole, "User used the update command")
+				await roleManage.add(guildStaff, "User used the update command")
+				await roleManage.add(moderator, "User used the update command")
+				await roleManage.add(defaultMember, "User used the update command")
 
 
-            await interaction.editReply({
-                embeds: [{
-                    description: "Your rank has been updated to `Member`.",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        icon_url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }]
-            })
-            return
-        }
+				await interaction.editReply({
+					embeds: [{
+						description: "Your rank has been updated to `Moderator`",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							icon_url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}]
+				})
 
-        if (guildRank === 'Trial Member' && guildID === hypixelGuildID) {
+			}
 
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-            }
+			if (guildRank === 'Beast') {
 
-            await roleManage.add(guildRole, "User used the update command")
-            await roleManage.add(trialmember, "User used the update command")
-            await roleManage.add(defaultMember, "User used the update command")
+				for (let i = 0; i < removeThese.length; i++) {
+					await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+				}
+
+				await roleManage.add(guildRole, "User used the update command")
+				await roleManage.add(beast, "User used the update command")
+				await roleManage.add(defaultMember, "User used the update command")
 
 
-            await interaction.editReply({
-                embeds: [{
-                    description: "Your rank has been updated to `Trial Member`.",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        icon_url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }]
-            })
-            return
-        }
+				await interaction.editReply({
+					embeds: [{
+						description: "Your rank has been updated to `Beast`.",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							icon_url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}]
+				})
+				return
+			}
 
+			if (guildRank === 'Elite') {
+
+				for (let i = 0; i < removeThese.length; i++) {
+					await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+				}
+
+				await roleManage.add(guildRole, "User used the update command")
+				await roleManage.add(elite, "User used the update command")
+				await roleManage.add(defaultMember, "User used the update command")
+
+
+				await interaction.editReply({
+					embeds: [{
+						description: "Your rank has been updated to `Elite`.",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							icon_url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}]
+				})
+				return
+			}
+
+			if (guildRank === 'Member') {
+
+				for (let i = 0; i < removeThese.length; i++) {
+					await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+				}
+
+				await roleManage.add(guildRole, "User used the update command")
+				await roleManage.add(member, "User used the update command")
+				await roleManage.add(defaultMember, "User used the update command")
+
+
+				await interaction.editReply({
+					embeds: [{
+						description: "Your rank has been updated to `Member`.",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							icon_url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}]
+				})
+				return
+			}
+
+			if (guildRank === 'Trial Member') {
+
+				for (let i = 0; i < removeThese.length; i++) {
+					await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
+				}
+
+				await roleManage.add(guildRole, "User used the update command")
+				await roleManage.add(trialmember, "User used the update command")
+				await roleManage.add(defaultMember, "User used the update command")
+
+
+				await interaction.editReply({
+					embeds: [{
+						description: "Your rank has been updated to `Trial Member`.",
+						color: embedColor,
+						thumbnail: {
+							url: head
+						},
+						footer: {
+							text: interaction.guild.name + " | Developed by @Taken#0002",
+							icon_url: interaction.guild.iconURL({ dynamic: true })
+						}
+					}]
+				})
+				return
+			}
+		}	
     }
 };

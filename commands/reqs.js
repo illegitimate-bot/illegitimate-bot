@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { color } = require('../config/options.json');
-const { bwfdkr, bwstars, bwwins, duelswins, swstars } = require('../config/reqs.json');
+const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require('../config/reqs.json');
 
 module.exports = {
     name: 'reqs',
@@ -29,7 +29,7 @@ module.exports = {
                         name: '**Bedwars**',
                         value: '**Stars:** `' + bwstars.toString() + 
                         '`\n**Wins:** `' + bwwins.toString() +
-                        '`\n**FKDR:** `' + bwfdkr.toString() + '`'
+                        '`\n**FKDR:** `' + bwfkdr.toString() + '`'
                     },
                     {
                         name: '**Skywars**',
@@ -37,7 +37,8 @@ module.exports = {
                     },
                     {
                         name: '**Duels**',
-                        value: '**Wins:** `' + duelswins.toString() + '`'
+                        value: '**Wins:** `' + duelswins.toString() +
+                        '`\n**WLR:** `' + duelswlr.toString() + '`'
                     }
                 ],
                 footer: {

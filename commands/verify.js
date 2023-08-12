@@ -37,7 +37,7 @@ module.exports = {
         const verifyData = await verify.findOne({ userID: user.id });
 
         if (verifyData) {
-            interaction.editReply("You are already verified.");
+            interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
             return;
         }
 

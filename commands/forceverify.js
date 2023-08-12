@@ -35,10 +35,13 @@ module.exports = {
         const user = interaction.guild.members.cache.get(user1.id);
         const ign = interaction.options.getString('ign');
         const mod = interaction.user
+        
+        // const slothPixel = "https://api.slothpixel.me/api/players/";
+        // const guildAPI = "https://api.slothpixel.me/api/guilds/"
 
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
-        const slothPixel = "https://api.slothpixel.me/api/players/";
-        const guildAPI = "https://api.slothpixel.me/api/guilds/"
+        const hypixelApi = "https://api.hypixel.net/player"
+        const guildApi = "https://api.hypixel.net/guild"
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
@@ -81,85 +84,72 @@ module.exports = {
         const userCheck = await fetch(mojang + ign);
         const userUUID = userCheck.data.id;
 
-        try {
-            await fetch(slothPixel + userUUID);
-        } catch (err) {
-            interaction.editReply('That player doesn\'t exist. [Hypixel]')
-            return
-        }
-
-        const hypixelCheck = await fetch(slothPixel + userUUID);
+        const player = hypixelApi + "?key=" + hypixelApiKey + "&uuid=" + userUUID
+        const guild = guildApi + "?key=" + hypixelApiKey + "&player=" + userUUID
         const head = minotar + ign;
 
-        try {
-            const guildCheck = await fetch(guildAPI + userUUID);
-            var responseGuildID = guildCheck.data.id;
-        } catch (err) {
-            var responseGuildID = null;
-        }
+        const hypixelCheck = await fetch(player);
 
-        if (responseGuildID !== hypixelGuildID) {
-
-            await user.roles.add(defaultMember, "User was force verified by " + modName);
-
-            await interaction.editReply({
+				if (!hypixelCheck.data.player) {
+            interaction.editReply({
                 embeds: [{
-                    title: interaction.guild.name,
-                    description: "You have successfully force verified `" + username + "` with the account `" + hypixelCheck.data.username + "`.",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
-                    footer: {
-                        icon_url: interaction.guild.iconURL(),
-                        text: interaction.guild.name + " | Developed by Taken#0002"
-                    }
+                    description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
+                    color: embedColor
                 }]
             });
-            return
+            return;
+				}
+
+        const guildCheck = await fetch(guild)
+
+        if (!guildCheck.data.guild) {
+            var responseGuildID = null
+        } else {
+            var responseGuildID = guildCheck.data.guild._id
         }
 
-        const guildCheck = await fetch(guildAPI + userUUID);
-        const GuildMembers = await guildCheck.data.members;
-        const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.uuid).rank;
+        if (responseGuildID === hypixelGuildID) {
+					const GuildMembers = guildCheck.data.guild.members;
+					const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.player.uuid).rank;
 
-        if (guildRank === "Guild Master" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(gm, "User was force verified by " + modName);
-            await user.roles.add(guildRole, "User was force verified by " + modName)
-            await user.roles.add(guildStaff, "User was force verified by " + modName)
-        }
+					if (guildRank === "Guild Master") {
+						await user.roles.add(gm, "User was force verified by " + modName);
+						await user.roles.add(guildRole, "User was force verified by " + modName)
+						await user.roles.add(guildStaff, "User was force verified by " + modName)
+					}
 
-        if (guildRank === "Manager" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(manager, "User was force verified by " + modName);
-            await user.roles.add(guildRole, "User was force verified by " + modName)
-            await user.roles.add(guildStaff, "User was force verified by " + modName)
-        }
+					if (guildRank === "Manager") {
+						await user.roles.add(manager, "User was force verified by " + modName);
+						await user.roles.add(guildRole, "User was force verified by " + modName)
+						await user.roles.add(guildStaff, "User was force verified by " + modName)
+					}
 
-        if (guildRank === "Moderator" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(moderator, "User was force verified by " + modName);
-            await user.roles.add(guildRole, "User was force verified by " + modName)
-            await user.roles.add(guildStaff, "User was force verified by " + modName)
-        }
-        
-        if (guildRank === "Beast" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(beast, "User was force verified by " + modName);
-            await user.roles.add(guildRole, "User was force verified by " + modName)
-        }
+					if (guildRank === "Moderator") {
+						await user.roles.add(moderator, "User was force verified by " + modName);
+						await user.roles.add(guildRole, "User was force verified by " + modName)
+						await user.roles.add(guildStaff, "User was force verified by " + modName)
+					}
 
-        if (guildRank === "Elite" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(elite, "User was force verified by " + modName);
-            await user.roles.add(guildRole, "User was force verified by " + modName)
-        }
+					if (guildRank === "Beast") {
+						await user.roles.add(beast, "User was force verified by " + modName);
+						await user.roles.add(guildRole, "User was force verified by " + modName)
+					}
 
-        if (guildRank === "Member" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(member, "User was force verified by " + modName);
-            await user.roles.add(guildRole, "User was force verified by " + modName)
-        }
+					if (guildRank === "Elite") {
+						await user.roles.add(elite, "User was force verified by " + modName);
+						await user.roles.add(guildRole, "User was force verified by " + modName)
+					}
 
-        if (guildRank === "Trial Member" && guildCheck.data.id === hypixelGuildID) {
-            await user.roles.add(trialmember, "User was force verified by " + modName);
-            await user.roles.add(guildRole, "User was force verified by " + modName)
-        }
+					if (guildRank === "Member") {
+						await user.roles.add(member, "User was force verified by " + modName);
+						await user.roles.add(guildRole, "User was force verified by " + modName)
+					}
+
+					if (guildRank === "Trial Member") {
+						await user.roles.add(trialmember, "User was force verified by " + modName);
+						await user.roles.add(guildRole, "User was force verified by " + modName)
+					}
+				}
 
         await user.roles.add(defaultMember, "User was force verified by " + modName);
         
@@ -174,7 +164,7 @@ module.exports = {
         await interaction.editReply({
             embeds: [{
                 title: interaction.guild.name,
-                description: "You have successfully force verified `" + username + "` with the account `" + hypixelCheck.data.username + "`.",
+                description: "You have successfully force verified `" + username + "` with the account `" + hypixelCheck.data.player.displayname + "`.",
                 color: embedColor,
                 thumbnail: {
                     url: head

@@ -85,9 +85,7 @@ module.exports = {
             var username = user1.username + "#" + user1.discriminator
         }
 
-        const linkedDiscord = stats.data.player.socialMedia.links.DISCORD
-
-        if (!linkedDiscord) {
+        if (!stats.data.player.socialMedia.links.DISCORD) {
             interaction.editReply({
                 embeds: [
                     {
@@ -99,7 +97,7 @@ module.exports = {
             });
             return;
         }
-        if (linkedDiscord !== username) {
+        if (stats.data.player.socialMedia.links.DISCORD !== username) {
             interaction.editReply({
                 embeds: [
                     {

@@ -100,7 +100,7 @@ module.exports = {
 
 		const linkedDiscord = stats.data.player.socialMedia.links.DISCORD
 
-        if (stats.data.player.socialMedia.links.DISCORD !== username) {
+        if (linkedDiscord !== username) {
             interaction.editReply({
                 embeds: [
                     {

@@ -97,6 +97,9 @@ module.exports = {
             });
             return;
         }
+
+		const linkedDiscord = stats.data.player.socialMedia.links.DISCORD
+
         if (stats.data.player.socialMedia.links.DISCORD !== username) {
             interaction.editReply({
                 embeds: [

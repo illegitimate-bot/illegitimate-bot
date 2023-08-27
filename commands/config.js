@@ -37,6 +37,15 @@ module.exports = {
                     	.setName("channel")
                     	.setDescription("The channel to send the verfiy message to.")
                     	.setRequired(true)))
+    	.addSubcommand((subcommand) =>
+            subcommand
+            	.setName("sendwaitinglistmessage")
+            	.setDescription("Send the waiting list message to a channel.")
+            	.addChannelOption((option) =>
+                    option
+                    	.setName("channel")
+                    	.setDescription("The channel to send the waiting list message to.")
+                    	.setRequired(true)))
 		.addSubcommand((subcommand) =>
 			subcommand
 				.setName("sendinactivityapplication")
@@ -191,6 +200,35 @@ module.exports = {
 			});
 
         }
+
+		if (subcommand === "sendwaitinglistmessage") {
+			const channel = interaction.options.getChannel("channel");
+
+			await channel.send({
+				embeds: [{
+					title: "Waiting List",
+					description: "The people below are on the waiting list to join the guild\n" +
+					"They are placed in order of then being accepted into the guild\n" +
+					"Press the button below to refresh the list",
+					color: embedColor,
+					footer: {
+						text: interaction.guild.name + " | Developed by @Taken#0002",
+						iconURL: interaction.guild.iconURL({ dynamic: true })
+					},
+					thumbnail: {
+						url: interaction.guild.iconURL({ dynamic: true })
+					}
+				}],
+				components: [
+					new ActionRowBuilder()
+					.addComponents(new ButtonBuilder()
+						.setCustomId("waitingListUpdate")
+						.setLabel("Update")
+						.setStyle(ButtonStyle.Primary)
+						.setEmoji({ name: "✅" }))
+				]
+			});
+		}
 
 		if (subcommand !== "sendguildinfo" || "sendrequirements" || "sendrules-info") {
 			await interaction.reply({ content: "In development.", ephemeral: true });

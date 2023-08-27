@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
 const env = require('dotenv').config();
-const { hypixelAPIKey } = process.env.HYPIXELAPIKEY;
+const hypixelAPIKey = process.env.HYPIXELAPIKEY;
 const { hypixelGuildID, color } = require('../config/options.json');
 const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
 const verify = require('../schemas/verifySchema.js')
@@ -65,7 +65,7 @@ module.exports = {
 		} else {
 			var responseGuildID = guildCheck.data.guild._id
 		}
-
+	
         if (responseGuildID !== hypixelGuildID) {
 
 			for (let i = 0; i < removeThese.length; i++) {
@@ -91,7 +91,7 @@ module.exports = {
 
 		if (responseGuildID === hypixelGuildID) {
 
-			const GuildMembers = await guildCheck.data.members;
+			const GuildMembers = guildCheck.data.guild.members;
 			const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
 			if (guildRank === 'Guild Master') {

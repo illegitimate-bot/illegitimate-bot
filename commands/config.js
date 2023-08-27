@@ -55,18 +55,6 @@ module.exports = {
 						.setName("channel")
 						.setDescription("The channel to send the application to.")
 						.setRequired(true)))
-		.addSubcommand((subcommand) => 
-			subcommand
-				.setName("sendguildinfo")
-				.setDescription("Send the guild info message to a channel."))
-		.addSubcommand((subcommand) => 
-			subcommand
-				.setName("sendrequirements")
-				.setDescription("Send the guild requirements message to a channel."))
-		.addSubcommand((subcommand) => 
-			subcommand
-				.setName("sendrules-info")
-				.setDescription("Send the rules and info message to a channel."))
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 		.setDMPermission(false),
 
@@ -76,10 +64,6 @@ module.exports = {
 		const subcommand = interaction.options.getSubcommand();
 		const embedColor = Number(color.replace("#", "0x"));
 
-		if (subcommand === "reload") {
-			await interaction.reply({ content: "In development", ephemeral: true });
-			return;
-		}
 
 		if (subcommand === "sendguildapplication") {
 			const channel = interaction.options.getChannel("channel");
@@ -198,6 +182,7 @@ module.exports = {
 									   .setEmoji({ name: "✅" }))
 				]
 			});
+			await interaction.reply({ content: "Message sent", ephemeral: true });
 
         }
 
@@ -222,16 +207,14 @@ module.exports = {
 				components: [
 					new ActionRowBuilder()
 					.addComponents(new ButtonBuilder()
-						.setCustomId("waitingListUpdate")
+						.setCustomId("waitinglistupdate")
 						.setLabel("Update")
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ name: "✅" }))
 				]
 			});
+			await interaction.reply({ content: "Message sent", ephemeral: true });
 		}
 
-		if (subcommand !== "sendguildinfo" || "sendrequirements" || "sendrules-info") {
-			await interaction.reply({ content: "In development.", ephemeral: true });
-		}
 	}
 };

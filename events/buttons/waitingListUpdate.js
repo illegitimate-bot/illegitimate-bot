@@ -1,4 +1,3 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const mongoose = require('mongoose');
 const waitinglist = require('../../schemas/waitinglistSchema.js');
 const env = require('dotenv').config();
@@ -57,6 +56,6 @@ module.exports = {
 			}],
 		});
 
-		await interaction.editReply({ content: 'Updating the waiting list...', ephemeral: true });
+		await interaction.editReply({ content: 'Updated the waiting list', ephemeral: true });
 	}
 }

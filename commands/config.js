@@ -192,9 +192,8 @@ module.exports = {
 			await channel.send({
 				embeds: [{
 					title: "Waiting List",
-					description: "The people below are on the waiting list to join the guild\n" +
-					"They are placed in order of then being accepted into the guild\n" +
-					"Press the button below to refresh the list",
+					description: "The people below were accepted into the guild\n" +
+					"Try to invite them in order.",
 					color: embedColor,
 					footer: {
 						text: interaction.guild.name + " | Developed by @Taken#0002",
@@ -210,7 +209,7 @@ module.exports = {
 						.setCustomId("waitinglistupdate")
 						.setLabel("Update")
 						.setStyle(ButtonStyle.Primary)
-						.setEmoji({ name: "✅" }))
+						.setEmoji({ name: "🔄" }))
 				]
 			});
 			await interaction.reply({ content: "Message sent", ephemeral: true });

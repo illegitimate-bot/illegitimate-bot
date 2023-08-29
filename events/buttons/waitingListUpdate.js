@@ -14,6 +14,7 @@ module.exports = {
 
 		await interaction.deferReply({ ephemeral: true });
 
+		const user = interaction.user;
 		const message = interaction.message;
 		const embed = message.embeds[0];
 		const accepted = await waitinglist.find()
@@ -50,9 +51,13 @@ module.exports = {
 				title: embed.title,
 				description: embed.description,
 				color: embed.color,
-				footer: embed.footer,
+				footer: {
+					text: "Last updated by " + user.username,
+					icon_url: user.avatarURL(),
+				},
 				thumbnail: embed.thumbnail,
 				fields: fields,
+				timestamp: new Date(),
 			}],
 		});
 

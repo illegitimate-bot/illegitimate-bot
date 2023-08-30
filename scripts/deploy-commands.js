@@ -18,12 +18,12 @@ else if (arg === '--prod') {
 
 	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 	for (const file of commandFiles) {
-		const command = require(`./commands/${file}`);
+		const command = require(`../commands/${file}`);
 		commands.push(command.data.toJSON());
 	}
 
 	for (const file of contentMenuCommands) {
-		const command = require(`./commands-contextmenu/${file}`);
+		const command = require(`../commands-contextmenu/${file}`);
 		commands.push(command.data.toJSON());
 	}
 
@@ -56,7 +56,7 @@ else if (arg === '--dev') {
 
 	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 	for (const file of commandFiles) {
-		const command = require(`./commands-testing/${file}`);
+		const command = require(`../commands-testing/${file}`);
 		commands.push(command.data.toJSON());
 	}
 

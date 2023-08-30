@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prod:build": "node deploy-commands.js --prod",
-    "prod:build:context": "node deploy-commands.js --contextmenu",
-    "dev:build": "node deploy-commands.js --dev"
+    "prod:build": "node scripts/deploy-commands.js --prod",
+    "dev:build": "node scripts/deploy-commands.js --dev"
   },
   "author": "Taken",
   "license": "ISC",

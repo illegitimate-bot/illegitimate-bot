@@ -2,4 +2,3 @@ node_modules/*
 .env
 .prettierrc
 .editorconfig
-dev-deploy.js

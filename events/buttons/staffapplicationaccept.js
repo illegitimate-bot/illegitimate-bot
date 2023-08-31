@@ -1,14 +1,13 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { color } = require('../../config/options.json');
-const staffapp = require('../../schemas/staffAppSchema.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { color } = require("../../config/options.json");
+const staffapp = require("../../schemas/staffAppSchema.js");
 
 module.exports = {
-    name: 'staffapplicationaccept',
-    description: 'Accept a staff application.',
-    type: 'button',
+    name: "staffapplicationaccept",
+    description: "Accept a staff application.",
+    type: "button",
 
     async execute(interaction) {
-
         const user = interaction.user;
         const channel = interaction.channel;
         const guild = interaction.guild;
@@ -16,16 +15,18 @@ module.exports = {
 
         const message = interaction.message;
         const embed = message.embeds[0];
-        const applicantId = embed.footer.text.split(" ")[1]
+        const applicantId = embed.footer.text.split(" ")[1];
 
-        const applicant = await guild.members.fetch(applicantId)
+        const applicant = await guild.members.fetch(applicantId);
         const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator;
 
         await applicant.send({
-            embeds: [{
-                description: `Your application for the Illegitimate staff team has been accepted.`,
-                color: embedColor
-            }]
+            embeds: [
+                {
+                    description: `Your application for the Illegitimate staff team has been accepted.`,
+                    color: embedColor,
+                },
+            ],
         });
 
         await message.edit({
@@ -40,27 +41,28 @@ module.exports = {
                         .setCustomId("staffapplicationdeny")
                         .setLabel("Deny")
                         .setStyle(ButtonStyle.Danger)
-                        .setDisabled(true)
-                )
-            ]
+                        .setDisabled(true),
+                ),
+            ],
         });
 
         await staffapp.findOneAndDelete({ userId: applicantId });
 
         await interaction.reply({
-            embeds: [{
-                title: applicantUsername + " - Staff Application.",
-                description: "Application accepted by <@" + user.id + ">.",
-                color: embedColor,
-                thumbnail: {
-                    url: applicant.avatarURL()
+            embeds: [
+                {
+                    title: applicantUsername + " - Staff Application.",
+                    description: "Application accepted by <@" + user.id + ">.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: applicant.avatarURL(),
+                    },
+                    footer: {
+                        iconurl: guild.iconURL(),
+                        text: "ID: " + applicantId,
+                    },
                 },
-                footer: {
-                    iconurl: guild.iconURL(),
-                    text: "ID: " + applicantId
-                }
-            }]
+            ],
         });
-
-    }
-}
+    },
+};

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const guildAppSchema = new Schema({
     _id: Schema.Types.ObjectId,
@@ -6,4 +6,4 @@ const guildAppSchema = new Schema({
     uuid: { type: String, required: true },
 });
 
-module.exports = model('guildapp', guildAppSchema, 'guildapp');
+module.exports = model("guildapp", guildAppSchema, "guildapp");

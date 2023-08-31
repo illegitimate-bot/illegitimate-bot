@@ -1,11 +1,9 @@
 module.exports = {
-	name: "inactiveapplicationaccept",
-	description: "Accept an inactivity application.",
-	type: "button",
-	
-	async execute(interaction) {
+    name: "inactiveapplicationaccept",
+    description: "Accept an inactivity application.",
+    type: "button",
 
-		await interaction.reply({ content: "This button is currently disabled.", ephemeral: true });
-
-	}
-}
+    async execute(interaction) {
+        await interaction.reply({ content: "This button is currently disabled.", ephemeral: true });
+    },
+};

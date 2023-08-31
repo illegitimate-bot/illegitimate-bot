@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const staffAppSchema = new Schema({
     _id: Schema.Types.ObjectId,
@@ -6,4 +6,4 @@ const staffAppSchema = new Schema({
     uuid: { type: String, required: true },
 });
 
-module.exports = model('staffapp', staffAppSchema, 'staffapp');
+module.exports = model("staffapp", staffAppSchema, "staffapp");

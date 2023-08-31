@@ -1,30 +1,29 @@
-const { color } = require('../../config/options.json');
-const fetch = require('axios');
-const guildapp = require('../../schemas/guildAppSchema.js');
-const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require('../../config/reqs.json');
+const { color } = require("../../config/options.json");
+const fetch = require("axios");
+const guildapp = require("../../schemas/guildAppSchema.js");
+const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require("../../config/reqs.json");
 const env = require("dotenv").config();
 const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const { getExactLevel, skywarsLevel, getLevelForExp } = require("../../utils/functions.js");
 
 module.exports = {
-    name: 'checkstats',
-    description: 'Check your stats.',
-    type: 'button',
+    name: "checkstats",
+    description: "Check your stats.",
+    type: "button",
 
     async execute(interaction) {
-
         await interaction.deferReply();
 
         const message = interaction.message;
         const embed = message.embeds[0];
-        const applicantId = embed.footer.text.split(" ")[1]
+        const applicantId = embed.footer.text.split(" ")[1];
 
-        const guildappdata = await guildapp.findOne({ userID: applicantId })
+        const guildappdata = await guildapp.findOne({ userID: applicantId });
         const uuid = guildappdata.uuid;
 
-        const mojang = "https://api.mojang.com/user/profile/"
-        const hypixel = "https://api.hypixel.net/player"
-        const guildAPI = "https://api.hypixel.net/guild"
+        const mojang = "https://api.mojang.com/user/profile/";
+        const hypixel = "https://api.hypixel.net/player";
+        const guildAPI = "https://api.hypixel.net/guild";
         const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
@@ -32,15 +31,17 @@ module.exports = {
         const ign = userCheck.data.name;
         const head = minotar + ign;
 
-        const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + uuid
+        const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + uuid;
         const stats = await fetch(player);
 
         if (!stats.data.player) {
             interaction.editReply({
-                embeds: [{
-                    description: "That player hasn't played Hypixel before.",
-                    color: embedColor
-                }]
+                embeds: [
+                    {
+                        description: "That player hasn't played Hypixel before.",
+                        color: embedColor,
+                    },
+                ],
             });
             return;
         }
@@ -48,19 +49,19 @@ module.exports = {
         const rank2 = stats.data.player.newPackageRank;
         const monthlyRank = stats.data.player.monthlyPackageRank;
 
-        if (rank2 === 'VIP') {
-            var rank = "[VIP] "
-        } else if (rank2 === 'VIP_PLUS') {
-            var rank = "[VIP+] "
-        } else if (rank2 === 'MVP') {
-            var rank = "[MVP] "
-        } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'NONE') {
-            var rank = "[MVP+] "
-        } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'SUPERSTAR') {
-            var rank = "[MVP++] "
+        if (rank2 === "VIP") {
+            var rank = "[VIP] ";
+        } else if (rank2 === "VIP_PLUS") {
+            var rank = "[VIP+] ";
+        } else if (rank2 === "MVP") {
+            var rank = "[MVP] ";
+        } else if (rank2 === "MVP_PLUS" && monthlyRank === "NONE") {
+            var rank = "[MVP+] ";
+        } else if (rank2 === "MVP_PLUS" && monthlyRank === "SUPERSTAR") {
+            var rank = "[MVP++] ";
         }
 
-        const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + uuid
+        const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + uuid;
         const guildCheck = await fetch(guild);
 
         if (!guildCheck.data.guild) {
@@ -70,11 +71,11 @@ module.exports = {
         }
 
         if (!guildCheck.data.guild) {
-            var guildTag = ""
+            var guildTag = "";
         } else if (!guildCheck.data.guild.tag) {
-            var guildTag = ""
+            var guildTag = "";
         } else {
-            var guildTag = " [" + guildCheck.data.guild.tag + "]"
+            var guildTag = " [" + guildCheck.data.guild.tag + "]";
         }
 
         //bedwars level
@@ -96,9 +97,9 @@ module.exports = {
         //skywars wins
         const hsswwins = stats.data.player.stats.SkyWars.wins;
         // dueks kdr
-        const hsduelskills = stats.data.player.stats.Duels.kills
-        const hsduelsdeaths = stats.data.player.stats.Duels.deaths
-        const hsduelskd = hsduelskills / hsduelsdeaths
+        const hsduelskills = stats.data.player.stats.Duels.kills;
+        const hsduelsdeaths = stats.data.player.stats.Duels.deaths;
+        const hsduelskd = hsduelskills / hsduelsdeaths;
         // duels wins
         const hsduelswins = stats.data.player.stats.Duels.wins;
         // duels wlr
@@ -109,72 +110,95 @@ module.exports = {
         const level = getExactLevel(hypixelExp);
 
         if (hsbwstars < bwstars || hsbwfkdr < bwfkdr || hsbwwins < bwwins) {
-            var bwtitle = "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
+            var bwtitle = "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements.";
         } else {
-            var bwtitle = "<a:check_a:1087808632172847134> This player meets the BedWars requirements."
+            var bwtitle = "<a:check_a:1087808632172847134> This player meets the BedWars requirements.";
         }
 
         if (hsswstars < swstars) {
-            var swtitle = "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements."
+            var swtitle = "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements.";
         } else {
-            var swtitle = "<a:check_a:1087808632172847134> This player meets the SkyWars requirements."
+            var swtitle = "<a:check_a:1087808632172847134> This player meets the SkyWars requirements.";
         }
 
         if (hsduelswins < duelswins || hsduelswlr < duelswlr) {
-            var duelstitle = "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements."
+            var duelstitle = "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements.";
         } else {
-            var duelstitle = "<a:check_a:1087808632172847134> This player meets the Duels requirements."
+            var duelstitle = "<a:check_a:1087808632172847134> This player meets the Duels requirements.";
         }
 
         await interaction.editReply({
-            embeds: [{
-                title: rank + stats.data.player.displayname + guildTag,
-                description: "**Network Level:** `" +
-                level.toFixed(2).toString() + "`\n" +
-                "**Current Guild:** `" + guildName + "`",
-                color: embedColor,
-                thumbnail: { url: head },
-                footer: {
-                    text: interaction.guild.name + " | Developed by @Taken#0002",
-                    icon_url: interaction.guild.iconURL()
+            embeds: [
+                {
+                    title: rank + stats.data.player.displayname + guildTag,
+                    description:
+                        "**Network Level:** `" +
+                        level.toFixed(2).toString() +
+                        "`\n" +
+                        "**Current Guild:** `" +
+                        guildName +
+                        "`",
+                    color: embedColor,
+                    thumbnail: { url: head },
+                    footer: {
+                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        icon_url: interaction.guild.iconURL(),
+                    },
+                    fields: [
+                        {
+                            name: bwtitle,
+                            value:
+                                "**➺ Stars:** `" +
+                                hsbwstars.toFixed(2).toString() +
+                                " / " +
+                                bwstars.toString() +
+                                "`\n" +
+                                "**➺ FKDR:** `" +
+                                hsbwfkdr.toFixed(2).toString() +
+                                " / " +
+                                bwfkdr.toString() +
+                                "`\n" +
+                                "**➺ Wins:** `" +
+                                hsbwwins.toString() +
+                                " / " +
+                                bwwins.toString() +
+                                "`",
+                        },
+                        {
+                            name: swtitle,
+                            value:
+                                "**➺ Stars:** `" +
+                                hsswstars.toFixed(2).toString() +
+                                " / " +
+                                swstars.toString() +
+                                "`\n" +
+                                "**➺ KDR:** `" +
+                                hsswkd.toFixed(2).toString() +
+                                "`\n" +
+                                "**➺ Wins:** `" +
+                                hsswwins.toString() +
+                                "`",
+                        },
+                        {
+                            name: duelstitle,
+                            value:
+                                "**➺ Wins:** `" +
+                                hsduelswins.toString() +
+                                " / " +
+                                duelswins.toString() +
+                                "`\n" +
+                                "**➺ WLR:** `" +
+                                hsduelswlr.toFixed(2).toString() +
+                                " / " +
+                                duelswlr.toString() +
+                                "`\n" +
+                                "**➺ KDR:** `" +
+                                hsduelskd.toFixed(2).toString() +
+                                "`",
+                        },
+                    ],
                 },
-                fields: [
-                    {
-                        name: bwtitle,
-                        value: "**➺ Stars:** `" +
-                        hsbwstars.toFixed(2).toString() + " / " +
-                        bwstars.toString() + "`\n" +
-                        "**➺ FKDR:** `" +
-                        hsbwfkdr.toFixed(2).toString() +
-                        " / " + bwfkdr.toString() + "`\n" +
-                        "**➺ Wins:** `" +
-                        hsbwwins.toString() + " / " +
-                        bwwins.toString() + "`"
-                    },
-                    {
-                        name: swtitle,
-                        value:
-                        "**➺ Stars:** `" +
-                        hsswstars.toFixed(2).toString() +
-                        " / " + swstars.toString() + "`\n" +
-                        "**➺ KDR:** `" +
-                        hsswkd.toFixed(2).toString() + "`\n" +
-                        "**➺ Wins:** `" +
-                        hsswwins.toString() + "`"
-                    },
-                    {
-                        name: duelstitle,
-                        value: "**➺ Wins:** `" +
-                        hsduelswins.toString() +
-                        " / " + duelswins.toString() + "`\n" +
-                        "**➺ WLR:** `" +
-                        hsduelswlr.toFixed(2).toString() + 
-                        " / " + duelswlr.toString() + "`\n" +
-                        "**➺ KDR:** `" +
-                        hsduelskd.toFixed(2).toString() + "`"
-                    }
-                ]
-            }]
+            ],
         });
-    }
+    },
 };

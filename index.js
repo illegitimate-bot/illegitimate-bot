@@ -9,12 +9,17 @@ const fs = require('fs');
 
 const client = new Client({
     intents: [
-        GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.MessageContent,
         GatewayIntentBits.DirectMessages
     ],
     partials: [
-        Partials.GuildMember, Partials.User, Partials.Message, Partials.Channel
+        Partials.GuildMember,
+        Partials.User,
+        Partials.Message,
+        Partials.Channel
     ]
 });
 
@@ -40,8 +45,7 @@ for (const file of cmdFiles) {
 
 //! commands testing
 const cmdTestPath = path.join(__dirname, 'commands-testing');
-const cmdTestFiles =
-    fs.readdirSync(cmdTestPath).filter(file => file.endsWith('.js'));
+const cmdTestFiles = fs.readdirSync(cmdTestPath).filter(file => file.endsWith('.js'));
 
 for (const file of cmdTestFiles) {
 
@@ -80,8 +84,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 //! commands
 const contextMenuPath = path.join(__dirname, 'commands-contextmenu');
-const contextMenuFiles =
-    fs.readdirSync(contextMenuPath).filter(file => file.endsWith('.js'));
+const contextMenuFiles = fs.readdirSync(contextMenuPath).filter(file => file.endsWith('.js'));
 
 for (const file of contextMenuFiles) {
 
@@ -159,8 +162,7 @@ client.on(Events.InteractionCreate, async event => {
 
 //! modals
 const modalPath = path.join(__dirname, 'events', 'modals');
-const modalFiles =
-    fs.readdirSync(modalPath).filter(file => file.endsWith('.js'));
+const modalFiles = fs.readdirSync(modalPath).filter(file => file.endsWith('.js'));
 
 for (const file of modalFiles) {
 
@@ -178,11 +180,13 @@ client.on(Events.InteractionCreate, async interaction => {
     if (interaction.isCommand()) {
         console.log(interaction.user.username + "#" +
             interaction.user.discriminator + " ran " +
-            interaction.commandName);
+            interaction.commandName
+        );
     } else if (interaction.isButton()) {
         console.log(interaction.user.username + "#" +
             interaction.user.discriminator + " clicked " +
-            interaction.customId);
+            interaction.customId
+        );
     }
 });
 
@@ -195,8 +199,12 @@ client.on(Events.ClientReady, () => {
         return;
     }
 
-    channel.send(
-        { embeds: [{ description: `Bot is online!`, color: embedColor }] });
+    channel.send({
+        embeds: [{
+            description: `Bot is online!`,
+            color: embedColor
+        }] 
+    });
 });
 
 client.on(Events.ClientReady, () => {
@@ -215,10 +223,15 @@ client.on(Events.ClientReady, () => {
 
     let i = 0;
     setInterval(() =>
-        client.user.setActivity(activities[i++ % activities.length]),
-        1000 * 60 * 30)
+        client.user.setActivity(
+            activities[i++ % activities.length]
+        ),
+        1000 * 60 * 30
+    )
 });
-client.on(Events.ClientReady, () => { client.user.setStatus('dnd'); });
+client.on(Events.ClientReady, () => {
+    client.user.setStatus('dnd');
+});
 client.login(token);
 
 connect(mongoURI, {}).then(() => {

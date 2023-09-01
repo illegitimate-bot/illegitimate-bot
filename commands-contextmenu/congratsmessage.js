@@ -1,4 +1,4 @@
-const { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits, userMention} = require('discord.js');
+const { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits, userMention } = require('discord.js');
 
 module.exports = {
     name: 'congratsmessage',
@@ -22,7 +22,7 @@ module.exports = {
         const target = message.author;
 
         await message.reply({
-            embeds:[{
+            embeds: [{
                 title: 'Congratulations!',
                 description: `GG to ${userMention(target.id)}!`,
             }]

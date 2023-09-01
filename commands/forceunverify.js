@@ -3,7 +3,7 @@ const { color } = require("../config/options.json");
 const verify = require("../schemas/verifySchema.js");
 const mongoose = require("mongoose");
 const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json");
-const removeThese = [ gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember ]
+const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember]
 
 module.exports = {
     name: "forceunverify",
@@ -38,7 +38,7 @@ module.exports = {
         }
 
         await verify.findOneAndDelete({ userID: member1.id })
-    
+
         await member.roles.remove(removeThese)
 
         await interaction.reply({

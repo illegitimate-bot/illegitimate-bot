@@ -27,9 +27,9 @@ module.exports = {
                 fields: [
                     {
                         name: '**Bedwars**',
-                        value: '**Stars:** `' + bwstars.toString() + 
-                        '`\n**Wins:** `' + bwwins.toString() +
-                        '`\n**FKDR:** `' + bwfkdr.toString() + '`'
+                        value: '**Stars:** `' + bwstars.toString() +
+                            '`\n**Wins:** `' + bwwins.toString() +
+                            '`\n**FKDR:** `' + bwfkdr.toString() + '`'
                     },
                     {
                         name: '**Skywars**',
@@ -38,7 +38,7 @@ module.exports = {
                     {
                         name: '**Duels**',
                         value: '**Wins:** `' + duelswins.toString() +
-                        '`\n**WLR:** `' + duelswlr.toString() + '`'
+                            '`\n**WLR:** `' + duelswlr.toString() + '`'
                     }
                 ],
                 footer: {

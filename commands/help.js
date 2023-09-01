@@ -5,7 +5,7 @@ module.exports = {
     name: 'help',
     description: 'Help command',
     type: 'slash',
-    
+
     data: new SlashCommandBuilder()
         .setName('help')
         .setDescription('Help command')
@@ -47,7 +47,7 @@ module.exports = {
                     icon_url: interaction.guild.iconURL({ dynamic: true }),
                     text: interaction.guild.name + ' | Developed by: @Taken#0001'
                 }
-            }] 
+            }]
         });
 
     }

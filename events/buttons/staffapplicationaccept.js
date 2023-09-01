@@ -10,7 +10,6 @@ module.exports = {
     async execute(interaction) {
 
         const user = interaction.user;
-        const channel = interaction.channel;
         const guild = interaction.guild;
         const embedColor = Number(color.replace("#", "0x"));
 

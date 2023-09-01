@@ -9,17 +9,17 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('send')
         .setDescription('Send a message to a channel.')
-        .addStringOption(option => 
+        .addStringOption(option =>
             option
                 .setName('message')
                 .setDescription('The message to send.'))
-        .addChannelOption(option => 
+        .addChannelOption(option =>
             option
                 .setName('channel')
                 .setDescription('The channel to send the message to.'))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
-        
+
     async execute(interaction) {
 
         await interaction.deferReply({ ephemeral: true });

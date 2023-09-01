@@ -8,80 +8,80 @@ const args = process.argv.slice(2);
 const arg = args[0];
 
 if (!arg) {
-	console.log('Please specify a command to run!');
+    console.log('Please specify a command to run!');
 }
-else if (arg === '--prod') {	
-	const commands = [];
-	// Grab all the command files from the commands directory you created earlier
-	const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-	const contentMenuCommands = fs.readdirSync('./commands-contextmenu').filter(file => file.endsWith('.js'));
+else if (arg === '--prod') {
+    const commands = [];
+    // Grab all the command files from the commands directory you created earlier
+    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+    const contentMenuCommands = fs.readdirSync('./commands-contextmenu').filter(file => file.endsWith('.js'));
 
-	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
-	for (const file of commandFiles) {
-		const command = require(`../commands/${file}`);
-		commands.push(command.data.toJSON());
-	}
+    // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
+    for (const file of commandFiles) {
+        const command = require(`../commands/${file}`);
+        commands.push(command.data.toJSON());
+    }
 
-	for (const file of contentMenuCommands) {
-		const command = require(`../commands-contextmenu/${file}`);
-		commands.push(command.data.toJSON());
-	}
+    for (const file of contentMenuCommands) {
+        const command = require(`../commands-contextmenu/${file}`);
+        commands.push(command.data.toJSON());
+    }
 
-	// Construct and prepare an instance of the REST module
-	const rest = new REST({ version: '10' }).setToken(token);
+    // Construct and prepare an instance of the REST module
+    const rest = new REST({ version: '10' }).setToken(token);
 
 
-	// and deploy your commands!
-	(async () => {
-		try {
-			console.log(`Started refreshing ${commands.length} application (/) commands.`);
+    // and deploy your commands!
+    (async () => {
+        try {
+            console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
-			// The put method is used to fully refresh all commands in the guild with the current set
-			const data = await rest.put(
-				Routes.applicationCommands(clientId),
-				{ body: commands },
-			);
+            // The put method is used to fully refresh all commands in the guild with the current set
+            const data = await rest.put(
+                Routes.applicationCommands(clientId),
+                { body: commands },
+            );
 
-			console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-		} catch (error) {
-			// And of course, make sure you catch and log any errors!
-			console.error(error);
-		}
-	})();
+            console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+        } catch (error) {
+            // And of course, make sure you catch and log any errors!
+            console.error(error);
+        }
+    })();
 }
 else if (arg === '--dev') {
-	const commands = [];
-	// Grab all the command files from the commands directory you created earlier
-	const commandFiles = fs.readdirSync('./commands-testing').filter(file => file.endsWith('.js'));
+    const commands = [];
+    // Grab all the command files from the commands directory you created earlier
+    const commandFiles = fs.readdirSync('./commands-testing').filter(file => file.endsWith('.js'));
 
-	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
-	for (const file of commandFiles) {
-		const command = require(`../commands-testing/${file}`);
-		commands.push(command.data.toJSON());
-	}
+    // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
+    for (const file of commandFiles) {
+        const command = require(`../commands-testing/${file}`);
+        commands.push(command.data.toJSON());
+    }
 
-	// Construct and prepare an instance of the REST module
-	const rest = new REST({ version: '10' }).setToken(token);
+    // Construct and prepare an instance of the REST module
+    const rest = new REST({ version: '10' }).setToken(token);
 
 
-	// and deploy your commands!
-	(async () => {
-		try {
-			console.log(`Started refreshing ${commands.length} application (/) commands.`);
+    // and deploy your commands!
+    (async () => {
+        try {
+            console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
-			// The put method is used to fully refresh all commands in the guild with the current set
-			const data = await rest.put(
-				Routes.applicationGuildCommands(clientId, guildId),
-				{ body: commands },
-			);
+            // The put method is used to fully refresh all commands in the guild with the current set
+            const data = await rest.put(
+                Routes.applicationGuildCommands(clientId, guildId),
+                { body: commands },
+            );
 
-			console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-		} catch (error) {
-			// And of course, make sure you catch and log any errors!
-			console.error(error);
-		}
-	})();
-} 
+            console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+        } catch (error) {
+            // And of course, make sure you catch and log any errors!
+            console.error(error);
+        }
+    })();
+}
 else if (arg && arg !== '--prod' && arg !== '--dev') {
-	console.log('Invalid argument!');
+    console.log('Invalid argument!');
 }

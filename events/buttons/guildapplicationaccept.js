@@ -52,7 +52,7 @@ module.exports = {
 
         await applicant.send({
             embeds: [{
-            description: `Your application for the Illegitimate guild has been accepted.`,
+                description: `Your application for the Illegitimate guild has been accepted.`,
                 color: embedColor
             }]
         });
@@ -76,7 +76,7 @@ module.exports = {
 
 
         await interaction.editReply({
-            embeds: [{ 
+            embeds: [{
                 title: applicantUsername + " - Guild Application",
                 description: "Application has been accepted by <@" + user.id + ">.",
                 color: embedColor,

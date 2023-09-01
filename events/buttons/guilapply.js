@@ -23,9 +23,9 @@ module.exports = {
         const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
 
         const userRoles = guild.members.cache.get(user.id).roles.cache.map(role => role.id);
-        
+
         if (interaction.customId === 'guildapply') {
-            
+
             await interaction.deferReply({ ephemeral: true });
 
             if (userRoles.includes(guildRole)) {
@@ -39,7 +39,7 @@ module.exports = {
                 await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true });
                 return
             }
-            
+
             const tooLong = new EmbedBuilder()
                 .setDescription("You took too long to respond.")
                 .setColor(embedColor)
@@ -54,11 +54,11 @@ module.exports = {
                 await user.send({
                     embeds: [{
                         title: 'Guild Application',
-                        description: "Please answer the following questions to apply for the guild.\n" + 
-                        "If you wish to cancel your application, please press type `cancel` at any time.\n" + 
-                        "If you wish to proceed with your application, please type `yes`.\n\n" + 
-                        "**Do not upload images, videos, or GIFS.**\n" + 
-                        "You have a minute to respond to this message.",
+                        description: "Please answer the following questions to apply for the guild.\n" +
+                            "If you wish to cancel your application, please press type `cancel` at any time.\n" +
+                            "If you wish to proceed with your application, please type `yes`.\n\n" +
+                            "**Do not upload images, videos, or GIFS.**\n" +
+                            "You have a minute to respond to this message.",
                         color: embedColor,
                     }]
                 })
@@ -67,7 +67,7 @@ module.exports = {
                 return
             }
 
-            await interaction.editReply({ content: "Please check your DMs.", ephemeral: true})
+            await interaction.editReply({ content: "Please check your DMs.", ephemeral: true })
 
 
             const input = await user.dmChannel.awaitMessages({
@@ -84,17 +84,17 @@ module.exports = {
                 return
             }
             if (input.first().content.toLowerCase() !== 'yes') {
-                await user.send({ embeds: [cancelled]} );
+                await user.send({ embeds: [cancelled] });
                 return
             }
 
             // first question
             const question1 = await user.send({
                 embeds: [{
-                    title : "**Question 1**",
+                    title: "**Question 1**",
                     description: qu1 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + ignM + "`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 5 minutes to respond to this message."
                     }
                 }]
@@ -123,7 +123,7 @@ module.exports = {
                 await user.send({
                     embeds: [{
                         description: "That is not a valid Minecraft username.\n" +
-                        "Application cancelled.",
+                            "Application cancelled.",
                         color: embedColor
                     }]
                 })
@@ -142,10 +142,10 @@ module.exports = {
             // second question
             const question2 = await user.send({
                 embeds: [{
-                    title : "**Question 2**",
+                    title: "**Question 2**",
                     description: qu2 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(8 characters max)`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 15 minutes to respond to this message."
                     }
                 }]
@@ -181,10 +181,10 @@ module.exports = {
             // third question
             const question3 = await user.send({
                 embeds: [{
-                    title : "**Question 3**",
+                    title: "**Question 3**",
                     description: qu3 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 15 minutes to respond to this message."
                     }
                 }]
@@ -219,11 +219,11 @@ module.exports = {
             // fourth question
             const question4 = await user.send({
                 embeds: [{
-                    title : "**Question 4**",
-                    description: qu4 + "\n\nPlease type your answer below or type `cancel` to cancel your application." + 
-                    " `(We expect a longer answer.)`\n`" + largeM + "`",
+                    title: "**Question 4**",
+                    description: qu4 + "\n\nPlease type your answer below or type `cancel` to cancel your application." +
+                        " `(We expect a longer answer.)`\n`" + largeM + "`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 15 minutes to respond to this message."
                     }
                 }]
@@ -258,10 +258,10 @@ module.exports = {
             // fifth question
             const question5 = await user.send({
                 embeds: [{
-                    title : "**Question 5**",
+                    title: "**Question 5**",
                     description: qu5 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 15 minutes to respond to this message."
                     }
                 }]
@@ -292,14 +292,14 @@ module.exports = {
                 return
             }
             const answer5_1 = answer5.first().content
-            
+
             // sixth question
             const question6 = await user.send({
                 embeds: [{
-                    title : "**Question 6**",
+                    title: "**Question 6**",
                     description: qu6 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 15 minutes to respond to this message."
                     }
                 }]
@@ -334,10 +334,10 @@ module.exports = {
             // seventh question
             const question7 = await user.send({
                 embeds: [{
-                    title : "**Question 7**",
+                    title: "**Question 7**",
                     description: qu7 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 15 minutes to respond to this message."
                     }
                 }]
@@ -372,10 +372,10 @@ module.exports = {
             // eighth question
             const question8 = await user.send({
                 embeds: [{
-                    title : "**Question 8**",
+                    title: "**Question 8**",
                     description: qu8 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
                     color: embedColor,
-                    footer:{
+                    footer: {
                         text: "You have 15 minutes to respond to this message."
                     }
                 }]
@@ -428,7 +428,7 @@ module.exports = {
                 return
             }
             if (final.first().content.toLowerCase() !== 'yes') {
-                await user.send({ embeds: [cancelled]} );
+                await user.send({ embeds: [cancelled] });
                 return
             }
 
@@ -452,7 +452,7 @@ module.exports = {
 
             const channel = guild.channels.cache.get(applicationsChannel);
             await channel.send({
-                embeds: [{ 
+                embeds: [{
                     title: user.username + "#" + user.discriminator + " - Guild Application",
                     color: embedColor,
                     thumbnail: {

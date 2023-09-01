@@ -4,7 +4,7 @@ const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const fetch = require('axios');
 const { color, hypixelGuildID } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js')
-const {mongoose} = require('mongoose');
+const { mongoose } = require('mongoose');
 const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
 
 
@@ -16,7 +16,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('forceverify')
         .setDescription('Force verify a user.')
-        .addUserOption(option => 
+        .addUserOption(option =>
             option
                 .setName('user')
                 .setDescription('The user to force verify.'))
@@ -26,7 +26,7 @@ module.exports = {
                 .setDescription('The user\'s in-game name.'))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
-    
+
     async execute(interaction) {
 
         await interaction.deferReply();
@@ -35,7 +35,7 @@ module.exports = {
         const user = interaction.guild.members.cache.get(user1.id);
         const ign = interaction.options.getString('ign');
         const mod = interaction.user
-        
+
         // const slothPixel = "https://api.slothpixel.me/api/players/";
         // const guildAPI = "https://api.slothpixel.me/api/guilds/"
 
@@ -90,7 +90,7 @@ module.exports = {
 
         const hypixelCheck = await fetch(player);
 
-				if (!hypixelCheck.data.player) {
+        if (!hypixelCheck.data.player) {
             interaction.editReply({
                 embeds: [{
                     description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
@@ -98,7 +98,7 @@ module.exports = {
                 }]
             });
             return;
-				}
+        }
 
         const guildCheck = await fetch(guild)
 
@@ -109,50 +109,50 @@ module.exports = {
         }
 
         if (responseGuildID === hypixelGuildID) {
-					const GuildMembers = guildCheck.data.guild.members;
-					const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.player.uuid).rank;
+            const GuildMembers = guildCheck.data.guild.members;
+            const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.player.uuid).rank;
 
-					if (guildRank === "Guild Master") {
-						await user.roles.add(gm, "User was force verified by " + modName);
-						await user.roles.add(guildRole, "User was force verified by " + modName)
-						await user.roles.add(guildStaff, "User was force verified by " + modName)
-					}
+            if (guildRank === "Guild Master") {
+                await user.roles.add(gm, "User was force verified by " + modName);
+                await user.roles.add(guildRole, "User was force verified by " + modName)
+                await user.roles.add(guildStaff, "User was force verified by " + modName)
+            }
 
-					if (guildRank === "Manager") {
-						await user.roles.add(manager, "User was force verified by " + modName);
-						await user.roles.add(guildRole, "User was force verified by " + modName)
-						await user.roles.add(guildStaff, "User was force verified by " + modName)
-					}
+            if (guildRank === "Manager") {
+                await user.roles.add(manager, "User was force verified by " + modName);
+                await user.roles.add(guildRole, "User was force verified by " + modName)
+                await user.roles.add(guildStaff, "User was force verified by " + modName)
+            }
 
-					if (guildRank === "Moderator") {
-						await user.roles.add(moderator, "User was force verified by " + modName);
-						await user.roles.add(guildRole, "User was force verified by " + modName)
-						await user.roles.add(guildStaff, "User was force verified by " + modName)
-					}
+            if (guildRank === "Moderator") {
+                await user.roles.add(moderator, "User was force verified by " + modName);
+                await user.roles.add(guildRole, "User was force verified by " + modName)
+                await user.roles.add(guildStaff, "User was force verified by " + modName)
+            }
 
-					if (guildRank === "Beast") {
-						await user.roles.add(beast, "User was force verified by " + modName);
-						await user.roles.add(guildRole, "User was force verified by " + modName)
-					}
+            if (guildRank === "Beast") {
+                await user.roles.add(beast, "User was force verified by " + modName);
+                await user.roles.add(guildRole, "User was force verified by " + modName)
+            }
 
-					if (guildRank === "Elite") {
-						await user.roles.add(elite, "User was force verified by " + modName);
-						await user.roles.add(guildRole, "User was force verified by " + modName)
-					}
+            if (guildRank === "Elite") {
+                await user.roles.add(elite, "User was force verified by " + modName);
+                await user.roles.add(guildRole, "User was force verified by " + modName)
+            }
 
-					if (guildRank === "Member") {
-						await user.roles.add(member, "User was force verified by " + modName);
-						await user.roles.add(guildRole, "User was force verified by " + modName)
-					}
+            if (guildRank === "Member") {
+                await user.roles.add(member, "User was force verified by " + modName);
+                await user.roles.add(guildRole, "User was force verified by " + modName)
+            }
 
-					if (guildRank === "Trial Member") {
-						await user.roles.add(trialmember, "User was force verified by " + modName);
-						await user.roles.add(guildRole, "User was force verified by " + modName)
-					}
-				}
+            if (guildRank === "Trial Member") {
+                await user.roles.add(trialmember, "User was force verified by " + modName);
+                await user.roles.add(guildRole, "User was force verified by " + modName)
+            }
+        }
 
         await user.roles.add(defaultMember, "User was force verified by " + modName);
-        
+
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
             userID: user.id,

@@ -203,13 +203,14 @@ client.on(Events.ClientReady, () => {
         embeds: [{
             description: `Bot is online!`,
             color: embedColor
-        }] 
+        }]
     });
 });
 
 client.on(Events.ClientReady, () => {
     client.user.setActivity(
-        { name: "over the Illegitimate Server", type: ActivityType.Watching });
+        { name: "over the Illegitimate Server", type: ActivityType.Watching }
+    );
 
     const activities = [
         { name: "for Martina's return", type: ActivityType.Watching },
@@ -229,9 +230,11 @@ client.on(Events.ClientReady, () => {
         1000 * 60 * 30
     )
 });
+
 client.on(Events.ClientReady, () => {
     client.user.setStatus('dnd');
 });
+
 client.login(token);
 
 connect(mongoURI, {}).then(() => {

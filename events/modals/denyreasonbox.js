@@ -11,12 +11,12 @@ module.exports = {
     type: 'modal',
 
     async execute(interaction) {
-    
+
         if (interaction.type !== InteractionType.ModalSubmit) return;
         if (interaction.customId !== "denyreasonbox") return;
-        
+
         interaction.deferReply();
-        
+
         const guild = interaction.guild;
 
         const message = interaction.message;
@@ -52,7 +52,7 @@ module.exports = {
 
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild has been denied\n" +
-            "**Reason:** `" + reason + "`")
+                "**Reason:** `" + reason + "`")
             .setColor(embedColor);
 
         await applicant.send({ embeds: [dmMessage] });
@@ -62,8 +62,8 @@ module.exports = {
         await interaction.editReply({
             embeds: [{
                 title: "Application Denied",
-                description: "The application has been denied by <@" + interaction.user.id + ">.\n" + 
-                "**Reason:** `" + reason + "`",
+                description: "The application has been denied by <@" + interaction.user.id + ">.\n" +
+                    "**Reason:** `" + reason + "`",
                 color: embedColor,
                 thumbnail: {
                     url: applicant.avatarURL()

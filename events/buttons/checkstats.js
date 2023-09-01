@@ -130,8 +130,8 @@ module.exports = {
             embeds: [{
                 title: rank + stats.data.player.displayname + guildTag,
                 description: "**Network Level:** `" +
-                level.toFixed(2).toString() + "`\n" +
-                "**Current Guild:** `" + guildName + "`",
+                    level.toFixed(2).toString() + "`\n" +
+                    "**Current Guild:** `" + guildName + "`",
                 color: embedColor,
                 thumbnail: { url: head },
                 footer: {
@@ -142,36 +142,36 @@ module.exports = {
                     {
                         name: bwtitle,
                         value: "**➺ Stars:** `" +
-                        hsbwstars.toFixed(2).toString() + " / " +
-                        bwstars.toString() + "`\n" +
-                        "**➺ FKDR:** `" +
-                        hsbwfkdr.toFixed(2).toString() +
-                        " / " + bwfkdr.toString() + "`\n" +
-                        "**➺ Wins:** `" +
-                        hsbwwins.toString() + " / " +
-                        bwwins.toString() + "`"
+                            hsbwstars.toFixed(2).toString() + " / " +
+                            bwstars.toString() + "`\n" +
+                            "**➺ FKDR:** `" +
+                            hsbwfkdr.toFixed(2).toString() +
+                            " / " + bwfkdr.toString() + "`\n" +
+                            "**➺ Wins:** `" +
+                            hsbwwins.toString() + " / " +
+                            bwwins.toString() + "`"
                     },
                     {
                         name: swtitle,
                         value:
-                        "**➺ Stars:** `" +
-                        hsswstars.toFixed(2).toString() +
-                        " / " + swstars.toString() + "`\n" +
-                        "**➺ KDR:** `" +
-                        hsswkd.toFixed(2).toString() + "`\n" +
-                        "**➺ Wins:** `" +
-                        hsswwins.toString() + "`"
+                            "**➺ Stars:** `" +
+                            hsswstars.toFixed(2).toString() +
+                            " / " + swstars.toString() + "`\n" +
+                            "**➺ KDR:** `" +
+                            hsswkd.toFixed(2).toString() + "`\n" +
+                            "**➺ Wins:** `" +
+                            hsswwins.toString() + "`"
                     },
                     {
                         name: duelstitle,
                         value: "**➺ Wins:** `" +
-                        hsduelswins.toString() +
-                        " / " + duelswins.toString() + "`\n" +
-                        "**➺ WLR:** `" +
-                        hsduelswlr.toFixed(2).toString() + 
-                        " / " + duelswlr.toString() + "`\n" +
-                        "**➺ KDR:** `" +
-                        hsduelskd.toFixed(2).toString() + "`"
+                            hsduelswins.toString() +
+                            " / " + duelswins.toString() + "`\n" +
+                            "**➺ WLR:** `" +
+                            hsduelswlr.toFixed(2).toString() +
+                            " / " + duelswlr.toString() + "`\n" +
+                            "**➺ KDR:** `" +
+                            hsduelskd.toFixed(2).toString() + "`"
                     }
                 ]
             }]

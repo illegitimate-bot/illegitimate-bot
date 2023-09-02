@@ -55,7 +55,7 @@ module.exports = {
                     embeds: [{
                         title: 'Guild Application',
                         description: "Please answer the following questions to apply for the guild.\n" +
-                            "If you wish to cancel your application, please press type `cancel` at any time.\n" +
+                            "If you wish to cancel your application, please type `cancel` at any time.\n" +
                             "If you wish to proceed with your application, please type `yes`.\n\n" +
                             "**Do not upload images, videos, or GIFS.**\n" +
                             "You have a minute to respond to this message.",
@@ -75,10 +75,6 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60
             });
-            if (input.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
-                return
-            }
             if (input.size === 0) {
                 await user.send({ embeds: [tooLong] });
                 return
@@ -87,9 +83,13 @@ module.exports = {
                 await user.send({ embeds: [cancelled] });
                 return
             }
+            if (input.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
 
             // first question
-            const question1 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 1**",
                     description: qu1 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + ignM + "`",
@@ -104,6 +104,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 5,
             });
+            if (answer1.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer1.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer1.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -118,7 +126,7 @@ module.exports = {
                 return
             }
             try {
-                await fetch(mojangAPI + answer1.first().content)
+                var userCheck = await fetch(mojangAPI + answer1.first().content);
             } catch (error) {
                 await user.send({
                     embeds: [{
@@ -129,18 +137,10 @@ module.exports = {
                 })
                 return
             }
-            if (answer1.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer1.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer1_1 = answer1.first().content
 
             // second question
-            const question2 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 2**",
                     description: qu2 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(8 characters max)`",
@@ -155,6 +155,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer2.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer2.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer2.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -168,18 +176,10 @@ module.exports = {
                 })
                 return
             }
-            if (answer2.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer2.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer2_1 = answer2.first().content
 
             // third question
-            const question3 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 3**",
                     description: qu3 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
@@ -194,6 +194,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer3.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer3.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer3.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -206,18 +214,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer3.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer3.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer3_1 = answer3.first().content
 
             // fourth question
-            const question4 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 4**",
                     description: qu4 + "\n\nPlease type your answer below or type `cancel` to cancel your application." +
@@ -233,6 +233,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer4.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer4.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer4.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -245,18 +253,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer4.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer4.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer4_1 = answer4.first().content
 
             // fifth question
-            const question5 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 5**",
                     description: qu5 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
@@ -271,6 +271,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer5.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer5.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer5.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -283,18 +291,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer5.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer5.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer5_1 = answer5.first().content
 
             // sixth question
-            const question6 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 6**",
                     description: qu6 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
@@ -309,6 +309,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer6.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer6.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer6.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -321,18 +329,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer6.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer6.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer6_1 = answer6.first().content
 
             // seventh question
-            const question7 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 7**",
                     description: qu7 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
@@ -347,6 +347,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer7.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer7.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer7.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -359,18 +367,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer7.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer7.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer7_1 = answer7.first().content
 
             // eighth question
-            const question8 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 8**",
                     description: qu8 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
@@ -385,6 +385,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer8.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer8.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer8.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -396,14 +404,6 @@ module.exports = {
                         color: embedColor
                     }]
                 })
-            }
-            if (answer8.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer8.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
             }
             const answer8_1 = answer8.first().content
 
@@ -419,16 +419,16 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 5
             });
-            if (final.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
-                return
-            }
             if (final.size === 0) {
                 await user.send({ embeds: [tooLong] });
                 return
             }
             if (final.first().content.toLowerCase() !== 'yes') {
                 await user.send({ embeds: [cancelled] });
+                return
+            }
+            if (final.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
                 return
             }
 
@@ -439,7 +439,6 @@ module.exports = {
                 }]
             })
 
-            const userCheck = await fetch(mojangAPI + answer1_1)
             const uuid = userCheck.data.id
 
             const newGuildApp = new guildapp({

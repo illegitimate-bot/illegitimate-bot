@@ -38,11 +38,8 @@ module.exports = {
         if (!verifyData) {
             await interaction.editReply({
                 embeds: [{
-                    description: "You are not verified. Please run `/verify` to verify yourself",
+                    description: "User is not verified.",
                     color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
                         icon_url: interaction.guild.iconURL({ dynamic: true })

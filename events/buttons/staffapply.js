@@ -5,6 +5,8 @@ const { staffApplicationsChannel } = require('../../config/options.json');
 const { sq1, sq2, sq3, sq4, sq5, sq6 } = require('../../config/questions.json');
 const { rsq1, rsq2, rsq3, rsq4, rsq5, rsq6 } = require('../../config/questions.json');
 const { guildRole, guildStaff } = require('../../config/roles.json')
+const env = require('dotenv').config();
+const status = process.env.STAFFAPPSTATUS;
 const mongoose = require('mongoose');
 const staffapp = require('../../schemas/staffAppSchema.js');
 const fetch = require('axios');
@@ -25,6 +27,11 @@ module.exports = {
         if (interaction.customId === "staffapply") {
 
             await interaction.deferReply({ ephemeral: true });
+
+            if (status === false) {
+                await interaction.editReply({ content: "Staff applications are currently closed.", ephemeral: true });
+                return
+            }
 
             if (!userRoles.has(guildRole)) {
                 await interaction.editReply({ content: "You must be a member of the guild to apply for staff.", ephemeral: true });

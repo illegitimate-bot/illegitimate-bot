@@ -1,11 +1,18 @@
 const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection } = require('discord.js');
 const { botLogChannel, color } = require('./config/options.json');
 const env = require('dotenv').config();
-const token = process.env.TOKEN;
 const mongoURI = process.env.MONGOURI;
 const { connect } = require('mongoose');
 const path = require('path');
 const fs = require('fs');
+
+if (process.env.NODE_ENV === 'dev') {
+    console.log("Running in development mode.");
+    var token = process.env.DEVTOKEN;
+} else {
+    console.log("Running in production mode.");
+    var token = process.env.PRODTOKEN;
+}
 
 const client = new Client({
     intents: [

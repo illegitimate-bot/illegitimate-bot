@@ -28,7 +28,7 @@ module.exports = {
 
             await interaction.deferReply({ ephemeral: true });
 
-            if (status === false) {
+            if (status === "false") {
                 await interaction.editReply({ content: "Staff applications are currently closed.", ephemeral: true });
                 return
             }

@@ -84,10 +84,6 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60
             });
-            if (input.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
-                return
-            }
             if (input.size === 0) {
                 await user.send({ embeds: [tooLong] });
                 return
@@ -96,9 +92,13 @@ module.exports = {
                 await user.send({ embeds: [cancelled] });
                 return
             }
+            if (input.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
+                return
+            }
 
             // first question
-            const question1 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 1**",
                     description: sq1 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + ignM + "`",
@@ -113,6 +113,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 5,
             });
+            if (answer1.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer1.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer1.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -138,18 +146,10 @@ module.exports = {
                 })
                 return
             }
-            if (answer1.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer1.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer1_1 = answer1.first().content
 
             // second question
-            const question2 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 2**",
                     description: sq2 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
@@ -164,6 +164,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer2.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer2.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer2.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -177,18 +185,10 @@ module.exports = {
                 })
                 return
             }
-            if (answer2.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer2.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer2_1 = answer2.first().content
 
             // third question
-            const question3 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 3**",
                     description: sq3 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
@@ -203,6 +203,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer3.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer3.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer3.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -215,18 +223,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer3.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer3.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer3_1 = answer3.first().content
 
             // fourth question
-            const question4 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 4**",
                     description: sq4 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
@@ -241,6 +241,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer4.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer4.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer4.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -253,18 +261,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer4.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer4.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer4_1 = answer4.first().content
 
             // fifth question
-            const question5 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 5**",
                     description: sq5 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
@@ -279,6 +279,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer5.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer5.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer5.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -291,18 +299,10 @@ module.exports = {
                     }]
                 })
             }
-            if (answer5.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer5.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
-            }
             const answer5_1 = answer5.first().content
 
             // sixth question
-            const question6 = await user.send({
+            await user.send({
                 embeds: [{
                     title: "**Question 6**",
                     description: sq6 + "\n\nPlease type your answer below or type `cancel` to cancel your application." +
@@ -318,6 +318,14 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 15
             });
+            if (answer6.size === 0) {
+                await user.send({ embeds: [tooLong] })
+                return
+            }
+            if (answer6.first().content.toLowerCase() === 'cancel') {
+                await user.send({ embeds: [cancelled] })
+                return
+            }
             if (answer6.first().attachments.size > 0) {
                 await user.send({ embeds: [attachments] });
                 return
@@ -329,14 +337,6 @@ module.exports = {
                         color: embedColor
                     }]
                 })
-            }
-            if (answer6.size === 0) {
-                await user.send({ embeds: [tooLong] })
-                return
-            }
-            if (answer6.first().content.toLowerCase() === 'cancel') {
-                await user.send({ embeds: [cancelled] })
-                return
             }
             const answer6_1 = answer6.first().content
 
@@ -352,16 +352,16 @@ module.exports = {
                 max: 1,
                 time: 1000 * 60 * 5
             });
-            if (final.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
-                return
-            }
             if (final.size === 0) {
                 await user.send({ embeds: [tooLong] });
                 return
             }
             if (final.first().content.toLowerCase() !== 'yes') {
                 await user.send({ embeds: [cancelled] });
+                return
+            }
+            if (final.first().attachments.size > 0) {
+                await user.send({ embeds: [attachments] });
                 return
             }
 

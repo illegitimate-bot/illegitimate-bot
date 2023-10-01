@@ -68,7 +68,7 @@ module.exports = {
                 "**Reason:** `" + reason + "`")
             .setColor(embedColor)
             .setThumbnail({
-                url: applicant.avatarURL()
+                url: applicant.avatarURL() ?? guild.iconURL()
             })
             .setFooter({
                 iconURL: guild.iconURL(),

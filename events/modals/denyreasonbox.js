@@ -26,7 +26,6 @@ module.exports = {
         const applicant = await guild.members.fetch(applicantId);
         const reason = interaction.fields.fields.get('denyreason').value || "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));
-        const filePath = path.join(__dirname, `../../apps/guild/${applicantId}`);
 
         await message.edit({
             components: [
@@ -55,24 +54,37 @@ module.exports = {
                 "**Reason:** `" + reason + "`")
             .setColor(embedColor);
 
-        await applicant.send({ embeds: [dmMessage] });
+        const missingUser = new EmbedBuilder()
+            .setDescription("[WARN] User has left the server and cannot be notified.")
+            .setColor(embedColor)
+
+        const responseEmbed = new EmbedBuilder()
+            .setTitle("Application Denied")
+            .setDescription("The application has been denied by <@" + interaction.user.id + ">.\n" +
+                "**Reason:** `" + reason + "`")
+            .setColor(embedColor)
+            .setThumbnail({
+                url: applicant.avatarURL()
+            })
+            .setFooter({
+                iconURL: guild.iconURL(),
+                text: "ID: " + applicant.id
+            })
+
+        if (applicant) {
+            await applicant.send({ embeds: [dmMessage] });
+        }
+
+        if (!applicant) {
+            var responseEmbeds = [responseEmbed, missingUser];
+        } else {
+            var responseEmbeds = [responseEmbed];
+        }
 
         await guildapp.findOneAndDelete({ userID: applicantId });
 
         await interaction.editReply({
-            embeds: [{
-                title: "Application Denied",
-                description: "The application has been denied by <@" + interaction.user.id + ">.\n" +
-                    "**Reason:** `" + reason + "`",
-                color: embedColor,
-                thumbnail: {
-                    url: applicant.avatarURL()
-                },
-                footer: {
-                    iconURL: guild.iconURL(),
-                    text: "ID: " + applicant.id
-                }
-            }],
+            embeds: responseEmbeds
         });
     }
 }

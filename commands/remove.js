@@ -5,6 +5,7 @@ const { waitinglistSchema } = require("../schemas/waitinglistSchema.js")
 module.exports = {
     name: 'remove',
     description: 'Remove a person on the waiting list.',
+    type: 'slash',
 
     data: new SlashCommandBuilder()
         .setName('remove')

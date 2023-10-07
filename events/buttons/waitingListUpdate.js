@@ -26,7 +26,7 @@ module.exports = {
             const uuid = accepted[i].uuid
             const check = await fetch(guild + uuid)
 
-            if (check.data.guild._id === hypixelGuildID) {
+            if (check.data.guild && check.data.guild._id === hypixelGuildID) {
                 await waitinglist.findOneAndDelete({ uuid: uuid })
                 continue
             }

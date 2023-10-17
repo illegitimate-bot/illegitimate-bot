@@ -198,21 +198,39 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.on(Events.ClientReady, () => {
-    console.log("Logged in as " + client.user.tag + "!");
-    const channel = client.channels.cache.get(botLogChannel);
-    const embedColor = Number(color.replace('#', '0x'))
+    if (process.env.NODE_ENV !== 'dev') {
+        console.log("Logged in as " + client.user.tag + "!");
+        const channel = client.channels.cache.get(botLogChannel);
+        const embedColor = Number(color.replace('#', '0x'))
 
-    if (!channel) {
-        return;
+        if (!channel) {
+            return;
+        }
+
+        channel.send({
+            embeds: [{
+                description: `Bot is online!`,
+                color: embedColor
+            }]
+        });
     }
-
-    channel.send({
-        embeds: [{
-            description: `Bot is online!`,
-            color: embedColor
-        }]
-    });
 });
+
+// message files
+const messagePath = path.join(__dirname, 'events', 'messages');
+const messageFiles = fs.readdirSync(messagePath).filter(file => file.endsWith('.js'));
+
+for (const file of messageFiles) {
+
+    const filePath = path.join(messagePath, file);
+    const message = require(filePath);
+
+    if (message.type === 'message') {
+        client.on(Events.MessageCreate, message.execute);
+    } else {
+        console.log(`[WARNING] The message at ${filePath} is missing a required "type" property.`);
+    }
+}
 
 client.on(Events.ClientReady, () => {
     client.user.setActivity(

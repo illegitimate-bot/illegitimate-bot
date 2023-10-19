@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 module.exports = {
     name: "config",
     description: "Configure the bot",
+    type: "slash",
 
     data: new SlashCommandBuilder()
         .setName("config")

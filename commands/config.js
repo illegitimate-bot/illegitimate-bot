@@ -37,11 +37,13 @@ module.exports = {
 
         if (!settingsData) {
 
-            await settings.create({
-                _id: mongoose.Types.ObjectId(),
+            const newSetting = new settings({
+                _id: new mongoose.Types.ObjectId(),
                 name: setting,
                 value: value
             });
+
+            await newSetting.save();
 
             await interaction.editReply({
                 embeds: [{

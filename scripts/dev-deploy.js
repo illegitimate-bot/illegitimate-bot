@@ -9,7 +9,8 @@ const commands = [];
 // const commandFiles = fs.readdirSync('./commands-testing').filter(file => file.endsWith('.js'));
 
 const commandFiles = [
-    "../commands/config.js"
+    "../commands/config.js",
+    "../commands/setup.js"
 ]
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment

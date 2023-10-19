@@ -5,10 +5,9 @@ const { staffApplicationsChannel } = require('../../config/options.json');
 const { sq1, sq2, sq3, sq4, sq5, sq6 } = require('../../config/questions.json');
 const { rsq1, rsq2, rsq3, rsq4, rsq5, rsq6 } = require('../../config/questions.json');
 const { guildRole, guildStaff } = require('../../config/roles.json')
-const env = require('dotenv').config();
-const status = process.env.STAFFAPPSTATUS;
 const mongoose = require('mongoose');
 const staffapp = require('../../schemas/staffAppSchema.js');
+const settings = require("../../schemas/settingsSchema.js");
 const fetch = require('axios');
 
 module.exports = {
@@ -23,12 +22,14 @@ module.exports = {
         const embedColor = Number(color.replace("#", "0x"));
         const userRoles = interaction.member.roles.cache;
         const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
+        const setting = await settings.findOne({ name: "staffAppStatus" })
+        const status = setting.value;
 
         if (interaction.customId === "staffapply") {
 
             await interaction.deferReply({ ephemeral: true });
 
-            if (status === "false") {
+            if (status === "0") {
                 await interaction.editReply({ content: "Staff applications are currently closed.", ephemeral: true });
                 return
             }

@@ -1,219 +1,66 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { color } = require("../config/options.json");
+const settings = require("../schemas/settingsSchema.js");
+const mongoose = require("mongoose");
 
 module.exports = {
     name: "config",
-    description: "Configure the bot.",
-    type: "slash",
+    description: "Configure the bot",
 
     data: new SlashCommandBuilder()
         .setName("config")
-        .setDescription("Configure the bot.")
-        .addSubcommand((subcommand) =>
-            subcommand
-                .setName("sendguildapplication")
-                .setDescription("Send the application message to a channel.")
-                .addChannelOption((option) =>
-                    option
-                        .setName("channel")
-                        .setDescription("The channel to send the application to.")
-                        .setRequired(true))
+        .setDescription("Configure the bot")
+        .addStringOption(option =>
+            option
+                .setName("setting")
+                .setDescription("The setting to configure")
+                .setRequired(true))
+        .addStringOption(option =>
+            option
+                .setName("value")
+                .setDescription("The value to set")
+                .setRequired(true)
         )
-        .addSubcommand((subcommand) =>
-            subcommand
-                .setName("sendstaffapplication")
-                .setDescription("Send the application message to a channel.")
-                .addChannelOption((option) =>
-                    option
-                        .setName("channel")
-                        .setDescription("The channel to send the application to.")
-                        .setRequired(true)))
-        .addSubcommand((subcommand) =>
-            subcommand
-                .setName("sendverfiymessage")
-                .setDescription("Send the verfiy message to a channel.")
-                .addChannelOption((option) =>
-                    option
-                        .setName("channel")
-                        .setDescription("The channel to send the verfiy message to.")
-                        .setRequired(true)))
-        .addSubcommand((subcommand) =>
-            subcommand
-                .setName("sendwaitinglistmessage")
-                .setDescription("Send the waiting list message to a channel.")
-                .addChannelOption((option) =>
-                    option
-                        .setName("channel")
-                        .setDescription("The channel to send the waiting list message to.")
-                        .setRequired(true)))
-        .addSubcommand((subcommand) =>
-            subcommand
-                .setName("sendinactivityapplication")
-                .setDescription("Send the application message to a channel.")
-                .addChannelOption((option) =>
-                    option
-                        .setName("channel")
-                        .setDescription("The channel to send the application to.")
-                        .setRequired(true)))
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDMPermission(false)
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute(interaction) {
-        const user = interaction.user;
-        const guild = interaction.guild;
-        const subcommand = interaction.options.getSubcommand();
+
+        await interaction.deferReply();
+
+        const setting = interaction.options.getString("setting");
+        const value = interaction.options.getString("value");
         const embedColor = Number(color.replace("#", "0x"));
 
+        const settingsData = await settings.findOne({ name: setting });
 
-        if (subcommand === "sendguildapplication") {
-            const channel = interaction.options.getChannel("channel");
+        if (!settingsData) {
 
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Guild Application",
-                        description: "You can apply for the guild by clicking the button below.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
-                            iconURL: interaction.guild.iconURL({ dynamic: true })
-                        },
-                        thumbnail: {
-                            url: interaction.guild.iconURL({ dynamic: true })
-                        }
-                    }
-                ],
-                components: [
-                    new ActionRowBuilder()
-                        .addComponents(new ButtonBuilder()
-                            .setCustomId("guildapply")
-                            .setLabel("Apply")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }))
-                ]
-            });
-            await interaction.reply({ content: "Message sent", ephemeral: true });
-        }
-
-        if (subcommand === "sendstaffapplication") {
-            const channel = interaction.options.getChannel("channel");
-
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Staff Application",
-                        description: "You can apply for the staff team by clicking the button below.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
-                            iconURL: interaction.guild.iconURL({ dynamic: true })
-                        },
-                        thumbnail: {
-                            url: interaction.guild.iconURL({ dynamic: true })
-                        }
-                    }
-                ],
-                components: [
-                    new ActionRowBuilder()
-                        .addComponents(new ButtonBuilder()
-                            .setCustomId("staffapply")
-                            .setLabel("Apply")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }))
-                ]
+            await settings.create({
+                _id: mongoose.Types.ObjectId(),
+                name: setting,
+                value: value
             });
 
-            await interaction.reply({ content: "Message sent", ephemeral: true });
-        }
-
-        if (subcommand === "sendinactivityapplication") {
-            const channel = interaction.options.getChannel("channel");
-
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Inactivity Log",
-                        description: "You can send an inactivity log by clicking the button below.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
-                            iconURL: interaction.guild.iconURL({ dynamic: true })
-                        },
-                        thumbnail: {
-                            url: interaction.guild.iconURL({ dynamic: true })
-                        }
-                    }
-                ],
-                components: [
-                    new ActionRowBuilder()
-                        .addComponents(new ButtonBuilder()
-                            .setCustomId("guildinactivitylog")
-                            .setLabel("Submit")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }))
-                ]
-            });
-
-            await interaction.reply({ content: "Message sent", ephemeral: true });
-        }
-
-        if (subcommand === "sendverfiymessage") {
-            const channel = interaction.options.getChannel("channel");
-
-            await channel.send({
+            await interaction.editReply({
                 embeds: [{
-                    title: "Verification",
-                    description: "You can verify by clicking the button below.",
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        iconURL: interaction.guild.iconURL({ dynamic: true })
-                    },
-                    thumbnail: {
-                        url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }],
-                components: [
-                    new ActionRowBuilder()
-                        .addComponents(new ButtonBuilder()
-                            .setCustomId("verifybutton")
-                            .setLabel("Verify")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }))
-                ]
+                    description: "Successfully created `" + setting + "` with value `" + value + "`.",
+                    color: embedColor
+                }]
             });
-            await interaction.reply({ content: "Message sent", ephemeral: true });
+        } else {
 
-        }
+            await settings.findOneAndUpdate(
+                { name: setting },
+                { value: value }
+            );
 
-        if (subcommand === "sendwaitinglistmessage") {
-            const channel = interaction.options.getChannel("channel");
-
-            await channel.send({
+            await interaction.editReply({
                 embeds: [{
-                    title: "Waiting List",
-                    description: "The people below were accepted into the guild\n" +
-                        "Try to invite them in order.",
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
-                        iconURL: interaction.guild.iconURL({ dynamic: true })
-                    },
-                    thumbnail: {
-                        url: interaction.guild.iconURL({ dynamic: true })
-                    }
-                }],
-                components: [
-                    new ActionRowBuilder()
-                        .addComponents(new ButtonBuilder()
-                            .setCustomId("waitinglistupdate")
-                            .setLabel("Update")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "🔄" }))
-                ]
-            });
-            await interaction.reply({ content: "Message sent", ephemeral: true });
+                    description: "Successfully updated `" + setting + "` to value `" + value + "`.",
+                }]
+            })
         }
 
     }
-};
+}

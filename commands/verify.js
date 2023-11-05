@@ -85,6 +85,19 @@ module.exports = {
             var username = user1.username + "#" + user1.discriminator
         }
 
+        if (!stats.data.player.socialMedia) {
+            interaction.editReply({
+                embeds: [
+                    {
+                        description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + stats.data.player.displayname + "`.\n\n" +
+                            "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
+                        color: embedColor
+                    }
+                ]
+            });
+            return;
+        }
+
         if (!stats.data.player.socialMedia.links.DISCORD) {
             interaction.editReply({
                 embeds: [

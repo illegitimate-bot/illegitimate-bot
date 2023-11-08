@@ -36,7 +36,7 @@ module.exports = {
         }
 
         try {
-            await fetch(mojang + ign);
+            var userCheck = await fetch(mojang + ign);
         } catch (error) {
             interaction.editReply({
                 embeds: [
@@ -46,7 +46,6 @@ module.exports = {
             return;
         }
 
-        const userCheck = await fetch(mojang + ign);
         const uuid = userCheck.data.id;
 
         const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + uuid

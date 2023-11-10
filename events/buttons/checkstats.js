@@ -2,7 +2,6 @@ const { color } = require('../../config/options.json');
 const fetch = require('axios');
 const guildapp = require('../../schemas/guildAppSchema.js');
 const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require('../../config/reqs.json');
-const env = require("dotenv").config();
 const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const { getExactLevel, skywarsLevel, getLevelForExp } = require("../../utils/functions.js");
 

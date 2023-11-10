@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits, Partials, ActivityType, Events, Collection } = require('discord.js');
 const { botLogChannel, color } = require('./config/options.json');
-const env = require('dotenv').config();
+require('dotenv').config();
 const mongoURI = process.env.MONGOURI;
 const { connect } = require('mongoose');
 const path = require('path');

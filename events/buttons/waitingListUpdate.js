@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const waitinglist = require('../../schemas/waitinglistSchema.js');
-const env = require('dotenv').config();
 const key = process.env.HYPIXELAPIKEY;
 const { hypixelGuildID } = require("../../config/options.json")
 const fetch = require("axios");

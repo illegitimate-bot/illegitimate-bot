@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const env = require('dotenv').config();
 const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const fetch = require('axios');
 const { color, hypixelGuildID } = require('../config/options.json');

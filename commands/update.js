@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('discord.js');
-const env = require('dotenv').config();
 const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const fetch = require('axios');
 const verify = require('../schemas/verifySchema.js')

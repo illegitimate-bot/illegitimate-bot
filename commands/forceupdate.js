@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
-const env = require('dotenv').config();
 const hypixelAPIKey = process.env.HYPIXELAPIKEY;
 const { hypixelGuildID, color } = require('../config/options.json');
 const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');

@@ -2,7 +2,6 @@ const { SlashCommandBuilder, PermissionFlagsBits, userMention, EmbedBuilder, Cha
 const { hypixelGuildID, color } = require('../config/options.json');
 const { muted } = require('../config/roles.json');
 const verify = require('../schemas/verifySchema.js');
-const env = require('dotenv').config();
 const dev = process.env.DEV;
 const fetch = require('axios');
 

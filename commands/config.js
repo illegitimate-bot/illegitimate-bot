@@ -15,6 +15,9 @@ module.exports = {
             option
                 .setName("setting")
                 .setDescription("The setting to configure")
+                .setChoices(
+                    { name: "Staff Application status", value: "staffAppStatus" }
+                )
                 .setRequired(true))
         .addStringOption(option =>
             option
@@ -29,10 +32,9 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const setting = interaction.options.getString("setting");
+        const setting = interaction.options.getString("setting")
         const value = interaction.options.getString("value");
         const embedColor = Number(color.replace("#", "0x"));
-
         const settingsData = await settings.findOne({ name: setting });
 
         if (!settingsData) {

@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const getuuid = require('../utils/functions');
 
 module.exports = {
     name: 'dev-info',

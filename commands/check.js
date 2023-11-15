@@ -3,7 +3,7 @@ const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require("../co
 const hypixelApiKey = process.env.HYPIXELAPIKEY;
 const { color } = require("../config/options.json");
 const fetch = require("axios");
-const { getExactLevel, skywarsLevel, getLevelForExp } = require("../utils/functions.js");
+const { hypixelLevel, bedwarsLevel, skywarsLevel } = require("../utils/utils.js");
 
 module.exports = {
     name: "check",
@@ -97,7 +97,7 @@ module.exports = {
 
         //bedwars level
         const hsbwexp = stats.data.player.stats.Bedwars.Experience;
-        const hsbwstars = getLevelForExp(hsbwexp);
+        const hsbwstars = bedwarsLevel(hsbwexp);
         // bedwars fkdr
         const hsbwfk = stats.data.player.stats.Bedwars.final_kills_bedwars;
         const hsbwfd = stats.data.player.stats.Bedwars.final_deaths_bedwars;
@@ -124,7 +124,7 @@ module.exports = {
         const hsduelswlr = hsduelswins / hsduelslosses;
         // network level
         const hypixelExp = stats.data.player.networkExp;
-        const level = getExactLevel(hypixelExp);
+        const level = hypixelLevel(hypixelExp);
 
         if (hsbwstars < bwstars || hsbwfkdr < bwfkdr || hsbwwins < bwwins) {
             var bwtitle =

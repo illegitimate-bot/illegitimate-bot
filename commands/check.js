@@ -18,7 +18,10 @@ module.exports = {
             .setRequired(true))
         .setDMPermission(false),
 
+    /** @param { import('discord.js').ChatInputCommandInteraction } interaction  */
+
     async execute(interaction) {
+
         await interaction.deferReply({});
 
         const ign = interaction.options.getString("ign");

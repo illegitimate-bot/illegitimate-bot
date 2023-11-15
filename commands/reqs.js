@@ -10,7 +10,7 @@ module.exports = {
         .setName('reqs')
         .setDescription('Displays the requirements for the guild.'),
 
-    /** @param { import('discord.js').ChatInputCommandInteraction } interaction  */
+    /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
 

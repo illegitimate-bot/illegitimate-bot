@@ -21,7 +21,7 @@ module.exports = {
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-    /** @param { import('discord.js').ChatInputCommandInteraction } interaction  */
+    /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
         const member1 = interaction.options.getUser('user');

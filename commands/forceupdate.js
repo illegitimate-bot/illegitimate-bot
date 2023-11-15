@@ -22,7 +22,7 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
-    /** @param { import('discord.js').ChatInputCommandInteraction } interaction  */
+    /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
 

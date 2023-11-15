@@ -10,7 +10,7 @@ module.exports = {
         .setType(ApplicationCommandType.Message)
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 
-    /** @param { import('discord.js').ContextMenuCommandInteraction } interaction  */
+    /** @param { import('discord.js').ContextMenuCommandInteraction } interaction */
 
     async execute(interaction) {
 

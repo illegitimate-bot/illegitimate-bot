@@ -10,7 +10,7 @@ module.exports = {
         .setType(ApplicationCommandType.User)
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames),
 
-    /** @param { import('discord.js').ContextMenuCommandInteraction } interaction  */
+    /** @param { import('discord.js').ContextMenuCommandInteraction } interaction */
 
     async execute(interaction) {
 

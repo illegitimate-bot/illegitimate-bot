@@ -10,6 +10,8 @@ module.exports = {
     description: 'Check your stats.',
     type: 'button',
 
+    /** @param {import('discord.js').ButtonInteraction} interaction */
+
     async execute(interaction) {
 
         await interaction.deferReply();

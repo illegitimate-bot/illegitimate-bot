@@ -9,6 +9,8 @@ module.exports = {
     description: 'Update the waiting list.',
     type: 'button',
 
+    /** @param {import('discord.js').ButtonInteraction} interaction */
+
     async execute(interaction) {
 
         await interaction.deferReply({ ephemeral: true });

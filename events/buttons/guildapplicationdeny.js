@@ -6,6 +6,8 @@ module.exports = {
     description: 'Deny a guild application.',
     type: 'button',
 
+    /** @param {import('discord.js').ButtonInteraction} interaction */
+
     async execute(interaction) {
 
         const modal = new ModalBuilder()

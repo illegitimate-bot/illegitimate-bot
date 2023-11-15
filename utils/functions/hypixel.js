@@ -1,3 +1,6 @@
+/*
+    Code used from the slothpixel project https://github.com/slothpixel/core
+*/
 const BASE = 10000;
 const GROWTH = 2500;
 const HALF_GROWTH = 0.5 * GROWTH;

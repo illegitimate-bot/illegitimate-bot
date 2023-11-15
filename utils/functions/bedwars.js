@@ -1,3 +1,6 @@
+/*
+    Code used from the slothpixel project https://github.com/slothpixel/core
+*/
 function getExpForLevel(level) {
     if (level == 0) return 0;
 

@@ -1,3 +1,6 @@
+/*
+    Code used from the slothpixel project https://github.com/slothpixel/core
+*/
 function skywarsLevel(xp) {
     var xps = [0, 20, 70, 150, 250, 500, 1000, 2000, 3500, 6000, 10000, 15000];
     let exactLevel = 0

@@ -10,6 +10,8 @@ module.exports = {
     description: 'Accept a guild application.',
     type: 'button',
 
+    /** @param {import('discord.js').ButtonInteraction} interaction */
+
     async execute(interaction) {
 
         await interaction.deferReply();

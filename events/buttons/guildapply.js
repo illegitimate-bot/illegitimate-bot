@@ -14,6 +14,8 @@ module.exports = {
     description: 'Guild application button.',
     type: 'button',
 
+    /** @param {import('discord.js').ButtonInteraction} interaction */
+
     async execute(interaction) {
 
         const user = interaction.user;

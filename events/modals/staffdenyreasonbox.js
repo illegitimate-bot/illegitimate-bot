@@ -10,6 +10,8 @@ module.exports = {
     description: 'Deny reason box.',
     type: 'modal',
 
+    /** @param {import('discord.js').ModalSubmitInteraction} interaction  */
+
     async execute(interaction) {
 
         if (interaction.type !== InteractionType.ModalSubmit) return;
@@ -17,7 +19,6 @@ module.exports = {
 
         interaction.deferReply();
 
-        const channel = interaction.channel;
         const guild = interaction.guild;
         const reason = interaction.fields.fields.get('staffdenyreason').value || "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));

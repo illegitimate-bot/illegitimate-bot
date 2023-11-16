@@ -44,5 +44,13 @@ function guildLevel(exp) {
     // If changed here, also change in for loop above
     return 1000;
 }
+/*
+    Code used from the hypixel-guild-bot project https://github.com/SimplyNo/hypixel-guild-bot
+*/
+function scaledGEXP(input) {
+    if (input <= 200000) return Number(input);
+    if (input <= 700000) return Number(Math.round(((input - 200000) / 10) + 200000));
+    if (input > 700000) return Number(Math.round(((input - 700000) / 33) + 250000));
+}
 
-module.exports = { guildLevel }
+module.exports = { guildLevel, scaledGEXP }

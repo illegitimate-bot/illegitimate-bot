@@ -69,9 +69,7 @@ module.exports = {
             .setDescription("The application has been denied by <@" + interaction.user.id + ">.\n" +
                 "**Reason:** `" + reason + "`")
             .setColor(embedColor)
-            .setThumbnail({
-                url: applicant.avatarURL() ?? guild.iconURL()
-            })
+            .setThumbnail(guild.iconURL())
             .setFooter({
                 iconURL: guild.iconURL(),
                 text: "ID: " + applicant.id

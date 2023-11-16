@@ -11,6 +11,7 @@ const commands = [];
 const commandFiles = [
     "../commands/config.js",
     "../commands/setup.js",
+    "../commands/guild.js"
 ]
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment

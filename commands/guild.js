@@ -36,6 +36,7 @@ module.exports = {
         const mojang = "https://api.mojang.com/users/profiles/minecraft/"
         const hypixel = "https://api.hypixel.net/player"
         const guild = "https://api.hypixel.net/guild"
+        const minotar = "https://minotar.net/helm/"
 
         if (subcommand === "member") {
 
@@ -57,6 +58,7 @@ module.exports = {
                 })
             }
 
+            const head = minotar + ign
             const player = await fetch(hypixel, {
                 params: {
                     key: apikey,
@@ -64,11 +66,15 @@ module.exports = {
                 }
             })
 
+
             if (!player.data.player) {
                 await interaction.editReply({
                     embeds: [{
-                        description: "This user does not exist",
+                        description: "This user never logged on to hypixel",
                         color: embedColor,
+                        thumbnail: {
+                            url: head
+                        },
                         footer: {
                             text: interaction.guild.name + " | Developed by taken.lua",
                             icon_url: interaction.guild.iconURL({ dynamic: true })
@@ -105,6 +111,9 @@ module.exports = {
                     embeds: [{
                         description: "This user is not in a guild",
                         color: embedColor,
+                        thumbnail: {
+                            url: head
+                        },
                         footer: {
                             text: interaction.guild.name + " | Developed by taken.lua",
                             icon_url: interaction.guild.iconURL({ dynamic: true })
@@ -142,6 +151,8 @@ module.exports = {
                 return "**➺ " + key + ":** " + "`" + memberGexp[key] + "`" + "\n"
             })
             const expValue = allDaysGexp.join("")
+            const totalWeeklyGexp = Object.values(memberGexp).reduce((a, b) => a + b, 0)
+            const averageWeeklyGexp = Math.round(totalWeeklyGexp / 7)
 
             const guildMemberJoinMS = guildMember.joined
             const guildMemberJoinTime = new Date(guildMemberJoinMS)
@@ -165,15 +176,24 @@ module.exports = {
                     description: "**Guild Name:** `" + guildName + "`\n" +
                         "**Guild Rank:** `" + guildRank + "`\n",
                     color: embedColor,
+                    thumbnail: {
+                        url: head
+                    },
                     fields: [
                         {
                             name: "**Daily GEXP**",
                             value: expValue
                         },
                         {
+                            name: "**Weekly GEXP**",
+                            value: "**➺ Total:** `" + totalWeeklyGexp + "`\n" +
+                                "**➺ Daily avarage:** `" + averageWeeklyGexp + "`"
+                        },
+                        {
                             name: "**Join date**",
-                            value: "`" + guildMemberJoin + "`"
+                            value: "**➺ **`" + guildMemberJoin + "`"
                         }
+                        
                     ],
                     footer: {
                         text: interaction.guild.name + " | Developed by taken.lua",

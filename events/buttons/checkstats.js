@@ -1,9 +1,7 @@
 const { color } = require('../../config/options.json');
-const fetch = require('axios');
 const guildapp = require('../../schemas/guildAppSchema.js');
 const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require('../../config/reqs.json');
-const hypixelApiKey = process.env.HYPIXELAPIKEY;
-const { hypixelLevel, bedwarsLevel, skywarsLevel } = require("../../utils/utils.js");
+const { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js");
 
 module.exports = {
     name: 'checkstats',
@@ -19,24 +17,12 @@ module.exports = {
         const message = interaction.message;
         const embed = message.embeds[0];
         const applicantId = embed.footer.text.split(" ")[1]
-
         const guildappdata = await guildapp.findOne({ userID: applicantId })
         const uuid = guildappdata.uuid;
-
-        const mojang = "https://api.mojang.com/user/profile/"
-        const hypixel = "https://api.hypixel.net/player"
-        const guildAPI = "https://api.hypixel.net/guild"
-        const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
-        const userCheck = await fetch(mojang + uuid);
-        const ign = userCheck.data.name;
-        const head = minotar + ign;
-
-        const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + uuid
-        const stats = await fetch(player);
-
-        if (!stats.data.player) {
+        const player = await getPlayer(uuid)
+        if (!player) {
             interaction.editReply({
                 embeds: [{
                     description: "That player hasn't played Hypixel before.",
@@ -46,8 +32,10 @@ module.exports = {
             return;
         }
 
-        const rank2 = stats.data.player.newPackageRank;
-        const monthlyRank = stats.data.player.monthlyPackageRank;
+        const ign = player.playername
+        const head = await getHeadURL(ign)
+        const rank2 = player.newPackageRank;
+        const monthlyRank = player.monthlyPackageRank;
 
         if (rank2 === 'VIP') {
             var rank = "[VIP] "
@@ -61,52 +49,50 @@ module.exports = {
             var rank = "[MVP++] "
         }
 
-        const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + uuid
-        const guildCheck = await fetch(guild);
-
-        if (!guildCheck.data.guild) {
+        const guild = await getGuild(uuid)
+        if (!guild) {
             var guildName = "None";
         } else {
-            var guildName = guildCheck.data.guild.name;
+            var guildName = guild.name;
         }
 
-        if (!guildCheck.data.guild) {
+        if (!guild) {
             var guildTag = ""
-        } else if (!guildCheck.data.guild.tag) {
+        } else if (!guild.tag) {
             var guildTag = ""
         } else {
-            var guildTag = " [" + guildCheck.data.guild.tag + "]"
+            var guildTag = " [" + guild.tag + "]"
         }
 
         //bedwars level
-        const hsbwexp = stats.data.player.stats.Bedwars.Experience;
+        const hsbwexp = player.stats.Bedwars.Experience;
         const hsbwstars = bedwarsLevel(hsbwexp);
         // bedwars fkdr
-        const hsbwfk = stats.data.player.stats.Bedwars.final_kills_bedwars;
-        const hsbwfd = stats.data.player.stats.Bedwars.final_deaths_bedwars;
+        const hsbwfk = player.stats.Bedwars.final_kills_bedwars;
+        const hsbwfd = player.stats.Bedwars.final_deaths_bedwars;
         const hsbwfkdr = hsbwfk / hsbwfd;
         // bedwars wins
-        const hsbwwins = stats.data.player.stats.Bedwars.wins_bedwars;
+        const hsbwwins = player.stats.Bedwars.wins_bedwars;
         // skywars level
-        const hsswexp = stats.data.player.stats.SkyWars.skywars_experience;
+        const hsswexp = player.stats.SkyWars.skywars_experience;
         const hsswstars = skywarsLevel(hsswexp);
         // skywars kdr
-        const hsswkills = stats.data.player.stats.SkyWars.kills;
-        const hsswdeaths = stats.data.player.stats.SkyWars.deaths;
+        const hsswkills = player.stats.SkyWars.kills;
+        const hsswdeaths = player.stats.SkyWars.deaths;
         const hsswkd = hsswkills / hsswdeaths;
         //skywars wins
-        const hsswwins = stats.data.player.stats.SkyWars.wins;
+        const hsswwins = player.stats.SkyWars.wins;
         // dueks kdr
-        const hsduelskills = stats.data.player.stats.Duels.kills
-        const hsduelsdeaths = stats.data.player.stats.Duels.deaths
+        const hsduelskills = player.stats.Duels.kills
+        const hsduelsdeaths = player.stats.Duels.deaths
         const hsduelskd = hsduelskills / hsduelsdeaths
         // duels wins
-        const hsduelswins = stats.data.player.stats.Duels.wins;
+        const hsduelswins = player.stats.Duels.wins;
         // duels wlr
-        const hsduelslosses = stats.data.player.stats.Duels.losses;
+        const hsduelslosses = player.stats.Duels.losses;
         const hsduelswlr = hsduelswins / hsduelslosses;
         // network level
-        const hypixelExp = stats.data.player.networkExp;
+        const hypixelExp = player.networkExp;
         const level = hypixelLevel(hypixelExp);
 
         if (hsbwstars < bwstars || hsbwfkdr < bwfkdr || hsbwwins < bwwins) {
@@ -129,7 +115,7 @@ module.exports = {
 
         await interaction.editReply({
             embeds: [{
-                title: rank + stats.data.player.displayname + guildTag,
+                title: rank + player.displayname + guildTag,
                 description: "**Network Level:** `" +
                     level.toFixed(2).toString() + "`\n" +
                     "**Current Guild:** `" + guildName + "`",

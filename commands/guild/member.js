@@ -1,4 +1,4 @@
-const { guildLevel, getUUID, getIGN, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js");
+const { getUUID, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js");
 const { color } = require("../../config/options.json");
 
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
@@ -23,6 +23,7 @@ async function guildMember(interaction) {
         });
     }
 
+    const head = await getHeadURL(ign);
     const player = await getPlayer(uuid);
     if (!player) {
         await interaction.editReply({
@@ -42,9 +43,9 @@ async function guildMember(interaction) {
         });
     }
 
-    const serverRank = player.data.player.newPackageRank;
-    const monthlyRank = player.data.player.monthlyPackageRank;
-    const displayName = player.data.player.displayname;
+    const serverRank = player.newPackageRank;
+    const monthlyRank = player.monthlyPackageRank;
+    const displayName = player.displayname;
 
     if (serverRank === "VIP") {
         var rank = "[VIP] ";
@@ -101,29 +102,19 @@ async function guildMember(interaction) {
     const guildMemberJoinSeconds = guildMemberJoinTime.getSeconds();
 
     const guildMemberJoin =
-        guildMemberJoinDate +
-        "." +
-        guildMemberJoinMonth +
-        "." +
-        guildMemberJoinYear +
-        " " +
-        guildMemberJoinHours +
-        ":" +
-        guildMemberJoinMinutes +
-        ":" +
+        guildMemberJoinDate + "." +
+        guildMemberJoinMonth + "." +
+        guildMemberJoinYear + " " +
+        guildMemberJoinHours + ":" +
+        guildMemberJoinMinutes + ":" +
         guildMemberJoinSeconds;
 
     await interaction.editReply({
         embeds: [
             {
                 title: rank + displayName + guildTag,
-                description:
-                    "**Guild Name:** `" +
-                    guildName +
-                    "`\n" +
-                    "**Guild Rank:** `" +
-                    guildRank +
-                    "`\n",
+                description: "**Guild Name:** `" + guildName + "`\n" +
+                    "**Guild Rank:** `" + guildRank + "`\n",
                 color: embedColor,
                 thumbnail: {
                     url: head,
@@ -135,13 +126,8 @@ async function guildMember(interaction) {
                     },
                     {
                         name: "**Weekly GEXP**",
-                        value:
-                            "**➺ Total:** `" +
-                            totalWeeklyGexp +
-                            "`\n" +
-                            "**➺ Daily avarage:** `" +
-                            averageWeeklyGexp +
-                            "`",
+                        value: "**➺ Total:** `" + totalWeeklyGexp + "`\n" +
+                            "**➺ Daily avarage:** `" + averageWeeklyGexp + "`",
                     },
                     {
                         name: "**Join date**",

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
 const { color } = require('../config/options.json')
 const { guildMember } = require('./guild/member.js')
+const { guildInfo } = require('./guild/info.js')
 
 module.exports = {
     name: 'guild',
@@ -21,6 +22,17 @@ module.exports = {
                         .setRequired(true)
                 )
         )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('info')
+                .setDescription('Get info about a guild.')
+                .addStringOption(option =>
+                    option
+                        .setName('ign')
+                        .setDescription('The IGN of a member.')
+                        .setRequired(true)
+                )
+        )
         .setDMPermission(false),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
@@ -34,6 +46,11 @@ module.exports = {
 
         if (subcommand === 'member') {
             await guildMember(interaction)
+            return
+        }
+
+        if (subcommand === 'info') {
+            await guildInfo(interaction)
             return
         }
 

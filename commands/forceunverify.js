@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
 const { color } = require("../config/options.json");
 const verify = require("../schemas/verifySchema.js");
-const mongoose = require("mongoose");
 const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json");
 const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember]
 
@@ -28,7 +27,6 @@ module.exports = {
         const member = interaction.guild.members.cache.get(member1.id)
         const embedColor = Number(color.replace('#', '0x'))
         const verifiedUser = await verify.findOne({ userID: member1.id })
-        const user = interaction.user
 
         if (!verifiedUser) {
             return interaction.reply({
@@ -45,7 +43,7 @@ module.exports = {
 
         await interaction.reply({
             embeds: [{
-                description: "Successfully unverified" + userMention(member1.id),
+                description: "Successfully unverified " + userMention(member1.id),
                 color: embedColor,
                 footer: {
                     text: interaction.guild.name + " | Developed by taken.lua",

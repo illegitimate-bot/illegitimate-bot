@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const hypixelApiKey = process.env.HYPIXELAPIKEY;
-const fetch = require('axios');
+const { getUUID, getPlayer, getGuild, getHeadURL } = require('../utils/utils.js');
 const { color, hypixelGuildID } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js')
 const { mongoose } = require('mongoose');
@@ -36,25 +35,16 @@ module.exports = {
         const user = interaction.guild.members.cache.get(user1.id);
         const ign = interaction.options.getString('ign');
         const mod = interaction.user
-
-        // const slothPixel = "https://api.slothpixel.me/api/players/";
-        // const guildAPI = "https://api.slothpixel.me/api/guilds/"
-
-        const mojang = "https://api.mojang.com/users/profiles/minecraft/"
-        const hypixelApi = "https://api.hypixel.net/player"
-        const guildApi = "https://api.hypixel.net/guild"
-        const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
 
-        if (!user) {
-            interaction.editReply('Please provide a user to force verify.\nThis can also mean the user is not in the server.')
+        const verifyData = await verify.findOne({ userID: user.id })
+        if (verifyData) {
+            interaction.editReply('That user is already verified.')
             return
         }
 
-        const verifyData = await verify.findOne({ userID: user.id })
-
-        if (verifyData) {
-            interaction.editReply('That user is already verified.')
+        if (!user) {
+            interaction.editReply('Please provide a user to force verify.\nThis can also mean the user is not in the server.')
             return
         }
 
@@ -75,23 +65,19 @@ module.exports = {
             var modName = mod.username + "#" + mod.discriminator
         }
 
-        try {
-            await fetch(mojang + ign);
-        } catch (err) {
-            interaction.editReply('That player doesn\'t exist. [Mojang]')
+        const uuid = await getUUID(ign);
+        if (!uuid) {
+            interaction.editReply({
+                embeds: [{
+                    description: "<a:questionmark_pink:1130206038008803488> That player doesn't exist.",
+                    color: embedColor
+                }]
+            })
             return
         }
 
-        const userCheck = await fetch(mojang + ign);
-        const userUUID = userCheck.data.id;
-
-        const player = hypixelApi + "?key=" + hypixelApiKey + "&uuid=" + userUUID
-        const guild = guildApi + "?key=" + hypixelApiKey + "&player=" + userUUID
-        const head = minotar + ign;
-
-        const hypixelCheck = await fetch(player);
-
-        if (!hypixelCheck.data.player) {
+        const player = await getPlayer(uuid);
+        if (!player) {
             interaction.editReply({
                 embeds: [{
                     description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
@@ -101,17 +87,17 @@ module.exports = {
             return;
         }
 
-        const guildCheck = await fetch(guild)
-
-        if (!guildCheck.data.guild) {
+        const guild = await getGuild(uuid);
+        if (!guild) {
             var responseGuildID = null
         } else {
-            var responseGuildID = guildCheck.data.guild._id
+            var responseGuildID = guild._id
         }
 
+        const head = await getHeadURL(ign);
         if (responseGuildID === hypixelGuildID) {
-            const GuildMembers = guildCheck.data.guild.members;
-            const guildRank = GuildMembers.find(member => member.uuid === hypixelCheck.data.player.uuid).rank;
+            const GuildMembers = guild.members;
+            const guildRank = GuildMembers.find(member => member.uuid === player.uuid).rank;
 
             if (guildRank === "Guild Master") {
                 await user.roles.add(gm, "User was force verified by " + modName);
@@ -157,7 +143,7 @@ module.exports = {
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
             userID: user.id,
-            uuid: userUUID
+            uuid: uuid
         })
 
         await newVerify.save();
@@ -165,7 +151,7 @@ module.exports = {
         await interaction.editReply({
             embeds: [{
                 title: interaction.guild.name,
-                description: "You have successfully force verified `" + username + "` with the account `" + hypixelCheck.data.player.displayname + "`.",
+                description: "You have successfully force verified `" + username + "` with the account `" + player.displayname + "`.",
                 color: embedColor,
                 thumbnail: {
                     url: head

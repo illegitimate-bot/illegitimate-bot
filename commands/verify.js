@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const hypixelApiKey = process.env.HYPIXELAPIKEY;
-const fetch = require("axios");
+const { getUUID, getPlayer, getGuild, getHeadURL } = require("../utils/utils.js");
 const { color, hypixelGuildID } = require("../config/options.json");
 const verify = require("../schemas/verifySchema.js");
 const mongoose = require("mongoose");
@@ -28,15 +27,9 @@ module.exports = {
         const user1 = interaction.user
         const user = interaction.guild.members.cache.get(user1.id);
         const ign = interaction.options.getString("ign");
-        const mojang = "https://api.mojang.com/users/profiles/minecraft/";
-        const hypixel = "https://api.hypixel.net/player"
-        const guildAPI = "https://api.hypixel.net/guild"
-        const minotar = "https://minotar.net/helm/";
         const embedColor = Number(color.replace("#", "0x"));
-        const head = minotar + ign;
 
         const verifyData = await verify.findOne({ userID: user.id });
-
         if (verifyData) {
             interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
             return;
@@ -52,9 +45,8 @@ module.exports = {
             return;
         }
 
-        try {
-            await fetch(mojang + ign);
-        } catch (err) {
+        const uuid = await getUUID(ign);
+        if (!uuid) {
             interaction.editReply({
                 embeds: [{
                     description: "<a:questionmark_pink:1130206038008803488> That player does not exist.",
@@ -64,13 +56,9 @@ module.exports = {
             return;
         }
 
-        const userCheck = await fetch(mojang + ign);
-        const userUUID = userCheck.data.id;
-
-        const player = hypixel + "?key=" + hypixelApiKey + "&uuid=" + userUUID
-        const stats = await fetch(player);
-
-        if (!stats.data.player) {
+        const head = await getHeadURL(ign);
+        const player = await getPlayer(uuid);
+        if (!player) {
             interaction.editReply({
                 embeds: [{
                     description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
@@ -86,7 +74,7 @@ module.exports = {
             var username = user1.username + "#" + user1.discriminator
         }
 
-        if (!stats.data.player.socialMedia) {
+        if (!player.socialMedia) {
             interaction.editReply({
                 embeds: [
                     {
@@ -99,7 +87,7 @@ module.exports = {
             return;
         }
 
-        if (!stats.data.player.socialMedia.links.DISCORD) {
+        if (!player.socialMedia.links.DISCORD) {
             interaction.editReply({
                 embeds: [
                     {
@@ -112,7 +100,7 @@ module.exports = {
             return;
         }
 
-        const linkedDiscord = stats.data.player.socialMedia.links.DISCORD
+        const linkedDiscord = player.socialMedia.links.DISCORD
 
         if (linkedDiscord !== username) {
             interaction.editReply({
@@ -127,18 +115,16 @@ module.exports = {
             return;
         }
 
-        const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + userUUID
-        const guildCheck = await fetch(guild);
-
-        if (!guildCheck.data.guild) {
+        const guild = await getGuild(uuid);
+        if (!guild) {
             var guildID = null
         } else {
-            var guildID = guildCheck.data.guild._id
+            var guildID = guild._id
         }
 
         if (guildID === hypixelGuildID) {
-            const GuildMembers = guildCheck.data.guild.members
-            const guildRank = GuildMembers.find((member) => member.uuid === stats.data.player.uuid).rank;
+            const GuildMembers = guild.members
+            const guildRank = GuildMembers.find((member) => member.uuid === player.uuid).rank;
 
             if (guildRank === "Guild Master" && guildID === hypixelGuildID) {
                 await user.roles.add(gm, "Verification");
@@ -184,7 +170,7 @@ module.exports = {
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
             userID: user.id,
-            uuid: userUUID
+            uuid: uuid
         });
 
         await newVerify.save();
@@ -193,7 +179,7 @@ module.exports = {
             embeds: [
                 {
                     title: interaction.guild.name,
-                    description: "You have successfully verified `" + username + "` with the account `" + stats.data.player.displayname + "`.",
+                    description: "You have successfully verified `" + username + "` with the account `" + player.displayname + "`.",
                     color: embedColor,
                     thumbnail: {
                         url: head

@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
+const { getIGN, getHeadURL } = require('../utils/utils.js')
 const { color } = require('../config/options.json');
 const verify = require('../schemas/verifySchema.js');
-const fetch = require('axios');
 
 module.exports = {
     name: 'whois',
@@ -27,19 +27,15 @@ module.exports = {
 
         const user = interaction.options.getUser('user');
         const embedColor = Number(color.replace("#", "0x"));
-        const mojang = "https://api.mojang.com/user/profile/"
-        const minotar = "https://minotar.net/helm/";
 
         const verifiedUser = await verify.findOne({ userID: user.id });
-
         if (!verifiedUser) {
             interaction.editReply({ content: 'This user has not verified their account.' });
             return
         }
 
-        const userCheck = await fetch(mojang + verifiedUser.uuid);
-        const ign = userCheck.data.name;
-        const head = minotar + ign;
+        const ign = await getIGN(verifiedUser.uuid);
+        const head = await getHeadURL(ign)
 
         await interaction.editReply({
             embeds: [{

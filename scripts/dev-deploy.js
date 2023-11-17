@@ -1,5 +1,5 @@
 const { REST, Routes } = require('discord.js');
-const env = require('dotenv').config();
+require('dotenv').config();
 const token = process.env.DEVTOKEN;
 const clientId = process.env.DEVID;
 const guildId = process.env.GUILDID;
@@ -11,7 +11,6 @@ const commands = [];
 const commandFiles = [
     "../commands/config.js",
     "../commands/setup.js",
-    "../commands/guild.js"
 ]
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment

@@ -1,9 +1,8 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
-const hypixelAPIKey = process.env.HYPIXELAPIKEY;
+const { getGuild, getHeadURL, getIGN } = require('../utils/utils.js')
 const { hypixelGuildID, color } = require('../config/options.json');
 const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
 const verify = require('../schemas/verifySchema.js')
-const fetch = require('axios');
 const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff]
 
 module.exports = {
@@ -50,18 +49,14 @@ module.exports = {
             return
         }
 
-        const mojangAPI = "https://api.mojang.com/user/profile/"
-        const guildlAPI = "https://api.hypixel.net/guild"
-        const minotar = "https://minotar.net/helm/";
-        const guild = guildlAPI + "?key=" + hypixelAPIKey + "&player=" + verifyData.uuid;
-        const userCheck = await fetch(mojangAPI + verifyData.uuid);
-        const guildCheck = await fetch(guild);
-        const head = minotar + userCheck.data.name;
+        const ign = await getIGN(verifyData.uuid);
+        const head = await getHeadURL(ign)
+        const guild = await getGuild(verifyData.uuid);
 
-        if (!guildCheck.data.guild) {
+        if (!guild) {
             var responseGuildID = null
         } else {
-            var responseGuildID = guildCheck.data.guild._id
+            var responseGuildID = guild._id
         }
 
         if (responseGuildID !== hypixelGuildID) {
@@ -89,7 +84,7 @@ module.exports = {
 
         if (responseGuildID === hypixelGuildID) {
 
-            const GuildMembers = guildCheck.data.guild.members;
+            const GuildMembers = guild.members;
             const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
             if (guildRank === 'Guild Master') {

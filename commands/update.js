@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const hypixelApiKey = process.env.HYPIXELAPIKEY;
-const fetch = require('axios');
+const { getGuild, getIGN, getHeadURL } = require('../utils/utils.js');
 const verify = require('../schemas/verifySchema.js')
 const { color, hypixelGuildID } = require('../config/options.json');
 const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
@@ -33,9 +32,6 @@ module.exports = {
                 embeds: [{
                     description: "You are not verified. Please run `/verify` to verify yourself",
                     color: embedColor,
-                    thumbnail: {
-                        url: head
-                    },
                     footer: {
                         text: interaction.guild.name + " | Developed by @Taken#0002",
                         icon_url: interaction.guild.iconURL({ dynamic: true })
@@ -45,20 +41,15 @@ module.exports = {
             return
         }
 
-        const mojangAPI = "https://api.mojang.com/user/profile/"
-        const guildAPI = "https://api.hypixel.net/guild"
-        const minotar = "https://minotar.net/helm/";
-        const userCheck = await fetch(mojangAPI + verifyData.uuid);
-        const head = minotar + userCheck.data.name;
-        const guild = guildAPI + "?key=" + hypixelApiKey + "&player=" + verifyData.uuid
-        const guildCheck = await fetch(guild);
-
-        if (!guildCheck.data.guild) {
+        const guild = await getGuild(verifyData.uuid);
+        if (!guild) {
             var guildID = null
         } else {
-            var guildID = guildCheck.data.guild._id
+            var guildID = guild._id
         }
 
+        const ign = await getIGN(verifyData.uuid);
+        const head = await getHeadURL(ign);
         if (guildID !== hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
@@ -85,7 +76,7 @@ module.exports = {
 
         if (guildID === hypixelGuildID) {
 
-            const GuildMembers = guildCheck.data.guild.members;
+            const GuildMembers = guild.members;
             const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
 
             if (guildRank === 'Guild Master') {

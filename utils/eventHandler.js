@@ -4,6 +4,6 @@ const { loadContextMenu } = require('./eventHandlers/contextmenu.js')
 const { loadMessageEvents } = require('./eventHandlers/message.js')
 const { loadModalEvents } = require('./eventHandlers/modal.js')
 const { loadReadyEvents } = require('./eventHandlers/ready.js')
+const { loadInteractionEvents } = require('./eventHandlers/interaction.js')
 
-
-module.exports = { loadSlashCommands, loadButtonEvents, loadContextMenu, loadMessageEvents, loadModalEvents, loadReadyEvents }
+module.exports = { loadSlashCommands, loadButtonEvents, loadContextMenu, loadMessageEvents, loadModalEvents, loadReadyEvents, loadInteractionEvents }

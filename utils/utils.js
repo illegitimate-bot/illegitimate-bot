@@ -1,6 +1,7 @@
 const { skywarsLevel } = require('./functions/skywars.js')
 const { bedwarsLevel } = require('./functions/bedwars.js')
 const { hypixelLevel } = require('./functions/hypixel.js')
+const { formatUuid } = require('./functions/uuid.js')
 const { guildLevel, scaledGEXP } = require('./functions/guild.js')
 const { getUUID, getIGN, getPlayer, getGuild, getHeadURL } = require('./functions/account.js')
 
@@ -14,5 +15,6 @@ module.exports = {
     getIGN,
     getPlayer,
     getGuild,
-    getHeadURL
+    getHeadURL,
+    formatUuid
 }

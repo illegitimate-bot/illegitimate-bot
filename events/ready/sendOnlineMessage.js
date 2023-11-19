@@ -8,7 +8,6 @@ module.exports = {
 
     execute(client) {
         if (process.env.NODE_ENV !== 'dev') {
-            console.log("Logged in as " + client.user.tag + "!");
             const channel = client.channels.cache.get(botLogChannel);
             const embedColor = Number(color.replace('#', '0x'))
 

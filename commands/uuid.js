@@ -6,7 +6,6 @@ module.exports = {
     name: 'uuid',
     description: 'Get a player\'s UUID',
     type: 'slash',
-    dev: true,
 
     data: new SlashCommandBuilder()
         .setName('uuid')

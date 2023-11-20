@@ -5,9 +5,9 @@ const { applicationsChannel } = require('../../config/options.json');
 const { qu1, qu2, qu3, qu4, qu5, qu6, qu7, qu8 } = require('../../config/questions.json');
 const { rq1, rq2, rq3, rq4, rq5, rq6, rq7, rq8 } = require('../../config/questions.json');
 const { guildRole } = require('../../config/roles.json')
+const { getUUID } = require('../../utils/utils.js')
 const mongoose = require('mongoose');
 const guildapp = require('../../schemas/guildAppSchema.js');
-const fetch = require('axios');
 
 module.exports = {
     name: 'guildapply',
@@ -127,9 +127,8 @@ module.exports = {
                 })
                 return
             }
-            try {
-                var userCheck = await fetch(mojangAPI + answer1.first().content);
-            } catch (error) {
+            const uuid = await getUUID(answer1.first().content)
+            if (!uuid) {
                 await user.send({
                     embeds: [{
                         description: "That is not a valid Minecraft username.\n" +
@@ -440,8 +439,6 @@ module.exports = {
                     color: embedColor
                 }]
             })
-
-            const uuid = userCheck.data.id
 
             const newGuildApp = new guildapp({
                 _id: new mongoose.Types.ObjectId(),

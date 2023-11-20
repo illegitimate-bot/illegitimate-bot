@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { color } = require('../../config/options.json');
-const { largeM, smallM, ignM } = require('../../config/limitmessages.json')
+const { largeM, ignM } = require('../../config/limitmessages.json')
 const { staffApplicationsChannel } = require('../../config/options.json');
 const { sq1, sq2, sq3, sq4, sq5, sq6 } = require('../../config/questions.json');
 const { rsq1, rsq2, rsq3, rsq4, rsq5, rsq6 } = require('../../config/questions.json');
@@ -8,7 +8,7 @@ const { guildRole, guildStaff } = require('../../config/roles.json')
 const mongoose = require('mongoose');
 const staffapp = require('../../schemas/staffAppSchema.js');
 const settings = require("../../schemas/settingsSchema.js");
-const fetch = require('axios');
+const { getUUID } = require('../../utils/utils.js')
 
 module.exports = {
     name: 'staffapply',
@@ -23,7 +23,6 @@ module.exports = {
         const guild = interaction.guild;
         const embedColor = Number(color.replace("#", "0x"));
         const userRoles = interaction.member.roles.cache;
-        const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
         const setting = await settings.findOne({ name: "staffAppStatus" })
         const status = setting.value;
 
@@ -137,9 +136,8 @@ module.exports = {
                 })
                 return
             }
-            try {
-                await fetch(mojangAPI + answer1.first().content)
-            } catch (error) {
+            const uuid = await getUUID(answer1.first().content)
+            if (!uuid) {
                 await user.send({
                     embeds: [{
                         description: "That is not a valid Minecraft username.\n" +
@@ -374,9 +372,6 @@ module.exports = {
                     color: embedColor
                 }]
             })
-
-            const userCheck = await fetch(mojangAPI + answer1_1)
-            const uuid = userCheck.data.id
 
             const newStaffApp = new staffapp({
                 _id: new mongoose.Types.ObjectId(),

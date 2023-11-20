@@ -1,5 +1,4 @@
 const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
-const { color } = require('../../config/options.json')
 
 module.exports = {
     name: 'verify',

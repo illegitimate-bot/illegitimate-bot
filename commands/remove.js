@@ -28,15 +28,18 @@ module.exports = {
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
+
+        interaction.deferReply()
+
         const user = interaction.options.getUser('user');
-        const reason = interaction.options.getString('reason') || "No reason provided."
+        const reason = interaction.options.getString('reason') ?? "No reason provided."
         const mod = interaction.user
-        const color = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace('#', '0x'))
 
         const waitinglist = await waitinglistSchema.findOne({ UserID: user.id })
 
         if (!waitinglist) {
-            await interaction.reply({
+            await interaction.editReply({
                 embeds: [{
                     description: userMention(user.id) + " is not on the waiting list.",
                     color: color
@@ -47,10 +50,12 @@ module.exports = {
 
         await waitinglistSchema.findOneAndDelete({ UserID: user.id })
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [{
-                description: userMention(user.id) + " has been removed from the waiting list.",
-                color: color
+                description: userMention(user.id) + " has been removed from the waiting list.\n" +
+                    "**Reason:** `" + reason + "`\n" +
+                    "**Moderator:** " + userMention(mod.id),
+                color: embedColor,
             }]
         })
     }

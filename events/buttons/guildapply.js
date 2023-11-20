@@ -2,12 +2,11 @@ const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('
 const { color } = require('../../config/options.json');
 const { largeM, smallM, ignM } = require('../../config/limitmessages.json')
 const { applicationsChannel } = require('../../config/options.json');
-const { qu1, qu2, qu3, qu4, qu5, qu6, qu7, qu8 } = require('../../config/questions.json');
-const { rq1, rq2, rq3, rq4, rq5, rq6, rq7, rq8 } = require('../../config/questions.json');
+const questions = require('../../config/questions.json');
 const { guildRole } = require('../../config/roles.json')
+const { getUUID } = require('../../utils/utils.js')
 const mongoose = require('mongoose');
 const guildapp = require('../../schemas/guildAppSchema.js');
-const fetch = require('axios');
 
 module.exports = {
     name: 'guildapply',
@@ -21,10 +20,16 @@ module.exports = {
         const user = interaction.user;
         const guild = interaction.guild;
         const embedColor = Number(color.replace("#", "0x"));
-
-        const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
-
         const userRoles = guild.members.cache.get(user.id).roles.cache.map(role => role.id);
+        const guildQuestions = questions.guild
+
+        function qu(n) {
+            return guildQuestions[n - 1].q
+        }
+
+        function rq(n) {
+            return guildQuestions[n - 1].r
+        }
 
         if (interaction.customId === 'guildapply') {
 
@@ -94,7 +99,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 1**",
-                    description: qu1 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + ignM + "`",
+                    description: qu(1) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + ignM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 5 minutes to respond to this message."
@@ -127,9 +132,8 @@ module.exports = {
                 })
                 return
             }
-            try {
-                var userCheck = await fetch(mojangAPI + answer1.first().content);
-            } catch (error) {
+            const uuid = await getUUID(answer1.first().content)
+            if (!uuid) {
                 await user.send({
                     embeds: [{
                         description: "That is not a valid Minecraft username.\n" +
@@ -145,7 +149,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 2**",
-                    description: qu2 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(8 characters max)`",
+                    description: qu(2) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(8 characters max)`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -184,7 +188,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 3**",
-                    description: qu3 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
+                    description: qu(3) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -222,7 +226,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 4**",
-                    description: qu4 + "\n\nPlease type your answer below or type `cancel` to cancel your application." +
+                    description: qu(4) + "\n\nPlease type your answer below or type `cancel` to cancel your application." +
                         " `(We expect a longer answer.)`\n`" + largeM + "`",
                     color: embedColor,
                     footer: {
@@ -261,7 +265,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 5**",
-                    description: qu5 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
+                    description: qu(5) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -299,7 +303,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 6**",
-                    description: qu6 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
+                    description: qu(6) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -337,7 +341,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 7**",
-                    description: qu7 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
+                    description: qu(7) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + smallM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -375,7 +379,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 8**",
-                    description: qu8 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
+                    description: qu(8) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -441,8 +445,6 @@ module.exports = {
                 }]
             })
 
-            const uuid = userCheck.data.id
-
             const newGuildApp = new guildapp({
                 _id: new mongoose.Types.ObjectId(),
                 userID: user.id,
@@ -461,35 +463,35 @@ module.exports = {
                     },
                     fields: [
                         {
-                            name: rq1,
+                            name: rq(1),
                             value: "```" + answer1_1 + "```"
                         },
                         {
-                            name: rq2,
+                            name: rq(2),
                             value: "```" + answer2_1 + "```"
                         },
                         {
-                            name: rq3,
+                            name: rq(3),
                             value: "```" + answer3_1 + "```"
                         },
                         {
-                            name: rq4,
+                            name: rq(4),
                             value: "```" + answer4_1 + "```"
                         },
                         {
-                            name: rq5,
+                            name: rq(5),
                             value: "```" + answer5_1 + "```"
                         },
                         {
-                            name: rq6,
+                            name: rq(6),
                             value: "```" + answer6_1 + "```"
                         },
                         {
-                            name: rq7,
+                            name: rq(7),
                             value: "```" + answer7_1 + "```"
                         },
                         {
-                            name: rq8,
+                            name: rq(8),
                             value: "```" + answer8_1 + "```"
                         }
                     ],

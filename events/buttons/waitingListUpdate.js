@@ -1,8 +1,6 @@
-const mongoose = require('mongoose');
 const waitinglist = require('../../schemas/waitinglistSchema.js');
-const key = process.env.HYPIXELAPIKEY;
+const { getGuild } = require('../../utils/utils.js');
 const { hypixelGuildID } = require("../../config/options.json")
-const fetch = require("axios");
 
 module.exports = {
     name: 'waitinglistupdate',
@@ -19,15 +17,13 @@ module.exports = {
         const message = interaction.message;
         const embed = message.embeds[0];
         const accepted = await waitinglist.find()
-        const guildAPI = "https://api.hypixel.net/guild"
-        const guild = guildAPI + "?key=" + key + "&player="
 
         for (let i = 0; i < accepted.length; i++) {
 
             const uuid = accepted[i].uuid
-            const check = await fetch(guild + uuid)
+            const guild = await getGuild(uuid)
 
-            if (check.data.guild && check.data.guild._id === hypixelGuildID) {
+            if (guild && guild._id === hypixelGuildID) {
                 await waitinglist.findOneAndDelete({ uuid: uuid })
                 continue
             }

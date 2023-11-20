@@ -1,4 +1,3 @@
-const { Events } = require('discord.js');
 const { botLogChannel, color } = require('../../config/options.json');
 
 module.exports = {

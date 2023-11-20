@@ -1,9 +1,6 @@
 const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { color } = require('../../config/options.json');
-const mongoose = require('mongoose');
 const staffapp = require('../../schemas/staffAppSchema.js');
-const fs = require('fs');
-const path = require('path');
 
 module.exports = {
     name: 'staffdenyreasonbox',

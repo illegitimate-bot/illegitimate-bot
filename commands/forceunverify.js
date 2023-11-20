@@ -8,7 +8,6 @@ module.exports = {
     name: "forceunverify",
     description: "Force unverify a user",
     type: 'slash',
-    dev: true,
 
     data: new SlashCommandBuilder()
         .setName('forceunverify')

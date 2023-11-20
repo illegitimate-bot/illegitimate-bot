@@ -2,13 +2,13 @@ const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('
 const { color } = require('../../config/options.json');
 const { largeM, ignM } = require('../../config/limitmessages.json')
 const { staffApplicationsChannel } = require('../../config/options.json');
-const { sq1, sq2, sq3, sq4, sq5, sq6 } = require('../../config/questions.json');
-const { rsq1, rsq2, rsq3, rsq4, rsq5, rsq6 } = require('../../config/questions.json');
+const questions = require('../../config/questions.json');
 const { guildRole, guildStaff } = require('../../config/roles.json')
 const mongoose = require('mongoose');
 const staffapp = require('../../schemas/staffAppSchema.js');
 const settings = require("../../schemas/settingsSchema.js");
 const { getUUID } = require('../../utils/utils.js')
+const dev = process.env.DEV
 
 module.exports = {
     name: 'staffapply',
@@ -25,14 +25,25 @@ module.exports = {
         const userRoles = interaction.member.roles.cache;
         const setting = await settings.findOne({ name: "staffAppStatus" })
         const status = setting.value;
+        const staffQuestions = questions.staff
+
+        function sq(n) {
+            return staffQuestions[n - 1].q
+        }
+
+        function rq(n) {
+            return staffQuestions[n - 1].r
+        }
 
         if (interaction.customId === "staffapply") {
 
             await interaction.deferReply({ ephemeral: true });
 
-            if (status === "0") {
-                await interaction.editReply({ content: "Staff applications are currently closed.", ephemeral: true });
-                return
+            if (user.id !== dev) {
+                if (status === "0") {
+                    await interaction.editReply({ content: "Staff applications are currently closed.", ephemeral: true });
+                    return
+                }
             }
 
             if (!userRoles.has(guildRole)) {
@@ -103,7 +114,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 1**",
-                    description: sq1 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + ignM + "`",
+                    description: sq(1) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + ignM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 5 minutes to respond to this message."
@@ -153,7 +164,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 2**",
-                    description: sq2 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
+                    description: sq(2) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n" + "`(64 characters max)`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -192,7 +203,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 3**",
-                    description: sq3 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
+                    description: sq(3) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -230,7 +241,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 4**",
-                    description: sq4 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
+                    description: sq(4) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -268,7 +279,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 5**",
-                    description: sq5 + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
+                    description: sq(5) + "\n\nPlease type your answer below or type `cancel` to cancel your application.\n`" + largeM + "`",
                     color: embedColor,
                     footer: {
                         text: "You have 15 minutes to respond to this message."
@@ -306,7 +317,7 @@ module.exports = {
             await user.send({
                 embeds: [{
                     title: "**Question 6**",
-                    description: sq6 + "\n\nPlease type your answer below or type `cancel` to cancel your application." +
+                    description: sq(6) + "\n\nPlease type your answer below or type `cancel` to cancel your application." +
                         "`(We expect a longer answer here)`\n`" + largeM + "`",
                     color: embedColor,
                     footer: {
@@ -393,27 +404,27 @@ module.exports = {
                     },
                     fields: [
                         {
-                            name: rsq1,
+                            name: rq(1),
                             value: "```" + answer1_1 + "```"
                         },
                         {
-                            name: rsq2,
+                            name: rq(2),
                             value: "```" + answer2_1 + "```"
                         },
                         {
-                            name: rsq3,
+                            name: rq(3),
                             value: "```" + answer3_1 + "```"
                         },
                         {
-                            name: rsq4,
+                            name: rq(4),
                             value: "```" + answer4_1 + "```"
                         },
                         {
-                            name: rsq5,
+                            name: rq(5),
                             value: "```" + answer5_1 + "```"
                         },
                         {
-                            name: rsq6,
+                            name: rq(6),
                             value: "```" + answer6_1 + "```"
                         }
 

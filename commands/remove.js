@@ -6,7 +6,6 @@ module.exports = {
     name: 'remove',
     description: 'Remove a person on the waiting list.',
     type: 'slash',
-    dev: true,
 
     data: new SlashCommandBuilder()
         .setName('remove')

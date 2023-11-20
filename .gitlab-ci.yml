@@ -6,6 +6,6 @@ build-docker:
         - docker build --pull -t illegitimate:$CI_COMMIT_BRANCH .
         - docker push illegitimate:$CI_COMMIT_BRANCH
     rules:
-    - if: $CI_COMMIT_BRANCH === "main"
+    - if: $CI_COMMIT_BRANCH
       exists:
         - Dockerfile

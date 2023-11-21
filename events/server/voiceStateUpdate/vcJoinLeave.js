@@ -54,6 +54,8 @@ module.exports = {
 
         } else if (oldChannel !== null && newChannel !== null) {
 
+            if (oldChannel.id === newChannel.id) return
+
             channel.send({
                 embeds: [{
                     title: "Voice Channel Switch",

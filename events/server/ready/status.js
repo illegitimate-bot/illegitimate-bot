@@ -1,9 +1,10 @@
-const statuses = require('../../config/statuses.json')
+const statuses = require('../../../config/statuses.json')
 
 module.exports = {
     name: 'status',
     description: 'Sets the status of the bot',
-    type: 'ready',
+    type: 'event',
+    event: 'ready',
 
     /** @param { import('discord.js').Client } client */
 

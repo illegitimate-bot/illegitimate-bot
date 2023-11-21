@@ -1,7 +1,8 @@
 module.exports = {
     name: 'ur mom',
     description: 'ur moms someone',
-    type: 'message',
+    type: 'event',
+    event: 'messageCreate',
 
     /** @param { import('discord.js').Message } message */
 

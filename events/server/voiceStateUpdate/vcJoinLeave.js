@@ -1,10 +1,10 @@
 const { userMention, channelMention } = require('discord.js')
-const { botLogChannel, color } = require('../../config/options.json')
+const { botLogChannel, color } = require('../../../config/options.json')
 
 module.exports = {
     name: 'vcJoinLeave',
     description: 'Logs when a user joins or leaves a voice channel.',
-    type: 'other',
+    type: 'event',
     event: 'voiceStateUpdate',
 
     /**

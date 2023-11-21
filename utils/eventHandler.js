@@ -1,19 +1,13 @@
 const { loadButtonEvents } = require('./eventHandlers/button.js')
-const { loadSlashCommands } = require('./eventHandlers/command.js')
-const { loadContextMenu } = require('./eventHandlers/contextmenu.js')
-const { loadMessageEvents } = require('./eventHandlers/message.js')
+const { loadSlashCommandsEvents } = require('./eventHandlers/command.js')
+const { loadContextMenuEvents } = require('./eventHandlers/contextmenu.js')
 const { loadModalEvents } = require('./eventHandlers/modal.js')
-const { loadReadyEvents } = require('./eventHandlers/ready.js')
-const { loadInteractionEvents } = require('./eventHandlers/interaction.js')
-const { loadOtherEvents } = require('./eventHandlers/other.js')
+const { loadEvents } = require('./eventHandlers/events.js')
 
 module.exports = {
-    loadSlashCommands,
+    loadSlashCommandsEvents,
     loadButtonEvents,
-    loadContextMenu,
-    loadMessageEvents,
+    loadContextMenuEvents,
     loadModalEvents,
-    loadReadyEvents,
-    loadInteractionEvents,
-    loadOtherEvents
+    loadEvents
 }

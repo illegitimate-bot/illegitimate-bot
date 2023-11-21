@@ -1,7 +1,8 @@
 module.exports = {
     name: "logBtnsCmds",
     description: "Logs all button and command interactions",
-    type: "interaction",
+    type: "event",
+    event: "interactionCreate",
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 

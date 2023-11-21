@@ -1,7 +1,8 @@
 module.exports = {
     name: 'conolelog',
     description: "console log",
-    type: 'ready',
+    type: 'event',
+    event: 'ready',
 
     /** @param { import('discord.js').Client } client */
     execute(client) {

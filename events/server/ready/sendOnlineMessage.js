@@ -1,9 +1,10 @@
-const { onlineLogChannel, color } = require('../../config/options.json');
+const { onlineLogChannel, color } = require('../../../config/options.json');
 
 module.exports = {
     name: 'sendonlinemessage',
     description: "send an online message",
-    type: 'ready',
+    type: 'event',
+    event: 'ready',
 
     execute(client) {
         if (process.env.NODE_ENV !== 'dev') {

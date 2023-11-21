@@ -1,14 +1,5 @@
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
-const {
-    loadSlashCommands,
-    loadMessageEvents,
-    loadContextMenu,
-    loadModalEvents,
-    loadButtonEvents,
-    loadReadyEvents,
-    loadInteractionEvents,
-    loadOtherEvents
-} = require('./utils/eventHandler.js')
+const { loadSlashCommandsEvents, loadContextMenuEvents, loadModalEvents, loadButtonEvents, loadEvents } = require('./utils/eventHandler.js')
 const { autoDeployCommands } = require('./utils/autodeploy.js');
 require('dotenv').config();
 const mongoURI = process.env.MONGOURI;
@@ -44,14 +35,11 @@ client.commands = new Collection();
 client.events = new Collection();
 client.modals = new Collection();
 
-loadSlashCommands(client);
-loadContextMenu(client);
+loadSlashCommandsEvents(client);
+loadContextMenuEvents(client);
 loadButtonEvents(client);
 loadModalEvents(client);
-loadMessageEvents(client);
-loadReadyEvents(client)
-loadInteractionEvents(client);
-loadOtherEvents(client);
+loadEvents(client);
 
 client.login(token);
 

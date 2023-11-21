@@ -4,7 +4,7 @@ const fs = require('fs');
 
 /** @param { import('discord.js').Client } client */
 
-function loadSlashCommands(client) {
+function loadSlashCommandsEvents(client) {
     const cmdPath = path.join(__dirname, '..', '..', 'commands');
     const cmdFiles = fs.readdirSync(cmdPath).filter(file => file.endsWith('.js'));
 
@@ -60,4 +60,4 @@ function loadSlashCommands(client) {
     })
 }
 
-module.exports = { loadSlashCommands }
+module.exports = { loadSlashCommandsEvents }

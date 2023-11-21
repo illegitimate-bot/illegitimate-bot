@@ -4,7 +4,7 @@ const fs = require('fs');
 
 /** @param { import('discord.js').Client } client */
 
-function loadContextMenu(client) {
+function loadContextMenuEvents(client) {
     const contextMenuPath = path.join(__dirname, '..', '..', 'commands-contextmenu');
     const contextMenuFiles = fs.readdirSync(contextMenuPath).filter(file => file.endsWith('.js'));
 
@@ -44,4 +44,4 @@ function loadContextMenu(client) {
     })
 }
 
-module.exports = { loadContextMenu }
+module.exports = { loadContextMenuEvents }

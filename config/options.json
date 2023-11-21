@@ -2,8 +2,9 @@
     "color": "#eeaadb",
     "applicationsChannel": "776705352456470550",
     "staffApplicationsChannel": "1039258641393520700",
-	"inactivityLogChannel": "829742524796239882",
+    "inactivityLogChannel": "829742524796239882",
     "staffOtherChannel": "1082036748558803104",
     "hypixelGuildID": "5a353a170cf2e529044f2935",
-    "botLogChannel": "1101144489306886226"
+    "onlineLogChannel": "1101144489306886226",
+    "botLogChannel": "1174403585149243472"
 }

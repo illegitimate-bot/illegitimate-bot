@@ -1,4 +1,4 @@
-const { botLogChannel, color } = require('../../config/options.json');
+const { onlineLogChannel, color } = require('../../config/options.json');
 
 module.exports = {
     name: 'sendonlinemessage',
@@ -7,10 +7,11 @@ module.exports = {
 
     execute(client) {
         if (process.env.NODE_ENV !== 'dev') {
-            const channel = client.channels.cache.get(botLogChannel);
+            const channel = client.channels.cache.get(onlineLogChannel);
             const embedColor = Number(color.replace('#', '0x'))
 
             if (!channel) {
+                console.log(`[ERROR] Could not find channel used for online message.`);
                 return;
             }
 

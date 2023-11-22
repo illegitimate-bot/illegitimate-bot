@@ -55,31 +55,34 @@ module.exports = {
         const rank2 = player.newPackageRank;
         const monthlyRank = player.monthlyPackageRank;
 
+        let rank = ""
         if (rank2 === 'VIP') {
-            var rank = "[VIP] "
+            rank = "[VIP] "
         } else if (rank2 === 'VIP_PLUS') {
-            var rank = "[VIP+] "
+            rank = "[VIP+] "
         } else if (rank2 === 'MVP') {
-            var rank = "[MVP] "
+            rank = "[MVP] "
         } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'NONE') {
-            var rank = "[MVP+] "
+            rank = "[MVP+] "
         } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'SUPERSTAR') {
-            var rank = "[MVP++] "
+            rank = "[MVP++] "
         }
 
         const guild = await getGuild(uuid)
+        let guildName = ""
         if (!guild) {
-            var guildName = "None";
+            guildName = "None";
         } else {
-            var guildName = guild.name;
+            guildName = guild.name;
         }
 
+        let guildTag = ""
         if (!guild) {
-            var guildTag = ""
+            guildTag = ""
         } else if (!guild.tag) {
-            var guildTag = ""
+            guildTag = ""
         } else {
-            var guildTag = " [" + guild.tag + "]"
+            guildTag = " [" + guild.tag + "]"
         }
 
         //bedwars level
@@ -113,27 +116,30 @@ module.exports = {
         const hypixelExp = player.networkExp;
         const level = hypixelLevel(hypixelExp);
 
+        let bwtitle = ""
+        let swtitle = ""
+        let duelstitle = ""
         if (hsbwstars < bwstars || hsbwfkdr < bwfkdr || hsbwwins < bwwins) {
-            var bwtitle =
+            bwtitle =
                 "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements.";
         } else {
-            var bwtitle =
+            bwtitle =
                 "<a:check_a:1087808632172847134> This player meets the BedWars requirements.";
         }
 
         if (hsswstars < swstars) {
-            var swtitle =
+            swtitle =
                 "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements.";
         } else {
-            var swtitle =
+            swtitle =
                 "<a:check_a:1087808632172847134> This player meets the SkyWars requirements.";
         }
 
         if (hsduelswins < duelswins || hsduelswlr < duelswlr) {
-            var duelstitle =
+            duelstitle =
                 "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements.";
         } else {
-            var duelstitle =
+            duelstitle =
                 "<a:check_a:1087808632172847134> This player meets the Duels requirements.";
         }
 

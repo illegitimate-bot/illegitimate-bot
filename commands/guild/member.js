@@ -47,16 +47,17 @@ async function guildMember(interaction) {
     const monthlyRank = player.monthlyPackageRank;
     const displayName = player.displayname;
 
+    let rank = "";
     if (serverRank === "VIP") {
-        var rank = "[VIP] ";
+        rank = "[VIP] ";
     } else if (serverRank === "VIP_PLUS") {
-        var rank = "[VIP+] ";
+        rank = "[VIP+] ";
     } else if (serverRank === "MVP") {
-        var rank = "[MVP] ";
+        rank = "[MVP] ";
     } else if (serverRank === "MVP_PLUS" && monthlyRank === "NONE") {
-        var rank = "[MVP+] ";
+        rank = "[MVP+] ";
     } else if (serverRank === "MVP_PLUS" && monthlyRank === "SUPERSTAR") {
-        var rank = "[MVP++] ";
+        rank = "[MVP++] ";
     }
 
     const guild = await getGuild(uuid);

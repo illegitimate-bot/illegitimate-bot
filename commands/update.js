@@ -42,10 +42,11 @@ module.exports = {
         }
 
         const guild = await getGuild(verifyData.uuid);
+        let guildID = ""
         if (!guild) {
-            var guildID = null
+            guildID = null
         } else {
-            var guildID = guild._id
+            guildID = guild._id
         }
 
         const ign = await getIGN(verifyData.uuid);

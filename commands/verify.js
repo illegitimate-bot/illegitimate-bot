@@ -68,10 +68,11 @@ module.exports = {
             return;
         }
 
+        let username = ""
         if (user1.discriminator === "0") {
-            var username = user1.username
+            username = user1.username
         } else {
-            var username = user1.username + "#" + user1.discriminator
+            username = user1.username + "#" + user1.discriminator
         }
 
         if (!player.socialMedia) {
@@ -116,10 +117,11 @@ module.exports = {
         }
 
         const guild = await getGuild(uuid);
+        let guildID = ""
         if (!guild) {
-            var guildID = null
+            guildID = null
         } else {
-            var guildID = guild._id
+            guildID = guild._id
         }
 
         if (guildID === hypixelGuildID) {

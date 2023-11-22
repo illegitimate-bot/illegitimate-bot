@@ -22,10 +22,11 @@ module.exports = {
         const embed = message.embeds[0];
         const applicantId = embed.footer.text.split(" ")[1];
 
+        let applicant = ""
         try {
-            var applicant = await guild.members.fetch(applicantId);
+            applicant = await guild.members.fetch(applicantId);
         } catch (error) {
-            var applicant = null;
+            applicant = null;
         }
         const reason = interaction.fields.fields.get('denyreason').value || "No reason provided";
         const embedColor = Number(color.replace("#", "0x"));
@@ -76,10 +77,11 @@ module.exports = {
             await applicant.send({ embeds: [dmMessage] });
         }
 
+        let responseEmbeds = ""
         if (applicant === null) {
-            var responseEmbeds = [responseEmbed, missingUser];
+            responseEmbeds = [responseEmbed, missingUser];
         } else {
-            var responseEmbeds = [responseEmbed];
+            responseEmbeds = [responseEmbed];
         }
 
         await guildapp.findOneAndDelete({ userID: applicantId });

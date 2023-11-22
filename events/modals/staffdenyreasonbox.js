@@ -1,27 +1,27 @@
-const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { color } = require('../../config/options.json');
-const staffapp = require('../../schemas/staffAppSchema.js');
+const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
+const { color } = require("../../config/options.json")
+const staffapp = require("../../schemas/staffAppSchema.js")
 
 module.exports = {
-    name: 'staffdenyreasonbox',
-    description: 'Deny reason box.',
-    type: 'modal',
+    name: "staffdenyreasonbox",
+    description: "Deny reason box.",
+    type: "modal",
 
     /** @param {import('discord.js').ModalSubmitInteraction} interaction */
 
     async execute(interaction) {
 
-        if (interaction.type !== InteractionType.ModalSubmit) return;
-        if (interaction.customId !== "staffdenyreasonbox") return;
+        if (interaction.type !== InteractionType.ModalSubmit) return
+        if (interaction.customId !== "staffdenyreasonbox") return
 
-        interaction.deferReply();
+        interaction.deferReply()
 
-        const guild = interaction.guild;
-        const reason = interaction.fields.fields.get('staffdenyreason').value || "No reason provided";
-        const embedColor = Number(color.replace("#", "0x"));
+        const guild = interaction.guild
+        const reason = interaction.fields.fields.get("staffdenyreason").value || "No reason provided"
+        const embedColor = Number(color.replace("#", "0x"))
 
-        const message = interaction.message;
-        const embed = message.embeds[0];
+        const message = interaction.message
+        const embed = message.embeds[0]
         const applicantId = embed.footer.text.split(" ")[1]
         const applicant = await guild.members.fetch(applicantId)
 
@@ -40,16 +40,16 @@ module.exports = {
                         .setDisabled(true),
                 )
             ]
-        });
+        })
 
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild staff has been denied\n" +
                 "**Reason:** `" + reason + "`")
-            .setColor(embedColor);
+            .setColor(embedColor)
 
-        await applicant.send({ embeds: [dmMessage] });
+        await applicant.send({ embeds: [dmMessage] })
 
-        await staffapp.findOneAndDelete({ userID: applicantId });
+        await staffapp.findOneAndDelete({ userID: applicantId })
 
         await interaction.editReply({
             embeds: [{
@@ -65,6 +65,6 @@ module.exports = {
                     text: "ID: " + applicant.id
                 }
             }],
-        });;
+        })
     }
 }

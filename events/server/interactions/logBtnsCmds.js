@@ -11,12 +11,12 @@ module.exports = {
             console.log(interaction.user.username + "#" +
                 interaction.user.discriminator + " ran " +
                 interaction.commandName
-            );
+            )
         } else if (interaction.isButton()) {
             console.log(interaction.user.username + "#" +
                 interaction.user.discriminator + " clicked " +
                 interaction.customId
-            );
+            )
         }
     }
 }

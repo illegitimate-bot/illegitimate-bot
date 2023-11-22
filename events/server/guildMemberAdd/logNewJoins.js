@@ -1,21 +1,21 @@
-const { userMention } = require('discord.js');
-const { color, botLogChannel } = require('../../../config/options.json');
+const { userMention } = require("discord.js")
+const { color, botLogChannel } = require("../../../config/options.json")
 
 module.exports = {
-    name: 'logNewJoins',
-    description: 'Logs new joins',
-    type: 'event',
-    event: 'guildMemberAdd',
+    name: "logNewJoins",
+    description: "Logs new joins",
+    type: "event",
+    event: "guildMemberAdd",
 
     /** @param { import('discord.js').GuildMember } member */
     execute(member) {
 
-        const channel = member.guild.channels.cache.get(botLogChannel);
-        const embedColor = Number(color.replace('#', '0x'));
+        const channel = member.guild.channels.cache.get(botLogChannel)
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!channel) {
-            console.log(`[ERROR] Could not find channel used for new join logging.`);
-            return;
+            console.log("[ERROR] Could not find channel used for new join logging.")
+            return
         }
 
         channel.send({

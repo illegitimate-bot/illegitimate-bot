@@ -1,10 +1,10 @@
-const statuses = require('../../../config/statuses.json')
+const statuses = require("../../../config/statuses.json")
 
 module.exports = {
-    name: 'status',
-    description: 'Sets the status of the bot',
-    type: 'event',
-    event: 'ready',
+    name: "status",
+    description: "Sets the status of the bot",
+    type: "event",
+    event: "ready",
 
     /** @param { import('discord.js').Client } client */
 
@@ -19,16 +19,16 @@ module.exports = {
 
         client.user.setActivity(
             { name: statuses[0].name, type: 3}
-        );
+        )
 
-        let i = 0;
+        let i = 0
         setInterval(() =>
             client.user.setActivity(
                 statuses[i = 1, i++ % statuses.length]
             ),
-            1000 * 60 * 10
+        1000 * 60 * 10
         )
 
-        client.user.setStatus('dnd');
+        client.user.setStatus("dnd")
     }
 }

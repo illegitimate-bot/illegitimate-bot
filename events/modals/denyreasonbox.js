@@ -1,35 +1,35 @@
-const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { color } = require('../../config/options.json');
-const guildapp = require('../../schemas/guildAppSchema.js');
+const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
+const { color } = require("../../config/options.json")
+const guildapp = require("../../schemas/guildAppSchema.js")
 
 module.exports = {
-    name: 'denyreasonbox',
-    description: 'Deny reason box.',
-    type: 'modal',
+    name: "denyreasonbox",
+    description: "Deny reason box.",
+    type: "modal",
 
     /** @param {import('discord.js').ModalSubmitInteraction} interaction */
 
     async execute(interaction) {
 
-        if (interaction.type !== InteractionType.ModalSubmit) return;
-        if (interaction.customId !== "denyreasonbox") return;
+        if (interaction.type !== InteractionType.ModalSubmit) return
+        if (interaction.customId !== "denyreasonbox") return
 
-        interaction.deferReply();
+        interaction.deferReply()
 
-        const guild = interaction.guild;
+        const guild = interaction.guild
 
-        const message = interaction.message;
-        const embed = message.embeds[0];
-        const applicantId = embed.footer.text.split(" ")[1];
+        const message = interaction.message
+        const embed = message.embeds[0]
+        const applicantId = embed.footer.text.split(" ")[1]
 
         let applicant = ""
         try {
-            applicant = await guild.members.fetch(applicantId);
+            applicant = await guild.members.fetch(applicantId)
         } catch (error) {
-            applicant = null;
+            applicant = null
         }
-        const reason = interaction.fields.fields.get('denyreason').value || "No reason provided";
-        const embedColor = Number(color.replace("#", "0x"));
+        const reason = interaction.fields.fields.get("denyreason").value || "No reason provided"
+        const embedColor = Number(color.replace("#", "0x"))
 
         await message.edit({
             components: [
@@ -51,12 +51,12 @@ module.exports = {
                         .setDisabled(true)
                 )
             ]
-        });
+        })
 
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild has been denied\n" +
                 "**Reason:** `" + reason + "`")
-            .setColor(embedColor);
+            .setColor(embedColor)
 
         const missingUser = new EmbedBuilder()
             .setDescription("[WARN] User has left the server and cannot be notified.")
@@ -74,20 +74,20 @@ module.exports = {
             })
 
         if (applicant !== null) {
-            await applicant.send({ embeds: [dmMessage] });
+            await applicant.send({ embeds: [dmMessage] })
         }
 
         let responseEmbeds = ""
         if (applicant === null) {
-            responseEmbeds = [responseEmbed, missingUser];
+            responseEmbeds = [responseEmbed, missingUser]
         } else {
-            responseEmbeds = [responseEmbed];
+            responseEmbeds = [responseEmbed]
         }
 
-        await guildapp.findOneAndDelete({ userID: applicantId });
+        await guildapp.findOneAndDelete({ userID: applicantId })
 
         await interaction.editReply({
             embeds: responseEmbeds
-        });
+        })
     }
 }

@@ -1,21 +1,21 @@
-const waitinglist = require('../../schemas/waitinglistSchema.js');
-const { getGuild } = require('../../utils/utils.js');
+const waitinglist = require("../../schemas/waitinglistSchema.js")
+const { getGuild } = require("../../utils/utils.js")
 const { hypixelGuildID } = require("../../config/options.json")
 
 module.exports = {
-    name: 'waitinglistupdate',
-    description: 'Update the waiting list.',
-    type: 'button',
+    name: "waitinglistupdate",
+    description: "Update the waiting list.",
+    type: "button",
 
     /** @param {import('discord.js').ButtonInteraction} interaction */
 
     async execute(interaction) {
 
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ ephemeral: true })
 
-        const user = interaction.user;
-        const message = interaction.message;
-        const embed = message.embeds[0];
+        const user = interaction.user
+        const message = interaction.message
+        const embed = message.embeds[0]
         const accepted = await waitinglist.find()
 
         for (let i = 0; i < accepted.length; i++) {
@@ -30,7 +30,7 @@ module.exports = {
 
         }
 
-        let fields = [];
+        let fields = []
 
         for (let i = 0; i < accepted.length; i++) {
 
@@ -40,7 +40,7 @@ module.exports = {
             fields.push({
                 name: `${i + 1}. ${accepted[i].IGN}`,
                 value: `TS: <t:${timestamp}:R>`
-            });
+            })
         }
 
         await message.edit({
@@ -56,8 +56,8 @@ module.exports = {
                 fields: fields,
                 timestamp: new Date(),
             }],
-        });
+        })
 
-        await interaction.editReply({ content: 'Updated the waiting list', ephemeral: true });
+        await interaction.editReply({ content: "Updated the waiting list", ephemeral: true })
     }
 }

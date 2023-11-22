@@ -1,20 +1,20 @@
-const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
-const { getIGN, getHeadURL } = require('../utils/utils.js')
-const { color } = require('../config/options.json');
-const verify = require('../schemas/verifySchema.js');
+const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
+const { getIGN, getHeadURL } = require("../utils/utils.js")
+const { color } = require("../config/options.json")
+const verify = require("../schemas/verifySchema.js")
 
 module.exports = {
-    name: 'whois',
-    description: 'Get\'s the ign of a user.',
-    type: 'slash',
+    name: "whois",
+    description: "Get's the ign of a user.",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('whois')
-        .setDescription('Get\'s the ign of a user.')
+        .setName("whois")
+        .setDescription("Get's the ign of a user.")
         .addUserOption(option =>
             option
-                .setName('user')
-                .setDescription('The user to get the ign of.')
+                .setName("user")
+                .setDescription("The user to get the ign of.")
                 .setRequired(true))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -23,18 +23,18 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.deferReply();
+        await interaction.deferReply()
 
-        const user = interaction.options.getUser('user');
-        const embedColor = Number(color.replace("#", "0x"));
+        const user = interaction.options.getUser("user")
+        const embedColor = Number(color.replace("#", "0x"))
 
-        const verifiedUser = await verify.findOne({ userID: user.id });
+        const verifiedUser = await verify.findOne({ userID: user.id })
         if (!verifiedUser) {
-            interaction.editReply({ content: 'This user has not verified their account.' });
+            interaction.editReply({ content: "This user has not verified their account." })
             return
         }
 
-        const ign = await getIGN(verifiedUser.uuid);
+        const ign = await getIGN(verifiedUser.uuid)
         const head = await getHeadURL(ign)
 
         await interaction.editReply({
@@ -53,4 +53,4 @@ module.exports = {
         })
 
     }
-};
+}

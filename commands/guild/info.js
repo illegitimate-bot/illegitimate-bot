@@ -1,12 +1,12 @@
 const { getUUID, getIGN, getPlayer, getGuild, guildLevel } = require("../../utils/utils.js")
-const { color } = require("../../config/options.json");
+const { color } = require("../../config/options.json")
 
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
 async function guildInfo(interaction) {
 
-    const ign = interaction.options.getString("ign");
-    const embedColor = Number(color.replace("#", "0x"));
+    const ign = interaction.options.getString("ign")
+    const embedColor = Number(color.replace("#", "0x"))
 
     const uuid = await getUUID(ign)
     if (!uuid) {
@@ -41,12 +41,12 @@ async function guildInfo(interaction) {
         return
     }
 
-    const guildName = guild.name;
-    const guildCreatedMS = guild.created;
-    const guildCreated = new Date(guildCreatedMS);
-    const guildTag = guild.tag;
-    const guildExp = guild.exp;
-    const guildLvl = guildLevel(guildExp);
+    const guildName = guild.name
+    const guildCreatedMS = guild.created
+    const guildCreated = new Date(guildCreatedMS)
+    const guildTag = guild.tag
+    const guildExp = guild.exp
+    const guildLvl = guildLevel(guildExp)
     const guildMembers = guild.members
 
     const guildCreatedDate = guildCreated.getDate()

@@ -1,9 +1,9 @@
-const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
-const { loadSlashCommandsEvents, loadContextMenuEvents, loadModalEvents, loadButtonEvents, loadEvents } = require('./utils/eventHandler.js')
-const { autoDeployCommands } = require('./utils/autodeploy.js');
-require('dotenv').config();
-const mongoURI = process.env.MONGOURI;
-const { connect } = require('mongoose');
+const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js")
+const { loadSlashCommandsEvents, loadContextMenuEvents, loadModalEvents, loadButtonEvents, loadEvents } = require("./utils/eventHandler.js")
+const { autoDeployCommands } = require("./utils/autodeploy.js")
+require("dotenv").config()
+const mongoURI = process.env.MONGOURI
+const { connect } = require("mongoose")
 
 const client = new Client({
     intents: [
@@ -20,30 +20,30 @@ const client = new Client({
         Partials.Message,
         Partials.Channel
     ]
-});
+})
 
-client.commands = new Collection();
-client.events = new Collection();
-client.modals = new Collection();
+client.commands = new Collection()
+client.events = new Collection()
+client.modals = new Collection()
 
-loadSlashCommandsEvents(client);
-loadContextMenuEvents(client);
-loadButtonEvents(client);
-loadModalEvents(client);
-loadEvents(client);
+loadSlashCommandsEvents(client)
+loadContextMenuEvents(client)
+loadButtonEvents(client)
+loadModalEvents(client)
+loadEvents(client)
 
 let token = ""
-if (process.env.NODE_ENV === 'dev') {
-    console.log("Running in development mode.");
-    token = process.env.DEVTOKEN;
+if (process.env.NODE_ENV === "dev") {
+    console.log("Running in development mode.")
+    token = process.env.DEVTOKEN
     autoDeployCommands()
 } else {
-    console.log("Running in production mode.");
-    token = process.env.PRODTOKEN;
+    console.log("Running in production mode.")
+    token = process.env.PRODTOKEN
 }
 
-client.login(token);
+client.login(token)
 
 connect(mongoURI, {}).then(() => {
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB")
 })

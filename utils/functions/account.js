@@ -1,10 +1,10 @@
-const fetch = require('axios')
+const fetch = require("axios")
 const apikey = process.env.HYPIXELAPIKEY
-const mojang = 'https://api.mojang.com/users/profiles/minecraft/'
+const mojang = "https://api.mojang.com/users/profiles/minecraft/"
 const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"
-const hypixel = 'https://api.hypixel.net/player'
-const guild = 'https://api.hypixel.net/guild'
-const minotar = 'https://minotar.net/helm/'
+const hypixel = "https://api.hypixel.net/player"
+const guild = "https://api.hypixel.net/guild"
+const minotar = "https://minotar.net/helm/"
 
 async function getUUID(ign) {
     try {

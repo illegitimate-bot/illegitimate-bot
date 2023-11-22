@@ -1,9 +1,9 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { getUUID, getPlayer, getGuild, getHeadURL } = require("../utils/utils.js");
-const { color, hypixelGuildID } = require("../config/options.json");
-const verify = require("../schemas/verifySchema.js");
-const mongoose = require("mongoose");
-const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json");
+const { SlashCommandBuilder } = require("discord.js")
+const { getUUID, getPlayer, getGuild, getHeadURL } = require("../utils/utils.js")
+const { color, hypixelGuildID } = require("../config/options.json")
+const verify = require("../schemas/verifySchema.js")
+const mongoose = require("mongoose")
+const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json")
 
 module.exports = {
     name: "verify",
@@ -22,17 +22,17 @@ module.exports = {
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
-        await interaction.deferReply();
+        await interaction.deferReply()
 
         const user1 = interaction.user
-        const user = interaction.guild.members.cache.get(user1.id);
-        const ign = interaction.options.getString("ign");
-        const embedColor = Number(color.replace("#", "0x"));
+        const user = interaction.guild.members.cache.get(user1.id)
+        const ign = interaction.options.getString("ign")
+        const embedColor = Number(color.replace("#", "0x"))
 
-        const verifyData = await verify.findOne({ userID: user.id });
+        const verifyData = await verify.findOne({ userID: user.id })
         if (verifyData) {
             interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
-            return;
+            return
         }
 
         if (!ign) {
@@ -42,30 +42,30 @@ module.exports = {
                     color: embedColor
                 }]
             })
-            return;
+            return
         }
 
-        const uuid = await getUUID(ign);
+        const uuid = await getUUID(ign)
         if (!uuid) {
             interaction.editReply({
                 embeds: [{
                     description: "<a:questionmark_pink:1130206038008803488> That player does not exist.",
                     color: embedColor
                 }]
-            });
-            return;
+            })
+            return
         }
 
-        const head = await getHeadURL(ign);
-        const player = await getPlayer(uuid);
+        const head = await getHeadURL(ign)
+        const player = await getPlayer(uuid)
         if (!player) {
             interaction.editReply({
                 embeds: [{
                     description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
                     color: embedColor
                 }]
-            });
-            return;
+            })
+            return
         }
 
         let username = ""
@@ -84,8 +84,8 @@ module.exports = {
                         color: embedColor
                     }
                 ]
-            });
-            return;
+            })
+            return
         }
 
         if (!player.socialMedia.links.DISCORD) {
@@ -97,8 +97,8 @@ module.exports = {
                         color: embedColor
                     }
                 ]
-            });
-            return;
+            })
+            return
         }
 
         const linkedDiscord = player.socialMedia.links.DISCORD
@@ -112,11 +112,11 @@ module.exports = {
                         color: embedColor
                     }
                 ]
-            });
-            return;
+            })
+            return
         }
 
-        const guild = await getGuild(uuid);
+        const guild = await getGuild(uuid)
         let guildID = ""
         if (!guild) {
             guildID = null
@@ -126,56 +126,56 @@ module.exports = {
 
         if (guildID === hypixelGuildID) {
             const GuildMembers = guild.members
-            const guildRank = GuildMembers.find((member) => member.uuid === player.uuid).rank;
+            const guildRank = GuildMembers.find((member) => member.uuid === player.uuid).rank
 
             if (guildRank === "Guild Master" && guildID === hypixelGuildID) {
-                await user.roles.add(gm, "Verification");
-                await user.roles.add(guildRole, "Verification");
-                await user.roles.add(guildStaff, "Verification");
+                await user.roles.add(gm, "Verification")
+                await user.roles.add(guildRole, "Verification")
+                await user.roles.add(guildStaff, "Verification")
             }
 
             if (guildRank === "Manager" && guildID === hypixelGuildID) {
-                await user.roles.add(manager, "Verification");
-                await user.roles.add(guildRole, "Verification");
-                await user.roles.add(guildStaff, "Verification");
+                await user.roles.add(manager, "Verification")
+                await user.roles.add(guildRole, "Verification")
+                await user.roles.add(guildStaff, "Verification")
             }
 
             if (guildRank === "Moderator" && guildID === hypixelGuildID) {
-                await user.roles.add(moderator, "Verification");
-                await user.roles.add(guildRole, "Verification");
-                await user.roles.add(guildStaff, "Verification");
+                await user.roles.add(moderator, "Verification")
+                await user.roles.add(guildRole, "Verification")
+                await user.roles.add(guildStaff, "Verification")
             }
 
             if (guildRank === "Beast" && guildID === hypixelGuildID) {
-                await user.roles.add(beast, "Verification");
-                await user.roles.add(guildRole, "Verification");
+                await user.roles.add(beast, "Verification")
+                await user.roles.add(guildRole, "Verification")
             }
 
             if (guildRank === "Elite" && guildID === hypixelGuildID) {
-                await user.roles.add(elite, "Verification");
-                await user.roles.add(guildRole, "Verification");
+                await user.roles.add(elite, "Verification")
+                await user.roles.add(guildRole, "Verification")
             }
 
             if (guildRank === "Member" && guildID === hypixelGuildID) {
-                await user.roles.add(member, "Verification");
-                await user.roles.add(guildRole, "Verification");
+                await user.roles.add(member, "Verification")
+                await user.roles.add(guildRole, "Verification")
             }
 
             if (guildRank === "Trial Member" && guildID === hypixelGuildID) {
-                await user.roles.add(trialmember, "Verification");
-                await user.roles.add(guildRole, "Verification");
+                await user.roles.add(trialmember, "Verification")
+                await user.roles.add(guildRole, "Verification")
             }
         }
 
-        await user.roles.add(defaultMember, "Verification");
+        await user.roles.add(defaultMember, "Verification")
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
             userID: user.id,
             uuid: uuid
-        });
+        })
 
-        await newVerify.save();
+        await newVerify.save()
 
         await interaction.editReply({
             embeds: [
@@ -192,6 +192,6 @@ module.exports = {
                     }
                 }
             ]
-        });
+        })
     }
-};
+}

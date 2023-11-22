@@ -1,24 +1,24 @@
-const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js')
-const { admin, helper } = require('../config/roles.json')
-const { color } = require('../config/options.json')
+const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
+const { admin, helper } = require("../config/roles.json")
+const { color } = require("../config/options.json")
 
 module.exports = {
-    name: 'kick',
-    description: 'Kick a member from the server.',
-    type: 'slash',
+    name: "kick",
+    description: "Kick a member from the server.",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('kick')
-        .setDescription('Kick a member from the server.')
+        .setName("kick")
+        .setDescription("Kick a member from the server.")
         .addUserOption(option =>
             option
-                .setName('member')
-                .setDescription('Member to kick.')
+                .setName("member")
+                .setDescription("Member to kick.")
                 .setRequired(true))
         .addStringOption(option =>
             option
-                .setName('reason')
-                .setDescription('Reason for kicking the member.'))
+                .setName("reason")
+                .setDescription("Reason for kicking the member."))
         .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
         .setDMPermission(false),
 
@@ -28,12 +28,12 @@ module.exports = {
 
         await interaction.deferReply()
 
-        const member = interaction.options.getMember('member')
-        const reason = interaction.options.getString('reason') ?? "No reason provided."
+        const member = interaction.options.getMember("member")
+        const reason = interaction.options.getString("reason") ?? "No reason provided."
         const mod = await interaction.guild.members.fetch(interaction.user.id)
         const memberRoles = member.roles.cache.map(role => role.id)
         const modRoles = mod.roles.cache.map(role => role.id)
-        const embedColor = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!modRoles.includes(helper) && !modRoles.includes(admin)) {
             await interaction.editReply("You do not have permission to use this command.")

@@ -1,11 +1,11 @@
-const { userMention, channelMention } = require('discord.js')
-const { botLogChannel, color } = require('../../../config/options.json')
+const { userMention, channelMention } = require("discord.js")
+const { botLogChannel, color } = require("../../../config/options.json")
 
 module.exports = {
-    name: 'vcJoinLeave',
-    description: 'Logs when a user joins or leaves a voice channel.',
-    type: 'event',
-    event: 'voiceStateUpdate',
+    name: "vcJoinLeave",
+    description: "Logs when a user joins or leaves a voice channel.",
+    type: "event",
+    event: "voiceStateUpdate",
 
     /**
     * @param { import('discord.js').VoiceState } oldState
@@ -18,10 +18,10 @@ module.exports = {
 
         const guild = oldState.guild
         const channel = guild.channels.cache.get(botLogChannel)
-        const embedColor = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!channel) {
-            console.log(`[ERROR] Could not find channel used for voice channel join/leave logging.`)
+            console.log("[ERROR] Could not find channel used for voice channel join/leave logging.")
             return
         }
 

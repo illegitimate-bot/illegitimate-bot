@@ -53,16 +53,18 @@ module.exports = {
             return
         }
 
+        let username = ""
         if (user1.discriminator == "0") {
-            var username = user1.username
+            username = user1.username
         } else {
-            var username = user1.username + "#" + user1.discriminator
+            username = user1.username + "#" + user1.discriminator
         }
 
+        let modName = ""
         if (mod.discriminator == "0") {
-            var modName = mod.username
+            modName = mod.username
         } else {
-            var modName = mod.username + "#" + mod.discriminator
+            modName = mod.username + "#" + mod.discriminator
         }
 
         const uuid = await getUUID(ign);
@@ -88,10 +90,11 @@ module.exports = {
         }
 
         const guild = await getGuild(uuid);
+        let responseGuildID = ""
         if (!guild) {
-            var responseGuildID = null
+            responseGuildID = null
         } else {
-            var responseGuildID = guild._id
+            responseGuildID = guild._id
         }
 
         const head = await getHeadURL(ign);

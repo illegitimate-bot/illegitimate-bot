@@ -5,15 +5,6 @@ require('dotenv').config();
 const mongoURI = process.env.MONGOURI;
 const { connect } = require('mongoose');
 
-if (process.env.NODE_ENV === 'dev') {
-    console.log("Running in development mode.");
-    var token = process.env.DEVTOKEN;
-    autoDeployCommands()
-} else {
-    console.log("Running in production mode.");
-    var token = process.env.PRODTOKEN;
-}
-
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -40,6 +31,16 @@ loadContextMenuEvents(client);
 loadButtonEvents(client);
 loadModalEvents(client);
 loadEvents(client);
+
+let token = ""
+if (process.env.NODE_ENV === 'dev') {
+    console.log("Running in development mode.");
+    token = process.env.DEVTOKEN;
+    autoDeployCommands()
+} else {
+    console.log("Running in production mode.");
+    token = process.env.PRODTOKEN;
+}
 
 client.login(token);
 

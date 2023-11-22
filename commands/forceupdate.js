@@ -53,10 +53,11 @@ module.exports = {
         const head = await getHeadURL(ign)
         const guild = await getGuild(verifyData.uuid);
 
+        let responseGuildID = ""
         if (!guild) {
-            var responseGuildID = null
+            responseGuildID = null
         } else {
-            var responseGuildID = guild._id
+            responseGuildID = guild._id
         }
 
         if (responseGuildID !== hypixelGuildID) {

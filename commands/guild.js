@@ -1,35 +1,35 @@
-const { SlashCommandBuilder } = require('discord.js')
-const { color } = require('../config/options.json')
-const { guildMember } = require('./guild/member.js')
-const { guildInfo } = require('./guild/info.js')
+const { SlashCommandBuilder } = require("discord.js")
+const { color } = require("../config/options.json")
+const { guildMember } = require("./guild/member.js")
+const { guildInfo } = require("./guild/info.js")
 
 module.exports = {
-    name: 'guild',
-    description: 'Subcommands for guilds',
-    type: 'slash',
+    name: "guild",
+    description: "Subcommands for guilds",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('guild')
-        .setDescription('Subcommands for guilds')
+        .setName("guild")
+        .setDescription("Subcommands for guilds")
         .addSubcommand(subcommand =>
             subcommand
-                .setName('member')
-                .setDescription('Get info about a guild memeber')
+                .setName("member")
+                .setDescription("Get info about a guild memeber")
                 .addStringOption(option =>
                     option
-                        .setName('ign')
-                        .setDescription('The IGN of the player.')
+                        .setName("ign")
+                        .setDescription("The IGN of the player.")
                         .setRequired(true)
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
-                .setName('info')
-                .setDescription('Get info about a guild.')
+                .setName("info")
+                .setDescription("Get info about a guild.")
                 .addStringOption(option =>
                     option
-                        .setName('ign')
-                        .setDescription('The IGN of a member.')
+                        .setName("ign")
+                        .setDescription("The IGN of a member.")
                         .setRequired(true)
                 )
         )
@@ -42,14 +42,14 @@ module.exports = {
         await interaction.deferReply()
 
         const subcommand = interaction.options.getSubcommand()
-        const embedColor = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace("#", "0x"))
 
-        if (subcommand === 'member') {
+        if (subcommand === "member") {
             await guildMember(interaction)
             return
         }
 
-        if (subcommand === 'info') {
+        if (subcommand === "info") {
             await guildInfo(interaction)
             return
         }

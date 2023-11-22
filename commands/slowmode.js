@@ -1,22 +1,22 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const { color } = require('../config/options.json');
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
+const { color } = require("../config/options.json")
 
 module.exports = {
-    name: 'slowmode',
-    description: 'Set the slowmode of a channel.',
-    type: 'slash',
+    name: "slowmode",
+    description: "Set the slowmode of a channel.",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('slowmode')
-        .setDescription('Set the slowmode of a channel.')
+        .setName("slowmode")
+        .setDescription("Set the slowmode of a channel.")
         .addIntegerOption(option =>
             option
-                .setName('seconds')
-                .setDescription('The amount of seconds to set the slowmode to.'))
+                .setName("seconds")
+                .setDescription("The amount of seconds to set the slowmode to."))
         .addChannelOption(option =>
             option
-                .setName('channel')
-                .setDescription('The channel to set the slowmode of.'))
+                .setName("channel")
+                .setDescription("The channel to set the slowmode of."))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
@@ -24,11 +24,11 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.deferReply({ ephermeral: true });
+        await interaction.deferReply({ ephermeral: true })
 
-        const seconds = interaction.options.getInteger('seconds') ?? 5
-        const channel = interaction.options.getChannel('channel') ?? interaction.channel
-        const embedColor = Number(color.replace("#", "0x"));
+        const seconds = interaction.options.getInteger("seconds") ?? 5
+        const channel = interaction.options.getChannel("channel") ?? interaction.channel
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (seconds > 21600) {
             await channel.setRateLimitPerUser(21600)

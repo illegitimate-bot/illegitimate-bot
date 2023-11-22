@@ -1,30 +1,30 @@
-const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
-const { color } = require('../../config/options.json');
-const { largeM, ignM } = require('../../config/limitmessages.json')
-const { staffApplicationsChannel } = require('../../config/options.json');
-const questions = require('../../config/questions.json');
-const { guildRole, guildStaff } = require('../../config/roles.json')
-const mongoose = require('mongoose');
-const staffapp = require('../../schemas/staffAppSchema.js');
-const settings = require("../../schemas/settingsSchema.js");
-const { getUUID } = require('../../utils/utils.js')
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require("discord.js")
+const { color } = require("../../config/options.json")
+const { largeM, ignM } = require("../../config/limitmessages.json")
+const { staffApplicationsChannel } = require("../../config/options.json")
+const questions = require("../../config/questions.json")
+const { guildRole, guildStaff } = require("../../config/roles.json")
+const mongoose = require("mongoose")
+const staffapp = require("../../schemas/staffAppSchema.js")
+const settings = require("../../schemas/settingsSchema.js")
+const { getUUID } = require("../../utils/utils.js")
 const dev = process.env.DEV
 
 module.exports = {
-    name: 'staffapply',
-    description: 'Apply for the staff team.',
-    type: 'button',
+    name: "staffapply",
+    description: "Apply for the staff team.",
+    type: "button",
 
     /** @param {import('discord.js').ButtonInteraction} interaction */
 
     async execute(interaction) {
 
-        const user = interaction.user;
-        const guild = interaction.guild;
-        const embedColor = Number(color.replace("#", "0x"));
-        const userRoles = interaction.member.roles.cache;
+        const user = interaction.user
+        const guild = interaction.guild
+        const embedColor = Number(color.replace("#", "0x"))
+        const userRoles = interaction.member.roles.cache
         const setting = await settings.findOne({ name: "staffAppStatus" })
-        const status = setting.value;
+        const status = setting.value
         const staffQuestions = questions.staff
 
         function sq(n) {
@@ -37,29 +37,29 @@ module.exports = {
 
         if (interaction.customId === "staffapply") {
 
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ ephemeral: true })
 
             if (user.id !== dev) {
                 if (status === "0") {
-                    await interaction.editReply({ content: "Staff applications are currently closed.", ephemeral: true });
+                    await interaction.editReply({ content: "Staff applications are currently closed.", ephemeral: true })
                     return
                 }
             }
 
             if (!userRoles.has(guildRole)) {
-                await interaction.editReply({ content: "You must be a member of the guild to apply for staff.", ephemeral: true });
+                await interaction.editReply({ content: "You must be a member of the guild to apply for staff.", ephemeral: true })
                 return
             }
 
             if (userRoles.has(guildStaff)) {
-                await interaction.editReply({ content: "You are already a staff member.", ephemeral: true });
+                await interaction.editReply({ content: "You are already a staff member.", ephemeral: true })
                 return
             }
 
-            const application = await staffapp.findOne({ userID: user.id });
+            const application = await staffapp.findOne({ userID: user.id })
 
             if (application) {
-                await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true });
+                await interaction.editReply({ content: "You already have an application in progress.", ephemeral: true })
                 return
             }
 
@@ -76,7 +76,7 @@ module.exports = {
             try {
                 await user.send({
                     embeds: [{
-                        title: 'Staff Application',
+                        title: "Staff Application",
                         description: "Please answer the following questions to apply for staff.\n" +
                             "If you wish to cancel your application, please press type `cancel` at any time.\n" +
                             "If you wish to proceed with your application, please type `yes`.\n\n" +
@@ -86,7 +86,7 @@ module.exports = {
                     }]
                 })
             } catch (error) {
-                await interaction.editReply({ content: "Please enable your DMs.", ephemeral: true });
+                await interaction.editReply({ content: "Please enable your DMs.", ephemeral: true })
                 return
             }
 
@@ -96,17 +96,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60
-            });
+            })
             if (input.size === 0) {
-                await user.send({ embeds: [tooLong] });
+                await user.send({ embeds: [tooLong] })
                 return
             }
-            if (input.first().content.toLowerCase() !== 'yes') {
-                await user.send({ embeds: [cancelled] });
+            if (input.first().content.toLowerCase() !== "yes") {
+                await user.send({ embeds: [cancelled] })
                 return
             }
             if (input.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
 
@@ -125,17 +125,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60 * 5,
-            });
+            })
             if (answer1.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
             }
-            if (answer1.first().content.toLowerCase() === 'cancel') {
+            if (answer1.first().content.toLowerCase() === "cancel") {
                 await user.send({ embeds: [cancelled] })
                 return
             }
             if (answer1.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
             if (answer1.first().content > 16) {
@@ -175,17 +175,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60 * 15
-            });
+            })
             if (answer2.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
             }
-            if (answer2.first().content.toLowerCase() === 'cancel') {
+            if (answer2.first().content.toLowerCase() === "cancel") {
                 await user.send({ embeds: [cancelled] })
                 return
             }
             if (answer2.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
             if (answer2.first().content > 64) {
@@ -214,17 +214,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60 * 15
-            });
+            })
             if (answer3.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
             }
-            if (answer3.first().content.toLowerCase() === 'cancel') {
+            if (answer3.first().content.toLowerCase() === "cancel") {
                 await user.send({ embeds: [cancelled] })
                 return
             }
             if (answer3.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
             if (answer3.first().content > 256) {
@@ -252,17 +252,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60 * 15
-            });
+            })
             if (answer4.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
             }
-            if (answer4.first().content.toLowerCase() === 'cancel') {
+            if (answer4.first().content.toLowerCase() === "cancel") {
                 await user.send({ embeds: [cancelled] })
                 return
             }
             if (answer4.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
             if (answer4.first().content > 256) {
@@ -290,17 +290,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60 * 15
-            });
+            })
             if (answer5.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
             }
-            if (answer5.first().content.toLowerCase() === 'cancel') {
+            if (answer5.first().content.toLowerCase() === "cancel") {
                 await user.send({ embeds: [cancelled] })
                 return
             }
             if (answer5.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
             if (answer5.first().content > 256) {
@@ -329,17 +329,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60 * 15
-            });
+            })
             if (answer6.size === 0) {
                 await user.send({ embeds: [tooLong] })
                 return
             }
-            if (answer6.first().content.toLowerCase() === 'cancel') {
+            if (answer6.first().content.toLowerCase() === "cancel") {
                 await user.send({ embeds: [cancelled] })
                 return
             }
             if (answer6.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
             if (answer6.first().content > 256) {
@@ -363,17 +363,17 @@ module.exports = {
                 filter: m => m.author.id === user.id,
                 max: 1,
                 time: 1000 * 60 * 5
-            });
+            })
             if (final.size === 0) {
-                await user.send({ embeds: [tooLong] });
+                await user.send({ embeds: [tooLong] })
                 return
             }
-            if (final.first().content.toLowerCase() !== 'yes') {
-                await user.send({ embeds: [cancelled] });
+            if (final.first().content.toLowerCase() !== "yes") {
+                await user.send({ embeds: [cancelled] })
                 return
             }
             if (final.first().attachments.size > 0) {
-                await user.send({ embeds: [attachments] });
+                await user.send({ embeds: [attachments] })
                 return
             }
 
@@ -391,9 +391,9 @@ module.exports = {
             })
 
             await newStaffApp.save()
-            await user.deleteDM();
+            await user.deleteDM()
 
-            const channel = guild.channels.cache.get(staffApplicationsChannel);
+            const channel = guild.channels.cache.get(staffApplicationsChannel)
 
             await channel.send({
                 embeds: [{
@@ -446,7 +446,7 @@ module.exports = {
                             .setStyle(ButtonStyle.Danger)
                     )
                 ]
-            });
+            })
         }
     }
 }

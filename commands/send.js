@@ -1,22 +1,22 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const { color } = require('../config/options.json');
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
+const { color } = require("../config/options.json")
 
 module.exports = {
-    name: 'send',
-    description: 'Send a message to a channel.',
-    type: 'slash',
+    name: "send",
+    description: "Send a message to a channel.",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('send')
-        .setDescription('Send a message to a channel.')
+        .setName("send")
+        .setDescription("Send a message to a channel.")
         .addStringOption(option =>
             option
-                .setName('message')
-                .setDescription('The message to send.'))
+                .setName("message")
+                .setDescription("The message to send."))
         .addChannelOption(option =>
             option
-                .setName('channel')
-                .setDescription('The channel to send the message to.'))
+                .setName("channel")
+                .setDescription("The channel to send the message to."))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
@@ -24,19 +24,19 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ ephemeral: true })
 
-        const message = interaction.options.getString('message');
-        const channel = interaction.options.getChannel('channel');
-        const embedColor = Number(color.replace("#", "0x"));
+        const message = interaction.options.getString("message")
+        const channel = interaction.options.getChannel("channel")
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!message) {
-            interaction.editReply({ content: 'Please provide a message to send.', ephemeral: true })
+            interaction.editReply({ content: "Please provide a message to send.", ephemeral: true })
             return
         }
 
         if (!channel) {
-            interaction.editReply({ content: 'Please provide a channel to send the message to.', ephemeral: true })
+            interaction.editReply({ content: "Please provide a channel to send the message to.", ephemeral: true })
             return
         }
 
@@ -54,6 +54,6 @@ module.exports = {
                     }
                 }
             ]
-        });
+        })
     }
-};
+}

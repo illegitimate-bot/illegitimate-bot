@@ -1,18 +1,18 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
-const { color } = require('../config/options.json')
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
+const { color } = require("../config/options.json")
 
 module.exports = {
-    name: 'clear',
-    description: 'Clears messages',
-    type: 'slash',
+    name: "clear",
+    description: "Clears messages",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('clear')
-        .setDescription('Clears messages')
+        .setName("clear")
+        .setDescription("Clears messages")
         .addIntegerOption(option =>
             option
-                .setName('amount')
-                .setDescription('Amount of messages to clear')
+                .setName("amount")
+                .setDescription("Amount of messages to clear")
                 .setRequired(true))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -23,14 +23,14 @@ module.exports = {
 
         await interaction.deferReply({ ephemeral: true })
 
-        const amount = interaction.options.getInteger('amount')
+        const amount = interaction.options.getInteger("amount")
         const channel = interaction.channel
-        const embedColor = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!amount || amount < 1 || amount > 100) {
             await interaction.editReply({
                 embeds: [{
-                    description: 'Please provide an amount of messages to clear',
+                    description: "Please provide an amount of messages to clear",
                     color: embedColor
                 }],
             })

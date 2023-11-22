@@ -1,34 +1,34 @@
-const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
-const { color } = require('../../config/options.json');
-const mongoose = require("mongoose");
-const guildapp = require('../../schemas/guildAppSchema.js');
-const waitingList = require('../../schemas/waitinglistSchema.js');
-const { waitingListRole } = require('../../config/roles.json');
+const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require("discord.js")
+const { color } = require("../../config/options.json")
+const mongoose = require("mongoose")
+const guildapp = require("../../schemas/guildAppSchema.js")
+const waitingList = require("../../schemas/waitinglistSchema.js")
+const { waitingListRole } = require("../../config/roles.json")
 
 module.exports = {
-    name: 'guildapplicationaccept',
-    description: 'Accept a guild application.',
-    type: 'button',
+    name: "guildapplicationaccept",
+    description: "Accept a guild application.",
+    type: "button",
 
     /** @param {import('discord.js').ButtonInteraction} interaction */
 
     async execute(interaction) {
 
-        await interaction.deferReply();
+        await interaction.deferReply()
 
-        const user = interaction.user;
-        const guild = interaction.guild;
-        const embedColor = Number(color.replace("#", "0x"));
+        const user = interaction.user
+        const guild = interaction.guild
+        const embedColor = Number(color.replace("#", "0x"))
 
-        const message = interaction.message;
-        const embed = message.embeds[0];
+        const message = interaction.message
+        const embed = message.embeds[0]
         const applicantId = embed.footer.text.split(" ")[1]
 
-        const applicantIGN1 = embed.fields[0].value;
-        const applicantIGN = applicantIGN1.replaceAll("`", "");
+        const applicantIGN1 = embed.fields[0].value
+        const applicantIGN = applicantIGN1.replaceAll("`", "")
 
         const applicant = await guild.members.fetch(applicantId)
-        const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator;
+        const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator
 
         await message.edit({
             components: [
@@ -50,18 +50,18 @@ module.exports = {
                         .setDisabled(true)
                 )
             ]
-        });
+        })
 
         await applicant.send({
             embeds: [{
-                description: `Your application for the Illegitimate guild has been accepted.`,
+                description: "Your application for the Illegitimate guild has been accepted.",
                 color: embedColor
             }]
-        });
+        })
 
         const applicantEntry = await guildapp.findOne({ userID: applicantId })
-        const applicantUUID = applicantEntry.uuid;
-        const time = Date.now();
+        const applicantUUID = applicantEntry.uuid
+        const time = Date.now()
 
         const waitingListAdd = new waitingList({
             _id: new mongoose.Types.ObjectId(),
@@ -69,12 +69,12 @@ module.exports = {
             uuid: applicantUUID,
             IGN: applicantIGN,
             timestamp: time
-        });
+        })
 
-        await waitingListAdd.save();
+        await waitingListAdd.save()
 
-        await applicant.roles.add(waitingListRole);
-        await guildapp.findOneAndDelete({ userID: applicantId });
+        await applicant.roles.add(waitingListRole)
+        await guildapp.findOneAndDelete({ userID: applicantId })
 
 
         await interaction.editReply({
@@ -90,6 +90,6 @@ module.exports = {
                     text: "ID: " + applicant.id
                 }
             }]
-        });
+        })
     }
-};
+}

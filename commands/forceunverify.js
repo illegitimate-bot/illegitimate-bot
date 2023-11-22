@@ -1,21 +1,21 @@
-const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js');
-const { color } = require("../config/options.json");
-const verify = require("../schemas/verifySchema.js");
-const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json");
+const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
+const { color } = require("../config/options.json")
+const verify = require("../schemas/verifySchema.js")
+const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json")
 const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember]
 
 module.exports = {
     name: "forceunverify",
     description: "Force unverify a user",
-    type: 'slash',
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('forceunverify')
-        .setDescription('Force unverify a user')
+        .setName("forceunverify")
+        .setDescription("Force unverify a user")
         .addUserOption(option =>
             option
-                .setName('user')
-                .setDescription('The user to force unverify')
+                .setName("user")
+                .setDescription("The user to force unverify")
                 .setRequired(true))
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
@@ -23,9 +23,9 @@ module.exports = {
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
-        const member1 = interaction.options.getUser('user');
+        const member1 = interaction.options.getUser("user")
         const member = interaction.guild.members.cache.get(member1.id)
-        const embedColor = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace("#", "0x"))
         const verifiedUser = await verify.findOne({ userID: member1.id })
 
         if (!verifiedUser) {

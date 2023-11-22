@@ -1,5 +1,5 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, } = require("discord.js");
-const { color } = require("../config/options.json");
+const { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, } = require("discord.js")
+const { color } = require("../config/options.json")
 
 module.exports = {
     name: "setup",
@@ -62,14 +62,14 @@ module.exports = {
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
-        const user = interaction.user;
-        const guild = interaction.guild;
-        const subcommand = interaction.options.getSubcommand();
-        const embedColor = Number(color.replace("#", "0x"));
+        const user = interaction.user
+        const guild = interaction.guild
+        const subcommand = interaction.options.getSubcommand()
+        const embedColor = Number(color.replace("#", "0x"))
 
 
         if (subcommand === "sendguildapplication") {
-            const channel = interaction.options.getChannel("channel");
+            const channel = interaction.options.getChannel("channel")
 
             await channel.send({
                 embeds: [
@@ -94,12 +94,12 @@ module.exports = {
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji({ name: "✅" }))
                 ]
-            });
-            await interaction.reply({ content: "Message sent", ephemeral: true });
+            })
+            await interaction.reply({ content: "Message sent", ephemeral: true })
         }
 
         if (subcommand === "sendstaffapplication") {
-            const channel = interaction.options.getChannel("channel");
+            const channel = interaction.options.getChannel("channel")
 
             await channel.send({
                 embeds: [
@@ -124,13 +124,13 @@ module.exports = {
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji({ name: "✅" }))
                 ]
-            });
+            })
 
-            await interaction.reply({ content: "Message sent", ephemeral: true });
+            await interaction.reply({ content: "Message sent", ephemeral: true })
         }
 
         if (subcommand === "sendinactivityapplication") {
-            const channel = interaction.options.getChannel("channel");
+            const channel = interaction.options.getChannel("channel")
 
             await channel.send({
                 embeds: [
@@ -155,13 +155,13 @@ module.exports = {
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji({ name: "✅" }))
                 ]
-            });
+            })
 
-            await interaction.reply({ content: "Message sent", ephemeral: true });
+            await interaction.reply({ content: "Message sent", ephemeral: true })
         }
 
         if (subcommand === "sendverfiymessage") {
-            const channel = interaction.options.getChannel("channel");
+            const channel = interaction.options.getChannel("channel")
 
             await channel.send({
                 embeds: [{
@@ -184,13 +184,13 @@ module.exports = {
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji({ name: "✅" }))
                 ]
-            });
-            await interaction.reply({ content: "Message sent", ephemeral: true });
+            })
+            await interaction.reply({ content: "Message sent", ephemeral: true })
 
         }
 
         if (subcommand === "sendwaitinglistmessage") {
-            const channel = interaction.options.getChannel("channel");
+            const channel = interaction.options.getChannel("channel")
 
             await channel.send({
                 embeds: [{
@@ -214,9 +214,9 @@ module.exports = {
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji({ name: "🔄" }))
                 ]
-            });
-            await interaction.reply({ content: "Message sent", ephemeral: true });
+            })
+            await interaction.reply({ content: "Message sent", ephemeral: true })
         }
 
     }
-};
+}

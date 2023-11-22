@@ -1,13 +1,13 @@
-const { getUUID, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js");
-const { color } = require("../../config/options.json");
+const { getUUID, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js")
+const { color } = require("../../config/options.json")
 
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
 async function guildMember(interaction) {
-    const ign = interaction.options.getString("ign");
-    const embedColor = Number(color.replace("#", "0x"));
+    const ign = interaction.options.getString("ign")
+    const embedColor = Number(color.replace("#", "0x"))
 
-    const uuid = await getUUID(ign);
+    const uuid = await getUUID(ign)
     if (!uuid) {
         interaction.editReply({
             embeds: [
@@ -20,11 +20,11 @@ async function guildMember(interaction) {
                     },
                 },
             ],
-        });
+        })
     }
 
-    const head = await getHeadURL(ign);
-    const player = await getPlayer(uuid);
+    const head = await getHeadURL(ign)
+    const player = await getPlayer(uuid)
     if (!player) {
         await interaction.editReply({
             embeds: [
@@ -40,27 +40,27 @@ async function guildMember(interaction) {
                     },
                 },
             ],
-        });
+        })
     }
 
-    const serverRank = player.newPackageRank;
-    const monthlyRank = player.monthlyPackageRank;
-    const displayName = player.displayname;
+    const serverRank = player.newPackageRank
+    const monthlyRank = player.monthlyPackageRank
+    const displayName = player.displayname
 
-    let rank = "";
+    let rank = ""
     if (serverRank === "VIP") {
-        rank = "[VIP] ";
+        rank = "[VIP] "
     } else if (serverRank === "VIP_PLUS") {
-        rank = "[VIP+] ";
+        rank = "[VIP+] "
     } else if (serverRank === "MVP") {
-        rank = "[MVP] ";
+        rank = "[MVP] "
     } else if (serverRank === "MVP_PLUS" && monthlyRank === "NONE") {
-        rank = "[MVP+] ";
+        rank = "[MVP+] "
     } else if (serverRank === "MVP_PLUS" && monthlyRank === "SUPERSTAR") {
-        rank = "[MVP++] ";
+        rank = "[MVP++] "
     }
 
-    const guild = await getGuild(uuid);
+    const guild = await getGuild(uuid)
     if (!guild) {
         await interaction.editReply({
             embeds: [
@@ -76,31 +76,31 @@ async function guildMember(interaction) {
                     },
                 },
             ],
-        });
+        })
     }
 
-    const guildName = guild.name;
-    const guildTag = " [" + guild.tag + "]" ?? "";
+    const guildName = guild.name
+    const guildTag = " [" + guild.tag + "]" ?? ""
 
-    const guildMembers = guild.members;
-    const guildMember = guildMembers.find((member) => member.uuid === uuid);
-    const guildRank = guildMember.rank;
-    const memberGexp = guildMember.expHistory;
+    const guildMembers = guild.members
+    const guildMember = guildMembers.find((member) => member.uuid === uuid)
+    const guildRank = guildMember.rank
+    const memberGexp = guildMember.expHistory
     const allDaysGexp = Object.keys(memberGexp).map((key) => {
-        return "**➺ " + key + ":** " + "`" + memberGexp[key] + "`" + "\n";
-    });
-    const expValue = allDaysGexp.join("");
-    const totalWeeklyGexp = Object.values(memberGexp).reduce((a, b) => a + b, 0);
-    const averageWeeklyGexp = Math.round(totalWeeklyGexp / 7);
+        return "**➺ " + key + ":** " + "`" + memberGexp[key] + "`" + "\n"
+    })
+    const expValue = allDaysGexp.join("")
+    const totalWeeklyGexp = Object.values(memberGexp).reduce((a, b) => a + b, 0)
+    const averageWeeklyGexp = Math.round(totalWeeklyGexp / 7)
 
-    const guildMemberJoinMS = guildMember.joined;
-    const guildMemberJoinTime = new Date(guildMemberJoinMS);
-    const guildMemberJoinDate = guildMemberJoinTime.getDate();
-    const guildMemberJoinMonth = guildMemberJoinTime.getMonth() + 1;
-    const guildMemberJoinYear = guildMemberJoinTime.getFullYear();
-    const guildMemberJoinHours = guildMemberJoinTime.getHours();
-    const guildMemberJoinMinutes = guildMemberJoinTime.getMinutes();
-    const guildMemberJoinSeconds = guildMemberJoinTime.getSeconds();
+    const guildMemberJoinMS = guildMember.joined
+    const guildMemberJoinTime = new Date(guildMemberJoinMS)
+    const guildMemberJoinDate = guildMemberJoinTime.getDate()
+    const guildMemberJoinMonth = guildMemberJoinTime.getMonth() + 1
+    const guildMemberJoinYear = guildMemberJoinTime.getFullYear()
+    const guildMemberJoinHours = guildMemberJoinTime.getHours()
+    const guildMemberJoinMinutes = guildMemberJoinTime.getMinutes()
+    const guildMemberJoinSeconds = guildMemberJoinTime.getSeconds()
 
     const guildMemberJoin =
         guildMemberJoinDate + "." +
@@ -108,7 +108,7 @@ async function guildMember(interaction) {
         guildMemberJoinYear + " " +
         guildMemberJoinHours + ":" +
         guildMemberJoinMinutes + ":" +
-        guildMemberJoinSeconds;
+        guildMemberJoinSeconds
 
     await interaction.editReply({
         embeds: [
@@ -141,8 +141,8 @@ async function guildMember(interaction) {
                 },
             },
         ],
-    });
-    return;
+    })
+    return
 }
 
 module.exports = { guildMember }

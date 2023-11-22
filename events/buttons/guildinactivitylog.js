@@ -1,9 +1,9 @@
-const { ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
-const { gm, manager, moderator, beast, member, trialmember, guildStaff, guildRole } = require("../../config/roles.json");
-const { ignM, smallM, largeM } = require("../../config/limitmessages.json");
-const { ia1, ia2, ia3, ria1, ria2, ria3 } = require("../../config/questions.json");
-const { color, inactivityLogChannel } = require("../../config/options.json");
-const guildRoles = [gm, manager, moderator, beast, member, trialmember, guildStaff, guildRole];
+const { ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require("discord.js")
+const { gm, manager, moderator, beast, member, trialmember, guildStaff, guildRole } = require("../../config/roles.json")
+const { ignM, smallM, largeM } = require("../../config/limitmessages.json")
+const { ia1, ia2, ia3, ria1, ria2, ria3 } = require("../../config/questions.json")
+const { color, inactivityLogChannel } = require("../../config/options.json")
+const guildRoles = [gm, manager, moderator, beast, member, trialmember, guildStaff, guildRole]
 
 module.exports = {
     name: "guildinactivitylog",
@@ -13,28 +13,28 @@ module.exports = {
     /** @param {import('discord.js').ButtonInteraction} interaction */
 
     async execute(interaction) {
-        const guild = interaction.guild;
-        const user = interaction.user;
-        const embedColor = Number(color.replace("#", "0x"));
-        const userRoles = guild.members.cache.get(user.id).roles.cache;
-        const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/";
+        const guild = interaction.guild
+        const user = interaction.user
+        const embedColor = Number(color.replace("#", "0x"))
+        const userRoles = guild.members.cache.get(user.id).roles.cache
+        const mojangAPI = "https://api.mojang.com/users/profiles/minecraft/"
 
         if (!userRoles.some((role) => guildRoles.includes(role.id))) {
             return await interaction.reply({
                 content: "Only guild members can use this button.",
                 ephemeral: true
-            });
+            })
         }
 
         const tooLong = new EmbedBuilder()
             .setDescription("You took too long to respond.")
-            .setColor(embedColor);
+            .setColor(embedColor)
         const cancelled = new EmbedBuilder()
             .setDescription("You have cancelled your application.")
-            .setColor(embedColor);
+            .setColor(embedColor)
         const attachments = new EmbedBuilder()
             .setDescription("You have uploaded an attachment. Please do not upload images, videos, or GIFS.")
-            .setColor(embedColor);
+            .setColor(embedColor)
 
         try {
             await user.send({
@@ -46,29 +46,29 @@ module.exports = {
                         "You have a minute to respond to this message.",
                     color: embedColor
                 }]
-            });
+            })
         } catch (error) {
-            return await interaction.reply({ content: "Please enable your DMs.", ephemeral: true });
+            return await interaction.reply({ content: "Please enable your DMs.", ephemeral: true })
         }
 
-        await interaction.reply({ content: "Please check your DMs.", ephemeral: true });
+        await interaction.reply({ content: "Please check your DMs.", ephemeral: true })
 
         const input = await user.dmChannel.awaitMessages({
             filter: (m) => m.author.id === user.id,
             max: 1,
             time: 1000 * 60
-        });
+        })
         if (input.first().attachments.size > 0) {
-            await user.send({ embeds: [attachments] });
-            return;
+            await user.send({ embeds: [attachments] })
+            return
         }
         if (input.size === 0) {
-            await user.send({ embeds: [tooLong] });
-            return;
+            await user.send({ embeds: [tooLong] })
+            return
         }
         if (input.first().content.toLowerCase() !== "yes") {
-            await user.send({ embeds: [cancelled] });
-            return;
+            await user.send({ embeds: [cancelled] })
+            return
         }
 
         await user.send({
@@ -80,16 +80,16 @@ module.exports = {
                     text: "You have 5 minutes to respond to this message."
                 }
             }]
-        });
+        })
 
         const answer1 = await user.dmChannel.awaitMessages({
             filter: (m) => m.author.id === user.id,
             max: 1,
             time: 1000 * 60 * 5
-        });
+        })
         if (answer1.first().attachments.size > 0) {
-            await user.send({ embeds: [attachments] });
-            return;
+            await user.send({ embeds: [attachments] })
+            return
         }
         if (answer1.first().content > 16) {
             await user.send({
@@ -97,29 +97,29 @@ module.exports = {
                     description: "Max character limit is 16.",
                     color: embedColor
                 }]
-            });
-            return;
+            })
+            return
         }
         try {
-            await fetch(mojangAPI + answer1.first().content);
+            await fetch(mojangAPI + answer1.first().content)
         } catch (error) {
             await user.send({
                 embeds: [{
                     description: "That is not a valid Minecraft username.\n" + "Application cancelled.",
                     color: embedColor
                 }]
-            });
-            return;
+            })
+            return
         }
         if (answer1.size === 0) {
-            await user.send({ embeds: [tooLong] });
-            return;
+            await user.send({ embeds: [tooLong] })
+            return
         }
         if (answer1.first().content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] });
-            return;
+            await user.send({ embeds: [cancelled] })
+            return
         }
-        const answer1_1 = answer1.first().content;
+        const answer1_1 = answer1.first().content
 
         await user.send({
             embeds: [{
@@ -130,15 +130,15 @@ module.exports = {
                     text: "You have 5 minutes to respond to this message."
                 }
             }]
-        });
+        })
         const answer2 = await user.dmChannel.awaitMessages({
             filter: (m) => m.author.id === user.id,
             max: 1,
             time: 1000 * 60 * 5
-        });
+        })
         if (answer2.first().attachments.size > 0) {
-            await user.send({ embeds: [attachments] });
-            return;
+            await user.send({ embeds: [attachments] })
+            return
         }
         if (answer2.first().content > 128) {
             await user.send({
@@ -146,18 +146,18 @@ module.exports = {
                     description: "Max character limit is 128.",
                     color: embedColor
                 }]
-            });
-            return;
+            })
+            return
         }
         if (answer1.size === 0) {
-            await user.send({ embeds: [tooLong] });
-            return;
+            await user.send({ embeds: [tooLong] })
+            return
         }
         if (answer1.first().content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] });
-            return;
+            await user.send({ embeds: [cancelled] })
+            return
         }
-        const answer2_1 = answer1.first().content;
+        const answer2_1 = answer1.first().content
 
         await user.send({
             embeds: [{
@@ -168,15 +168,15 @@ module.exports = {
                     text: "You have 15 minutes to respond to this message."
                 }
             }]
-        });
+        })
         const answer3 = await user.dmChannel.awaitMessages({
             filter: (m) => m.author.id === user.id,
             max: 1,
             time: 1000 * 60 * 15
-        });
+        })
         if (answer3.first().attachments.size > 0) {
-            await user.send({ embeds: [attachments] });
-            return;
+            await user.send({ embeds: [attachments] })
+            return
         }
         if (answer3.first().content > 256) {
             await user.send({
@@ -184,18 +184,18 @@ module.exports = {
                     description: "Max character limit is 256",
                     color: embedColor
                 }]
-            });
-            return;
+            })
+            return
         }
         if (answer1.size === 0) {
-            await user.send({ embeds: [tooLong] });
-            return;
+            await user.send({ embeds: [tooLong] })
+            return
         }
         if (answer1.first().content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] });
-            return;
+            await user.send({ embeds: [cancelled] })
+            return
         }
-        const answer3_1 = answer1.first().content;
+        const answer3_1 = answer1.first().content
 
         await user.send({
             embeds: [{
@@ -207,17 +207,17 @@ module.exports = {
             filter: m => m.author.id === user.id,
             max: 1,
             time: 1000 * 60 * 5
-        });
+        })
         if (final.first().attachments.size > 0) {
-            await user.send({ embeds: [attachments] });
+            await user.send({ embeds: [attachments] })
             return
         }
         if (final.size === 0) {
-            await user.send({ embeds: [tooLong] });
+            await user.send({ embeds: [tooLong] })
             return
         }
-        if (final.first().content.toLowerCase() !== 'yes') {
-            await user.send({ embeds: [cancelled] });
+        if (final.first().content.toLowerCase() !== "yes") {
+            await user.send({ embeds: [cancelled] })
             return
         }
 
@@ -228,7 +228,7 @@ module.exports = {
             }]
         })
 
-        const appChannel = await guild.channels.cache.get(inactivityLogChannel);
+        const appChannel = await guild.channels.cache.get(inactivityLogChannel)
 
         await appChannel.send({
             embeds: [{
@@ -268,6 +268,6 @@ module.exports = {
                         .setStyle(ButtonStyle.Danger),
                 )
             ]
-        });
+        })
     }
-};
+}

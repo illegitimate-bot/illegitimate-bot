@@ -1,28 +1,28 @@
-const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require('discord.js')
-const { admin, helper } = require('../config/roles.json')
-const { color } = require('../config/options.json')
+const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
+const { admin, helper } = require("../config/roles.json")
+const { color } = require("../config/options.json")
 
 module.exports = {
-    name: 'ban',
-    description: 'Ban a user',
-    type: 'slash',
+    name: "ban",
+    description: "Ban a user",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('ban')
-        .setDescription('Ban a user')
+        .setName("ban")
+        .setDescription("Ban a user")
         .addUserOption(option =>
             option
-                .setName('user')
-                .setDescription('User to ban')
+                .setName("user")
+                .setDescription("User to ban")
                 .setRequired(true))
         .addStringOption(option =>
             option
-                .setName('reason')
-                .setDescription('Reason for ban'))
+                .setName("reason")
+                .setDescription("Reason for ban"))
         .addNumberOption(option =>
             option
-                .setName('messagedeletiondays')
-                .setDescription('Number of days to delete messages')
+                .setName("messagedeletiondays")
+                .setDescription("Number of days to delete messages")
                 .addChoices(
                     { name: "1 day", value: 1 },
                     { name: "2 days", value: 2 },
@@ -42,13 +42,13 @@ module.exports = {
 
         await interaction.deferReply()
 
-        const member = interaction.options.getMember('user')
-        const reason = interaction.options.getString('reason') ?? "No reason provided."
-        const messageDeletionDays = interaction.options.getNumber('messagedeletiondays') ?? 0
+        const member = interaction.options.getMember("user")
+        const reason = interaction.options.getString("reason") ?? "No reason provided."
+        const messageDeletionDays = interaction.options.getNumber("messagedeletiondays") ?? 0
         const mod = await interaction.guild.members.fetch(interaction.user.id)
         const memberRoles = member.roles.cache.map(role => role.id)
         const modRoles = mod.roles.cache.map(role => role.id)
-        const embedColor = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!modRoles.includes(admin)) {
             await interaction.editReply("You do not have permission to use this command.")

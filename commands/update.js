@@ -1,31 +1,31 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { getGuild, getIGN, getHeadURL } = require('../utils/utils.js');
-const verify = require('../schemas/verifySchema.js')
-const { color, hypixelGuildID } = require('../config/options.json');
-const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require('../config/roles.json');
-const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff];
+const { SlashCommandBuilder } = require("discord.js")
+const { getGuild, getIGN, getHeadURL } = require("../utils/utils.js")
+const verify = require("../schemas/verifySchema.js")
+const { color, hypixelGuildID } = require("../config/options.json")
+const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../config/roles.json")
+const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff]
 
 module.exports = {
-    name: 'update',
-    description: 'Update your guild rank.',
-    type: 'slash',
+    name: "update",
+    description: "Update your guild rank.",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('update')
-        .setDescription('Update your guild rank.')
+        .setName("update")
+        .setDescription("Update your guild rank.")
         .setDMPermission(false),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
 
-        await interaction.deferReply();
+        await interaction.deferReply()
 
-        const user1 = interaction.user;
-        const user = interaction.guild.members.cache.get(user1.id);
+        const user1 = interaction.user
+        const user = interaction.guild.members.cache.get(user1.id)
         const verifyData = await verify.findOne({ userID: user.id })
-        const roleManage = user.roles;
-        const embedColor = Number(color.replace("#", "0x"));
+        const roleManage = user.roles
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!verifyData) {
             await interaction.editReply({
@@ -41,7 +41,7 @@ module.exports = {
             return
         }
 
-        const guild = await getGuild(verifyData.uuid);
+        const guild = await getGuild(verifyData.uuid)
         let guildID = ""
         if (!guild) {
             guildID = null
@@ -49,8 +49,8 @@ module.exports = {
             guildID = guild._id
         }
 
-        const ign = await getIGN(verifyData.uuid);
-        const head = await getHeadURL(ign);
+        const ign = await getIGN(verifyData.uuid)
+        const head = await getHeadURL(ign)
         if (guildID !== hypixelGuildID) {
 
             for (let i = 0; i < removeThese.length; i++) {
@@ -77,10 +77,10 @@ module.exports = {
 
         if (guildID === hypixelGuildID) {
 
-            const GuildMembers = guild.members;
-            const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank;
+            const GuildMembers = guild.members
+            const guildRank = GuildMembers.find(member => member.uuid === verifyData.uuid).rank
 
-            if (guildRank === 'Guild Master') {
+            if (guildRank === "Guild Master") {
 
                 for (let i = 0; i < removeThese.length; i++) {
                     await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -107,7 +107,7 @@ module.exports = {
                 })
             }
 
-            if (guildRank === 'Manager') {
+            if (guildRank === "Manager") {
 
                 for (let i = 0; i < removeThese.length; i++) {
                     await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -134,7 +134,7 @@ module.exports = {
                 })
             }
 
-            if (guildRank === 'Moderator') {
+            if (guildRank === "Moderator") {
 
                 for (let i = 0; i < removeThese.length; i++) {
                     await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -162,7 +162,7 @@ module.exports = {
 
             }
 
-            if (guildRank === 'Beast') {
+            if (guildRank === "Beast") {
 
                 for (let i = 0; i < removeThese.length; i++) {
                     await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -189,7 +189,7 @@ module.exports = {
                 return
             }
 
-            if (guildRank === 'Elite') {
+            if (guildRank === "Elite") {
 
                 for (let i = 0; i < removeThese.length; i++) {
                     await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -216,7 +216,7 @@ module.exports = {
                 return
             }
 
-            if (guildRank === 'Member') {
+            if (guildRank === "Member") {
 
                 for (let i = 0; i < removeThese.length; i++) {
                     await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -243,7 +243,7 @@ module.exports = {
                 return
             }
 
-            if (guildRank === 'Trial Member') {
+            if (guildRank === "Trial Member") {
 
                 for (let i = 0; i < removeThese.length; i++) {
                     await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
@@ -271,4 +271,4 @@ module.exports = {
             }
         }
     }
-};
+}

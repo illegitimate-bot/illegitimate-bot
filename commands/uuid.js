@@ -1,18 +1,18 @@
-const { SlashCommandBuilder } = require('discord.js')
-const { color } = require('../config/options.json')
-const { getUUID, getIGN, getHeadURL, formatUuid } = require('../utils/utils.js')
+const { SlashCommandBuilder } = require("discord.js")
+const { color } = require("../config/options.json")
+const { getUUID, getIGN, getHeadURL, formatUuid } = require("../utils/utils.js")
 
 module.exports = {
-    name: 'uuid',
-    description: 'Get a player\'s UUID',
-    type: 'slash',
+    name: "uuid",
+    description: "Get a player's UUID",
+    type: "slash",
 
     data: new SlashCommandBuilder()
-        .setName('uuid')
-        .setDescription('Get a player\'s UUID')
+        .setName("uuid")
+        .setDescription("Get a player's UUID")
         .addStringOption(option => option
-            .setName('ign')
-            .setDescription('Player\'s name')
+            .setName("ign")
+            .setDescription("Player's name")
             .setRequired(true)
         ),
 
@@ -22,16 +22,16 @@ module.exports = {
 
         await interaction.deferReply()
 
-        const ign = interaction.options.getString('ign')
+        const ign = interaction.options.getString("ign")
         const uuid = await getUUID(ign)
         const formattedUuid = formatUuid(uuid)
         const newIgn = await getIGN(uuid)
         const head = await getHeadURL(ign)
-        const embedColor = Number(color.replace('#', '0x'))
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!uuid) {
             interaction.editReply({
-                description: 'That player doesn\'t exist!',
+                description: "That player doesn't exist!",
                 color: embedColor
             })
             return

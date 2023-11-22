@@ -1,25 +1,25 @@
-const { color } = require('../../config/options.json');
-const guildapp = require('../../schemas/guildAppSchema.js');
-const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require('../../config/reqs.json');
-const { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js");
+const { color } = require("../../config/options.json")
+const guildapp = require("../../schemas/guildAppSchema.js")
+const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require("../../config/reqs.json")
+const { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js")
 
 module.exports = {
-    name: 'checkstats',
-    description: 'Check your stats.',
-    type: 'button',
+    name: "checkstats",
+    description: "Check your stats.",
+    type: "button",
 
     /** @param {import('discord.js').ButtonInteraction} interaction */
 
     async execute(interaction) {
 
-        await interaction.deferReply();
+        await interaction.deferReply()
 
-        const message = interaction.message;
-        const embed = message.embeds[0];
+        const message = interaction.message
+        const embed = message.embeds[0]
         const applicantId = embed.footer.text.split(" ")[1]
         const guildappdata = await guildapp.findOne({ userID: applicantId })
-        const uuid = guildappdata.uuid;
-        const embedColor = Number(color.replace("#", "0x"));
+        const uuid = guildappdata.uuid
+        const embedColor = Number(color.replace("#", "0x"))
 
         const player = await getPlayer(uuid)
         if (!player) {
@@ -28,34 +28,34 @@ module.exports = {
                     description: "That player hasn't played Hypixel before.",
                     color: embedColor
                 }]
-            });
-            return;
+            })
+            return
         }
 
         const ign = player.playername
         const head = await getHeadURL(ign)
-        const rank2 = player.newPackageRank;
-        const monthlyRank = player.monthlyPackageRank;
+        const rank2 = player.newPackageRank
+        const monthlyRank = player.monthlyPackageRank
 
         let rank = ""
-        if (rank2 === 'VIP') {
+        if (rank2 === "VIP") {
             rank = "[VIP] "
-        } else if (rank2 === 'VIP_PLUS') {
+        } else if (rank2 === "VIP_PLUS") {
             rank = "[VIP+] "
-        } else if (rank2 === 'MVP') {
+        } else if (rank2 === "MVP") {
             rank = "[MVP] "
-        } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'NONE') {
+        } else if (rank2 === "MVP_PLUS" && monthlyRank === "NONE") {
             rank = "[MVP+] "
-        } else if (rank2 === 'MVP_PLUS' && monthlyRank === 'SUPERSTAR') {
+        } else if (rank2 === "MVP_PLUS" && monthlyRank === "SUPERSTAR") {
             rank = "[MVP++] "
         }
 
         const guild = await getGuild(uuid)
         let guildName = ""
         if (!guild) {
-            guildName = "None";
+            guildName = "None"
         } else {
-            guildName = guild.name;
+            guildName = guild.name
         }
 
         let guildTag = ""
@@ -68,35 +68,35 @@ module.exports = {
         }
 
         //bedwars level
-        const hsbwexp = player.stats.Bedwars.Experience;
-        const hsbwstars = bedwarsLevel(hsbwexp);
+        const hsbwexp = player.stats.Bedwars.Experience
+        const hsbwstars = bedwarsLevel(hsbwexp)
         // bedwars fkdr
-        const hsbwfk = player.stats.Bedwars.final_kills_bedwars;
-        const hsbwfd = player.stats.Bedwars.final_deaths_bedwars;
-        const hsbwfkdr = hsbwfk / hsbwfd;
+        const hsbwfk = player.stats.Bedwars.final_kills_bedwars
+        const hsbwfd = player.stats.Bedwars.final_deaths_bedwars
+        const hsbwfkdr = hsbwfk / hsbwfd
         // bedwars wins
-        const hsbwwins = player.stats.Bedwars.wins_bedwars;
+        const hsbwwins = player.stats.Bedwars.wins_bedwars
         // skywars level
-        const hsswexp = player.stats.SkyWars.skywars_experience;
-        const hsswstars = skywarsLevel(hsswexp);
+        const hsswexp = player.stats.SkyWars.skywars_experience
+        const hsswstars = skywarsLevel(hsswexp)
         // skywars kdr
-        const hsswkills = player.stats.SkyWars.kills;
-        const hsswdeaths = player.stats.SkyWars.deaths;
-        const hsswkd = hsswkills / hsswdeaths;
+        const hsswkills = player.stats.SkyWars.kills
+        const hsswdeaths = player.stats.SkyWars.deaths
+        const hsswkd = hsswkills / hsswdeaths
         //skywars wins
-        const hsswwins = player.stats.SkyWars.wins;
+        const hsswwins = player.stats.SkyWars.wins
         // dueks kdr
         const hsduelskills = player.stats.Duels.kills
         const hsduelsdeaths = player.stats.Duels.deaths
         const hsduelskd = hsduelskills / hsduelsdeaths
         // duels wins
-        const hsduelswins = player.stats.Duels.wins;
+        const hsduelswins = player.stats.Duels.wins
         // duels wlr
-        const hsduelslosses = player.stats.Duels.losses;
-        const hsduelswlr = hsduelswins / hsduelslosses;
+        const hsduelslosses = player.stats.Duels.losses
+        const hsduelswlr = hsduelswins / hsduelslosses
         // network level
-        const hypixelExp = player.networkExp;
-        const level = hypixelLevel(hypixelExp);
+        const hypixelExp = player.networkExp
+        const level = hypixelLevel(hypixelExp)
 
         let bwtitle = ""
         let swtitle = ""
@@ -168,6 +168,6 @@ module.exports = {
                     }
                 ]
             }]
-        });
+        })
     }
-};
+}

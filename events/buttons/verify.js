@@ -1,9 +1,9 @@
-const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
+const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require("discord.js")
 
 module.exports = {
-    name: 'verify',
-    description: 'Configure the bot.',
-    type: 'button',
+    name: "verify",
+    description: "Configure the bot.",
+    type: "button",
 
     /** @param {import('discord.js').ButtonInteraction} interaction */
 

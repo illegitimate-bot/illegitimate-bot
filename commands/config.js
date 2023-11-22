@@ -1,7 +1,7 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const { color } = require("../config/options.json");
-const settings = require("../schemas/settingsSchema.js");
-const mongoose = require("mongoose");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
+const { color } = require("../config/options.json")
+const settings = require("../schemas/settingsSchema.js")
+const mongoose = require("mongoose")
 
 module.exports = {
     name: "config",
@@ -33,12 +33,12 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.deferReply();
+        await interaction.deferReply()
 
         const setting = interaction.options.getString("setting")
-        const value = interaction.options.getString("value");
-        const embedColor = Number(color.replace("#", "0x"));
-        const settingsData = await settings.findOne({ name: setting });
+        const value = interaction.options.getString("value")
+        const embedColor = Number(color.replace("#", "0x"))
+        const settingsData = await settings.findOne({ name: setting })
 
         if (!settingsData) {
 
@@ -46,22 +46,22 @@ module.exports = {
                 _id: new mongoose.Types.ObjectId(),
                 name: setting,
                 value: value
-            });
+            })
 
-            await newSetting.save();
+            await newSetting.save()
 
             await interaction.editReply({
                 embeds: [{
                     description: "Successfully created `" + setting + "` with value `" + value + "`.",
                     color: embedColor
                 }]
-            });
+            })
         } else {
 
             await settings.findOneAndUpdate(
                 { name: setting },
                 { value: value }
-            );
+            )
 
             await interaction.editReply({
                 embeds: [{

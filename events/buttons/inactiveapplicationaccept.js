@@ -7,7 +7,7 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.reply({ content: "This button is currently disabled.", ephemeral: true });
+        await interaction.reply({ content: "This button is currently disabled.", ephemeral: true })
 
     }
 }

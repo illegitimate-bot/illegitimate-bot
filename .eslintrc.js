@@ -37,6 +37,14 @@ module.exports = {
         "semi": [
             "error",
             "never"
+        ],
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false
+            }
         ]
     }
 }

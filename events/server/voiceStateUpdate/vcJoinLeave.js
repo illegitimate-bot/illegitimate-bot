@@ -14,11 +14,19 @@ module.exports = {
 
     execute(oldState, newState) {
 
+        if (process.env.NODE_ENV === 'dev') return
+
+        const channel = guild.channels.cache.get(botLogChannel)
+        const embedColor = Number(color.replace('#', '0x'))
+
+        if (!channel) {
+            console.log(`[ERROR] Could not find channel used for voice channel join/leave logging.`)
+            return
+        }
+
         const oldChannel = oldState.channel
         const newChannel = newState.channel
         const guild = oldState.guild
-        const channel = guild.channels.cache.get(botLogChannel)
-        const embedColor = Number(color.replace('#', '0x'))
 
         if (oldChannel === null && newChannel !== null) {
 

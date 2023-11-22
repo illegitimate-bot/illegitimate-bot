@@ -7,21 +7,21 @@ module.exports = {
     event: 'ready',
 
     execute(client) {
-        if (process.env.NODE_ENV !== 'dev') {
-            const channel = client.channels.cache.get(onlineLogChannel);
-            const embedColor = Number(color.replace('#', '0x'))
+        if (process.env.NODE_ENV === 'dev') return
 
-            if (!channel) {
-                console.log(`[ERROR] Could not find channel used for online message.`);
-                return;
-            }
+        const channel = client.channels.cache.get(onlineLogChannel);
+        const embedColor = Number(color.replace('#', '0x'))
 
-            channel.send({
-                embeds: [{
-                    description: `Bot is online!`,
-                    color: embedColor
-                }]
-            });
+        if (!channel) {
+            console.log(`[ERROR] Could not find channel used for online message.`);
+            return;
         }
+
+        channel.send({
+            embeds: [{
+                description: `Bot is online!`,
+                color: embedColor
+            }]
+        });
     }
 }

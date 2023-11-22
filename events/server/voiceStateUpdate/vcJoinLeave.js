@@ -14,8 +14,9 @@ module.exports = {
 
     execute(oldState, newState) {
 
-        if (process.env.NODE_ENV === 'dev') return
+        // if (process.env.NODE_ENV === 'dev') return
 
+        const guild = oldState.guild
         const channel = guild.channels.cache.get(botLogChannel)
         const embedColor = Number(color.replace('#', '0x'))
 
@@ -26,7 +27,6 @@ module.exports = {
 
         const oldChannel = oldState.channel
         const newChannel = newState.channel
-        const guild = oldState.guild
 
         if (oldChannel === null && newChannel !== null) {
 

@@ -79,7 +79,7 @@ module.exports = {
             interaction.editReply({
                 embeds: [
                     {
-                        description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + stats.data.player.displayname + "`.\n\n" +
+                        description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + player.displayname + "`.\n\n" +
                             "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
                         color: embedColor
                     }
@@ -92,7 +92,7 @@ module.exports = {
             interaction.editReply({
                 embeds: [
                     {
-                        description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + stats.data.player.displayname + "`.\n\n" +
+                        description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + player.displayname + "`.\n\n" +
                             "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
                         color: embedColor
                     }
@@ -107,7 +107,7 @@ module.exports = {
             interaction.editReply({
                 embeds: [
                     {
-                        description: "<a:cross_a:1087808606897983539> The Discord account linked to `" + stats.data.player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
+                        description: "<a:cross_a:1087808606897983539> The Discord account linked to `" + player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
                             "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
                         color: embedColor
                     }

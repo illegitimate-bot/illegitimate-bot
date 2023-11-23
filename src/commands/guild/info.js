@@ -84,7 +84,9 @@ async function guildInfo(interaction) {
                 },
                 {
                     name: "**GEXP**",
-                    value: "**➺ Total weekly GEXP:** `" + totalGuildMembersDailyXP + "`"
+                    value: "**➺ Total weekly GEXP:** `" + totalGuildMembersDailyXP + "`\n" +
+                        "**➺ Daily avarage:** `" + Math.round(totalGuildMembersDailyXP / 7) + "`\n" +
+                        "**➺ Total GEXP:** `" + guildExp + "`"
                 },
                 {
                     name: "**Guild Created**",

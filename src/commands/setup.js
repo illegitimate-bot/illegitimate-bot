@@ -62,8 +62,6 @@ module.exports = {
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
     async execute(interaction) {
-        const user = interaction.user
-        const guild = interaction.guild
         const subcommand = interaction.options.getSubcommand()
         const embedColor = Number(color.replace("#", "0x"))
 

@@ -8,7 +8,7 @@ function skywarsLevel(xp) {
         exactLevel = (xp - 15000) / 10000 + 12
         return exactLevel
     } else {
-        for (i = 0; i < xps.length; i++) {
+        for (let i = 0; i < xps.length; i++) {
             if (xp < xps[i]) {
                 exactLevel = i + (xp - xps[i - 1]) / (xps[i] - xps[i - 1])
                 return exactLevel

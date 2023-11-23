@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChannelType } = require("discord.js")
+const { SlashCommandBuilder } = require("discord.js")
 const { color } = require("../../config/options.json")
 
 module.exports = {

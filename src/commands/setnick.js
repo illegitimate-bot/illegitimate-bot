@@ -38,4 +38,4 @@ module.exports = {
         await interaction.reply({ content: "Set the nickname of " + userMention(member.id) + " to " + nickname, ephemeral: true })
 
     }
-} 
+}

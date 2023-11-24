@@ -30,7 +30,7 @@ module.exports = {
 
         }
 
-        let fields = []
+        const fields = []
 
         for (let i = 0; i < accepted.length; i++) {
 

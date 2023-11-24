@@ -31,7 +31,7 @@ module.exports = {
             "windows"
         ],
         "quotes": [
-            "error",
+            "warn",
             "double"
         ],
         "semi": [
@@ -45,6 +45,20 @@ module.exports = {
                 "args": "after-used",
                 "ignoreRestSiblings": false
             }
-        ]
+        ],
+        "prefer-const": "warn",
+        "no-var": "error",
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
+        "no-lonely-if": "error",
+        "no-empty-function": "error",
+        "no-inline-comments": "error",
+        "no-trailing-spaces": ["error"],
+        "arrow-spacing": ["warn", { "before": true, "after": true }],
+        "space-before-function-paren": ["error", {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always"
+        }],
+        "comma-spacing": "error",
     }
 }

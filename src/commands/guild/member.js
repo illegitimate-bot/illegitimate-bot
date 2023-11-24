@@ -21,6 +21,7 @@ async function guildMember(interaction) {
                 },
             ],
         })
+        return
     }
 
     const head = await getHeadURL(ign)
@@ -41,6 +42,7 @@ async function guildMember(interaction) {
                 },
             ],
         })
+        return
     }
 
     const serverRank = player.newPackageRank
@@ -77,6 +79,7 @@ async function guildMember(interaction) {
                 },
             ],
         })
+        return
     }
 
     const guildName = guild.name
@@ -142,7 +145,6 @@ async function guildMember(interaction) {
             },
         ],
     })
-    return
 }
 
 module.exports = { guildMember }

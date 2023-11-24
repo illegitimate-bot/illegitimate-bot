@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
-
 module.exports = {
     name: "dev-info",
     description: "Test command for the bot.",
     type: "slash",
+    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("dev-info")

@@ -4,6 +4,6 @@ COPY . /app
 
 WORKDIR /app
 
-RUN npm install
+RUN yarn install
 
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]

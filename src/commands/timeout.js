@@ -6,7 +6,6 @@ module.exports = {
     name: "timeout",
     description: "Times out a memeber",
     type: "slash",
-    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("timeout")
@@ -34,11 +33,13 @@ module.exports = {
 
         await interaction.deferReply()
 
+        const { default: prettyms } = await import("pretty-ms")
         const target1 = interaction.options.getUser("user")
         const target = interaction.guild.members.cache.get(target1.id)
         const timeString = interaction.options.getString("time")
         const reason = interaction.options.getString("reason") || "No reason provided"
         const time = ms(timeString)
+        const prettyTime = prettyms(time, { verbose: true })
         const embedColor = Number(color.replace("#", "0x"))
 
         if (target.bot) {
@@ -111,7 +112,7 @@ module.exports = {
             await target.timeout(time, reason)
             await interaction.editReply({
                 embeds: [{
-                    description: "Updated timeout of " + userMention(target.id) + " to " + timeString + " for " + reason,
+                    description: "Updated timeout of " + userMention(target.id) + " to " + prettyTime + " for " + reason,
                     color: embedColor,
                     footer: {
                         text: "ID: " + target.id,
@@ -126,7 +127,7 @@ module.exports = {
         await target.timeout(time, reason)
         await interaction.editReply({
             embeds: [{
-                description: "Timed out " + userMention(target.id) + " for " + timeString + " for " + reason,
+                description: "Timed out " + userMention(target.id) + " for " + prettyTime + " for " + reason,
                 color: embedColor,
                 footer: {
                     text: "ID: " + target.id,

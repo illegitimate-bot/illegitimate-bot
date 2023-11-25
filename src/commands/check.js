@@ -7,7 +7,6 @@ module.exports = {
     name: "check",
     description: "Check a player's stats.",
     type: "slash",
-    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("check")

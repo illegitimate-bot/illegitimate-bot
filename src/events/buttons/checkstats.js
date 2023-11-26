@@ -1,6 +1,6 @@
 const { color } = require("../../../config/options.json")
 const guildapp = require("../../schemas/guildAppSchema.js")
-const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require("../../../config/reqs.json")
+const { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } = require("../../../config/reqs.json")
 const { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js")
 
 module.exports = {
@@ -112,7 +112,7 @@ module.exports = {
                 const hsswwins = player.stats.SkyWars.wins
 
                 let swtitle = ""
-                if (hsswstars < swstars) {
+                if (hsswstars < swstars || hsswkd < swkdr) {
                     swtitle = "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements."
                 } else {
                     swtitle = "<a:check_a:1087808632172847134> This player meets the SkyWars requirements."
@@ -125,7 +125,8 @@ module.exports = {
                         hsswstars.toFixed(2).toString() +
                         " / " + swstars.toString() + "`\n" +
                         "**➺ KDR:** `" +
-                        hsswkd.toFixed(2).toString() + "`\n" +
+                        hsswkd.toFixed(2).toString() + " / " +
+                        swkdr.toString() + "`\n" +
                         "**➺ Wins:** `" +
                         hsswwins.toString() + "`"
                 })

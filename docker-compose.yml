@@ -1,14 +1,7 @@
-version: '1.0'
+version: '3.7'
 services:
   illegitimate:
-    image: "illegitimate-bot:latest"
-    environment:
-      - TOKEN=${TOKEN}
-      - MONGOURI=${MONGOURI}
-      - DEV=${DEV}
-      - CLIENTID=${CLIENTID}
-      - GUILDID=${GUILDID}
-      - HYPIXELKEY=${HYPIXELKEY}
-      - GUILDINFO=${GUILDINFO}
-      - REQUIREMENTS=${REQUIREMENTS}
-      - RULESINFO=${RULESINFO}
+    container_name: illegitimate
+    build: https://gitlab.com/illegitimate/illegitimate-bot.git#main
+    image: illegitimate:latest
+    env_file: .env

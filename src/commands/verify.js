@@ -75,7 +75,8 @@ module.exports = {
             username = user1.username + "#" + user1.discriminator
         }
 
-        if (!player.socialMedia) {
+        const linkedDiscord = player?.socialMedia?.links?.DISCORD || null
+        if (!linkedDiscord) {
             interaction.editReply({
                 embeds: [
                     {
@@ -87,21 +88,6 @@ module.exports = {
             })
             return
         }
-
-        if (!player.socialMedia.links.DISCORD) {
-            interaction.editReply({
-                embeds: [
-                    {
-                        description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + player.displayname + "`.\n\n" +
-                            "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
-                        color: embedColor
-                    }
-                ]
-            })
-            return
-        }
-
-        const linkedDiscord = player.socialMedia.links.DISCORD
 
         if (linkedDiscord !== username) {
             interaction.editReply({

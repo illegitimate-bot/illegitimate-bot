@@ -1,5 +1,13 @@
-node_modules/*
-scripts/*
+node_modules
+scripts
+.git
 package-lock.json
 .env
+.env.example
 .clang-format
+.eslintrc.js
+.gitignore
+.gitlab-ci.yml
+docker-compose.yml
+Dockerfile
+nodemon.json

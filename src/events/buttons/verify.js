@@ -16,7 +16,7 @@ module.exports = {
                 new ActionRowBuilder().setComponents(
                     new TextInputBuilder()
                         .setLabel("IGN")
-                        .setCustomId("verifyfield")
+                        .setCustomId("verifyign")
                         .setStyle(TextInputStyle.Short)
                         .setPlaceholder("Enter your ign.")
                         .setRequired(true)

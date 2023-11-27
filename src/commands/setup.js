@@ -177,7 +177,7 @@ module.exports = {
                 components: [
                     new ActionRowBuilder()
                         .addComponents(new ButtonBuilder()
-                            .setCustomId("verifybutton")
+                            .setCustomId("verify")
                             .setLabel("Verify")
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji({ name: "✅" }))

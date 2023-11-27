@@ -4,3 +4,8 @@ services:
     container_name: illegitimate
     build: https://gitlab.com/illegitimate/illegitimate-bot.git#main
     image: illegitimate:latest
+    environment:
+      - TOKEN=${TOKEN}
+      - MONGOURI=${MONGOURI}
+      - DEV:=${DEV}
+      - HYPIXELAPIKEY=${HYPIXELAPIKEY}

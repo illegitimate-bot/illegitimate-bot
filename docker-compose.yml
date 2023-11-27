@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   illegitimate:
-    build: /home/user/illegitimate/illegitimate-bot
+    container_name: illegitimate
+    build: https://gitlab.com/illegitimate/illegitimate-bot.git#main
     image: illegitimate:latest
     env_file: .env

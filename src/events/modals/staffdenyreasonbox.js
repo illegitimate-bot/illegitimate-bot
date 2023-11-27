@@ -7,7 +7,7 @@ module.exports = {
     description: "Deny reason box.",
     type: "modal",
 
-    /** @param {import('discord.js').ModalSubmitInteraction} interaction */
+    /** @param { import('discord.js').ModalSubmitInteraction } interaction */
 
     async execute(interaction) {
 

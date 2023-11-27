@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "dev") {
     autoDeployCommands()
 } else {
     console.log("Running in production mode.")
-    token = process.env.PRODTOKEN
+    token = process.env.TOKEN
 }
 
 client.login(token)

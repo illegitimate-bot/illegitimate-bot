@@ -9,6 +9,8 @@ module.exports = {
     name: "verify",
     description: "Verify yourself as a member of the server.",
     type: "slash",
+    dev: false,
+    public: true,
 
     data: new SlashCommandBuilder()
         .setName("verify")

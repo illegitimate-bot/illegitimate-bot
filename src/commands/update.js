@@ -9,6 +9,8 @@ module.exports = {
     name: "update",
     description: "Update your guild rank.",
     type: "slash",
+    dev: false,
+    public: true,
 
     data: new SlashCommandBuilder()
         .setName("update")

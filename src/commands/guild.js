@@ -7,6 +7,8 @@ module.exports = {
     name: "guild",
     description: "Subcommands for guilds",
     type: "slash",
+    dev: false,
+    public: true,
 
     data: new SlashCommandBuilder()
         .setName("guild")

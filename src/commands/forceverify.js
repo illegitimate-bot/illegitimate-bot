@@ -10,6 +10,8 @@ module.exports = {
     name: "forceverify",
     description: "Force verify a user.",
     type: "slash",
+    dev: false,
+    public: false,
 
     data: new SlashCommandBuilder()
         .setName("forceverify")

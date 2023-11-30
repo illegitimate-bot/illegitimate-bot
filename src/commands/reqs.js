@@ -1,11 +1,14 @@
 const { SlashCommandBuilder } = require("discord.js")
 const { color, devMessage } = require("../../config/options.json")
-const { bwfkdr, bwstars, bwwins, swstars, duelswins, duelswlr } = require("../../config/reqs.json")
+const { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } = require("../../config/reqs.json")
 
 module.exports = {
     name: "reqs",
     description: "Displays the requirements for the guild.",
     type: "slash",
+    dev: false,
+    public: true,
+
     data: new SlashCommandBuilder()
         .setName("reqs")
         .setDescription("Displays the requirements for the guild."),
@@ -26,7 +29,7 @@ module.exports = {
                 description: "**You must make 100k-150k weekly GEXP.\nAs well as onne of the game stats below**",
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.guild.iconURL()
+                    url: interaction?.guild?.iconURL({ dynamic: true }) || null
                 },
                 fields: [
                     {
@@ -37,7 +40,8 @@ module.exports = {
                     },
                     {
                         name: "**Skywars**",
-                        value: "**Stars:** `" + swstars.toString() + "`"
+                        value: "**Stars:** `" + swstars.toString() +
+                            "`\n**KDR:** `" + swkdr.toString() + "`"
                     },
                     {
                         name: "**Duels**",

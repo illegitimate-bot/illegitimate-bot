@@ -109,37 +109,38 @@ async function guildMember(interaction) {
         guildMemberJoinMinutes + ":" +
         guildMemberJoinSeconds
 
+    const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+    const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
+
     await interaction.editReply({
-        embeds: [
-            {
-                title: rank + displayName + guildTag,
-                description: "**Guild Name:** `" + guildName + "`\n" +
-                    "**Guild Rank:** `" + guildRank + "`\n",
-                color: embedColor,
-                thumbnail: {
-                    url: head,
-                },
-                fields: [
-                    {
-                        name: "**Daily GEXP**",
-                        value: expValue,
-                    },
-                    {
-                        name: "**Weekly GEXP**",
-                        value: "**➺ Total:** `" + totalWeeklyGexp + "`\n" +
-                            "**➺ Daily avarage:** `" + averageWeeklyGexp + "`",
-                    },
-                    {
-                        name: "**Join date**",
-                        value: "**➺ **`" + guildMemberJoin + "`",
-                    },
-                ],
-                footer: {
-                    text: interaction.guild.name + " | " + devMessage,
-                    icon_url: interaction.guild.iconURL({ dynamic: true }),
-                },
+        embeds: [{
+            title: rank + displayName + guildTag,
+            description: "**Guild Name:** `" + guildName + "`\n" +
+                "**Guild Rank:** `" + guildRank + "`\n",
+            color: embedColor,
+            thumbnail: {
+                url: head,
             },
-        ],
+            fields: [
+                {
+                    name: "**Daily GEXP**",
+                    value: expValue,
+                },
+                {
+                    name: "**Weekly GEXP**",
+                    value: "**➺ Total:** `" + totalWeeklyGexp + "`\n" +
+                        "**➺ Daily avarage:** `" + averageWeeklyGexp + "`",
+                },
+                {
+                    name: "**Join date**",
+                    value: "**➺ **`" + guildMemberJoin + "`",
+                },
+            ],
+            footer: {
+                text: footerText,
+                icon_url: footerIcon
+            },
+        }],
     })
 }
 

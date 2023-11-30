@@ -19,6 +19,9 @@ module.exports = {
 
         const embedColor = Number(color.replace("#", "0x"))
 
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
+
         await interaction.editReply({
             embeds: [{
                 title: "Commands",
@@ -43,11 +46,11 @@ module.exports = {
                 ],
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.guild.iconURL({ dynamic: true })
+                    url: interaction?.guild.iconURL({ dynamic: true }) || null
                 },
                 footer: {
-                    icon_url: interaction?.guild.iconURL({ dynamic: true }) || interaction.user.avatarURL({ dynamic: true }),
-                    text: interaction?.guild.name || interaction.user.username + " | " + devMessage
+                    icon_url: footerIcon,
+                    text: footerText
                 }
             }]
         })

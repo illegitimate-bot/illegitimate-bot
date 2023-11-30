@@ -70,6 +70,9 @@ async function guildInfo(interaction) {
     const guildMembersDailyXP = Object.values(guildMembers).map((m) => m.expHistory[Object.keys(m.expHistory)[0]])
     const totalGuildMembersDailyXP = guildMembersDailyXP.reduce((a, b) => a + b, 0)
 
+    const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+    const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
+
     await interaction.editReply({
         embeds: [{
             title: "**Info on** " + guildName,
@@ -95,8 +98,8 @@ async function guildInfo(interaction) {
             ],
             color: embedColor,
             footer: {
-                text: interaction?.guild.name || interaction.user.username + " | " + devMessage,
-                icon_url: interaction?.guild.iconURL({ dynamic: true }) || interaction.user.avatarURL({ dynamic: true })
+                text: footerText,
+                icon_url: footerIcon
             }
         }]
     })

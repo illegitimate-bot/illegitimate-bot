@@ -5,7 +5,6 @@ module.exports = {
     name: "unban",
     description: "Unban a user from the server",
     type: "slash",
-    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("unban")
@@ -22,7 +21,9 @@ module.exports = {
                 .setName("reason")
                 .setDescription("The reason for unbanning the user")
                 .setRequired(false)
-        ),
+        )
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+        .setDMPermission(false),
 
     /** @param { import("discord.js").ChatInputCommandInteraction } interaction */
 

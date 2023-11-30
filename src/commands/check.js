@@ -13,8 +13,7 @@ module.exports = {
         .setDescription("Check a player's stats.")
         .addStringOption((option) => option.setName("ign")
             .setDescription("The player's IGN.")
-            .setRequired(true))
-        .setDMPermission(false),
+            .setRequired(true)),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
@@ -216,8 +215,8 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: interaction.guild.name + " | " + devMessage,
-                    icon_url: interaction.guild.iconURL()
+                    text: interaction?.guild.name || interaction.user.username + " | " + devMessage,
+                    icon_url: interaction?.guild.iconURL() || interaction.user.avatarURL()
                 },
                 fields: statsFields
             }]

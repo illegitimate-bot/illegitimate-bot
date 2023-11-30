@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 const { getUUID, getIGN, getHeadURL, formatUuid } = require("../utils/utils.js")
 
 module.exports = {
@@ -47,7 +47,7 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: interaction.guild.name + " | Developed by taken.lua",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL({ dynamic: true })
                 }
             }]

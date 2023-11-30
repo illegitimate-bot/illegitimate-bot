@@ -1,5 +1,5 @@
 const { getUUID, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js")
-const { color } = require("../../../config/options.json")
+const { color, devMessage } = require("../../../config/options.json")
 
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
@@ -14,10 +14,6 @@ async function guildMember(interaction) {
                 {
                     description: "This user does not exist",
                     color: embedColor,
-                    footer: {
-                        text: interaction.guild.name + " | Developed by taken.lua",
-                        icon_url: interaction.guild.iconURL({ dynamic: true }),
-                    },
                 },
             ],
         })
@@ -36,7 +32,7 @@ async function guildMember(interaction) {
                         url: head,
                     },
                     footer: {
-                        text: interaction.guild.name + " | Developed by taken.lua",
+                        text: interaction.guild.name + " | " + devMessage,
                         icon_url: interaction.guild.iconURL({ dynamic: true }),
                     },
                 },
@@ -73,7 +69,7 @@ async function guildMember(interaction) {
                         url: head,
                     },
                     footer: {
-                        text: interaction.guild.name + " | Developed by taken.lua",
+                        text: interaction.guild.name + " | " + devMessage,
                         icon_url: interaction.guild.iconURL({ dynamic: true }),
                     },
                 },
@@ -139,7 +135,7 @@ async function guildMember(interaction) {
                     },
                 ],
                 footer: {
-                    text: interaction.guild.name + " | Developed by taken.lua",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL({ dynamic: true }),
                 },
             },

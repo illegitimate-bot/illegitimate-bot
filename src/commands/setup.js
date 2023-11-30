@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 
 module.exports = {
     name: "setup",
@@ -76,7 +76,7 @@ module.exports = {
                         description: "You can apply for the guild by clicking the button below.",
                         color: embedColor,
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             iconURL: interaction.guild.iconURL({ dynamic: true })
                         },
                         thumbnail: {
@@ -106,7 +106,7 @@ module.exports = {
                         description: "You can apply for the staff team by clicking the button below.",
                         color: embedColor,
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             iconURL: interaction.guild.iconURL({ dynamic: true })
                         },
                         thumbnail: {
@@ -137,7 +137,7 @@ module.exports = {
                         description: "You can send an inactivity log by clicking the button below.",
                         color: embedColor,
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             iconURL: interaction.guild.iconURL({ dynamic: true })
                         },
                         thumbnail: {
@@ -167,7 +167,7 @@ module.exports = {
                     description: "You can verify by clicking the button below.",
                     color: embedColor,
                     footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        text: interaction.guild.name + " | " + devMessage,
                         iconURL: interaction.guild.iconURL({ dynamic: true })
                     },
                     thumbnail: {
@@ -197,7 +197,7 @@ module.exports = {
                         "Try to invite them in order.",
                     color: embedColor,
                     footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        text: interaction.guild.name + " | " + devMessage,
                         iconURL: interaction.guild.iconURL({ dynamic: true })
                     },
                     thumbnail: {

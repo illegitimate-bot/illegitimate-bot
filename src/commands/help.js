@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 
 module.exports = {
     name: "help",
@@ -47,7 +47,7 @@ module.exports = {
                 },
                 footer: {
                     icon_url: interaction.guild.iconURL({ dynamic: true }),
-                    text: interaction.guild.name + " | Developed by: @Taken#0001"
+                    text: interaction.guild.name + " | " + devMessage
                 }
             }]
         })

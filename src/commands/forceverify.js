@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
 const { getUUID, getPlayer, getGuild, getHeadURL } = require("../utils/utils.js")
-const { color, hypixelGuildID } = require("../../config/options.json")
+const { color, hypixelGuildID, devMessage } = require("../../config/options.json")
 const verify = require("../schemas/verifySchema.js")
 const { mongoose } = require("mongoose")
 const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
@@ -161,7 +161,7 @@ module.exports = {
                 },
                 footer: {
                     icon_url: interaction.guild.iconURL(),
-                    text: interaction.guild.name + " | Developed by Taken#0002"
+                    text: interaction.guild.name + " | " + devMessage
                 }
             }]
         })

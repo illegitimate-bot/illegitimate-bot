@@ -30,7 +30,7 @@ module.exports = {
         const newIgn = await getIGN(uuid)
         const head = await getHeadURL(ign)
         const embedColor = Number(color.replace("#", "0x"))
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
         const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
         if (!uuid) {
@@ -51,7 +51,7 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: footerText,
+                    text: footerText + " | " + devMessage,
                     icon_url: footerIcon
                 }
             }]

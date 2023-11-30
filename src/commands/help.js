@@ -36,7 +36,7 @@ module.exports = {
         })
 
         const embedColor = Number(color.replace("#", "0x"))
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
         const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
         await interaction.editReply({
@@ -50,7 +50,7 @@ module.exports = {
                 },
                 footer: {
                     icon_url: footerIcon,
-                    text: footerText
+                    text: footerText + " | " + devMessage
                 }
             }]
         })

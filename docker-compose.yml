@@ -8,5 +8,5 @@ services:
     environment:
       - TOKEN=${TOKEN}
       - MONGOURI=${MONGOURI}
-      - DEV:=${DEV}
+      - DEV=${DEV}
       - HYPIXELAPIKEY=${HYPIXELAPIKEY}

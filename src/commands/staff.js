@@ -6,7 +6,7 @@ module.exports = {
     name: "staff",
     description: "Subcommands for staff",
     type: "slash",
-    dev: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()

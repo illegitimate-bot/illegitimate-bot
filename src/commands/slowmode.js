@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 
 module.exports = {
     name: "slowmode",
@@ -37,7 +37,7 @@ module.exports = {
                     description: `Set the slowmode of ${channel} to 21600 seconds.`,
                     color: embedColor,
                     footer: {
-                        text: interaction.guild.name + " | Developed by: @Taken#0001",
+                        text: interaction.guild.name + " | " + devMessage,
                         icon_url: interaction.guild.iconURL({ dynamic: true })
                     }
                 }]
@@ -50,7 +50,7 @@ module.exports = {
                 description: `Set the slowmode of ${channel} to ${seconds} seconds.`,
                 color: embedColor,
                 footer: {
-                    text: interaction.guild.name + " | Developed by: @Taken#0001",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL({ dynamic: true })
                 }
             }]

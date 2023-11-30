@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 const { guildMember } = require("./guild/member.js")
 const { guildInfo } = require("./guild/info.js")
 
@@ -59,7 +59,7 @@ module.exports = {
                 description: "This command is currently under development",
                 color: embedColor,
                 footer: {
-                    text: interaction.guild.name + " | Developed by taken.lua",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL({ dynamic: true })
                 }
             }]

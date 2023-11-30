@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js")
 const { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } = require("../../config/reqs.json")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 const { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } = require("../utils/utils.js")
 
 module.exports = {
@@ -216,7 +216,7 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: interaction.guild.name + " | Developed by @Taken#0002",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL()
                 },
                 fields: statsFields

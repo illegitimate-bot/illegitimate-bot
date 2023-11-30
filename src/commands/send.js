@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 
 module.exports = {
     name: "send",
@@ -50,7 +50,8 @@ module.exports = {
                         url: interaction.guild.iconURL({ dynamic: true })
                     },
                     footer: {
-                        text: "Developed by @Taken#0002"
+                        text: interaction.guild.id + " | " + devMessage,
+                        icon_url: interaction.guild.iconURL({ dynamic: true })
                     }
                 }
             ]

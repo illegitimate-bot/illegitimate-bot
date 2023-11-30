@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
 const { getIGN, getHeadURL } = require("../utils/utils.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 const verify = require("../schemas/verifySchema.js")
 
 module.exports = {
@@ -46,7 +46,7 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: interaction.guild.name + " | Developed by: @Taken#0002",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL({ dynamic: true })
                 }
             }]

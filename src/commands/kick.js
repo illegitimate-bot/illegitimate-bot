@@ -74,9 +74,10 @@ module.exports = {
                     "**Moderator:** " + mod.user.username,
                 color: embedColor,
                 footer: {
-                    text: member.user.id,
+                    text: "ID: " + member.user.id,
                     icon_url: member.user.avatarURL({ dynamic: true })
                 },
+                timestamp: new Date()
             }]
         })
 

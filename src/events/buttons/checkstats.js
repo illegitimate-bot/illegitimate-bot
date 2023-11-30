@@ -1,4 +1,4 @@
-const { color } = require("../../../config/options.json")
+const { color, devMessage } = require("../../../config/options.json")
 const guildapp = require("../../schemas/guildAppSchema.js")
 const { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } = require("../../../config/reqs.json")
 const { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js")
@@ -174,7 +174,7 @@ module.exports = {
                 color: embedColor,
                 thumbnail: { url: head },
                 footer: {
-                    text: interaction.guild.name + " | Developed by @Taken#0002",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL()
                 },
                 fields: statsFields

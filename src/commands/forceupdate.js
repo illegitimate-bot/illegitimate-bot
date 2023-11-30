@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
 const { getGuild, getHeadURL, getIGN } = require("../utils/utils.js")
-const { hypixelGuildID, color } = require("../../config/options.json")
+const { hypixelGuildID, color, devMessage } = require("../../config/options.json")
 const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
 const verify = require("../schemas/verifySchema.js")
 const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff]
@@ -41,7 +41,7 @@ module.exports = {
                     description: "User is not verified.",
                     color: embedColor,
                     footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        text: interaction.guild.name + " | " + devMessage,
                         icon_url: interaction.guild.iconURL({ dynamic: true })
                     }
                 }]
@@ -74,7 +74,7 @@ module.exports = {
                         url: head
                     },
                     footer: {
-                        text: interaction.guild.name + " | Developed by @Taken#0002",
+                        text: interaction.guild.name + " | " + devMessage,
                         icon_url: interaction.guild.iconURL({ dynamic: true })
                     }
                 }]
@@ -108,7 +108,7 @@ module.exports = {
                             url: head
                         },
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             icon_url: interaction.guild.iconURL({ dynamic: true })
                         }
                     }]
@@ -135,7 +135,7 @@ module.exports = {
                             url: head
                         },
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             icon_url: interaction.guild.iconURL({ dynamic: true })
                         }
                     }]
@@ -162,7 +162,7 @@ module.exports = {
                             url: head
                         },
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             icon_url: interaction.guild.iconURL({ dynamic: true })
                         }
                     }]
@@ -189,7 +189,7 @@ module.exports = {
                             url: head
                         },
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             icon_url: interaction.guild.iconURL({ dynamic: true })
                         }
                     }]
@@ -216,7 +216,7 @@ module.exports = {
                             url: head
                         },
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             icon_url: interaction.guild.iconURL({ dynamic: true })
                         }
                     }]
@@ -243,7 +243,7 @@ module.exports = {
                             url: head
                         },
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             icon_url: interaction.guild.iconURL({ dynamic: true })
                         }
                     }]
@@ -270,7 +270,7 @@ module.exports = {
                             url: head
                         },
                         footer: {
-                            text: interaction.guild.name + " | Developed by @Taken#0002",
+                            text: interaction.guild.name + " | " + devMessage,
                             icon_url: interaction.guild.iconURL({ dynamic: true })
                         }
                     }]

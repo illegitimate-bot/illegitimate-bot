@@ -56,6 +56,11 @@ module.exports = {
                     "**Reason:** `" + reason + "`\n" +
                     "**Moderator:** " + userMention(mod.id),
                 color: embedColor,
+                footer: {
+                    text: "User ID: " + user.id,
+                    icon_url: user.displayAvatarURL( { dynamic: true })
+                },
+                timestamp: new Date()
             }]
         })
     }

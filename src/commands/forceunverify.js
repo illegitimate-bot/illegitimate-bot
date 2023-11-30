@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 const verify = require("../schemas/verifySchema.js")
 const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
 const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember]
@@ -46,7 +46,7 @@ module.exports = {
                 description: "Successfully unverified " + userMention(member1.id),
                 color: embedColor,
                 footer: {
-                    text: interaction.guild.name + " | Developed by taken.lua",
+                    text: interaction.guild.name + " | " + devMessage,
                     icon_url: interaction.guild.iconURL({ dynamic: true })
                 }
             }]

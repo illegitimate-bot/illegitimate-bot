@@ -28,6 +28,8 @@ module.exports = {
         const newIgn = await getIGN(uuid)
         const head = await getHeadURL(ign)
         const embedColor = Number(color.replace("#", "0x"))
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
         if (!uuid) {
             interaction.editReply({
@@ -47,8 +49,8 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: interaction?.guild.name || interaction.user.username + " | " + devMessage,
-                    icon_url: interaction?.guild.iconURL({ dynamic: true }) || interaction.user.avatarURL({ dynamic: true })
+                    text: footerText,
+                    icon_url: footerIcon
                 }
             }]
         })

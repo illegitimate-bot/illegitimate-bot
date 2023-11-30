@@ -204,6 +204,9 @@ module.exports = {
         const hypixelExp = player.networkExp || 0
         const level = hypixelLevel(hypixelExp)
 
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
+
         await interaction.editReply({
             embeds: [{
                 title: rank + player.displayname + guildTag,
@@ -215,8 +218,8 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: interaction?.guild.name || interaction.user.username + " | " + devMessage,
-                    icon_url: interaction?.guild.iconURL() || interaction.user.avatarURL()
+                    text: footerText,
+                    icon_url: footerIcon
                 },
                 fields: statsFields
             }]

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const { color } = require("../../config/options.json")
+const { color, devMessage } = require("../../config/options.json")
 
 module.exports = {
     name: "ping",
@@ -20,15 +20,16 @@ module.exports = {
 
         const embedColor = Number(color.replace("#", "0x"))
 
-        console.log(client.ws.ping)
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
         await interaction.editReply({
             embeds: [{
                 description: "Ping of the bot is " + client.ws.ping + "ms.",
                 color: embedColor,
                 footer: {
-                    text: interaction?.guild.name || interaction.user.username,
-                    icon_url: interaction?.guild.iconURL({ dynamic: true }) || interaction.user.avatarURL({ dynamic: true })
+                    text: footerText,
+                    icon_url: footerIcon
                 },
                 timestamp: new Date()
             }]

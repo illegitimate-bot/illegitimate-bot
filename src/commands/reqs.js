@@ -17,6 +17,8 @@ module.exports = {
         await interaction.deferReply({ ephemeral: true })
 
         const embedColor = Number(color.replace("#", "0x"))
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
         await interaction.editReply({
             embeds: [{
@@ -44,8 +46,8 @@ module.exports = {
                     }
                 ],
                 footer: {
-                    text: interaction?.guild.name || interaction.user.username + " | " + devMessage,
-                    icon_url: interaction?.guild.iconURL() || interaction.user.avatarURL()
+                    text: footerText,
+                    icon_url: footerIcon
                 }
             }]
         })

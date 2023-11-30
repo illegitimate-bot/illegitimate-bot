@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "nodemon",
     "dev:build": "node scripts/dev-deploy.js",
+    "lint": "eslint_d src",
+    "lint:fix": "eslint_d --fix src",
     "prod:build:global": "node scripts/deploy-commands.js --prod",
     "prod:build:user": "node scripts/deploy-commands.js --dev"
   },

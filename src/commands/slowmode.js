@@ -5,6 +5,7 @@ module.exports = {
     name: "slowmode",
     description: "Set the slowmode of a channel.",
     type: "slash",
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("slowmode")

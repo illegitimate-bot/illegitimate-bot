@@ -7,6 +7,7 @@ module.exports = {
     name: "whois",
     description: "Get's the ign of a user.",
     type: "slash",
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("whois")

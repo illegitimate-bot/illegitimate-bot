@@ -5,6 +5,7 @@ module.exports = {
     name: "send",
     description: "Send a message to a channel.",
     type: "slash",
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("send")

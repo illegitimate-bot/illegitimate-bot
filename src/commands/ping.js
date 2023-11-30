@@ -5,6 +5,7 @@ module.exports = {
     name: "ping",
     description: "Get the bot's ping.",
     type: "slash",
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("ping")

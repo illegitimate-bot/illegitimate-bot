@@ -5,6 +5,7 @@ module.exports = {
     name: "clear",
     description: "Clears messages",
     type: "slash",
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("clear")

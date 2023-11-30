@@ -4,6 +4,7 @@ module.exports = {
     name: "admin",
     description: "Admin command.",
     type: "slash",
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("devel")

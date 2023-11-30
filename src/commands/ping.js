@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const { color, devMessage } = require("../../config/options.json")
+const { color } = require("../../config/options.json")
 
 module.exports = {
     name: "ping",
@@ -27,8 +27,8 @@ module.exports = {
                 description: "Ping of the bot is " + client.ws.ping + "ms.",
                 color: embedColor,
                 footer: {
-                    text: interaction.guild.name + " | " + devMessage,
-                    icon_url: interaction.user.displayAvatarURL({ dynamic: true })
+                    text: interaction.guild.name,
+                    icon_url: interaction.guild.iconURL({ dynamic: true })
                 },
                 timestamp: new Date()
             }]

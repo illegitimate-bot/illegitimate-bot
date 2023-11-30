@@ -6,6 +6,7 @@ module.exports = {
     description: "Used for setup of the bot.",
     type: "slash",
     dev: true,
+    public: false,
 
     data: new SlashCommandBuilder()
         .setName("setup")

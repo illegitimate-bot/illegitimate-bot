@@ -6,6 +6,7 @@ module.exports = {
     description: "Help command",
     type: "slash",
     dev: false,
+    public: true,
 
     data: new SlashCommandBuilder()
         .setName("help")

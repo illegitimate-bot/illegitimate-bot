@@ -7,6 +7,7 @@ module.exports = {
     description: "Kick a member from the server.",
     type: "slash",
     dev: false,
+    public: false,
 
     data: new SlashCommandBuilder()
         .setName("kick")

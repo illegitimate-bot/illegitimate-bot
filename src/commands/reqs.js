@@ -7,6 +7,7 @@ module.exports = {
     description: "Displays the requirements for the guild.",
     type: "slash",
     dev: false,
+    public: true,
 
     data: new SlashCommandBuilder()
         .setName("reqs")

@@ -10,6 +10,7 @@ module.exports = {
     description: "Force update the user",
     type: "slash",
     dev: false,
+    public: false,
 
     data: new SlashCommandBuilder()
         .setName("forceupdate")

@@ -7,6 +7,7 @@ module.exports = {
     description: "Times out a memeber",
     type: "slash",
     dev: false,
+    public: false,
 
     data: new SlashCommandBuilder()
         .setName("timeout")

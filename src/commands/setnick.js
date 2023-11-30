@@ -5,6 +5,7 @@ module.exports = {
     description: "Set your nickname",
     type: "slash",
     dev: false,
+    public: false,
 
     data: new SlashCommandBuilder()
         .setName("setnick")

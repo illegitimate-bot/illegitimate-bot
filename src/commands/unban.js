@@ -6,6 +6,7 @@ module.exports = {
     description: "Unban a user from the server",
     type: "slash",
     dev: false,
+    public: false,
 
     data: new SlashCommandBuilder()
         .setName("unban")

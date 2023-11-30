@@ -46,8 +46,8 @@ module.exports = {
                     url: interaction.guild.iconURL({ dynamic: true })
                 },
                 footer: {
-                    icon_url: interaction.guild.iconURL({ dynamic: true }),
-                    text: interaction.guild.name + " | " + devMessage
+                    icon_url: interaction?.guild.iconURL({ dynamic: true }) || interaction.user.avatarURL({ dynamic: true }),
+                    text: interaction?.guild.name || interaction.user.username + " | " + devMessage
                 }
             }]
         })

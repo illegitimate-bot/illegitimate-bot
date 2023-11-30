@@ -27,8 +27,8 @@ module.exports = {
                 description: "Ping of the bot is " + client.ws.ping + "ms.",
                 color: embedColor,
                 footer: {
-                    text: interaction.guild.name,
-                    icon_url: interaction.guild.iconURL({ dynamic: true })
+                    text: interaction?.guild.name || interaction.user.username,
+                    icon_url: interaction?.guild.iconURL({ dynamic: true }) || interaction.user.avatarURL({ dynamic: true })
                 },
                 timestamp: new Date()
             }]

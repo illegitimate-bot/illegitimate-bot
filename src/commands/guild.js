@@ -32,8 +32,7 @@ module.exports = {
                         .setDescription("The IGN of a member.")
                         .setRequired(true)
                 )
-        )
-        .setDMPermission(false),
+        ),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
@@ -59,8 +58,8 @@ module.exports = {
                 description: "This command is currently under development",
                 color: embedColor,
                 footer: {
-                    text: interaction.guild.name + " | " + devMessage,
-                    icon_url: interaction.guild.iconURL({ dynamic: true })
+                    text: interaction?.guild.name || interaction.user.username + " | " + devMessage,
+                    icon_url: interaction?.guild.iconURL({ dynamic: true }) || interaction.user.avatarURL({ dynamic: true })
                 }
             }]
         })

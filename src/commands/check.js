@@ -206,7 +206,7 @@ module.exports = {
         const hypixelExp = player.networkExp || 0
         const level = hypixelLevel(hypixelExp)
 
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
         const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
         await interaction.editReply({
@@ -220,7 +220,7 @@ module.exports = {
                     url: head
                 },
                 footer: {
-                    text: footerText,
+                    text: footerText + " | " + devMessage,
                     icon_url: footerIcon
                 },
                 fields: statsFields

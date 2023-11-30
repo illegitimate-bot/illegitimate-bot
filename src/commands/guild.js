@@ -55,7 +55,7 @@ module.exports = {
             return
         }
 
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username + " | " + devMessage
+        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
         const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
         await interaction.editReply({
@@ -63,7 +63,7 @@ module.exports = {
                 description: "This command is currently under development",
                 color: embedColor,
                 footer: {
-                    text: footerText,
+                    text: footerText + " | " + devMessage,
                     icon_url: footerIcon
                 }
             }]

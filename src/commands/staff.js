@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 const { color, devMessage } = require("../../config/options.json")
 const { beast } = require("./staff/beast.js")
+const { help } = require("./staff/help.js")
 
 module.exports = {
     name: "staff",
@@ -12,6 +13,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("staff")
         .setDescription("Subcommands for staff")
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("help")
+                .setDescription("Get help with staff commands"))
         .addSubcommand(subcommand =>
             subcommand
                 .setName("beast")
@@ -34,6 +39,11 @@ module.exports = {
 
         const subcommand = interaction.options.getSubcommand()
         const embedColor = Number(color.replace("#", "0x"))
+
+        if (subcommand === "help") {
+            help(interaction)
+            return
+        }
 
         if (subcommand === "beast") {
             beast(interaction)

@@ -1,9 +1,9 @@
 const { ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require("discord.js")
-const { gm, manager, moderator, beast, member, trialmember, guildStaff, guildRole } = require("../../../config/roles.json")
+const { gm, manager, moderator, beast, member, guildStaff, guildRole } = require("../../../config/roles.json")
 const { ignM, smallM, largeM } = require("../../../config/limitmessages.json")
 const { ia1, ia2, ia3, ria1, ria2, ria3 } = require("../../../config/questions.json")
 const { color, inactivityLogChannel } = require("../../../config/options.json")
-const guildRoles = [gm, manager, moderator, beast, member, trialmember, guildStaff, guildRole]
+const guildRoles = [gm, manager, moderator, beast, member, guildStaff, guildRole]
 
 module.exports = {
     name: "guildinactivitylog",

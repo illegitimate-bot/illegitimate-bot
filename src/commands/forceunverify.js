@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
 const { color, devMessage } = require("../../config/options.json")
 const verify = require("../schemas/verifySchema.js")
-const { gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
-const removeThese = [gm, manager, moderator, beast, member, trialmember, guildRole, guildStaff, defaultMember]
+const { gm, manager, moderator, beast, member, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
+const removeThese = [gm, manager, moderator, beast, member, guildRole, guildStaff, defaultMember]
 
 module.exports = {
     name: "forceunverify",

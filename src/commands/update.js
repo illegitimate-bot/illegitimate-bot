@@ -2,14 +2,14 @@ const { SlashCommandBuilder } = require("discord.js")
 const { getGuild, getIGN, getHeadURL } = require("../utils/utils.js")
 const verify = require("../schemas/verifySchema.js")
 const { color, hypixelGuildID, devMessage } = require("../../config/options.json")
-const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
-const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff]
+const { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
+const removeThese = [gm, manager, moderator, beast, elite, member, guildRole, guildStaff]
 
 module.exports = {
     name: "update",
     description: "Update your guild rank.",
     type: "slash",
-    dev: false,
+    dev: true,
     public: true,
 
     data: new SlashCommandBuilder()
@@ -232,33 +232,6 @@ module.exports = {
                 await interaction.editReply({
                     embeds: [{
                         description: "Your rank has been updated to `Member`.",
-                        color: embedColor,
-                        thumbnail: {
-                            url: head
-                        },
-                        footer: {
-                            text: interaction.guild.name + " | " + devMessage,
-                            icon_url: interaction.guild.iconURL({ dynamic: true })
-                        }
-                    }]
-                })
-                return
-            }
-
-            if (guildRank === "Trial Member") {
-
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
-                }
-
-                await roleManage.add(guildRole, "User used the update command")
-                await roleManage.add(trialmember, "User used the update command")
-                await roleManage.add(defaultMember, "User used the update command")
-
-
-                await interaction.editReply({
-                    embeds: [{
-                        description: "Your rank has been updated to `Trial Member`.",
                         color: embedColor,
                         thumbnail: {
                             url: head

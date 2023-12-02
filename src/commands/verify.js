@@ -3,7 +3,7 @@ const { getUUID, getPlayer, getGuild, getHeadURL } = require("../utils/utils.js"
 const { color, hypixelGuildID, devMessage } = require("../../config/options.json")
 const verify = require("../schemas/verifySchema.js")
 const mongoose = require("mongoose")
-const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
+const { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
 
 module.exports = {
     name: "verify",
@@ -146,11 +146,6 @@ module.exports = {
 
             if (guildRank === "Member" && guildID === hypixelGuildID) {
                 await user.roles.add(member, "Verification")
-                await user.roles.add(guildRole, "Verification")
-            }
-
-            if (guildRank === "Trial Member" && guildID === hypixelGuildID) {
-                await user.roles.add(trialmember, "Verification")
                 await user.roles.add(guildRole, "Verification")
             }
         }

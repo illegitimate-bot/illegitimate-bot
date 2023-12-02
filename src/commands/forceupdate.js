@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, PermissionFlagsBits, userMention } = require("discord.js")
 const { getGuild, getHeadURL, getIGN } = require("../utils/utils.js")
 const { hypixelGuildID, color, devMessage } = require("../../config/options.json")
-const { gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
+const { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } = require("../../config/roles.json")
 const verify = require("../schemas/verifySchema.js")
-const removeThese = [gm, manager, moderator, beast, elite, member, trialmember, guildRole, guildStaff]
+const removeThese = [gm, manager, moderator, beast, elite, member, guildRole, guildStaff]
 
 module.exports = {
     name: "forceupdate",
@@ -240,33 +240,6 @@ module.exports = {
                 await interaction.editReply({
                     embeds: [{
                         description: usermentioned + "'s rank has been updated to `Member`.",
-                        color: embedColor,
-                        thumbnail: {
-                            url: head
-                        },
-                        footer: {
-                            text: interaction.guild.name + " | " + devMessage,
-                            icon_url: interaction.guild.iconURL({ dynamic: true })
-                        }
-                    }]
-                })
-                return
-            }
-
-            if (guildRank === "Trial Member") {
-
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(removeThese[i], "Auto role removal. (Force Update)")
-                }
-
-                await roleManage.add(guildRole, "User was force updated.")
-                await roleManage.add(trialmember, "User was force updated.")
-                await roleManage.add(defaultMember, "User was force updated.")
-
-
-                await interaction.editReply({
-                    embeds: [{
-                        description: usermentioned + "'s rank has been updated to `Trial Member`.",
                         color: embedColor,
                         thumbnail: {
                             url: head

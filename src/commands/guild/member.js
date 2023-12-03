@@ -74,7 +74,7 @@ async function guildMember(interaction) {
 
     await interaction.editReply({
         embeds: [{
-            description: "Checking your guild data...",
+            description: "Fetching your guild data...",
             color: embedColor
         }]
     })

@@ -127,7 +127,7 @@ module.exports = {
 
         await interaction.editReply({
             embeds: [{
-                description: "Checking your guild...",
+                description: "Fetching your guild data...",
                 color: embedColor
             }]
         })
@@ -141,13 +141,6 @@ module.exports = {
         }
 
         if (guildID === hypixelGuildID) {
-
-            await interaction.editReply({
-                embeds: [{
-                    description: "You are a member of the guild `" + guild.name + "`!",
-                    color: embedColor
-                }]
-            })
 
             const GuildMembers = guild.members
             const guildRank = GuildMembers.find((member) => member.uuid === player.uuid).rank

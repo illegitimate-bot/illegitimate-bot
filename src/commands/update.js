@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, InteractionResponse } = require("discord.js")
+const { SlashCommandBuilder } = require("discord.js")
 const { getGuild, getIGN, getHeadURL } = require("../utils/utils.js")
 const verify = require("../schemas/verifySchema.js")
 const { color, hypixelGuildID, devMessage } = require("../../config/options.json")
@@ -62,12 +62,6 @@ module.exports = {
         const head = await getHeadURL(ign)
         if (guildID !== hypixelGuildID) {
 
-            await interaction.editReply({
-                description: "You are not a member of illegitimate\n" +
-                    "Just a moment while I update your roles...",
-                color: embedColor,
-            })
-
             for (let i = 0; i < removeThese.length; i++) {
                 await roleManage.remove(removeThese[i], "Auto role removal. (Update)")
             }
@@ -89,14 +83,6 @@ module.exports = {
             })
             return
         }
-
-        await interaction.editReply({
-            embeds: [{
-                description: "You are a member of illegitimate\n" +
-                    "Just a moment while I update your roles...",
-                color: embedColor,
-            }]
-        })
 
         if (guildID === hypixelGuildID) {
 

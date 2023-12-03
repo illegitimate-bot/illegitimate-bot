@@ -7,6 +7,13 @@ async function guildMember(interaction) {
     const ign = interaction.options.getString("ign")
     const embedColor = Number(color.replace("#", "0x"))
 
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your uuid...",
+            color: embedColor
+        }]
+    })
+
     const uuid = await getUUID(ign)
     if (!uuid) {
         interaction.editReply({
@@ -19,6 +26,13 @@ async function guildMember(interaction) {
         })
         return
     }
+
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your player data...",
+            color: embedColor
+        }]
+    })
 
     const head = await getHeadURL(ign)
     const player = await getPlayer(uuid)
@@ -58,22 +72,27 @@ async function guildMember(interaction) {
         rank = "[MVP++] "
     }
 
+    await interaction.editReply({
+        embeds: [{
+            description: "Checking your guild data...",
+            color: embedColor
+        }]
+    })
+
     const guild = await getGuild(uuid)
     if (!guild) {
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "This user is not in a guild",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head,
-                    },
-                    footer: {
-                        text: interaction.guild.name + " | " + devMessage,
-                        icon_url: interaction.guild.iconURL({ dynamic: true }),
-                    },
+            embeds: [{
+                description: "This user is not in a guild",
+                color: embedColor,
+                thumbnail: {
+                    url: head,
                 },
-            ],
+                footer: {
+                    text: interaction.guild.name + " | " + devMessage,
+                    icon_url: interaction.guild.iconURL({ dynamic: true }),
+                },
+            }],
         })
         return
     }

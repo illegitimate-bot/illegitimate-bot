@@ -8,6 +8,13 @@ async function guildInfo(interaction) {
     const ign = interaction.options.getString("ign")
     const embedColor = Number(color.replace("#", "0x"))
 
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your uuid...",
+            color: embedColor
+        }]
+    })
+
     const uuid = await getUUID(ign)
     if (!uuid) {
         interaction.editReply({
@@ -19,6 +26,13 @@ async function guildInfo(interaction) {
         return
     }
 
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your player data...",
+            color: embedColor
+        }]
+    })
+
     const player = await getPlayer(uuid)
     if (!player) {
         interaction.editReply({
@@ -29,6 +43,13 @@ async function guildInfo(interaction) {
         })
         return
     }
+
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your guild data...",
+            color: embedColor
+        }]
+    })
 
     const guild = await getGuild(uuid)
     if (!guild) {

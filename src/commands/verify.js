@@ -47,6 +47,13 @@ module.exports = {
             return
         }
 
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching your uuid...",
+                color: embedColor
+            }]
+        })
+
         const uuid = await getUUID(ign)
         if (!uuid) {
             interaction.editReply({
@@ -57,6 +64,13 @@ module.exports = {
             })
             return
         }
+
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching your player data...",
+                color: embedColor
+            }]
+        })
 
         const head = await getHeadURL(ign)
         const player = await getPlayer(uuid)
@@ -76,6 +90,13 @@ module.exports = {
         } else {
             username = user1.username + "#" + user1.discriminator
         }
+
+        await interaction.editReply({
+            embeds: [{
+                description: "Checking your Discord tag...",
+                color: embedColor
+            }]
+        })
 
         const linkedDiscord = player?.socialMedia?.links?.DISCORD || null
         if (!linkedDiscord) {
@@ -104,6 +125,13 @@ module.exports = {
             return
         }
 
+        await interaction.editReply({
+            embeds: [{
+                description: "Checking your guild...",
+                color: embedColor
+            }]
+        })
+
         const guild = await getGuild(uuid)
         let guildID = ""
         if (!guild) {
@@ -113,6 +141,14 @@ module.exports = {
         }
 
         if (guildID === hypixelGuildID) {
+
+            await interaction.editReply({
+                embeds: [{
+                    description: "You are a member of the guild `" + guild.name + "`!",
+                    color: embedColor
+                }]
+            })
+
             const GuildMembers = guild.members
             const guildRank = GuildMembers.find((member) => member.uuid === player.uuid).rank
 

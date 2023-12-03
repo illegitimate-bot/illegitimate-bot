@@ -14,6 +14,13 @@ async function beast(interaction) {
         return
     }
 
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your uuid...",
+            color: embedColor
+        }]
+    })
+
     const uuid = await getUUID(ign)
     if (!uuid) {
         interaction.editReply({
@@ -23,6 +30,13 @@ async function beast(interaction) {
         })
         return
     }
+
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your player data...",
+            color: embedColor
+        }]
+    })
 
     const head = await getHeadURL(ign)
     const player = await getPlayer(uuid)
@@ -51,6 +65,13 @@ async function beast(interaction) {
     } else if (rank2 === "MVP_PLUS" && monthlyRank === "SUPERSTAR") {
         rank = "[MVP++] "
     }
+
+    await interaction.editReply({
+        embeds: [{
+            description: "Fetching your guild data...",
+            color: embedColor
+        }]
+    })
 
     const guild = await getGuild(uuid)
     let guildName = ""

@@ -51,8 +51,23 @@ module.exports = {
             return
         }
 
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching ign...",
+                color: embedColor,
+            }]
+        })
+
         const ign = await getIGN(verifyData.uuid)
         const head = await getHeadURL(ign)
+
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching guild data...",
+                color: embedColor,
+            }]
+        })
+
         const guild = await getGuild(verifyData.uuid)
 
         let responseGuildID = ""

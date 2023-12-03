@@ -9,7 +9,7 @@ module.exports = {
     name: "update",
     description: "Update your guild rank.",
     type: "slash",
-    dev: true,
+    dev: false,
     public: true,
 
     data: new SlashCommandBuilder()
@@ -42,6 +42,13 @@ module.exports = {
             })
             return
         }
+
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching your guild data...",
+                color: embedColor,
+            }]
+        })
 
         const guild = await getGuild(verifyData.uuid)
         let guildID = ""

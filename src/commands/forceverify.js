@@ -69,6 +69,13 @@ module.exports = {
             modName = mod.username + "#" + mod.discriminator
         }
 
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching their uuid...",
+                color: embedColor
+            }]
+        })
+
         const uuid = await getUUID(ign)
         if (!uuid) {
             interaction.editReply({
@@ -80,6 +87,13 @@ module.exports = {
             return
         }
 
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching their player data...",
+                color: embedColor
+            }]
+        })
+
         const player = await getPlayer(uuid)
         if (!player) {
             interaction.editReply({
@@ -90,6 +104,13 @@ module.exports = {
             })
             return
         }
+
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching their guild data...",
+                color: embedColor
+            }]
+        })
 
         const guild = await getGuild(uuid)
         let responseGuildID = ""

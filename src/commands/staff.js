@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
 const { color, devMessage } = require("../../config/options.json")
 const { beast } = require("./staff/beast.js")
 const { help } = require("./staff/help.js")

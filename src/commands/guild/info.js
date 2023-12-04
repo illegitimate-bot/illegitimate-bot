@@ -106,7 +106,8 @@ async function guildInfo(interaction) {
     const guildCreatedMS = guild.created
     const guildCreated = new Date(guildCreatedMS)
     const guildTag = guild.tag
-    const guildExp = guild.exp
+    const guildExpUnformatted = guild.exp
+    const guildExp = new Intl.NumberFormat().format(guildExpUnformatted)
     const guildLvl = guildLevel(guildExp)
     const guildMembers = guild.members
 
@@ -129,7 +130,10 @@ async function guildInfo(interaction) {
     const guildRanks = guild.ranks.map((r) => "**➺ " + r.name + "** `[" + r.tag + "]`").join("\n")
 
     const guildMembersDailyXP = Object.values(guildMembers).map((m) => m.expHistory[Object.keys(m.expHistory)[0]])
-    const totalGuildMembersDailyXP = guildMembersDailyXP.reduce((a, b) => a + b, 0)
+    const totalGuildMembersDailyXPUnformatted = guildMembersDailyXP.reduce((a, b) => a + b, 0)
+    const totalGuildMembersDailyXP = new Intl.NumberFormat().format(totalGuildMembersDailyXPUnformatted)
+    const averageGuildMembersDailyXPUnformatted = Math.round(totalGuildMembersDailyXPUnformatted / 7)
+    const averageGuildMembersDailyXP = new Intl.NumberFormat().format(averageGuildMembersDailyXPUnformatted)
 
     const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
     const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
@@ -149,7 +153,7 @@ async function guildInfo(interaction) {
                 {
                     name: "**GEXP**",
                     value: "**➺ Total weekly GEXP:** `" + totalGuildMembersDailyXP + "`\n" +
-                        "**➺ Daily avarage:** `" + Math.round(totalGuildMembersDailyXP / 7) + "`\n" +
+                        "**➺ Daily avarage:** `" + averageGuildMembersDailyXP + "`\n" +
                         "**➺ Total GEXP:** `" + guildExp + "`"
                 },
                 {

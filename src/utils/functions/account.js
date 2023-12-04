@@ -39,11 +39,13 @@ async function getPlayer(uuid) {
     return playerReq.data.player
 }
 
-async function getGuild(uuid) {
+async function getGuild(query, type) {
+    const reqType = type ? type : "player"
+
     const guildReq = await fetch(guild, {
         params: {
             key: apikey,
-            player: uuid
+            [reqType]: query
         }
     })
 

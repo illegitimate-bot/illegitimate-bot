@@ -30,9 +30,19 @@ module.exports = {
                 .setDescription("Get info about a guild.")
                 .addStringOption(option =>
                     option
-                        .setName("ign")
+                        .setName("query")
                         .setDescription("The IGN of a member.")
                         .setRequired(true)
+                ).
+                addStringOption(option =>
+                    option
+                        .setName("type")
+                        .setDescription("The type of query.")
+                        .addChoices(
+                            { name: "Guild Member", value: "ign" },
+                            { name: "Guild Name", value: "name" },
+                            { name: "Guild Id", value: "id" }
+                        )
                 )
         ),
 

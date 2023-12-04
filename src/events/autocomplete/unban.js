@@ -11,7 +11,13 @@ module.exports = {
         const focusedOption = interaction.options.getFocused(true)
         if (focusedOption.name !== "user") return
 
-        console.log
+        if (focusedOption.value === "") {
+            await interaction.respond([{
+                name: "Please start typing a username to unban",
+                value: "none"
+            }])
+            return
+        }
 
         const bannedUsers = await interaction.guild.bans.fetch()
         const filteredUsers = bannedUsers.filter((user) =>

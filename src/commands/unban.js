@@ -37,6 +37,16 @@ module.exports = {
         const mod = interaction.user
         const embedColor = Number(color.replace("#", "0x"))
 
+        if (userid === "none") {
+            await interaction.editReply({
+                embeds: [{
+                    description: "You haven't specified a user to unban",
+                    color: embedColor
+                }]
+            })
+            return
+        }
+
         const user = await interaction.client.users.fetch(userid)
         await interaction.guild.members.unban(user.id, reason)
 

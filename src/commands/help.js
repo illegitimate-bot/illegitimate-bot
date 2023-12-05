@@ -11,7 +11,7 @@ module.exports = {
 
     data: new SlashCommandBuilder()
         .setName("help")
-        .setDescription("Help command")
+        .setDescription("List's all commands usable by a member")
         .setDMPermission(true),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
@@ -24,10 +24,26 @@ module.exports = {
         const commandFiles = fs.readdirSync(__dirname).filter(file => file.endsWith(".js"))
         for (const file of commandFiles) {
             const command = require(`./${file}`)
-            if (command.public) {
+            if (command.public && !command.subcommands) {
                 commands.push(command)
+            } else if (command.public && command.subcommands) {
+                const commandName = command.name
+
+                const subcommands = command.subcommands.map((subcommand) => {
+                    return {
+                        name: commandName + " " + subcommand.name,
+                        description: subcommand.description
+                    }
+                })
+
+                console.log(subcommands)
+
+                for (const subcommand of subcommands) {
+                    commands.push(subcommand)
+                }
             }
         }
+
         const commandList = commands.map((command) => {
             return {
                 name: "**/" + command.name + "**",

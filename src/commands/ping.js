@@ -10,7 +10,7 @@ module.exports = {
 
     data: new SlashCommandBuilder()
         .setName("ping")
-        .setDescription("Get the bot's ping."),
+        .setDescription("Get's the bot's ping."),
 
     /**
     * @param { import("discord.js").ChatInputCommandInteraction } interaction

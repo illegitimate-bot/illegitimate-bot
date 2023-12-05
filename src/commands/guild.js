@@ -9,6 +9,16 @@ module.exports = {
     type: "slash",
     dev: false,
     public: true,
+    subcommands: [
+        {
+            name: "member",
+            description: "Get info about a guild memeber",
+        },
+        {
+            name: "info",
+            description: "Get info about a guild.",
+        }
+    ],
 
     data: new SlashCommandBuilder()
         .setName("guild")
@@ -31,7 +41,7 @@ module.exports = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription("The IGN of a member.")
+                        .setDescription("The query to search for. [Default: player]")
                         .setRequired(true)
                 ).
                 addStringOption(option =>

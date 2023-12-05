@@ -127,7 +127,8 @@ async function guildInfo(interaction) {
 
     const guildOwner = guildMembers.find((m) => m.rank === "Guild Master").uuid
     const guildOwnerName = await getIGN(guildOwner)
-    const guildRanks = guild.ranks.map((r) => "**➺ " + r.name + "** `[" + r.tag + "]`").join("\n")
+    const guildRanksUnsorted = guild.ranks.sort((a, b) => b.priority - a.priority)
+    const guildRanks = guildRanksUnsorted.map((r) => "**➺ " + r.name + "** `[" + r.tag + "]`").join("\n")
 
     const guildMembersDailyXP = Object.values(guildMembers).map((m) => m.expHistory[Object.keys(m.expHistory)[0]])
     const totalGuildMembersDailyXPUnformatted = guildMembersDailyXP.reduce((a, b) => a + b, 0)

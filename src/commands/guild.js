@@ -9,6 +9,16 @@ module.exports = {
     type: "slash",
     dev: false,
     public: true,
+    subcommands: [
+        {
+            name: "member",
+            description: "Get info about a guild memeber",
+        },
+        {
+            name: "info",
+            description: "Get info about a guild.",
+        }
+    ],
 
     data: new SlashCommandBuilder()
         .setName("guild")

@@ -14,7 +14,7 @@ module.exports = {
 
     data: new SlashCommandBuilder()
         .setName("update")
-        .setDescription("Update your guild rank.")
+        .setDescription("Update your discord roles.")
         .setDMPermission(false),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */

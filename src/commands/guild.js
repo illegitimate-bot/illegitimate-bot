@@ -31,7 +31,7 @@ module.exports = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription("The IGN of a member.")
+                        .setDescription("The query to search for. [Default: player]")
                         .setRequired(true)
                 ).
                 addStringOption(option =>

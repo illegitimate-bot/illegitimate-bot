@@ -11,7 +11,7 @@ module.exports = {
 
     data: new SlashCommandBuilder()
         .setName("help")
-        .setDescription("Help command")
+        .setDescription("List's all commands usable by a member")
         .setDMPermission(true),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */

@@ -130,11 +130,16 @@ async function guildInfo(interaction) {
     const guildRanksUnsorted = guild.ranks.sort((a, b) => b.priority - a.priority)
     const guildRanks = guildRanksUnsorted.map((r) => "**➺ " + r.name + "** `[" + r.tag + "]`").join("\n")
 
-    const guildMembersDailyXP = Object.values(guildMembers).map((m) => m.expHistory[Object.keys(m.expHistory)[0]])
-    const totalGuildMembersDailyXPUnformatted = guildMembersDailyXP.reduce((a, b) => a + b, 0)
-    const totalGuildMembersDailyXP = new Intl.NumberFormat("en-US").format(totalGuildMembersDailyXPUnformatted)
-    const averageGuildMembersDailyXPUnformatted = Math.round(totalGuildMembersDailyXPUnformatted / 7)
-    const averageGuildMembersDailyXP = new Intl.NumberFormat("en-US").format(averageGuildMembersDailyXPUnformatted)
+    const allGuildMembersWeeklyXP = guildMembers.map(member => member.expHistory)
+    const guildMembersWeeklyXP = allGuildMembersWeeklyXP.map((member) => {
+        return Object.values(member).reduce((a, b) => a + b, 0)
+    })
+
+    const totalGuildMembersWeeklyXPUnformatted = guildMembersWeeklyXP.reduce((a, b) => a + b, 0)
+    const totalGuildMembersWeeklyXP = new Intl.NumberFormat("en-US").format(totalGuildMembersWeeklyXPUnformatted)
+
+    const averageGuildMembersWeeklyXPUnformatted = Math.round(totalGuildMembersWeeklyXPUnformatted / 7)
+    const averageGuildMembersWeeklyXP = new Intl.NumberFormat("en-US").format(averageGuildMembersWeeklyXPUnformatted)
 
     const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
     const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
@@ -153,8 +158,8 @@ async function guildInfo(interaction) {
                 },
                 {
                     name: "**GEXP**",
-                    value: "**➺ Total weekly GEXP:** `" + totalGuildMembersDailyXP + "`\n" +
-                        "**➺ Daily avarage:** `" + averageGuildMembersDailyXP + "`\n" +
+                    value: "**➺ Total weekly GEXP:** `" + totalGuildMembersWeeklyXP + "`\n" +
+                        "**➺ Daily avarage:** `" + averageGuildMembersWeeklyXP + "`\n" +
                         "**➺ Total GEXP:** `" + guildExp + "`"
                 },
                 {

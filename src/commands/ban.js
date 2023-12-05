@@ -57,6 +57,15 @@ module.exports = {
             return
         }
 
+        if (interaction.guild.members.me.roles.highest.position <= member.roles.highest.position) {
+            await interaction.editReply("I cannot ban this member.")
+            return
+        }
+
+        if (member.id === mod.id) {
+            return interaction.editReply("You cannot ban yourself.")
+        }
+
         if (member.id === interaction.applicationId) {
             await interaction.editReply("I cannot ban myself.")
             return
@@ -65,10 +74,6 @@ module.exports = {
         if (member.id === interaction.guild.ownerId) {
             await interaction.editReply("I ban kick the server owner.")
             return
-        }
-
-        if (member.id === mod.id) {
-            return interaction.editReply("You cannot ban yourself.")
         }
 
         if (memberRoles.includes(helper) || memberRoles.includes(admin)) {

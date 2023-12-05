@@ -105,13 +105,13 @@ async function guildMember(interaction) {
     const guildRank = guildMember.rank
     const memberGexp = guildMember.expHistory
     const allDaysGexp = Object.keys(memberGexp).map((key) => {
-        return "**➺ " + key + ":** " + "`" + new Intl.NumberFormat().format(memberGexp[key]) + "`" + "\n"
+        return "**➺ " + key + ":** " + "`" + new Intl.NumberFormat("en-US").format(memberGexp[key]) + "`" + "\n"
     })
     const expValue = allDaysGexp.join("")
     const totalWeeklyGexpUnformatted = Object.values(memberGexp).reduce((a, b) => a + b, 0)
-    const totalWeeklyGexp = new Intl.NumberFormat().format(totalWeeklyGexpUnformatted)
+    const totalWeeklyGexp = new Intl.NumberFormat("en-US").format(totalWeeklyGexpUnformatted)
     const averageWeeklyGexpUnformatted = Math.round(totalWeeklyGexpUnformatted / 7)
-    const averageWeeklyGexp = new Intl.NumberFormat().format(averageWeeklyGexpUnformatted)
+    const averageWeeklyGexp = new Intl.NumberFormat("en-US").format(averageWeeklyGexpUnformatted)
 
     const guildMemberJoinMS = guildMember.joined
     const guildMemberJoinTime = new Date(guildMemberJoinMS)

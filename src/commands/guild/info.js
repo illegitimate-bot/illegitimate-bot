@@ -107,8 +107,8 @@ async function guildInfo(interaction) {
     const guildCreated = new Date(guildCreatedMS)
     const guildTag = guild.tag
     const guildExpUnformatted = guild.exp
-    const guildExp = new Intl.NumberFormat().format(guildExpUnformatted)
-    const guildLvl = guildLevel(guildExp)
+    const guildExp = new Intl.NumberFormat("en-US").format(guildExpUnformatted)
+    const guildLvl = guildLevel(guildExpUnformatted)
     const guildMembers = guild.members
 
     const guildCreatedDate = guildCreated.getDate()
@@ -131,9 +131,9 @@ async function guildInfo(interaction) {
 
     const guildMembersDailyXP = Object.values(guildMembers).map((m) => m.expHistory[Object.keys(m.expHistory)[0]])
     const totalGuildMembersDailyXPUnformatted = guildMembersDailyXP.reduce((a, b) => a + b, 0)
-    const totalGuildMembersDailyXP = new Intl.NumberFormat().format(totalGuildMembersDailyXPUnformatted)
+    const totalGuildMembersDailyXP = new Intl.NumberFormat("en-US").format(totalGuildMembersDailyXPUnformatted)
     const averageGuildMembersDailyXPUnformatted = Math.round(totalGuildMembersDailyXPUnformatted / 7)
-    const averageGuildMembersDailyXP = new Intl.NumberFormat().format(averageGuildMembersDailyXPUnformatted)
+    const averageGuildMembersDailyXP = new Intl.NumberFormat("en-US").format(averageGuildMembersDailyXPUnformatted)
 
     const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
     const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })

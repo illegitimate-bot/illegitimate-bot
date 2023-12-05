@@ -8,10 +8,16 @@ module.exports = {
 
     execute(interaction) {
         if (interaction.isCommand()) {
-            console.log(interaction.user.username + "#" +
-                interaction.user.discriminator + " ran " +
-                interaction.commandName
-            )
+            try {
+                console.log(interaction.user.username + " ran " +
+                    interaction.commandName + " " +
+                    interaction.options.getSubcommand()
+                )
+            } catch {
+                console.log(interaction.user.username + " ran " +
+                    interaction.commandName
+                )
+            }
         } else if (interaction.isButton()) {
             console.log(interaction.user.username + "#" +
                 interaction.user.discriminator + " clicked " +

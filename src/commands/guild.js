@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require("discord.js")
 const { color, devMessage } = require("../../config/options.json")
 const { guildMember } = require("./guild/member.js")
 const { guildInfo } = require("./guild/info.js")
+const { guildTop } = require("./guild/top.js")
 
 module.exports = {
     name: "guild",
@@ -17,6 +18,10 @@ module.exports = {
         {
             name: "info",
             description: "Get info about a guild.",
+        },
+        {
+            name: "top",
+            description: "Get the top guild members based on gexp",
         }
     ],
 
@@ -54,6 +59,30 @@ module.exports = {
                             { name: "Guild Id", value: "id" }
                         )
                 )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("top")
+                .setDescription("Get the top guild members based on gexp")
+                .addStringOption(option =>
+                    option
+                        .setName("query")
+                        .setDescription("The query to search for. [Default: player]")
+                        .setRequired(true))
+                .addStringOption(option =>
+                    option
+                        .setName("type")
+                        .setDescription("The type of query.")
+                        .addChoices(
+                            { name: "Guild Member", value: "ign" },
+                            { name: "Guild Name", value: "name" },
+                            { name: "Guild Id", value: "id" }
+                        )
+                )
+                .addNumberOption(option =>
+                    option
+                        .setName("amount")
+                        .setDescription("The amount of guild members to show. [Default: 10]"))
         ),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
@@ -72,6 +101,11 @@ module.exports = {
 
         if (subcommand === "info") {
             await guildInfo(interaction)
+            return
+        }
+
+        if (subcommand === "top") {
+            await guildTop(interaction)
             return
         }
 

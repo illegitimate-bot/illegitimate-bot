@@ -14,7 +14,19 @@ function loadAutocompleteEvents(client) {
         const autocomplete = require(filePath)
 
         if ("name" in autocomplete && "execute" in autocomplete && autocomplete.type === "autocomplete") {
-            client.on(Events.InteractionCreate, autocomplete.execute)
+            client.on(Events.InteractionCreate, async interaction => {
+                if (!interaction.isAutocomplete()) return
+
+                try {
+                    await autocomplete.execute(interaction)
+                } catch (error) {
+                    console.error(error)
+                    await interaction.respond({
+                        content: "There was an error while executing this command!",
+                        ephemeral: true
+                    })
+                }
+            })
         } else {
             console.log(`[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`)
         }

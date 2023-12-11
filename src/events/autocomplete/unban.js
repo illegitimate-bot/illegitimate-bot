@@ -6,7 +6,6 @@ module.exports = {
     /** @param { import("discord.js").AutocompleteInteraction } interaction */
 
     async execute(interaction) {
-        if (!interaction.isAutocomplete()) return
         if (interaction.commandName !== "unban") return
         const focusedOption = interaction.options.getFocused(true)
         if (focusedOption.name !== "user") return

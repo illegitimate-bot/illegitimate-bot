@@ -36,6 +36,7 @@ module.exports = {
         const reason = interaction.options.getString("reason") || "No reason provided"
         const mod = interaction.user
         const embedColor = Number(color.replace("#", "0x"))
+        let user
 
         if (userid === "none") {
             await interaction.editReply({
@@ -47,7 +48,17 @@ module.exports = {
             return
         }
 
-        const user = await interaction.client.users.fetch(userid)
+        try {
+            user = await interaction.client.users.fetch(userid)
+        } catch (error) {
+            await interaction.editReply({
+                embeds: [{
+                    description: "The user you specified is not valid",
+                    color: embedColor
+                }]
+            })
+        }
+
         await interaction.guild.members.unban(user.id, reason)
 
         await interaction.editReply({

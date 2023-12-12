@@ -1,10 +1,12 @@
-const { Events } = require("discord.js")
+const { Events, Collection } = require("discord.js")
 const path = require("path")
 const fs = require("fs")
 
 /** @param { import('discord.js').Client } client */
 
 function loadSlashCommandsEvents(client) {
+    client.commands = new Collection()
+
     const cmdPath = path.join(__dirname, "..", "..", "commands")
     const cmdFiles = fs.readdirSync(cmdPath).filter(file => file.endsWith(".js"))
 

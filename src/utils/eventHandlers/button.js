@@ -1,10 +1,12 @@
-const { Events } = require("discord.js")
+const { Events, Collection } = require("discord.js")
 const path = require("path")
 const fs = require("fs")
 
 /** @param { import('discord.js').Client } client */
 
 function loadButtonEvents(client) {
+    client.buttons = new Collection()
+
     const btnPath = path.join(__dirname, "..", "..", "events", "buttons")
     const btnFiles = fs.readdirSync(btnPath).filter(file => file.endsWith(".js"))
 
@@ -14,28 +16,28 @@ function loadButtonEvents(client) {
         const btn = require(filePath)
 
         if ("name" in btn && "execute" in btn && btn.type === "button") {
-            client.events.set(btn.name, btn)
+            client.buttons.set(btn.name, btn)
         } else {
             console.log(`[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`)
         }
     }
 
-    client.on(Events.InteractionCreate, async event => {
-        if (!event.isButton())
+    client.on(Events.InteractionCreate, async interaction => {
+        if (!interaction.isButton())
             return
 
-        const event2 = event.client.events.get(event.customId)
+        const button = interaction.client.buttons.get(interaction.customId)
 
-        if (!event2) {
-            console.error(`No event matching ${event.customId} was found.`)
+        if (!button) {
+            console.error(`No event matching ${interaction.customId} was found.`)
             return
         }
 
         try {
-            await event2.execute(event)
+            await button.execute(interaction)
         } catch (error) {
             console.error(error)
-            await event.reply({
+            await interaction.reply({
                 content: "There was an error while executing this event!",
                 ephemeral: true
             })

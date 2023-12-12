@@ -14,22 +14,31 @@ function loadAutocompleteEvents(client) {
         const autocomplete = require(filePath)
 
         if ("name" in autocomplete && "execute" in autocomplete && autocomplete.type === "autocomplete") {
-            client.on(Events.InteractionCreate, async interaction => {
-                if (!interaction.isAutocomplete()) return
-
-                try {
-                    await autocomplete.execute(interaction)
-                } catch (error) {
-                    console.error(error)
-                    await interaction.respond({
-                        content: "There was an error while executing this command!",
-                        ephemeral: true
-                    })
-                }
-            })
+            client.autocomplete.set(autocomplete.name, autocomplete)
         } else {
             console.log(`[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`)
         }
+
+        client.on(Events.InteractionCreate, async interaction => {
+            if (!interaction.isAutocomplete()) return
+
+            const autocomplete = interaction.client.autocomplete.get(interaction.commandName)
+
+            if (!autocomplete) {
+                console.error(`No autocomplete matching ${interaction.commandName} was found.`)
+                return
+            }
+
+            try {
+                await autocomplete.execute(interaction, client)
+            } catch (error) {
+                console.error(error)
+                await interaction.respond({
+                    content: "There was an error while executing this autocomplete!",
+                    ephemeral: true
+                })
+            }
+        })
     }
 }
 

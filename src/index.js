@@ -24,8 +24,9 @@ const client = new Client({
 })
 
 client.commands = new Collection()
-client.events = new Collection()
+client.buttons = new Collection()
 client.modals = new Collection()
+client.autocomplete = new Collection()
 
 init()
 loadSlashCommandsEvents(client)

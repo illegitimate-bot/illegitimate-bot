@@ -14,28 +14,28 @@ function loadButtonEvents(client) {
         const btn = require(filePath)
 
         if ("name" in btn && "execute" in btn && btn.type === "button") {
-            client.events.set(btn.name, btn)
+            client.buttons.set(btn.name, btn)
         } else {
             console.log(`[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`)
         }
     }
 
-    client.on(Events.InteractionCreate, async event => {
-        if (!event.isButton())
+    client.on(Events.InteractionCreate, async interaction => {
+        if (!interaction.isButton())
             return
 
-        const event2 = event.client.events.get(event.customId)
+        const button = interaction.client.buttons.get(interaction.customId)
 
-        if (!event2) {
-            console.error(`No event matching ${event.customId} was found.`)
+        if (!button) {
+            console.error(`No event matching ${interaction.customId} was found.`)
             return
         }
 
         try {
-            await event2.execute(event)
+            await button.execute(interaction)
         } catch (error) {
             console.error(error)
-            await event.reply({
+            await interaction.reply({
                 content: "There was an error while executing this event!",
                 ephemeral: true
             })

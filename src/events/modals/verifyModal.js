@@ -1,4 +1,3 @@
-const { InteractionType } = require("discord.js")
 const { getUUID, getPlayer, getGuild, getHeadURL } = require("../../utils/utils.js")
 const { color, hypixelGuildID, devMessage } = require("../../../config/options.json")
 const verify = require("../../schemas/verifySchema.js")
@@ -12,7 +11,6 @@ module.exports = {
 
     /** @param { import('discord.js').ModalSubmitInteraction } interaction */
     async execute(interaction) {
-        if (interaction.type !== InteractionType.ModalSubmit) return
         await interaction.deferReply({ ephemeral: true })
 
         const user1 = interaction.user

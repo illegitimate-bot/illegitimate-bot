@@ -1,4 +1,4 @@
-const { InteractionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
 const { color } = require("../../../config/options.json")
 const guildapp = require("../../schemas/guildAppSchema.js")
 
@@ -10,10 +10,6 @@ module.exports = {
     /** @param { import('discord.js').ModalSubmitInteraction } interaction */
 
     async execute(interaction) {
-
-        if (interaction.type !== InteractionType.ModalSubmit) return
-        if (interaction.customId !== "denyreasonbox") return
-
         interaction.deferReply()
 
         const guild = interaction.guild

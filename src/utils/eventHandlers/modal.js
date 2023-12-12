@@ -1,10 +1,12 @@
-const { Events } = require("discord.js")
+const { Events, Collection } = require("discord.js")
 const path = require("path")
 const fs = require("fs")
 
 /** @param { import('discord.js').Client } client */
 
 function loadModalEvents(client) {
+    client.modals = new Collection()
+
     const modalPath = path.join(__dirname, "..", "..", "events", "modals")
     const modalFiles = fs.readdirSync(modalPath).filter(file => file.endsWith(".js"))
 

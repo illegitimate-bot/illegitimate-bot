@@ -1,10 +1,12 @@
-const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js")
-const { loadSlashCommandsEvents, loadContextMenuEvents, loadModalEvents, loadButtonEvents, loadEvents, loadAutocompleteEvents } = require("./utils/eventHandler.js")
+const { Client, GatewayIntentBits, Partials } = require("discord.js")
 const { autoDeployCommands } = require("./utils/autodeploy.js")
+const { loadAllEvents } = require("./utils/loadEvents.js")
 const { init } = require("./utils/init.js")
 require("dotenv").config()
 const mongoURI = process.env.MONGOURI
 const { connect } = require("mongoose")
+
+init()
 
 const client = new Client({
     intents: [
@@ -23,18 +25,7 @@ const client = new Client({
     ]
 })
 
-client.commands = new Collection()
-client.buttons = new Collection()
-client.modals = new Collection()
-client.autocomplete = new Collection()
-
-init()
-loadSlashCommandsEvents(client)
-loadAutocompleteEvents(client)
-loadContextMenuEvents(client)
-loadButtonEvents(client)
-loadModalEvents(client)
-loadEvents(client)
+loadAllEvents(client)
 
 let token = ""
 if (process.env.NODE_ENV === "dev") {

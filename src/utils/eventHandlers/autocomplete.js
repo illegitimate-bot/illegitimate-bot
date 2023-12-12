@@ -1,10 +1,12 @@
-const { Events } = require("discord.js")
+const { Events, Collection } = require("discord.js")
 const path = require("path")
 const fs = require("fs")
 
 /** @param { import('discord.js').Client } client */
 
 function loadAutocompleteEvents(client) {
+    client.autocomplete = new Collection()
+
     const autocompletePath = path.join(__dirname, "..", "..", "events", "autocomplete")
     const autocompleteFiles = fs.readdirSync(autocompletePath).filter(file => file.endsWith(".js"))
 

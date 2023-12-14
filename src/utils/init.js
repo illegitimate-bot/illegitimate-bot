@@ -2,7 +2,8 @@ const envars = [
     "TOKEN",
     "MONGOURI",
     "DEV",
-    "HYPIXELAPIKEY"
+    "HYPIXELAPIKEY",
+    "REDISURI"
 ]
 const devenvars = [
     "DEVTOKEN",

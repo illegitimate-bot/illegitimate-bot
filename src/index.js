@@ -5,6 +5,7 @@ const { init } = require("./utils/init.js")
 require("dotenv").config()
 const mongoURI = process.env.MONGOURI
 const { connect } = require("mongoose")
+const { redis } = require("./utils/redis.js")
 
 init()
 
@@ -38,6 +39,10 @@ if (process.env.NODE_ENV === "dev") {
 }
 
 client.login(token)
+
+redis.on("ready", () => {
+    console.log("Connected to Redis")
+})
 
 connect(mongoURI, {}).then(() => {
     console.log("Connected to MongoDB")

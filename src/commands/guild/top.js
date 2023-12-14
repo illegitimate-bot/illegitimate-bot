@@ -1,7 +1,7 @@
 const { getUUID, getPlayer, getGuild, getIGN } = require("../../utils/utils.js")
 const { color, devMessage } = require("../../../config/options.json")
-const { admin } = require("../../../config/roles.json")
 const { ChannelType } = require("discord.js")
+const { redis } = require("../../utils/redis.js")
 
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
@@ -15,19 +15,7 @@ async function guildTop(interaction) {
     if (interaction.channel.type === ChannelType.DM) {
         interaction.editReply({
             embeds: [{
-                description: "You can't use this command in DMs!\n" +
-                    "While taken checks will this rate limit the bot",
-                color: embedColor
-            }]
-        })
-        return
-    }
-
-    if (!interaction.member.roles.cache.has(admin)) {
-        await interaction.editReply({
-            embeds: [{
-                description: "Command temporarily disabled\n" +
-                    "While taken checks will this rate limit the bot",
+                description: "You can't use this command in DMs!",
                 color: embedColor
             }]
         })
@@ -128,6 +116,9 @@ async function guildTop(interaction) {
 
     const guildName = guild.name
     const guildMembers = guild.members
+    const guildId = guild._id
+
+    const cachedData = await redis.get("guildTop+" + guildId)
 
     const gexpTodayUnformatted = guildMembers.map((member) => {
         return member.expHistory[Object.keys(member.expHistory)[0]]
@@ -152,22 +143,49 @@ async function guildTop(interaction) {
         amount = 1
     }
 
-    await interaction.editReply({
-        embeds: [{
-            description: "Fetching the top " + amount + " members of " + guildName + "...",
-            color: embedColor
-        }]
-    })
-
+    let cacheStatus
+    let guildData = []
     const fieldsValueRaw = []
     const allMembersSorted = allMembersDailyGEXP.sort((a, b) => b.gexp - a.gexp)
-    const topMembers = allMembersSorted.slice(0, amount)
+
+    if (!cachedData) {
+        cacheStatus = false
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching the top " + amount + " members of " + guildName + "...",
+                color: embedColor
+            }]
+        })
+
+        for (let i = 0; i < allMembersSorted.length; i++) {
+            const ign = await getIGN(allMembersSorted[i].uuid)
+            const gexpUnformatted = allMembersSorted[i].gexp
+            const gexp = new Intl.NumberFormat("en-US").format(gexpUnformatted)
+
+            guildData.push({
+                ign: ign,
+                gexp: gexp,
+            })
+        }
+
+        await redis.set("guildTop+" + guildId, JSON.stringify(guildData), "EX", 60 * 30)
+    } else {
+        cacheStatus = true
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching the top " + amount + " members of " + guildName + "using cache...",
+                color: embedColor,
+            }]
+        })
+        guildData = JSON.parse(cachedData)
+    }
+
+    const topMembers = guildData.slice(0, amount)
     const sliceSize = amount / 3
 
     for (let i = 0; i < amount; i++) {
-        const ign = await getIGN(topMembers[i].uuid)
-        const gexpUnformatted = topMembers[i].gexp
-        const gexp = new Intl.NumberFormat("en-US").format(gexpUnformatted)
+        const ign = topMembers[i].ign
+        const gexp = topMembers[i].gexp
 
         const position = i + 1
 
@@ -189,6 +207,7 @@ async function guildTop(interaction) {
 
     const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
     const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
+    const cacheStatusText = cacheStatus ? " | [Cache]" : ""
 
     await interaction.editReply({
         embeds: [{
@@ -198,7 +217,7 @@ async function guildTop(interaction) {
             color: embedColor,
             fields: newList,
             footer: {
-                text: footerText + " | " + devMessage,
+                text: footerText + " | " + devMessage + cacheStatusText,
                 icon_url: footerIcon
             }
         }]

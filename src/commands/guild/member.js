@@ -4,6 +4,8 @@ const { color, devMessage } = require("../../../config/options.json")
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
 async function guildMember(interaction) {
+    await interaction.deferReply()
+
     const ign = interaction.options.getString("ign")
     const embedColor = Number(color.replace("#", "0x"))
 

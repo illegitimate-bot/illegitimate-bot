@@ -4,6 +4,7 @@ const { color, devMessage } = require("../../../config/options.json")
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
 async function guildInfo(interaction) {
+    await interaction.deferReply()
 
     const query = interaction.options.getString("query")
     const type = interaction.options.getString("type") || "ign"

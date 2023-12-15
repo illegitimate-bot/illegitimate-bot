@@ -6,6 +6,8 @@ const { redis } = require("../../utils/redis.js")
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
 async function guildTop(interaction) {
+    await interaction.deferReply()
+
     const query = interaction.options.getString("query")
     const type = interaction.options.getString("type") || "ign"
     let amount = interaction.options.getNumber("amount") || 10

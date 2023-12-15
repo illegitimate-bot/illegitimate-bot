@@ -10,20 +10,13 @@ module.exports = {
     /** @param { import('discord.js').ModalSubmitInteraction } interaction */
 
     async execute(interaction) {
-        interaction.deferReply()
+        await interaction.deferReply()
 
         const guild = interaction.guild
-
         const message = interaction.message
         const embed = message.embeds[0]
         const applicantId = embed.footer.text.split(" ")[1]
 
-        let applicant = ""
-        try {
-            applicant = await guild.members.fetch(applicantId)
-        } catch (error) {
-            applicant = null
-        }
         const reason = interaction.fields.fields.get("denyreason").value || "No reason provided"
         const embedColor = Number(color.replace("#", "0x"))
 
@@ -49,6 +42,13 @@ module.exports = {
             ]
         })
 
+        let applicant = ""
+        try {
+            applicant = await guild.members.fetch(applicantId)
+        } catch (error) {
+            applicant = null
+        }
+
         const dmMessage = new EmbedBuilder()
             .setDescription("Your application for the Illegitimate guild has been denied\n" +
                 "**Reason:** `" + reason + "`")
@@ -66,7 +66,7 @@ module.exports = {
             .setThumbnail(guild.iconURL())
             .setFooter({
                 iconURL: guild.iconURL(),
-                text: "ID: " + applicant.id
+                text: "ID: " + applicantId
             })
 
         if (applicant !== null) {

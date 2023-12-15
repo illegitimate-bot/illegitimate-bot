@@ -10,7 +10,7 @@ module.exports = {
     /** @param { import('discord.js').ModalSubmitInteraction } interaction */
 
     async execute(interaction) {
-        interaction.deferReply()
+        await interaction.deferReply()
 
         const guild = interaction.guild
         const reason = interaction.fields.fields.get("staffdenyreason").value || "No reason provided"

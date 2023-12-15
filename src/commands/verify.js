@@ -18,7 +18,8 @@ module.exports = {
         .addStringOption((option) =>
             option
                 .setName("ign")
-                .setDescription("Your in-game name."))
+                .setDescription("Your in-game name.")
+                .setRequired(true))
         .setDMPermission(false),
 
     /** @param { import('discord.js').ChatInputCommandInteraction } interaction */

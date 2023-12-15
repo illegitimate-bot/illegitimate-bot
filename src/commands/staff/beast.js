@@ -5,6 +5,7 @@ const { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, 
 /** @param { import('discord.js').ChatInputCommandInteraction } interaction */
 
 async function beast(interaction) {
+    await interaction.deferReply()
 
     const ign = interaction.options.getString("ign")
     const embedColor = Number(color.replace("#", "0x"))

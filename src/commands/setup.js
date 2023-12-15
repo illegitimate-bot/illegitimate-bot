@@ -7,6 +7,7 @@ module.exports = {
     type: "slash",
     dev: true,
     public: false,
+    subcommands: true,
 
     data: new SlashCommandBuilder()
         .setName("setup")

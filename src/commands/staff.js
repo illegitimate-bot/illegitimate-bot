@@ -9,6 +9,7 @@ module.exports = {
     type: "slash",
     dev: false,
     public: false,
+    subcommands: true,
 
     data: new SlashCommandBuilder()
         .setName("staff")
@@ -35,8 +36,6 @@ module.exports = {
 
     async execute(interaction) {
 
-        await interaction.deferReply()
-
         const subcommand = interaction.options.getSubcommand()
         const embedColor = Number(color.replace("#", "0x"))
 
@@ -53,7 +52,7 @@ module.exports = {
         const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
         const footerIcon = interaction.guild ? interaction.guild.iconURL({ dynamic: true }) : interaction.user.avatarURL({ dynamic: true })
 
-        await interaction.editReply({
+        await interaction.reply({
             embeds: [{
                 description: "This command is currently under development",
                 color: embedColor,

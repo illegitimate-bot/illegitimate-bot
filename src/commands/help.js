@@ -27,16 +27,14 @@ module.exports = {
             if (command.public && !command.subcommands) {
                 commands.push(command)
             } else if (command.public && command.subcommands) {
-                const commandName = command.name
+                const commandName = command.data.name
 
-                const subcommands = command.subcommands.map((subcommand) => {
+                const subcommands = command.data.options.map((subcommand) => {
                     return {
                         name: commandName + " " + subcommand.name,
                         description: subcommand.description
                     }
                 })
-
-                console.log(subcommands)
 
                 for (const subcommand of subcommands) {
                     commands.push(subcommand)

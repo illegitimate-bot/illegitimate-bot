@@ -67,6 +67,13 @@ module.exports = {
             guildTag = " [" + guild.tag + "]"
         }
 
+        let guildRank
+        if (!guild) {
+            guildRank = "N/A"
+        } else {
+            guildRank = guild.members.find((m) => m.uuid === uuid).rank
+        }
+
         const statsFields = []
         if (!player.stats) {
             statsFields.push({
@@ -170,7 +177,8 @@ module.exports = {
                 title: rank + player.displayname + guildTag,
                 description: "**Network Level:** `" +
                     level.toFixed(2).toString() + "`\n" +
-                    "**Current Guild:** `" + guildName + "`",
+                    "**Current Guild:** `" + guildName + "`\n" +
+                    "**Guild Rank:** `" + guildRank + "`",
                 color: embedColor,
                 thumbnail: { url: head },
                 footer: {

@@ -18,13 +18,13 @@ module.exports = {
         // Competing 5
 
         client.user.setActivity(
-            { name: statuses[0].name, type: 3}
+            { name: statuses[0].name, type: statuses[0].type }
         )
 
-        let i = 0
+        let i = 1
         setInterval(() =>
             client.user.setActivity(
-                statuses[i = 1, i++ % statuses.length]
+                statuses[i, i++ % statuses.length]
             ),
         1000 * 60 * 10
         )

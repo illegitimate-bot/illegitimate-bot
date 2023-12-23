@@ -2,12 +2,13 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js")
 const { color, devMessage } = require("../../config/options.json")
 const { beast } = require("./staff/beast.js")
 const { help } = require("./staff/help.js")
+const { updateDiscordRoles } = require("./staff/updatediscordroles.js")
 
 module.exports = {
     name: "staff",
     description: "Subcommands for staff",
     type: "slash",
-    dev: false,
+    dev: true,
     public: false,
     subcommands: true,
 
@@ -29,6 +30,11 @@ module.exports = {
                         .setRequired(true)
                 )
         )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("updatediscordroles")
+                .setDescription("Update the discord roles of all guild members")
+        )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
@@ -46,6 +52,11 @@ module.exports = {
 
         if (subcommand === "beast") {
             beast(interaction)
+            return
+        }
+
+        if (subcommand === "updatediscordroles") {
+            updateDiscordRoles(interaction)
             return
         }
 

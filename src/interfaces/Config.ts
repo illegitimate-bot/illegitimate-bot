@@ -1,16 +1,16 @@
 interface ProdConfig {
-    token: string
-    mongoURI: string
-    dev: string
-    hypixelapikey: string
-    redisURI: string
+    token: string | undefined
+    mongoURI: string | undefined
+    dev: string | undefined
+    hypixelapikey: string | undefined
+    redisURI: string | undefined
 }
 
 interface DevConfig {
-    devtoken: string
-    clientid: string
-    devid: string
-    guildid: string
+    devtoken: string | undefined
+    clientid: string | undefined
+    devid: string | undefined
+    guildid: string | undefined
 }
 
 export default interface Config {

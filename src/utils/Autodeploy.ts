@@ -31,10 +31,10 @@ async function autoDeployCommands() {
         }
     }
 
-    const rest = new REST({ version: "10" }).setToken(config.dev.devtoken)
+    const rest = new REST({ version: "10" }).setToken(config.dev.devtoken!)
 
     const currentCommands = (await rest.get(
-        Routes.applicationGuildCommands(config.dev.devid, config.dev.guildid),
+        Routes.applicationGuildCommands(config.dev.devid!, config.dev.guildid!),
     )) as RESTGetAPIApplicationGuildCommandResult[]
 
     const currentCommandsInfo = currentCommands.map(command => {
@@ -94,8 +94,8 @@ async function autoDeployCommands() {
 
             const data = (await rest.put(
                 Routes.applicationGuildCommands(
-                    config.dev.devid,
-                    config.dev.guildid,
+                    config.dev.devid!,
+                    config.dev.guildid!,
                 ),
                 { body: commands },
             )) as RESTPutAPIApplicationGuildCommandsJSONBody[]

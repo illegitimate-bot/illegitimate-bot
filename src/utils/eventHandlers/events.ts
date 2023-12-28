@@ -1,0 +1,20 @@
+import { ExtendedClient as Client } from "../Client"
+import { Event } from "../../interfaces"
+import path = require("path")
+import fs = require("fs")
+
+function loadEvents(client: Client) {
+    const serverDir = path.join(__dirname, "..", "..", "events", "server")
+    const eventDirs = fs.readdirSync(serverDir)
+    for (const eventDir of eventDirs) {
+        const eventFiles = fs.readdirSync(path.join(serverDir, eventDir))
+        for (const eventFile of eventFiles) {
+            const eventPath = path.join(serverDir, eventDir, eventFile)
+            const event: Event = require(eventPath)
+            client.on(event.event, event.execute)
+        }
+    }
+
+}
+
+export { loadEvents }

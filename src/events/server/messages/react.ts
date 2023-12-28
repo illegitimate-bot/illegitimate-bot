@@ -1,7 +1,7 @@
 import { Event } from "../../../interfaces"
 import { Message } from "discord.js"
 
-const event: Event = {
+export = {
     name: "ur mom",
     description: "ur moms someone",
     type: "event",
@@ -15,6 +15,4 @@ const event: Event = {
             message.react("Woot:734345936347725885")
         }
     },
-}
-
-export = event
+} as Event

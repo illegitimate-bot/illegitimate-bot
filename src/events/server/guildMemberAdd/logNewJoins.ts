@@ -2,7 +2,7 @@ import { ChannelType, GuildMember, userMention } from "discord.js"
 import { color, botLogChannel } from "../../../../config/options.json"
 import { Event } from "../../../interfaces"
 
-const event: Event = {
+export = {
     name: "logNewJoins",
     description: "Logs new joins",
     type: "event",
@@ -44,6 +44,4 @@ const event: Event = {
             ],
         })
     },
-}
-
-export = event
+} as Event

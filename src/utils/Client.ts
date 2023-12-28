@@ -40,11 +40,11 @@ export class ExtendedClient extends Client {
         let token: string
         if (process.env.NODE_ENV === "dev") {
             console.log("Running in development mode.")
-            token = config.dev.devtoken
+            token = config.dev.devtoken!
             autoDeployCommands()
         } else {
             console.log("Running in production mode.")
-            token = config.prod.token
+            token = config.prod.token!
         }
 
         this.login(token)

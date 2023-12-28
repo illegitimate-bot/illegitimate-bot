@@ -5,22 +5,17 @@ const devValues = config.dev
 
 export default function init() {
     if (process.env.NODE_ENV === "dev") {
-        Object.keys(devValues).forEach(key => {
-            if (!process.env[key.toUpperCase()]) {
-                throw new Error(`[DEV] Missing environment variable: ${key}`)
-            }
-        })
+        for (const [key, value] of Object.entries(devValues)) {
+            if (!value) throw new Error(`No ${key} specified`)
+        }
 
-        Object.keys(prodValues).forEach(key => {
-            if (!process.env[key.toUpperCase()]) {
-                throw new Error(`[PROD] Missing environment variable: ${key}`)
-            }
-        })
+        for (const [key, value] of Object.entries(prodValues)) {
+            if (!value) throw new Error(`No ${key} specified`)
+        }
     } else {
-        Object.keys(prodValues).forEach(key => {
-            if (!process.env[key]) {
-                throw new Error(`[PROD] Missing environment variable: ${key}`)
-            }
-        })
+        for (const [key, value] of Object.entries(prodValues)) {
+            if (!value) throw new Error(`No ${key} specified`)
+        }
     }
+
 }

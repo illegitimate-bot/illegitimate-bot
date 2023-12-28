@@ -1,5 +1,6 @@
 import { Command } from "../interfaces"
 import config from "./Config"
+import color from "./Colors"
 import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPutAPIApplicationGuildCommandsJSONBody, Routes } from "discord.js"
 import fs = require("fs")
 
@@ -51,15 +52,15 @@ async function autoDeployCommands() {
     }).join("\n")
 
     if (JSON.stringify(sortedNewCommandsInfo) === JSON.stringify(sortedCurrentCommandsInfo)) {
-        console.log("Commands are the same, skipping deploy.")
-        console.log(newCmds)
+        console.log(color.colorize("Commands are the same, skipping deploy.", "green"))
+        console.log(color.colorize(currentCmds, "green"))
         return
     }
 
     (async () => {
         try {
-            console.log("Commands are different, starting deploy.")
-            console.log(currentCmds)
+            console.log(color.colorize("Commands are different, starting deploy.", "red"))
+            console.log(color.colorize(currentCmds, "red"))
             console.log(`Started refreshing ${commands.length} application (/) commands.`)
 
             const data = await rest.put(
@@ -67,7 +68,8 @@ async function autoDeployCommands() {
                 { body: commands },
             ) as RESTPutAPIApplicationGuildCommandsJSONBody[]
 
-            console.log(newCmds)
+            console.log(color.colorize("New commands deployed.", "green"))
+            console.log(color.colorize(newCmds, "green"))
             console.log(`Successfully reloaded ${data.length} application (/) commands.`)
         } catch (error) {
             console.error(error)

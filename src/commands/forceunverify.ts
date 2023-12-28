@@ -1,9 +1,32 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    userMention,
+    GuildMember,
+} from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import verify = require("../schemas/verifySchema")
-import { gm, manager, moderator, beast, member, guildRole, guildStaff, defaultMember } from "../../config/roles.json"
+import {
+    gm,
+    manager,
+    moderator,
+    beast,
+    member,
+    guildRole,
+    guildStaff,
+    defaultMember,
+} from "../../config/roles.json"
 import { Command } from "../interfaces"
-const removeThese = [gm, manager, moderator, beast, member, guildRole, guildStaff, defaultMember]
+const removeThese = [
+    gm,
+    manager,
+    moderator,
+    beast,
+    member,
+    guildRole,
+    guildStaff,
+    defaultMember,
+]
 
 export = {
     name: "forceunverify",
@@ -19,7 +42,8 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to force unverify")
-                .setRequired(true))
+                .setRequired(true),
+        )
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
@@ -30,10 +54,12 @@ export = {
 
         if (!verifiedUser) {
             return interaction.reply({
-                embeds: [{
-                    description: "This user is not verified",
-                    color: embedColor,
-                }]
+                embeds: [
+                    {
+                        description: "This user is not verified",
+                        color: embedColor,
+                    },
+                ],
             })
         }
 
@@ -42,14 +68,20 @@ export = {
         await member.roles.remove(removeThese)
 
         await interaction.reply({
-            embeds: [{
-                description: "Successfully unverified " + userMention(member.user.id),
-                color: embedColor,
-                footer: {
-                    text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false })!
-                }
-            }]
+            embeds: [
+                {
+                    description:
+                        "Successfully unverified " +
+                        userMention(member.user.id),
+                    color: embedColor,
+                    footer: {
+                        text: interaction.guild!.name + " | " + devMessage,
+                        icon_url: interaction.guild!.iconURL({
+                            forceStatic: false,
+                        })!,
+                    },
+                },
+            ],
         })
-    }
+    },
 } as Command

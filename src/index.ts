@@ -1,4 +1,4 @@
-import { ExtendedClient as Client} from "./utils/Client"
+import { ExtendedClient as Client } from "./utils/Client"
 import { GatewayIntentBits, Partials } from "discord.js"
 import config from "./utils/Config"
 import { redis } from "./utils/Redis"
@@ -7,20 +7,20 @@ import { loadAllEvents } from "./utils/Events"
 import { autoDeployCommands } from "./utils/Autodeploy"
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.GuildVoiceStates
-  ],
-  partials: [
-    Partials.GuildMember,
-    Partials.User,
-    Partials.Message,
-    Partials.Channel
-  ]
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildVoiceStates,
+    ],
+    partials: [
+        Partials.GuildMember,
+        Partials.User,
+        Partials.Message,
+        Partials.Channel,
+    ],
 })
 
 loadAllEvents(client)

@@ -1,4 +1,8 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    userMention,
+} from "discord.js"
 import { color } from "../../config/options.json"
 import waitinglistSchema = require("../schemas/waitinglistSchema")
 import { Command } from "../interfaces"
@@ -17,23 +21,23 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to remove.")
-                .setRequired(true)
+                .setRequired(true),
         )
         .addStringOption(option =>
             option
                 .setName("reason")
                 .setDescription("The reason for removing the user.")
-                .setRequired(false)
+                .setRequired(false),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
     async execute(interaction) {
-
         await interaction.deferReply()
 
         const user = interaction.options.getUser("user")!
-        const reason = interaction.options.getString("reason") ?? "No reason provided."
+        const reason =
+            interaction.options.getString("reason") ?? "No reason provided."
         const mod = interaction.user!
         const embedColor = Number(color.replace("#", "0x"))
 
@@ -41,10 +45,14 @@ export = {
 
         if (!waitinglist) {
             await interaction.editReply({
-                embeds: [{
-                    description: userMention(user.id) + " is not on the waiting list.",
-                    color: embedColor
-                }]
+                embeds: [
+                    {
+                        description:
+                            userMention(user.id) +
+                            " is not on the waiting list.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
@@ -52,17 +60,24 @@ export = {
         await waitinglistSchema.findOneAndDelete({ UserID: user.id })
 
         await interaction.editReply({
-            embeds: [{
-                description: userMention(user.id) + " has been removed from the waiting list.\n" +
-                    "**Reason:** `" + reason + "`\n" +
-                    "**Moderator:** " + userMention(mod.id),
-                color: embedColor,
-                footer: {
-                    text: "User ID: " + user.id,
-                    icon_url: user.displayAvatarURL({ forceStatic: false })
+            embeds: [
+                {
+                    description:
+                        userMention(user.id) +
+                        " has been removed from the waiting list.\n" +
+                        "**Reason:** `" +
+                        reason +
+                        "`\n" +
+                        "**Moderator:** " +
+                        userMention(mod.id),
+                    color: embedColor,
+                    footer: {
+                        text: "User ID: " + user.id,
+                        icon_url: user.displayAvatarURL({ forceStatic: false }),
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
-    }
+    },
 } as Command

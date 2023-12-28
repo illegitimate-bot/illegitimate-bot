@@ -1,4 +1,10 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, ChatInputCommandInteraction, GuildMember } from "discord.js"
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    userMention,
+    ChatInputCommandInteraction,
+    GuildMember,
+} from "discord.js"
 import { color } from "../../config/options.json"
 import { Command } from "../interfaces"
 import ms from "ms"
@@ -17,26 +23,29 @@ const command: Command = {
             option
                 .setName("user")
                 .setDescription("The user to timeout")
-                .setRequired(true))
+                .setRequired(true),
+        )
         .addStringOption(option =>
             option
                 .setName("time")
                 .setDescription("The time to timeout the user for")
-                .setRequired(true))
+                .setRequired(true),
+        )
         .addStringOption(option =>
             option
                 .setName("reason")
-                .setDescription("The reason for the timeout"))
+                .setDescription("The reason for the timeout"),
+        )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
     async execute(interaction: ChatInputCommandInteraction) {
-
         await interaction.deferReply()
 
         const target = interaction.options.getMember("user")! as GuildMember
         const timeString = interaction.options.getString("time")!
-        const reason = interaction.options.getString("reason") || "No reason provided"
+        const reason =
+            interaction.options.getString("reason") || "No reason provided"
         const mod = interaction.member! as GuildMember
         const embedColor = Number(color.replace("#", "0x"))
         const time = ms(timeString)
@@ -45,50 +54,65 @@ const command: Command = {
 
         if (target.user.bot) {
             interaction.editReply({
-                embeds: [{
-                    description: "You cannot timeout a bot.",
-                    color: embedColor,
-                }]
+                embeds: [
+                    {
+                        description: "You cannot timeout a bot.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
 
         if (target.id == interaction.guild!.ownerId) {
             await interaction.editReply({
-                embeds: [{
-                    description: "You cannot timeout the server owner.",
-                    color: embedColor,
-                }]
+                embeds: [
+                    {
+                        description: "You cannot timeout the server owner.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
 
-        if (interaction.guild!.members.me!.roles.highest.position <= target.roles.highest.position) {
+        if (
+            interaction.guild!.members.me!.roles.highest.position <=
+            target.roles.highest.position
+        ) {
             interaction.editReply({
-                embeds: [{
-                    description: "I cannot timeout this user because their role is higher than mine.",
-                    color: embedColor,
-                }]
+                embeds: [
+                    {
+                        description:
+                            "I cannot timeout this user because their role is higher than mine.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
 
         if (mod.roles.highest.position <= target.roles.highest.position) {
             await interaction.editReply({
-                embeds: [{
-                    description: "You cannot timeout this user because their role is higher than yours.",
-                    color: embedColor,
-                }]
+                embeds: [
+                    {
+                        description:
+                            "You cannot timeout this user because their role is higher than yours.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
 
         if (target.id == interaction.user.id) {
             interaction.editReply({
-                embeds: [{
-                    description: "You cannot timeout yourself.",
-                    color: embedColor,
-                }]
+                embeds: [
+                    {
+                        description: "You cannot timeout yourself.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
@@ -97,47 +121,69 @@ const command: Command = {
             if (time === 0) {
                 await target.timeout(null, reason)
                 await interaction.editReply({
-                    embeds: [{
-                        description: "Removed timeout of " + userMention(target.id) + " for " + reason,
-                        color: embedColor,
-                        footer: {
-                            text: "ID: " + target.id,
-                            icon_url: target.avatarURL() || undefined
+                    embeds: [
+                        {
+                            description:
+                                "Removed timeout of " +
+                                userMention(target.id) +
+                                " for " +
+                                reason,
+                            color: embedColor,
+                            footer: {
+                                text: "ID: " + target.id,
+                                icon_url: target.avatarURL() || undefined,
+                            },
+                            timestamp: new Date().toISOString(),
                         },
-                        timestamp: new Date().toISOString()
-                    }]
+                    ],
                 })
                 return
             }
 
             await target.timeout(time, reason)
             await interaction.editReply({
-                embeds: [{
-                    description: "Updated timeout of " + userMention(target.id) + " to " + prettyTime + " for " + reason,
-                    color: embedColor,
-                    footer: {
-                        text: "ID: " + target.id,
-                        icon_url: target.avatarURL() || undefined
+                embeds: [
+                    {
+                        description:
+                            "Updated timeout of " +
+                            userMention(target.id) +
+                            " to " +
+                            prettyTime +
+                            " for " +
+                            reason,
+                        color: embedColor,
+                        footer: {
+                            text: "ID: " + target.id,
+                            icon_url: target.avatarURL() || undefined,
+                        },
+                        timestamp: new Date().toISOString(),
                     },
-                    timestamp: new Date().toISOString()
-                }]
+                ],
             })
             return
         }
 
         await target.timeout(time, reason)
         await interaction.editReply({
-            embeds: [{
-                description: "Timed out " + userMention(target.id) + " for " + prettyTime + " for " + reason,
-                color: embedColor,
-                footer: {
-                    text: "ID: " + target.id,
-                    icon_url: target.avatarURL() || undefined
+            embeds: [
+                {
+                    description:
+                        "Timed out " +
+                        userMention(target.id) +
+                        " for " +
+                        prettyTime +
+                        " for " +
+                        reason,
+                    color: embedColor,
+                    footer: {
+                        text: "ID: " + target.id,
+                        icon_url: target.avatarURL() || undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
-    }
+    },
 }
 
 export = command

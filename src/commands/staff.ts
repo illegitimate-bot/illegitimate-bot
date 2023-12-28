@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
-import { help} from "./staff/help"
+import { help } from "./staff/help"
 import { beast } from "./staff/beast"
 import { updateDiscordRoles } from "./staff/updatediscordroles"
 
@@ -19,7 +19,8 @@ export = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName("help")
-                .setDescription("Get help with staff commands"))
+                .setDescription("Get help with staff commands"),
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("beast")
@@ -28,19 +29,20 @@ export = {
                     option
                         .setName("ign")
                         .setDescription("The IGN of the player.")
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("updatediscordroles")
-                .setDescription("Update the discord roles of all guild members")
+                .setDescription(
+                    "Update the discord roles of all guild members",
+                ),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
     async execute(interaction, client) {
-
         const subcommand = interaction.options.getSubcommand()
         const embedColor = Number(color.replace("#", "0x"))
 
@@ -59,18 +61,24 @@ export = {
             return
         }
 
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
-        const footerIcon = interaction.guild ? interaction.guild.iconURL({ forceStatic: false }) : interaction.user.avatarURL({ forceStatic: false })
+        const footerText = interaction.guild
+            ? interaction.guild.name
+            : interaction.user.username
+        const footerIcon = interaction.guild
+            ? interaction.guild.iconURL({ forceStatic: false })
+            : interaction.user.avatarURL({ forceStatic: false })
 
         await interaction.reply({
-            embeds: [{
-                description: "This command is currently under development",
-                color: embedColor,
-                footer: {
-                    text: footerText + " | " + devMessage,
-                    icon_url: footerIcon!
-                }
-            }]
+            embeds: [
+                {
+                    description: "This command is currently under development",
+                    color: embedColor,
+                    footer: {
+                        text: footerText + " | " + devMessage,
+                        icon_url: footerIcon!,
+                    },
+                },
+            ],
         })
-    }
+    },
 } as Command

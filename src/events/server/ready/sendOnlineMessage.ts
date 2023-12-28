@@ -16,7 +16,9 @@ const event: Event = {
         const embedColor = Number(color.replace("#", "0x"))
 
         if (!channel) {
-            console.log("[ERROR] Could not find channel used for online message.")
+            console.log(
+                "[ERROR] Could not find channel used for online message.",
+            )
             return
         }
 
@@ -26,12 +28,14 @@ const event: Event = {
         }
 
         channel.send({
-            embeds: [{
-                description: "Bot is online!",
-                color: embedColor
-            }]
+            embeds: [
+                {
+                    description: "Bot is online!",
+                    color: embedColor,
+                },
+            ],
         })
-    }
+    },
 }
 
 export = event

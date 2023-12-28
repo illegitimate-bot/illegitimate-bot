@@ -1,13 +1,22 @@
 import { Command } from "../interfaces"
 import config from "./Config"
 import color from "./Colors"
-import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPutAPIApplicationGuildCommandsJSONBody, Routes } from "discord.js"
+import {
+    REST,
+    RESTGetAPIApplicationGuildCommandResult,
+    RESTPutAPIApplicationGuildCommandsJSONBody,
+    Routes,
+} from "discord.js"
 import fs = require("fs")
 
 async function autoDeployCommands() {
     const commands = []
-    const commandFiles = fs.readdirSync("./dist/src/commands/").filter(file => file.endsWith(".js"))
-    const contentMenuCommands = fs.readdirSync("./dist/src/commands-contextmenu/").filter(file => file.endsWith(".js"))
+    const commandFiles = fs
+        .readdirSync("./dist/src/commands/")
+        .filter(file => file.endsWith(".js"))
+    const contentMenuCommands = fs
+        .readdirSync("./dist/src/commands-contextmenu/")
+        .filter(file => file.endsWith(".js"))
 
     for (const file of commandFiles) {
         const command = require(`../commands/${file}`)
@@ -24,9 +33,9 @@ async function autoDeployCommands() {
 
     const rest = new REST({ version: "10" }).setToken(config.dev.devtoken)
 
-    const currentCommands = await rest.get(
+    const currentCommands = (await rest.get(
         Routes.applicationGuildCommands(config.dev.devid, config.dev.guildid),
-    ) as RESTGetAPIApplicationGuildCommandResult[]
+    )) as RESTGetAPIApplicationGuildCommandResult[]
 
     const currentCommandsInfo = currentCommands.map(command => {
         return {
@@ -41,36 +50,61 @@ async function autoDeployCommands() {
         }
     })
 
-    const sortedCurrentCommandsInfo = currentCommandsInfo.sort((a, b) => a.name.localeCompare(b.name))
-    const sortedNewCommandsInfo = newCommandsInfo.sort((a, b) => a.name.localeCompare(b.name))
+    const sortedCurrentCommandsInfo = currentCommandsInfo.sort((a, b) =>
+        a.name.localeCompare(b.name),
+    )
+    const sortedNewCommandsInfo = newCommandsInfo.sort((a, b) =>
+        a.name.localeCompare(b.name),
+    )
 
-    const newCmds = sortedNewCommandsInfo.map(cmd => {
-        return " " + cmd.name + " was registered."
-    }).join("\n")
-    const currentCmds = sortedCurrentCommandsInfo.map(cmd => {
-        return " " + cmd.name + " was unregistered."
-    }).join("\n")
+    const newCmds = sortedNewCommandsInfo
+        .map(cmd => {
+            return " " + cmd.name + " was registered."
+        })
+        .join("\n")
+    const currentCmds = sortedCurrentCommandsInfo
+        .map(cmd => {
+            return " " + cmd.name + " was unregistered."
+        })
+        .join("\n")
 
-    if (JSON.stringify(sortedNewCommandsInfo) === JSON.stringify(sortedCurrentCommandsInfo)) {
-        console.log(color.colorize("Commands are the same, skipping deploy.", "green"))
+    if (
+        JSON.stringify(sortedNewCommandsInfo) ===
+        JSON.stringify(sortedCurrentCommandsInfo)
+    ) {
+        console.log(
+            color.colorize("Commands are the same, skipping deploy.", "green"),
+        )
         console.log(color.colorize(currentCmds, "green"))
         return
     }
 
-    (async () => {
+    ;(async () => {
         try {
-            console.log(color.colorize("Commands are different, starting deploy.", "red"))
+            console.log(
+                color.colorize(
+                    "Commands are different, starting deploy.",
+                    "red",
+                ),
+            )
             console.log(color.colorize(currentCmds, "red"))
-            console.log(`Started refreshing ${commands.length} application (/) commands.`)
+            console.log(
+                `Started refreshing ${commands.length} application (/) commands.`,
+            )
 
-            const data = await rest.put(
-                Routes.applicationGuildCommands(config.dev.devid, config.dev.guildid),
+            const data = (await rest.put(
+                Routes.applicationGuildCommands(
+                    config.dev.devid,
+                    config.dev.guildid,
+                ),
                 { body: commands },
-            ) as RESTPutAPIApplicationGuildCommandsJSONBody[]
+            )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
 
             console.log(color.colorize("New commands deployed.", "green"))
             console.log(color.colorize(newCmds, "green"))
-            console.log(`Successfully reloaded ${data.length} application (/) commands.`)
+            console.log(
+                `Successfully reloaded ${data.length} application (/) commands.`,
+            )
         } catch (error) {
             console.error(error)
         }

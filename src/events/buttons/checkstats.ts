@@ -1,7 +1,22 @@
 import { color, devMessage } from "../../../config/options.json"
 import guildapp from "../../schemas/guildAppSchema"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "../../../config/reqs.json"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "../../utils/Hypixel"
+import {
+    bwfkdr,
+    bwstars,
+    bwwins,
+    swstars,
+    swkdr,
+    duelswins,
+    duelswlr,
+} from "../../../config/reqs.json"
+import {
+    hypixelLevel,
+    bedwarsLevel,
+    skywarsLevel,
+    getPlayer,
+    getGuild,
+    getHeadURL,
+} from "../../utils/Hypixel"
 import { Button } from "../../interfaces"
 
 export = {
@@ -22,10 +37,13 @@ export = {
         const player = await getPlayer(uuid)
         if (!player) {
             interaction.editReply({
-                embeds: [{
-                    description: "That player hasn't played Hypixel before.",
-                    color: embedColor
-                }]
+                embeds: [
+                    {
+                        description:
+                            "That player hasn't played Hypixel before.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
@@ -69,14 +87,14 @@ export = {
         if (!guild) {
             guildRank = "N/A"
         } else {
-            guildRank = guild.members.find((m) => m.uuid === uuid)!.rank
+            guildRank = guild.members.find(m => m.uuid === uuid)!.rank
         }
 
         const statsFields = []
         if (!player.stats) {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played any games.",
-                value: "**➺ Stats:** `None`"
+                value: "**➺ Stats:** `None`",
             })
         } else {
             if (player.stats.Bedwars) {
@@ -88,23 +106,36 @@ export = {
                 const hsbwwins = player.stats?.Bedwars?.wins_bedwars || 0
 
                 let bwtitle = ""
-                if (hsbwstars < bwstars || hsbwfkdr < bwfkdr || hsbwwins < bwwins) {
-                    bwtitle = "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
+                if (
+                    hsbwstars < bwstars ||
+                    hsbwfkdr < bwfkdr ||
+                    hsbwwins < bwwins
+                ) {
+                    bwtitle =
+                        "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
                 } else {
-                    bwtitle = "<a:check_a:1087808632172847134> This player meets the BedWars requirements."
+                    bwtitle =
+                        "<a:check_a:1087808632172847134> This player meets the BedWars requirements."
                 }
 
                 statsFields.push({
                     name: bwtitle,
-                    value: "**➺ Stars:** `" +
-                        hsbwstars.toFixed(2).toString() + " / " +
-                        bwstars.toString() + "`\n" +
+                    value:
+                        "**➺ Stars:** `" +
+                        hsbwstars.toFixed(2).toString() +
+                        " / " +
+                        bwstars.toString() +
+                        "`\n" +
                         "**➺ FKDR:** `" +
                         hsbwfkdr.toFixed(2).toString() +
-                        " / " + bwfkdr.toString() + "`\n" +
+                        " / " +
+                        bwfkdr.toString() +
+                        "`\n" +
                         "**➺ Wins:** `" +
-                        hsbwwins.toString() + " / " +
-                        bwwins.toString() + "`"
+                        hsbwwins.toString() +
+                        " / " +
+                        bwwins.toString() +
+                        "`",
                 })
             }
 
@@ -118,9 +149,11 @@ export = {
 
                 let swtitle = ""
                 if (hsswstars < swstars || hsswkd < swkdr) {
-                    swtitle = "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements."
+                    swtitle =
+                        "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements."
                 } else {
-                    swtitle = "<a:check_a:1087808632172847134> This player meets the SkyWars requirements."
+                    swtitle =
+                        "<a:check_a:1087808632172847134> This player meets the SkyWars requirements."
                 }
 
                 statsFields.push({
@@ -128,12 +161,17 @@ export = {
                     value:
                         "**➺ Stars:** `" +
                         hsswstars.toFixed(2).toString() +
-                        " / " + swstars.toString() + "`\n" +
+                        " / " +
+                        swstars.toString() +
+                        "`\n" +
                         "**➺ KDR:** `" +
-                        hsswkd.toFixed(2).toString() + " / " +
-                        swkdr.toString() + "`\n" +
+                        hsswkd.toFixed(2).toString() +
+                        " / " +
+                        swkdr.toString() +
+                        "`\n" +
                         "**➺ Wins:** `" +
-                        hsswwins.toString() + "`"
+                        hsswwins.toString() +
+                        "`",
                 })
             }
 
@@ -147,21 +185,29 @@ export = {
 
                 let duelstitle = ""
                 if (hsduelswins < duelswins || hsduelswlr < duelswlr) {
-                    duelstitle = "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements."
+                    duelstitle =
+                        "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements."
                 } else {
-                    duelstitle = "<a:check_a:1087808632172847134> This player meets the Duels requirements."
+                    duelstitle =
+                        "<a:check_a:1087808632172847134> This player meets the Duels requirements."
                 }
 
                 statsFields.push({
                     name: duelstitle,
-                    value: "**➺ Wins:** `" +
+                    value:
+                        "**➺ Wins:** `" +
                         hsduelswins.toString() +
-                        " / " + duelswins.toString() + "`\n" +
+                        " / " +
+                        duelswins.toString() +
+                        "`\n" +
                         "**➺ WLR:** `" +
                         hsduelswlr.toFixed(2).toString() +
-                        " / " + duelswlr.toString() + "`\n" +
+                        " / " +
+                        duelswlr.toString() +
+                        "`\n" +
                         "**➺ KDR:** `" +
-                        hsduelskd.toFixed(2).toString() + "`"
+                        hsduelskd.toFixed(2).toString() +
+                        "`",
                 })
             }
         }
@@ -171,22 +217,30 @@ export = {
         const level = hypixelLevel(hypixelExp)
 
         await interaction.editReply({
-            embeds: [{
-                title: rank + player.displayname + guildTag,
-                description: "**Network Level:** `" +
-                    level.toFixed(2).toString() + "`\n" +
-                    "**Current Guild:** `" + guildName + "`\n" +
-                    "**Guild Rank:** `" + guildRank + "`",
-                color: embedColor,
-                thumbnail: {
-                    url: head!
+            embeds: [
+                {
+                    title: rank + player.displayname + guildTag,
+                    description:
+                        "**Network Level:** `" +
+                        level.toFixed(2).toString() +
+                        "`\n" +
+                        "**Current Guild:** `" +
+                        guildName +
+                        "`\n" +
+                        "**Guild Rank:** `" +
+                        guildRank +
+                        "`",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head!,
+                    },
+                    footer: {
+                        text: interaction.guild!.name + " | " + devMessage,
+                        icon_url: interaction.guild!.iconURL()!,
+                    },
+                    fields: statsFields,
                 },
-                footer: {
-                    text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL()!
-                },
-                fields: statsFields
-            }]
+            ],
         })
-    }
+    },
 } as Button

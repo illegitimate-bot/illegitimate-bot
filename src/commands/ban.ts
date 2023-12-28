@@ -1,4 +1,9 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    userMention,
+    GuildMember,
+} from "discord.js"
 import { admin, helper } from "../../config/roles.json"
 import { color } from "../../config/options.json"
 import { Command } from "../interfaces"
@@ -17,11 +22,11 @@ export = {
             option
                 .setName("user")
                 .setDescription("User to ban")
-                .setRequired(true))
+                .setRequired(true),
+        )
         .addStringOption(option =>
-            option
-                .setName("reason")
-                .setDescription("Reason for ban"))
+            option.setName("reason").setDescription("Reason for ban"),
+        )
         .addNumberOption(option =>
             option
                 .setName("messagedeletiondays")
@@ -33,19 +38,22 @@ export = {
                     { name: "4 days", value: 4 },
                     { name: "5 days", value: 5 },
                     { name: "6 days", value: 6 },
-                    { name: "7 days", value: 7 }
-                )
+                    { name: "7 days", value: 7 },
+                ),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
     async execute(interaction) {
-
         await interaction.deferReply()
 
-        const member = interaction.options.getMember("user") as GuildMember | null
-        const reason = interaction.options.getString("reason") ?? "No reason provided."
-        const messageDeletionDays = interaction.options.getNumber("messagedeletiondays") ?? 0
+        const member = interaction.options.getMember(
+            "user",
+        ) as GuildMember | null
+        const reason =
+            interaction.options.getString("reason") ?? "No reason provided."
+        const messageDeletionDays =
+            interaction.options.getNumber("messagedeletiondays") ?? 0
         const embedColor = Number(color.replace("#", "0x"))
 
         if (!member) {
@@ -57,13 +65,17 @@ export = {
         const memberRoles = member.roles.cache.map(role => role.id)
         const modRoles = mod.roles.cache.map(role => role.id)
 
-
         if (!modRoles.includes(admin)) {
-            await interaction.editReply("You do not have permission to use this command.")
+            await interaction.editReply(
+                "You do not have permission to use this command.",
+            )
             return
         }
 
-        if (interaction.guild!.members.me!.roles.highest.position <= member.roles.highest.position) {
+        if (
+            interaction.guild!.members.me!.roles.highest.position <=
+            member.roles.highest.position
+        ) {
             await interaction.editReply("I cannot ban this member.")
             return
         }
@@ -95,24 +107,36 @@ export = {
 
         await member.ban({
             reason: reason,
-            deleteMessageDays: messageDeletionDays
+            deleteMessageDays: messageDeletionDays,
         })
 
         await interaction.editReply({
-            embeds: [{
-                title: "Member Banned",
-                description: "**User:** " + userMention(member.user.id) + "\n" +
-                    "**Reason:** " + reason + "\n" +
-                    "**Moderator:** " + mod.user.username + "\n" +
-                    "**Messages Deleted:** " + messageDeletionDays + " days",
-                color: embedColor,
-                footer: {
-                    text: "ID: " + member.user.id,
-                    icon_url: member.user.avatarURL({ forceStatic: false }) || undefined
+            embeds: [
+                {
+                    title: "Member Banned",
+                    description:
+                        "**User:** " +
+                        userMention(member.user.id) +
+                        "\n" +
+                        "**Reason:** " +
+                        reason +
+                        "\n" +
+                        "**Moderator:** " +
+                        mod.user.username +
+                        "\n" +
+                        "**Messages Deleted:** " +
+                        messageDeletionDays +
+                        " days",
+                    color: embedColor,
+                    footer: {
+                        text: "ID: " + member.user.id,
+                        icon_url:
+                            member.user.avatarURL({ forceStatic: false }) ||
+                            undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
-
-    }
+    },
 } as Command

@@ -6,29 +6,33 @@ import fs = require("fs")
 
 function loadSlashCommandsEvents(client: Client) {
     const cmdPath = path.join(__dirname, "..", "..", "commands")
-    const cmdFiles = fs.readdirSync(cmdPath).filter(file => file.endsWith(".js"))
+    const cmdFiles = fs
+        .readdirSync(cmdPath)
+        .filter(file => file.endsWith(".js"))
 
     for (const file of cmdFiles) {
-
         const filePath = path.join(cmdPath, file)
         const cmd: Command = require(filePath)
 
         if ("data" in cmd && "execute" in cmd && cmd.type === "slash") {
             client.commands.set(cmd.data.name, cmd)
         } else {
-            console.log(`[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`)
+            console.log(
+                `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
+            )
         }
     }
 
     //! command handler
     client.on(Events.InteractionCreate, async interaction => {
-        if (!interaction.isChatInputCommand())
-            return
+        if (!interaction.isChatInputCommand()) return
 
         const command = client.commands.get(interaction.commandName)
 
         if (!command) {
-            console.error(`No command matching ${interaction.commandName} was found.`)
+            console.error(
+                `No command matching ${interaction.commandName} was found.`,
+            )
             return
         }
 
@@ -38,7 +42,7 @@ function loadSlashCommandsEvents(client: Client) {
             console.error(error)
             await interaction.reply({
                 content: "There was an error while executing this command!",
-                ephemeral: true
+                ephemeral: true,
             })
         }
     })

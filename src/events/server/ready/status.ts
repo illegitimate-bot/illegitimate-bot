@@ -9,7 +9,6 @@ const event: Event = {
     event: "ready",
 
     execute(client: Client) {
-
         // Playing 0
         // Streaming 1
         // Listening 2
@@ -19,20 +18,16 @@ const event: Event = {
 
         const user = client.user!
 
-        user.setActivity(
-            { name: statuses[0].name, type: statuses[0].type }
-        )
+        user.setActivity({ name: statuses[0].name, type: statuses[0].type })
 
         let i = 1
-        setInterval(() =>
-            user.setActivity(
-                statuses[i++ % statuses.length]
-            ),
-        1000 * 60 * 10
+        setInterval(
+            () => user.setActivity(statuses[i++ % statuses.length]),
+            1000 * 60 * 10,
         )
 
         user.setStatus("dnd")
-    }
+    },
 }
 
 export = event

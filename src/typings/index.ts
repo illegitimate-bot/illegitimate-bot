@@ -1,6 +1,3 @@
 import { Profile, Profile2 } from "./Profile"
 
-export {
-    Profile,
-    Profile2
-}
+export { Profile, Profile2 }

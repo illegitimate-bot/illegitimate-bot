@@ -1,9 +1,27 @@
-import { bwwins, beastbwfkdr, beastbwstars, beastswkdr, beastswstars, beastduelswins, duelswlr } from "../../../config/reqs.json"
+import {
+    bwwins,
+    beastbwfkdr,
+    beastbwstars,
+    beastswkdr,
+    beastswstars,
+    beastduelswins,
+    duelswlr,
+} from "../../../config/reqs.json"
 import { color, devMessage } from "../../../config/options.json"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "../../utils/Hypixel"
+import {
+    hypixelLevel,
+    bedwarsLevel,
+    skywarsLevel,
+    getUUID,
+    getPlayer,
+    getGuild,
+    getHeadURL,
+} from "../../utils/Hypixel"
 import { ChatInputCommandInteraction } from "discord.js"
 
-export async function beast(interaction: ChatInputCommandInteraction): Promise<void> {
+export async function beast(
+    interaction: ChatInputCommandInteraction,
+): Promise<void> {
     await interaction.deferReply()
 
     const ign = interaction.options.getString("ign")!
@@ -15,37 +33,46 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
     }
 
     await interaction.editReply({
-        embeds: [{
-            description: "Fetching your uuid...",
-            color: embedColor
-        }]
+        embeds: [
+            {
+                description: "Fetching your uuid...",
+                color: embedColor,
+            },
+        ],
     })
 
     const uuid = await getUUID(ign)
     if (!uuid) {
         interaction.editReply({
             embeds: [
-                { description: "That player doesn't exist.", color: embedColor }
-            ]
+                {
+                    description: "That player doesn't exist.",
+                    color: embedColor,
+                },
+            ],
         })
         return
     }
 
     await interaction.editReply({
-        embeds: [{
-            description: "Fetching your player data...",
-            color: embedColor
-        }]
+        embeds: [
+            {
+                description: "Fetching your player data...",
+                color: embedColor,
+            },
+        ],
     })
 
     const head = await getHeadURL(ign)
     const player = await getPlayer(uuid)
     if (!player) {
         interaction.editReply({
-            embeds: [{
-                description: "That player hasn't played Hypixel before.",
-                color: embedColor
-            }]
+            embeds: [
+                {
+                    description: "That player hasn't played Hypixel before.",
+                    color: embedColor,
+                },
+            ],
         })
         return
     }
@@ -67,10 +94,12 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
     }
 
     await interaction.editReply({
-        embeds: [{
-            description: "Fetching your guild data...",
-            color: embedColor
-        }]
+        embeds: [
+            {
+                description: "Fetching your guild data...",
+                color: embedColor,
+            },
+        ],
     })
 
     const guild = await getGuild(uuid)
@@ -95,7 +124,7 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
     if (!player.stats) {
         statsFields.push({
             name: "<a:_warning:1178350183457751100> This player never played any games.",
-            value: "**➺ Stats:** `None`"
+            value: "**➺ Stats:** `None`",
         })
     } else {
         if (player.stats.Bedwars) {
@@ -107,7 +136,11 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
             const hsbwwins = player.stats.Bedwars.wins_bedwars || 0
 
             let bwtitle = ""
-            if (hsbwstars < beastbwstars || hsbwfkdr < beastbwfkdr || hsbwwins < bwwins) {
+            if (
+                hsbwstars < beastbwstars ||
+                hsbwfkdr < beastbwfkdr ||
+                hsbwwins < bwwins
+            ) {
                 bwtitle =
                     "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
             } else {
@@ -117,20 +150,27 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
 
             statsFields.push({
                 name: bwtitle,
-                value: "**➺ Stars:** `" +
-                    hsbwstars.toFixed(2).toString() + " / " +
-                    beastbwstars.toString() + "`\n" +
+                value:
+                    "**➺ Stars:** `" +
+                    hsbwstars.toFixed(2).toString() +
+                    " / " +
+                    beastbwstars.toString() +
+                    "`\n" +
                     "**➺ FKDR:** `" +
                     hsbwfkdr.toFixed(2).toString() +
-                    " / " + beastbwfkdr.toString() + "`\n" +
+                    " / " +
+                    beastbwfkdr.toString() +
+                    "`\n" +
                     "**➺ Wins:** `" +
-                    hsbwwins.toString() + " / " +
-                    bwwins.toString() + "`"
+                    hsbwwins.toString() +
+                    " / " +
+                    bwwins.toString() +
+                    "`",
             })
         } else {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played BedWars.",
-                value: "**➺ Stats:** `None`"
+                value: "**➺ Stats:** `None`",
             })
         }
 
@@ -153,19 +193,25 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
 
             statsFields.push({
                 name: swtitle,
-                value: "**➺ Stars:** `" +
-                    hsswstars.toFixed(2).toString() + " / " +
-                    beastswstars.toString() + "`\n" +
+                value:
+                    "**➺ Stars:** `" +
+                    hsswstars.toFixed(2).toString() +
+                    " / " +
+                    beastswstars.toString() +
+                    "`\n" +
                     "**➺ KDR:** `" +
-                    hsswkd.toFixed(2).toString() + " / " +
-                    beastswkdr.toString() + "`\n" +
+                    hsswkd.toFixed(2).toString() +
+                    " / " +
+                    beastswkdr.toString() +
+                    "`\n" +
                     "**➺ Wins:** `" +
-                    hsswwins.toString() + "`"
+                    hsswwins.toString() +
+                    "`",
             })
         } else {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played SkyWars.",
-                value: "**➺ Stats:** `None`"
+                value: "**➺ Stats:** `None`",
             })
         }
 
@@ -190,18 +236,23 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
                 name: duelstitle,
                 value:
                     "**➺ Wins:** `" +
-                    hsduelswins.toString() + " / " +
-                    beastduelswins.toString() + "`\n" +
+                    hsduelswins.toString() +
+                    " / " +
+                    beastduelswins.toString() +
+                    "`\n" +
                     "**➺ WLR:** `" +
-                    hsduelswlr.toFixed(2).toString() + " / " +
-                    duelswlr.toString() + "`\n" +
+                    hsduelswlr.toFixed(2).toString() +
+                    " / " +
+                    duelswlr.toString() +
+                    "`\n" +
                     "**➺ KDR:** `" +
-                    hsduelskd.toFixed(2).toString() + "`\n"
+                    hsduelskd.toFixed(2).toString() +
+                    "`\n",
             })
         } else {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played Duels.",
-                value: "**➺ Stats:** `None`"
+                value: "**➺ Stats:** `None`",
             })
         }
     }
@@ -210,24 +261,34 @@ export async function beast(interaction: ChatInputCommandInteraction): Promise<v
     const hypixelExp = player.networkExp || 0
     const level = hypixelLevel(hypixelExp)
 
-    const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
-    const footerIcon = interaction.guild ? interaction.guild.iconURL({ forceStatic: false }) : interaction.user.avatarURL({ forceStatic: false })
+    const footerText = interaction.guild
+        ? interaction.guild.name
+        : interaction.user.username
+    const footerIcon = interaction.guild
+        ? interaction.guild.iconURL({ forceStatic: false })
+        : interaction.user.avatarURL({ forceStatic: false })
 
     await interaction.editReply({
-        embeds: [{
-            title: rank + player.displayname + guildTag,
-            description: "**Network Level:** `" +
-                level.toFixed(2).toString() + "`\n" +
-                "**Current Guild:** `" + guildName + "`",
-            color: embedColor,
-            thumbnail: {
-                url: head!
+        embeds: [
+            {
+                title: rank + player.displayname + guildTag,
+                description:
+                    "**Network Level:** `" +
+                    level.toFixed(2).toString() +
+                    "`\n" +
+                    "**Current Guild:** `" +
+                    guildName +
+                    "`",
+                color: embedColor,
+                thumbnail: {
+                    url: head!,
+                },
+                footer: {
+                    text: footerText + " | " + devMessage,
+                    icon_url: footerIcon!,
+                },
+                fields: statsFields,
             },
-            footer: {
-                text: footerText + " | " + devMessage,
-                icon_url: footerIcon!
-            },
-            fields: statsFields
-        }]
+        ],
     })
 }

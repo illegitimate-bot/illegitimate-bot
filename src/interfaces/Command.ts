@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder} from "discord.js"
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
 import { ExtendedClient as Client } from "../utils/Client"
 
 export default interface Command {
@@ -7,7 +7,13 @@ export default interface Command {
     type: "slash"
     dev?: boolean
     public: boolean
-    data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup" | "addIntegerOption">
+    data: Omit<
+        SlashCommandBuilder,
+        "addSubcommand" | "addSubcommandGroup" | "addIntegerOption"
+    >
     subcommands?: boolean
-    execute: (interaction: ChatInputCommandInteraction, client: Client) => Promise<void>
+    execute: (
+        interaction: ChatInputCommandInteraction,
+        client: Client,
+    ) => Promise<void>
 }

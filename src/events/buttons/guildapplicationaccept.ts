@@ -12,7 +12,6 @@ export = {
     type: "button",
 
     async execute(interaction) {
-
         await interaction.deferReply()
 
         const user = interaction.user
@@ -25,7 +24,8 @@ export = {
         const applicantIGN = embed.fields[0].value.replaceAll("`", "")
 
         const applicant = await guild.members.fetch(applicantId)
-        const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator
+        const applicantUsername =
+            applicant.user.username + "#" + applicant.user.discriminator
 
         await message.edit({
             components: [
@@ -44,16 +44,19 @@ export = {
                         .setCustomId("checkstats")
                         .setLabel("Check Stats")
                         .setStyle(ButtonStyle.Secondary)
-                        .setDisabled(true)
-                )
-            ]
+                        .setDisabled(true),
+                ),
+            ],
         })
 
         await applicant.send({
-            embeds: [{
-                description: "Your application for the Illegitimate guild has been accepted.",
-                color: embedColor
-            }]
+            embeds: [
+                {
+                    description:
+                        "Your application for the Illegitimate guild has been accepted.",
+                    color: embedColor,
+                },
+            ],
         })
 
         const applicantEntry = await guildapp.findOne({ userID: applicantId })
@@ -65,7 +68,7 @@ export = {
             userID: applicantId,
             uuid: applicantUUID,
             IGN: applicantIGN,
-            timestamp: time
+            timestamp: time,
         })
 
         await waitingListAdd.save()
@@ -73,20 +76,22 @@ export = {
         await applicant.roles.add(waitingListRole)
         await guildapp.findOneAndDelete({ userID: applicantId })
 
-
         await interaction.editReply({
-            embeds: [{
-                title: applicantUsername + " - Guild Application",
-                description: "Application has been accepted by <@" + user.id + ">.",
-                color: embedColor,
-                thumbnail: {
-                    url: applicant.avatarURL() || guild.iconURL()!
+            embeds: [
+                {
+                    title: applicantUsername + " - Guild Application",
+                    description:
+                        "Application has been accepted by <@" + user.id + ">.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: applicant.avatarURL() || guild.iconURL()!,
+                    },
+                    footer: {
+                        icon_url: guild.iconURL()!,
+                        text: "ID: " + applicant.id,
+                    },
                 },
-                footer: {
-                    icon_url: guild.iconURL()!,
-                    text: "ID: " + applicant.id
-                }
-            }]
+            ],
         })
-    }
+    },
 } as Button

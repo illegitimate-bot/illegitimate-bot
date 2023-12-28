@@ -10,14 +10,14 @@ function getExpForLevel(level: number): number {
     }
 
     switch (respectedLevel) {
-    case 1:
-        return 500
-    case 2:
-        return 1000
-    case 3:
-        return 2000
-    case 4:
-        return 3500
+        case 1:
+            return 500
+        case 2:
+            return 1000
+        case 3:
+            return 2000
+        case 4:
+            return 3500
     }
     return 5000
 }
@@ -25,8 +25,7 @@ function getExpForLevel(level: number): number {
 function getLevelRespectingPrestige(level: number): number {
     if (level > HIGHEST_PRESTIGE * LEVELS_PER_PRESTIGE) {
         return level - HIGHEST_PRESTIGE * LEVELS_PER_PRESTIGE
-    }
-    else {
+    } else {
         return level % LEVELS_PER_PRESTIGE
     }
 }
@@ -39,7 +38,7 @@ const HIGHEST_PRESTIGE = 50
 function bedwarsLevel(exp: number): number {
     const prestiges = Math.floor(exp / XP_PER_PRESTIGE)
     let level = prestiges * LEVELS_PER_PRESTIGE
-    let expWithoutPrestiges = exp - (prestiges * XP_PER_PRESTIGE)
+    let expWithoutPrestiges = exp - prestiges * XP_PER_PRESTIGE
 
     for (let i = 1; i <= EASY_LEVELS; ++i) {
         const expForEasyLevel = getExpForLevel(i)

@@ -2,17 +2,17 @@
     "name": "illegitimate-bot",
     "version": "1.0.0",
     "description": "",
-    "main": "dist/src/index.js",
+    "main": "src/index.ts",
     "scripts": {
+        "start": "node dist/src/index.js",
         "build": "tsc",
-        "dev": "nodemon",
-        "dev:ts": "nodemon --exec node_modules/.bin/tsx src/index.ts",
-        "dev:build": "node scripts/dev-deploy.js",
-        "dev:delete": "node scripts/delete-commands.js",
+        "watch": "tsc -w",
+        "dev": "nodemon dist/src/index.js",
+        "dev:build": "ts-node scripts/dev-deploy.ts",
+        "dev:delete": "ts-node scripts/delete-commands.ts",
         "lint": "eslint_d src",
         "lint:fix": "eslint_d --fix src",
-        "prod:build:global": "node scripts/deploy-commands.js --prod",
-        "prod:build:user": "node scripts/deploy-commands.js --dev"
+        "prod:build": "ts-node scripts/deploy-commands.ts"
     },
     "author": "Taken",
     "license": "GPL-3.0-only",
@@ -24,13 +24,12 @@
         "log-beautify": "^1.2.0",
         "mongoose": "^7.0.1",
         "ms": "^2.1.3",
-        "pretty-ms": "^8.0.0",
-        "ts-node": "^10.9.2"
+        "pretty-ms": "^8.0.0"
     },
     "devDependencies": {
         "@types/ms": "^0.7.34",
         "@types/node": "^20.10.5",
-        "tsx": "^4.7.0",
+        "ts-node": "^10.9.2",
         "typescript": "^5.3.3"
     }
 }

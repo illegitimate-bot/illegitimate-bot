@@ -2,11 +2,13 @@
   "restartable": "rs",
   "ignore": [
     ".git",
-    "node_modules/**/node_modules"
+    "node_modules/**/node_modules",
+    "dist/config",
+    "src"
   ],
   "verbose": true,
   "env": {
     "NODE_ENV": "dev"
   },
-  "ext": "js,json"
+  "ext": "js, json"
 }

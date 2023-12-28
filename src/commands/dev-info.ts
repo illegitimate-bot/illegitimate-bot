@@ -1,4 +1,8 @@
-import { SlashCommandBuilder, PermissionFlagsBits, ChatInputCommandInteraction } from "discord.js"
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    ChatInputCommandInteraction,
+} from "discord.js"
 import { Command } from "../interfaces"
 
 const command: Command = {
@@ -12,14 +16,12 @@ const command: Command = {
         .setName("dev-info")
         .setDescription("Test command for the bot.")
         .addStringOption(option =>
-            option
-                .setName("test")
-                .setDescription("Test option."))
+            option.setName("test").setDescription("Test option."),
+        )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
     async execute(interaction: ChatInputCommandInteraction) {
-
         const test = interaction.options.getString("test")!
 
         const message = await interaction.channel!.messages.fetch(test)
@@ -30,7 +32,7 @@ const command: Command = {
         console.log(field1.value)
 
         await interaction.reply({ content: "Test command.", ephemeral: true })
-    }
+    },
 }
 
 export = command

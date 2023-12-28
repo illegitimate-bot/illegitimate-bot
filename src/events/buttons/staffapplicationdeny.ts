@@ -1,4 +1,9 @@
-import { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
+import {
+    ModalBuilder,
+    ActionRowBuilder,
+    TextInputBuilder,
+    TextInputStyle,
+} from "discord.js"
 import { Button } from "../../interfaces"
 
 export = {
@@ -7,7 +12,6 @@ export = {
     type: "button",
 
     async execute(interaction) {
-
         const modal = new ModalBuilder()
             .setTitle("Deny Reason")
             .setCustomId("staffdenyreasonbox")
@@ -17,10 +21,12 @@ export = {
                         .setLabel("Deny Reason")
                         .setCustomId("staffdenyreason")
                         .setStyle(TextInputStyle.Paragraph)
-                        .setPlaceholder("Enter a reason for denying the application")
-                        .setRequired(false)
-                )
+                        .setPlaceholder(
+                            "Enter a reason for denying the application",
+                        )
+                        .setRequired(false),
+                ),
             )
         await interaction.showModal(modal)
-    }
+    },
 } as Button

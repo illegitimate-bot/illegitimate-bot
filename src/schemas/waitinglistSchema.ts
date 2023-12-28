@@ -5,7 +5,7 @@ const waitinglistSchema = new Schema({
     userID: { type: String, required: true },
     uuid: { type: String, required: true },
     IGN: { type: String, required: true },
-    timestamp: { type: Number, required: true }
+    timestamp: { type: Number, required: true },
 })
 
 export = model("waitinglist", waitinglistSchema, "waitinglist")

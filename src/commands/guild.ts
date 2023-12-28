@@ -24,8 +24,8 @@ export = {
                     option
                         .setName("ign")
                         .setDescription("The IGN of the player.")
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -34,19 +34,21 @@ export = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription("The query to search for. [Default: player]")
-                        .setRequired(true)
-                ).
-                addStringOption(option =>
+                        .setDescription(
+                            "The query to search for. [Default: player]",
+                        )
+                        .setRequired(true),
+                )
+                .addStringOption(option =>
                     option
                         .setName("type")
                         .setDescription("The type of query.")
                         .addChoices(
                             { name: "Guild Member", value: "ign" },
                             { name: "Guild Name", value: "name" },
-                            { name: "Guild Id", value: "id" }
-                        )
-                )
+                            { name: "Guild Id", value: "id" },
+                        ),
+                ),
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -55,8 +57,11 @@ export = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription("The query to search for. [Default: player]")
-                        .setRequired(true))
+                        .setDescription(
+                            "The query to search for. [Default: player]",
+                        )
+                        .setRequired(true),
+                )
                 .addStringOption(option =>
                     option
                         .setName("type")
@@ -64,17 +69,19 @@ export = {
                         .addChoices(
                             { name: "Guild Member", value: "ign" },
                             { name: "Guild Name", value: "name" },
-                            { name: "Guild Id", value: "id" }
-                        )
+                            { name: "Guild Id", value: "id" },
+                        ),
                 )
                 .addNumberOption(option =>
                     option
                         .setName("amount")
-                        .setDescription("The amount of guild members to show. [Default: 10]"))
+                        .setDescription(
+                            "The amount of guild members to show. [Default: 10]",
+                        ),
+                ),
         ),
 
     async execute(interaction) {
-
         const subcommand = interaction.options.getSubcommand()
         const embedColor = Number(color.replace("#", "0x"))
 
@@ -93,18 +100,24 @@ export = {
             return
         }
 
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
-        const footerIcon = interaction.guild ? interaction.guild.iconURL({ forceStatic: false }) : interaction.user.avatarURL({ forceStatic: true })
+        const footerText = interaction.guild
+            ? interaction.guild.name
+            : interaction.user.username
+        const footerIcon = interaction.guild
+            ? interaction.guild.iconURL({ forceStatic: false })
+            : interaction.user.avatarURL({ forceStatic: true })
 
         await interaction.reply({
-            embeds: [{
-                description: "This command is currently under development",
-                color: embedColor,
-                footer: {
-                    text: footerText + " | " + devMessage,
-                    icon_url: footerIcon!
-                }
-            }]
+            embeds: [
+                {
+                    description: "This command is currently under development",
+                    color: embedColor,
+                    footer: {
+                        text: footerText + " | " + devMessage,
+                        icon_url: footerIcon!,
+                    },
+                },
+            ],
         })
-    }
+    },
 } as Command

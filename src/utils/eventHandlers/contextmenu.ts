@@ -5,30 +5,39 @@ import path = require("path")
 import fs = require("fs")
 
 function loadContextMenuEvents(client: Client) {
-    const contextMenuPath = path.join(__dirname, "..", "..", "commands-contextmenu")
-    const contextMenuFiles = fs.readdirSync(contextMenuPath).filter(file => file.endsWith(".js"))
+    const contextMenuPath = path.join(
+        __dirname,
+        "..",
+        "..",
+        "commands-contextmenu",
+    )
+    const contextMenuFiles = fs
+        .readdirSync(contextMenuPath)
+        .filter(file => file.endsWith(".js"))
 
     for (const file of contextMenuFiles) {
-
         const filePath = path.join(contextMenuPath, file)
         const cmd: ContextMenu = require(filePath)
 
         if ("data" in cmd && "execute" in cmd && cmd.type === "contextmenu") {
             client.contextmenus.set(cmd.data.name, cmd)
         } else {
-            console.log(`[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`)
+            console.log(
+                `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
+            )
         }
     }
 
     //! context menu command handler
     client.on(Events.InteractionCreate, async interaction => {
-        if (!interaction.isContextMenuCommand())
-            return
+        if (!interaction.isContextMenuCommand()) return
 
         const command = client.contextmenus.get(interaction.commandName)
 
         if (!command) {
-            console.error(`No command matching ${interaction.commandName} was found.`)
+            console.error(
+                `No command matching ${interaction.commandName} was found.`,
+            )
             return
         }
 
@@ -38,7 +47,7 @@ function loadContextMenuEvents(client: Client) {
             console.error(error)
             await interaction.reply({
                 content: "There was an error while executing this command!",
-                ephemeral: true
+                ephemeral: true,
             })
         }
     })

@@ -6,8 +6,9 @@ export = {
     type: "button",
 
     async execute(interaction) {
-
-        await interaction.reply({ content: "This button is currently disabled.", ephemeral: true })
-
-    }
+        await interaction.reply({
+            content: "This button is currently disabled.",
+            ephemeral: true,
+        })
+    },
 } as Button

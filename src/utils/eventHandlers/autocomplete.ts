@@ -5,18 +5,31 @@ import path = require("path")
 import fs = require("fs")
 
 function loadAutocompleteEvents(client: Client) {
-    const autocompletePath = path.join(__dirname, "..", "..", "events", "autocomplete")
-    const autocompleteFiles = fs.readdirSync(autocompletePath).filter(file => file.endsWith(".js"))
+    const autocompletePath = path.join(
+        __dirname,
+        "..",
+        "..",
+        "events",
+        "autocomplete",
+    )
+    const autocompleteFiles = fs
+        .readdirSync(autocompletePath)
+        .filter(file => file.endsWith(".js"))
 
     for (const file of autocompleteFiles) {
-
         const filePath = path.join(autocompletePath, file)
         const autocomplete: Autocomplete = require(filePath)
 
-        if ("name" in autocomplete && "execute" in autocomplete && autocomplete.type === "autocomplete") {
+        if (
+            "name" in autocomplete &&
+            "execute" in autocomplete &&
+            autocomplete.type === "autocomplete"
+        ) {
             client.autocomplete.set(autocomplete.name, autocomplete)
         } else {
-            console.log(`[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`)
+            console.log(
+                `[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`,
+            )
         }
     }
 
@@ -26,7 +39,9 @@ function loadAutocompleteEvents(client: Client) {
         const autocomplete = client.autocomplete.get(interaction.commandName)
 
         if (!autocomplete) {
-            console.error(`No autocomplete matching ${interaction.commandName} was found.`)
+            console.error(
+                `No autocomplete matching ${interaction.commandName} was found.`,
+            )
             return
         }
 

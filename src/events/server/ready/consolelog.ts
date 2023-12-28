@@ -9,7 +9,7 @@ const event: Event = {
 
     execute(client: Client) {
         console.log("Logged in as " + client.user!.tag + "!")
-    }
+    },
 }
 
 export = event

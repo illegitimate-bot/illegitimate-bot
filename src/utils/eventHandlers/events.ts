@@ -14,7 +14,6 @@ function loadEvents(client: Client) {
             client.on(event.event, event.execute)
         }
     }
-
 }
 
 export { loadEvents }

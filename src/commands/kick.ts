@@ -1,4 +1,9 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    userMention,
+    GuildMember,
+} from "discord.js"
 import { admin, helper } from "../../config/roles.json"
 import { color } from "../../config/options.json"
 import { Command } from "../interfaces"
@@ -17,20 +22,24 @@ export = {
             option
                 .setName("member")
                 .setDescription("Member to kick.")
-                .setRequired(true))
+                .setRequired(true),
+        )
         .addStringOption(option =>
             option
                 .setName("reason")
-                .setDescription("Reason for kicking the member."))
+                .setDescription("Reason for kicking the member."),
+        )
         .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
         .setDMPermission(false),
 
     async execute(interaction) {
-
         await interaction.deferReply()
 
-        const member = interaction.options.getMember("member") as GuildMember | null
-        const reason = interaction.options.getString("reason") ?? "No reason provided."
+        const member = interaction.options.getMember(
+            "member",
+        ) as GuildMember | null
+        const reason =
+            interaction.options.getString("reason") ?? "No reason provided."
         const embedColor = Number(color.replace("#", "0x"))
 
         if (!member) {
@@ -43,7 +52,9 @@ export = {
         const modRoles = mod.roles.cache.map(role => role.id)
 
         if (!modRoles.includes(helper) && !modRoles.includes(admin)) {
-            await interaction.editReply("You do not have permission to use this command.")
+            await interaction.editReply(
+                "You do not have permission to use this command.",
+            )
             return
         }
 
@@ -75,19 +86,28 @@ export = {
         await member.kick(reason + ` - ${mod.user.username}`)
 
         await interaction.editReply({
-            embeds: [{
-                title: "Member Kicked",
-                description: "**User:** " + userMention(member.user.id) + "\n" +
-                    "**Reason:** " + reason + "\n" +
-                    "**Moderator:** " + mod.user.username,
-                color: embedColor,
-                footer: {
-                    text: "ID: " + member.user.id,
-                    icon_url: member.user.avatarURL({ forceStatic: false }) || undefined
+            embeds: [
+                {
+                    title: "Member Kicked",
+                    description:
+                        "**User:** " +
+                        userMention(member.user.id) +
+                        "\n" +
+                        "**Reason:** " +
+                        reason +
+                        "\n" +
+                        "**Moderator:** " +
+                        mod.user.username,
+                    color: embedColor,
+                    footer: {
+                        text: "ID: " + member.user.id,
+                        icon_url:
+                            member.user.avatarURL({ forceStatic: false }) ||
+                            undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
-
-    }
+    },
 } as Command

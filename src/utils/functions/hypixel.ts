@@ -9,7 +9,13 @@ const REVERSE_CONST = REVERSE_PQ_PREFIX * REVERSE_PQ_PREFIX
 const GROWTH_DIVIDES_2 = 2 / GROWTH
 
 function getLevel(exp: number): number {
-    return exp <= 1 ? 1 : Math.floor(1 + REVERSE_PQ_PREFIX + Math.sqrt(REVERSE_CONST + GROWTH_DIVIDES_2 * exp))
+    return exp <= 1
+        ? 1
+        : Math.floor(
+              1 +
+                  REVERSE_PQ_PREFIX +
+                  Math.sqrt(REVERSE_CONST + GROWTH_DIVIDES_2 * exp),
+          )
 }
 
 function hypixelLevel(exp: number): number {
@@ -17,8 +23,8 @@ function hypixelLevel(exp: number): number {
 }
 
 function getTotalExpToLevel(level: number): number {
-    const lv = Math.floor(level); const
-        x0 = getTotalExpToFullLevel(lv)
+    const lv = Math.floor(level)
+    const x0 = getTotalExpToFullLevel(lv)
     if (level === lv) return x0
     return (getTotalExpToFullLevel(lv + 1) - x0) * (level % 1) + x0
 }
@@ -32,6 +38,5 @@ function getPercentageToNextLevel(exp: number): number {
     const x0 = getTotalExpToLevel(lv)
     return (exp - x0) / (getTotalExpToLevel(lv + 1) - x0)
 }
-
 
 export { hypixelLevel }

@@ -18,19 +18,25 @@ export = {
 
         const embedColor = Number(color.replace("#", "0x"))
 
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
-        const footerIcon = interaction.guild ? interaction.guild.iconURL({ forceStatic: false }) : interaction.user.avatarURL({ forceStatic: false })
+        const footerText = interaction.guild
+            ? interaction.guild.name
+            : interaction.user.username
+        const footerIcon = interaction.guild
+            ? interaction.guild.iconURL({ forceStatic: false })
+            : interaction.user.avatarURL({ forceStatic: false })
 
         await interaction.editReply({
-            embeds: [{
-                description: "Ping of the bot is " + client.ws.ping + "ms.",
-                color: embedColor,
-                footer: {
-                    text: footerText + " | " + devMessage,
-                    icon_url: footerIcon || undefined
+            embeds: [
+                {
+                    description: "Ping of the bot is " + client.ws.ping + "ms.",
+                    color: embedColor,
+                    footer: {
+                        text: footerText + " | " + devMessage,
+                        icon_url: footerIcon || undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
-    }
+    },
 } as Command

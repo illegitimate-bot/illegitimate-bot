@@ -18,21 +18,22 @@ export = {
             option
                 .setName("setting")
                 .setDescription("The setting to configure")
-                .setChoices(
-                    { name: "Staff Application status", value: "staffAppStatus" }
-                )
-                .setRequired(true))
+                .setChoices({
+                    name: "Staff Application status",
+                    value: "staffAppStatus",
+                })
+                .setRequired(true),
+        )
         .addStringOption(option =>
             option
                 .setName("value")
                 .setDescription("The value to set")
-                .setRequired(true)
+                .setRequired(true),
         )
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute(interaction) {
-
         await interaction.deferReply()
 
         const setting = interaction.options.getString("setting")
@@ -41,33 +42,42 @@ export = {
         const settingsData = await settings.findOne({ name: setting })
 
         if (!settingsData) {
-
             const newSetting = new settings({
                 _id: new mongoose.Types.ObjectId(),
                 name: setting,
-                value: value
+                value: value,
             })
 
             await newSetting.save()
 
             await interaction.editReply({
-                embeds: [{
-                    description: "Successfully created `" + setting + "` with value `" + value + "`.",
-                    color: embedColor
-                }]
+                embeds: [
+                    {
+                        description:
+                            "Successfully created `" +
+                            setting +
+                            "` with value `" +
+                            value +
+                            "`.",
+                        color: embedColor,
+                    },
+                ],
             })
         } else {
-
-            await settings.findOneAndUpdate(
-                { name: setting },
-                { value: value }
-            )
+            await settings.findOneAndUpdate({ name: setting }, { value: value })
 
             await interaction.editReply({
-                embeds: [{
-                    description: "Successfully updated `" + setting + "` to value `" + value + "`.",
-                }]
+                embeds: [
+                    {
+                        description:
+                            "Successfully updated `" +
+                            setting +
+                            "` to value `" +
+                            value +
+                            "`.",
+                    },
+                ],
             })
         }
-    }
+    },
 } as Command

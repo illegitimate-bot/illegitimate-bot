@@ -10,25 +10,33 @@ const event: Event = {
     execute(interaction: ChatInputCommandInteraction | ButtonInteraction) {
         if (interaction.isCommand()) {
             try {
-                console.log(interaction.user.username + " ran " +
-                    interaction.commandName + " " +
-                    interaction.options.getSubcommand()
+                console.log(
+                    interaction.user.username +
+                        " ran " +
+                        interaction.commandName +
+                        " " +
+                        interaction.options.getSubcommand(),
                 )
             } catch {
-                console.log(interaction.user.username + " ran " +
-                    interaction.commandName
+                console.log(
+                    interaction.user.username +
+                        " ran " +
+                        interaction.commandName,
                 )
             }
         }
-        
+
         if (interaction.isButton()) {
-            console.log(interaction.user.username + "#" +
-                interaction.user.discriminator + " clicked " +
-                interaction.customId
+            console.log(
+                interaction.user.username +
+                    "#" +
+                    interaction.user.discriminator +
+                    " clicked " +
+                    interaction.customId,
             )
             return
         }
-    }
+    },
 }
 
 export = event

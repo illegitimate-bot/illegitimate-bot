@@ -1,4 +1,9 @@
-import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
+import {
+    EmbedBuilder,
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+} from "discord.js"
 import { color } from "../../../config/options.json"
 import staffapp from "../../schemas/staffAppSchema"
 import { Modal } from "../../interfaces"
@@ -12,7 +17,9 @@ export = {
         await interaction.deferReply()
 
         const guild = interaction.guild
-        const reason = interaction.fields.fields.get("staffdenyreason")!.value || "No reason provided"
+        const reason =
+            interaction.fields.fields.get("staffdenyreason")!.value ||
+            "No reason provided"
         const embedColor = Number(color.replace("#", "0x"))
 
         const message = interaction.message!
@@ -33,13 +40,17 @@ export = {
                         .setLabel("Deny")
                         .setStyle(ButtonStyle.Danger)
                         .setDisabled(true),
-                )
-            ]
+                ),
+            ],
         })
 
         const dmMessage = new EmbedBuilder()
-            .setDescription("Your application for the Illegitimate guild staff has been denied\n" +
-                "**Reason:** `" + reason + "`")
+            .setDescription(
+                "Your application for the Illegitimate guild staff has been denied\n" +
+                    "**Reason:** `" +
+                    reason +
+                    "`",
+            )
             .setColor(embedColor)
 
         await applicant.send({ embeds: [dmMessage] })
@@ -47,19 +58,26 @@ export = {
         await staffapp.findOneAndDelete({ userID: applicantId })
 
         await interaction.editReply({
-            embeds: [{
-                title: "Application Denied",
-                description: "The application has been denied by <@" + interaction.user.id + ">.\n" +
-                    "**Reason:** `" + reason + "`",
-                color: embedColor,
-                thumbnail: {
-                    url: applicant.avatarURL() || guild!.iconURL()!
+            embeds: [
+                {
+                    title: "Application Denied",
+                    description:
+                        "The application has been denied by <@" +
+                        interaction.user.id +
+                        ">.\n" +
+                        "**Reason:** `" +
+                        reason +
+                        "`",
+                    color: embedColor,
+                    thumbnail: {
+                        url: applicant.avatarURL() || guild!.iconURL()!,
+                    },
+                    footer: {
+                        icon_url: guild!.iconURL()!,
+                        text: "ID: " + applicant.id,
+                    },
                 },
-                footer: {
-                    icon_url: guild!.iconURL()!,
-                    text: "ID: " + applicant.id
-                }
-            }],
+            ],
         })
-    }
+    },
 } as Modal

@@ -1,7 +1,23 @@
 import { SlashCommandBuilder } from "discord.js"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "../../config/reqs.json"
+import {
+    bwfkdr,
+    bwstars,
+    bwwins,
+    swstars,
+    swkdr,
+    duelswins,
+    duelswlr,
+} from "../../config/reqs.json"
 import { color, devMessage } from "../../config/options.json"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "../utils/Hypixel"
+import {
+    hypixelLevel,
+    bedwarsLevel,
+    skywarsLevel,
+    getUUID,
+    getPlayer,
+    getGuild,
+    getHeadURL,
+} from "../utils/Hypixel"
 import { Command } from "../interfaces"
 
 export = {
@@ -14,12 +30,14 @@ export = {
     data: new SlashCommandBuilder()
         .setName("check")
         .setDescription("Check a player's stats.")
-        .addStringOption((option) => option.setName("ign")
-            .setDescription("The player's IGN.")
-            .setRequired(true)),
+        .addStringOption(option =>
+            option
+                .setName("ign")
+                .setDescription("The player's IGN.")
+                .setRequired(true),
+        ),
 
     async execute(interaction) {
-
         await interaction.deferReply({})
 
         const ign = interaction.options.getString("ign")
@@ -31,37 +49,47 @@ export = {
         }
 
         await interaction.editReply({
-            embeds: [{
-                description: "Fetching your uuid...",
-                color: embedColor
-            }]
+            embeds: [
+                {
+                    description: "Fetching your uuid...",
+                    color: embedColor,
+                },
+            ],
         })
 
         const uuid = await getUUID(ign)
         if (!uuid) {
             interaction.editReply({
                 embeds: [
-                    { description: "That player doesn't exist.", color: embedColor }
-                ]
+                    {
+                        description: "That player doesn't exist.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
 
         await interaction.editReply({
-            embeds: [{
-                description: "Fetching your player data...",
-                color: embedColor
-            }]
+            embeds: [
+                {
+                    description: "Fetching your player data...",
+                    color: embedColor,
+                },
+            ],
         })
 
         const head = await getHeadURL(ign)
         const player = await getPlayer(uuid)
         if (!player) {
             interaction.editReply({
-                embeds: [{
-                    description: "That player hasn't played Hypixel before.",
-                    color: embedColor
-                }]
+                embeds: [
+                    {
+                        description:
+                            "That player hasn't played Hypixel before.",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
@@ -83,10 +111,12 @@ export = {
         }
 
         await interaction.editReply({
-            embeds: [{
-                description: "Fetching your guild data...",
-                color: embedColor
-            }]
+            embeds: [
+                {
+                    description: "Fetching your guild data...",
+                    color: embedColor,
+                },
+            ],
         })
 
         const guild = await getGuild(uuid)
@@ -110,7 +140,7 @@ export = {
         if (!guild) {
             guildRank = "N/A"
         } else {
-            guildRank = guild.members.find((m) => m.uuid === uuid)!.rank
+            guildRank = guild.members.find(m => m.uuid === uuid)!.rank
         }
 
         const statsFields = []
@@ -118,7 +148,7 @@ export = {
         if (!player.stats) {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played any games.",
-                value: "**➺ Stats:** `None`"
+                value: "**➺ Stats:** `None`",
             })
         } else {
             if (player.stats.Bedwars) {
@@ -130,7 +160,11 @@ export = {
                 const hsbwwins = player.stats.Bedwars.wins_bedwars || 0
 
                 let bwtitle = ""
-                if (hsbwstars < bwstars || hsbwfkdr < bwfkdr || hsbwwins < bwwins) {
+                if (
+                    hsbwstars < bwstars ||
+                    hsbwfkdr < bwfkdr ||
+                    hsbwwins < bwwins
+                ) {
                     bwtitle =
                         "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
                 } else {
@@ -140,20 +174,27 @@ export = {
 
                 statsFields.push({
                     name: bwtitle,
-                    value: "**➺ Stars:** `" +
-                        hsbwstars.toFixed(2).toString() + " / " +
-                        bwstars.toString() + "`\n" +
+                    value:
+                        "**➺ Stars:** `" +
+                        hsbwstars.toFixed(2).toString() +
+                        " / " +
+                        bwstars.toString() +
+                        "`\n" +
                         "**➺ FKDR:** `" +
                         hsbwfkdr.toFixed(2).toString() +
-                        " / " + bwfkdr.toString() + "`\n" +
+                        " / " +
+                        bwfkdr.toString() +
+                        "`\n" +
                         "**➺ Wins:** `" +
-                        hsbwwins.toString() + " / " +
-                        bwwins.toString() + "`"
+                        hsbwwins.toString() +
+                        " / " +
+                        bwwins.toString() +
+                        "`",
                 })
             } else {
                 statsFields.push({
                     name: "<a:_warning:1178350183457751100> This player never played BedWars.",
-                    value: "**➺ Stats:** `None`"
+                    value: "**➺ Stats:** `None`",
                 })
             }
 
@@ -176,19 +217,25 @@ export = {
 
                 statsFields.push({
                     name: swtitle,
-                    value: "**➺ Stars:** `" +
-                        hsswstars.toFixed(2).toString() + " / " +
-                        swstars.toString() + "`\n" +
+                    value:
+                        "**➺ Stars:** `" +
+                        hsswstars.toFixed(2).toString() +
+                        " / " +
+                        swstars.toString() +
+                        "`\n" +
                         "**➺ KDR:** `" +
-                        hsswkd.toFixed(2).toString() + " / " +
-                        swkdr.toString() + "`\n" +
+                        hsswkd.toFixed(2).toString() +
+                        " / " +
+                        swkdr.toString() +
+                        "`\n" +
                         "**➺ Wins:** `" +
-                        hsswwins.toString() + "`"
+                        hsswwins.toString() +
+                        "`",
                 })
             } else {
                 statsFields.push({
                     name: "<a:_warning:1178350183457751100> This player never played SkyWars.",
-                    value: "**➺ Stats:** `None`"
+                    value: "**➺ Stats:** `None`",
                 })
             }
 
@@ -213,18 +260,23 @@ export = {
                     name: duelstitle,
                     value:
                         "**➺ Wins:** `" +
-                        hsduelswins.toString() + " / " +
-                        duelswins.toString() + "`\n" +
+                        hsduelswins.toString() +
+                        " / " +
+                        duelswins.toString() +
+                        "`\n" +
                         "**➺ WLR:** `" +
-                        hsduelswlr.toFixed(2).toString() + " / " +
-                        duelswlr.toString() + "`\n" +
+                        hsduelswlr.toFixed(2).toString() +
+                        " / " +
+                        duelswlr.toString() +
+                        "`\n" +
                         "**➺ KDR:** `" +
-                        hsduelskd.toFixed(2).toString() + "`\n"
+                        hsduelskd.toFixed(2).toString() +
+                        "`\n",
                 })
             } else {
                 statsFields.push({
                     name: "<a:_warning:1178350183457751100> This player never played Duels.",
-                    value: "**➺ Stats:** `None`"
+                    value: "**➺ Stats:** `None`",
                 })
             }
         }
@@ -233,26 +285,38 @@ export = {
         const hypixelExp = player.networkExp || 0
         const level = hypixelLevel(hypixelExp)
 
-        const footerText = interaction.guild ? interaction.guild.name : interaction.user.username
-        const footerIcon = interaction.guild ? interaction.guild.iconURL({ forceStatic: false }) : interaction.user.avatarURL({ forceStatic: false })
+        const footerText = interaction.guild
+            ? interaction.guild.name
+            : interaction.user.username
+        const footerIcon = interaction.guild
+            ? interaction.guild.iconURL({ forceStatic: false })
+            : interaction.user.avatarURL({ forceStatic: false })
 
         await interaction.editReply({
-            embeds: [{
-                title: rank + player.displayname + guildTag,
-                description: "**Network Level:** `" +
-                    level.toFixed(2).toString() + "`\n" +
-                    "**Current Guild:** `" + guildName + "`\n" +
-                    "**Guild Rank:** `" + guildRank + "`",
-                color: embedColor,
-                thumbnail: {
-                    url: head!
+            embeds: [
+                {
+                    title: rank + player.displayname + guildTag,
+                    description:
+                        "**Network Level:** `" +
+                        level.toFixed(2).toString() +
+                        "`\n" +
+                        "**Current Guild:** `" +
+                        guildName +
+                        "`\n" +
+                        "**Guild Rank:** `" +
+                        guildRank +
+                        "`",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head!,
+                    },
+                    footer: {
+                        text: footerText + " | " + devMessage,
+                        icon_url: footerIcon!,
+                    },
+                    fields: statsFields,
                 },
-                footer: {
-                    text: footerText + " | " + devMessage,
-                    icon_url: footerIcon!
-                },
-                fields: statsFields
-            }]
+            ],
         })
-    }
+    },
 } as Command

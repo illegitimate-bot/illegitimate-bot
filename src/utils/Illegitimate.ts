@@ -2,14 +2,14 @@ import { ExtendedClient as Client } from "./Client"
 import config from "./Config"
 import { redis } from "./Redis"
 import { connect } from "mongoose"
-import init from "./Init"
+// import init from "./Init"
 const client = new Client()
 
 export default class Illegitimate {
     constructor() {}
 
     async start() {
-        init()
+        // init()
 
         client.start()
 

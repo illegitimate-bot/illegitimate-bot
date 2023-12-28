@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, ButtonInteraction } from "discord.js"
 import { Event } from "../../../interfaces"
 
-const event: Event = {
+export = {
     name: "logBtnsCmds",
     description: "Logs all button and command interactions",
     type: "event",
@@ -37,6 +37,4 @@ const event: Event = {
             return
         }
     },
-}
-
-export = event
+} as Event

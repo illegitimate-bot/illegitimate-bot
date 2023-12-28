@@ -7,7 +7,7 @@ import {
 import { botLogChannel, color } from "../../../../config/options.json"
 import { Event } from "../../../interfaces"
 
-const event: Event = {
+export = {
     name: "vcJoinLeave",
     description: "Logs when a user joins or leaves a voice channel.",
     type: "event",
@@ -94,6 +94,4 @@ const event: Event = {
             })
         }
     },
-}
-
-export = event
+} as Event

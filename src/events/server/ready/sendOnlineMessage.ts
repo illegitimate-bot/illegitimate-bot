@@ -3,7 +3,7 @@ import { Event } from "../../../interfaces"
 import { ExtendedClient as Client } from "../../../utils/Client"
 import { ChannelType } from "discord.js"
 
-const event: Event = {
+export = {
     name: "sendonlinemessage",
     description: "send an online message",
     type: "event",
@@ -36,6 +36,4 @@ const event: Event = {
             ],
         })
     },
-}
-
-export = event
+} as Event

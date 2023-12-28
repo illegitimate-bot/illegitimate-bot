@@ -2,7 +2,7 @@ import statuses = require("../../../../config/statuses.json")
 import { Event } from "../../../interfaces"
 import { ExtendedClient as Client } from "../../../utils/Client"
 
-const event: Event = {
+export = {
     name: "status",
     description: "Sets the status of the bot",
     type: "event",
@@ -28,6 +28,4 @@ const event: Event = {
 
         user.setStatus("dnd")
     },
-}
-
-export = event
+} as Event

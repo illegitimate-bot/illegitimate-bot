@@ -13,3 +13,5 @@ export type Profile2 = {
         profileActions: []
     }
 }
+
+export type FileType = "js" | "ts"

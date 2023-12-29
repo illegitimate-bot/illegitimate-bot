@@ -8,15 +8,20 @@ import {
     Routes,
 } from "discord.js"
 import fs = require("fs")
+import { FileType } from "../typings"
 
-async function autoDeployCommands() {
+async function autoDeployCommands(fileType: FileType) {
     const commands = []
-    const commandFiles = fs
-        .readdirSync("./dist/src/commands/")
-        .filter(file => file.endsWith(".js"))
-    const contentMenuCommands = fs
-        .readdirSync("./dist/src/commands-contextmenu/")
-        .filter(file => file.endsWith(".js"))
+    let commandFiles: string[] = []
+    let contentMenuCommands: string[] = []
+
+    if (fileType === "js") {
+        commandFiles = fs.readdirSync("./dist/src/commands/").filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs.readdirSync("./dist/src/commands-contextmenu/").filter(file => file.endsWith(fileType))
+    } else if (fileType === "ts") {
+        commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(fileType))
+    }
 
     for (const file of commandFiles) {
         const command = require(`../commands/${file}`)
@@ -79,36 +84,34 @@ async function autoDeployCommands() {
         return
     }
 
-    ;(async () => {
-        try {
-            console.log(
-                color.colorize(
-                    "Commands are different, starting deploy.",
-                    "red",
-                ),
-            )
-            console.log(color.colorize(currentCmds, "red"))
-            console.log(
-                `Started refreshing ${commands.length} application (/) commands.`,
-            )
+    try {
+        console.log(
+            color.colorize(
+                "Commands are different, starting deploy.",
+                "red",
+            ),
+        )
+        console.log(color.colorize(currentCmds, "red"))
+        console.log(
+            `Started refreshing ${commands.length} application (/) commands.`,
+        )
 
-            const data = (await rest.put(
-                Routes.applicationGuildCommands(
-                    config.dev.devid!,
-                    config.dev.guildid!,
-                ),
-                { body: commands },
-            )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
+        const data = (await rest.put(
+            Routes.applicationGuildCommands(
+                config.dev.devid!,
+                config.dev.guildid!,
+            ),
+            { body: commands },
+        )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
 
-            console.log(color.colorize("New commands deployed.", "green"))
-            console.log(color.colorize(newCmds, "green"))
-            console.log(
-                `Successfully reloaded ${data.length} application (/) commands.`,
-            )
-        } catch (error) {
-            console.error(error)
-        }
-    })()
+        console.log(color.colorize("New commands deployed.", "green"))
+        console.log(color.colorize(newCmds, "green"))
+        console.log(
+            `Successfully reloaded ${data.length} application (/) commands.`,
+        )
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export { autoDeployCommands }

@@ -3,8 +3,9 @@ import { ContextMenu } from "../../interfaces"
 import { Events } from "discord.js"
 import path = require("path")
 import fs = require("fs")
+import { FileType } from "../../typings"
 
-function loadContextMenuEvents(client: Client) {
+function loadContextMenuEvents(client: Client, ft: FileType) {
     const contextMenuPath = path.join(
         __dirname,
         "..",
@@ -13,7 +14,7 @@ function loadContextMenuEvents(client: Client) {
     )
     const contextMenuFiles = fs
         .readdirSync(contextMenuPath)
-        .filter(file => file.endsWith(".js"))
+        .filter(file => file.endsWith(ft))
 
     for (const file of contextMenuFiles) {
         const filePath = path.join(contextMenuPath, file)

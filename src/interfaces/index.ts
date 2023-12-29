@@ -4,13 +4,18 @@ import Command from "./Command"
 import ContextMenu from "./ContextMenu"
 import Event from "./Event"
 import Modal from "./Modal"
+
 import Config from "./Config"
+import Cron from "./Cron"
+import TimeZones from "./TimeZones"
 
 import { Guild, GuildData } from "./Guild"
 import { Player, PlayerData } from "./Player"
 
 export {
     Config,
+    Cron,
+    TimeZones,
     Autocomplete,
     Button,
     Command,

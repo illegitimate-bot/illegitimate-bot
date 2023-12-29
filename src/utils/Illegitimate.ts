@@ -6,7 +6,7 @@ import init from "./Init"
 import { loadCronEvents } from "./Cron"
 const client = new Client()
 
-export default class Illegitimate {
+class Bot {
     constructor() {}
 
     async start() {
@@ -21,3 +21,5 @@ export default class Illegitimate {
         })
     }
 }
+
+export default { Bot, client }

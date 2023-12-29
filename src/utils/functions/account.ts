@@ -9,6 +9,7 @@ const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"
 const hypixel = "https://api.hypixel.net/player"
 const guild = "https://api.hypixel.net/guild"
 const minotar = "https://minotar.net/helm/"
+type GuildQuerqType = "player" | "name" | "id"
 
 async function getUUID(ign: string): Promise<string | null> {
     try {
@@ -45,7 +46,7 @@ async function getPlayer(uuid: string): Promise<PlayerData | null> {
 
 async function getGuild(
     query: string,
-    type?: string,
+    type?: GuildQuerqType,
 ): Promise<GuildData | null> {
     const reqType = type ? type : "player"
 

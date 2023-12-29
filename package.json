@@ -8,6 +8,7 @@
         "build": "tsc",
         "watch": "tsc -w",
         "dev": "nodemon dist/src/index.js",
+        "dev:ts": "nodemon --config nodemon-ts.json",
         "dev:build": "ts-node scripts/dev-deploy.ts",
         "dev:delete": "ts-node scripts/delete-commands.ts",
         "format": "prettier --write src/",

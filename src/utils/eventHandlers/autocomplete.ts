@@ -3,8 +3,9 @@ import { Autocomplete } from "../../interfaces"
 import { Events } from "discord.js"
 import path = require("path")
 import fs = require("fs")
+import { FileType } from "../../typings"
 
-function loadAutocompleteEvents(client: Client) {
+function loadAutocompleteEvents(client: Client, ft: FileType) {
     const autocompletePath = path.join(
         __dirname,
         "..",
@@ -14,7 +15,7 @@ function loadAutocompleteEvents(client: Client) {
     )
     const autocompleteFiles = fs
         .readdirSync(autocompletePath)
-        .filter(file => file.endsWith(".js"))
+        .filter(file => file.endsWith(ft))
 
     for (const file of autocompleteFiles) {
         const filePath = path.join(autocompletePath, file)

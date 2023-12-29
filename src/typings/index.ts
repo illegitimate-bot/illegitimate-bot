@@ -1,3 +1,3 @@
-import { Profile, Profile2 } from "./Profile"
+import { Profile, Profile2, FileType } from "./Types"
 
-export { Profile, Profile2 }
+export { Profile, Profile2, FileType }

@@ -3,12 +3,13 @@ import { Modal } from "../../interfaces"
 import { Events } from "discord.js"
 import path = require("path")
 import fs = require("fs")
+import { FileType } from "../../typings"
 
-function loadModalEvents(client: Client) {
+function loadModalEvents(client: Client, ft: FileType) {
     const modalPath = path.join(__dirname, "..", "..", "events", "modals")
     const modalFiles = fs
         .readdirSync(modalPath)
-        .filter(file => file.endsWith(".js"))
+        .filter(file => file.endsWith(ft))
 
     for (const file of modalFiles) {
         const filePath = path.join(modalPath, file)

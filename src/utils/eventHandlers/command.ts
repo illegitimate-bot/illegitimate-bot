@@ -3,12 +3,11 @@ import { Command } from "../../interfaces"
 import { Events } from "discord.js"
 import path = require("path")
 import fs = require("fs")
+import { FileType } from "../../typings"
 
-function loadSlashCommandsEvents(client: Client) {
+function loadSlashCommandsEvents(client: Client, ft: FileType) {
     const cmdPath = path.join(__dirname, "..", "..", "commands")
-    const cmdFiles = fs
-        .readdirSync(cmdPath)
-        .filter(file => file.endsWith(".js"))
+    const cmdFiles = fs .readdirSync(cmdPath) .filter(file => file.endsWith(ft))
 
     for (const file of cmdFiles) {
         const filePath = path.join(cmdPath, file)

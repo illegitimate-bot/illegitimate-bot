@@ -35,15 +35,21 @@ export class ExtendedClient extends Client {
     }
 
     async start() {
-        loadAllEvents(this)
 
         let token: string
-        if (process.env.NODE_ENV === "dev") {
-            console.log("Running in development mode.")
+        if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT) {
+            console.log("Running in development mode. [ts-node]")
+            loadAllEvents(this, "ts")
             token = config.dev.devtoken!
-            autoDeployCommands()
+            autoDeployCommands("ts")
+        } else if (process.env.NODE_ENV === "dev" && !process.env.TYPESCRIPT) {
+            console.log("Running in development mode.")
+            loadAllEvents(this, "js")
+            token = config.dev.devtoken!
+            autoDeployCommands("js")
         } else {
             console.log("Running in production mode.")
+            loadAllEvents(this, "js")
             token = config.prod.token!
         }
 

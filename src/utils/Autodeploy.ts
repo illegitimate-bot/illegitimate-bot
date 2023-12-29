@@ -75,7 +75,7 @@ async function autoDeployCommands() {
         console.log(
             color.colorize("Commands are the same, skipping deploy.", "green"),
         )
-        console.log(color.colorize(currentCmds, "green"))
+        console.log(color.colorize(newCmds, "green"))
         return
     }
 

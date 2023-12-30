@@ -3,12 +3,12 @@
   "ignore": [
     ".git",
     "node_modules/**/node_modules",
-    "dist/config"
+    "dist/config",
+    "src"
   ],
   "verbose": true,
   "env": {
-    "NODE_ENV": "dev",
-    "TYPESCRIPT": "true"
+    "NODE_ENV": "dev"
   },
-  "ext": "ts, json"
+  "ext": "js, json"
 }

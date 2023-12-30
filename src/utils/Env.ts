@@ -1,7 +1,7 @@
-import { Config } from "../interfaces"
+import { Env } from "../interfaces"
 import "dotenv/config"
 
-const config: Config = {
+const env: Env = {
     prod: {
         token: process.env.TOKEN,
         mongoURI: process.env.MONGOURI,
@@ -17,4 +17,4 @@ const config: Config = {
     },
 }
 
-export default config
+export default env

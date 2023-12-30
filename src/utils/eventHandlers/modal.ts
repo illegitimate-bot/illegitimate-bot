@@ -5,7 +5,7 @@ import path = require("path")
 import fs = require("fs")
 import { FileType } from "../../typings"
 
-function loadModalEvents(client: Client, ft: FileType) {
+export default function loadModalEvents(client: Client, ft: FileType) {
     const modalPath = path.join(__dirname, "..", "..", "events", "modals")
     const modalFiles = fs
         .readdirSync(modalPath)

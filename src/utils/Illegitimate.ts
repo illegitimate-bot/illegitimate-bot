@@ -1,10 +1,11 @@
 import { ExtendedClient as Client } from "./Client"
-import config from "./Config"
-import { redis } from "./Redis"
+import { Redis } from "ioredis"
+import env from "./Env"
 import { connect } from "mongoose"
 import init from "./Init"
-import { loadCronEvents } from "./Cron"
+import { loadCronEvents } from "./eventHandlers"
 const client = new Client()
+const redis = new Redis(env.prod.redisURI!)
 
 class Bot {
     constructor() {}
@@ -16,10 +17,10 @@ class Bot {
         redis.on("ready", () => {
             console.log("Connected to Redis")
         })
-        connect(config.prod.mongoURI!, {}).then(() => {
+        connect(env.prod.mongoURI!, {}).then(() => {
             console.log("Connected to MongoDB")
         })
     }
 }
 
-export default { Bot, client }
+export default { Bot, client, redis }

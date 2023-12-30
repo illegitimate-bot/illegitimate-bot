@@ -3,7 +3,7 @@ import { Event } from "../../interfaces"
 import path = require("path")
 import fs = require("fs")
 
-function loadEvents(client: Client) {
+export default function loadEvents(client: Client) {
     const serverDir = path.join(__dirname, "..", "..", "events", "server")
     const eventDirs = fs.readdirSync(serverDir)
     for (const eventDir of eventDirs) {
@@ -15,5 +15,3 @@ function loadEvents(client: Client) {
         }
     }
 }
-
-export { loadEvents }

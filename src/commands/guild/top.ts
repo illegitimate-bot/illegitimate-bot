@@ -1,8 +1,9 @@
 import { getUUID, getPlayer, getGuild, getIGN } from "../../utils/Hypixel"
 import { color, devMessage } from "../../../config/options.json"
 import { ChannelType, ChatInputCommandInteraction } from "discord.js"
-import { redis } from "../../utils/Redis"
 import { GuildData } from "../../interfaces/Guild"
+import Illegitimate from "../../utils/Illegitimate"
+const redis = Illegitimate.redis
 
 async function guildTop(
     interaction: ChatInputCommandInteraction,

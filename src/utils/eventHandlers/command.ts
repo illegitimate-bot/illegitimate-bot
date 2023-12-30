@@ -5,7 +5,7 @@ import path = require("path")
 import fs = require("fs")
 import { FileType } from "../../typings"
 
-function loadSlashCommandsEvents(client: Client, ft: FileType) {
+export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
     const cmdPath = path.join(__dirname, "..", "..", "commands")
     const cmdFiles = fs .readdirSync(cmdPath) .filter(file => file.endsWith(ft))
 
@@ -46,5 +46,3 @@ function loadSlashCommandsEvents(client: Client, ft: FileType) {
         }
     })
 }
-
-export { loadSlashCommandsEvents }

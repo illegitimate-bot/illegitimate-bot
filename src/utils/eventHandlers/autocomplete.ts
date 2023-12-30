@@ -5,7 +5,7 @@ import path = require("path")
 import fs = require("fs")
 import { FileType } from "../../typings"
 
-function loadAutocompleteEvents(client: Client, ft: FileType) {
+export default function loadAutocompleteEvents(client: Client, ft: FileType) {
     const autocompletePath = path.join(
         __dirname,
         "..",
@@ -53,5 +53,3 @@ function loadAutocompleteEvents(client: Client, ft: FileType) {
         }
     })
 }
-
-export { loadAutocompleteEvents }

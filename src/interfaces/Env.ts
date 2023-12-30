@@ -1,4 +1,4 @@
-interface ProdConfig {
+interface ProdEnv {
     token: string | undefined
     mongoURI: string | undefined
     dev: string | undefined
@@ -6,14 +6,14 @@ interface ProdConfig {
     redisURI: string | undefined
 }
 
-interface DevConfig {
+interface DevEnv {
     devtoken: string | undefined
     clientid: string | undefined
     devid: string | undefined
     guildid: string | undefined
 }
 
-export default interface Config {
-    prod: ProdConfig
-    dev: DevConfig
+export default interface Env {
+    prod: ProdEnv
+    dev: DevEnv
 }

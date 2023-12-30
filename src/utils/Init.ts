@@ -1,7 +1,7 @@
-import config from "./Config"
+import env from "./Env"
 
-const prodValues = config.prod
-const devValues = config.dev
+const prodValues = env.prod
+const devValues = env.dev
 
 export default function init() {
     if (process.env.NODE_ENV === "dev") {

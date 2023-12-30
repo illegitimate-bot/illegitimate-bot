@@ -16,11 +16,19 @@ async function autoDeployCommands(fileType: FileType) {
     let contentMenuCommands: string[] = []
 
     if (fileType === "js") {
-        commandFiles = fs.readdirSync("./dist/src/commands/").filter(file => file.endsWith(fileType))
-        contentMenuCommands = fs.readdirSync("./dist/src/commands-contextmenu/").filter(file => file.endsWith(fileType))
+        commandFiles = fs
+            .readdirSync("./dist/src/commands/")
+            .filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs
+            .readdirSync("./dist/src/commands-contextmenu/")
+            .filter(file => file.endsWith(fileType))
     } else if (fileType === "ts") {
-        commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(fileType))
-        contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(fileType))
+        commandFiles = fs
+            .readdirSync("./src/commands/")
+            .filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs
+            .readdirSync("./src/commands-contextmenu/")
+            .filter(file => file.endsWith(fileType))
     }
 
     for (const file of commandFiles) {
@@ -86,10 +94,7 @@ async function autoDeployCommands(fileType: FileType) {
 
     try {
         console.log(
-            color.colorize(
-                "Commands are different, starting deploy.",
-                "red",
-            ),
+            color.colorize("Commands are different, starting deploy.", "red"),
         )
         console.log(color.colorize(currentCmds, "red"))
         console.log(
@@ -97,10 +102,7 @@ async function autoDeployCommands(fileType: FileType) {
         )
 
         const data = (await rest.put(
-            Routes.applicationGuildCommands(
-                env.dev.devid!,
-                env.dev.guildid!,
-            ),
+            Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
             { body: commands },
         )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
 

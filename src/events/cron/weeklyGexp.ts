@@ -2,7 +2,7 @@ import {
     hypixelGuildID,
     guildLogChannel,
     color,
-    devMessage
+    devMessage,
 } from "../../../config/options.json"
 import { getGuild, getIGN } from "../../utils/Hypixel"
 import { Cron, GuildData } from "../../interfaces"
@@ -23,10 +23,12 @@ async function guildWeekly() {
     const embedColor = Number(color.replace("#", "0x"))
 
     const message = await channel.send({
-        embeds: [{
-            description: "Starting to fetch guild data...",
-            color: embedColor
-        }]
+        embeds: [
+            {
+                description: "Starting to fetch guild data...",
+                color: embedColor,
+            },
+        ],
     })
 
     const guild = (await getGuild(hypixelGuildID, "id")) as GuildData

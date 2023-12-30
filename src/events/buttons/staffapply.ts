@@ -52,7 +52,9 @@ export = {
             }
 
             if (!userRoles.has(guildRole)) {
-                await interaction.editReply("You must be a member of the guild to apply for staff.")
+                await interaction.editReply(
+                    "You must be a member of the guild to apply for staff.",
+                )
                 return
             }
 

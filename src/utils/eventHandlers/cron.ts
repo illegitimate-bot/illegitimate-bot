@@ -5,14 +5,33 @@ import { Cron } from "../../interfaces"
 
 export default function loadCronEvents() {
     const cronPath = path.join(__dirname, "..", "..", "events", "cron")
-    const cronFiles = fs.readdirSync(cronPath).filter(file => file.endsWith(".js"))
+    const cronFiles = fs
+        .readdirSync(cronPath)
+        .filter(file => file.endsWith(".js"))
 
     for (const file of cronFiles) {
         const filePath = path.join(cronPath, file)
         const cron: Cron = require(filePath)
 
-        const time = cron.time.seconds + " " + cron.time.minutes + " " + cron.time.hours + " " + cron.time.dayOfMonth + " " + cron.time.month + " " + cron.time.dayOfWeek
+        const time =
+            cron.time.seconds +
+            " " +
+            cron.time.minutes +
+            " " +
+            cron.time.hours +
+            " " +
+            cron.time.dayOfMonth +
+            " " +
+            cron.time.month +
+            " " +
+            cron.time.dayOfWeek
 
-        new CronJob(time, cron.execute, cron.onComplete, cron.start, cron.timeZone).start()
+        new CronJob(
+            time,
+            cron.execute,
+            cron.onComplete,
+            cron.start,
+            cron.timeZone,
+        ).start()
     }
 }

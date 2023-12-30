@@ -7,7 +7,7 @@ import { FileType } from "../../typings"
 
 export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
     const cmdPath = path.join(__dirname, "..", "..", "commands")
-    const cmdFiles = fs .readdirSync(cmdPath) .filter(file => file.endsWith(ft))
+    const cmdFiles = fs.readdirSync(cmdPath).filter(file => file.endsWith(ft))
 
     for (const file of cmdFiles) {
         const filePath = path.join(cmdPath, file)

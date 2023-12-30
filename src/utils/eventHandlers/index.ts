@@ -13,5 +13,5 @@ export {
     loadContextMenuEvents,
     loadCronEvents,
     loadEvents,
-    loadModalEvents
+    loadModalEvents,
 }

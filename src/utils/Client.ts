@@ -35,7 +35,6 @@ export class ExtendedClient extends Client {
     }
 
     async start() {
-
         let token: string
         if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT) {
             console.log("Running in development mode. [ts-node]")

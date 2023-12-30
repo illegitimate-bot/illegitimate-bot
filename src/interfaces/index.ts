@@ -5,7 +5,7 @@ import ContextMenu from "./ContextMenu"
 import Event from "./Event"
 import Modal from "./Modal"
 
-import Config from "./Config"
+import Env from "./Env"
 import Cron from "./Cron"
 import TimeZones from "./TimeZones"
 
@@ -13,7 +13,7 @@ import { Guild, GuildData } from "./Guild"
 import { Player, PlayerData } from "./Player"
 
 export {
-    Config,
+    Env,
     Cron,
     TimeZones,
     Autocomplete,

@@ -15,7 +15,7 @@ import staffapp from "../../schemas/staffAppSchema"
 import settings from "../../schemas/settingsSchema"
 import { getUUID } from "../../utils/Hypixel"
 import { Button } from "../../interfaces"
-import config from "../../utils/Config"
+import env from "../../utils/Env"
 
 export = {
     name: "staffapply",
@@ -42,7 +42,7 @@ export = {
         if (interaction.customId === "staffapply") {
             await interaction.deferReply({ ephemeral: true })
 
-            if (user.user.id !== config.prod.dev) {
+            if (user.user.id !== env.prod.dev) {
                 if (status === "0") {
                     await interaction.editReply(
                         "Staff applications are currently closed.",
@@ -51,15 +51,15 @@ export = {
                 }
             }
 
-            // if (!userRoles.has(guildRole)) {
-            //     await interaction.editReply("You must be a member of the guild to apply for staff.")
-            //     return
-            // }
+            if (!userRoles.has(guildRole)) {
+                await interaction.editReply("You must be a member of the guild to apply for staff.")
+                return
+            }
 
-            // if (userRoles.has(guildStaff)) {
-            //     await interaction.editReply("You are already a staff member.")
-            //     return
-            // }
+            if (userRoles.has(guildStaff)) {
+                await interaction.editReply("You are already a staff member.")
+                return
+            }
 
             const application = await staffapp.findOne({ userID: user.user.id })
 

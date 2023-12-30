@@ -1,9 +1,9 @@
 import fetch from "axios"
-import config from "../Config"
+import env from "../Env"
 import { Profile, Profile2 } from "../../typings"
 import { Player, PlayerData } from "../../interfaces"
 import { Guild, GuildData } from "../../interfaces"
-const apikey = config.prod.hypixelapikey
+const apikey = env.prod.hypixelapikey
 const mojang = "https://api.mojang.com/users/profiles/minecraft/"
 const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"
 const hypixel = "https://api.hypixel.net/player"

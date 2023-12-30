@@ -1,6 +1,6 @@
 import { Command } from "../interfaces"
-import config from "./Config"
-import color from "./Colors"
+import env from "./Env"
+import color from "./functions/colors"
 import {
     REST,
     RESTGetAPIApplicationGuildCommandResult,
@@ -36,10 +36,10 @@ async function autoDeployCommands(fileType: FileType) {
         }
     }
 
-    const rest = new REST({ version: "10" }).setToken(config.dev.devtoken!)
+    const rest = new REST({ version: "10" }).setToken(env.dev.devtoken!)
 
     const currentCommands = (await rest.get(
-        Routes.applicationGuildCommands(config.dev.devid!, config.dev.guildid!),
+        Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
     )) as RESTGetAPIApplicationGuildCommandResult[]
 
     const currentCommandsInfo = currentCommands.map(command => {
@@ -98,8 +98,8 @@ async function autoDeployCommands(fileType: FileType) {
 
         const data = (await rest.put(
             Routes.applicationGuildCommands(
-                config.dev.devid!,
-                config.dev.guildid!,
+                env.dev.devid!,
+                env.dev.guildid!,
             ),
             { body: commands },
         )) as RESTPutAPIApplicationGuildCommandsJSONBody[]

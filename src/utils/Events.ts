@@ -1,10 +1,10 @@
 import { ExtendedClient as Client } from "./Client"
-import { loadButtonEvents } from "./eventHandlers/button"
-import { loadSlashCommandsEvents } from "./eventHandlers/command"
-import { loadContextMenuEvents } from "./eventHandlers/contextmenu"
-import { loadModalEvents } from "./eventHandlers/modal"
-import { loadEvents } from "./eventHandlers/events"
-import { loadAutocompleteEvents } from "./eventHandlers/autocomplete"
+import { loadButtonEvents } from "./eventHandlers"
+import { loadSlashCommandsEvents } from "./eventHandlers"
+import { loadContextMenuEvents } from "./eventHandlers"
+import { loadModalEvents } from "./eventHandlers"
+import { loadEvents } from "./eventHandlers"
+import { loadAutocompleteEvents } from "./eventHandlers"
 import { FileType } from "../typings"
 
 export function loadAllEvents(client: Client, ft: FileType) {

@@ -1,10 +1,10 @@
 import { CronJob } from "cron"
 import path from "path"
 import fs from "fs"
-import { Cron } from "../interfaces"
+import { Cron } from "../../interfaces"
 
-function loadCronEvents() {
-    const cronPath = path.join(__dirname, "..", "events", "cron")
+export default function loadCronEvents() {
+    const cronPath = path.join(__dirname, "..", "..", "events", "cron")
     const cronFiles = fs.readdirSync(cronPath).filter(file => file.endsWith(".js"))
 
     for (const file of cronFiles) {
@@ -16,5 +16,3 @@ function loadCronEvents() {
         new CronJob(time, cron.execute, cron.onComplete, cron.start, cron.timeZone).start()
     }
 }
-
-export { loadCronEvents }

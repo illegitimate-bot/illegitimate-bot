@@ -5,7 +5,7 @@ import path = require("path")
 import fs = require("fs")
 import { FileType } from "../../typings"
 
-function loadButtonEvents(client: Client, ft: FileType) {
+export default function loadButtonEvents(client: Client, ft: FileType) {
     const btnPath = path.join(__dirname, "..", "..", "events", "buttons")
     const btnFiles = fs
         .readdirSync(btnPath)
@@ -47,5 +47,3 @@ function loadButtonEvents(client: Client, ft: FileType) {
         }
     })
 }
-
-export { loadButtonEvents }

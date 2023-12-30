@@ -5,7 +5,7 @@ import path = require("path")
 import fs = require("fs")
 import { FileType } from "../../typings"
 
-function loadContextMenuEvents(client: Client, ft: FileType) {
+export default function loadContextMenuEvents(client: Client, ft: FileType) {
     const contextMenuPath = path.join(
         __dirname,
         "..",
@@ -53,5 +53,3 @@ function loadContextMenuEvents(client: Client, ft: FileType) {
         }
     })
 }
-
-export { loadContextMenuEvents }

@@ -1,8 +1,8 @@
 import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 import fs from "fs"
-import config from "../src/utils/Config"
+import env from "../src/utils/Env"
 import { Command } from "../src/interfaces"
-const rest = new REST({ version: "10" }).setToken(config.dev.devtoken)
+const rest = new REST({ version: "10" }).setToken(env.dev.devtoken!)
 
 const commands: RESTPutAPIApplicationCommandsJSONBody = []
 const commandFiles = fs.readdirSync("./dist/src/commands/").filter(file => file.endsWith(".js"))
@@ -26,7 +26,7 @@ for (const file of contentMenuCommands) {
         console.log(`Started refreshing ${commands.length} application (/) commands.`)
 
         const data = await rest.put(
-            Routes.applicationGuildCommands(config.dev.devid, config.dev.guildid),
+            Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
             { body: commands },
         ) as RESTGetAPIApplicationGuildCommandResult[]
 

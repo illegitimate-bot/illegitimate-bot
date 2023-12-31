@@ -9,6 +9,8 @@
         "skipLibCheck": true,
         "strictNullChecks": true,
         "resolveJsonModule": true,
+        "removeComments": true,
+        "noUnusedLocals": true,
         "outDir": "dist"
     },
     "include": ["src"],

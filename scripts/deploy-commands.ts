@@ -1,4 +1,4 @@
-import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
+import { REST, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 import fs from "node:fs"
 import { Command } from "../src/interfaces"
 import env from "../src/utils/Env"
@@ -21,12 +21,14 @@ for (const file of contentMenuCommands) {
     try {
         console.log(`Started refreshing ${commands.length} application (/) commands.`)
 
-        const data = await rest.put(
+        await rest.put(
             Routes.applicationCommands(env.dev.clientid!),
             { body: commands },
-        ) as RESTGetAPIApplicationGuildCommandResult[]
+        ).then(() => {
+            console.log(`Successfully reloaded ${commands.length} application (/) commands.`)
+            process.exit(0)
+        })
 
-        console.log(`Successfully reloaded ${data.length} application (/) commands.`)
     } catch (error) {
         console.error(error)
     }

@@ -46,7 +46,10 @@ export async function updateDiscordRoles(
     })
     const guildMemberIDs = hypixelGuildMembers.map(gmember => gmember.uuid)
 
-    const allVerifiedUsers = await verify.find({}) as { userID: string, uuid: string }[]
+    const allVerifiedUsers = (await verify.find({})) as {
+        userID: string
+        uuid: string
+    }[]
     const verifiedUsers = allVerifiedUsers.map(user => {
         return {
             userID: user.userID,
@@ -64,17 +67,25 @@ export async function updateDiscordRoles(
     })
 
     for (const gmember of guildMembers) {
-        const memberData = verifiedUsers.find(user => user.userID === gmember.id)
+        const memberData = verifiedUsers.find(
+            user => user.userID === gmember.id,
+        )
 
         if (!memberData) {
             const rolesToremove = removeRoles("default").rolesToRemove
-            await gmember.member.roles.remove(rolesToremove, "Updating all discord members",)
+            await gmember.member.roles.remove(
+                rolesToremove,
+                "Updating all discord members",
+            )
             continue
         }
 
         if (!guildMemberIDs.includes(memberData?.uuid || "none")) {
             const rolesToremove = removeRoles("default").rolesToRemove
-            await gmember.member.roles.remove(rolesToremove , "Updating all discord members",)
+            await gmember.member.roles.remove(
+                rolesToremove,
+                "Updating all discord members",
+            )
             continue
         } else if (guildMemberIDs.includes(memberData!.uuid)) {
             const guildMemberRank = hypixelGuildMembers.find(
@@ -89,8 +100,14 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( guildStaff, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
                 const rolesmanage = removeRoles("gm")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members",)
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members",)
+                gmember.member.roles.remove(
+                    rolesmanage.rolesToRemove,
+                    "Updating all discord members",
+                )
+                gmember.member.roles.add(
+                    rolesmanage.rolesToAdd,
+                    "Updating all discord members",
+                )
                 continue
             } else if (guildMemberRank === "Manager") {
                 // const rolesToRemove = removeThese.filter(role => role !== manager && role !== guildStaff && role !== guildRole)
@@ -99,8 +116,14 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( guildStaff, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
                 const rolesmanage = removeRoles("manager")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members",)
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members",)
+                gmember.member.roles.remove(
+                    rolesmanage.rolesToRemove,
+                    "Updating all discord members",
+                )
+                gmember.member.roles.add(
+                    rolesmanage.rolesToAdd,
+                    "Updating all discord members",
+                )
                 continue
             } else if (guildMemberRank === "Moderator") {
                 // const rolesToRemove = removeThese.filter(role => role !== moderator && role !== guildStaff && role !== guildRole)
@@ -109,8 +132,14 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( guildStaff, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
                 const rolesmanage = removeRoles("moderator")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members",)
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members",)
+                gmember.member.roles.remove(
+                    rolesmanage.rolesToRemove,
+                    "Updating all discord members",
+                )
+                gmember.member.roles.add(
+                    rolesmanage.rolesToAdd,
+                    "Updating all discord members",
+                )
                 continue
             } else if (guildMemberRank === "Beast") {
                 // const rolesToRemove = removeThese.filter(role => role !== beast && role !== guildRole)
@@ -118,8 +147,14 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( beast, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
                 const rolesmanage = removeRoles("beast")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members",)
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members",)
+                gmember.member.roles.remove(
+                    rolesmanage.rolesToRemove,
+                    "Updating all discord members",
+                )
+                gmember.member.roles.add(
+                    rolesmanage.rolesToAdd,
+                    "Updating all discord members",
+                )
                 continue
             } else if (guildMemberRank === "Elite") {
                 // const rolesToRemove = removeThese.filter(role => role !== elite && role !== guildRole)
@@ -127,8 +162,14 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( elite, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
                 const rolesmanage = removeRoles("elite")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members",)
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members",)
+                gmember.member.roles.remove(
+                    rolesmanage.rolesToRemove,
+                    "Updating all discord members",
+                )
+                gmember.member.roles.add(
+                    rolesmanage.rolesToAdd,
+                    "Updating all discord members",
+                )
                 continue
             } else if (guildMemberRank === "Member") {
                 // const rolesToRemove = removeThese.filter(role => role !== member && role !== guildRole)
@@ -136,8 +177,14 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( member, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
                 const rolesmanage = removeRoles("member")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members",)
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members",)
+                gmember.member.roles.remove(
+                    rolesmanage.rolesToRemove,
+                    "Updating all discord members",
+                )
+                gmember.member.roles.add(
+                    rolesmanage.rolesToAdd,
+                    "Updating all discord members",
+                )
                 continue
             }
             continue

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ClientEvents } from "discord.js"
 
 export default interface Event {
@@ -5,6 +6,5 @@ export default interface Event {
     description: string
     type: "event"
     event: keyof ClientEvents
-    // eslint-disable-next-line no-unused-vars
     execute(...args: any[]): void
 }

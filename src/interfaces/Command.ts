@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
 import { ExtendedClient as Client } from "../utils/Client"
 
@@ -12,6 +13,8 @@ export default interface Command {
         "addSubcommand" | "addSubcommandGroup" | "addIntegerOption"
     >
     subcommands?: boolean
-    // eslint-disable-next-line no-unused-vars
-    execute: ( interaction: ChatInputCommandInteraction, client: Client,) => Promise<void>
+    execute: (
+        interaction: ChatInputCommandInteraction,
+        client: Client,
+    ) => Promise<void>
 }

@@ -279,8 +279,14 @@ async function guildTop(
                 color: embedColor,
                 fields: newList,
                 footer: {
-                    text: interaction.guild!.name + " | " + devMessage + cacheStatusText,
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
+                    text:
+                        interaction.guild!.name +
+                        " | " +
+                        devMessage +
+                        cacheStatusText,
+                    icon_url: interaction.guild!.iconURL({
+                        forceStatic: false,
+                    })!,
                 },
             },
         ],

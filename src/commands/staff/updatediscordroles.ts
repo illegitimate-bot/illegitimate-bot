@@ -17,7 +17,8 @@ export async function updateDiscordRoles(
         await interaction.editReply({
             embeds: [
                 {
-                    description: "You do not have permission to use this command.",
+                    description:
+                        "You do not have permission to use this command.",
                     color: embedColor,
                 },
             ],

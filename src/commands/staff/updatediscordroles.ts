@@ -1,26 +1,5 @@
 import verify = require("../../schemas/verifySchema")
 import { color, hypixelGuildID } from "../../../config/options.json"
-import {
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-    defaultMember,
-} from "../../../config/roles.json"
-const removeThese = [
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-]
 import removeRoles from "../../utils/functions/rolesmanage"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
 import env from "../../utils/Env"

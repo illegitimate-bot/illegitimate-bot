@@ -9,5 +9,6 @@ export default interface ContextMenu {
     type: "contextmenu"
     dev?: boolean
     data: ContextMenuCommandBuilder
+    // eslint-disable-next-line no-unused-vars
     execute: (interaction: ContextMenuCommandInteraction) => Promise<void>
 }

@@ -12,7 +12,7 @@ export = {
     data: new SlashCommandBuilder()
         .setName("help")
         .setDescription("List's all commands usable by a member")
-        .setDMPermission(true),
+        .setDMPermission(false),
 
     async execute(interaction, client) {
         await interaction.deferReply({ ephemeral: true })
@@ -72,9 +72,7 @@ export = {
                     fields: commandList,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction?.guild?.iconURL({
-                            forceStatic: true,
-                        })!,
+                        url: interaction.guild!.iconURL({ forceStatic: true, })!,
                     },
                     footer: {
                         icon_url: footerIcon!,

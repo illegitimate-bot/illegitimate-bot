@@ -4,5 +4,6 @@ export default interface Autocomplete {
     name: string
     description: string
     type: "autocomplete"
-    execute: (interaction: AutocompleteInteraction) => Promise<void>
+    // eslint-disable-next-line no-unused-vars
+    execute: (interacion: AutocompleteInteraction) => Promise<void>
 }

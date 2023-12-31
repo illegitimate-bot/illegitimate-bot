@@ -8,8 +8,6 @@ const client = new Client()
 const redis = new Redis(env.prod.redisURI!)
 
 class Bot {
-    constructor() {}
-
     async start() {
         init()
         client.start()

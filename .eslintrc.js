@@ -1,10 +1,13 @@
 module.exports = {
     "env": {
         "node": true,
-        "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "browser": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "overrides": [
         {
             "env": {
@@ -18,9 +21,14 @@ module.exports = {
             }
         }
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
         "indent": [
             "error",
@@ -60,5 +68,7 @@ module.exports = {
             "asyncArrow": "always"
         }],
         "comma-spacing": "error",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }

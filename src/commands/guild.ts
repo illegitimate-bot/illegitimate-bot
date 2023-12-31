@@ -79,7 +79,8 @@ export = {
                             "The amount of guild members to show. [Default: 10]",
                         ),
                 ),
-        ),
+        )
+        .setDMPermission(false),
 
     async execute(interaction) {
         const subcommand = interaction.options.getSubcommand()
@@ -100,21 +101,14 @@ export = {
             return
         }
 
-        const footerText = interaction.guild
-            ? interaction.guild.name
-            : interaction.user.username
-        const footerIcon = interaction.guild
-            ? interaction.guild.iconURL({ forceStatic: false })
-            : interaction.user.avatarURL({ forceStatic: true })
-
         await interaction.reply({
             embeds: [
                 {
                     description: "This command is currently under development",
                     color: embedColor,
                     footer: {
-                        text: footerText + " | " + devMessage,
-                        icon_url: footerIcon!,
+                        text: interaction.guild!.name + " | " + devMessage,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
                     },
                 },
             ],

@@ -12,8 +12,6 @@ export default interface Command {
         "addSubcommand" | "addSubcommandGroup" | "addIntegerOption"
     >
     subcommands?: boolean
-    execute: (
-        interaction: ChatInputCommandInteraction,
-        client: Client,
-    ) => Promise<void>
+    // eslint-disable-next-line no-unused-vars
+    execute: ( interaction: ChatInputCommandInteraction, client: Client,) => Promise<void>
 }

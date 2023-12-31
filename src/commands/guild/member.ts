@@ -167,13 +167,6 @@ async function guildMember(
         ":" +
         guildMemberJoinSeconds
 
-    const footerText = interaction.guild
-        ? interaction.guild.name
-        : interaction.user.username
-    const footerIcon = interaction.guild
-        ? interaction.guild.iconURL({ forceStatic: false })
-        : interaction.user.avatarURL({ forceStatic: false })
-
     await interaction.editReply({
         embeds: [
             {
@@ -210,8 +203,8 @@ async function guildMember(
                     },
                 ],
                 footer: {
-                    text: footerText + " | " + devMessage,
-                    icon_url: footerIcon!,
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
                 },
             },
         ],

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js"
+import { GuildMember, SlashCommandBuilder } from "discord.js"
 import { getUUID, getPlayer, getGuild, getHeadURL } from "../utils/Hypixel"
 import { color, hypixelGuildID, devMessage } from "../../config/options.json"
 import mongoose from "mongoose"
@@ -39,8 +39,7 @@ export = {
     async execute(interaction) {
         await interaction.deferReply()
 
-        const user1 = interaction.user
-        const user = interaction.guild!.members.cache.get(user1.id)!
+        const user = interaction.member! as GuildMember
         const ign = interaction.options.getString("ign")!
         const embedColor = Number(color.replace("#", "0x"))
 
@@ -114,10 +113,10 @@ export = {
         }
 
         let username = ""
-        if (user1.discriminator === "0") {
-            username = user1.username
+        if (user.user.discriminator === "0") {
+            username = user.user.username
         } else {
-            username = user1.username + "#" + user1.discriminator
+            username = user.user.username + "#" + user.user.discriminator
         }
 
         await interaction.editReply({

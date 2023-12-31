@@ -1,4 +1,3 @@
-import { CronCommand } from "cron"
 import { TimeZones } from "."
 
 interface TimeFormat {

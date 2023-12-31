@@ -20,20 +20,13 @@ export = {
 
     data: new SlashCommandBuilder()
         .setName("reqs")
-        .setDescription("Displays the requirements for the guild."),
+        .setDescription("Displays the requirements for the guild.")
+        .setDMPermission(false),
 
     async execute(interaction) {
-        await interaction.deferReply({ ephemeral: true })
-
         const embedColor = Number(color.replace("#", "0x"))
-        const footerText = interaction.guild
-            ? interaction.guild.name
-            : interaction.user.username
-        const footerIcon = interaction.guild
-            ? interaction.guild.iconURL({ forceStatic: false })
-            : interaction.user.avatarURL({ forceStatic: false })
 
-        await interaction.editReply({
+        await interaction.reply({
             embeds: [
                 {
                     title: "Requirements",
@@ -42,9 +35,7 @@ export = {
                     color: embedColor,
                     thumbnail: {
                         url:
-                            interaction?.guild?.iconURL({
-                                forceStatic: false,
-                            }) || "",
+                            interaction?.guild?.iconURL({ forceStatic: false, }) || "",
                     },
                     fields: [
                         {
@@ -78,8 +69,8 @@ export = {
                         },
                     ],
                     footer: {
-                        text: footerText + " | " + devMessage,
-                        icon_url: footerIcon || undefined,
+                        text: interaction.guild!.name + " | " + devMessage,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
                     },
                 },
             ],

@@ -42,7 +42,7 @@ export = {
     async execute(interaction) {
         await interaction.deferReply()
 
-        const user = interaction.member as GuildMember
+        const user = interaction.options.getMember("user") as GuildMember
         const ign = interaction.options.getString("ign")
         const mod = interaction.user
         const embedColor = Number(color.replace("#", "0x"))

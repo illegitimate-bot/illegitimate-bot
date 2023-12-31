@@ -11,19 +11,13 @@ export = {
 
     data: new SlashCommandBuilder()
         .setName("ping")
-        .setDescription("Get's the bot's ping."),
+        .setDescription("Get's the bot's ping.")
+        .setDMPermission(false),
 
     async execute(interaction, client) {
         await interaction.deferReply()
 
         const embedColor = Number(color.replace("#", "0x"))
-
-        const footerText = interaction.guild
-            ? interaction.guild.name
-            : interaction.user.username
-        const footerIcon = interaction.guild
-            ? interaction.guild.iconURL({ forceStatic: false })
-            : interaction.user.avatarURL({ forceStatic: false })
 
         await interaction.editReply({
             embeds: [
@@ -31,8 +25,8 @@ export = {
                     description: "Ping of the bot is " + client.ws.ping + "ms.",
                     color: embedColor,
                     footer: {
-                        text: footerText + " | " + devMessage,
-                        icon_url: footerIcon || undefined,
+                        text: interaction.guild!.name + " | " + devMessage,
+                        icon_url: interaction.guild?.iconURL({ forceStatic: false }) || undefined,
                     },
                     timestamp: new Date().toISOString(),
                 },

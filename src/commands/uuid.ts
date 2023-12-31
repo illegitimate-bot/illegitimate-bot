@@ -18,7 +18,8 @@ export = {
                 .setName("ign")
                 .setDescription("Player's name")
                 .setRequired(true),
-        ),
+        )
+        .setDMPermission(false),
 
     async execute(interaction) {
         await interaction.deferReply()
@@ -29,12 +30,6 @@ export = {
         const newIgn = (await getIGN(uuid)) as string
         const head = await getHeadURL(ign)
         const embedColor = Number(color.replace("#", "0x"))
-        const footerText = interaction.guild
-            ? interaction.guild.name
-            : interaction.user.username
-        const footerIcon = interaction.guild
-            ? interaction.guild.iconURL({ forceStatic: false })
-            : interaction.user.avatarURL({ forceStatic: false })
 
         if (!uuid) {
             interaction.editReply({
@@ -64,8 +59,8 @@ export = {
                         url: head!,
                     },
                     footer: {
-                        text: footerText + " | " + devMessage,
-                        icon_url: footerIcon || undefined,
+                        text: interaction.guild!.name + " | " + devMessage,
+                        icon_url: interaction.guild?.iconURL({ forceStatic: false }) || undefined,
                     },
                 },
             ],

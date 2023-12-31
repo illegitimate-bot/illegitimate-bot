@@ -263,12 +263,6 @@ async function guildTop(
         }
     })
 
-    const footerText = interaction.guild
-        ? interaction.guild.name
-        : interaction.user.username
-    const footerIcon = interaction.guild
-        ? interaction.guild.iconURL({ forceStatic: false })
-        : interaction.user.avatarURL({ forceStatic: false })
     const cacheStatusText = cacheStatus ? " | [Cache]" : ""
 
     await interaction.editReply({
@@ -285,8 +279,8 @@ async function guildTop(
                 color: embedColor,
                 fields: newList,
                 footer: {
-                    text: footerText + " | " + devMessage + cacheStatusText,
-                    icon_url: footerIcon!,
+                    text: interaction.guild!.name + " | " + devMessage + cacheStatusText,
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
                 },
             },
         ],

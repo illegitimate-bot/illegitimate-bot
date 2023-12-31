@@ -12,7 +12,8 @@ export = {
     data: new SlashCommandBuilder()
         .setName("instructions")
         .setDescription("Instructions for verification")
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setDMPermission(false),
 
     async execute(interaction) {
         const embedColor = Number(color.replace("#", "0x"))

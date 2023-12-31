@@ -57,12 +57,6 @@ export = {
         }
 
         const embedColor = Number(color.replace("#", "0x"))
-        const footerText = interaction.guild
-            ? interaction.guild.name
-            : interaction.user.username
-        const footerIcon = interaction.guild
-            ? interaction.guild.iconURL({ forceStatic: false })
-            : interaction.user.avatarURL({ forceStatic: false })
 
         await interaction.editReply({
             embeds: [
@@ -75,8 +69,8 @@ export = {
                         url: interaction.guild!.iconURL({ forceStatic: true, })!,
                     },
                     footer: {
-                        icon_url: footerIcon!,
-                        text: footerText + " | " + devMessage,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false})!,
+                        text: interaction.guild!.name + " | " + devMessage,
                     },
                 },
             ],

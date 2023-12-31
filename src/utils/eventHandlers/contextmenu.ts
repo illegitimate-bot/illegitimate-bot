@@ -1,9 +1,11 @@
 import { ExtendedClient as Client } from "../Client"
 import { ContextMenu } from "../../interfaces"
-import { Events } from "discord.js"
+import { errorLogChannel, color } from "../../../config/options.json"
+import { Events, GuildTextBasedChannel } from "discord.js"
 import path = require("path")
 import fs = require("fs")
 import { FileType } from "../../typings"
+const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadContextMenuEvents(client: Client, ft: FileType) {
     const contextMenuPath = path.join(
@@ -45,6 +47,22 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
         try {
             await command.execute(interaction)
         } catch (error) {
+            const channel = client.channels.cache.get(errorLogChannel) as GuildTextBasedChannel
+            if (!channel) {
+                console.log("No error log channel found.")
+            }
+
+            await channel.send({
+                embeds: [{
+                    title: "Contextmenu error occured",
+                    description: String(error),
+                    color: embedColor,
+                    footer: {
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
+                        text: interaction.user.username + " | " + interaction.commandName
+                    }
+                }],
+            })
             console.error(error)
             await interaction.reply({
                 content: "There was an error while executing this command!",

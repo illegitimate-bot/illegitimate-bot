@@ -9,7 +9,7 @@ export = {
     description: "Get your user info",
     type: "slash",
     public: true,
-    dev: true,
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("whoami")

@@ -1,9 +1,11 @@
 import { ExtendedClient as Client } from "../Client"
+import { errorLogChannel, color } from "../../../config/options.json"
 import { Autocomplete } from "../../interfaces"
-import { Events } from "discord.js"
+import { Events, GuildTextBasedChannel } from "discord.js"
 import path = require("path")
 import fs = require("fs")
 import { FileType } from "../../typings"
+const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadAutocompleteEvents(client: Client, ft: FileType) {
     const autocompletePath = path.join(
@@ -49,6 +51,22 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         try {
             await autocomplete.execute(interaction)
         } catch (error) {
+            const channel = client.channels.cache.get(errorLogChannel) as GuildTextBasedChannel
+            if (!channel) {
+                console.log("No error log channel found.")
+            }
+
+            await channel.send({
+                embeds: [{
+                    title: "Autocomplete error occured",
+                    description: String(error),
+                    color: embedColor,
+                    footer: {
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
+                        text: interaction.user.username + " | " + interaction.commandName
+                    }
+                }],
+            })
             console.error(error)
         }
     })

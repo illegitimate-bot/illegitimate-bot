@@ -53,7 +53,8 @@ export = {
             embeds: [
                 {
                     description:
-                        "Your application for the Illegitimate guild has been accepted.",
+                        "Your application for the Illegitimate guild has been accepted.\n\n" +
+                        "Make sure to leave your current guild so that we can invite you.",
                     color: embedColor,
                 },
             ],

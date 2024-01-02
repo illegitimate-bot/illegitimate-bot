@@ -8,10 +8,7 @@ export default interface Command {
     type: "slash"
     dev?: boolean
     public: boolean
-    data: Omit<
-        SlashCommandBuilder,
-        "addSubcommand" | "addSubcommandGroup" | "addIntegerOption"
-    >
+    data: SlashCommandBuilder
     subcommands?: boolean
     execute: (
         interaction: ChatInputCommandInteraction,

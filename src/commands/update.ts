@@ -2,28 +2,8 @@ import { GuildMember, SlashCommandBuilder } from "discord.js"
 import { getGuild, getIGN, getHeadURL } from "../utils/Hypixel"
 import verify = require("../schemas/verifySchema")
 import { color, hypixelGuildID, devMessage } from "../../config/options.json"
-import {
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-    defaultMember,
-} from "../../config/roles.json"
+import roleManage from "../utils/functions/rolesmanage"
 import { Command } from "../interfaces"
-const removeThese = [
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-]
 
 export = {
     name: "update",
@@ -42,7 +22,6 @@ export = {
 
         const user = interaction.member as GuildMember
         const verifyData = await verify.findOne({ userID: user.user.id })
-        const roleManage = user.roles
         const embedColor = Number(color.replace("#", "0x"))
 
         if (!verifyData) {
@@ -84,14 +63,9 @@ export = {
         const ign = (await getIGN(verifyData.uuid)) as string
         const head = await getHeadURL(ign)
         if (guildID !== hypixelGuildID) {
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(
-                    removeThese[i],
-                    "Auto role removal. (Update)",
-                )
-            }
-
-            await roleManage.add(defaultMember, "User used the update command")
+            const roles = roleManage("default")
+            await user.roles.remove(roles.rolesToRemove, "User used the update command")
+            await user.roles.add(roles.rolesToAdd, "User used the update command")
 
             await interaction.editReply({
                 embeds: [
@@ -119,21 +93,12 @@ export = {
                 member => member.uuid === verifyData.uuid,
             )!.rank
 
-            if (guildRank === "Guild Master") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Update)",
-                    )
-                }
+            await user.roles.add(roleManage("default").rolesToAdd, "User used the update command")
 
-                await roleManage.add(guildRole, "User used the update command")
-                await roleManage.add(guildStaff, "User used the update command")
-                await roleManage.add(gm, "User used the update command")
-                await roleManage.add(
-                    defaultMember,
-                    "User used the update command",
-                )
+            if (guildRank === "Guild Master") {
+                const roles = roleManage("gm")
+                await user.roles.remove(roles.rolesToRemove, "User used the update command")
+                await user.roles.add(roles.rolesToAdd, "User used the update command")
 
                 await interaction.editReply({
                     embeds: [
@@ -156,23 +121,13 @@ export = {
                         },
                     ],
                 })
+                return
             }
 
             if (guildRank === "Manager") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User used the update command")
-                await roleManage.add(guildStaff, "User used the update command")
-                await roleManage.add(manager, "User used the update command")
-                await roleManage.add(
-                    defaultMember,
-                    "User used the update command",
-                )
+                const roles = roleManage("manager")
+                await user.roles.remove(roles.rolesToRemove, "User used the update command")
+                await user.roles.add(roles.rolesToAdd, "User used the update command")
 
                 await interaction.editReply({
                     embeds: [
@@ -195,23 +150,13 @@ export = {
                         },
                     ],
                 })
+                return
             }
 
             if (guildRank === "Moderator") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User used the update command")
-                await roleManage.add(guildStaff, "User used the update command")
-                await roleManage.add(moderator, "User used the update command")
-                await roleManage.add(
-                    defaultMember,
-                    "User used the update command",
-                )
+                const roles = roleManage("moderator")
+                await user.roles.remove(roles.rolesToRemove, "User used the update command")
+                await user.roles.add(roles.rolesToAdd, "User used the update command")
 
                 await interaction.editReply({
                     embeds: [
@@ -234,22 +179,13 @@ export = {
                         },
                     ],
                 })
+                return
             }
 
             if (guildRank === "Beast") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User used the update command")
-                await roleManage.add(beast, "User used the update command")
-                await roleManage.add(
-                    defaultMember,
-                    "User used the update command",
-                )
+                const roles = roleManage("beast")
+                await user.roles.remove(roles.rolesToRemove, "User used the update command")
+                await user.roles.add(roles.rolesToAdd, "User used the update command")
 
                 await interaction.editReply({
                     embeds: [
@@ -276,19 +212,9 @@ export = {
             }
 
             if (guildRank === "Elite") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User used the update command")
-                await roleManage.add(elite, "User used the update command")
-                await roleManage.add(
-                    defaultMember,
-                    "User used the update command",
-                )
+                const roles = roleManage("elite")
+                await user.roles.remove(roles.rolesToRemove, "User used the update command")
+                await user.roles.add(roles.rolesToAdd, "User used the update command")
 
                 await interaction.editReply({
                     embeds: [
@@ -315,19 +241,9 @@ export = {
             }
 
             if (guildRank === "Member") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User used the update command")
-                await roleManage.add(member, "User used the update command")
-                await roleManage.add(
-                    defaultMember,
-                    "User used the update command",
-                )
+                const roles = roleManage("member")
+                await user.roles.remove(roles.rolesToRemove, "User used the update command")
+                await user.roles.add(roles.rolesToAdd, "User used the update command")
 
                 await interaction.editReply({
                     embeds: [

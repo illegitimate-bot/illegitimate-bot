@@ -7,17 +7,7 @@ import { getUUID, getPlayer, getGuild, getHeadURL } from "../utils/Hypixel"
 import { color, hypixelGuildID, devMessage } from "../../config/options.json"
 import verify = require("../schemas/verifySchema")
 import mongoose from "mongoose"
-import {
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-    defaultMember,
-} from "../../config/roles.json"
+import roleManage from "../utils/functions/rolesmanage"
 import { Command } from "../interfaces"
 
 export = {
@@ -150,88 +140,37 @@ export = {
             )!.rank
 
             if (guildRank === "Guild Master") {
-                await user.roles.add(
-                    gm,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildRole,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildStaff,
-                    "User was force verified by " + modName,
-                )
+                const roles = roleManage("gm")
+                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
             }
 
             if (guildRank === "Manager") {
-                await user.roles.add(
-                    manager,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildRole,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildStaff,
-                    "User was force verified by " + modName,
-                )
+                const roles = roleManage("manager")
+                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
             }
 
             if (guildRank === "Moderator") {
-                await user.roles.add(
-                    moderator,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildRole,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildStaff,
-                    "User was force verified by " + modName,
-                )
+                const roles = roleManage("moderator")
+                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
             }
 
             if (guildRank === "Beast") {
-                await user.roles.add(
-                    beast,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildRole,
-                    "User was force verified by " + modName,
-                )
+                const roles = roleManage("beast")
+                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
             }
 
             if (guildRank === "Elite") {
-                await user.roles.add(
-                    elite,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildRole,
-                    "User was force verified by " + modName,
-                )
+                const roles = roleManage("elite")
+                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
             }
 
             if (guildRank === "Member") {
-                await user.roles.add(
-                    member,
-                    "User was force verified by " + modName,
-                )
-                await user.roles.add(
-                    guildRole,
-                    "User was force verified by " + modName,
-                )
+                const roles = roleManage("member")
+                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
             }
         }
 
-        await user.roles.add(
-            defaultMember,
-            "User was force verified by " + modName,
-        )
+        await user.roles.add(roleManage("default").rolesToAdd, "User was force verified by " + modName)
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),

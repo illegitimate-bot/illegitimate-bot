@@ -7,6 +7,7 @@ import {
     member,
     guildStaff,
     guildRole,
+    defaultMember
 } from "../../../config/roles.json"
 const roles = [
     gm,
@@ -27,8 +28,9 @@ type RoleType =
     | "elite"
     | "member"
     | "default"
+    | "all"
 
-export default function removeRoles(role: RoleType): {
+export default function roleManage(role: RoleType): {
     rolesToRemove: string[]
     rolesToAdd: string[]
 } {
@@ -84,8 +86,15 @@ export default function removeRoles(role: RoleType): {
 
     if (role === "default") {
         const rolesToRemove = roles
-        const rolesToAdd: string[] = []
+        const rolesToAdd: string[] = [defaultMember]
         return { rolesToRemove, rolesToAdd }
+    }
+
+    if (role === "all") {
+        const rolesToRemove = roles
+        rolesToRemove.push(defaultMember)
+
+        return { rolesToRemove, rolesToAdd: [] }
     }
 
     return { rolesToRemove: [], rolesToAdd: [] }

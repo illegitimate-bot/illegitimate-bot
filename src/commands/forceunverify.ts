@@ -6,27 +6,8 @@ import {
 } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import verify = require("../schemas/verifySchema")
-import {
-    gm,
-    manager,
-    moderator,
-    beast,
-    member,
-    guildRole,
-    guildStaff,
-    defaultMember,
-} from "../../config/roles.json"
 import { Command } from "../interfaces"
-const removeThese = [
-    gm,
-    manager,
-    moderator,
-    beast,
-    member,
-    guildRole,
-    guildStaff,
-    defaultMember,
-]
+import roleManage from "../utils/functions/rolesmanage"
 
 export = {
     name: "forceunverify",
@@ -62,10 +43,9 @@ export = {
                 ],
             })
         }
-
         await verify.findOneAndDelete({ userID: member.user.id })
 
-        await member.roles.remove(removeThese)
+        await member.roles.remove(roleManage("all").rolesToRemove, "User force unverified by " + interaction.user.username)
 
         await interaction.reply({
             embeds: [

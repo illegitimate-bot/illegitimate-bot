@@ -6,29 +6,9 @@ import {
 } from "discord.js"
 import { getGuild, getHeadURL, getIGN } from "../utils/Hypixel"
 import { hypixelGuildID, color, devMessage } from "../../config/options.json"
-import {
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-    defaultMember,
-} from "../../config/roles.json"
 import verify = require("../schemas/verifySchema")
 import { Command } from "../interfaces"
-const removeThese = [
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-]
+import roleManage from "../utils/functions/rolesmanage"
 
 export = {
     name: "forceupdate",
@@ -56,8 +36,6 @@ export = {
         const usermentioned = userMention(user.user.id)
         const verifyData = await verify.findOne({ userID: user.user.id })
         const embedColor = Number(color.replace("#", "0x"))
-
-        const roleManage = user.roles
 
         if (!verifyData) {
             await interaction.editReply({
@@ -108,12 +86,9 @@ export = {
         }
 
         if (responseGuildID !== hypixelGuildID) {
-            for (let i = 0; i < removeThese.length; i++) {
-                await roleManage.remove(
-                    removeThese[i],
-                    "Auto role removal. (Force Update)",
-                )
-            }
+            const roles = roleManage("default")
+            await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+            await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
             await interaction.editReply({
                 embeds: [
@@ -134,7 +109,6 @@ export = {
                     },
                 ],
             })
-            await roleManage.add(defaultMember)
             return
         }
 
@@ -144,18 +118,12 @@ export = {
                 member => member.uuid === verifyData.uuid,
             )!.rank
 
-            if (guildRank === "Guild Master") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Force Update)",
-                    )
-                }
+            await user.roles.add(roleManage("default").rolesToAdd, "User was force updated.")
 
-                await roleManage.add(guildRole, "User was force updated.")
-                await roleManage.add(guildStaff, "User was force updated.")
-                await roleManage.add(gm, "User was force updated.")
-                await roleManage.add(defaultMember, "User was force updated.")
+            if (guildRank === "Guild Master") {
+                const roles = roleManage("gm")
+                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+                await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
                 await interaction.editReply({
                     embeds: [
@@ -179,20 +147,13 @@ export = {
                         },
                     ],
                 })
+                return
             }
 
             if (guildRank === "Manager") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Force Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User was force updated.")
-                await roleManage.add(guildStaff, "User was force updated.")
-                await roleManage.add(manager, "User was force updated.")
-                await roleManage.add(defaultMember, "User was force updated.")
+                const roles = roleManage("manager")
+                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+                await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
                 await interaction.editReply({
                     embeds: [
@@ -216,20 +177,13 @@ export = {
                         },
                     ],
                 })
+                return
             }
 
             if (guildRank === "Moderator") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Force Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User was force updated.")
-                await roleManage.add(guildStaff, "User was force updated.")
-                await roleManage.add(moderator, "User was force updated.")
-                await roleManage.add(defaultMember, "User was force updated.")
+                const roles = roleManage("moderator")
+                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+                await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
                 await interaction.editReply({
                     embeds: [
@@ -253,19 +207,13 @@ export = {
                         },
                     ],
                 })
+                return
             }
 
             if (guildRank === "Beast") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Force Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User was force updated.")
-                await roleManage.add(beast, "User was force updated.")
-                await roleManage.add(defaultMember, "User was force updated.")
+                const roles = roleManage("beast")
+                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+                await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
                 await interaction.editReply({
                     embeds: [
@@ -293,16 +241,9 @@ export = {
             }
 
             if (guildRank === "Elite") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Force Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User was force updated.")
-                await roleManage.add(elite, "User was force updated.")
-                await roleManage.add(defaultMember, "User was force updated.")
+                const roles = roleManage("elite")
+                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+                await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
                 await interaction.editReply({
                     embeds: [
@@ -330,16 +271,9 @@ export = {
             }
 
             if (guildRank === "Member") {
-                for (let i = 0; i < removeThese.length; i++) {
-                    await roleManage.remove(
-                        removeThese[i],
-                        "Auto role removal. (Force Update)",
-                    )
-                }
-
-                await roleManage.add(guildRole, "User was force updated.")
-                await roleManage.add(member, "User was force updated.")
-                await roleManage.add(defaultMember, "User was force updated.")
+                const roles = roleManage("member")
+                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+                await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
                 await interaction.editReply({
                     embeds: [

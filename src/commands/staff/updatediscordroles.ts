@@ -1,6 +1,6 @@
 import verify = require("../../schemas/verifySchema")
 import { color, hypixelGuildID } from "../../../config/options.json"
-import removeRoles from "../../utils/functions/rolesmanage"
+import roleManage from "../../utils/functions/rolesmanage"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
 import env from "../../utils/Env"
 import { getGuild } from "../../utils/Hypixel"
@@ -73,7 +73,7 @@ export async function updateDiscordRoles(
         )
 
         if (!memberData) {
-            const rolesToremove = removeRoles("default").rolesToRemove
+            const rolesToremove = roleManage("default").rolesToRemove
             await gmember.member.roles.remove(
                 rolesToremove,
                 "Updating all discord members",
@@ -82,7 +82,7 @@ export async function updateDiscordRoles(
         }
 
         if (!guildMemberIDs.includes(memberData?.uuid || "none")) {
-            const rolesToremove = removeRoles("default").rolesToRemove
+            const rolesToremove = roleManage("default").rolesToRemove
             await gmember.member.roles.remove(
                 rolesToremove,
                 "Updating all discord members",
@@ -100,7 +100,7 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( gm, "Updating all discord members",)
                 // await gmember.member.roles.add( guildStaff, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
-                const rolesmanage = removeRoles("gm")
+                const rolesmanage = roleManage("gm")
                 gmember.member.roles.remove(
                     rolesmanage.rolesToRemove,
                     "Updating all discord members",
@@ -116,7 +116,7 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( manager, "Updating all discord members",)
                 // await gmember.member.roles.add( guildStaff, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
-                const rolesmanage = removeRoles("manager")
+                const rolesmanage = roleManage("manager")
                 gmember.member.roles.remove(
                     rolesmanage.rolesToRemove,
                     "Updating all discord members",
@@ -132,7 +132,7 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.add( moderator, "Updating all discord members",)
                 // await gmember.member.roles.add( guildStaff, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
-                const rolesmanage = removeRoles("moderator")
+                const rolesmanage = roleManage("moderator")
                 gmember.member.roles.remove(
                     rolesmanage.rolesToRemove,
                     "Updating all discord members",
@@ -147,7 +147,7 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.remove( rolesToRemove, "Updating all discord members",)
                 // await gmember.member.roles.add( beast, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
-                const rolesmanage = removeRoles("beast")
+                const rolesmanage = roleManage("beast")
                 gmember.member.roles.remove(
                     rolesmanage.rolesToRemove,
                     "Updating all discord members",
@@ -162,7 +162,7 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.remove( rolesToRemove, "Updating all discord members",)
                 // await gmember.member.roles.add( elite, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
-                const rolesmanage = removeRoles("elite")
+                const rolesmanage = roleManage("elite")
                 gmember.member.roles.remove(
                     rolesmanage.rolesToRemove,
                     "Updating all discord members",
@@ -177,7 +177,7 @@ export async function updateDiscordRoles(
                 // await gmember.member.roles.remove( rolesToRemove, "Updating all discord members",)
                 // await gmember.member.roles.add( member, "Updating all discord members",)
                 // await gmember.member.roles.add( guildRole, "Updating all discord members",)
-                const rolesmanage = removeRoles("member")
+                const rolesmanage = roleManage("member")
                 gmember.member.roles.remove(
                     rolesmanage.rolesToRemove,
                     "Updating all discord members",

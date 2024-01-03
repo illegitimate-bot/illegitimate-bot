@@ -8,7 +8,7 @@ import { FileType } from "../../typings"
 const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadModalEvents(client: Client, ft: FileType) {
-    const modalPath = path.join(__dirname, "..", "..", "events", "modals")
+    const modalPath = path.join(__dirname, "..", "..", "components", "modals")
     const modalFiles = fs
         .readdirSync(modalPath)
         .filter(file => file.endsWith(ft))

@@ -8,7 +8,7 @@ import { FileType } from "../../typings"
 const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadButtonEvents(client: Client, ft: FileType) {
-    const btnPath = path.join(__dirname, "..", "..", "events", "buttons")
+    const btnPath = path.join(__dirname, "..", "..", "components", "buttons")
     const btnFiles = fs.readdirSync(btnPath).filter(file => file.endsWith(ft))
 
     for (const file of btnFiles) {

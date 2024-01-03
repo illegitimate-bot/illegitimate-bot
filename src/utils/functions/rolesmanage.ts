@@ -28,6 +28,7 @@ type RoleType =
     | "elite"
     | "member"
     | "default"
+    | "all"
 
 export default function roleManage(role: RoleType): {
     rolesToRemove: string[]
@@ -87,6 +88,13 @@ export default function roleManage(role: RoleType): {
         const rolesToRemove = roles
         const rolesToAdd: string[] = [defaultMember]
         return { rolesToRemove, rolesToAdd }
+    }
+
+    if (role === "all") {
+        const rolesToRemove = roles
+        rolesToRemove.push(defaultMember)
+
+        return { rolesToRemove, rolesToAdd: [] }
     }
 
     return { rolesToRemove: [], rolesToAdd: [] }

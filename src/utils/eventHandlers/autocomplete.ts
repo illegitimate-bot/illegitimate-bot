@@ -12,7 +12,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         __dirname,
         "..",
         "..",
-        "events",
+        "components",
         "autocomplete",
     )
     const autocompleteFiles = fs

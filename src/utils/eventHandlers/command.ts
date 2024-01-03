@@ -40,24 +40,35 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
         try {
             await command.execute(interaction, client)
         } catch (error) {
-            const channel = client.channels.cache.get(errorLogChannel) as GuildTextBasedChannel
-            if (!channel) {
-                console.log("No error log channel found.")
+            if (process.env.NODE_ENV !== "dev") {
+                const channel = client.channels.cache.get(
+                    errorLogChannel,
+                ) as GuildTextBasedChannel
+                if (!channel) {
+                    console.log("No error log channel found.")
+                }
+
+                await channel.send({
+                    embeds: [
+                        {
+                            title: "Command error occured",
+                            description: String(error),
+                            color: embedColor,
+                            footer: {
+                                icon_url: interaction.guild!.iconURL({
+                                    forceStatic: false,
+                                })!,
+                                text:
+                                    interaction.user.username +
+                                    " | " +
+                                    interaction.commandName,
+                            },
+                        },
+                    ],
+                })
             }
 
-            await channel.send({
-                embeds: [{
-                    title: "Command error occured",
-                    description: String(error),
-                    color: embedColor,
-                    footer: {
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
-                        text: interaction.user.username + " | " + interaction.commandName
-                    }
-                }],
-            })
-
-            console.error(error)
+            // console.error(error)
             await interaction.reply({
                 content: "There was an error while executing this command!",
                 ephemeral: true,

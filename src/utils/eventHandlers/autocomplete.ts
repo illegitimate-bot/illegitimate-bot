@@ -51,22 +51,33 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         try {
             await autocomplete.execute(interaction)
         } catch (error) {
-            const channel = client.channels.cache.get(errorLogChannel) as GuildTextBasedChannel
-            if (!channel) {
-                console.log("No error log channel found.")
-            }
+            if (process.env.NODE_ENV !== "dev") {
+                const channel = client.channels.cache.get(
+                    errorLogChannel,
+                ) as GuildTextBasedChannel
+                if (!channel) {
+                    console.log("No error log channel found.")
+                }
 
-            await channel.send({
-                embeds: [{
-                    title: "Autocomplete error occured",
-                    description: String(error),
-                    color: embedColor,
-                    footer: {
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
-                        text: interaction.user.username + " | " + interaction.commandName
-                    }
-                }],
-            })
+                await channel.send({
+                    embeds: [
+                        {
+                            title: "Autocomplete error occured",
+                            description: String(error),
+                            color: embedColor,
+                            footer: {
+                                icon_url: interaction.guild!.iconURL({
+                                    forceStatic: false,
+                                })!,
+                                text:
+                                    interaction.user.username +
+                                    " | " +
+                                    interaction.commandName,
+                            },
+                        },
+                    ],
+                })
+            }
             console.error(error)
         }
     })

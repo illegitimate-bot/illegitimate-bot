@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
-import guildMember = require("./guild/member")
-import guildInfo = require("./guild/info")
-import guildTop = require("./guild/top")
+import guildMember from "./guild/member"
+import guildInfo from "./guild/info"
+import guildTop from "./guild/top"
 
 export = {
     name: "guild",

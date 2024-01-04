@@ -5,7 +5,7 @@ import { GuildData } from "../../interfaces/Guild"
 import Illegitimate from "../../utils/Illegitimate"
 const redis = Illegitimate.redis
 
-async function guildTop(
+export default async function guildTop(
     interaction: ChatInputCommandInteraction,
 ): Promise<void> {
     await interaction.deferReply()
@@ -292,5 +292,3 @@ async function guildTop(
         ],
     })
 }
-
-export = guildTop

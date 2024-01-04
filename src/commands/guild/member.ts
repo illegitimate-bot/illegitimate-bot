@@ -2,7 +2,7 @@ import { getUUID, getPlayer, getGuild, getHeadURL } from "../../utils/Hypixel"
 import { color, devMessage } from "../../../config/options.json"
 import { ChatInputCommandInteraction } from "discord.js"
 
-async function guildMember(
+export default async function guildMember(
     interaction: ChatInputCommandInteraction,
 ): Promise<void> {
     await interaction.deferReply()
@@ -212,5 +212,3 @@ async function guildMember(
         ],
     })
 }
-
-export = guildMember

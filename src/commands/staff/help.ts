@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction } from "discord.js"
 import { color, devMessage } from "../../../config/options.json"
 import { ExtendedClient as Client } from "../../utils/Client"
 
-export async function help(
+export default async function help(
     interaction: ChatInputCommandInteraction,
     client: Client,
 ): Promise<void> {

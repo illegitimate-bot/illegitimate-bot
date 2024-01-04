@@ -19,7 +19,7 @@ import {
 } from "../../utils/Hypixel"
 import { ChatInputCommandInteraction } from "discord.js"
 
-export async function beast(
+export default async function beast(
     interaction: ChatInputCommandInteraction,
 ): Promise<void> {
     await interaction.deferReply()

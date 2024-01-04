@@ -1,10 +1,21 @@
-import { ActionRowBuilder, ButtonStyle, ButtonBuilder } from "discord.js"
-import { color } from "../../../config/options.json"
+import {
+    ActionRowBuilder,
+    ButtonStyle,
+    ButtonBuilder,
+    GuildTextBasedChannel,
+} from "discord.js"
+import {
+    color,
+    waitingListChannel,
+    waitingListMessage,
+    hypixelGuildID,
+} from "../../../config/options.json"
 import mongoose from "mongoose"
 import guildapp from "../../schemas/guildAppSchema"
 import waitingList from "../../schemas/waitinglistSchema"
 import { waitingListRole } from "../../../config/roles.json"
 import { Button } from "../../interfaces"
+import { getGuild } from "../../utils/Hypixel"
 
 export = {
     name: "guildapplicationaccept",
@@ -76,6 +87,53 @@ export = {
 
         await applicant.roles.add(waitingListRole)
         await guildapp.findOneAndDelete({ userID: applicantId })
+
+        // update waiting list
+        const channel = guild.channels.cache.get(
+            waitingListChannel,
+        ) as GuildTextBasedChannel
+        const wlmessage = await channel!.messages.fetch(waitingListMessage)
+
+        const wlembed = wlmessage.embeds[0]
+        const accepted = await waitingList.find()
+
+        for (let i = 0; i < accepted.length; i++) {
+            const uuid = accepted[i].uuid
+            const guild = await getGuild(uuid)
+
+            if (guild && guild._id === hypixelGuildID) {
+                await waitingList.findOneAndDelete({ uuid: uuid })
+                continue
+            }
+        }
+
+        const fields: { name: string; value: string }[] = []
+
+        for (let i = 0; i < accepted.length; i++) {
+            const timestamp = Math.floor(accepted[i].timestamp / 1000)
+
+            fields.push({
+                name: `${i + 1}. ${accepted[i].IGN}`,
+                value: `TS: <t:${timestamp}:R>`,
+            })
+        }
+
+        await wlmessage.edit({
+            embeds: [
+                {
+                    title: wlembed.title!,
+                    description: wlembed.description!,
+                    color: wlembed.color!,
+                    footer: {
+                        text: "Last updated by " + user.username,
+                        icon_url: user.avatarURL()!,
+                    },
+                    thumbnail: wlembed.thumbnail!,
+                    fields: fields,
+                    timestamp: new Date().toISOString(),
+                },
+            ],
+        })
 
         await interaction.editReply({
             embeds: [

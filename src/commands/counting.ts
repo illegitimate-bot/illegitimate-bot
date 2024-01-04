@@ -9,7 +9,7 @@ export = {
     name: "counting",
     description: "counting subcommands",
     type: "slash",
-    dev: true,
+    dev: false,
     public: true,
     subcommands: true,
 

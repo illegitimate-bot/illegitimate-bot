@@ -6,7 +6,7 @@ import env from "../../utils/Env"
 import { getGuild } from "../../utils/Hypixel"
 import { GuildData } from "../../interfaces"
 
-export async function updateDiscordRoles(
+export default async function updateDiscordRoles(
     interaction: ChatInputCommandInteraction,
 ): Promise<void> {
     const discordMember = interaction.member as GuildMember

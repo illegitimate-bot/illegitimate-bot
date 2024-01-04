@@ -9,7 +9,7 @@ import { color, devMessage } from "../../../config/options.json"
 import { ChatInputCommandInteraction } from "discord.js"
 import { GuildData } from "../../interfaces/Guild"
 
-async function guildInfo(
+export default async function guildInfo(
     interaction: ChatInputCommandInteraction,
 ): Promise<void> {
     await interaction.deferReply()
@@ -242,5 +242,3 @@ async function guildInfo(
         ],
     })
 }
-
-export = guildInfo

@@ -1,9 +1,9 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
-import { help } from "./staff/help"
-import { beast } from "./staff/beast"
-import { updateDiscordRoles } from "./staff/updatediscordroles"
+import help from "./staff/help"
+import beast from "./staff/beast"
+import updateDiscordRoles from "./staff/updatediscordroles"
 
 export = {
     name: "staff",

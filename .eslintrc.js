@@ -46,14 +46,7 @@ module.exports = {
             "error",
             "never"
         ],
-        "no-unused-vars": [
-            "warn",
-            {
-                "vars": "all",
-                "args": "after-used",
-                "ignoreRestSiblings": false
-            }
-        ],
+        "no-unused-vars": "off",
         "prefer-const": "warn",
         "no-var": "error",
         "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
@@ -69,6 +62,14 @@ module.exports = {
         }],
         "comma-spacing": "error",
         "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false
+            }
+        ],
     }
 }

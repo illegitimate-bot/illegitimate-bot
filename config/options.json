@@ -10,5 +10,7 @@
     "botLogChannel": "1174403585149243472",
     "guildLogChannel": "1183733282534326322",
     "errorLogChannel": "1191051275442339951",
+    "waitingListChannel": "1145773618291298384",
+    "waitingListMessage": "1146027645415473193",
     "instructionsgif": "https://cdn.discordapp.com/attachments/838716950723952640/1188211176300089384/4DMu513uNxbM.gif?ex=6599b2e4&is=65873de4&hm=e727c7a39aacbc47d6a5453f4b5f792a45679983c30d662cd258a311381b6df0&"
 }

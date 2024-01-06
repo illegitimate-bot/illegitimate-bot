@@ -177,13 +177,16 @@ export default async function guildTop(
         amount = 1
     }
 
-    type GuildTopData = { ign: string; gexp: string }[]
-    type NewList = { name: string; value: string; inline: boolean }[]
+    type GuildTopData = { ign: string, uuid: string }[]
+    type NewList = { name: string, value: string; inline: boolean }[]
 
     let cacheStatus: boolean
     let guildData: GuildTopData = []
     const fieldsValueRaw: string[] = []
     const allMembersSorted = allMembersDailyGEXP.sort((a, b) => b.gexp - a.gexp)
+    const allMembersSortedUUIDArray = allMembersSorted.map(member => {
+        return member.uuid
+    })
 
     if (!cachedData) {
         cacheStatus = false
@@ -201,14 +204,13 @@ export default async function guildTop(
             ],
         })
 
-        for (let i = 0; i < allMembersSorted.length; i++) {
-            const ign = (await getIGN(allMembersSorted[i].uuid)) as string
-            const gexpUnformatted = allMembersSorted[i].gexp
-            const gexp = new Intl.NumberFormat("en-US").format(gexpUnformatted)
+        for (let i = 0; i < allMembersSortedUUIDArray.length; i++) {
+            const uuid = allMembersSortedUUIDArray[i]
+            const ign = await getIGN(uuid)
 
             guildData.push({
-                ign: ign,
-                gexp: gexp,
+                ign: ign!,
+                uuid: uuid,
             })
         }
 
@@ -236,12 +238,12 @@ export default async function guildTop(
         guildData = JSON.parse(cachedData)
     }
 
-    const topMembers = guildData.slice(0, amount)
-    const sliceSize = amount / 3
+    const topMembers = allMembersSorted.slice(0, amount)
+    const sliceSize = amount / 4
 
     for (let i = 0; i < amount; i++) {
-        const ign = topMembers[i].ign
-        const gexp = topMembers[i].gexp
+        const gexp = new Intl.NumberFormat("en-US").format(topMembers[i].gexp)
+        const ign = guildData.find(member => member.uuid === topMembers[i].uuid)?.ign
 
         const position = i + 1
 
@@ -259,7 +261,7 @@ export default async function guildTop(
         newList[index] = {
             name: "",
             value: item.join("\n"),
-            inline: true,
+            inline: false,
         }
     })
 

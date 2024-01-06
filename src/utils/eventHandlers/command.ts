@@ -4,7 +4,7 @@ import { Command } from "../../interfaces"
 import { Events, GuildTextBasedChannel } from "discord.js"
 import path = require("path")
 import fs = require("fs")
-import { FileType } from "../../typings"
+type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadSlashCommandsEvents(client: Client, ft: FileType) {

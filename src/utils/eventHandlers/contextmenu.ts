@@ -4,7 +4,7 @@ import { errorLogChannel, color } from "../../../config/options.json"
 import { Events, GuildTextBasedChannel } from "discord.js"
 import path = require("path")
 import fs = require("fs")
-import { FileType } from "../../typings"
+type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadContextMenuEvents(client: Client, ft: FileType) {

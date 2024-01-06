@@ -1,9 +1,10 @@
 import { ExtendedClient as Client } from "../Client"
-import { errorLogChannel, color } from "../../../config/options.json"
+import { color } from "../../../config/options.json"
 import { Modal } from "../../interfaces"
-import { Events, TextChannel } from "discord.js"
+import { Events} from "discord.js"
 import path = require("path")
 import fs = require("fs")
+import logToChannel from "../functions/logtochannel"
 type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
 
@@ -42,14 +43,7 @@ export default function loadModalEvents(client: Client, ft: FileType) {
             await modal.execute(interaction)
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
-                const channel = client.channels.cache.get(
-                    errorLogChannel,
-                ) as TextChannel
-                if (!channel) {
-                    console.log("No error log channel found.")
-                }
-
-                await channel.send({
+                await logToChannel("error", {
                     embeds: [
                         {
                             title: "Button error occured",

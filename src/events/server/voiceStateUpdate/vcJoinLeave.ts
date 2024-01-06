@@ -2,10 +2,10 @@ import {
     userMention,
     channelMention,
     VoiceState,
-    ChannelType,
 } from "discord.js"
-import { botLogChannel, color } from "../../../../config/options.json"
+import { color } from "../../../../config/options.json"
 import { Event } from "../../../interfaces"
+import logToChannel from "../../../utils/functions/logtochannel"
 
 export = {
     name: "vcJoinLeave",
@@ -16,29 +16,12 @@ export = {
     execute(oldState: VoiceState, newState: VoiceState) {
         if (process.env.NODE_ENV === "dev") return
 
-        const guild = oldState.guild
-        const channel = guild.channels.cache.get(botLogChannel)
         const embedColor = Number(color.replace("#", "0x"))
-
-        if (!channel) {
-            console.log(
-                "[ERROR] Could not find channel used for voice channel join/leave logging.",
-            )
-            return
-        }
-
-        if (channel.type !== ChannelType.GuildText) {
-            console.log(
-                "[ERROR] The channel used for voice channel join/leave logging is not a text channel.",
-            )
-            return
-        }
-
         const oldChannel = oldState.channel
         const newChannel = newState.channel
 
         if (oldChannel === null && newChannel !== null) {
-            channel.send({
+            logToChannel("bot", {
                 embeds: [
                     {
                         title: "Voice Channel Join",
@@ -55,7 +38,7 @@ export = {
                 ],
             })
         } else if (oldChannel !== null && newChannel === null) {
-            channel.send({
+            logToChannel("bot", {
                 embeds: [
                     {
                         title: "Voice Channel Leave",
@@ -74,7 +57,7 @@ export = {
         } else if (oldChannel !== null && newChannel !== null) {
             if (oldChannel.id === newChannel.id) return
 
-            channel.send({
+            logToChannel("bot", {
                 embeds: [
                     {
                         title: "Voice Channel Switch",

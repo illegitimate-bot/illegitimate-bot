@@ -5,7 +5,7 @@ import {
     ActionRowBuilder,
     ButtonStyle,
     ChannelType,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
@@ -31,6 +31,7 @@ export = {
                         .setDescription(
                             "The channel to send the application to.",
                         )
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
                         .setRequired(true),
                 ),
         )
@@ -44,6 +45,7 @@ export = {
                         .setDescription(
                             "The channel to send the application to.",
                         )
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
                         .setRequired(true),
                 ),
         )
@@ -57,6 +59,7 @@ export = {
                         .setDescription(
                             "The channel to send the verfiy message to.",
                         )
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
                         .setRequired(true),
                 ),
         )
@@ -70,6 +73,7 @@ export = {
                         .setDescription(
                             "The channel to send the waiting list message to.",
                         )
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
                         .setRequired(true),
                 ),
         )
@@ -83,6 +87,7 @@ export = {
                         .setDescription(
                             "The channel to send the application to.",
                         )
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
                         .setRequired(true),
                 ),
         )
@@ -94,17 +99,7 @@ export = {
         const embedColor = Number(color.replace("#", "0x"))
 
         if (subcommand === "sendguildapplication") {
-            const channel2 = interaction.options.getChannel("channel")!
-
-            if (channel2.type !== ChannelType.GuildText) {
-                await interaction.reply({
-                    content: "That channel is not a text channel.",
-                    ephemeral: true,
-                })
-                return
-            }
-
-            const channel = channel2 as GuildTextBasedChannel
+            const channel = interaction.options.getChannel("channel") as TextChannel
 
             await channel.send({
                 embeds: [
@@ -145,17 +140,7 @@ export = {
         }
 
         if (subcommand === "sendstaffapplication") {
-            const channel2 = interaction.options.getChannel("channel")!
-
-            if (channel2.type !== ChannelType.GuildText) {
-                await interaction.reply({
-                    content: "That channel is not a text channel.",
-                    ephemeral: true,
-                })
-                return
-            }
-
-            const channel = channel2 as GuildTextBasedChannel
+            const channel = interaction.options.getChannel("channel") as TextChannel
 
             await channel.send({
                 embeds: [
@@ -195,17 +180,7 @@ export = {
         }
 
         if (subcommand === "sendinactivityapplication") {
-            const channel2 = interaction.options.getChannel("channel")!
-
-            if (channel2.type !== ChannelType.GuildText) {
-                await interaction.reply({
-                    content: "That channel is not a text channel.",
-                    ephemeral: true,
-                })
-                return
-            }
-
-            const channel = channel2 as GuildTextBasedChannel
+            const channel = interaction.options.getChannel("channel") as TextChannel
 
             await channel.send({
                 embeds: [
@@ -245,17 +220,7 @@ export = {
         }
 
         if (subcommand === "sendverfiymessage") {
-            const channel2 = interaction.options.getChannel("channel")!
-
-            if (channel2.type !== ChannelType.GuildText) {
-                await interaction.reply({
-                    content: "That channel is not a text channel.",
-                    ephemeral: true,
-                })
-                return
-            }
-
-            const channel = channel2 as GuildTextBasedChannel
+            const channel = interaction.options.getChannel("channel") as TextChannel
 
             await channel.send({
                 embeds: [
@@ -294,17 +259,7 @@ export = {
         }
 
         if (subcommand === "sendwaitinglistmessage") {
-            const channel2 = interaction.options.getChannel("channel")!
-
-            if (channel2.type !== ChannelType.GuildText) {
-                await interaction.reply({
-                    content: "That channel is not a text channel.",
-                    ephemeral: true,
-                })
-                return
-            }
-
-            const channel = channel2 as GuildTextBasedChannel
+            const channel = interaction.options.getChannel("channel") as TextChannel
 
             await channel.send({
                 embeds: [

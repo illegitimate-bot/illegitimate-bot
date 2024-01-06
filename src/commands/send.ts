@@ -2,7 +2,7 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     ChannelType,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
@@ -26,7 +26,8 @@ export = {
         .addChannelOption(option =>
             option
                 .setName("channel")
-                .setDescription("The channel to send the message to."),
+                .setDescription("The channel to send the message to.")
+                .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -35,31 +36,8 @@ export = {
         await interaction.deferReply({ ephemeral: true })
 
         const message = interaction.options.getString("message")!
-        const channel2 =
-            interaction.options.getChannel("channel") ?? interaction.channel
+        const channel = (interaction.options.getChannel("channel") || interaction.channel) as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
-
-        if (channel2?.type !== ChannelType.GuildText) {
-            await interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "You can only send a message to a text channel.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild!.name + " | " + devMessage,
-                            icon_url:
-                                interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                }) || undefined,
-                        },
-                    },
-                ],
-            })
-            return
-        }
-
-        const channel = channel2 as GuildTextBasedChannel
 
         channel.send({
             embeds: [

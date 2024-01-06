@@ -4,7 +4,7 @@ import {
     ActionRowBuilder,
     EmbedBuilder,
     GuildMember,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import { color, staffApplicationsChannel } from "../../../config/options.json"
 import { largeM, ignM } from "../../../config/limitmessages.json"
@@ -464,7 +464,7 @@ export = {
 
             const channel = guild.channels.cache.get(
                 staffApplicationsChannel,
-            ) as GuildTextBasedChannel
+            ) as TextChannel
 
             await channel.send({
                 embeds: [

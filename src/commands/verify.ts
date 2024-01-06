@@ -118,7 +118,7 @@ export = {
             ],
         })
 
-        const linkedDiscord = player.socialMedia.links.DISCORD || null
+        const linkedDiscord = player?.socialMedia?.links?.DISCORD || null
         if (!linkedDiscord) {
             interaction.editReply({
                 embeds: [

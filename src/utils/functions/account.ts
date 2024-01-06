@@ -1,6 +1,5 @@
 import fetch from "axios"
 import env from "../Env"
-import { Profile, Profile2 } from "../../typings"
 import { Player, PlayerData } from "../../interfaces"
 import { Guild, GuildData } from "../../interfaces"
 const apikey = env.prod.hypixelapikey
@@ -10,6 +9,22 @@ const hypixel = "https://api.hypixel.net/player"
 const guild = "https://api.hypixel.net/guild"
 const minotar = "https://minotar.net/helm/"
 type GuildQuerqType = "player" | "name" | "id"
+
+type Profile = {
+    data: {
+        id: string
+        name: string
+    }
+}
+
+type Profile2 = {
+    data: {
+        id: string
+        name: string
+        properties: { name: string; value: string }[]
+        profileActions: []
+    }
+}
 
 async function getUUID(ign: string): Promise<string | null> {
     try {

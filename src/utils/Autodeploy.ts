@@ -8,7 +8,7 @@ import {
     Routes,
 } from "discord.js"
 import fs = require("fs")
-import { FileType } from "../typings"
+type FileType = "js" | "ts"
 
 async function autoDeployCommands(fileType: FileType) {
     const commands = []

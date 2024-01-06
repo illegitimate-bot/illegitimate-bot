@@ -5,7 +5,7 @@ import { loadContextMenuEvents } from "./eventHandlers"
 import { loadModalEvents } from "./eventHandlers"
 import { loadEvents } from "./eventHandlers"
 import { loadAutocompleteEvents } from "./eventHandlers"
-import { FileType } from "../typings"
+type FileType = "js" | "ts"
 
 export function loadAllEvents(client: Client, ft: FileType) {
     loadEvents(client)

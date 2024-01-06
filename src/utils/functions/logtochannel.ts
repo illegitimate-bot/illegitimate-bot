@@ -1,4 +1,4 @@
-import { guildid, onlineLogChannel, botLogChannel, guildLogChannel, errorLogChannel } from "../../../config/options.json"
+import { guildid, onlineLogChannel, botLogChannel, guildLogChannel, errorLogChannel, moderationLogChannel } from "../../../config/options.json"
 import { Guild, MessageCreateOptions, TextChannel } from "discord.js"
 import Illegitimate from "../Illegitimate"
 
@@ -6,7 +6,8 @@ const channels = {
     online: onlineLogChannel,
     bot: botLogChannel,
     guild: guildLogChannel,
-    error: errorLogChannel
+    error: errorLogChannel,
+    mod: moderationLogChannel
 }
 
 type Channel = keyof typeof channels

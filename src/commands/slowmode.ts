@@ -28,7 +28,7 @@ export = {
             option
                 .setName("channel")
                 .setDescription("The channel to set the slowmode of.")
-                .addChannelTypes(ChannelType.GuildText),
+                .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),

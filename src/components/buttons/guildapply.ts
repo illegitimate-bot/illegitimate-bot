@@ -4,7 +4,7 @@ import {
     ActionRowBuilder,
     EmbedBuilder,
     GuildMember,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import { color } from "../../../config/options.json"
 import { largeM, smallM, ignM } from "../../../config/limitmessages.json"
@@ -537,7 +537,7 @@ export = {
 
             const channel = guild.channels.cache.get(
                 applicationsChannel,
-            ) as GuildTextBasedChannel
+            ) as TextChannel
             await channel.send({
                 embeds: [
                     {

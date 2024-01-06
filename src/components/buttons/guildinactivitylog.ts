@@ -4,7 +4,7 @@ import {
     ButtonStyle,
     EmbedBuilder,
     GuildMember,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import {
     gm,
@@ -305,7 +305,7 @@ module.exports = {
 
         const appChannel = guild.channels.cache.get(
             inactivityLogChannel,
-        ) as GuildTextBasedChannel
+        ) as TextChannel
 
         await appChannel.send({
             embeds: [

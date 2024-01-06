@@ -1,7 +1,7 @@
 import { ExtendedClient as Client } from "../Client"
 import { ContextMenu } from "../../interfaces"
 import { errorLogChannel, color } from "../../../config/options.json"
-import { Events, GuildTextBasedChannel } from "discord.js"
+import { Events, TextChannel } from "discord.js"
 import path = require("path")
 import fs = require("fs")
 type FileType = "js" | "ts"
@@ -50,7 +50,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
             if (process.env.NODE_ENV !== "dev") {
                 const channel = client.channels.cache.get(
                     errorLogChannel,
-                ) as GuildTextBasedChannel
+                ) as TextChannel
                 if (!channel) {
                     console.log("No error log channel found.")
                 }

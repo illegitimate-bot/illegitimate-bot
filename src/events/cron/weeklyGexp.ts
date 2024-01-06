@@ -7,13 +7,13 @@ import {
 import { getGuild, getIGN } from "../../utils/Hypixel"
 import { Cron, GuildData } from "../../interfaces"
 import Illegitimate from "../../utils/Illegitimate"
-import { GuildTextBasedChannel } from "discord.js"
+import { TextChannel } from "discord.js"
 const client = Illegitimate.client
 
 async function guildWeekly() {
     const channel = client.channels.cache.get(
         guildLogChannel,
-    ) as GuildTextBasedChannel
+    ) as TextChannel
 
     if (!channel) {
         console.log("Guild log channel not found")

@@ -2,7 +2,7 @@ import {
     ActionRowBuilder,
     ButtonStyle,
     ButtonBuilder,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import {
     color,
@@ -91,7 +91,7 @@ export = {
         // update waiting list
         const channel = guild.channels.cache.get(
             waitingListChannel,
-        ) as GuildTextBasedChannel
+        ) as TextChannel
         const wlmessage = await channel!.messages.fetch(waitingListMessage)
 
         const wlembed = wlmessage.embeds[0]

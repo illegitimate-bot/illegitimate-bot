@@ -1,8 +1,7 @@
 import {
     SlashCommandBuilder,
     PermissionFlagsBits,
-    ChannelType,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import { color } from "../../config/options.json"
 import { Command } from "../interfaces"
@@ -30,7 +29,7 @@ export = {
         await interaction.deferReply({ ephemeral: true })
 
         const amount = interaction.options.getInteger("amount")!
-        const channel2 = interaction.channel!
+        const channel = interaction.channel as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
 
         if (!amount || amount < 1 || amount > 100) {
@@ -44,20 +43,6 @@ export = {
                 ],
             })
         }
-
-        if (channel2.type !== ChannelType.GuildText) {
-            await interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "You can only clear messages in a text channel",
-                        color: embedColor,
-                    },
-                ],
-            })
-        }
-
-        const channel = channel2 as GuildTextBasedChannel
 
         channel.messages.fetch({ limit: amount }).then(async messages => {
             const messagesToDelete = messages

@@ -2,7 +2,7 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     ChannelType,
-    GuildTextBasedChannel,
+    TextChannel,
 } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
@@ -27,7 +27,8 @@ export = {
         .addChannelOption(option =>
             option
                 .setName("channel")
-                .setDescription("The channel to set the slowmode of."),
+                .setDescription("The channel to set the slowmode of.")
+                .addChannelTypes(ChannelType.GuildText),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -36,31 +37,8 @@ export = {
         await interaction.deferReply({ ephemeral: true })
 
         const seconds = interaction.options.getInteger("seconds") ?? 5
-        const channel2 =
-            interaction.options.getChannel("channel") ?? interaction.channel
+        const channel = (interaction.options.getChannel("channel") || interaction.channel) as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
-
-        if (channel2?.type !== ChannelType.GuildText) {
-            await interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "You can only set the slowmode of a text channel.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild!.name + " | " + devMessage,
-                            icon_url:
-                                interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                }) || undefined,
-                        },
-                    },
-                ],
-            })
-            return
-        }
-
-        const channel = channel2 as GuildTextBasedChannel
 
         if (seconds > 21600) {
             await channel.setRateLimitPerUser(21600)

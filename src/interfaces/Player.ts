@@ -60,7 +60,7 @@ export interface PlayerData {
     userLanguage: string
     easter2020Cooldowns2: Easter2020Cooldowns2
     rankPlusColor: string
-    socialMedia: SocialMedia
+    socialMedia?: SocialMedia
     achievementTotem: AchievementTotem
     claimed_potato_talisman: number
     summer2020Cooldowns: Summer2020Cooldowns
@@ -11346,11 +11346,11 @@ export interface Easter2020Cooldowns2 {
 export interface SocialMedia {
     prompt: boolean
     TWITCH: string
-    links: Links
+    links?: Links
 }
 
 export interface Links {
-    DISCORD: string
+    DISCORD?: string
 }
 
 export interface AchievementTotem {

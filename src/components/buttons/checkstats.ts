@@ -48,7 +48,7 @@ export = {
             return
         }
 
-        const ign = player.playername
+        const ign = player?.playername || ""
         const head = await getHeadURL(ign)
         const rank2 = player.newPackageRank
         const monthlyRank = player.monthlyPackageRank
@@ -140,12 +140,12 @@ export = {
             }
 
             if (player.stats.SkyWars) {
-                const hsswexp = player.stats.SkyWars.skywars_experience
+                const hsswexp = player.stats?.SkyWars?.skywars_experience || 0
                 const hsswstars = skywarsLevel(hsswexp)
-                const hsswkills = player.stats.SkyWars.kills
-                const hsswdeaths = player.stats.SkyWars.deaths
+                const hsswkills = player.stats?.SkyWars?.kills || 0
+                const hsswdeaths = player.stats?.SkyWars?.deaths || 0
                 const hsswkd = hsswkills / hsswdeaths
-                const hsswwins = player.stats.SkyWars.wins
+                const hsswwins = player.stats?.SkyWars?.wins || 0
 
                 let swtitle = ""
                 if (hsswstars < swstars || hsswkd < swkdr) {
@@ -176,11 +176,11 @@ export = {
             }
 
             if (player.stats.Duels) {
-                const hsduelskills = player.stats.Duels.kills
-                const hsduelsdeaths = player.stats.Duels.deaths
+                const hsduelskills = player.stats?.Duels?.kills || 0
+                const hsduelsdeaths = player.stats?.Duels?.deaths || 0
                 const hsduelskd = hsduelskills / hsduelsdeaths
-                const hsduelswins = player.stats.Duels.wins
-                const hsduelslosses = player.stats.Duels.losses
+                const hsduelswins = player.stats?.Duels?.wins || 0
+                const hsduelslosses = player.stats?.Duels?.losses || 0
                 const hsduelswlr = hsduelswins / hsduelslosses
 
                 let duelstitle = ""

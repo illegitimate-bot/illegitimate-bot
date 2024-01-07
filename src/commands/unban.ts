@@ -90,7 +90,7 @@ export = {
                     },
                     footer: {
                         text: "ID: " + user!.id,
-                        icon_url: user.avatarURL({ forceStatic: false}) || undefined,
+                        icon_url: user.avatarURL() || undefined,
                     },
                     timestamp: new Date().toISOString(),
                 },
@@ -110,7 +110,7 @@ export = {
                         url: user!.avatarURL() || "",
                     },
                     footer: {
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

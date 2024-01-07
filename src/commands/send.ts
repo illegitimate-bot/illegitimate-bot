@@ -46,11 +46,11 @@ export = {
                     description: message,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.guild!.iconURL({ forceStatic: false, }) || "",
+                        url: interaction.guild!.iconURL() || "",
                     },
                     footer: {
                         text: interaction.guild!.id + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL({ forceStatic: true }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],
@@ -63,7 +63,7 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],

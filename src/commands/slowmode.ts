@@ -53,9 +53,7 @@ export = {
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
                             icon_url:
-                                interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                }) || undefined,
+                                interaction.guild!.iconURL() || undefined,
                         },
                     },
                 ],
@@ -95,8 +93,7 @@ export = {
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
                         icon_url:
-                            interaction.guild!.iconURL({ forceStatic: true }) ||
-                            undefined,
+                            interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],

@@ -21,9 +21,7 @@ export default async function ban(
                         " is currently not banned from counting",
                     color: embedColor,
                     footer: {
-                        icon_url: interaction.guild!.iconURL({
-                            forceStatic: false,
-                        })!,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },
@@ -40,7 +38,7 @@ export default async function ban(
                         " has been unbanned from counting",
                     color: embedColor,
                     footer: {
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

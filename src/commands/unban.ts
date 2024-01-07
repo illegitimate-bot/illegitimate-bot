@@ -76,7 +76,7 @@ export = {
                 {
                     author: {
                         name: mod.username,
-                        icon_url: mod.avatarURL({ forceStatic: false })!,
+                        icon_url: mod.avatarURL({ forceStatic: false }) || undefined,
                     },
                     title: "Member Unbanned",
                     description: `
@@ -86,7 +86,7 @@ export = {
                     `,
                     color: embedColor,
                     thumbnail: {
-                        url: mod.avatarURL({ forceStatic: false })!,
+                        url: mod.avatarURL({ forceStatic: false }) || "",
                     },
                     footer: {
                         text: "ID: " + user!.id,
@@ -110,9 +110,7 @@ export = {
                         url: user!.avatarURL({ forceStatic: false }) || "",
                     },
                     footer: {
-                        icon_url: interaction.guild!.iconURL({
-                            forceStatic: false,
-                        })!,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

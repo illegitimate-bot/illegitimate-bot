@@ -94,7 +94,7 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || "",
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
                     }
                 },
             ],

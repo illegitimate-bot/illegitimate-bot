@@ -96,206 +96,81 @@ export = {
 
     async execute(interaction) {
         const subcommand = interaction.options.getSubcommand()
+        const channel = interaction.options.getChannel("channel") as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
+        let title: string = ""
+        let description: string = ""
+        let customId: string = ""
+        let label: string = ""
+        let emoji: string = ""
 
         if (subcommand === "sendguildapplication") {
-            const channel = interaction.options.getChannel("channel") as TextChannel
-
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Guild Application",
-                        description:
-                            "You can apply for the guild by clicking the button below.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild!.name + " | " + devMessage,
-                            icon_url:
-                                interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                }) || undefined,
-                        },
-                        thumbnail: {
-                            url:
-                                interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                }) || "",
-                        },
-                    },
-                ],
-                components: [
-                    new ActionRowBuilder<ButtonBuilder>().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("guildapply")
-                            .setLabel("Apply")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }),
-                    ),
-                ],
-            })
-            await interaction.reply({
-                content: "Message sent",
-                ephemeral: true,
-            })
+            title = "Guild Application"
+            description = "You can apply for the guild by clicking the button below."
+            customId = "guildapply"
+            label = "Apply"
+            emoji = "✅"
         }
 
         if (subcommand === "sendstaffapplication") {
-            const channel = interaction.options.getChannel("channel") as TextChannel
-
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Staff Application",
-                        description:
-                            "You can apply for the staff team by clicking the button below.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                        thumbnail: {
-                            url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                    },
-                ],
-                components: [
-                    new ActionRowBuilder<ButtonBuilder>().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("staffapply")
-                            .setLabel("Apply")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }),
-                    ),
-                ],
-            })
-
-            await interaction.reply({
-                content: "Message sent",
-                ephemeral: true,
-            })
+            title = "Staff Application"
+            description = "You can apply for the staff team by clicking the button below."
+            customId = "staffapply"
+            label = "Apply"
+            emoji = "✅"
         }
 
         if (subcommand === "sendinactivityapplication") {
-            const channel = interaction.options.getChannel("channel") as TextChannel
-
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Inactivity Log",
-                        description:
-                            "You can send an inactivity log by clicking the button below.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                        thumbnail: {
-                            url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                    },
-                ],
-                components: [
-                    new ActionRowBuilder<ButtonBuilder>().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("guildinactivitylog")
-                            .setLabel("Submit")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }),
-                    ),
-                ],
-            })
-
-            await interaction.reply({
-                content: "Message sent",
-                ephemeral: true,
-            })
+            title = "Inactivity Log"
+            description = "You can send an inactivity log by clicking the button below."
+            customId = "guildinactivitylog"
+            label = "Submit"
+            emoji = "✅"
         }
 
         if (subcommand === "sendverfiymessage") {
-            const channel = interaction.options.getChannel("channel") as TextChannel
-
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Verification",
-                        description:
-                            "You can verify by clicking the button below.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                        thumbnail: {
-                            url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                    },
-                ],
-                components: [
-                    new ActionRowBuilder<ButtonBuilder>().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("verify")
-                            .setLabel("Verify")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "✅" }),
-                    ),
-                ],
-            })
-            await interaction.reply({
-                content: "Message sent",
-                ephemeral: true,
-            })
+            title = "Verification"
+            description = "You can verify by clicking the button below."
+            customId = "verify"
+            label = "Verify"
+            emoji = "✅"
         }
 
         if (subcommand === "sendwaitinglistmessage") {
-            const channel = interaction.options.getChannel("channel") as TextChannel
-
-            await channel.send({
-                embeds: [
-                    {
-                        title: "Waiting List",
-                        description:
-                            "The people below were accepted into the guild\n" +
-                            "Try to invite them in order.",
-                        color: embedColor,
-                        footer: {
-                            text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                        thumbnail: {
-                            url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
-                        },
-                    },
-                ],
-                components: [
-                    new ActionRowBuilder<ButtonBuilder>().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("waitinglistupdate")
-                            .setLabel("Update")
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji({ name: "🔄" }),
-                    ),
-                ],
-            })
-            await interaction.reply({
-                content: "Message sent",
-                ephemeral: true,
-            })
+            title = "Waiting List"
+            description = "The people below were accepted into the guild\n" + "Try to invite them in order.",
+            customId = "waitinglistupdate"
+            label = "Update"
+            emoji = "🔄"
         }
+
+        await channel.send({
+            embeds: [{
+                title: title,
+                description: description,
+                color: embedColor,
+                thumbnail: {
+                    url: interaction.guild!.iconURL({ forceStatic: false }) || "",
+                },
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                }
+            }],
+            components: [
+                new ActionRowBuilder<ButtonBuilder>().addComponents(
+                    new ButtonBuilder()
+                        .setCustomId(customId)
+                        .setLabel(label)
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji({ name: emoji })
+                )
+            ]
+        })
+
+        await interaction.reply({
+            content: "Message sent",
+            ephemeral: true,
+        })
     },
 } as Command

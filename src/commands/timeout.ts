@@ -118,53 +118,26 @@ const command: Command = {
             return
         }
 
+        let title: string = ""
+        let description: string = ""
+        let timeouttime: number | null = 0
         if (target.isCommunicationDisabled()) {
             if (time === 0) {
-                await target.timeout(null, reason)
-                await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                "Removed timeout of " +
-                                userMention(target.id) +
-                                " for " +
-                                reason,
-                            color: embedColor,
-                            footer: {
-                                text: "ID: " + target.id,
-                                icon_url: target.avatarURL() || undefined,
-                            },
-                            timestamp: new Date().toISOString(),
-                        },
-                    ],
-                })
-                return
+                title = "Timeout Removed"
+                description = "Removed timeout of " + userMention(target.id) + " for " + reason,
+                timeouttime = null
+            } else {
+                title = "Timeout Updated"
+                description = "Updated timeout of " + userMention(target.id) + " to " + prettyTime + " for " + reason,
+                timeouttime = time
             }
-
-            await target.timeout(time, reason)
-            await interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "Updated timeout of " +
-                            userMention(target.id) +
-                            " to " +
-                            prettyTime +
-                            " for " +
-                            reason,
-                        color: embedColor,
-                        footer: {
-                            text: "ID: " + target.id,
-                            icon_url: target.avatarURL() || undefined,
-                        },
-                        timestamp: new Date().toISOString(),
-                    },
-                ],
-            })
-            return
+        } else {
+            title = "Member Timed Out"
+            description = "Timed out " + userMention(target.id) + " for " + prettyTime + " for " + reason,
+            timeouttime = time
         }
 
-        await target.timeout(time, reason)
+        await target.timeout(timeouttime, reason)
 
         await logToChannel("mod", {
             embeds: [{
@@ -172,11 +145,11 @@ const command: Command = {
                     name: mod.user.username,
                     icon_url: mod.user.avatarURL({ forceStatic: false }) || undefined,
                 },
-                title: "Member Timed Out",
+                title: title,
                 description: `
                 **User:** ${userMention(target.id)}
-                **Time:** ${prettyTime}
-                **Reason:** ${reason}
+                ${timeouttime === null ? "**Time:** `None`" : "**Time:** `" + prettyTime + "`"}
+                **Reason:** \`${reason}\`
                 **Mod:** ${userMention(mod.id)}
                 `,
                 color: embedColor,
@@ -194,10 +167,7 @@ const command: Command = {
         await interaction.editReply({
             embeds: [
                 {
-                    description:
-                        "Timed out " + userMention(target.id) +
-                        " for " + prettyTime +
-                        " for " + reason,
+                    description: description,
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,

@@ -186,7 +186,7 @@ export = {
             embeds: [{
                 author: {
                     name: modName,
-                    icon_url: mod.avatarURL({ forceStatic: false })!,
+                    icon_url: mod.avatarURL({ forceStatic: false }) || undefined,
                 },
                 title: "Force Verified",
                 description: `
@@ -197,7 +197,7 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: mod.avatarURL({ forceStatic: false })!,
+                    url: mod.avatarURL({ forceStatic: false }) || "",
                 },
                 footer: {
                     icon_url: user.user.avatarURL({ forceStatic: false }) || undefined,
@@ -222,10 +222,7 @@ export = {
                         url: head!,
                     },
                     footer: {
-                        icon_url:
-                            interaction.guild!.iconURL({
-                                forceStatic: false,
-                            }) || undefined,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

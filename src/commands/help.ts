@@ -66,12 +66,10 @@ export = {
                     fields: commandList,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.guild!.iconURL({ forceStatic: true })!,
+                        url: interaction.guild!.iconURL({ forceStatic: true }) || "",
                     },
                     footer: {
-                        icon_url: interaction.guild!.iconURL({
-                            forceStatic: false,
-                        })!,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

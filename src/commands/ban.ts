@@ -115,7 +115,7 @@ export = {
             embeds: [{
                 author: {
                     name: mod.user.username,
-                    icon_url: mod.user.avatarURL({ forceStatic: false })!,
+                    icon_url: mod.user.avatarURL({ forceStatic: false }) || undefined,
                 },
                 title: "Member Banned",
                 description: `
@@ -126,7 +126,7 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: mod.user.avatarURL({ forceStatic: false })!,
+                    url: mod.user.avatarURL({ forceStatic: false }) || "",
                 },
                 footer: {
                     text: "ID: " + member.user.id,
@@ -151,7 +151,7 @@ export = {
                         url: member.user.avatarURL({ forceStatic: false }) || "",
                     },
                     footer: {
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false, })!,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

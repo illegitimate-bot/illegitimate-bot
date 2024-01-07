@@ -143,7 +143,7 @@ const command: Command = {
             embeds: [{
                 author: {
                     name: mod.user.username,
-                    icon_url: mod.user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: mod.user.avatarURL() || undefined,
                 },
                 title: title,
                 description: `
@@ -154,11 +154,11 @@ const command: Command = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: mod.user.avatarURL({ forceStatic: false }) || "",
+                    url: mod.user.avatarURL() || "",
                 },
                 footer: {
                     text: "ID: " + target.id,
-                    icon_url: target.user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: target.user.avatarURL() || undefined,
                 },
                 timestamp: new Date().toISOString()
             }]
@@ -171,7 +171,7 @@ const command: Command = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],

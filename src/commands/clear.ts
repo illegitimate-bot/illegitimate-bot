@@ -63,7 +63,7 @@ export = {
                 embeds: [{
                     author: {
                         name: interaction.user.username,
-                        icon_url: interaction.user.avatarURL({ forceStatic: false }) || undefined,
+                        icon_url: interaction.user.avatarURL() || undefined,
                     },
                     title: "Messages Cleared",
                     description: `
@@ -73,11 +73,11 @@ export = {
                     `,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.user.avatarURL({ forceStatic: false }) || "",
+                        url: interaction.user.avatarURL() || "",
                     },
                     footer: {
                         text: "ID: " + channel.id,
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                     timestamp: new Date().toISOString()
                 }]

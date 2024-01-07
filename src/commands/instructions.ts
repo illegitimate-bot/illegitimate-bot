@@ -32,7 +32,7 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                     image: {
                         url: instructionsgif,

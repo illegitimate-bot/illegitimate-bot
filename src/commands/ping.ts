@@ -27,9 +27,7 @@ export = {
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
                         icon_url:
-                            interaction.guild?.iconURL({
-                                forceStatic: false,
-                            }) || undefined,
+                            interaction.guild?.iconURL() || undefined,
                     },
                     timestamp: new Date().toISOString(),
                 },

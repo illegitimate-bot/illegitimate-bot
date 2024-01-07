@@ -52,7 +52,7 @@ export = {
             embeds: [{
                 author: {
                     name: interaction.user.username,
-                    icon_url: interaction.user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.user.avatarURL() || undefined,
                 },
                 title: "Nickname",
                 description: `
@@ -62,11 +62,11 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.user.avatarURL({ forceStatic: false }) || "",
+                    url: interaction.user.avatarURL() || "",
                 },
                 footer: {
                     text: "ID: " + member.user.id,
-                    icon_url: member.user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: member.user.avatarURL() || undefined,
                 },
                 timestamp: new Date().toISOString()
             }]
@@ -78,7 +78,7 @@ export = {
                 color: embedColor,
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                 }
             }],
             ephemeral: true,

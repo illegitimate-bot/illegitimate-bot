@@ -45,7 +45,7 @@ export = {
                     color: embed.color!,
                     footer: {
                         text: "Last updated by " + user.username,
-                        icon_url: user.avatarURL()!,
+                        icon_url: user.avatarURL() || undefined,
                     },
                     thumbnail: embed.thumbnail!,
                     fields: fields,

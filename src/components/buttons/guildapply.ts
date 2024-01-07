@@ -548,7 +548,7 @@ export = {
                             " - Guild Application",
                         color: embedColor,
                         thumbnail: {
-                            url: user.avatarURL({ forceStatic: false }) || "",
+                            url: user.avatarURL() || "",
                         },
                         fields: [
                             {
@@ -585,7 +585,7 @@ export = {
                             },
                         ],
                         footer: {
-                            icon_url: guild.iconURL({ forceStatic: false }) || "",
+                            icon_url: guild.iconURL() || "",
                             text: "ID: " + user.user.id,
                         },
                     },

@@ -64,7 +64,7 @@ export = {
             embeds: [{
                 author: {
                     name: mod.username,
-                    icon_url: mod.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: mod.avatarURL() || undefined,
                 },
                 title: "Waiting List - Remove User",
                 description: `
@@ -74,10 +74,10 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: mod.avatarURL({ forceStatic: false }) || "",
+                    url: mod.avatarURL() || "",
                 },
                 footer: {
-                    icon_url: user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: user.avatarURL() || undefined,
                     text: "ID: " + user.id,
                 },
                 timestamp: new Date().toISOString()
@@ -94,7 +94,7 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     }
                 },
             ],

@@ -16,7 +16,7 @@ export default async function setup(interaction: ChatInputCommandInteraction): P
                 description: "Counting channel has been updated to " + channelMention(channel.id),
                 color: embedColor,
                 footer: {
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false })!,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                     text: interaction.guild!.name + " | " + devMessage
                 }
             }]
@@ -35,7 +35,7 @@ export default async function setup(interaction: ChatInputCommandInteraction): P
                 description: "Counting channel has been set to " + channelMention(channel.id),
                 color: embedColor,
                 footer: {
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                     text: interaction.guild!.name + " | " + devMessage
                 }
             }]

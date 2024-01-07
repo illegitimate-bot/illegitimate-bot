@@ -116,7 +116,7 @@ async function guildWeekly() {
                 timestamp: new Date().toISOString(),
                 footer: {
                     text: channel.guild.name + " | " + devMessage,
-                    icon_url: channel.guild.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: channel.guild.iconURL() || undefined,
                 },
             },
         ],

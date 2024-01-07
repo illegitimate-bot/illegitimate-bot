@@ -49,9 +49,7 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
                             description: String(error),
                             color: embedColor,
                             footer: {
-                                icon_url: interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                })!,
+                                icon_url: interaction.guild!.iconURL() || undefined,
                                 text:
                                     interaction.user.username +
                                     " | " +

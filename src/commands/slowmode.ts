@@ -53,9 +53,7 @@ export = {
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
                             icon_url:
-                                interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                }) || undefined,
+                                interaction.guild!.iconURL() || undefined,
                         },
                     },
                 ],
@@ -67,7 +65,7 @@ export = {
             embeds: [{
                 author: {
                     name: interaction.user.username,
-                    icon_url: interaction.user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.user.avatarURL() || undefined,
                 },
                 title: "Slowmode Update",
                 description: `
@@ -77,10 +75,10 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.user.avatarURL({ forceStatic: false }) || "",
+                    url: interaction.user.avatarURL() || "",
                 },
                 footer: {
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                     text: " ID: " + channel.id
                 },
                 timestamp: new Date().toISOString()
@@ -95,8 +93,7 @@ export = {
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
                         icon_url:
-                            interaction.guild!.iconURL({ forceStatic: true }) ||
-                            undefined,
+                            interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],

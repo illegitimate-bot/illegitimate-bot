@@ -278,7 +278,7 @@ export default async function beast(
                 },
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                 },
                 fields: statsFields,
             },

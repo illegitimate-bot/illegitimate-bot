@@ -236,7 +236,7 @@ export = {
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL()!,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                     fields: statsFields,
                 },

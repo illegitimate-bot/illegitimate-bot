@@ -6,19 +6,19 @@ export interface Guild {
 }
 
 export interface GuildData {
-    _id?: string
-    name?: string
+    _id: string
+    name: string
     coins?: number
     coinsEver?: number
-    created?: number
-    members?: Member[]
+    created: number
+    members: Member[]
     achievements?: GuildAchievements
-    exp?: number
+    exp: number
     legacyRanking?: number
     name_lower?: string
     tagColor?: string
     description?: string
-    ranks?: Rank[]
+    ranks: Rank[]
     preferredGames?: string[]
     banner?: Banner
     chatMute?: number
@@ -28,12 +28,12 @@ export interface GuildData {
 }
 
 export interface Member {
-    uuid?: string
-    rank?: string
-    joined?: number
-    questParticipation?: number
-    expHistory?: ExpHistory
-    mutedTill?: number
+    uuid: string
+    rank: string
+    joined: number
+    questParticipation: number
+    expHistory: ExpHistory
+    mutedTill: number
 }
 
 export interface ExpHistory {
@@ -47,11 +47,11 @@ export interface GuildAchievements {
 }
 
 export interface Rank {
-    name?: string
-    default?: boolean
-    tag?: string
-    created?: number
-    priority?: number
+    name: string
+    default: boolean
+    tag: string
+    created: number
+    priority: number
 }
 
 export interface Banner {

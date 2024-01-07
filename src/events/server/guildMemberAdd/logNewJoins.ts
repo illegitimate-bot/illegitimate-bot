@@ -22,8 +22,12 @@ export = {
                         "Account created: " +
                         member.user.createdAt.toLocaleString(),
                     color: embedColor,
+                    thumbnail: {
+                        url: member.user.avatarURL({ forceStatic: false }) || "",
+                    },
                     footer: {
                         text: "ID: " + member.id,
+                        icon_url: member.user.avatarURL({ forceStatic: false }) || undefined,
                     },
                     timestamp: new Date().toISOString(),
                 },

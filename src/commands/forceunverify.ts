@@ -8,6 +8,8 @@ import { color, devMessage } from "../../config/options.json"
 import verify = require("../schemas/verifySchema")
 import { Command } from "../interfaces"
 import roleManage from "../utils/functions/rolesmanage"
+import logToChannel from "../utils/functions/logtochannel"
+import { getIGN } from "../utils/Hypixel"
 
 export = {
     name: "forceunverify",
@@ -32,6 +34,7 @@ export = {
         const member = interaction.options.getMember("user") as GuildMember
         const embedColor = Number(color.replace("#", "0x"))
         const verifiedUser = await verify.findOne({ userID: member.user.id })
+        const mod = interaction.user
 
         if (!verifiedUser) {
             return interaction.reply({
@@ -43,9 +46,37 @@ export = {
                 ],
             })
         }
-        await verify.findOneAndDelete({ userID: member.user.id })
 
+        const uuid = verifiedUser.uuid
+        const ign = await getIGN(uuid)
+        await verify.findOneAndDelete({ userID: member.user.id })
         await member.roles.remove(roleManage("all").rolesToRemove, "User force unverified by " + interaction.user.username)
+
+
+        await logToChannel("mod", {
+            embeds: [{
+                title: "Force Unverified",
+                author: {
+                    name: mod.username,
+                    icon_url: mod.avatarURL({ forceStatic: false })!,
+                },
+                description: `
+                **User:** ${userMention(member.user.id)}
+                **Mod:** ${userMention(mod.id)}
+                **IGN:** \`${ign}\`
+                **UUID:** \`${uuid}\`
+                `,
+                color: embedColor,
+                thumbnail: {
+                    url: mod.avatarURL({ forceStatic: false })!,
+                },
+                footer: {
+                    icon_url: member.user.avatarURL({ forceStatic: false }) || undefined,
+                    text: "ID: " + member.user.id,
+                },
+                timestamp: new Date().toISOString(),
+            }]
+        })
 
         await interaction.reply({
             embeds: [

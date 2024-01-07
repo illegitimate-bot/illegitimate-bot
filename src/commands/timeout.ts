@@ -5,9 +5,10 @@ import {
     ChatInputCommandInteraction,
     GuildMember,
 } from "discord.js"
-import { color } from "../../config/options.json"
+import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
 import ms from "ms"
+import logToChannel from "../utils/functions/logtochannel"
 
 const command: Command = {
     name: "timeout",
@@ -164,22 +165,44 @@ const command: Command = {
         }
 
         await target.timeout(time, reason)
+
+        await logToChannel("mod", {
+            embeds: [{
+                author: {
+                    name: mod.user.username,
+                    icon_url: mod.user.avatarURL({ forceStatic: false }) || undefined,
+                },
+                title: "Member Timed Out",
+                description: `
+                **User:** ${userMention(target.id)}
+                **Time:** ${prettyTime}
+                **Reason:** ${reason}
+                **Mod:** ${userMention(mod.id)}
+                `,
+                color: embedColor,
+                thumbnail: {
+                    url: mod.user.avatarURL({ forceStatic: false }) || "",
+                },
+                footer: {
+                    text: "ID: " + target.id,
+                    icon_url: target.user.avatarURL({ forceStatic: false }) || undefined,
+                },
+                timestamp: new Date().toISOString()
+            }]
+        })
+
         await interaction.editReply({
             embeds: [
                 {
                     description:
-                        "Timed out " +
-                        userMention(target.id) +
-                        " for " +
-                        prettyTime +
-                        " for " +
-                        reason,
+                        "Timed out " + userMention(target.id) +
+                        " for " + prettyTime +
+                        " for " + reason,
                     color: embedColor,
                     footer: {
-                        text: "ID: " + target.id,
-                        icon_url: target.avatarURL() || undefined,
+                        text: interaction.guild!.name + " | " + devMessage,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
                     },
-                    timestamp: new Date().toISOString(),
                 },
             ],
         })

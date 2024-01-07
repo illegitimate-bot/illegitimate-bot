@@ -2,9 +2,12 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     TextChannel,
+    channelMention,
+    userMention,
 } from "discord.js"
 import { color } from "../../config/options.json"
 import { Command } from "../interfaces"
+import logToChannel from "../utils/functions/logtochannel"
 
 export = {
     name: "clear",
@@ -32,12 +35,12 @@ export = {
         const channel = interaction.channel as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
 
-        if (!amount || amount < 1 || amount > 100) {
+        if (amount < 1 || amount > 100) {
             await interaction.editReply({
                 embeds: [
                     {
                         description:
-                            "Please provide an amount of messages to clear",
+                            "Please provide an amount of messages to clear between 1 and 100.",
                         color: embedColor,
                     },
                 ],
@@ -55,6 +58,30 @@ export = {
                 )
 
             await channel.bulkDelete(messagesToDelete, true)
+
+            await logToChannel("mod", {
+                embeds: [{
+                    author: {
+                        name: interaction.user.username,
+                        icon_url: interaction.user.avatarURL({ forceStatic: false }) || undefined,
+                    },
+                    title: "Messages Cleared",
+                    description: `
+                    **Channel:** ${channelMention(channel.id)}
+                    **Amount:** \`${messages.size}\` messages
+                    **Mod:** ${userMention(interaction.user.id)}
+                    `,
+                    color: embedColor,
+                    thumbnail: {
+                        url: interaction.guild!.iconURL({ forceStatic: false }) || "",
+                    },
+                    footer: {
+                        text: "ID: " + channel.id,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    },
+                    timestamp: new Date().toISOString()
+                }]
+            })
 
             await interaction.editReply({
                 embeds: [

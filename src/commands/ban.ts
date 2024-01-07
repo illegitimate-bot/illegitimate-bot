@@ -5,8 +5,9 @@ import {
     GuildMember,
 } from "discord.js"
 import { admin, helper } from "../../config/roles.json"
-import { color } from "../../config/options.json"
+import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
+import logToChannel from "../utils/functions/logtochannel"
 
 export = {
     name: "ban",
@@ -110,31 +111,52 @@ export = {
             deleteMessageDays: messageDeletionDays,
         })
 
+        await logToChannel("mod", {
+            embeds: [{
+                author: {
+                    name: mod.user.username,
+                    icon_url: mod.user.avatarURL({ forceStatic: false })!,
+                },
+                title: "Member Banned",
+                description: `
+                **User:** ${userMention(member.user.id)}
+                **Mod:** ${userMention(mod.user.id)}
+                **Reason:** ${reason}
+                **Messages Deleted:** ${messageDeletionDays} days
+                `,
+                color: embedColor,
+                thumbnail: {
+                    url: mod.user.avatarURL({ forceStatic: false })!,
+                },
+                footer: {
+                    text: "ID: " + member.user.id,
+                    icon_url:
+                        member.user.avatarURL({ forceStatic: false }) ||
+                        undefined,
+                },
+                timestamp: new Date().toISOString(),
+            }]
+        })
+
         await interaction.editReply({
             embeds: [
                 {
                     title: "Member Banned",
                     description:
-                        "**User:** " +
-                        userMention(member.user.id) +
-                        "\n" +
-                        "**Reason:** " +
-                        reason +
-                        "\n" +
-                        "**Moderator:** " +
-                        mod.user.username +
-                        "\n" +
-                        "**Messages Deleted:** " +
-                        messageDeletionDays +
-                        " days",
+                        "**User:** " + userMention(member.user.id) + "\n" +
+                        "**Reason:** " + reason + "\n" +
+                        "**Moderator:** " + mod.user.username + "\n" +
+                        "**Messages Deleted:** " + messageDeletionDays + " days",
                     color: embedColor,
-                    footer: {
-                        text: "ID: " + member.user.id,
-                        icon_url:
-                            member.user.avatarURL({ forceStatic: false }) ||
-                            undefined,
+                    thumbnail: {
+                        url: member.user.avatarURL({ forceStatic: false }) || interaction.guild!.iconURL({ forceStatic: false })!,
                     },
-                    timestamp: new Date().toISOString(),
+                    footer: {
+                        icon_url: interaction.guild!.iconURL({
+                            forceStatic: false,
+                        })!,
+                        text: interaction.guild!.name + " | " + devMessage,
+                    },
                 },
             ],
         })

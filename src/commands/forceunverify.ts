@@ -58,7 +58,7 @@ export = {
                 title: "Force Unverified",
                 author: {
                     name: mod.username,
-                    icon_url: mod.avatarURL({ forceStatic: false })!,
+                    icon_url: mod.avatarURL({ forceStatic: false }) || undefined,
                 },
                 description: `
                 **User:** ${userMention(member.user.id)}
@@ -68,7 +68,7 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: mod.avatarURL({ forceStatic: false })!,
+                    url: mod.avatarURL({ forceStatic: false }) || "",
                 },
                 footer: {
                     icon_url: member.user.avatarURL({ forceStatic: false }) || undefined,

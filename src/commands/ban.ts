@@ -145,16 +145,13 @@ export = {
                     description:
                         "**User:** " + userMention(member.user.id) + "\n" +
                         "**Reason:** " + reason + "\n" +
-                        "**Moderator:** " + mod.user.username + "\n" +
                         "**Messages Deleted:** " + messageDeletionDays + " days",
                     color: embedColor,
                     thumbnail: {
-                        url: member.user.avatarURL({ forceStatic: false }) || interaction.guild!.iconURL({ forceStatic: false })!,
+                        url: member.user.avatarURL({ forceStatic: false }) || "",
                     },
                     footer: {
-                        icon_url: interaction.guild!.iconURL({
-                            forceStatic: false,
-                        })!,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, })!,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

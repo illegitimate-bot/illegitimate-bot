@@ -73,7 +73,7 @@ export = {
                     `,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.guild!.iconURL({ forceStatic: false }) || "",
+                        url: interaction.user.avatarURL({ forceStatic: false }) || "",
                     },
                     footer: {
                         text: "ID: " + channel.id,

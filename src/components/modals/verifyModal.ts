@@ -184,7 +184,7 @@ export = {
                             url: head!,
                         },
                         footer: {
-                            icon_url: interaction.guild!.iconURL()!,
+                            icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
                             text: interaction.guild!.name + " | " + devMessage,
                         },
                     },

@@ -46,12 +46,6 @@ export default async function help(
     }
 
     const embedColor = Number(color.replace("#", "0x"))
-    const footerText = interaction.guild
-        ? interaction.guild.name
-        : interaction.user.username
-    const footerIcon = interaction.guild
-        ? interaction.guild.iconURL({ forceStatic: false })
-        : interaction.user.avatarURL({ forceStatic: false })
 
     await interaction.editReply({
         embeds: [
@@ -61,11 +55,11 @@ export default async function help(
                 fields: commandList,
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.guild!.iconURL({ forceStatic: false })!,
+                    url: interaction.guild!.iconURL({ forceStatic: false }) || "",
                 },
                 footer: {
-                    icon_url: footerIcon!,
-                    text: footerText + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    text: interaction.guild?.name + " | " + devMessage,
                 },
             },
         ],

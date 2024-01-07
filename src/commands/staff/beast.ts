@@ -261,13 +261,6 @@ export default async function beast(
     const hypixelExp = player.networkExp || 0
     const level = hypixelLevel(hypixelExp)
 
-    const footerText = interaction.guild
-        ? interaction.guild.name
-        : interaction.user.username
-    const footerIcon = interaction.guild
-        ? interaction.guild.iconURL({ forceStatic: false })
-        : interaction.user.avatarURL({ forceStatic: false })
-
     await interaction.editReply({
         embeds: [
             {
@@ -284,8 +277,8 @@ export default async function beast(
                     url: head!,
                 },
                 footer: {
-                    text: footerText + " | " + devMessage,
-                    icon_url: footerIcon!,
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
                 },
                 fields: statsFields,
             },

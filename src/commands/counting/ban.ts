@@ -40,9 +40,7 @@ export default async function ban(
                         " has been banned from counting",
                     color: embedColor,
                     footer: {
-                        icon_url: interaction.guild!.iconURL({
-                            forceStatic: false,
-                        })!,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

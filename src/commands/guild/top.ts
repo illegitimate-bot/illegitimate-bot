@@ -286,9 +286,7 @@ export default async function guildTop(
                         " | " +
                         devMessage +
                         cacheStatusText,
-                    icon_url: interaction.guild!.iconURL({
-                        forceStatic: false,
-                    })!,
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                 },
             },
         ],

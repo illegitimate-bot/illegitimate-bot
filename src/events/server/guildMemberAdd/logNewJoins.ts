@@ -10,6 +10,7 @@ export = {
     event: "guildMemberAdd",
 
     execute(member: GuildMember) {
+        if (process.env.NODE_ENV === "dev") return
         const embedColor = Number(color.replace("#", "0x"))
 
         logToChannel("bot", {

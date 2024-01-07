@@ -317,7 +317,7 @@ module.exports = {
                         " - Inactivity Application",
                     color: embedColor,
                     thumbnail: {
-                        url: user.displayAvatarURL({ forceStatic: false }),
+                        url: user.avatarURL({ forceStatic: false }) || "",
                     },
                     fields: [
                         {
@@ -334,7 +334,7 @@ module.exports = {
                         },
                     ],
                     footer: {
-                        icon_url: user.displayAvatarURL({ forceStatic: false }),
+                        icon_url: user.avatarURL({ forceStatic: false }) || undefined,
                         text: "ID: " + user.user.id,
                     },
                 },

@@ -476,7 +476,7 @@ export = {
                             " - Staff Application",
                         color: embedColor,
                         thumbnail: {
-                            url: user.avatarURL() || guild.iconURL()!,
+                            url: user.avatarURL({ forceStatic: false }) || "",
                         },
                         fields: [
                             {
@@ -505,7 +505,7 @@ export = {
                             },
                         ],
                         footer: {
-                            icon_url: guild.iconURL()!,
+                            icon_url: guild.iconURL({ forceStatic: false }) || undefined,
                             text: "ID: " + user.user.id,
                         },
                     },

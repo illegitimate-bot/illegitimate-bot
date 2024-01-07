@@ -143,10 +143,10 @@ export = {
                         "Application has been accepted by <@" + user.id + ">.",
                     color: embedColor,
                     thumbnail: {
-                        url: applicant.avatarURL() || guild.iconURL()!,
+                        url: applicant.avatarURL({ forceStatic: false }) || "",
                     },
                     footer: {
-                        icon_url: guild.iconURL()!,
+                        icon_url: guild.iconURL({ forceStatic: false }) || undefined,
                         text: "ID: " + applicant.id,
                     },
                 },

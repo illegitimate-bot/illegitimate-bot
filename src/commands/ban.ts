@@ -115,7 +115,7 @@ export = {
             embeds: [{
                 author: {
                     name: mod.user.username,
-                    icon_url: mod.user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: mod.user.avatarURL() || undefined,
                 },
                 title: "Member Banned",
                 description: `
@@ -126,12 +126,12 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: mod.user.avatarURL({ forceStatic: false }) || "",
+                    url: mod.user.avatarURL() || "",
                 },
                 footer: {
                     text: "ID: " + member.user.id,
                     icon_url:
-                        member.user.avatarURL({ forceStatic: false }) ||
+                        member.user.avatarURL() ||
                         undefined,
                 },
                 timestamp: new Date().toISOString(),
@@ -148,7 +148,7 @@ export = {
                         "**Messages Deleted:** " + messageDeletionDays + " days",
                     color: embedColor,
                     thumbnail: {
-                        url: member.user.avatarURL({ forceStatic: false }) || "",
+                        url: member.user.avatarURL() || "",
                     },
                     footer: {
                         icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,

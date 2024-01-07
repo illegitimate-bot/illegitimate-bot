@@ -55,10 +55,10 @@ export default async function help(
                 fields: commandList,
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.guild!.iconURL({ forceStatic: false }) || "",
+                    url: interaction.guild!.iconURL() || "",
                 },
                 footer: {
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                     text: interaction.guild?.name + " | " + devMessage,
                 },
             },

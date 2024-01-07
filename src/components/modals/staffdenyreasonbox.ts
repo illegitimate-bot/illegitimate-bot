@@ -70,10 +70,10 @@ export = {
                         "`",
                     color: embedColor,
                     thumbnail: {
-                        url: applicant.avatarURL({ forceStatic: false }) || "",
+                        url: applicant.avatarURL() || "",
                     },
                     footer: {
-                        icon_url: guild!.iconURL({ forceStatic: false }) || undefined,
+                        icon_url: guild!.iconURL() || undefined,
                         text: "ID: " + applicant.id,
                     },
                 },

@@ -150,11 +150,11 @@ export = {
                 description: description,
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.guild!.iconURL({ forceStatic: false }) || "",
+                    url: interaction.guild!.iconURL() || "",
                 },
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                 }
             }],
             components: [

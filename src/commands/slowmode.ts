@@ -67,7 +67,7 @@ export = {
             embeds: [{
                 author: {
                     name: interaction.user.username,
-                    icon_url: interaction.user.avatarURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.user.avatarURL() || undefined,
                 },
                 title: "Slowmode Update",
                 description: `
@@ -77,10 +77,10 @@ export = {
                 `,
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.user.avatarURL({ forceStatic: false }) || "",
+                    url: interaction.user.avatarURL() || "",
                 },
                 footer: {
-                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                     text: " ID: " + channel.id
                 },
                 timestamp: new Date().toISOString()

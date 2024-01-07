@@ -83,9 +83,9 @@ export = {
                     "`",
             )
             .setColor(embedColor)
-            .setThumbnail(guild.iconURL({ forceStatic: false }) || "")
+            .setThumbnail(guild.iconURL() || "")
             .setFooter({
-                iconURL: guild.iconURL({ forceStatic: false }) || undefined,
+                iconURL: guild.iconURL() || undefined,
                 text: "ID: " + applicantId,
             })
 

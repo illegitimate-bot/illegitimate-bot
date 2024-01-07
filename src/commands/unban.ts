@@ -76,7 +76,7 @@ export = {
                 {
                     author: {
                         name: mod.username,
-                        icon_url: mod.avatarURL({ forceStatic: false }) || undefined,
+                        icon_url: mod.avatarURL() || undefined,
                     },
                     title: "Member Unbanned",
                     description: `
@@ -86,7 +86,7 @@ export = {
                     `,
                     color: embedColor,
                     thumbnail: {
-                        url: mod.avatarURL({ forceStatic: false }) || "",
+                        url: mod.avatarURL() || "",
                     },
                     footer: {
                         text: "ID: " + user!.id,
@@ -107,7 +107,7 @@ export = {
                         "**Moderator:** " + userMention(mod.id),
                     color: embedColor,
                     thumbnail: {
-                        url: user!.avatarURL({ forceStatic: false }) || "",
+                        url: user!.avatarURL() || "",
                     },
                     footer: {
                         icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,

@@ -1,40 +1,29 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-    userMention,
-    GuildMember,
-} from "discord.js"
+import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
+import { color, devMessage, hypixelGuildID } from "../../config/options.json"
+import { ContextMenu } from "../interfaces"
+import verifySchema from "../schemas/verifySchema"
 import { getGuild, getHeadURL, getIGN } from "../utils/Hypixel"
-import { hypixelGuildID, color, devMessage } from "../../config/options.json"
-import verify = require("../schemas/verifySchema")
-import { Command } from "../interfaces"
 import roleManage from "../utils/functions/rolesmanage"
 
 export = {
-    name: "forceupdate",
-    description: "Force update the user",
-    type: "slash",
+    name: "Update User",
+    description: "Updates a user's roles",
+    type: "contextmenu",
     dev: false,
-    public: false,
 
-    data: new SlashCommandBuilder()
-        .setName("forceupdate")
-        .setDescription("Force update the user")
-        .addUserOption(option =>
-            option
-                .setName("user")
-                .setDescription("The user to force update")
-                .setRequired(true),
-        )
+    data: new ContextMenuCommandBuilder()
+        .setName("Update User")
+        .setType(ApplicationCommandType.User)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
     async execute(interaction) {
-        await interaction.deferReply()
+        await interaction.deferReply({ ephemeral: true })
 
-        const user = interaction.options.getMember("user") as GuildMember
+        const targetId = interaction.targetId
+        const user = await interaction.guild!.members.fetch(targetId)
         const usermentioned = userMention(user.user.id)
-        const verifyData = await verify.findOne({ userID: user.user.id })
+        const verifyData = await verifySchema.findOne({ userID: user.user.id })
         const embedColor = Number(color.replace("#", "0x"))
 
         if (!verifyData) {
@@ -91,18 +80,14 @@ export = {
             await interaction.editReply({
                 embeds: [
                     {
-                        description:
-                            usermentioned +
-                            " was given the the Default Member role.",
+                        description: usermentioned + " was given the the Default Member role.",
                         color: embedColor,
                         thumbnail: {
                             url: head!,
                         },
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL({
-                                forceStatic: false,
-                            })!,
+                            icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                         },
                     },
                 ],
@@ -163,7 +148,7 @@ export = {
                 embeds: [
                     {
                         description:
-                            usermentioned + " was given the the " + replyRank + " role.",
+                            usermentioned + " was given the " + replyRank + " role.",
                         color: embedColor,
                         thumbnail: {
                             url: head!,
@@ -176,5 +161,5 @@ export = {
                 ],
             })
         }
-    },
-} as Command
+    }
+} as ContextMenu

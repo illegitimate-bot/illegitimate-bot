@@ -41,13 +41,8 @@ export = {
     async execute(interaction) {
         await interaction.deferReply({})
 
-        const ign = interaction.options.getString("ign")
+        const ign = interaction.options.getString("ign")!
         const embedColor = Number(color.replace("#", "0x"))
-
-        if (!ign) {
-            await interaction.editReply("Please provide a player's IGN.")
-            return
-        }
 
         await interaction.editReply({
             embeds: [

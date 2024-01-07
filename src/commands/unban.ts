@@ -4,8 +4,9 @@ import {
     userMention,
     User,
 } from "discord.js"
-import { color } from "../../config/options.json"
+import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
+import logToChannel from "../utils/functions/logtochannel"
 
 export = {
     name: "unban",
@@ -37,11 +38,10 @@ export = {
         await interaction.deferReply()
 
         const userid = interaction.options.getString("user")!
-        const reason =
-            interaction.options.getString("reason") || "No reason provided"
+        const reason = interaction.options.getString("reason") || "No reason provided"
         const mod = interaction.user
         const embedColor = Number(color.replace("#", "0x"))
-        let user: User | null
+        let user: User
 
         if (userid === "none") {
             await interaction.editReply({
@@ -66,34 +66,53 @@ export = {
                     },
                 ],
             })
+            return
         }
 
-        await interaction.guild!.members.unban(user!.id, reason)
+        await interaction.guild!.members.unban(user.id, reason)
+
+        await logToChannel("mod", {
+            embeds: [
+                {
+                    author: {
+                        name: mod.username,
+                        icon_url: mod.avatarURL({ forceStatic: false }) || undefined,
+                    },
+                    title: "Member Unbanned",
+                    description: `
+                    **User:** ${userMention(user!.id)}
+                    **Mod:** ${userMention(mod.id)}
+                    **Reason:** ${reason}
+                    `,
+                    color: embedColor,
+                    thumbnail: {
+                        url: mod.avatarURL({ forceStatic: false }) || "",
+                    },
+                    footer: {
+                        text: "ID: " + user!.id,
+                        icon_url: user.avatarURL({ forceStatic: false}) || undefined,
+                    },
+                    timestamp: new Date().toISOString(),
+                },
+            ],
+        })
 
         await interaction.editReply({
             embeds: [
                 {
                     title: "User unbanned",
                     description:
-                        "The user " +
-                        user!.username +
-                        " has been unbanned.\n" +
-                        "**Reason:** `" +
-                        reason +
-                        "`\n" +
-                        "**Moderator:** " +
-                        userMention(mod.id),
+                        "The user " + user!.username + " has been unbanned.\n" +
+                        "**Reason:** `" + reason + "`\n" +
+                        "**Moderator:** " + userMention(mod.id),
                     color: embedColor,
                     thumbnail: {
                         url: user!.avatarURL({ forceStatic: false }) || "",
                     },
                     footer: {
-                        text: "ID: " + user!.id,
-                        icon_url: interaction.guild!.iconURL({
-                            forceStatic: false,
-                        })!,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
+                        text: interaction.guild!.name + " | " + devMessage,
                     },
-                    timestamp: new Date().toISOString(),
                 },
             ],
         })

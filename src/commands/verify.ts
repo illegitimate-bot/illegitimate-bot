@@ -233,7 +233,7 @@ export = {
                         "`.",
                     color: embedColor,
                     thumbnail: {
-                        url: head || "",
+                        url: head!,
                     },
                     footer: {
                         icon_url: interaction.guild!.iconURL() || undefined,

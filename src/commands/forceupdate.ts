@@ -114,9 +114,8 @@ export = {
 
         if (responseGuildID === hypixelGuildID) {
             const GuildMembers = guild!.members
-            const guildRank = GuildMembers.find(
-                member => member.uuid === verifyData.uuid,
-            )!.rank
+            const guildRank = GuildMembers.find( member => member.uuid === verifyData.uuid)!.rank
+            let replyRank: string | null = null
 
             await user.roles.add(roleManage("default").rolesToAdd, "User was force updated.")
 
@@ -124,181 +123,60 @@ export = {
                 const roles = roleManage("gm")
                 await user.roles.remove(roles.rolesToRemove, "User was force updated.")
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
-
-                await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                usermentioned +
-                                "'s rank has been updated to `Guild Master`",
-                            color: embedColor,
-                            thumbnail: {
-                                url: head!,
-                            },
-                            footer: {
-                                text:
-                                    interaction.guild!.name +
-                                    " | " +
-                                    devMessage,
-                                icon_url: interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                })!,
-                            },
-                        },
-                    ],
-                })
-                return
+                replyRank = "Guild Master"
             }
 
             if (guildRank === "Manager") {
                 const roles = roleManage("manager")
                 await user.roles.remove(roles.rolesToRemove, "User was force updated.")
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
-
-                await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                usermentioned +
-                                "'s rank has been updated to `Manager`",
-                            color: embedColor,
-                            thumbnail: {
-                                url: head!,
-                            },
-                            footer: {
-                                text:
-                                    interaction.guild!.name +
-                                    " | " +
-                                    devMessage,
-                                icon_url: interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                })!,
-                            },
-                        },
-                    ],
-                })
-                return
+                replyRank = "Manager"
             }
 
             if (guildRank === "Moderator") {
                 const roles = roleManage("moderator")
                 await user.roles.remove(roles.rolesToRemove, "User was force updated.")
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
-
-                await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                usermentioned +
-                                "'s rank has been updated to `Moderator`",
-                            color: embedColor,
-                            thumbnail: {
-                                url: head!,
-                            },
-                            footer: {
-                                text:
-                                    interaction.guild!.name +
-                                    " | " +
-                                    devMessage,
-                                icon_url: interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                })!,
-                            },
-                        },
-                    ],
-                })
-                return
+                replyRank = "Moderator"
             }
 
             if (guildRank === "Beast") {
                 const roles = roleManage("beast")
                 await user.roles.remove(roles.rolesToRemove, "User was force updated.")
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
-
-                await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                usermentioned +
-                                "'s rank has been updated to `Beast`.",
-                            color: embedColor,
-                            thumbnail: {
-                                url: head!,
-                            },
-                            footer: {
-                                text:
-                                    interaction.guild!.name +
-                                    " | " +
-                                    devMessage,
-                                icon_url: interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                })!,
-                            },
-                        },
-                    ],
-                })
-                return
+                replyRank = "Beast"
             }
 
             if (guildRank === "Elite") {
                 const roles = roleManage("elite")
                 await user.roles.remove(roles.rolesToRemove, "User was force updated.")
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
-
-                await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                usermentioned +
-                                "'s rank has been updated to `Elite`.",
-                            color: embedColor,
-                            thumbnail: {
-                                url: head!,
-                            },
-                            footer: {
-                                text:
-                                    interaction.guild!.name +
-                                    " | " +
-                                    devMessage,
-                                icon_url: interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                })!,
-                            },
-                        },
-                    ],
-                })
-                return
+                replyRank = "Elite"
             }
 
             if (guildRank === "Member") {
                 const roles = roleManage("member")
                 await user.roles.remove(roles.rolesToRemove, "User was force updated.")
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
-
-                await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                usermentioned +
-                                "'s rank has been updated to `Member`.",
-                            color: embedColor,
-                            thumbnail: {
-                                url: head!,
-                            },
-                            footer: {
-                                text:
-                                    interaction.guild!.name +
-                                    " | " +
-                                    devMessage,
-                                icon_url: interaction.guild!.iconURL({
-                                    forceStatic: false,
-                                })!,
-                            },
-                        },
-                    ],
-                })
-                return
+                replyRank = "Member"
             }
+
+            await interaction.editReply({
+                embeds: [
+                    {
+                        description:
+                            usermentioned + " was given the the " + replyRank + " role.",
+                        color: embedColor,
+                        thumbnail: {
+                            url: head!,
+                        },
+                        footer: {
+                            text: interaction.guild!.name + " | " + devMessage,
+                            icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
+                        },
+                    },
+                ],
+            })
         }
     },
 } as Command

@@ -2,8 +2,11 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     userMention,
+    GuildMember,
 } from "discord.js"
+import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
+import logToChannel from "../utils/functions/logtochannel"
 
 export = {
     name: "setnick",
@@ -31,9 +34,9 @@ export = {
         .setDMPermission(false),
 
     async execute(interaction) {
-        const user = interaction.options.getUser("user")!
+        const member = interaction.options.getMember("user") as GuildMember
         const nickname = interaction.options.getString("nickname")
-        const member = await interaction.guild!.members.fetch(user.id)
+        const embedColor = Number(color.replace("#", "0x"))
 
         if (!member.manageable) {
             interaction.reply({
@@ -45,12 +48,39 @@ export = {
 
         await member.setNickname(nickname, `Set by ${interaction.user.tag}`)
 
+        await logToChannel("mod", {
+            embeds: [{
+                author: {
+                    name: interaction.user.username,
+                    icon_url: interaction.user.avatarURL({ forceStatic: false }) || undefined,
+                },
+                title: "Nickname",
+                description: `
+                **User:** ${userMention(member.id)}
+                **Nickname:** ${nickname}
+                **Moderator:** ${userMention(interaction.user.id)}
+                `,
+                color: embedColor,
+                thumbnail: {
+                    url: interaction.user.avatarURL({ forceStatic: false }) || "",
+                },
+                footer: {
+                    text: "ID: " + member.user.id,
+                    icon_url: member.user.avatarURL({ forceStatic: false }) || undefined,
+                },
+                timestamp: new Date().toISOString()
+            }]
+        })
+
         await interaction.reply({
-            content:
-                "Set the nickname of " +
-                userMention(member.id) +
-                " to " +
-                nickname,
+            embeds: [{
+                description: `Successfully set the nickname of ${userMention(member.id)} to ${nickname}`,
+                color: embedColor,
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                }
+            }],
             ephemeral: true,
         })
     },

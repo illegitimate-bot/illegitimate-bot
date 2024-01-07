@@ -3,9 +3,12 @@ import {
     PermissionFlagsBits,
     ChannelType,
     TextChannel,
+    channelMention,
+    userMention,
 } from "discord.js"
 import { color, devMessage } from "../../config/options.json"
 import { Command } from "../interfaces"
+import logToChannel from "../utils/functions/logtochannel"
 
 export = {
     name: "slowmode",
@@ -59,6 +62,30 @@ export = {
             })
             return
         }
+
+        await logToChannel("mod", {
+            embeds: [{
+                author: {
+                    name: interaction.user.username,
+                    icon_url: interaction.user.avatarURL({ forceStatic: false }) || undefined,
+                },
+                title: "Slowmode Update",
+                description: `
+                **Channel:** ${channelMention(channel.id)}
+                **Slowmode:** ${seconds} seconds
+                **Mod:** ${userMention(interaction.user.id)}
+                `,
+                color: embedColor,
+                thumbnail: {
+                    url: interaction.user.avatarURL({ forceStatic: false }) || "",
+                },
+                footer: {
+                    icon_url: interaction.guild!.iconURL({ forceStatic: false }) || undefined,
+                    text: " ID: " + channel.id
+                },
+                timestamp: new Date().toISOString()
+            }]
+        })
 
         await interaction.editReply({
             embeds: [

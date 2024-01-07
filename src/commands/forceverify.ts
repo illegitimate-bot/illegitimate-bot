@@ -2,6 +2,7 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     GuildMember,
+    userMention,
 } from "discord.js"
 import { getUUID, getPlayer, getGuild, getHeadURL } from "../utils/Hypixel"
 import { color, hypixelGuildID, devMessage } from "../../config/options.json"
@@ -9,6 +10,7 @@ import verify = require("../schemas/verifySchema")
 import mongoose from "mongoose"
 import roleManage from "../utils/functions/rolesmanage"
 import { Command } from "../interfaces"
+import logToChannel from "../utils/functions/logtochannel"
 
 export = {
     name: "forceverify",
@@ -180,6 +182,31 @@ export = {
 
         await newVerify.save()
 
+        await logToChannel("mod", {
+            embeds: [{
+                author: {
+                    name: modName,
+                    icon_url: mod.avatarURL({ forceStatic: false }) || undefined,
+                },
+                title: "Force Verified",
+                description: `
+                **User:** ${userMention(user.id)}
+                **Mod:** ${userMention(mod.id)}
+                **IGN:** \`${player.displayname}\`
+                **UUID:** \`${uuid}\`
+                `,
+                color: embedColor,
+                thumbnail: {
+                    url: mod.avatarURL({ forceStatic: false }) || "",
+                },
+                footer: {
+                    icon_url: user.user.avatarURL({ forceStatic: false }) || undefined,
+                    text: "ID: " + user.user.id
+                },
+                timestamp: new Date().toISOString(),
+            }]
+        })
+
         await interaction.editReply({
             embeds: [
                 {
@@ -195,10 +222,7 @@ export = {
                         url: head!,
                     },
                     footer: {
-                        icon_url:
-                            interaction.guild!.iconURL({
-                                forceStatic: false,
-                            }) || undefined,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: false, }) || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
                     },
                 },

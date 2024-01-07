@@ -306,9 +306,7 @@ export = {
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL({
-                            forceStatic: true,
-                        })!,
+                        icon_url: interaction.guild!.iconURL({ forceStatic: true, }) || undefined,
                     },
                     fields: statsFields,
                 },

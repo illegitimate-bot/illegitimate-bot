@@ -126,7 +126,7 @@ export = {
                     color: wlembed.color!,
                     footer: {
                         text: "Last updated by " + user.username,
-                        icon_url: user.avatarURL()!,
+                        icon_url: user.avatarURL() || undefined,
                     },
                     thumbnail: wlembed.thumbnail!,
                     fields: fields,

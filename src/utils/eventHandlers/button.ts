@@ -41,12 +41,11 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
             await button.execute(interaction)
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
-
                 await logToChannel("error", {
                     embeds: [
                         {
                             title: "Button error occured",
-                            description: String(error),
+                            description: "```" + error + "```",
                             color: embedColor,
                             footer: {
                                 icon_url: interaction.guild!.iconURL() || undefined,
@@ -59,11 +58,24 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
                     ],
                 })
             }
+
             console.error(error)
-            await interaction.reply({
-                content: "There was an error while executing this event!",
-                ephemeral: true,
-            })
+            if (!interaction.deferred) {
+                await interaction.reply({
+                    embeds: [{
+                        description: "There was an error while executing this button!",
+                        color: embedColor,
+                    }],
+                    ephemeral: true,
+                })
+            } else {
+                await interaction.editReply({
+                    embeds: [{
+                        description: "There was an error while executing this button! 2",
+                        color: embedColor,
+                    }]
+                })
+            }
         }
     })
 }

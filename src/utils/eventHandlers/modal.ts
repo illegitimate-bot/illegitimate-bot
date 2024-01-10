@@ -80,5 +80,3 @@ export default function loadModalEvents(client: Client, ft: FileType) {
         }
     })
 }
-
-export { loadModalEvents }

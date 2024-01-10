@@ -10,7 +10,7 @@ import {
 import fs = require("fs")
 type FileType = "js" | "ts"
 
-async function autoDeployCommands(fileType: FileType) {
+export default async function autoDeployCommands(fileType: FileType) {
     const commands = []
     let commandFiles: string[] = []
     let contentMenuCommands: string[] = []
@@ -115,5 +115,3 @@ async function autoDeployCommands(fileType: FileType) {
         console.error(error)
     }
 }
-
-export { autoDeployCommands }

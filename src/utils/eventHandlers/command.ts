@@ -1,4 +1,5 @@
 import { ExtendedClient as Client } from "../Client"
+import colorLog from "../functions/colors"
 import { color } from "../../../config/options.json"
 import { Command } from "../../interfaces"
 import { Events } from "discord.js"
@@ -19,9 +20,10 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
         if ("data" in cmd && "execute" in cmd && cmd.type === "slash") {
             client.commands.set(cmd.data.name, cmd)
         } else {
-            console.log(
+            console.log(colorLog(
                 `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-            )
+                "red"
+            ))
         }
     }
 

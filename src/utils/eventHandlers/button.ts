@@ -1,4 +1,5 @@
 import { ExtendedClient as Client } from "../Client"
+import colorLog from "../functions/colors"
 import { color } from "../../../config/options.json"
 import { Button } from "../../interfaces"
 import { Events } from "discord.js"
@@ -19,9 +20,10 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
         if ("name" in btn && "execute" in btn && btn.type === "button") {
             client.buttons.set(btn.name, btn)
         } else {
-            console.log(
+            console.log(colorLog(
                 `[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`,
-            )
+                "red"
+            ))
         }
     }
 

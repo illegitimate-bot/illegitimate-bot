@@ -9,7 +9,7 @@ export = {
     description: "Snipes the last deleted message of a user",
     type: "slash",
     public: true,
-    dev: false,
+    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("snipe")

@@ -3,7 +3,6 @@ import { Event } from "../../../interfaces"
 import snipeCacheSchema from "../../../schemas/snipeCacheSchema"
 import mongoose from "mongoose"
 import { SnipeCache } from "../../../utils/Types"
-import env from "../../../utils/Env"
 
 export = {
     name: "snipecache",
@@ -14,7 +13,6 @@ export = {
     async execute(message: Message) {
         if (message.channel.type !== ChannelType.GuildText) return
         if (message.author.bot) return
-        if (message.author.id !== env.prod.dev) return
 
         const msg: SnipeCache = {
             author: message.author.id,

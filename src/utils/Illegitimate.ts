@@ -1,4 +1,5 @@
 import { ExtendedClient as Client } from "./Client"
+import color from "./functions/colors"
 import { Redis } from "ioredis"
 import env from "./Env"
 import { connect } from "mongoose"
@@ -13,10 +14,10 @@ class Bot {
         client.start()
         loadCronEvents()
         redis.on("ready", () => {
-            console.log("Connected to Redis")
+            console.log(color("Connected to Redis", "green"))
         })
         connect(env.prod.mongoURI!, {}).then(() => {
-            console.log("Connected to MongoDB")
+            console.log(color("Connected to MongoDB", "green"))
         })
     }
 }

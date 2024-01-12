@@ -1,4 +1,17 @@
+import chalk from "chalk"
+
 const colors = {
+    red: "#f38ba8",
+    lavender: "#b4befe",
+    green: "#a6e3a1",
+    pink: "#f5c2e7"
+}
+
+export default function color(text: string, type: keyof typeof colors) {
+    return chalk.hex(colors[type])(text)
+}
+
+/* const colors = {
     reset: "\x1b[0m",
     bright: "\x1b[1m",
     dim: "\x1b[2m",
@@ -28,4 +41,4 @@ const colors = {
 
 export default function colorize(text: string, color: keyof typeof colors) {
     return colors[color] + text + colors.reset
-}
+} */

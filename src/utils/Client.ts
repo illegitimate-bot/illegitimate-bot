@@ -5,7 +5,7 @@ import { Button } from "../interfaces"
 import { Modal } from "../interfaces"
 import { Autocomplete } from "../interfaces"
 import env from "./Env"
-import { autoDeployCommands } from "./Autodeploy"
+import autoDeployCommands from "./Autodeploy"
 import { loadAllEvents } from "./Events"
 
 export class ExtendedClient extends Client {

@@ -1,6 +1,7 @@
 import { Command } from "../interfaces"
+import chalk from "chalk"
 import env from "./Env"
-import color from "./functions/colors"
+// import color from "./functions/colors"
 import {
     REST,
     RESTGetAPIApplicationGuildCommandResult,
@@ -9,6 +10,9 @@ import {
 } from "discord.js"
 import fs = require("fs")
 type FileType = "js" | "ts"
+
+const oldColor = chalk.hex("#f38ba8")
+const newColor = chalk.hex("#b4befe")
 
 export default async function autoDeployCommands(fileType: FileType) {
     const commands = []
@@ -86,17 +90,21 @@ export default async function autoDeployCommands(fileType: FileType) {
         JSON.stringify(sortedCurrentCommandsInfo)
     ) {
         console.log(
-            color.colorize("Commands are the same, skipping deploy.", "green"),
+            // color.colorize("Commands are the same, skipping deploy.", "green"),
+            newColor("Commands are the same, skipping deploy."),
         )
-        console.log(color.colorize(newCmds, "green"))
+        // console.log(color.colorize(newCmds, "green"))
+        console.log(newColor(newCmds))
         return
     }
 
     try {
         console.log(
-            color.colorize("Commands are different, starting deploy.", "red"),
+            // color.colorize("Commands are different, starting deploy.", "red"),
+            oldColor("Commands are different, starting deploy."),
         )
-        console.log(color.colorize(currentCmds, "red"))
+        // console.log(color.colorize(currentCmds, "red"))
+        console.log(oldColor(currentCmds))
         console.log(
             `Started refreshing ${commands.length} application (/) commands.`,
         )
@@ -106,8 +114,10 @@ export default async function autoDeployCommands(fileType: FileType) {
             { body: commands },
         )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
 
-        console.log(color.colorize("New commands deployed.", "green"))
-        console.log(color.colorize(newCmds, "green"))
+        // console.log(color.colorize("New commands deployed.", "green"))
+        // console.log(color.colorize(newCmds, "green"))
+        console.log(newColor("New commands deployed."))
+        console.log(newColor(newCmds))
         console.log(
             `Successfully reloaded ${data.length} application (/) commands.`,
         )

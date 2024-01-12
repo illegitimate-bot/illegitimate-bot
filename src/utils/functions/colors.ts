@@ -26,8 +26,6 @@ const colors = {
     bgWhite: "\x1b[47m",
 }
 
-function colorize(text: string, color: keyof typeof colors) {
+export default function colorize(text: string, color: keyof typeof colors) {
     return colors[color] + text + colors.reset
 }
-
-export default { colorize }

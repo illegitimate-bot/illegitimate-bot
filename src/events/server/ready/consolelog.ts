@@ -1,6 +1,6 @@
-import { Event } from "../../../interfaces"
-import { ExtendedClient as Client } from "../../../utils/Client"
-import color from "../../../utils/functions/colors"
+import { Event } from "@interfaces"
+import { ExtendedClient as Client } from "@utils/Client"
+import color from "@utils/functions/colors"
 
 export = {
     name: "conolelog",

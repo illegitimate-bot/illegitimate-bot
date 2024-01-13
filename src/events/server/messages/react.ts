@@ -1,4 +1,4 @@
-import { Event } from "../../../interfaces"
+import { Event } from "@interfaces"
 import { Message } from "discord.js"
 
 export = {

@@ -5,9 +5,9 @@ import {
     channelMention,
     userMention,
 } from "discord.js"
-import { color } from "../../config/options.json"
-import { Command } from "../interfaces"
-import logToChannel from "../utils/functions/logtochannel"
+import { color } from "@config/options.json"
+import { Command } from "@interfaces"
+import logToChannel from "@utils/functions/logtochannel"
 
 export = {
     name: "clear",

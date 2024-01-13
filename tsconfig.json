@@ -11,7 +11,14 @@
         "resolveJsonModule": true,
         "removeComments": true,
         "noUnusedLocals": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "paths": {
+            "@/*": ["./src/*"],
+            "@utils/*": ["./src/utils/*"],
+            "@interfaces": ["./src/interfaces/index"],
+            "@schemas/*": ["./src/schemas/*"],
+            "@config/*": ["./config/*"],
+        }
     },
     "include": ["src"],
     "exclude": ["node_modules"]

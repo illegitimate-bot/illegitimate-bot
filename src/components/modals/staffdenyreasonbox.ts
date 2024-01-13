@@ -4,9 +4,9 @@ import {
     ButtonBuilder,
     ButtonStyle,
 } from "discord.js"
-import { color } from "../../../config/options.json"
-import staffapp from "../../schemas/staffAppSchema"
-import { Modal } from "../../interfaces"
+import { color } from "@config/options.json"
+import staffapp from "@schemas/staffAppSchema"
+import { Modal } from "@interfaces"
 
 export = {
     name: "staffdenyreasonbox",

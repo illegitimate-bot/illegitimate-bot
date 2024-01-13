@@ -3,8 +3,8 @@ import {
     GuildMember,
     userMention,
 } from "discord.js"
-import { countingBanned } from "../../../config/roles.json"
-import { color, devMessage } from "../../../config/options.json"
+import { countingBanned } from "@config/roles.json"
+import { color, devMessage } from "@config/options.json"
 
 export default async function ban(
     interaction: ChatInputCommandInteraction,

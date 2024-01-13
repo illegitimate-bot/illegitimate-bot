@@ -6,9 +6,9 @@ import {
     Message,
     GuildMember,
 } from "discord.js"
-import { color } from "../../../config/options.json"
-import guildapp from "../../schemas/guildAppSchema"
-import { Modal } from "../../interfaces"
+import { color } from "@config/options.json"
+import guildapp from "@schemas/guildAppSchema"
+import { Modal } from "@interfaces"
 
 export = {
     name: "denyreasonbox",

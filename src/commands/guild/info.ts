@@ -4,10 +4,10 @@ import {
     getPlayer,
     getGuild,
     guildLevel,
-} from "../../utils/Hypixel"
-import { color, devMessage } from "../../../config/options.json"
+} from "@utils/Hypixel"
+import { color, devMessage } from "@config/options.json"
 import { ChatInputCommandInteraction } from "discord.js"
-import { GuildData } from "../../interfaces/Guild"
+import { GuildData } from "@interfaces"
 
 export default async function guildInfo(
     interaction: ChatInputCommandInteraction,

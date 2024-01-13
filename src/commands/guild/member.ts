@@ -1,5 +1,5 @@
-import { getUUID, getPlayer, getGuild, getHeadURL } from "../../utils/Hypixel"
-import { color, devMessage } from "../../../config/options.json"
+import { getUUID, getPlayer, getGuild, getHeadURL } from "@utils/Hypixel"
+import { color, devMessage } from "@config/options.json"
 import { ChatInputCommandInteraction } from "discord.js"
 
 export default async function guildMember(

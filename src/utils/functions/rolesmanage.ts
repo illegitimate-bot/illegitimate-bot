@@ -8,7 +8,7 @@ import {
     guildStaff,
     guildRole,
     defaultMember
-} from "../../../config/roles.json"
+} from "@config/roles.json"
 const roles = [
     gm,
     manager,

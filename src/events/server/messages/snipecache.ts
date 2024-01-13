@@ -1,8 +1,8 @@
 import { ChannelType, Message } from "discord.js"
-import { Event } from "../../../interfaces"
-import snipeCacheSchema from "../../../schemas/snipeCacheSchema"
+import { Event } from "@interfaces"
+import snipeCacheSchema from "@schemas/snipeCacheSchema"
 import mongoose from "mongoose"
-import { SnipeCache } from "../../../utils/Types"
+import { SnipeCache } from "@utils/Types"
 
 export = {
     name: "snipecache",

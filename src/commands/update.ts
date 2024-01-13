@@ -1,9 +1,9 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
-import { getGuild, getIGN, getHeadURL } from "../utils/Hypixel"
-import verify = require("../schemas/verifySchema")
-import { color, hypixelGuildID, devMessage } from "../../config/options.json"
-import roleManage from "../utils/functions/rolesmanage"
-import { Command } from "../interfaces"
+import { getGuild, getIGN, getHeadURL } from "@utils/Hypixel"
+import verify from "@schemas/verifySchema"
+import { color, hypixelGuildID, devMessage } from "@config/options.json"
+import roleManage from "@utils/functions/rolesmanage"
+import { Command } from "@interfaces"
 
 export = {
     name: "update",

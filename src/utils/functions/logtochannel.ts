@@ -1,6 +1,6 @@
-import { guildid, onlineLogChannel, botLogChannel, guildLogChannel, errorLogChannel, moderationLogChannel, devLogChannel } from "../../../config/options.json"
+import { guildid, onlineLogChannel, botLogChannel, guildLogChannel, errorLogChannel, moderationLogChannel, devLogChannel } from "@config/options.json"
 import { Guild, MessageCreateOptions, TextChannel } from "discord.js"
-import Illegitimate from "../Illegitimate"
+import Illegitimate from "@utils/Illegitimate"
 
 const channels = {
     online: onlineLogChannel,

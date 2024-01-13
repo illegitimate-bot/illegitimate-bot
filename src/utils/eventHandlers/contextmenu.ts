@@ -1,4 +1,5 @@
 import { ExtendedClient as Client } from "../Client"
+import colorLog from "../functions/colors"
 import { ContextMenu } from "../../interfaces"
 import { color } from "../../../config/options.json"
 import { Events } from "discord.js"
@@ -26,9 +27,10 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
         if ("data" in cmd && "execute" in cmd && cmd.type === "contextmenu") {
             client.contextmenus.set(cmd.data.name, cmd)
         } else {
-            console.log(
+            console.log(colorLog(
                 `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-            )
+                "red"
+            ))
         }
     }
 
@@ -53,7 +55,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
                     embeds: [
                         {
                             title: "Contextmenu error occured",
-                            description: String(error),
+                            description: "```" + error + "```",
                             color: embedColor,
                             footer: {
                                 icon_url: interaction.guild!.iconURL() || undefined,
@@ -66,11 +68,24 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
                     ],
                 })
             }
+
             console.error(error)
-            await interaction.reply({
-                content: "There was an error while executing this command!",
-                ephemeral: true,
-            })
+            if (!interaction.deferred) {
+                await interaction.reply({
+                    embeds: [{
+                        description: "There was an error while executing this contextmenu command!",
+                        color: embedColor,
+                    }],
+                    ephemeral: true,
+                })
+            } else {
+                await interaction.editReply({
+                    embeds: [{
+                        description: "There was an error while executing this contextmenu command!",
+                        color: embedColor,
+                    }]
+                })
+            }
         }
     })
 }

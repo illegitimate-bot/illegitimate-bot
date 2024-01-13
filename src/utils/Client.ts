@@ -1,11 +1,12 @@
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js"
+import color from "./functions/colors"
 import { Command } from "../interfaces"
 import { ContextMenu } from "../interfaces"
 import { Button } from "../interfaces"
 import { Modal } from "../interfaces"
 import { Autocomplete } from "../interfaces"
 import env from "./Env"
-import { autoDeployCommands } from "./Autodeploy"
+import autoDeployCommands from "./Autodeploy"
 import { loadAllEvents } from "./Events"
 
 export class ExtendedClient extends Client {
@@ -37,17 +38,17 @@ export class ExtendedClient extends Client {
     async start() {
         let token: string
         if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT) {
-            console.log("Running in development mode. [ts-node]")
+            console.log(color("Running in development mode. [ts-node]", "lavender"))
             loadAllEvents(this, "ts")
             token = env.dev.devtoken!
             autoDeployCommands("ts")
         } else if (process.env.NODE_ENV === "dev" && !process.env.TYPESCRIPT) {
-            console.log("Running in development mode.")
+            console.log(color("Running in development mode.", "lavender"))
             loadAllEvents(this, "js")
             token = env.dev.devtoken!
             autoDeployCommands("js")
         } else {
-            console.log("Running in production mode.")
+            console.log(color("Running in production mode.", "green"))
             loadAllEvents(this, "js")
             token = env.prod.token!
         }

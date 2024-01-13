@@ -1,6 +1,6 @@
 import { Command } from "../interfaces"
-import env from "./Env"
 import color from "./functions/colors"
+import env from "./Env"
 import {
     REST,
     RESTGetAPIApplicationGuildCommandResult,
@@ -10,7 +10,7 @@ import {
 import fs = require("fs")
 type FileType = "js" | "ts"
 
-async function autoDeployCommands(fileType: FileType) {
+export default async function autoDeployCommands(fileType: FileType) {
     const commands = []
     let commandFiles: string[] = []
     let contentMenuCommands: string[] = []
@@ -86,17 +86,17 @@ async function autoDeployCommands(fileType: FileType) {
         JSON.stringify(sortedCurrentCommandsInfo)
     ) {
         console.log(
-            color.colorize("Commands are the same, skipping deploy.", "green"),
+            color("Commands are the same, skipping deploy.", "lavender"),
         )
-        console.log(color.colorize(newCmds, "green"))
+        console.log(color(newCmds, "lavender"))
         return
     }
 
     try {
         console.log(
-            color.colorize("Commands are different, starting deploy.", "red"),
+            color("Commands are different, starting deploy.", "red"),
         )
-        console.log(color.colorize(currentCmds, "red"))
+        console.log(color(currentCmds, "red"))
         console.log(
             `Started refreshing ${commands.length} application (/) commands.`,
         )
@@ -106,8 +106,8 @@ async function autoDeployCommands(fileType: FileType) {
             { body: commands },
         )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
 
-        console.log(color.colorize("New commands deployed.", "green"))
-        console.log(color.colorize(newCmds, "green"))
+        console.log(color("New commands deployed.", "lavender"))
+        console.log(color(newCmds, "lavender"))
         console.log(
             `Successfully reloaded ${data.length} application (/) commands.`,
         )
@@ -115,5 +115,3 @@ async function autoDeployCommands(fileType: FileType) {
         console.error(error)
     }
 }
-
-export { autoDeployCommands }

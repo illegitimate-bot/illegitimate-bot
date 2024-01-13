@@ -4,6 +4,7 @@ import {
     color,
     devMessage,
 } from "../../../config/options.json"
+import colorLog from "../../utils/functions/colors"
 import { getGuild, getIGN } from "../../utils/Hypixel"
 import { Cron, GuildData } from "../../interfaces"
 import Illegitimate from "../../utils/Illegitimate"
@@ -16,7 +17,7 @@ async function guildWeekly() {
     ) as TextChannel
 
     if (!channel) {
-        console.log("Guild log channel not found")
+        console.log(colorLog("Guild log channel not found", "red"))
         return
     }
 

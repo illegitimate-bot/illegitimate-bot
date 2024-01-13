@@ -1,4 +1,5 @@
 import { ExtendedClient as Client } from "../Client"
+import colorLog from "../functions/colors"
 import { color } from "../../../config/options.json"
 import { Button } from "../../interfaces"
 import { Events } from "discord.js"
@@ -19,9 +20,10 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
         if ("name" in btn && "execute" in btn && btn.type === "button") {
             client.buttons.set(btn.name, btn)
         } else {
-            console.log(
+            console.log(colorLog(
                 `[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`,
-            )
+                "red"
+            ))
         }
     }
 
@@ -41,12 +43,11 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
             await button.execute(interaction)
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
-
                 await logToChannel("error", {
                     embeds: [
                         {
                             title: "Button error occured",
-                            description: String(error),
+                            description: "```" + error + "```",
                             color: embedColor,
                             footer: {
                                 icon_url: interaction.guild!.iconURL() || undefined,
@@ -59,11 +60,24 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
                     ],
                 })
             }
+
             console.error(error)
-            await interaction.reply({
-                content: "There was an error while executing this event!",
-                ephemeral: true,
-            })
+            if (!interaction.deferred) {
+                await interaction.reply({
+                    embeds: [{
+                        description: "There was an error while executing this button!",
+                        color: embedColor,
+                    }],
+                    ephemeral: true,
+                })
+            } else {
+                await interaction.editReply({
+                    embeds: [{
+                        description: "There was an error while executing this button! 2",
+                        color: embedColor,
+                    }]
+                })
+            }
         }
     })
 }

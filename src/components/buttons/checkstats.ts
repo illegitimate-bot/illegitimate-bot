@@ -1,5 +1,5 @@
-import { color, devMessage } from "@config/options.json"
-import guildapp from "@schemas/guildAppSchema"
+import { color, devMessage } from "config/options.json"
+import guildapp from "schemas/guildAppSchema"
 import {
     bwfkdr,
     bwstars,
@@ -8,7 +8,7 @@ import {
     swkdr,
     duelswins,
     duelswlr,
-} from "@config/reqs.json"
+} from "config/reqs.json"
 import {
     hypixelLevel,
     bedwarsLevel,
@@ -16,8 +16,8 @@ import {
     getPlayer,
     getGuild,
     getHeadURL,
-} from "@utils/Hypixel"
-import { Button } from "@interfaces"
+} from "utils/Hypixel"
+import { Button } from "interfaces"
 
 export = {
     name: "checkstats",

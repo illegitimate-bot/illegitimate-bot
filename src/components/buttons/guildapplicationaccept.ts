@@ -9,14 +9,14 @@ import {
     waitingListChannel,
     waitingListMessage,
     hypixelGuildID,
-} from "@config/options.json"
-import colorLog from "@utils/functions/colors"
+} from "config/options.json"
+import colorLog from "utils/functions/colors"
 import mongoose from "mongoose"
-import guildapp from "@schemas/guildAppSchema"
-import waitingList from "@schemas/waitinglistSchema"
-import { waitingListRole } from "@config/roles.json"
-import { Button } from "@interfaces"
-import { getGuild } from "@utils/Hypixel"
+import guildapp from "schemas/guildAppSchema"
+import waitingList from "schemas/waitinglistSchema"
+import { waitingListRole } from "config/roles.json"
+import { Button } from "interfaces"
+import { getGuild } from "utils/Hypixel"
 
 export = {
     name: "guildapplicationaccept",

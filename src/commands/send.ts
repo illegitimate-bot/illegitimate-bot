@@ -4,8 +4,8 @@ import {
     ChannelType,
     TextChannel,
 } from "discord.js"
-import { color, devMessage } from "@config/options.json"
-import { Command } from "@interfaces"
+import { color, devMessage } from "config/options.json"
+import { Command } from "interfaces"
 
 export = {
     name: "send",

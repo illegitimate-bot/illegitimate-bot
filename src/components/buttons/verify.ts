@@ -4,7 +4,7 @@ import {
     TextInputBuilder,
     TextInputStyle,
 } from "discord.js"
-import { Button } from "@interfaces"
+import { Button } from "interfaces"
 
 export = {
     name: "verify",

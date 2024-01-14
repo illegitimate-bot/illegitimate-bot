@@ -3,7 +3,7 @@ import {
     PermissionFlagsBits,
     ChatInputCommandInteraction,
 } from "discord.js"
-import { Command } from "@interfaces"
+import { Command } from "interfaces"
 
 const command: Command = {
     name: "dev-info",

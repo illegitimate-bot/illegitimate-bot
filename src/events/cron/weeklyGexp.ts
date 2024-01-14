@@ -3,11 +3,11 @@ import {
     guildLogChannel,
     color,
     devMessage,
-} from "@config/options.json"
-import colorLog from "@utils/functions/colors"
-import { getGuild, getIGN } from "@utils/Hypixel"
-import { Cron, GuildData } from "@interfaces"
-import Illegitimate from "@utils/Illegitimate"
+} from "config/options.json"
+import colorLog from "utils/functions/colors"
+import { getGuild, getIGN } from "utils/Hypixel"
+import { Cron, GuildData } from "interfaces"
+import Illegitimate from "utils/Illegitimate"
 import { TextChannel } from "discord.js"
 const client = Illegitimate.client
 

@@ -12,12 +12,12 @@
         "removeComments": true,
         "noUnusedLocals": true,
         "outDir": "dist",
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"],
-            "@utils/*": ["./src/utils/*"],
-            "@interfaces": ["./src/interfaces/index"],
-            "@schemas/*": ["./src/schemas/*"],
-            "@config/*": ["./config/*"],
+            "utils/*": ["src/utils/*"],
+            "interfaces": ["src/interfaces/index"],
+            "schemas/*": ["src/schemas/*"],
+            "config/*": ["src/config/*"],
         }
     },
     "include": ["src"],

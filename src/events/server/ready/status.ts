@@ -1,6 +1,6 @@
-import statuses = require("@config/statuses.json")
-import { Event } from "@interfaces"
-import { ExtendedClient as Client } from "@utils/Client"
+import statuses = require("config/statuses.json")
+import { Event } from "interfaces"
+import { ExtendedClient as Client } from "utils/Client"
 
 export = {
     name: "status",

@@ -3,10 +3,10 @@ import {
     PermissionFlagsBits,
     userMention,
 } from "discord.js"
-import { getIGN, getHeadURL } from "@utils/Hypixel"
-import { color, devMessage } from "@config/options.json"
-import verify from "@schemas/verifySchema"
-import { Command } from "@interfaces"
+import { getIGN, getHeadURL } from "utils/Hypixel"
+import { color, devMessage } from "config/options.json"
+import verify from "schemas/verifySchema"
+import { Command } from "interfaces"
 
 export = {
     name: "whois",

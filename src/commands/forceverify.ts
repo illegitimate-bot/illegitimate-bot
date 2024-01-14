@@ -4,13 +4,13 @@ import {
     GuildMember,
     userMention,
 } from "discord.js"
-import { getUUID, getPlayer, getGuild, getHeadURL } from "@utils/Hypixel"
-import { color, hypixelGuildID, devMessage } from "@config/options.json"
-import verify from "@schemas/verifySchema"
+import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
+import { color, hypixelGuildID, devMessage } from "config/options.json"
+import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
-import roleManage from "@utils/functions/rolesmanage"
-import { Command } from "@interfaces"
-import logToChannel from "@utils/functions/logtochannel"
+import roleManage from "utils/functions/rolesmanage"
+import { Command } from "interfaces"
+import logToChannel from "utils/functions/logtochannel"
 
 export = {
     name: "forceverify",

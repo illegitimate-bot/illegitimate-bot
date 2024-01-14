@@ -6,15 +6,15 @@ import {
     GuildMember,
     TextChannel,
 } from "discord.js"
-import { color } from "@config/options.json"
-import { largeM, smallM, ignM } from "@config/limitmessages.json"
-import { applicationsChannel } from "@config/options.json"
-import questions from "@config/questions.json"
-import { guildRole } from "@config/roles.json"
-import { getUUID } from "@utils/Hypixel"
+import { color } from "config/options.json"
+import { largeM, smallM, ignM } from "config/limitmessages.json"
+import { applicationsChannel } from "config/options.json"
+import questions from "config/questions.json"
+import { guildRole } from "config/roles.json"
+import { getUUID } from "utils/Hypixel"
 import mongoose from "mongoose"
-import guildapp from "@schemas/guildAppSchema"
-import { Button } from "@interfaces"
+import guildapp from "schemas/guildAppSchema"
+import { Button } from "interfaces"
 
 export = {
     name: "guildapply",

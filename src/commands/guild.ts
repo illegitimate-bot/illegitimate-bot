@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "@config/options.json"
-import { Command } from "@interfaces"
+import { color, devMessage } from "config/options.json"
+import { Command } from "interfaces"
 import guildMember from "./guild/member"
 import guildInfo from "./guild/info"
 import guildTop from "./guild/top"

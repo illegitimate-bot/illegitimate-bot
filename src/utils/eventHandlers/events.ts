@@ -1,5 +1,5 @@
-import { ExtendedClient as Client } from "@utils/Client"
-import { Event } from "@interfaces"
+import { ExtendedClient as Client } from "utils/Client"
+import { Event } from "interfaces"
 import path = require("path")
 import fs = require("fs")
 

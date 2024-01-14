@@ -1,8 +1,8 @@
 import { SlashCommandBuilder, userMention } from "discord.js"
-import { Command } from "@interfaces"
-import { color, devMessage } from "@config/options.json"
-import verify from "@schemas/verifySchema"
-import { getIGN, getHeadURL } from "@utils/Hypixel"
+import { Command } from "interfaces"
+import { color, devMessage } from "config/options.json"
+import verify from "schemas/verifySchema"
+import { getIGN, getHeadURL } from "utils/Hypixel"
 
 export = {
     name: "whoami",

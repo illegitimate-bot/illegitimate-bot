@@ -1,9 +1,9 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
-import { color, devMessage, hypixelGuildID } from "@config/options.json"
-import { ContextMenu } from "@interfaces"
-import verifySchema from "@schemas/verifySchema"
-import { getGuild, getHeadURL, getIGN } from "@utils/Hypixel"
-import roleManage from "@utils/functions/rolesmanage"
+import { color, devMessage, hypixelGuildID } from "config/options.json"
+import { ContextMenu } from "interfaces"
+import verifySchema from "schemas/verifySchema"
+import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
+import roleManage from "utils/functions/rolesmanage"
 
 export = {
     name: "Update User",

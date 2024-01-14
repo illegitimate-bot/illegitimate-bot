@@ -1,4 +1,4 @@
-import { Autocomplete } from "@interfaces"
+import { Autocomplete } from "interfaces"
 
 export = {
     name: "unban",

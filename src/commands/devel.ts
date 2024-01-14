@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { Command } from "@interfaces"
+import { Command } from "interfaces"
 
 export = {
     name: "devel",

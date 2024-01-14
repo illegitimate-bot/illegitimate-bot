@@ -1,7 +1,7 @@
 import fetch from "axios"
-import env from "@utils/Env"
-import { Player, PlayerData } from "@interfaces"
-import { Guild, GuildData } from "@interfaces"
+import env from "utils/Env"
+import { Player, PlayerData } from "interfaces"
+import { Guild, GuildData } from "interfaces"
 const apikey = env.prod.hypixelapikey
 const mojang = "https://api.mojang.com/users/profiles/minecraft/"
 const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"

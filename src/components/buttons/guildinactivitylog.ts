@@ -14,11 +14,11 @@ import {
     member,
     guildStaff,
     guildRole,
-} from "@config/roles.json"
-import { ignM, smallM, largeM } from "@config/limitmessages.json"
-import { inactivity } from "@config/questions.json"
-import { color, inactivityLogChannel } from "@config/options.json"
-import { Button } from "@interfaces"
+} from "config/roles.json"
+import { ignM, smallM, largeM } from "config/limitmessages.json"
+import { inactivity } from "config/questions.json"
+import { color, inactivityLogChannel } from "config/options.json"
+import { Button } from "interfaces"
 const guildRoles = [
     gm,
     manager,

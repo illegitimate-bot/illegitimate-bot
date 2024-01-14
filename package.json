@@ -7,7 +7,7 @@
         "start": "node dist/src/index.js",
         "build": "tsc",
         "watch": "tsc -w",
-        "dev": "nodemon --config nodemon.json -r tsconfig-paths/register src/index.ts",
+        "dev": "nodemon",
         "dev:js": "nodemon --config nodemon-js.json dist/src/index.js",
         "dev:build": "ts-node scripts/dev-deploy.ts",
         "dev:delete": "ts-node scripts/delete-commands.ts",
@@ -37,7 +37,6 @@
         "eslint": "^8.56.0",
         "prettier": "^3.2.1",
         "ts-node": "^10.9.2",
-        "tsconfig-paths": "^4.2.0",
         "typescript": "^5.3.3"
     }
 }

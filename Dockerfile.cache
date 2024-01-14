@@ -1,6 +1,10 @@
 FROM node:20.9.0-alpine3.18
 
-COPY package.json ./
-COPY yarn.lock ./
+RUN mkdir /cache
+
+COPY package.json /cache
+COPY yarn.lock /cache
+
+WORKDIR /cache
 
 RUN yarn install

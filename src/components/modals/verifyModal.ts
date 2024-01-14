@@ -1,6 +1,6 @@
-import { getUUID, getPlayer, getGuild, getHeadURL } from "../../utils/Hypixel"
-import { color, hypixelGuildID, devMessage } from "../../../config/options.json"
-import verify from "../../schemas/verifySchema"
+import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
+import { color, hypixelGuildID, devMessage } from "config/options.json"
+import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
 import {
     gm,
@@ -12,8 +12,8 @@ import {
     guildRole,
     guildStaff,
     defaultMember,
-} from "../../../config/roles.json"
-import { Modal } from "../../interfaces"
+} from "config/roles.json"
+import { Modal } from "interfaces"
 import { GuildMember } from "discord.js"
 
 export = {

@@ -1,12 +1,12 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
-import { getUUID, getPlayer, getGuild, getHeadURL } from "../utils/Hypixel"
-import { color, hypixelGuildID, devMessage } from "../../config/options.json"
+import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
+import { color, hypixelGuildID, devMessage } from "config/options.json"
 import mongoose from "mongoose"
-import roleManage from "../utils/functions/rolesmanage"
-import { Command } from "../interfaces"
-import verify = require("../schemas/verifySchema")
-import { PlayerData } from "../interfaces/Player"
-import { GuildData } from "../interfaces/Guild"
+import roleManage from "utils/functions/rolesmanage"
+import { Command } from "interfaces"
+import verify from "schemas/verifySchema"
+import { PlayerData } from "interfaces"
+import { GuildData } from "interfaces"
 
 export = {
     name: "verify",

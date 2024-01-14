@@ -1,12 +1,12 @@
-export { skywarsLevel } from "./functions/skywars"
-export { bedwarsLevel } from "./functions/bedwars"
-export { hypixelLevel } from "./functions/hypixel"
-export { formatUuid } from "./functions/uuid"
-export { guildLevel, scaledGEXP } from "./functions/guild"
+export { skywarsLevel } from "utils/functions/skywars"
+export { bedwarsLevel } from "utils/functions/bedwars"
+export { hypixelLevel } from "utils/functions/hypixel"
+export { formatUuid } from "utils/functions/uuid"
+export { guildLevel, scaledGEXP } from "utils/functions/guild"
 export {
     getUUID,
     getIGN,
     getPlayer,
     getGuild,
     getHeadURL,
-} from "./functions/account"
+} from "utils/functions/account"

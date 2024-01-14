@@ -1,4 +1,4 @@
-import env from "./Env"
+import env from "utils/Env"
 
 const prodValues = env.prod
 const devValues = env.dev

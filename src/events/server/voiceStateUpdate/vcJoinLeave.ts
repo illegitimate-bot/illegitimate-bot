@@ -3,9 +3,9 @@ import {
     channelMention,
     VoiceState,
 } from "discord.js"
-import { color } from "../../../../config/options.json"
-import { Event } from "../../../interfaces"
-import logToChannel from "../../../utils/functions/logtochannel"
+import { color } from "config/options.json"
+import { Event } from "interfaces"
+import logToChannel from "utils/functions/logtochannel"
 
 export = {
     name: "vcJoinLeave",

@@ -4,12 +4,12 @@ import {
     userMention,
     GuildMember,
 } from "discord.js"
-import { color, devMessage } from "../../config/options.json"
-import verify = require("../schemas/verifySchema")
-import { Command } from "../interfaces"
-import roleManage from "../utils/functions/rolesmanage"
-import logToChannel from "../utils/functions/logtochannel"
-import { getIGN } from "../utils/Hypixel"
+import { color, devMessage } from "config/options.json"
+import verify from "schemas/verifySchema"
+import { Command } from "interfaces"
+import roleManage from "utils/functions/rolesmanage"
+import logToChannel from "utils/functions/logtochannel"
+import { getIGN } from "utils/Hypixel"
 
 export = {
     name: "forceunverify",

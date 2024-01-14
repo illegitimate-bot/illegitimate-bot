@@ -3,7 +3,7 @@ import {
     ApplicationCommandType,
     PermissionFlagsBits,
 } from "discord.js"
-import { ContextMenu } from "../interfaces"
+import { ContextMenu } from "interfaces"
 
 export = {
     name: "resetnick",

@@ -1,7 +1,7 @@
 import { CronJob } from "cron"
 import path from "path"
 import fs from "fs"
-import { Cron } from "../../interfaces"
+import { Cron } from "interfaces"
 
 export default function loadCronEvents() {
     const cronPath = path.join(__dirname, "..", "..", "events", "cron")

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "../../config/options.json"
+import { color, devMessage } from "config/options.json"
 import {
     bwfkdr,
     bwstars,
@@ -8,8 +8,8 @@ import {
     swkdr,
     duelswins,
     duelswlr,
-} from "../../config/reqs.json"
-import { Command } from "../interfaces"
+} from "config/reqs.json"
+import { Command } from "interfaces"
 
 export = {
     name: "reqs",

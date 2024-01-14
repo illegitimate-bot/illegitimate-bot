@@ -6,16 +6,16 @@ import {
     GuildMember,
     TextChannel,
 } from "discord.js"
-import { color, staffApplicationsChannel } from "../../../config/options.json"
-import { largeM, ignM } from "../../../config/limitmessages.json"
-import questions from "../../../config/questions.json"
-import { guildRole, guildStaff } from "../../../config/roles.json"
+import { color, staffApplicationsChannel } from "config/options.json"
+import { largeM, ignM } from "config/limitmessages.json"
+import questions from "config/questions.json"
+import { guildRole, guildStaff } from "config/roles.json"
 import mongoose from "mongoose"
-import staffapp from "../../schemas/staffAppSchema"
-import settings from "../../schemas/settingsSchema"
-import { getUUID } from "../../utils/Hypixel"
-import { Button } from "../../interfaces"
-import env from "../../utils/Env"
+import staffapp from "schemas/staffAppSchema"
+import settings from "schemas/settingsSchema"
+import { getUUID } from "utils/Hypixel"
+import { Button } from "interfaces"
+import env from "utils/Env"
 
 export = {
     name: "staffapply",

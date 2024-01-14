@@ -1,11 +1,11 @@
-import { ExtendedClient as Client } from "../Client"
-import colorLog from "../functions/colors"
-import { color } from "../../../config/options.json"
-import { Modal } from "../../interfaces"
+import { ExtendedClient as Client } from "utils/Client"
+import colorLog from "utils/functions/colors"
+import { color } from "config/options.json"
+import { Modal } from "interfaces"
 import { Events } from "discord.js"
 import path = require("path")
 import fs = require("fs")
-import logToChannel from "../functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel"
 type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
 

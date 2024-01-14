@@ -1,4 +1,4 @@
-import { Command } from "../interfaces"
+import { Command } from "interfaces"
 import color from "./functions/colors"
 import env from "./Env"
 import {

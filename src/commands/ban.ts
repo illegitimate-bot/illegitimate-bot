@@ -4,10 +4,10 @@ import {
     userMention,
     GuildMember,
 } from "discord.js"
-import { admin, helper } from "../../config/roles.json"
-import { color, devMessage } from "../../config/options.json"
-import { Command } from "../interfaces"
-import logToChannel from "../utils/functions/logtochannel"
+import { admin, helper } from "config/roles.json"
+import { color, devMessage } from "config/options.json"
+import { Command } from "interfaces"
+import logToChannel from "utils/functions/logtochannel"
 
 export = {
     name: "ban",

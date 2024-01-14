@@ -4,11 +4,11 @@ import {
     userMention,
     GuildMember,
 } from "discord.js"
-import { getGuild, getHeadURL, getIGN } from "../utils/Hypixel"
-import { hypixelGuildID, color, devMessage } from "../../config/options.json"
-import verify = require("../schemas/verifySchema")
-import { Command } from "../interfaces"
-import roleManage from "../utils/functions/rolesmanage"
+import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
+import { hypixelGuildID, color, devMessage } from "config/options.json"
+import verify from "schemas/verifySchema"
+import { Command } from "interfaces"
+import roleManage from "utils/functions/rolesmanage"
 
 export = {
     name: "forceupdate",

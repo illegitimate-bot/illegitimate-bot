@@ -5,10 +5,10 @@ import {
     ChatInputCommandInteraction,
     GuildMember,
 } from "discord.js"
-import { color, devMessage } from "../../config/options.json"
-import { Command } from "../interfaces"
+import { color, devMessage } from "config/options.json"
+import { Command } from "interfaces"
 import ms from "ms"
-import logToChannel from "../utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel"
 
 const command: Command = {
     name: "timeout",

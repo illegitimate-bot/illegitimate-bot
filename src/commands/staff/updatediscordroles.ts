@@ -1,10 +1,10 @@
-import verify = require("../../schemas/verifySchema")
-import { color, hypixelGuildID } from "../../../config/options.json"
-import roleManage from "../../utils/functions/rolesmanage"
+import verify from "schemas/verifySchema"
+import { color, hypixelGuildID } from "config/options.json"
+import roleManage from "utils/functions/rolesmanage"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
-import env from "../../utils/Env"
-import { getGuild } from "../../utils/Hypixel"
-import { GuildData } from "../../interfaces"
+import env from "utils/Env"
+import { getGuild } from "utils/Hypixel"
+import { GuildData } from "interfaces"
 
 export default async function updateDiscordRoles(
     interaction: ChatInputCommandInteraction,

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { color, devMessage, instructionsgif } from "../../config/options.json"
-import { Command } from "../interfaces"
+import { color, devMessage, instructionsgif } from "config/options.json"
+import { Command } from "interfaces"
 
 export = {
     name: "instructions",

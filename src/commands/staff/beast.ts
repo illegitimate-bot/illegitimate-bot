@@ -6,8 +6,8 @@ import {
     beastswstars,
     beastduelswins,
     duelswlr,
-} from "../../../config/reqs.json"
-import { color, devMessage } from "../../../config/options.json"
+} from "config/reqs.json"
+import { color, devMessage } from "config/options.json"
 import {
     hypixelLevel,
     bedwarsLevel,
@@ -16,7 +16,7 @@ import {
     getPlayer,
     getGuild,
     getHeadURL,
-} from "../../utils/Hypixel"
+} from "utils/Hypixel"
 import { ChatInputCommandInteraction } from "discord.js"
 
 export default async function beast(

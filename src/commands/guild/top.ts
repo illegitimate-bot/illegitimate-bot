@@ -1,8 +1,8 @@
-import { getUUID, getPlayer, getGuild, getIGN } from "../../utils/Hypixel"
-import { color, devMessage } from "../../../config/options.json"
+import { getUUID, getPlayer, getGuild, getIGN } from "utils/Hypixel"
+import { color, devMessage } from "config/options.json"
 import { ChannelType, ChatInputCommandInteraction } from "discord.js"
-import { GuildData } from "../../interfaces/Guild"
-import Illegitimate from "../../utils/Illegitimate"
+import { GuildData } from "interfaces"
+import Illegitimate from "utils/Illegitimate"
 const redis = Illegitimate.redis
 
 export default async function guildTop(

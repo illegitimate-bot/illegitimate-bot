@@ -1,7 +1,7 @@
-import waitinglist from "../../schemas/waitinglistSchema"
-import { getGuild } from "../../utils/Hypixel"
-import { hypixelGuildID } from "../../../config/options.json"
-import { Button } from "../../interfaces"
+import waitinglist from "schemas/waitinglistSchema"
+import { getGuild } from "utils/Hypixel"
+import { hypixelGuildID } from "config/options.json"
+import { Button } from "interfaces"
 
 export = {
     name: "waitinglistupdate",

@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, TextChannel, channelMention } from "discord.js"
-import settingsSchema from "../../schemas/settingsSchema"
-import { color, devMessage } from "../../../config/options.json"
+import settingsSchema from "schemas/settingsSchema"
+import { color, devMessage } from "config/options.json"
 import mongoose from "mongoose"
 
 export default async function setup(interaction: ChatInputCommandInteraction): Promise<void> {

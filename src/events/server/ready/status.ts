@@ -1,4 +1,4 @@
-import statuses = require("config/statuses.json")
+import statuses from "config/statuses.json"
 import { Event } from "interfaces"
 import { ExtendedClient as Client } from "utils/Client"
 

@@ -5,7 +5,7 @@ import {
 } from "discord.js"
 import { Command } from "interfaces"
 
-const command: Command = {
+export = {
     name: "dev-info",
     description: "Test command for the bot.",
     type: "slash",
@@ -33,6 +33,4 @@ const command: Command = {
 
         await interaction.reply({ content: "Test command.", ephemeral: true })
     },
-}
-
-export = command
+} as Command

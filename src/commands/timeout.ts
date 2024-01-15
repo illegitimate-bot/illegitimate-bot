@@ -10,7 +10,7 @@ import { Command } from "interfaces"
 import ms from "ms"
 import logToChannel from "utils/functions/logtochannel"
 
-const command: Command = {
+export = {
     name: "timeout",
     description: "Times out a memeber",
     type: "slash",
@@ -177,6 +177,4 @@ const command: Command = {
             ],
         })
     },
-}
-
-export = command
+} as Command

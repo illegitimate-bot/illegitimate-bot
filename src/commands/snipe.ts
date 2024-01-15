@@ -2,7 +2,7 @@ import { GuildMember, SlashCommandBuilder } from "discord.js"
 import snipeCacheSchema from "schemas/snipeCacheSchema"
 import { Command } from "interfaces"
 import { color } from "config/options.json"
-import { SnipeCache } from "utils/Types"
+import { SnipeCache } from "typings"
 
 export = {
     name: "snipe",

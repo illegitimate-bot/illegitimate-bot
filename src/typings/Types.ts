@@ -1,4 +1,4 @@
-export type SnipeCache = {
+type SnipeCache = {
     author: string
     content: string
     channel: string
@@ -6,3 +6,5 @@ export type SnipeCache = {
     deletedAt: number
     attachments: string[]
 }
+
+export default SnipeCache

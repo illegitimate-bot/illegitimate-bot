@@ -15,9 +15,10 @@
         "baseUrl": ".",
         "paths": {
             "utils/*": ["src/utils/*"],
-            "interfaces": ["src/interfaces/index"],
             "schemas/*": ["src/schemas/*"],
             "config/*": ["src/config/*"],
+            "interfaces": ["src/interfaces/index"],
+            "typings": ["src/typings/index"],
         }
     },
     "include": ["src"],

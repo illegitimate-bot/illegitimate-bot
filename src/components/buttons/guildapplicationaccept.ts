@@ -155,7 +155,9 @@ export = {
                 ],
             })
         } catch (err) {
-            console.log(colorLog("Error while trying to update waiting list.", "red"))
+            console.log(
+                colorLog("Error while trying to update waiting list.", "red"),
+            )
         }
     },
 } as Button

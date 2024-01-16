@@ -27,7 +27,10 @@ export = {
             option
                 .setName("channel")
                 .setDescription("The channel to send the message to.")
-                .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                .addChannelTypes(
+                    ChannelType.GuildText,
+                    ChannelType.GuildAnnouncement,
+                ),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -36,7 +39,8 @@ export = {
         await interaction.deferReply({ ephemeral: true })
 
         const message = interaction.options.getString("message")!
-        const channel = (interaction.options.getChannel("channel") || interaction.channel) as TextChannel
+        const channel = (interaction.options.getChannel("channel") ||
+            interaction.channel) as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
 
         channel.send({

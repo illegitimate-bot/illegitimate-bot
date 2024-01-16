@@ -177,8 +177,8 @@ export default async function guildTop(
         amount = 1
     }
 
-    type GuildTopData = { ign: string, uuid: string }[]
-    type NewList = { name: string, value: string; inline: boolean }[]
+    type GuildTopData = { ign: string; uuid: string }[]
+    type NewList = { name: string; value: string; inline: boolean }[]
 
     let cacheStatus: boolean
     let guildData: GuildTopData = []
@@ -243,7 +243,9 @@ export default async function guildTop(
 
     for (let i = 0; i < amount; i++) {
         const gexp = new Intl.NumberFormat("en-US").format(topMembers[i].gexp)
-        const ign = guildData.find(member => member.uuid === topMembers[i].uuid)?.ign
+        const ign = guildData.find(
+            member => member.uuid === topMembers[i].uuid,
+        )?.ign
 
         const position = i + 1
 

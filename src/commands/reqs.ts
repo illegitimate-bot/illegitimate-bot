@@ -34,8 +34,7 @@ export = {
                         "**You must make 100k-150k weekly GEXP.\nAs well as onne of the game stats below**",
                     color: embedColor,
                     thumbnail: {
-                        url:
-                            interaction.guild!.iconURL() || "",
+                        url: interaction.guild!.iconURL() || "",
                     },
                     fields: [
                         {

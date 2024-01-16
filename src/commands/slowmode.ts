@@ -31,7 +31,10 @@ export = {
             option
                 .setName("channel")
                 .setDescription("The channel to set the slowmode of.")
-                .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement),
+                .addChannelTypes(
+                    ChannelType.GuildText,
+                    ChannelType.GuildAnnouncement,
+                ),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -40,7 +43,8 @@ export = {
         await interaction.deferReply({ ephemeral: true })
 
         const seconds = interaction.options.getInteger("seconds") ?? 5
-        const channel = (interaction.options.getChannel("channel") || interaction.channel) as TextChannel
+        const channel = (interaction.options.getChannel("channel") ||
+            interaction.channel) as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
 
         if (seconds > 21600) {
@@ -52,8 +56,7 @@ export = {
                         color: embedColor,
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
-                            icon_url:
-                                interaction.guild!.iconURL() || undefined,
+                            icon_url: interaction.guild!.iconURL() || undefined,
                         },
                     },
                 ],
@@ -62,27 +65,29 @@ export = {
         }
 
         await logToChannel("mod", {
-            embeds: [{
-                author: {
-                    name: interaction.user.username,
-                    icon_url: interaction.user.avatarURL() || undefined,
-                },
-                title: "Slowmode Update",
-                description: `
+            embeds: [
+                {
+                    author: {
+                        name: interaction.user.username,
+                        icon_url: interaction.user.avatarURL() || undefined,
+                    },
+                    title: "Slowmode Update",
+                    description: `
                 **Channel:** ${channelMention(channel.id)}
                 **Slowmode:** ${seconds} seconds
                 **Mod:** ${userMention(interaction.user.id)}
                 `,
-                color: embedColor,
-                thumbnail: {
-                    url: interaction.user.avatarURL() || "",
+                    color: embedColor,
+                    thumbnail: {
+                        url: interaction.user.avatarURL() || "",
+                    },
+                    footer: {
+                        icon_url: interaction.guild!.iconURL() || undefined,
+                        text: " ID: " + channel.id,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                footer: {
-                    icon_url: interaction.guild!.iconURL() || undefined,
-                    text: " ID: " + channel.id
-                },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
 
         await interaction.editReply({
@@ -92,8 +97,7 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url:
-                            interaction.guild!.iconURL() || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],

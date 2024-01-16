@@ -124,44 +124,62 @@ export = {
         if (target.isCommunicationDisabled()) {
             if (time === 0) {
                 title = "Timeout Removed"
-                description = "Removed timeout of " + userMention(target.id) + " for " + reason,
-                timeouttime = null
+                ;(description =
+                    "Removed timeout of " +
+                    userMention(target.id) +
+                    " for " +
+                    reason),
+                    (timeouttime = null)
             } else {
                 title = "Timeout Updated"
-                description = "Updated timeout of " + userMention(target.id) + " to " + prettyTime + " for " + reason,
-                timeouttime = time
+                ;(description =
+                    "Updated timeout of " +
+                    userMention(target.id) +
+                    " to " +
+                    prettyTime +
+                    " for " +
+                    reason),
+                    (timeouttime = time)
             }
         } else {
             title = "Member Timed Out"
-            description = "Timed out " + userMention(target.id) + " for " + prettyTime + " for " + reason,
-            timeouttime = time
+            ;(description =
+                "Timed out " +
+                userMention(target.id) +
+                " for " +
+                prettyTime +
+                " for " +
+                reason),
+                (timeouttime = time)
         }
 
         await target.timeout(timeouttime, reason)
 
         await logToChannel("mod", {
-            embeds: [{
-                author: {
-                    name: mod.user.username,
-                    icon_url: mod.user.avatarURL() || undefined,
-                },
-                title: title,
-                description: `
+            embeds: [
+                {
+                    author: {
+                        name: mod.user.username,
+                        icon_url: mod.user.avatarURL() || undefined,
+                    },
+                    title: title,
+                    description: `
                 **User:** ${userMention(target.id)}
                 ${timeouttime === null ? "**Time:** `None`" : "**Time:** `" + prettyTime + "`"}
                 **Reason:** \`${reason}\`
                 **Mod:** ${userMention(mod.id)}
                 `,
-                color: embedColor,
-                thumbnail: {
-                    url: mod.user.avatarURL() || "",
+                    color: embedColor,
+                    thumbnail: {
+                        url: mod.user.avatarURL() || "",
+                    },
+                    footer: {
+                        text: "ID: " + target.id,
+                        icon_url: target.user.avatarURL() || undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                footer: {
-                    text: "ID: " + target.id,
-                    icon_url: target.user.avatarURL() || undefined,
-                },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
 
         await interaction.editReply({

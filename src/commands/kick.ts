@@ -36,8 +36,9 @@ export = {
     async execute(interaction) {
         await interaction.deferReply()
 
-        const member = interaction.options.getMember( "member",) as GuildMember
-        const reason = interaction.options.getString("reason") ?? "No reason provided."
+        const member = interaction.options.getMember("member") as GuildMember
+        const reason =
+            interaction.options.getString("reason") ?? "No reason provided."
         const embedColor = Number(color.replace("#", "0x"))
 
         const mod = await interaction.guild!.members.fetch(interaction.user.id)
@@ -79,36 +80,44 @@ export = {
         await member.kick(reason + ` - ${mod.user.username}`)
 
         await logToChannel("mod", {
-            embeds: [{
-                author: {
-                    name: mod.user.username,
-                    icon_url: mod.user.avatarURL() || undefined,
-                },
-                title: "Member Kicked",
-                description: `
+            embeds: [
+                {
+                    author: {
+                        name: mod.user.username,
+                        icon_url: mod.user.avatarURL() || undefined,
+                    },
+                    title: "Member Kicked",
+                    description: `
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.user.id)}
                 **Reason:** ${reason}
                 `,
-                color: embedColor,
-                thumbnail: {
-                    url: mod.user.avatarURL() || "",
+                    color: embedColor,
+                    thumbnail: {
+                        url: mod.user.avatarURL() || "",
+                    },
+                    footer: {
+                        text: "ID: " + member.user.id,
+                        icon_url: member.user.avatarURL() || undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                footer: {
-                    text: "ID: " + member.user.id,
-                    icon_url: member.user.avatarURL() || undefined,
-                },
-                timestamp: new Date().toISOString(),
-            }]
+            ],
         })
 
         await interaction.editReply({
             embeds: [
                 {
                     title: "Member Kicked",
-                    description: "**User:** " + userMention(member.user.id) + "\n" +
-                        "**Reason:** " + reason + "\n" +
-                        "**Moderator:** " + mod.user.username,
+                    description:
+                        "**User:** " +
+                        userMention(member.user.id) +
+                        "\n" +
+                        "**Reason:** " +
+                        reason +
+                        "\n" +
+                        "**Moderator:** " +
+                        mod.user.username,
                     color: embedColor,
                     thumbnail: {
                         url: member.user.avatarURL() || "",
@@ -116,7 +125,7 @@ export = {
                     footer: {
                         icon_url: interaction.guild!.iconURL() || undefined,
                         text: interaction.guild!.name + " | " + devMessage,
-                    }
+                    },
                 },
             ],
         })

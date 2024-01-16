@@ -50,32 +50,36 @@ export = {
         const uuid = verifiedUser.uuid
         const ign = await getIGN(uuid)
         await verify.findOneAndDelete({ userID: member.user.id })
-        await member.roles.remove(roleManage("all").rolesToRemove, "User force unverified by " + interaction.user.username)
-
+        await member.roles.remove(
+            roleManage("all").rolesToRemove,
+            "User force unverified by " + interaction.user.username,
+        )
 
         await logToChannel("mod", {
-            embeds: [{
-                title: "Force Unverified",
-                author: {
-                    name: mod.username,
-                    icon_url: mod.avatarURL() || undefined,
-                },
-                description: `
+            embeds: [
+                {
+                    title: "Force Unverified",
+                    author: {
+                        name: mod.username,
+                        icon_url: mod.avatarURL() || undefined,
+                    },
+                    description: `
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${ign}\`
                 **UUID:** \`${uuid}\`
                 `,
-                color: embedColor,
-                thumbnail: {
-                    url: mod.avatarURL() || "",
+                    color: embedColor,
+                    thumbnail: {
+                        url: mod.avatarURL() || "",
+                    },
+                    footer: {
+                        icon_url: member.user.avatarURL() || undefined,
+                        text: "ID: " + member.user.id,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                footer: {
-                    icon_url: member.user.avatarURL() || undefined,
-                    text: "ID: " + member.user.id,
-                },
-                timestamp: new Date().toISOString(),
-            }]
+            ],
         })
 
         await interaction.reply({

@@ -3,8 +3,8 @@ import colorLog from "utils/functions/colors"
 import { color } from "config/options.json"
 import { Command } from "interfaces"
 import { Events } from "discord.js"
-import path = require("path")
-import fs = require("fs")
+import path from "path"
+import fs from "fs"
 import logToChannel from "utils/functions/logtochannel"
 type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
@@ -20,10 +20,12 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
         if ("data" in cmd && "execute" in cmd && cmd.type === "slash") {
             client.commands.set(cmd.data.name, cmd)
         } else {
-            console.log(colorLog(
-                `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-                "red"
-            ))
+            console.log(
+                colorLog(
+                    `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
+                    "red",
+                ),
+            )
         }
     }
 
@@ -51,7 +53,8 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
                             description: "```" + error + "```",
                             color: embedColor,
                             footer: {
-                                icon_url: interaction.guild!.iconURL() || undefined,
+                                icon_url:
+                                    interaction.guild!.iconURL() || undefined,
                                 text:
                                     interaction.user.username +
                                     " | " +
@@ -65,18 +68,24 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
             console.error(error)
             if (!interaction.deferred) {
                 await interaction.reply({
-                    embeds: [{
-                        description: "There was an error while executing this command!",
-                        color: embedColor,
-                    }],
+                    embeds: [
+                        {
+                            description:
+                                "There was an error while executing this command!",
+                            color: embedColor,
+                        },
+                    ],
                     ephemeral: true,
                 })
             } else {
                 await interaction.editReply({
-                    embeds: [{
-                        description: "There was an error while executing this command!",
-                        color: embedColor,
-                    }]
+                    embeds: [
+                        {
+                            description:
+                                "There was an error while executing this command!",
+                            color: embedColor,
+                        },
+                    ],
                 })
             }
         }

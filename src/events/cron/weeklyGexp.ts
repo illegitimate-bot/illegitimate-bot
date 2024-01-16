@@ -12,9 +12,7 @@ import { TextChannel } from "discord.js"
 const client = Illegitimate.client
 
 async function guildWeekly() {
-    const channel = client.channels.cache.get(
-        guildLogChannel,
-    ) as TextChannel
+    const channel = client.channels.cache.get(guildLogChannel) as TextChannel
 
     if (!channel) {
         console.log(colorLog("Guild log channel not found", "red"))

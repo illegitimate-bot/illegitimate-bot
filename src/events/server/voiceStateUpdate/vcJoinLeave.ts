@@ -1,8 +1,4 @@
-import {
-    userMention,
-    channelMention,
-    VoiceState,
-} from "discord.js"
+import { userMention, channelMention, VoiceState } from "discord.js"
 import { color } from "config/options.json"
 import { Event } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
@@ -32,7 +28,8 @@ export = {
                         color: embedColor,
                         footer: {
                             text: "ID: " + newState.member!.id,
-                            icon_url: newState.member!.user.avatarURL() || undefined,
+                            icon_url:
+                                newState.member!.user.avatarURL() || undefined,
                         },
                         timestamp: new Date().toISOString(),
                     },
@@ -50,7 +47,8 @@ export = {
                         color: embedColor,
                         footer: {
                             text: "ID: " + oldState.member!.id,
-                            icon_url: oldState.member!.user.avatarURL() || undefined,
+                            icon_url:
+                                oldState.member!.user.avatarURL() || undefined,
                         },
                         timestamp: new Date().toISOString(),
                     },
@@ -72,7 +70,8 @@ export = {
                         color: embedColor,
                         footer: {
                             text: "ID: " + oldState.member!.id,
-                            icon_url: oldState.member!.user.avatarURL() || undefined,
+                            icon_url:
+                                oldState.member!.user.avatarURL() || undefined,
                         },
                         timestamp: new Date().toISOString(),
                     },

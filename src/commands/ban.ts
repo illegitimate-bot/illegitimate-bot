@@ -112,30 +112,30 @@ export = {
         })
 
         await logToChannel("mod", {
-            embeds: [{
-                author: {
-                    name: mod.user.username,
-                    icon_url: mod.user.avatarURL() || undefined,
-                },
-                title: "Member Banned",
-                description: `
+            embeds: [
+                {
+                    author: {
+                        name: mod.user.username,
+                        icon_url: mod.user.avatarURL() || undefined,
+                    },
+                    title: "Member Banned",
+                    description: `
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.user.id)}
                 **Reason:** ${reason}
                 **Messages Deleted:** ${messageDeletionDays} days
                 `,
-                color: embedColor,
-                thumbnail: {
-                    url: mod.user.avatarURL() || "",
+                    color: embedColor,
+                    thumbnail: {
+                        url: mod.user.avatarURL() || "",
+                    },
+                    footer: {
+                        text: "ID: " + member.user.id,
+                        icon_url: member.user.avatarURL() || undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                footer: {
-                    text: "ID: " + member.user.id,
-                    icon_url:
-                        member.user.avatarURL() ||
-                        undefined,
-                },
-                timestamp: new Date().toISOString(),
-            }]
+            ],
         })
 
         await interaction.editReply({
@@ -143,9 +143,15 @@ export = {
                 {
                     title: "Member Banned",
                     description:
-                        "**User:** " + userMention(member.user.id) + "\n" +
-                        "**Reason:** " + reason + "\n" +
-                        "**Messages Deleted:** " + messageDeletionDays + " days",
+                        "**User:** " +
+                        userMention(member.user.id) +
+                        "\n" +
+                        "**Reason:** " +
+                        reason +
+                        "\n" +
+                        "**Messages Deleted:** " +
+                        messageDeletionDays +
+                        " days",
                     color: embedColor,
                     thumbnail: {
                         url: member.user.avatarURL() || "",

@@ -24,12 +24,12 @@ export = {
         }
 
         const snipeCache = new snipeCacheSchema({
-            _id: new mongoose.Types.ObjectId,
+            _id: new mongoose.Types.ObjectId(),
             userid: message.author.id,
             channelid: message.channel.id,
             data: msg,
         })
 
         await snipeCache.save()
-    }
+    },
 } as Event

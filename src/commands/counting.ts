@@ -1,4 +1,8 @@
-import { ChannelType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
+import {
+    ChannelType,
+    PermissionFlagsBits,
+    SlashCommandBuilder,
+} from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
 import setup from "./counting/setup"
@@ -25,7 +29,10 @@ export = {
                         .setName("channel")
                         .setDescription("The channel to setup counting in")
                         .setRequired(true)
-                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                        .addChannelTypes(
+                            ChannelType.GuildText,
+                            ChannelType.GuildAnnouncement,
+                        ),
                 ),
         )
         .addSubcommand(subcommand =>
@@ -36,8 +43,8 @@ export = {
                     option
                         .setName("user")
                         .setDescription("The user to ban")
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -47,8 +54,8 @@ export = {
                     option
                         .setName("user")
                         .setDescription("The user to ban")
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -79,8 +86,7 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url:
-                            interaction.guild!.iconURL() || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],

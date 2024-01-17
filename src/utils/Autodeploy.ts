@@ -7,7 +7,7 @@ import {
     RESTPutAPIApplicationGuildCommandsJSONBody,
     Routes,
 } from "discord.js"
-import fs = require("fs")
+import fs from "fs"
 type FileType = "js" | "ts"
 
 export default async function autoDeployCommands(fileType: FileType) {
@@ -17,10 +17,10 @@ export default async function autoDeployCommands(fileType: FileType) {
 
     if (fileType === "js") {
         commandFiles = fs
-            .readdirSync("./dist/src/commands/")
+            .readdirSync("./dist/commands/")
             .filter(file => file.endsWith(fileType))
         contentMenuCommands = fs
-            .readdirSync("./dist/src/commands-contextmenu/")
+            .readdirSync("./dist/commands-contextmenu/")
             .filter(file => file.endsWith(fileType))
     } else if (fileType === "ts") {
         commandFiles = fs
@@ -93,9 +93,7 @@ export default async function autoDeployCommands(fileType: FileType) {
     }
 
     try {
-        console.log(
-            color("Commands are different, starting deploy.", "red"),
-        )
+        console.log(color("Commands are different, starting deploy.", "red"))
         console.log(color(currentCmds, "red"))
         console.log(
             `Started refreshing ${commands.length} application (/) commands.`,

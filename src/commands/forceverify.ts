@@ -143,36 +143,57 @@ export = {
 
             if (guildRank === "Guild Master") {
                 const roles = roleManage("gm")
-                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force verified by " + modName,
+                )
             }
 
             if (guildRank === "Manager") {
                 const roles = roleManage("manager")
-                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force verified by " + modName,
+                )
             }
 
             if (guildRank === "Moderator") {
                 const roles = roleManage("moderator")
-                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force verified by " + modName,
+                )
             }
 
             if (guildRank === "Beast") {
                 const roles = roleManage("beast")
-                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force verified by " + modName,
+                )
             }
 
             if (guildRank === "Elite") {
                 const roles = roleManage("elite")
-                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force verified by " + modName,
+                )
             }
 
             if (guildRank === "Member") {
                 const roles = roleManage("member")
-                await user.roles.add(roles.rolesToAdd, "User was force verified by " + modName)
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force verified by " + modName,
+                )
             }
         }
 
-        await user.roles.add(roleManage("default").rolesToAdd, "User was force verified by " + modName)
+        await user.roles.add(
+            roleManage("default").rolesToAdd,
+            "User was force verified by " + modName,
+        )
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
@@ -183,28 +204,30 @@ export = {
         await newVerify.save()
 
         await logToChannel("mod", {
-            embeds: [{
-                author: {
-                    name: modName,
-                    icon_url: mod.avatarURL() || undefined,
-                },
-                title: "Force Verified",
-                description: `
+            embeds: [
+                {
+                    author: {
+                        name: modName,
+                        icon_url: mod.avatarURL() || undefined,
+                    },
+                    title: "Force Verified",
+                    description: `
                 **User:** ${userMention(user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${player.displayname}\`
                 **UUID:** \`${uuid}\`
                 `,
-                color: embedColor,
-                thumbnail: {
-                    url: mod.avatarURL() || "",
+                    color: embedColor,
+                    thumbnail: {
+                        url: mod.avatarURL() || "",
+                    },
+                    footer: {
+                        icon_url: user.user.avatarURL() || undefined,
+                        text: "ID: " + user.user.id,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                footer: {
-                    icon_url: user.user.avatarURL() || undefined,
-                    text: "ID: " + user.user.id
-                },
-                timestamp: new Date().toISOString(),
-            }]
+            ],
         })
 
         await interaction.editReply({

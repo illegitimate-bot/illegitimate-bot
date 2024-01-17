@@ -1,10 +1,4 @@
-import {
-    getUUID,
-    getIGN,
-    getPlayer,
-    getGuild,
-    guildLevel,
-} from "utils/Hypixel"
+import { getUUID, getIGN, getPlayer, getGuild, guildLevel } from "utils/Hypixel"
 import { color, devMessage } from "config/options.json"
 import { ChatInputCommandInteraction } from "discord.js"
 import { GuildData } from "interfaces"
@@ -234,9 +228,7 @@ export default async function guildInfo(
                 color: embedColor,
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url:
-                        interaction.guild!.iconURL() ||
-                        undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined,
                 },
             },
         ],

@@ -1,4 +1,9 @@
-import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
+import {
+    ApplicationCommandType,
+    ContextMenuCommandBuilder,
+    PermissionFlagsBits,
+    userMention,
+} from "discord.js"
 import { color, devMessage, hypixelGuildID } from "config/options.json"
 import { ContextMenu } from "interfaces"
 import verifySchema from "schemas/verifySchema"
@@ -74,13 +79,18 @@ export = {
 
         if (responseGuildID !== hypixelGuildID) {
             const roles = roleManage("default")
-            await user.roles.remove(roles.rolesToRemove, "User was force updated.")
+            await user.roles.remove(
+                roles.rolesToRemove,
+                "User was force updated.",
+            )
             await user.roles.add(roles.rolesToAdd, "User was force updated.")
 
             await interaction.editReply({
                 embeds: [
                     {
-                        description: usermentioned + " was given the the Default Member role.",
+                        description:
+                            usermentioned +
+                            " was given the the Default Member role.",
                         color: embedColor,
                         thumbnail: {
                             url: head!,
@@ -97,50 +107,91 @@ export = {
 
         if (responseGuildID === hypixelGuildID) {
             const GuildMembers = guild!.members
-            const guildRank = GuildMembers.find( member => member.uuid === verifyData.uuid)!.rank
+            const guildRank = GuildMembers.find(
+                member => member.uuid === verifyData.uuid,
+            )!.rank
             let replyRank: string | null = null
 
-            await user.roles.add(roleManage("default").rolesToAdd, "User was force updated.")
+            await user.roles.add(
+                roleManage("default").rolesToAdd,
+                "User was force updated.",
+            )
 
             if (guildRank === "Guild Master") {
                 const roles = roleManage("gm")
-                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
-                await user.roles.add(roles.rolesToAdd, "User was force updated.")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User was force updated.",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force updated.",
+                )
                 replyRank = "Guild Master"
             }
 
             if (guildRank === "Manager") {
                 const roles = roleManage("manager")
-                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
-                await user.roles.add(roles.rolesToAdd, "User was force updated.")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User was force updated.",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force updated.",
+                )
                 replyRank = "Manager"
             }
 
             if (guildRank === "Moderator") {
                 const roles = roleManage("moderator")
-                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
-                await user.roles.add(roles.rolesToAdd, "User was force updated.")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User was force updated.",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force updated.",
+                )
                 replyRank = "Moderator"
             }
 
             if (guildRank === "Beast") {
                 const roles = roleManage("beast")
-                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
-                await user.roles.add(roles.rolesToAdd, "User was force updated.")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User was force updated.",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force updated.",
+                )
                 replyRank = "Beast"
             }
 
             if (guildRank === "Elite") {
                 const roles = roleManage("elite")
-                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
-                await user.roles.add(roles.rolesToAdd, "User was force updated.")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User was force updated.",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force updated.",
+                )
                 replyRank = "Elite"
             }
 
             if (guildRank === "Member") {
                 const roles = roleManage("member")
-                await user.roles.remove(roles.rolesToRemove, "User was force updated.")
-                await user.roles.add(roles.rolesToAdd, "User was force updated.")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User was force updated.",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User was force updated.",
+                )
                 replyRank = "Member"
             }
 
@@ -148,7 +199,10 @@ export = {
                 embeds: [
                     {
                         description:
-                            usermentioned + " was given the " + replyRank + " role.",
+                            usermentioned +
+                            " was given the " +
+                            replyRank +
+                            " role.",
                         color: embedColor,
                         thumbnail: {
                             url: head!,
@@ -161,5 +215,5 @@ export = {
                 ],
             })
         }
-    }
+    },
 } as ContextMenu

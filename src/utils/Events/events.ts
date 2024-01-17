@@ -1,7 +1,7 @@
 import { ExtendedClient as Client } from "utils/Client"
 import { Event } from "interfaces"
-import path = require("path")
-import fs = require("fs")
+import path from "path"
+import fs from "fs"
 
 export default function loadEvents(client: Client) {
     const serverDir = path.join(__dirname, "..", "..", "events", "server")

@@ -61,27 +61,29 @@ export = {
         await waitinglistSchema.findOneAndDelete({ userID: user.id })
 
         await logToChannel("mod", {
-            embeds: [{
-                author: {
-                    name: mod.username,
-                    icon_url: mod.avatarURL() || undefined,
-                },
-                title: "Waiting List - Remove User",
-                description: `
+            embeds: [
+                {
+                    author: {
+                        name: mod.username,
+                        icon_url: mod.avatarURL() || undefined,
+                    },
+                    title: "Waiting List - Remove User",
+                    description: `
                 **User:** ${userMention(user.id)}
                 **Reason:** ${reason}
                 **Mod:** ${userMention(mod.id)}
                 `,
-                color: embedColor,
-                thumbnail: {
-                    url: mod.avatarURL() || "",
+                    color: embedColor,
+                    thumbnail: {
+                        url: mod.avatarURL() || "",
+                    },
+                    footer: {
+                        icon_url: user.avatarURL() || undefined,
+                        text: "ID: " + user.id,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                footer: {
-                    icon_url: user.avatarURL() || undefined,
-                    text: "ID: " + user.id,
-                },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
 
         await interaction.editReply({
@@ -89,13 +91,17 @@ export = {
                 {
                     title: "Waiting List - Remove User",
                     description:
-                        "**User:** " + userMention(user.id) + "\n" +
-                        "**Reason:** `" + reason + "`",
+                        "**User:** " +
+                        userMention(user.id) +
+                        "\n" +
+                        "**Reason:** `" +
+                        reason +
+                        "`",
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
                         icon_url: interaction.guild!.iconURL() || undefined,
-                    }
+                    },
                 },
             ],
         })

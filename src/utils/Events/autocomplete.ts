@@ -3,8 +3,8 @@ import { color } from "config/options.json"
 import { Autocomplete } from "interfaces"
 import { Events } from "discord.js"
 import colorLog from "utils/functions/colors"
-import path = require("path")
-import fs = require("fs")
+import path from "path"
+import fs from "fs"
 import logToChannel from "utils/functions/logtochannel"
 type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
@@ -32,10 +32,12 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         ) {
             client.autocomplete.set(autocomplete.name, autocomplete)
         } else {
-            console.log(colorLog(
-                `[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                "red"
-            ))
+            console.log(
+                colorLog(
+                    `[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`,
+                    "red",
+                ),
+            )
         }
     }
 
@@ -55,7 +57,6 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
             await autocomplete.execute(interaction)
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
-
                 await logToChannel("error", {
                     embeds: [
                         {
@@ -63,7 +64,8 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
                             description: String(error),
                             color: embedColor,
                             footer: {
-                                icon_url: interaction.guild!.iconURL() || undefined,
+                                icon_url:
+                                    interaction.guild!.iconURL() || undefined,
                                 text:
                                     interaction.user.username +
                                     " | " +

@@ -59,8 +59,7 @@ export = {
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url:
-                            interaction.guild!.iconURL() || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined,
                     },
                 },
             ],

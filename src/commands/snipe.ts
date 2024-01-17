@@ -18,7 +18,8 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to snipe")
-                .setRequired(true))
+                .setRequired(true),
+        )
         .setDMPermission(false),
 
     async execute(interaction) {
@@ -26,17 +27,19 @@ export = {
         const member = interaction.options.getMember("user") as GuildMember
         const snipeCache = await snipeCacheSchema.find({
             userid: member.user.id,
-            channelid: interaction.channel!.id
+            channelid: interaction.channel!.id,
         })
         const embedColor = Number(color.replace("#", "0x"))
         const messages: string[] = []
 
         if (!snipeCache.length) {
             await interaction.editReply({
-                embeds: [{
-                    description: "No messages to snipe",
-                    color: embedColor
-                }]
+                embeds: [
+                    {
+                        description: "No messages to snipe",
+                        color: embedColor,
+                    },
+                ],
             })
             return
         }
@@ -48,28 +51,32 @@ export = {
                 messages.push(`**Message #${i}:** ${data.content}\n`)
             } else {
                 messages.push(`**Message #${i}:** ${data.content}`)
-                messages.push(`**Attachments:** ${data.attachments.join(", ")}\n`)
+                messages.push(
+                    `**Attachments:** ${data.attachments.join(", ")}\n`,
+                )
             }
             i++
         }
 
         await interaction.editReply({
-            embeds: [{
-                author: {
-                    name: member.user.username,
-                    icon_url: member.user.avatarURL() || undefined
+            embeds: [
+                {
+                    author: {
+                        name: member.user.username,
+                        icon_url: member.user.avatarURL() || undefined,
+                    },
+                    description: messages.join("\n"),
+                    thumbnail: {
+                        url: member.user.avatarURL() || "",
+                    },
+                    color: embedColor,
+                    footer: {
+                        text: "ID: " + member.user.id,
+                        icon_url: interaction.guild!.iconURL() || undefined,
+                    },
+                    timestamp: new Date().toISOString(),
                 },
-                description: messages.join("\n"),
-                thumbnail: {
-                    url: member.user.avatarURL() || ""
-                },
-                color: embedColor,
-                footer: {
-                    text: "ID: " + member.user.id,
-                    icon_url: interaction.guild!.iconURL() || undefined
-                },
-                timestamp: new Date().toISOString()
-            }]
+            ],
         })
-    }
+    },
 } as Command

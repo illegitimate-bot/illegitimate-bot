@@ -11,32 +11,38 @@ export = {
     execute(interaction: ChatInputCommandInteraction | ButtonInteraction) {
         if (interaction.isCommand()) {
             try {
-                console.log(color(
-                    interaction.user.username +
-                        " ran " +
-                        interaction.commandName +
-                        " " +
-                        interaction.options.getSubcommand(),
-                    "pink")
+                console.log(
+                    color(
+                        interaction.user.username +
+                            " ran " +
+                            interaction.commandName +
+                            " " +
+                            interaction.options.getSubcommand(),
+                        "pink",
+                    ),
                 )
             } catch {
-                console.log(color(
-                    interaction.user.username +
-                        " ran " +
-                        interaction.commandName,
-                    "pink")
+                console.log(
+                    color(
+                        interaction.user.username +
+                            " ran " +
+                            interaction.commandName,
+                        "pink",
+                    ),
                 )
             }
         }
 
         if (interaction.isButton()) {
-            console.log(color(
-                interaction.user.username +
-                    "#" +
-                    interaction.user.discriminator +
-                    " clicked " +
-                    interaction.customId,
-                "pink")
+            console.log(
+                color(
+                    interaction.user.username +
+                        "#" +
+                        interaction.user.discriminator +
+                        " clicked " +
+                        interaction.customId,
+                    "pink",
+                ),
             )
             return
         }

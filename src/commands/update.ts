@@ -62,8 +62,14 @@ export = {
         const head = await getHeadURL(ign)
         if (guildID !== hypixelGuildID) {
             const roles = roleManage("default")
-            await user.roles.remove(roles.rolesToRemove, "User used the update command")
-            await user.roles.add(roles.rolesToAdd, "User used the update command")
+            await user.roles.remove(
+                roles.rolesToRemove,
+                "User used the update command",
+            )
+            await user.roles.add(
+                roles.rolesToAdd,
+                "User used the update command",
+            )
 
             await interaction.editReply({
                 embeds: [
@@ -85,57 +91,99 @@ export = {
 
         if (guildID === hypixelGuildID) {
             const GuildMembers = guild!.members
-            const guildRank = GuildMembers.find( member => member.uuid === verifyData.uuid)!.rank
+            const guildRank = GuildMembers.find(
+                member => member.uuid === verifyData.uuid,
+            )!.rank
             let replyRank: string | null = null
 
-            await user.roles.add(roleManage("default").rolesToAdd, "User used the update command")
+            await user.roles.add(
+                roleManage("default").rolesToAdd,
+                "User used the update command",
+            )
 
             if (guildRank === "Guild Master") {
                 const roles = roleManage("gm")
-                await user.roles.remove(roles.rolesToRemove, "User used the update command")
-                await user.roles.add(roles.rolesToAdd, "User used the update command")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User used the update command",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User used the update command",
+                )
                 replyRank = "Guild Master"
             }
 
             if (guildRank === "Manager") {
                 const roles = roleManage("manager")
-                await user.roles.remove(roles.rolesToRemove, "User used the update command")
-                await user.roles.add(roles.rolesToAdd, "User used the update command")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User used the update command",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User used the update command",
+                )
                 replyRank = "Manager"
             }
 
             if (guildRank === "Moderator") {
                 const roles = roleManage("moderator")
-                await user.roles.remove(roles.rolesToRemove, "User used the update command")
-                await user.roles.add(roles.rolesToAdd, "User used the update command")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User used the update command",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User used the update command",
+                )
                 replyRank = "Moderator"
             }
 
             if (guildRank === "Beast") {
                 const roles = roleManage("beast")
-                await user.roles.remove(roles.rolesToRemove, "User used the update command")
-                await user.roles.add(roles.rolesToAdd, "User used the update command")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User used the update command",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User used the update command",
+                )
                 replyRank = "Beast"
             }
 
             if (guildRank === "Elite") {
                 const roles = roleManage("elite")
-                await user.roles.remove(roles.rolesToRemove, "User used the update command")
-                await user.roles.add(roles.rolesToAdd, "User used the update command")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User used the update command",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User used the update command",
+                )
                 replyRank = "Elite"
             }
 
             if (guildRank === "Member") {
                 const roles = roleManage("member")
-                await user.roles.remove(roles.rolesToRemove, "User used the update command")
-                await user.roles.add(roles.rolesToAdd, "User used the update command")
+                await user.roles.remove(
+                    roles.rolesToRemove,
+                    "User used the update command",
+                )
+                await user.roles.add(
+                    roles.rolesToAdd,
+                    "User used the update command",
+                )
                 replyRank = "Member"
             }
 
             await interaction.editReply({
                 embeds: [
                     {
-                        description: "Updated your roles to `" + replyRank + "`",
+                        description:
+                            "Updated your roles to `" + replyRank + "`",
                         color: embedColor,
                         thumbnail: {
                             url: head!,

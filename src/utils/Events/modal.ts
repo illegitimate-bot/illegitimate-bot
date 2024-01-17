@@ -3,8 +3,8 @@ import colorLog from "utils/functions/colors"
 import { color } from "config/options.json"
 import { Modal } from "interfaces"
 import { Events } from "discord.js"
-import path = require("path")
-import fs = require("fs")
+import path from "path"
+import fs from "fs"
 import logToChannel from "utils/functions/logtochannel"
 type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
@@ -22,10 +22,12 @@ export default function loadModalEvents(client: Client, ft: FileType) {
         if ("name" in modal && "execute" in modal && modal.type === "modal") {
             client.modals.set(modal.name, modal)
         } else {
-            console.log(colorLog(
-                `[WARNING] The modal at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                "red"
-            ))
+            console.log(
+                colorLog(
+                    `[WARNING] The modal at ${filePath} is missing a required "name", "execute" or "type" property.`,
+                    "red",
+                ),
+            )
         }
     }
 
@@ -52,7 +54,8 @@ export default function loadModalEvents(client: Client, ft: FileType) {
                             description: "```" + error + "```",
                             color: embedColor,
                             footer: {
-                                icon_url: interaction.guild!.iconURL() || undefined,
+                                icon_url:
+                                    interaction.guild!.iconURL() || undefined,
                                 text:
                                     interaction.user.username +
                                     " | " +
@@ -66,17 +69,23 @@ export default function loadModalEvents(client: Client, ft: FileType) {
             console.error(error)
             if (!interaction.deferred) {
                 await interaction.reply({
-                    embeds: [{
-                        description: "There was an error while executing this modal!",
-                        color: embedColor
-                    }]
+                    embeds: [
+                        {
+                            description:
+                                "There was an error while executing this modal!",
+                            color: embedColor,
+                        },
+                    ],
                 })
             } else {
                 await interaction.editReply({
-                    embeds: [{
-                        description: "There was an error while executing this modal!",
-                        color: embedColor
-                    }]
+                    embeds: [
+                        {
+                            description:
+                                "There was an error while executing this modal!",
+                            color: embedColor,
+                        },
+                    ],
                 })
             }
         }

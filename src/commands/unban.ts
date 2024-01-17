@@ -38,7 +38,8 @@ export = {
         await interaction.deferReply()
 
         const userid = interaction.options.getString("user")!
-        const reason = interaction.options.getString("reason") || "No reason provided"
+        const reason =
+            interaction.options.getString("reason") || "No reason provided"
         const mod = interaction.user
         const embedColor = Number(color.replace("#", "0x"))
         let user: User
@@ -102,9 +103,14 @@ export = {
                 {
                     title: "User unbanned",
                     description:
-                        "The user " + user!.username + " has been unbanned.\n" +
-                        "**Reason:** `" + reason + "`\n" +
-                        "**Moderator:** " + userMention(mod.id),
+                        "The user " +
+                        user!.username +
+                        " has been unbanned.\n" +
+                        "**Reason:** `" +
+                        reason +
+                        "`\n" +
+                        "**Moderator:** " +
+                        userMention(mod.id),
                     color: embedColor,
                     thumbnail: {
                         url: user!.avatarURL() || "",

@@ -1,4 +1,12 @@
-import { guildid, onlineLogChannel, botLogChannel, guildLogChannel, errorLogChannel, moderationLogChannel, devLogChannel } from "config/options.json"
+import {
+    guildid,
+    onlineLogChannel,
+    botLogChannel,
+    guildLogChannel,
+    errorLogChannel,
+    moderationLogChannel,
+    devLogChannel,
+} from "config/options.json"
 import { Guild, MessageCreateOptions, TextChannel } from "discord.js"
 import Illegitimate from "utils/Illegitimate"
 
@@ -8,12 +16,15 @@ const channels = {
     guild: guildLogChannel,
     error: errorLogChannel,
     mod: moderationLogChannel,
-    dev: devLogChannel
+    dev: devLogChannel,
 }
 
 type Channel = keyof typeof channels
 
-export default async function logToChannel(channel: Channel, message: MessageCreateOptions): Promise<void|null> {
+export default async function logToChannel(
+    channel: Channel,
+    message: MessageCreateOptions,
+): Promise<void | null> {
     const guild = Illegitimate.client.guilds.cache.get(guildid) as Guild
     let logChannel: TextChannel
 
@@ -24,7 +35,9 @@ export default async function logToChannel(channel: Channel, message: MessageCre
     }
 
     if (!logChannel) {
-        console.log(`[ERROR] Could not find channel used for ${channel} logging.`)
+        console.log(
+            `[ERROR] Could not find channel used for ${channel} logging.`,
+        )
         return
     }
 

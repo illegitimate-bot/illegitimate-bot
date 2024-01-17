@@ -60,27 +60,29 @@ export = {
             await channel.bulkDelete(messagesToDelete, true)
 
             await logToChannel("mod", {
-                embeds: [{
-                    author: {
-                        name: interaction.user.username,
-                        icon_url: interaction.user.avatarURL() || undefined,
-                    },
-                    title: "Messages Cleared",
-                    description: `
+                embeds: [
+                    {
+                        author: {
+                            name: interaction.user.username,
+                            icon_url: interaction.user.avatarURL() || undefined,
+                        },
+                        title: "Messages Cleared",
+                        description: `
                     **Channel:** ${channelMention(channel.id)}
                     **Amount:** \`${messages.size}\` messages
                     **Mod:** ${userMention(interaction.user.id)}
                     `,
-                    color: embedColor,
-                    thumbnail: {
-                        url: interaction.user.avatarURL() || "",
+                        color: embedColor,
+                        thumbnail: {
+                            url: interaction.user.avatarURL() || "",
+                        },
+                        footer: {
+                            text: "ID: " + channel.id,
+                            icon_url: interaction.guild!.iconURL() || undefined,
+                        },
+                        timestamp: new Date().toISOString(),
                     },
-                    footer: {
-                        text: "ID: " + channel.id,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                    timestamp: new Date().toISOString()
-                }]
+                ],
             })
 
             await interaction.editReply({

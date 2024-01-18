@@ -7,6 +7,7 @@ export = {
     description: "Evaluate a JavaScript expression",
     type: "event",
     event: "messageCreate",
+    disabled: true,
 
     async execute(message: Message) {
         if (message.author.bot) return

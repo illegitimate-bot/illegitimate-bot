@@ -6,5 +6,6 @@ export default interface Event {
     description: string
     type: "event"
     event: keyof ClientEvents
+    disabled?: boolean
     execute(...args: any[]): void
 }

@@ -128,7 +128,7 @@ export = {
                     userMention(target.id) +
                     " for " +
                     reason),
-                    (timeouttime = null)
+                (timeouttime = null)
             } else {
                 title = "Timeout Updated"
                 ;(description =
@@ -138,7 +138,7 @@ export = {
                     prettyTime +
                     " for " +
                     reason),
-                    (timeouttime = time)
+                (timeouttime = time)
             }
         } else {
             title = "Member Timed Out"
@@ -149,7 +149,7 @@ export = {
                 prettyTime +
                 " for " +
                 reason),
-                (timeouttime = time)
+            (timeouttime = time)
         }
 
         await target.timeout(timeouttime, reason)

@@ -12,10 +12,10 @@ function getLevel(exp: number): number {
     return exp <= 1
         ? 1
         : Math.floor(
-              1 +
+            1 +
                   REVERSE_PQ_PREFIX +
                   Math.sqrt(REVERSE_CONST + GROWTH_DIVIDES_2 * exp),
-          )
+        )
 }
 
 function hypixelLevel(exp: number): number {

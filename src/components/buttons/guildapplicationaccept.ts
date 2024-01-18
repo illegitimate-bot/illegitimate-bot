@@ -21,7 +21,6 @@ import { getGuild } from "utils/Hypixel"
 export = {
     name: "guildapplicationaccept",
     description: "Accept a guild application.",
-    type: "button",
 
     async execute(interaction) {
         await interaction.deferReply()

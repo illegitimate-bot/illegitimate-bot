@@ -8,7 +8,6 @@ import updateDiscordRoles from "./staff/updatediscordroles"
 export = {
     name: "staff",
     description: "Subcommands for staff",
-    type: "slash",
     dev: false,
     public: false,
     subcommands: true,

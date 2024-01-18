@@ -5,7 +5,6 @@ import { Command } from "interfaces"
 export = {
     name: "instructions",
     description: "Instructions for verification",
-    type: "slash",
     dev: false,
     public: false,
 

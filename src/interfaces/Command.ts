@@ -5,11 +5,11 @@ import { ExtendedClient as Client } from "utils/Client"
 export default interface Command {
     name: string
     description: string
-    type: "slash"
     dev?: boolean
     public: boolean
-    data: SlashCommandBuilder
+    disabled?: boolean
     subcommands?: boolean
+    data: SlashCommandBuilder
     execute: (
         interaction: ChatInputCommandInteraction,
         client: Client,

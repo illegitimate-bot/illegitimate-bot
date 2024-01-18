@@ -17,7 +17,7 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
         const filePath = path.join(btnPath, file)
         const btn: Button = require(filePath)
 
-        if ("name" in btn && "execute" in btn && btn.type === "button") {
+        if ("name" in btn && "execute" in btn) {
             client.buttons.set(btn.name, btn)
         } else {
             console.log(

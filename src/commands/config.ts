@@ -7,7 +7,6 @@ import { Command } from "interfaces"
 export = {
     name: "config",
     description: "Configure the bot",
-    type: "slash",
     dev: true,
     public: false,
 

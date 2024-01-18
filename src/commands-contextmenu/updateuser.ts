@@ -13,7 +13,6 @@ import roleManage from "utils/functions/rolesmanage"
 export = {
     name: "Update User",
     description: "Updates a user's roles",
-    type: "contextmenu",
     dev: false,
 
     data: new ContextMenuCommandBuilder()

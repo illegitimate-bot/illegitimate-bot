@@ -5,7 +5,6 @@ import color from "utils/functions/colors"
 export = {
     name: "conolelog",
     description: "console log",
-    type: "event",
     event: "ready",
 
     execute(client: Client) {

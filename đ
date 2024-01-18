@@ -13,6 +13,7 @@ import { Command } from "interfaces"
 export = {
     name: "setup",
     description: "Used for setup of the bot.",
+    type: "slash",
     dev: true,
     public: false,
     subcommands: true,
@@ -193,3 +194,4 @@ export = {
         })
     },
 } as Command
+

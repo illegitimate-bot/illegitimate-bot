@@ -3,7 +3,6 @@ import { Button } from "interfaces"
 export = {
     name: "inactiveapplicationdeny",
     description: "Denies an inactivity application.",
-    type: "button",
 
     async execute(interaction) {
         await interaction.reply({

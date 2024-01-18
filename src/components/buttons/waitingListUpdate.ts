@@ -6,7 +6,6 @@ import { Button } from "interfaces"
 export = {
     name: "waitinglistupdate",
     description: "Update the waiting list.",
-    type: "button",
 
     async execute(interaction) {
         await interaction.deferReply({ ephemeral: true })

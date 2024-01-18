@@ -5,7 +5,6 @@ import { ExtendedClient as Client } from "utils/Client"
 export = {
     name: "status",
     description: "Sets the status of the bot",
-    type: "event",
     event: "ready",
 
     execute(client: Client) {

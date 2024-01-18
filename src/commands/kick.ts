@@ -12,7 +12,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "kick",
     description: "Kick a member from the server.",
-    type: "slash",
     dev: false,
     public: false,
 

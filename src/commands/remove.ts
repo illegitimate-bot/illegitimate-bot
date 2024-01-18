@@ -11,7 +11,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "remove",
     description: "Remove a person on the waiting list.",
-    type: "slash",
     false: true,
     public: false,
 

@@ -6,7 +6,6 @@ import env from "utils/Env"
 export = {
     name: "pp",
     description: "Shows pp size",
-    type: "slash",
     public: true,
     dev: true,
 

@@ -6,7 +6,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "vcJoinLeave",
     description: "Logs when a user joins or leaves a voice channel.",
-    type: "event",
     event: "voiceStateUpdate",
 
     execute(oldState: VoiceState, newState: VoiceState) {

@@ -32,7 +32,6 @@ const guildRoles = [
 module.exports = {
     name: "guildinactivitylog",
     description: "Configure the bot.",
-    type: "button",
 
     async execute(interaction) {
         const guild = interaction.guild!

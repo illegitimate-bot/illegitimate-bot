@@ -7,7 +7,6 @@ import { SnipeCache } from "typings"
 export = {
     name: "snipe",
     description: "Snipes the last deleted message of a user",
-    type: "slash",
     public: true,
     dev: true,
 

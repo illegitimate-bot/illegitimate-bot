@@ -5,7 +5,6 @@ import { color } from "config/options.json"
 export = {
     name: "sendonlinemessage",
     description: "send an online message",
-    type: "event",
     event: "ready",
 
     execute() {

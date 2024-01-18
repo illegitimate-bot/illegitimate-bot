@@ -22,7 +22,6 @@ import { Button } from "interfaces"
 export = {
     name: "checkstats",
     description: "Check your stats.",
-    type: "button",
 
     async execute(interaction) {
         await interaction.deferReply()

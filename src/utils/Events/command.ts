@@ -17,7 +17,7 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
         const filePath = path.join(cmdPath, file)
         const cmd: Command = require(filePath)
 
-        if ("data" in cmd && "execute" in cmd && cmd.type === "slash") {
+        if ("data" in cmd && "execute" in cmd) {
             client.commands.set(cmd.data.name, cmd)
         } else {
             console.log(

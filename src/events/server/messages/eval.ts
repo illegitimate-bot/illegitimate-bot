@@ -5,7 +5,6 @@ import env from "utils/Env"
 export = {
     name: "eval",
     description: "Evaluate a JavaScript expression",
-    type: "event",
     event: "messageCreate",
     disabled: true,
 

@@ -27,8 +27,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
 
         if (
             "name" in autocomplete &&
-            "execute" in autocomplete &&
-            autocomplete.type === "autocomplete"
+            "execute" in autocomplete
         ) {
             client.autocomplete.set(autocomplete.name, autocomplete)
         } else {

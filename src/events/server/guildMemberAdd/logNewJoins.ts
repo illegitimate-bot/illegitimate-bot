@@ -6,7 +6,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "logNewJoins",
     description: "Logs new joins",
-    type: "event",
     event: "guildMemberAdd",
 
     execute(member: GuildMember) {

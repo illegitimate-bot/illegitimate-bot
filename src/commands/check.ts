@@ -23,7 +23,6 @@ import { Command } from "interfaces"
 export = {
     name: "check",
     description: "Check a player's stats.",
-    type: "slash",
     dev: false,
     public: true,
 

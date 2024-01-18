@@ -13,7 +13,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "slowmode",
     description: "Set the slowmode of a channel.",
-    type: "slash",
     dev: false,
     public: false,
 

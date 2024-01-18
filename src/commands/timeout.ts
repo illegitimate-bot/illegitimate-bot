@@ -13,7 +13,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "timeout",
     description: "Times out a memeber",
-    type: "slash",
     dev: false,
     public: false,
 

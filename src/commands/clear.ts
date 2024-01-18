@@ -12,7 +12,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "clear",
     description: "Clears messages",
-    type: "slash",
     dev: false,
     public: false,
 

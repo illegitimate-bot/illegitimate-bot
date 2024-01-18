@@ -4,7 +4,6 @@ import { Command } from "interfaces"
 export = {
     name: "devel",
     description: "Admin command.",
-    type: "slash",
     dev: false,
     public: false,
 

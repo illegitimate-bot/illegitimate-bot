@@ -7,7 +7,6 @@ import { SnipeCache } from "typings"
 export = {
     name: "snipecache",
     description: "Logs messages for the snipe command",
-    type: "event",
     event: "messageDelete",
     disabled: true,
 

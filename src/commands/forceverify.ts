@@ -15,7 +15,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "forceverify",
     description: "Force verify a user.",
-    type: "slash",
     dev: false,
     public: false,
 

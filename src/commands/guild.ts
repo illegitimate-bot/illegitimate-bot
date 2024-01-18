@@ -8,7 +8,6 @@ import guildTop from "./guild/top"
 export = {
     name: "guild",
     description: "Subcommands for guilds",
-    type: "slash",
     dev: false,
     public: true,
     subcommands: true,

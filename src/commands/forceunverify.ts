@@ -14,7 +14,6 @@ import { getIGN } from "utils/Hypixel"
 export = {
     name: "forceunverify",
     description: "Force unverify a user",
-    type: "slash",
     dev: false,
     public: false,
 

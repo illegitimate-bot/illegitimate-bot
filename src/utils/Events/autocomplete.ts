@@ -25,11 +25,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         const filePath = path.join(autocompletePath, file)
         const autocomplete: Autocomplete = require(filePath)
 
-        if (
-            "name" in autocomplete &&
-            "execute" in autocomplete &&
-            autocomplete.type === "autocomplete"
-        ) {
+        if ("name" in autocomplete && "execute" in autocomplete) {
             client.autocomplete.set(autocomplete.name, autocomplete)
         } else {
             console.log(

@@ -5,7 +5,6 @@ import { Command } from "interfaces"
 export = {
     name: "ping",
     description: "Get the bot's ping.",
-    type: "slash",
     dev: false,
     public: true,
 

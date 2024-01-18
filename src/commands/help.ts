@@ -5,7 +5,6 @@ import { Command } from "interfaces"
 export = {
     name: "help",
     description: "Help command",
-    type: "slash",
     dev: false,
     public: true,
 

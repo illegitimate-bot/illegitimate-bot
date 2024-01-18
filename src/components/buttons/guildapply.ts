@@ -19,7 +19,6 @@ import { Button } from "interfaces"
 export = {
     name: "guildapply",
     description: "Guild application button.",
-    type: "button",
 
     async execute(interaction) {
         const user = interaction.member as GuildMember

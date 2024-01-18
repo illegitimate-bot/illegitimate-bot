@@ -11,7 +11,6 @@ import { Modal } from "interfaces"
 export = {
     name: "staffdenyreasonbox",
     description: "Deny reason box.",
-    type: "modal",
 
     async execute(interaction) {
         await interaction.deferReply()

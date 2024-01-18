@@ -5,7 +5,6 @@ import env from "utils/Env"
 export = {
     name: "eval",
     description: "Evaluate a JavaScript expression",
-    type: "event",
     event: "messageCreate",
     disabled: true,
 
@@ -20,16 +19,20 @@ export = {
             const output = eval(code)
             const outputString = String(output)
             await message.channel.send({
-                embeds: [{
-                    description: `\`\`\`js\n${outputString}\`\`\``
-                }]
+                embeds: [
+                    {
+                        description: `\`\`\`js\n${outputString}\`\`\``,
+                    },
+                ],
             })
         } catch (error) {
             await message.channel.send({
-                embeds: [{
-                    description: `\`\`\`js\n${error}\`\`\``
-                }]
+                embeds: [
+                    {
+                        description: `\`\`\`js\n${error}\`\`\``,
+                    },
+                ],
             })
         }
-    }
+    },
 } as Event

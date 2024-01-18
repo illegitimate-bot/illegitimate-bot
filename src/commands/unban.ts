@@ -11,7 +11,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "unban",
     description: "Unban a user from the server",
-    type: "slash",
     dev: false,
     public: false,
 

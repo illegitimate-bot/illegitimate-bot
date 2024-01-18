@@ -12,7 +12,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "ban",
     description: "Ban a user",
-    type: "slash",
     dev: false,
     public: false,
 

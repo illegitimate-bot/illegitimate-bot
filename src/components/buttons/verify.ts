@@ -9,7 +9,6 @@ import { Button } from "interfaces"
 export = {
     name: "verify",
     description: "Configure the bot.",
-    type: "button",
 
     async execute(interaction) {
         const modal = new ModalBuilder()

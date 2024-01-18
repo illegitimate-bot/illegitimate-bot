@@ -7,7 +7,6 @@ import { getIGN, getHeadURL } from "utils/Hypixel"
 export = {
     name: "whoami",
     description: "Get your user info",
-    type: "slash",
     public: true,
     dev: false,
 

@@ -20,7 +20,6 @@ import env from "utils/Env"
 export = {
     name: "staffapply",
     description: "Apply for the staff team.",
-    type: "button",
 
     async execute(interaction) {
         const user = interaction.member as GuildMember

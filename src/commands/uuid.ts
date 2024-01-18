@@ -6,7 +6,6 @@ import { Command } from "interfaces"
 export = {
     name: "uuid",
     description: "Get a player's UUID",
-    type: "slash",
     dev: false,
     public: true,
 

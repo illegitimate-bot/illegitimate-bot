@@ -3,13 +3,10 @@ import { Autocomplete } from "interfaces"
 export = {
     name: "unban",
     description: "Unban a user from the server",
-    type: "autocomplete",
 
     async execute(interaction) {
         const focusedOption = interaction.options.getFocused(true)
-        if (focusedOption.name !== "user") {
-            return
-        }
+        if (focusedOption.name !== "user") return
 
         if (focusedOption.value === "") {
             await interaction.respond([

@@ -19,7 +19,7 @@ export default function loadModalEvents(client: Client, ft: FileType) {
         const filePath = path.join(modalPath, file)
         const modal: Modal = require(filePath)
 
-        if ("name" in modal && "execute" in modal && modal.type === "modal") {
+        if ("name" in modal && "execute" in modal) {
             client.modals.set(modal.name, modal)
         } else {
             console.log(

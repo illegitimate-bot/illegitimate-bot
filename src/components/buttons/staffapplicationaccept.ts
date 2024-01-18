@@ -6,7 +6,6 @@ import { Button } from "interfaces"
 export = {
     name: "staffapplicationaccept",
     description: "Accept a staff application.",
-    type: "button",
 
     async execute(interaction) {
         await interaction.deferReply()

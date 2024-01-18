@@ -9,7 +9,6 @@ import { Button } from "interfaces"
 export = {
     name: "guildapplicationdeny",
     description: "Deny a guild application.",
-    type: "button",
 
     async execute(interaction) {
         const modal = new ModalBuilder()

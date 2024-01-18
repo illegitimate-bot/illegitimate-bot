@@ -11,7 +11,6 @@ import { Command } from "interfaces"
 export = {
     name: "whois",
     description: "Get's the ign of a user.",
-    type: "slash",
     dev: false,
     public: false,
 

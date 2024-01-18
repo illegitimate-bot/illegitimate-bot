@@ -13,7 +13,6 @@ import { Command } from "interfaces"
 export = {
     name: "setup",
     description: "Used for setup of the bot.",
-    type: "slash",
     dev: true,
     public: false,
     subcommands: true,
@@ -156,10 +155,8 @@ export = {
 
         if (subcommand === "sendwaitinglistmessage") {
             title = "Waiting List"
-            ;(description =
-                "The people below were accepted into the guild\n" +
-                "Try to invite them in order."),
-                (customId = "waitinglistupdate")
+            description = "The people on the waiting list"
+            customId = "waitinglistupdate"
             label = "Update"
             emoji = "🔄"
         }

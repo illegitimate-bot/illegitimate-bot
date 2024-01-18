@@ -12,7 +12,6 @@ import unban from "./counting/unban"
 export = {
     name: "counting",
     description: "counting subcommands",
-    type: "slash",
     dev: false,
     public: true,
     subcommands: true,

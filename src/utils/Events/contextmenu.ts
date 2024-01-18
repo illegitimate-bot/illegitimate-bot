@@ -24,7 +24,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
         const filePath = path.join(contextMenuPath, file)
         const cmd: ContextMenu = require(filePath)
 
-        if ("data" in cmd && "execute" in cmd && cmd.type === "contextmenu") {
+        if ("data" in cmd && "execute" in cmd) {
             client.contextmenus.set(cmd.data.name, cmd)
         } else {
             console.log(

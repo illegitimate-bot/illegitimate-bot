@@ -9,7 +9,6 @@ import { ContextMenu } from "interfaces"
 export = {
     name: "congratsmessage",
     description: "Congratulate a user.",
-    type: "contextmenu",
     dev: false,
 
     data: new ContextMenuCommandBuilder()

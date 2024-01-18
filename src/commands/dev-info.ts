@@ -8,7 +8,6 @@ import { Command } from "interfaces"
 export = {
     name: "dev-info",
     description: "Test command for the bot.",
-    type: "slash",
     dev: true,
     public: false,
 

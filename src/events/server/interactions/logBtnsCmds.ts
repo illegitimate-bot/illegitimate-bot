@@ -5,7 +5,6 @@ import { Event } from "interfaces"
 export = {
     name: "logBtnsCmds",
     description: "Logs all button and command interactions",
-    type: "event",
     event: "interactionCreate",
 
     execute(interaction: ChatInputCommandInteraction | ButtonInteraction) {

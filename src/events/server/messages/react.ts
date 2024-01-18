@@ -4,7 +4,6 @@ import { Message } from "discord.js"
 export = {
     name: "ur mom",
     description: "ur moms someone",
-    type: "event",
     event: "messageCreate",
 
     async execute(message: Message) {

@@ -13,7 +13,6 @@ import roleManage from "utils/functions/rolesmanage"
 export = {
     name: "forceupdate",
     description: "Force update the user",
-    type: "slash",
     dev: false,
     public: false,
 

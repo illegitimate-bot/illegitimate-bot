@@ -8,7 +8,6 @@ import { ContextMenu } from "interfaces"
 export = {
     name: "resetnick",
     description: "Reset your nickname.",
-    type: "contextmenu",
     dev: false,
 
     data: new ContextMenuCommandBuilder()

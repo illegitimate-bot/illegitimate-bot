@@ -11,7 +11,6 @@ import logToChannel from "utils/functions/logtochannel"
 export = {
     name: "setnick",
     description: "Set your nickname",
-    type: "slash",
     dev: false,
     public: false,
 

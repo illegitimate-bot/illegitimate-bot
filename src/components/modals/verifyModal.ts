@@ -19,7 +19,6 @@ import { GuildMember } from "discord.js"
 export = {
     name: "verifybox",
     description: "Verify box.",
-    type: "modal",
 
     async execute(interaction) {
         await interaction.deferReply({ ephemeral: true })

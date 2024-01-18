@@ -14,7 +14,6 @@ import { Command } from "interfaces"
 export = {
     name: "reqs",
     description: "Displays the requirements for the guild.",
-    type: "slash",
     dev: false,
     public: true,
 

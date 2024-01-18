@@ -89,9 +89,7 @@ export = {
                         {
                             title: "Staff Application",
                             description:
-                                "Please answer the following questions to apply for staff.\n" +
-                                "If you wish to cancel your application, please press type `cancel` at any time.\n" +
-                                "If you wish to proceed with your application, please type `yes`.\n\n" +
+                                "If you wish to proceed with your application, please type `yes` otherwise type `cancel`.\n\n" +
                                 "**Do not upload images, videos, or GIFS.**\n" +
                                 "You have a minute to respond to this message.",
                             color: embedColor,

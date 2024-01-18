@@ -9,6 +9,7 @@ export = {
     description: "Logs messages for the snipe command",
     type: "event",
     event: "messageDelete",
+    disabled: true,
 
     async execute(message: Message) {
         if (message.channel.type !== ChannelType.GuildText) return

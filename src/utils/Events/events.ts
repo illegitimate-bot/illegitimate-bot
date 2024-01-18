@@ -11,7 +11,9 @@ export default function loadEvents(client: Client) {
         for (const eventFile of eventFiles) {
             const eventPath = path.join(serverDir, eventDir, eventFile)
             const event: Event = require(eventPath)
-            client.on(event.event, event.execute)
+            if (!event.disabled) {
+                client.on(event.event, event.execute)
+            }
         }
     }
 }

@@ -33,9 +33,7 @@ export = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription(
-                            "The query to search for. [Default: player]"
-                        )
+                        .setDescription("The query to search for. [Default: player]")
                         .setRequired(true)
                 )
                 .addStringOption(option =>
@@ -56,9 +54,7 @@ export = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription(
-                            "The query to search for. [Default: player]"
-                        )
+                        .setDescription("The query to search for. [Default: player]")
                         .setRequired(true)
                 )
                 .addStringOption(option =>
@@ -74,9 +70,7 @@ export = {
                 .addNumberOption(option =>
                     option
                         .setName("amount")
-                        .setDescription(
-                            "The amount of guild members to show. [Default: 10]"
-                        )
+                        .setDescription("The amount of guild members to show. [Default: 10]")
                 )
         )
         .setDMPermission(false),
@@ -101,16 +95,14 @@ export = {
         }
 
         await interaction.reply({
-            embeds: [
-                {
-                    description: "This command is currently under development",
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined
-                    }
+            embeds: [{
+                description: "This command is currently under development",
+                color: embedColor,
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
                 }
-            ]
+            }]
         })
     }
 } as Command

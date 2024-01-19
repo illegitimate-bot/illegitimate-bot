@@ -19,15 +19,15 @@ export = {
                 .setDescription("The setting to configure")
                 .setChoices({
                     name: "Staff Application status",
-                    value: "staffAppStatus",
+                    value: "staffAppStatus"
                 })
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("value")
                 .setDescription("The value to set")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
@@ -44,39 +44,25 @@ export = {
             const newSetting = new settings({
                 _id: new mongoose.Types.ObjectId(),
                 name: setting,
-                value: value,
+                value: value
             })
 
             await newSetting.save()
 
             await interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "Successfully created `" +
-                            setting +
-                            "` with value `" +
-                            value +
-                            "`.",
-                        color: embedColor,
-                    },
-                ],
+                embeds: [{
+                    description: "Successfully created `" + setting + "` with value `" + value + "`.",
+                    color: embedColor
+                }]
             })
         } else {
             await settings.findOneAndUpdate({ name: setting }, { value: value })
 
             await interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "Successfully updated `" +
-                            setting +
-                            "` to value `" +
-                            value +
-                            "`.",
-                    },
-                ],
+                embeds: [{
+                    description: "Successfully updated `" + setting + "` to value `" + value + "`."
+                }]
             })
         }
-    },
+    }
 } as Command

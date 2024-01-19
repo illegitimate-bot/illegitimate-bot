@@ -1,8 +1,4 @@
-import {
-    ContextMenuCommandBuilder,
-    ApplicationCommandType,
-    PermissionFlagsBits,
-} from "discord.js"
+import { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits } from "discord.js"
 import { ContextMenu } from "interfaces"
 
 export = {
@@ -22,7 +18,7 @@ export = {
         if (!target) {
             interaction.reply({
                 content: "That user does not exist.",
-                ephemeral: true,
+                ephemeral: true
             })
             return
         }
@@ -30,7 +26,7 @@ export = {
         if (target.id === interaction.user.id) {
             interaction.reply({
                 content: "You can't reset your own nickname.",
-                ephemeral: true,
+                ephemeral: true
             })
             return
         }
@@ -38,21 +34,18 @@ export = {
         if (!target.manageable) {
             interaction.reply({
                 content: "I cannot reset that user's nickname.",
-                ephemeral: true,
+                ephemeral: true
             })
             return
         }
 
         await target.setNickname(
             target.user.username,
-            "Reset by " +
-                interaction.user.username +
-                "#" +
-                interaction.user.discriminator,
+            "Reset by " + interaction.user.username + "#" + interaction.user.discriminator
         )
         interaction.reply({
             content: `Reset ${target.user.username}'s nickname.`,
-            ephemeral: true,
+            ephemeral: true
         })
-    },
+    }
 } as ContextMenu

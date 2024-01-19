@@ -7,7 +7,7 @@ const config = {
     semi: false,
     singleQuote: false,
     quoteProps: "as-needed",
-    trailingComma: "all",
+    trailingComma: "none",
     bracketSpacing: true,
     arrowParens: "avoid",
     parser: "typescript",

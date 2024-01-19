@@ -123,33 +123,33 @@ export = {
         if (target.isCommunicationDisabled()) {
             if (time === 0) {
                 title = "Timeout Removed"
-                ;(description =
+                description =
                     "Removed timeout of " +
                     userMention(target.id) +
                     " for " +
-                    reason),
-                (timeouttime = null)
+                    reason
+                timeouttime = null
             } else {
                 title = "Timeout Updated"
-                ;(description =
+                description =
                     "Updated timeout of " +
                     userMention(target.id) +
                     " to " +
                     prettyTime +
                     " for " +
-                    reason),
-                (timeouttime = time)
+                    reason
+                timeouttime = time
             }
         } else {
             title = "Member Timed Out"
-            ;(description =
+            description =
                 "Timed out " +
                 userMention(target.id) +
                 " for " +
                 prettyTime +
                 " for " +
-                reason),
-            (timeouttime = time)
+                reason
+            timeouttime = time
         }
 
         await target.timeout(timeouttime, reason)

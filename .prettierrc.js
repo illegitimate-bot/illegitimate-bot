@@ -11,7 +11,7 @@ const config = {
     bracketSpacing: true,
     arrowParens: "avoid",
     parser: "typescript",
-    endOfLine: "crlf"
+    endOfLine: "crlf",
 }
 
-module.exports = config 
+module.exports = config

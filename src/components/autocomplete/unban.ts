@@ -12,8 +12,8 @@ export = {
             await interaction.respond([
                 {
                     name: "Please start typing a username to unban",
-                    value: "none",
-                },
+                    value: "none"
+                }
             ])
             return
         }
@@ -22,16 +22,16 @@ export = {
         const filteredUsers = bannedUsers.filter(user =>
             user.user.username
                 .toLowerCase()
-                .includes(focusedOption.value.toLowerCase()),
+                .includes(focusedOption.value.toLowerCase())
         )
 
         const results = filteredUsers.map(user => ({
             name: user.user.username,
-            value: user.user.id,
+            value: user.user.id
         }))
 
         await interaction.respond(results.slice(0, 25)).catch(err => {
             console.log(err)
         })
-    },
+    }
 } as Autocomplete

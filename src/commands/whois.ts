@@ -1,7 +1,7 @@
 import {
     SlashCommandBuilder,
     PermissionFlagsBits,
-    userMention,
+    userMention
 } from "discord.js"
 import { getIGN, getHeadURL } from "utils/Hypixel"
 import { color, devMessage } from "config/options.json"
@@ -21,7 +21,7 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to get the ign of.")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -35,7 +35,7 @@ export = {
         const verifiedUser = await verify.findOne({ userID: user.id })
         if (!verifiedUser) {
             interaction.editReply({
-                content: "This user has not verified their account.",
+                content: "This user has not verified their account."
             })
             return
         }
@@ -54,14 +54,14 @@ export = {
                         ign,
                     color: embedColor,
                     thumbnail: {
-                        url: head!,
+                        url: head!
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

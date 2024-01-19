@@ -2,7 +2,7 @@ import {
     hypixelGuildID,
     guildLogChannel,
     color,
-    devMessage,
+    devMessage
 } from "config/options.json"
 import colorLog from "utils/functions/colors"
 import { getGuild, getIGN } from "utils/Hypixel"
@@ -25,9 +25,9 @@ async function guildWeekly() {
         embeds: [
             {
                 description: "Starting to fetch guild data...",
-                color: embedColor,
-            },
-        ],
+                color: embedColor
+            }
+        ]
     })
 
     const guild = (await getGuild(hypixelGuildID, "id")) as GuildData
@@ -45,10 +45,7 @@ async function guildWeekly() {
         .map(member => {
             return {
                 uuid: member.uuid,
-                exp: Object.values(member.expHistory).reduce(
-                    (a, b) => a + b,
-                    0,
-                ),
+                exp: Object.values(member.expHistory).reduce((a, b) => a + b, 0)
             }
         })
         .sort((a, b) => b.exp - a.exp)
@@ -56,16 +53,16 @@ async function guildWeekly() {
     for (let i = 0; i < allMembersGexpSorted.length; i++) {
         const ign = await getIGN(allMembersGexpSorted[i].uuid)
         const gexp = new Intl.NumberFormat("en-US").format(
-            allMembersGexpSorted[i].exp,
+            allMembersGexpSorted[i].exp
         )
         const position = i + 1
         guildMembersList.push(
-            "**#" + position + " " + ign + ":** `" + gexp + "`",
+            "**#" + position + " " + ign + ":** `" + gexp + "`"
         )
     }
 
     const list = Array.from({ length: sliceSize }, (_, i) =>
-        guildMembersList.slice(i * sliceSize, (i + 1) * sliceSize),
+        guildMembersList.slice(i * sliceSize, (i + 1) * sliceSize)
     )
 
     list.forEach((item, index) => {
@@ -74,30 +71,30 @@ async function guildWeekly() {
         topWeeklyMembers[index] = {
             name: "",
             value: item.join("\n"),
-            inline: false,
+            inline: false
         }
     })
 
     // combined weekly gexp
     const allGuildMembersWeeklyXP = guildMembers.map(
-        member => member.expHistory,
+        member => member.expHistory
     )
     const guildMembersWeeklyXP = allGuildMembersWeeklyXP.map(member => {
         return Object.values(member).reduce((a, b) => a + b, 0)
     })
     const totalGuildMembersWeeklyXPUnformatted = guildMembersWeeklyXP.reduce(
         (a, b) => a + b,
-        0,
+        0
     )
     const averageGuildMembersDailyXPUnformatted =
         totalGuildMembersWeeklyXPUnformatted / 7
 
     // final values
     const totalGuildMembersWeeklyXP = new Intl.NumberFormat("en-US").format(
-        totalGuildMembersWeeklyXPUnformatted,
+        totalGuildMembersWeeklyXPUnformatted
     )
     const averageGuildMembersWeeklyXP = new Intl.NumberFormat("en-US").format(
-        averageGuildMembersDailyXPUnformatted,
+        averageGuildMembersDailyXPUnformatted
     )
 
     await message.edit({
@@ -115,10 +112,10 @@ async function guildWeekly() {
                 timestamp: new Date().toISOString(),
                 footer: {
                     text: channel.guild.name + " | " + devMessage,
-                    icon_url: channel.guild.iconURL() || undefined,
-                },
-            },
-        ],
+                    icon_url: channel.guild.iconURL() || undefined
+                }
+            }
+        ]
     })
 }
 
@@ -129,10 +126,10 @@ export = {
         hours: 21,
         dayOfWeek: 7,
         dayOfMonth: "*",
-        month: "*",
+        month: "*"
     },
     execute: guildWeekly,
     onComplete: null,
     start: true,
-    timeZone: "Europe/Zagreb",
+    timeZone: "Europe/Zagreb"
 } as Cron

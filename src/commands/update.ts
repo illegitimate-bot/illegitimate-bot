@@ -32,10 +32,10 @@ export = {
                         color: embedColor,
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL() || undefined,
-                        },
-                    },
-                ],
+                            icon_url: interaction.guild!.iconURL() || undefined
+                        }
+                    }
+                ]
             })
             return
         }
@@ -44,9 +44,9 @@ export = {
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const guild = await getGuild(verifyData.uuid)
@@ -63,11 +63,11 @@ export = {
             const roles = roleManage("default")
             await user.roles.remove(
                 roles.rolesToRemove,
-                "User used the update command",
+                "User used the update command"
             )
             await user.roles.add(
                 roles.rolesToAdd,
-                "User used the update command",
+                "User used the update command"
             )
 
             await interaction.editReply({
@@ -76,14 +76,14 @@ export = {
                         description: "Updated your roles to `Default Member`",
                         color: embedColor,
                         thumbnail: {
-                            url: head!,
+                            url: head!
                         },
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL() || undefined,
-                        },
-                    },
-                ],
+                            icon_url: interaction.guild!.iconURL() || undefined
+                        }
+                    }
+                ]
             })
             return
         }
@@ -91,24 +91,24 @@ export = {
         if (guildID === hypixelGuildID) {
             const GuildMembers = guild!.members
             const guildRank = GuildMembers.find(
-                member => member.uuid === verifyData.uuid,
+                member => member.uuid === verifyData.uuid
             )!.rank
             let replyRank: string | null = null
 
             await user.roles.add(
                 roleManage("default").rolesToAdd,
-                "User used the update command",
+                "User used the update command"
             )
 
             if (guildRank === "Guild Master") {
                 const roles = roleManage("gm")
                 await user.roles.remove(
                     roles.rolesToRemove,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 await user.roles.add(
                     roles.rolesToAdd,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 replyRank = "Guild Master"
             }
@@ -117,11 +117,11 @@ export = {
                 const roles = roleManage("manager")
                 await user.roles.remove(
                     roles.rolesToRemove,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 await user.roles.add(
                     roles.rolesToAdd,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 replyRank = "Manager"
             }
@@ -130,11 +130,11 @@ export = {
                 const roles = roleManage("moderator")
                 await user.roles.remove(
                     roles.rolesToRemove,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 await user.roles.add(
                     roles.rolesToAdd,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 replyRank = "Moderator"
             }
@@ -143,11 +143,11 @@ export = {
                 const roles = roleManage("beast")
                 await user.roles.remove(
                     roles.rolesToRemove,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 await user.roles.add(
                     roles.rolesToAdd,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 replyRank = "Beast"
             }
@@ -156,11 +156,11 @@ export = {
                 const roles = roleManage("elite")
                 await user.roles.remove(
                     roles.rolesToRemove,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 await user.roles.add(
                     roles.rolesToAdd,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 replyRank = "Elite"
             }
@@ -169,11 +169,11 @@ export = {
                 const roles = roleManage("member")
                 await user.roles.remove(
                     roles.rolesToRemove,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 await user.roles.add(
                     roles.rolesToAdd,
-                    "User used the update command",
+                    "User used the update command"
                 )
                 replyRank = "Member"
             }
@@ -185,15 +185,15 @@ export = {
                             "Updated your roles to `" + replyRank + "`",
                         color: embedColor,
                         thumbnail: {
-                            url: head!,
+                            url: head!
                         },
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL() || undefined,
-                        },
-                    },
-                ],
+                            icon_url: interaction.guild!.iconURL() || undefined
+                        }
+                    }
+                ]
             })
         }
-    },
+    }
 } as Command

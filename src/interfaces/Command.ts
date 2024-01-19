@@ -12,6 +12,6 @@ export default interface Command {
     data: SlashCommandBuilder
     execute: (
         interaction: ChatInputCommandInteraction,
-        client: Client,
+        client: Client
     ) => Promise<void>
 }

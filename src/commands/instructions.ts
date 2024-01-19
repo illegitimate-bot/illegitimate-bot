@@ -31,14 +31,14 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined
                     },
                     image: {
                         url: instructionsgif,
-                        proxy_url: instructionsgif,
-                    },
-                },
-            ],
+                        proxy_url: instructionsgif
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

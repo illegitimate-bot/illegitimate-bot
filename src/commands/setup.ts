@@ -5,7 +5,7 @@ import {
     ActionRowBuilder,
     ButtonStyle,
     ChannelType,
-    TextChannel,
+    TextChannel
 } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
@@ -28,14 +28,14 @@ export = {
                     option
                         .setName("channel")
                         .setDescription(
-                            "The channel to send the application to.",
+                            "The channel to send the application to."
                         )
                         .addChannelTypes(
                             ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
+                            ChannelType.GuildAnnouncement
                         )
-                        .setRequired(true),
-                ),
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -45,14 +45,14 @@ export = {
                     option
                         .setName("channel")
                         .setDescription(
-                            "The channel to send the application to.",
+                            "The channel to send the application to."
                         )
                         .addChannelTypes(
                             ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
+                            ChannelType.GuildAnnouncement
                         )
-                        .setRequired(true),
-                ),
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -62,14 +62,14 @@ export = {
                     option
                         .setName("channel")
                         .setDescription(
-                            "The channel to send the verfiy message to.",
+                            "The channel to send the verfiy message to."
                         )
                         .addChannelTypes(
                             ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
+                            ChannelType.GuildAnnouncement
                         )
-                        .setRequired(true),
-                ),
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -79,14 +79,14 @@ export = {
                     option
                         .setName("channel")
                         .setDescription(
-                            "The channel to send the waiting list message to.",
+                            "The channel to send the waiting list message to."
                         )
                         .addChannelTypes(
                             ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
+                            ChannelType.GuildAnnouncement
                         )
-                        .setRequired(true),
-                ),
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -96,14 +96,14 @@ export = {
                     option
                         .setName("channel")
                         .setDescription(
-                            "The channel to send the application to.",
+                            "The channel to send the application to."
                         )
                         .addChannelTypes(
                             ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
+                            ChannelType.GuildAnnouncement
                         )
-                        .setRequired(true),
-                ),
+                        .setRequired(true)
+                )
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -168,13 +168,13 @@ export = {
                     description: description,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.guild!.iconURL() || "",
+                        url: interaction.guild!.iconURL() || ""
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
             ],
             components: [
                 new ActionRowBuilder<ButtonBuilder>().addComponents(
@@ -182,14 +182,14 @@ export = {
                         .setCustomId(customId)
                         .setLabel(label)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji({ name: emoji }),
-                ),
-            ],
+                        .setEmoji({ name: emoji })
+                )
+            ]
         })
 
         await interaction.reply({
             content: "Message sent",
-            ephemeral: true,
+            ephemeral: true
         })
-    },
+    }
 } as Command

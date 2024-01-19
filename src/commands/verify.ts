@@ -21,7 +21,7 @@ export = {
             option
                 .setName("ign")
                 .setDescription("Your in-game name.")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDMPermission(false),
 
@@ -36,7 +36,7 @@ export = {
         if (verifyData) {
             interaction.editReply(
                 "You are already verified.\n" +
-                    "Try running /update to update your roles.",
+                    "Try running /update to update your roles."
             )
             return
         }
@@ -47,9 +47,9 @@ export = {
                     {
                         description:
                             "<a:cross_a:1087808606897983539> Please provide your in-game name.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -58,9 +58,9 @@ export = {
             embeds: [
                 {
                     description: "Fetching your uuid...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const uuid = await getUUID(ign)
@@ -70,9 +70,9 @@ export = {
                     {
                         description:
                             "<a:questionmark_pink:1130206038008803488> That player does not exist.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -81,9 +81,9 @@ export = {
             embeds: [
                 {
                     description: "Fetching your player data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const head = await getHeadURL(ign)
@@ -94,9 +94,9 @@ export = {
                     {
                         description:
                             "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -112,9 +112,9 @@ export = {
             embeds: [
                 {
                     description: "Checking your Discord tag...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const linkedDiscord = player?.socialMedia?.links?.DISCORD || null
@@ -129,9 +129,9 @@ export = {
                             "**Please set your Discord tag on hypixel to `" +
                             username +
                             "` and try again.**",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -149,9 +149,9 @@ export = {
                             "**Please set your Discord tag on hypixel to `" +
                             username +
                             "` and try again.**",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -160,9 +160,9 @@ export = {
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const guild = (await getGuild(uuid)) as GuildData | null
@@ -176,7 +176,7 @@ export = {
         if (guildID === hypixelGuildID) {
             const GuildMembers = guild!.members
             const guildRank = GuildMembers.find(
-                member => member.uuid === player.uuid,
+                member => member.uuid === player.uuid
             )!.rank
 
             if (guildRank === "Guild Master") {
@@ -215,7 +215,7 @@ export = {
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),
             userID: user.id,
-            uuid: uuid,
+            uuid: uuid
         })
 
         await newVerify.save()
@@ -232,14 +232,14 @@ export = {
                         "`.",
                     color: embedColor,
                     thumbnail: {
-                        url: head!,
+                        url: head!
                     },
                     footer: {
                         icon_url: interaction.guild!.iconURL() || undefined,
-                        text: interaction.guild!.name + " | " + devMessage,
-                    },
-                },
-            ],
+                        text: interaction.guild!.name + " | " + devMessage
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

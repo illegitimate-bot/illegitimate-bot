@@ -4,7 +4,7 @@ import {
     ChannelType,
     TextChannel,
     channelMention,
-    userMention,
+    userMention
 } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
@@ -22,9 +22,7 @@ export = {
         .addIntegerOption(option =>
             option
                 .setName("seconds")
-                .setDescription(
-                    "The amount of seconds to set the slowmode to.",
-                ),
+                .setDescription("The amount of seconds to set the slowmode to.")
         )
         .addChannelOption(option =>
             option
@@ -32,8 +30,8 @@ export = {
                 .setDescription("The channel to set the slowmode of.")
                 .addChannelTypes(
                     ChannelType.GuildText,
-                    ChannelType.GuildAnnouncement,
-                ),
+                    ChannelType.GuildAnnouncement
+                )
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -55,10 +53,10 @@ export = {
                         color: embedColor,
                         footer: {
                             text: interaction.guild!.name + " | " + devMessage,
-                            icon_url: interaction.guild!.iconURL() || undefined,
-                        },
-                    },
-                ],
+                            icon_url: interaction.guild!.iconURL() || undefined
+                        }
+                    }
+                ]
             })
             return
         }
@@ -68,7 +66,7 @@ export = {
                 {
                     author: {
                         name: interaction.user.username,
-                        icon_url: interaction.user.avatarURL() || undefined,
+                        icon_url: interaction.user.avatarURL() || undefined
                     },
                     title: "Slowmode Update",
                     description: `
@@ -78,15 +76,15 @@ export = {
                 `,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.user.avatarURL() || "",
+                        url: interaction.user.avatarURL() || ""
                     },
                     footer: {
                         icon_url: interaction.guild!.iconURL() || undefined,
-                        text: " ID: " + channel.id,
+                        text: " ID: " + channel.id
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
 
         await interaction.editReply({
@@ -96,11 +94,11 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
         await channel.setRateLimitPerUser(seconds)
-    },
+    }
 } as Command

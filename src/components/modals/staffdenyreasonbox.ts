@@ -2,7 +2,7 @@ import {
     EmbedBuilder,
     ActionRowBuilder,
     ButtonBuilder,
-    ButtonStyle,
+    ButtonStyle
 } from "discord.js"
 import { color } from "config/options.json"
 import staffapp from "schemas/staffAppSchema"
@@ -38,9 +38,9 @@ export = {
                         .setCustomId("staffapplicationdeny")
                         .setLabel("Deny")
                         .setStyle(ButtonStyle.Danger)
-                        .setDisabled(true),
-                ),
-            ],
+                        .setDisabled(true)
+                )
+            ]
         })
 
         const dmMessage = new EmbedBuilder()
@@ -48,7 +48,7 @@ export = {
                 "Your application for the Illegitimate guild staff has been denied\n" +
                     "**Reason:** `" +
                     reason +
-                    "`",
+                    "`"
             )
             .setColor(embedColor)
 
@@ -69,14 +69,14 @@ export = {
                         "`",
                     color: embedColor,
                     thumbnail: {
-                        url: applicant.avatarURL() || "",
+                        url: applicant.avatarURL() || ""
                     },
                     footer: {
                         icon_url: guild!.iconURL() || undefined,
-                        text: "ID: " + applicant.id,
-                    },
-                },
-            ],
+                        text: "ID: " + applicant.id
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Modal

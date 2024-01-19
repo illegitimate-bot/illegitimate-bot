@@ -23,8 +23,8 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -36,7 +36,7 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
 
         if (!button) {
             console.error(
-                `No event matching ${interaction.customId} was found.`,
+                `No event matching ${interaction.customId} was found.`
             )
             return
         }
@@ -57,10 +57,10 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
                                 text:
                                     interaction.user.username +
                                     " | " +
-                                    interaction.customId,
-                            },
-                        },
-                    ],
+                                    interaction.customId
+                            }
+                        }
+                    ]
                 })
             }
 
@@ -71,10 +71,10 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this button!",
-                            color: embedColor,
-                        },
+                            color: embedColor
+                        }
                     ],
-                    ephemeral: true,
+                    ephemeral: true
                 })
             } else {
                 await interaction.editReply({
@@ -82,9 +82,9 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this button! 2",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
         }

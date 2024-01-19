@@ -20,14 +20,14 @@ export class ExtendedClient extends Client {
                 GatewayIntentBits.GuildMembers,
                 GatewayIntentBits.MessageContent,
                 GatewayIntentBits.DirectMessages,
-                GatewayIntentBits.GuildVoiceStates,
+                GatewayIntentBits.GuildVoiceStates
             ],
             partials: [
                 Partials.GuildMember,
                 Partials.User,
                 Partials.Message,
-                Partials.Channel,
-            ],
+                Partials.Channel
+            ]
         })
     }
 
@@ -35,7 +35,7 @@ export class ExtendedClient extends Client {
         let token: string
         if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT) {
             console.log(
-                color("Running in development mode. [ts-node]", "lavender"),
+                color("Running in development mode. [ts-node]", "lavender")
             )
             loadAllEvents(this, "ts")
             token = env.dev.devtoken!

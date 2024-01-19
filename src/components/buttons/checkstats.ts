@@ -7,7 +7,7 @@ import {
     swstars,
     swkdr,
     duelswins,
-    duelswlr,
+    duelswlr
 } from "config/reqs.json"
 import {
     hypixelLevel,
@@ -15,7 +15,7 @@ import {
     skywarsLevel,
     getPlayer,
     getGuild,
-    getHeadURL,
+    getHeadURL
 } from "utils/Hypixel"
 import { Button } from "interfaces"
 
@@ -40,9 +40,9 @@ export = {
                     {
                         description:
                             "That player hasn't played Hypixel before.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -93,7 +93,7 @@ export = {
         if (!player.stats) {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played any games.",
-                value: "**➺ Stats:** `None`",
+                value: "**➺ Stats:** `None`"
             })
         } else {
             if (player.stats.Bedwars) {
@@ -134,7 +134,7 @@ export = {
                         hsbwwins.toString() +
                         " / " +
                         bwwins.toString() +
-                        "`",
+                        "`"
                 })
             }
 
@@ -170,7 +170,7 @@ export = {
                         "`\n" +
                         "**➺ Wins:** `" +
                         hsswwins.toString() +
-                        "`",
+                        "`"
                 })
             }
 
@@ -206,7 +206,7 @@ export = {
                         "`\n" +
                         "**➺ KDR:** `" +
                         hsduelskd.toFixed(2).toString() +
-                        "`",
+                        "`"
                 })
             }
         }
@@ -231,15 +231,15 @@ export = {
                         "`",
                     color: embedColor,
                     thumbnail: {
-                        url: head!,
+                        url: head!
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined
                     },
-                    fields: statsFields,
-                },
-            ],
+                    fields: statsFields
+                }
+            ]
         })
-    },
+    }
 } as Button

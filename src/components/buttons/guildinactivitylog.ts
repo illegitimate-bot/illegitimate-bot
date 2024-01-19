@@ -4,7 +4,7 @@ import {
     ButtonStyle,
     EmbedBuilder,
     GuildMember,
-    TextChannel,
+    TextChannel
 } from "discord.js"
 import {
     gm,
@@ -13,7 +13,7 @@ import {
     beast,
     member,
     guildStaff,
-    guildRole,
+    guildRole
 } from "config/roles.json"
 import { ignM, smallM, largeM } from "config/limitmessages.json"
 import { inactivity } from "config/questions.json"
@@ -26,7 +26,7 @@ const guildRoles = [
     beast,
     member,
     guildStaff,
-    guildRole,
+    guildRole
 ]
 
 module.exports = {
@@ -43,7 +43,7 @@ module.exports = {
         if (!userRoles.some(role => guildRoles.includes(role.id))) {
             return await interaction.reply({
                 content: "Only guild members can use this button.",
-                ephemeral: true,
+                ephemeral: true
             })
         }
 
@@ -63,7 +63,7 @@ module.exports = {
             .setColor(embedColor)
         const attachments = new EmbedBuilder()
             .setDescription(
-                "You have uploaded an attachment. Please do not upload images, videos, or GIFS.",
+                "You have uploaded an attachment. Please do not upload images, videos, or GIFS."
             )
             .setColor(embedColor)
 
@@ -78,26 +78,26 @@ module.exports = {
                             "If you wish to proceed with your form, please type `yes`.\n\n" +
                             "**Do not upload images, videos, or GIFS.**\n" +
                             "You have a minute to respond to this message.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
         } catch (error) {
             return await interaction.reply({
                 content: "Please enable your DMs.",
-                ephemeral: true,
+                ephemeral: true
             })
         }
 
         await interaction.reply({
             content: "Please check your DMs.",
-            ephemeral: true,
+            ephemeral: true
         })
 
         const input = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
-            time: 1000 * 60,
+            time: 1000 * 60
         })
         if (input.first()!.attachments.size > 0) {
             await user.send({ embeds: [attachments] })
@@ -123,16 +123,16 @@ module.exports = {
                         "`",
                     color: embedColor,
                     footer: {
-                        text: "You have 5 minutes to respond to this message.",
-                    },
-                },
-            ],
+                        text: "You have 5 minutes to respond to this message."
+                    }
+                }
+            ]
         })
 
         const answer1 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
-            time: 1000 * 60 * 5,
+            time: 1000 * 60 * 5
         })
         if (answer1.first()!.attachments.size > 0) {
             await user.send({ embeds: [attachments] })
@@ -143,9 +143,9 @@ module.exports = {
                 embeds: [
                     {
                         description: "Max character limit is 16.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -158,9 +158,9 @@ module.exports = {
                         description:
                             "That is not a valid Minecraft username.\n" +
                             "Application cancelled.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -185,15 +185,15 @@ module.exports = {
                         "`",
                     color: embedColor,
                     footer: {
-                        text: "You have 5 minutes to respond to this message.",
-                    },
-                },
-            ],
+                        text: "You have 5 minutes to respond to this message."
+                    }
+                }
+            ]
         })
         const answer2 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
-            time: 1000 * 60 * 5,
+            time: 1000 * 60 * 5
         })
         if (answer2.first()!.attachments.size > 0) {
             await user.send({ embeds: [attachments] })
@@ -204,9 +204,9 @@ module.exports = {
                 embeds: [
                     {
                         description: "Max character limit is 128.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -231,15 +231,15 @@ module.exports = {
                         "`",
                     color: embedColor,
                     footer: {
-                        text: "You have 15 minutes to respond to this message.",
-                    },
-                },
-            ],
+                        text: "You have 15 minutes to respond to this message."
+                    }
+                }
+            ]
         })
         const answer3 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
-            time: 1000 * 60 * 15,
+            time: 1000 * 60 * 15
         })
         if (answer3.first()!.attachments.size > 0) {
             await user.send({ embeds: [attachments] })
@@ -250,9 +250,9 @@ module.exports = {
                 embeds: [
                     {
                         description: "Max character limit is 256",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -271,14 +271,14 @@ module.exports = {
                 {
                     description:
                         "If you want to submit your application, type `yes` if not, type `no`",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
         const final = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
-            time: 1000 * 60 * 5,
+            time: 1000 * 60 * 5
         })
         if (final.first()!.attachments.size > 0) {
             await user.send({ embeds: [attachments] })
@@ -297,13 +297,13 @@ module.exports = {
             embeds: [
                 {
                     description: "Your application has been submitted!",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const appChannel = guild.channels.cache.get(
-            inactivityLogChannel,
+            inactivityLogChannel
         ) as TextChannel
 
         await appChannel.send({
@@ -316,27 +316,27 @@ module.exports = {
                         " - Inactivity Application",
                     color: embedColor,
                     thumbnail: {
-                        url: user.avatarURL() || "",
+                        url: user.avatarURL() || ""
                     },
                     fields: [
                         {
                             name: rq(1),
-                            value: "`" + answer1_1 + "`",
+                            value: "`" + answer1_1 + "`"
                         },
                         {
                             name: rq(2),
-                            value: "`" + answer2_1 + "`",
+                            value: "`" + answer2_1 + "`"
                         },
                         {
                             name: rq(3),
-                            value: "`" + answer3_1 + "`",
-                        },
+                            value: "`" + answer3_1 + "`"
+                        }
                     ],
                     footer: {
                         icon_url: user.avatarURL() || undefined,
-                        text: "ID: " + user.user.id,
-                    },
-                },
+                        text: "ID: " + user.user.id
+                    }
+                }
             ],
             components: [
                 new ActionRowBuilder<ButtonBuilder>().addComponents(
@@ -347,9 +347,9 @@ module.exports = {
                     new ButtonBuilder()
                         .setCustomId("inactiveapplicationdeny")
                         .setLabel("Deny")
-                        .setStyle(ButtonStyle.Danger),
-                ),
-            ],
+                        .setStyle(ButtonStyle.Danger)
+                )
+            ]
         })
-    },
+    }
 } as Button

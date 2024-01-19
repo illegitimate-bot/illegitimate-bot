@@ -5,7 +5,7 @@ import {
     beastswkdr,
     beastswstars,
     beastduelswins,
-    duelswlr,
+    duelswlr
 } from "config/reqs.json"
 import { color, devMessage } from "config/options.json"
 import {
@@ -15,12 +15,12 @@ import {
     getUUID,
     getPlayer,
     getGuild,
-    getHeadURL,
+    getHeadURL
 } from "utils/Hypixel"
 import { ChatInputCommandInteraction } from "discord.js"
 
 export default async function beast(
-    interaction: ChatInputCommandInteraction,
+    interaction: ChatInputCommandInteraction
 ): Promise<void> {
     await interaction.deferReply()
 
@@ -36,9 +36,9 @@ export default async function beast(
         embeds: [
             {
                 description: "Fetching your uuid...",
-                color: embedColor,
-            },
-        ],
+                color: embedColor
+            }
+        ]
     })
 
     const uuid = await getUUID(ign)
@@ -47,9 +47,9 @@ export default async function beast(
             embeds: [
                 {
                     description: "That player doesn't exist.",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
         return
     }
@@ -58,9 +58,9 @@ export default async function beast(
         embeds: [
             {
                 description: "Fetching your player data...",
-                color: embedColor,
-            },
-        ],
+                color: embedColor
+            }
+        ]
     })
 
     const head = await getHeadURL(ign)
@@ -70,9 +70,9 @@ export default async function beast(
             embeds: [
                 {
                     description: "That player hasn't played Hypixel before.",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
         return
     }
@@ -97,9 +97,9 @@ export default async function beast(
         embeds: [
             {
                 description: "Fetching your guild data...",
-                color: embedColor,
-            },
-        ],
+                color: embedColor
+            }
+        ]
     })
 
     const guild = await getGuild(uuid)
@@ -124,7 +124,7 @@ export default async function beast(
     if (!player.stats) {
         statsFields.push({
             name: "<a:_warning:1178350183457751100> This player never played any games.",
-            value: "**➺ Stats:** `None`",
+            value: "**➺ Stats:** `None`"
         })
     } else {
         if (player.stats.Bedwars) {
@@ -165,12 +165,12 @@ export default async function beast(
                     hsbwwins.toString() +
                     " / " +
                     bwwins.toString() +
-                    "`",
+                    "`"
             })
         } else {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played BedWars.",
-                value: "**➺ Stats:** `None`",
+                value: "**➺ Stats:** `None`"
             })
         }
 
@@ -206,12 +206,12 @@ export default async function beast(
                     "`\n" +
                     "**➺ Wins:** `" +
                     hsswwins.toString() +
-                    "`",
+                    "`"
             })
         } else {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played SkyWars.",
-                value: "**➺ Stats:** `None`",
+                value: "**➺ Stats:** `None`"
             })
         }
 
@@ -247,12 +247,12 @@ export default async function beast(
                     "`\n" +
                     "**➺ KDR:** `" +
                     hsduelskd.toFixed(2).toString() +
-                    "`\n",
+                    "`\n"
             })
         } else {
             statsFields.push({
                 name: "<a:_warning:1178350183457751100> This player never played Duels.",
-                value: "**➺ Stats:** `None`",
+                value: "**➺ Stats:** `None`"
             })
         }
     }
@@ -274,14 +274,14 @@ export default async function beast(
                     "`",
                 color: embedColor,
                 thumbnail: {
-                    url: head!,
+                    url: head!
                 },
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL() || undefined,
+                    icon_url: interaction.guild!.iconURL() || undefined
                 },
-                fields: statsFields,
-            },
-        ],
+                fields: statsFields
+            }
+        ]
     })
 }

@@ -31,7 +31,7 @@ export default function loadCronEvents() {
             cron.execute,
             cron.onComplete,
             cron.start,
-            cron.timeZone,
+            cron.timeZone
         ).start()
     }
 }

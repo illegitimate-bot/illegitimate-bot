@@ -2,13 +2,13 @@ import {
     ActionRowBuilder,
     ButtonStyle,
     ButtonBuilder,
-    TextChannel,
+    TextChannel
 } from "discord.js"
 import {
     color,
     waitingListChannel,
     waitingListMessage,
-    hypixelGuildID,
+    hypixelGuildID
 } from "config/options.json"
 import colorLog from "utils/functions/colors"
 import mongoose from "mongoose"
@@ -55,9 +55,9 @@ export = {
                         .setCustomId("checkstats")
                         .setLabel("Check Stats")
                         .setStyle(ButtonStyle.Secondary)
-                        .setDisabled(true),
-                ),
-            ],
+                        .setDisabled(true)
+                )
+            ]
         })
 
         await applicant.send({
@@ -66,9 +66,9 @@ export = {
                     description:
                         "Your application for the Illegitimate guild has been accepted.\n\n" +
                         "Make sure to leave your current guild so that we can invite you.",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const applicantEntry = await guildapp.findOne({ userID: applicantId })
@@ -80,7 +80,7 @@ export = {
             userID: applicantId,
             uuid: applicantUUID,
             IGN: applicantIGN,
-            timestamp: time,
+            timestamp: time
         })
 
         await waitingListAdd.save()
@@ -96,20 +96,20 @@ export = {
                         "Application has been accepted by <@" + user.id + ">.",
                     color: embedColor,
                     thumbnail: {
-                        url: applicant.avatarURL() || "",
+                        url: applicant.avatarURL() || ""
                     },
                     footer: {
                         icon_url: guild.iconURL() || undefined,
-                        text: "ID: " + applicant.id,
-                    },
-                },
-            ],
+                        text: "ID: " + applicant.id
+                    }
+                }
+            ]
         })
 
         if (process.env.NODE_ENV === "dev") return
         try {
             const channel = guild.channels.cache.get(
-                waitingListChannel,
+                waitingListChannel
             ) as TextChannel
             const wlmessage = await channel!.messages.fetch(waitingListMessage)
 
@@ -133,7 +133,7 @@ export = {
 
                 fields.push({
                     name: `${i + 1}. ${accepted[i].IGN}`,
-                    value: `TS: <t:${timestamp}:R>`,
+                    value: `TS: <t:${timestamp}:R>`
                 })
             }
 
@@ -145,18 +145,18 @@ export = {
                         color: wlembed.color!,
                         footer: {
                             text: "Last updated by " + user.username,
-                            icon_url: user.avatarURL() || undefined,
+                            icon_url: user.avatarURL() || undefined
                         },
                         thumbnail: wlembed.thumbnail!,
                         fields: fields,
-                        timestamp: new Date().toISOString(),
-                    },
-                ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
             })
         } catch (err) {
             console.log(
-                colorLog("Error while trying to update waiting list.", "red"),
+                colorLog("Error while trying to update waiting list.", "red")
             )
         }
-    },
+    }
 } as Button

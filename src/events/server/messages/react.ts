@@ -13,5 +13,5 @@ export = {
         ) {
             message.react("Woot:734345936347725885")
         }
-    },
+    }
 } as Event

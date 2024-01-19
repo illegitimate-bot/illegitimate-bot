@@ -16,7 +16,7 @@ export = {
             option
                 .setName("ign")
                 .setDescription("Player's name")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDMPermission(false),
 
@@ -35,9 +35,9 @@ export = {
                 embeds: [
                     {
                         description: "That player doesn't exist!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -55,14 +55,14 @@ export = {
                         "`",
                     color: embedColor,
                     thumbnail: {
-                        url: head!,
+                        url: head!
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

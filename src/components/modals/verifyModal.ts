@@ -11,7 +11,7 @@ import {
     member,
     guildRole,
     guildStaff,
-    defaultMember,
+    defaultMember
 } from "config/roles.json"
 import { Modal } from "interfaces"
 import { GuildMember } from "discord.js"
@@ -31,7 +31,7 @@ export = {
         if (verifyData) {
             interaction.editReply(
                 "You are already verified.\n" +
-                    "Try running /update to update your roles.",
+                    "Try running /update to update your roles."
             )
             return
         }
@@ -43,9 +43,9 @@ export = {
                     {
                         description:
                             "<a:questionmark_pink:1130206038008803488> That player does not exist.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -58,9 +58,9 @@ export = {
                     {
                         description:
                             "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -84,9 +84,9 @@ export = {
                             "**Please set your Discord tag on hypixel to `" +
                             username +
                             "` and try again.**",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -104,9 +104,9 @@ export = {
                             "**Please set your Discord tag on hypixel to `" +
                             username +
                             "` and try again.**",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -122,7 +122,7 @@ export = {
         if (guildID === hypixelGuildID) {
             const GuildMembers = guild!.members
             const guildRank = GuildMembers.find(
-                member => member.uuid === player.uuid,
+                member => member.uuid === player.uuid
             )!.rank
 
             if (guildRank === "Guild Master" && guildID === hypixelGuildID) {
@@ -163,7 +163,7 @@ export = {
             const newVerify = new verify({
                 _id: new mongoose.Types.ObjectId(),
                 userID: user.id,
-                uuid: uuid,
+                uuid: uuid
             })
 
             await newVerify.save()
@@ -180,15 +180,15 @@ export = {
                             "`.",
                         color: embedColor,
                         thumbnail: {
-                            url: head!,
+                            url: head!
                         },
                         footer: {
                             icon_url: interaction.guild!.iconURL() || undefined,
-                            text: interaction.guild!.name + " | " + devMessage,
-                        },
-                    },
-                ],
+                            text: interaction.guild!.name + " | " + devMessage
+                        }
+                    }
+                ]
             })
         }
-    },
+    }
 } as Modal

@@ -12,7 +12,7 @@ function getLevel(exp: number): number {
     if (exp <= 1) return 1
 
     return Math.floor(
-        1 + REVERSE_PQ_PREFIX + Math.sqrt(REVERSE_CONST + GROWTHDIV2 * exp),
+        1 + REVERSE_PQ_PREFIX + Math.sqrt(REVERSE_CONST + GROWTHDIV2 * exp)
     )
 }
 

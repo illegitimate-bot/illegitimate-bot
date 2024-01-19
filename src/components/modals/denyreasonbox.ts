@@ -4,7 +4,7 @@ import {
     ButtonBuilder,
     ButtonStyle,
     Message,
-    GuildMember,
+    GuildMember
 } from "discord.js"
 import { color } from "config/options.json"
 import guildapp from "schemas/guildAppSchema"
@@ -44,9 +44,9 @@ export = {
                         .setCustomId("checkstats")
                         .setLabel("Check Stats")
                         .setStyle(ButtonStyle.Secondary)
-                        .setDisabled(true),
-                ),
-            ],
+                        .setDisabled(true)
+                )
+            ]
         })
 
         let applicant: GuildMember | null
@@ -61,13 +61,13 @@ export = {
                 "Your application for the Illegitimate guild has been denied\n" +
                     "**Reason:** `" +
                     reason +
-                    "`",
+                    "`"
             )
             .setColor(embedColor)
 
         const missingUser = new EmbedBuilder()
             .setDescription(
-                "[WARN] User has left the server and cannot be notified.",
+                "[WARN] User has left the server and cannot be notified."
             )
             .setColor(embedColor)
 
@@ -79,13 +79,13 @@ export = {
                     ">.\n" +
                     "**Reason:** `" +
                     reason +
-                    "`",
+                    "`"
             )
             .setColor(embedColor)
             .setThumbnail(guild.iconURL() || "")
             .setFooter({
                 iconURL: guild.iconURL() || undefined,
-                text: "ID: " + applicantId,
+                text: "ID: " + applicantId
             })
 
         if (applicant !== null) {
@@ -102,7 +102,7 @@ export = {
         await guildapp.findOneAndDelete({ userID: applicantId })
 
         await interaction.editReply({
-            embeds: responseEmbeds,
+            embeds: responseEmbeds
         })
-    },
+    }
 } as Modal

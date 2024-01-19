@@ -23,15 +23,15 @@ export = {
                         member.user.createdAt.toLocaleString(),
                     color: embedColor,
                     thumbnail: {
-                        url: member.user.avatarURL() || "",
+                        url: member.user.avatarURL() || ""
                     },
                     footer: {
                         text: "ID: " + member.id,
-                        icon_url: member.user.avatarURL() || undefined,
+                        icon_url: member.user.avatarURL() || undefined
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
-    },
+    }
 } as Event

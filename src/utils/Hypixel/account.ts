@@ -48,8 +48,8 @@ async function getPlayer(uuid: string): Promise<PlayerData | null> {
     const playerReq: Player = await fetch(hypixel, {
         params: {
             key: apikey,
-            uuid: uuid,
-        },
+            uuid: uuid
+        }
     })
 
     if (!playerReq.data.player) {
@@ -61,15 +61,15 @@ async function getPlayer(uuid: string): Promise<PlayerData | null> {
 
 async function getGuild(
     query: string,
-    type?: GuildQuerqType,
+    type?: GuildQuerqType
 ): Promise<GuildData | null> {
     const reqType = type ? type : "player"
 
     const guildReq: Guild = await fetch(guild, {
         params: {
             key: apikey,
-            [reqType]: query,
-        },
+            [reqType]: query
+        }
     })
 
     if (!guildReq.data.guild) {

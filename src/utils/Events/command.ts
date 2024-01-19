@@ -23,8 +23,8 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -37,7 +37,7 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
 
         if (!command) {
             console.error(
-                `No command matching ${interaction.commandName} was found.`,
+                `No command matching ${interaction.commandName} was found.`
             )
             return
         }
@@ -58,10 +58,10 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
                                 text:
                                     interaction.user.username +
                                     " | " +
-                                    interaction.commandName,
-                            },
-                        },
-                    ],
+                                    interaction.commandName
+                            }
+                        }
+                    ]
                 })
             }
 
@@ -72,10 +72,10 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this command!",
-                            color: embedColor,
-                        },
+                            color: embedColor
+                        }
                     ],
-                    ephemeral: true,
+                    ephemeral: true
                 })
             } else {
                 await interaction.editReply({
@@ -83,9 +83,9 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this command!",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
         }

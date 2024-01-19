@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {
     ContextMenuCommandInteraction,
-    ContextMenuCommandBuilder,
+    ContextMenuCommandBuilder
 } from "discord.js"
 
 export default interface ContextMenu {

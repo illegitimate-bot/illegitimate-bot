@@ -2,7 +2,7 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     userMention,
-    User,
+    User
 } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
@@ -22,13 +22,13 @@ export = {
                 .setName("user")
                 .setDescription("The user to unban")
                 .setAutocomplete(true)
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("reason")
                 .setDescription("The reason for unbanning the user")
-                .setRequired(false),
+                .setRequired(false)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .setDMPermission(false),
@@ -48,9 +48,9 @@ export = {
                 embeds: [
                     {
                         description: "You haven't specified a user to unban",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -62,9 +62,9 @@ export = {
                 embeds: [
                     {
                         description: "The user you specified is not valid",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -76,7 +76,7 @@ export = {
                 {
                     author: {
                         name: mod.username,
-                        icon_url: mod.avatarURL() || undefined,
+                        icon_url: mod.avatarURL() || undefined
                     },
                     title: "Member Unbanned",
                     description: `
@@ -86,15 +86,15 @@ export = {
                     `,
                     color: embedColor,
                     thumbnail: {
-                        url: mod.avatarURL() || "",
+                        url: mod.avatarURL() || ""
                     },
                     footer: {
                         text: "ID: " + user!.id,
-                        icon_url: user.avatarURL() || undefined,
+                        icon_url: user.avatarURL() || undefined
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
 
         await interaction.editReply({
@@ -112,14 +112,14 @@ export = {
                         userMention(mod.id),
                     color: embedColor,
                     thumbnail: {
-                        url: user!.avatarURL() || "",
+                        url: user!.avatarURL() || ""
                     },
                     footer: {
                         icon_url: interaction.guild!.iconURL() || undefined,
-                        text: interaction.guild!.name + " | " + devMessage,
-                    },
-                },
-            ],
+                        text: interaction.guild!.name + " | " + devMessage
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

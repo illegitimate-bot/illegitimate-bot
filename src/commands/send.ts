@@ -2,7 +2,7 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     ChannelType,
-    TextChannel,
+    TextChannel
 } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
@@ -20,7 +20,7 @@ export = {
             option
                 .setName("message")
                 .setDescription("The message to send.")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addChannelOption(option =>
             option
@@ -28,8 +28,8 @@ export = {
                 .setDescription("The channel to send the message to.")
                 .addChannelTypes(
                     ChannelType.GuildText,
-                    ChannelType.GuildAnnouncement,
-                ),
+                    ChannelType.GuildAnnouncement
+                )
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -49,14 +49,14 @@ export = {
                     description: message,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.guild!.iconURL() || "",
+                        url: interaction.guild!.iconURL() || ""
                     },
                     footer: {
                         text: interaction.guild!.id + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
 
         await interaction.editReply({
@@ -66,10 +66,10 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

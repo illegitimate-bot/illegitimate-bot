@@ -16,7 +16,7 @@ export = {
             option
                 .setName("user")
                 .setDescription("User to show pp size")
-                .setRequired(false),
+                .setRequired(false)
         )
         .setDMPermission(false),
 
@@ -37,9 +37,9 @@ export = {
                 {
                     title: `${user.username}'s pp size`,
                     description: `8${"=".repeat(size)}D`,
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
-    },
+    }
 } as Command

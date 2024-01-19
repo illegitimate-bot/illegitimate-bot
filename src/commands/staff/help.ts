@@ -4,7 +4,7 @@ import { ExtendedClient as Client } from "utils/Client"
 
 export default async function help(
     interaction: ChatInputCommandInteraction,
-    client: Client,
+    client: Client
 ): Promise<void> {
     await interaction.deferReply({ ephemeral: true })
 
@@ -16,7 +16,7 @@ export default async function help(
     const commandRawList = client.commands.map(command => {
         return {
             name: command.name,
-            command: command,
+            command: command
         }
     })
 
@@ -26,20 +26,20 @@ export default async function help(
         if (!command.command.subcommands && !command.command.public) {
             commandList.push({
                 name: "**/" + commandName + "**",
-                value: "`" + command.command.description + "`",
+                value: "`" + command.command.description + "`"
             })
         } else if (command.command.subcommands && !command.command.public) {
             const subcommands = command.command.data.options.map(subcommand => {
                 return {
                     name: commandName + " " + subcommand.toJSON().name,
-                    description: subcommand.toJSON().description,
+                    description: subcommand.toJSON().description
                 }
             })
 
             for (const subcommand of subcommands) {
                 commandList.push({
                     name: "**/" + subcommand.name + "**",
-                    value: "`" + subcommand.description + "`",
+                    value: "`" + subcommand.description + "`"
                 })
             }
         }
@@ -55,13 +55,13 @@ export default async function help(
                 fields: commandList,
                 color: embedColor,
                 thumbnail: {
-                    url: interaction.guild!.iconURL() || "",
+                    url: interaction.guild!.iconURL() || ""
                 },
                 footer: {
                     icon_url: interaction.guild!.iconURL() || undefined,
-                    text: interaction.guild?.name + " | " + devMessage,
-                },
-            },
-        ],
+                    text: interaction.guild?.name + " | " + devMessage
+                }
+            }
+        ]
     })
 }

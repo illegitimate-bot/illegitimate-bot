@@ -21,18 +21,18 @@ export = {
             await message.channel.send({
                 embeds: [
                     {
-                        description: `\`\`\`js\n${outputString}\`\`\``,
-                    },
-                ],
+                        description: `\`\`\`js\n${outputString}\`\`\``
+                    }
+                ]
             })
         } catch (error) {
             await message.channel.send({
                 embeds: [
                     {
-                        description: `\`\`\`js\n${error}\`\`\``,
-                    },
-                ],
+                        description: `\`\`\`js\n${error}\`\`\``
+                    }
+                ]
             })
         }
-    },
+    }
 } as Event

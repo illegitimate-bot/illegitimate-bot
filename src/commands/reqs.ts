@@ -7,7 +7,7 @@ import {
     swstars,
     swkdr,
     duelswins,
-    duelswlr,
+    duelswlr
 } from "config/reqs.json"
 import { Command } from "interfaces"
 
@@ -33,7 +33,7 @@ export = {
                         "**You must make 100k-150k weekly GEXP.\nAs well as onne of the game stats below**",
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.guild!.iconURL() || "",
+                        url: interaction.guild!.iconURL() || ""
                     },
                     fields: [
                         {
@@ -45,7 +45,7 @@ export = {
                                 bwwins.toString() +
                                 "`\n**FKDR:** `" +
                                 bwfkdr.toString() +
-                                "`",
+                                "`"
                         },
                         {
                             name: "**Skywars**",
@@ -54,7 +54,7 @@ export = {
                                 swstars.toString() +
                                 "`\n**KDR:** `" +
                                 swkdr.toString() +
-                                "`",
+                                "`"
                         },
                         {
                             name: "**Duels**",
@@ -63,15 +63,15 @@ export = {
                                 duelswins.toString() +
                                 "`\n**WLR:** `" +
                                 duelswlr.toString() +
-                                "`",
-                        },
+                                "`"
+                        }
                     ],
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

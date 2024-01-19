@@ -4,7 +4,7 @@ import { ChatInputCommandInteraction } from "discord.js"
 import { GuildData } from "interfaces"
 
 export default async function guildInfo(
-    interaction: ChatInputCommandInteraction,
+    interaction: ChatInputCommandInteraction
 ): Promise<void> {
     await interaction.deferReply()
 
@@ -18,9 +18,9 @@ export default async function guildInfo(
             embeds: [
                 {
                     description: "Fetching your uuid...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const uuid = await getUUID(query)
@@ -29,9 +29,9 @@ export default async function guildInfo(
                 embeds: [
                     {
                         description: "That player doen't exist!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -40,9 +40,9 @@ export default async function guildInfo(
             embeds: [
                 {
                     description: "Fetching your player data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const player = await getPlayer(uuid)
@@ -51,9 +51,9 @@ export default async function guildInfo(
                 embeds: [
                     {
                         description: "That player has never joined the server!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -62,9 +62,9 @@ export default async function guildInfo(
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         guild = await getGuild(uuid, "player")
@@ -73,9 +73,9 @@ export default async function guildInfo(
                 embeds: [
                     {
                         description: "That player is not in a guild!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -84,9 +84,9 @@ export default async function guildInfo(
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         guild = await getGuild(query, "name")
@@ -95,9 +95,9 @@ export default async function guildInfo(
                 embeds: [
                     {
                         description: "That guild doesn't exist!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -106,9 +106,9 @@ export default async function guildInfo(
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         guild = await getGuild(query, "id")
@@ -117,9 +117,9 @@ export default async function guildInfo(
                 embeds: [
                     {
                         description: "That guild doesn't exist!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -157,14 +157,14 @@ export default async function guildInfo(
     const guildOwner = guildMembers.find(m => m.rank === "Guild Master")!.uuid
     const guildOwnerName = await getIGN(guildOwner)
     const guildRanksUnsorted = guild!.ranks.sort(
-        (a, b) => b.priority - a.priority,
+        (a, b) => b.priority - a.priority
     )
     const guildRanks = guildRanksUnsorted
         .map(r => "**➺ " + r.name + "** `[" + r.tag + "]`")
         .join("\n")
 
     const allGuildMembersWeeklyXP = guildMembers.map(
-        member => member.expHistory,
+        member => member.expHistory
     )
     const guildMembersWeeklyXP = allGuildMembersWeeklyXP.map(member => {
         return Object.values(member).reduce((a, b) => a + b, 0)
@@ -172,17 +172,17 @@ export default async function guildInfo(
 
     const totalGuildMembersWeeklyXPUnformatted = guildMembersWeeklyXP.reduce(
         (a, b) => a + b,
-        0,
+        0
     )
     const totalGuildMembersWeeklyXP = new Intl.NumberFormat("en-US").format(
-        totalGuildMembersWeeklyXPUnformatted,
+        totalGuildMembersWeeklyXPUnformatted
     )
 
     const averageGuildMembersWeeklyXPUnformatted = Math.round(
-        totalGuildMembersWeeklyXPUnformatted / 7,
+        totalGuildMembersWeeklyXPUnformatted / 7
     )
     const averageGuildMembersWeeklyXP = new Intl.NumberFormat("en-US").format(
-        averageGuildMembersWeeklyXPUnformatted,
+        averageGuildMembersWeeklyXPUnformatted
     )
 
     await interaction.editReply({
@@ -205,7 +205,7 @@ export default async function guildInfo(
                 fields: [
                     {
                         name: "**Guild Ranks**",
-                        value: guildRanks,
+                        value: guildRanks
                     },
                     {
                         name: "**GEXP**",
@@ -218,19 +218,19 @@ export default async function guildInfo(
                             "`\n" +
                             "**➺ Total GEXP:** `" +
                             guildExp +
-                            "`",
+                            "`"
                     },
                     {
                         name: "**Guild Created**",
-                        value: "**➺ **`" + guildCreatedTime + "`",
-                    },
+                        value: "**➺ **`" + guildCreatedTime + "`"
+                    }
                 ],
                 color: embedColor,
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL() || undefined,
-                },
-            },
-        ],
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }
+        ]
     })
 }

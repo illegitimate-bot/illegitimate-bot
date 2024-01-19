@@ -2,7 +2,7 @@ import {
     ModalBuilder,
     ActionRowBuilder,
     TextInputBuilder,
-    TextInputStyle,
+    TextInputStyle
 } from "discord.js"
 import { Button } from "interfaces"
 
@@ -23,9 +23,9 @@ export = {
                         .setPlaceholder("Enter your ign.")
                         .setRequired(true)
                         .setMinLength(3)
-                        .setMaxLength(16),
-                ),
+                        .setMaxLength(16)
+                )
             )
         await interaction.showModal(modal)
-    },
+    }
 } as Button

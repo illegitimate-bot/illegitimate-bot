@@ -6,7 +6,7 @@ import Illegitimate from "utils/Illegitimate"
 const redis = Illegitimate.redis
 
 export default async function guildTop(
-    interaction: ChatInputCommandInteraction,
+    interaction: ChatInputCommandInteraction
 ): Promise<void> {
     await interaction.deferReply()
 
@@ -21,9 +21,9 @@ export default async function guildTop(
             embeds: [
                 {
                     description: "You can't use this command in DMs!",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
         return
     }
@@ -33,9 +33,9 @@ export default async function guildTop(
             embeds: [
                 {
                     description: "Fetching your uuid...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const uuid = await getUUID(query)
@@ -44,9 +44,9 @@ export default async function guildTop(
                 embeds: [
                     {
                         description: "That player doen't exist!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -55,9 +55,9 @@ export default async function guildTop(
             embeds: [
                 {
                     description: "Fetching your player data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         const player = await getPlayer(uuid)
@@ -66,9 +66,9 @@ export default async function guildTop(
                 embeds: [
                     {
                         description: "That player has never joined the server!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -77,9 +77,9 @@ export default async function guildTop(
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         guild = await getGuild(uuid, "player")
@@ -88,9 +88,9 @@ export default async function guildTop(
                 embeds: [
                     {
                         description: "That player is not in a guild!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -99,9 +99,9 @@ export default async function guildTop(
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         guild = await getGuild(query, "name")
@@ -110,9 +110,9 @@ export default async function guildTop(
                 embeds: [
                     {
                         description: "That guild doesn't exist!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -121,9 +121,9 @@ export default async function guildTop(
             embeds: [
                 {
                     description: "Fetching your guild data...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         guild = await getGuild(query, "id")
@@ -132,9 +132,9 @@ export default async function guildTop(
                 embeds: [
                     {
                         description: "That guild doesn't exist!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -152,20 +152,20 @@ export default async function guildTop(
         })
         .reduce((a, b) => a + b, 0)
     const gexpToday = new Intl.NumberFormat("en-US").format(
-        gexpTodayUnformatted,
+        gexpTodayUnformatted
     )
 
     const averageGuildMemberGEXPUnformatted = Math.floor(
-        gexpTodayUnformatted / guildMembers.length,
+        gexpTodayUnformatted / guildMembers.length
     )
     const averageGuildMemberGEXP = new Intl.NumberFormat("en-US").format(
-        averageGuildMemberGEXPUnformatted,
+        averageGuildMemberGEXPUnformatted
     )
 
     const allMembersDailyGEXP = guildMembers.map(member => {
         return {
             uuid: member.uuid,
-            gexp: member.expHistory[Object.keys(member.expHistory)[0]],
+            gexp: member.expHistory[Object.keys(member.expHistory)[0]]
         }
     })
 
@@ -199,9 +199,9 @@ export default async function guildTop(
                         " members of " +
                         guildName +
                         "...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         for (let i = 0; i < allMembersSortedUUIDArray.length; i++) {
@@ -210,7 +210,7 @@ export default async function guildTop(
 
             guildData.push({
                 ign: ign!,
-                uuid: uuid,
+                uuid: uuid
             })
         }
 
@@ -218,7 +218,7 @@ export default async function guildTop(
             "guildTop+" + guildId,
             JSON.stringify(guildData),
             "EX",
-            60 * 30,
+            60 * 30
         )
     } else {
         cacheStatus = true
@@ -231,9 +231,9 @@ export default async function guildTop(
                         " members of " +
                         guildName +
                         "using cache...",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
         guildData = JSON.parse(cachedData)
     }
@@ -244,7 +244,7 @@ export default async function guildTop(
     for (let i = 0; i < amount; i++) {
         const gexp = new Intl.NumberFormat("en-US").format(topMembers[i].gexp)
         const ign = guildData.find(
-            member => member.uuid === topMembers[i].uuid,
+            member => member.uuid === topMembers[i].uuid
         )?.ign
 
         const position = i + 1
@@ -253,7 +253,7 @@ export default async function guildTop(
     }
 
     const list = Array.from({ length: sliceSize }, (_, i) =>
-        fieldsValueRaw.slice(i * sliceSize, (i + 1) * sliceSize),
+        fieldsValueRaw.slice(i * sliceSize, (i + 1) * sliceSize)
     )
     const newList: NewList = []
 
@@ -263,7 +263,7 @@ export default async function guildTop(
         newList[index] = {
             name: "",
             value: item.join("\n"),
-            inline: false,
+            inline: false
         }
     })
 
@@ -288,9 +288,9 @@ export default async function guildTop(
                         " | " +
                         devMessage +
                         cacheStatusText,
-                    icon_url: interaction.guild!.iconURL() || undefined,
-                },
-            },
-        ],
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }
+        ]
     })
 }

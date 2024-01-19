@@ -27,9 +27,9 @@ export = {
                 {
                     description:
                         "Your application for the Illegitimate staff team has been accepted.",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
 
         await message.edit({
@@ -44,9 +44,9 @@ export = {
                         .setCustomId("staffapplicationdeny")
                         .setLabel("Deny")
                         .setStyle(ButtonStyle.Danger)
-                        .setDisabled(true),
-                ),
-            ],
+                        .setDisabled(true)
+                )
+            ]
         })
 
         await staffapp.findOneAndDelete({ userID: applicantId })
@@ -58,14 +58,14 @@ export = {
                     description: "Application accepted by <@" + user.id + ">.",
                     color: embedColor,
                     thumbnail: {
-                        url: applicant.avatarURL() || "",
+                        url: applicant.avatarURL() || ""
                     },
                     footer: {
                         icon_url: guild.iconURL() || undefined,
-                        text: "ID: " + applicantId,
-                    },
-                },
-            ],
+                        text: "ID: " + applicantId
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Button

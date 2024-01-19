@@ -32,7 +32,7 @@ export = {
 
             fields.push({
                 name: `${i + 1}. ${accepted[i].IGN}`,
-                value: `TS: <t:${timestamp}:R>`,
+                value: `TS: <t:${timestamp}:R>`
             })
         }
 
@@ -44,15 +44,15 @@ export = {
                     color: embed.color!,
                     footer: {
                         text: "Last updated by " + user.username,
-                        icon_url: user.avatarURL() || undefined,
+                        icon_url: user.avatarURL() || undefined
                     },
                     thumbnail: embed.thumbnail!,
                     fields: fields,
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
 
         await interaction.editReply("Updated the waiting list")
-    },
+    }
 } as Button

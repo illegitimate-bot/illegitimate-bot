@@ -5,7 +5,7 @@ import {
     REST,
     RESTGetAPIApplicationGuildCommandResult,
     RESTPutAPIApplicationGuildCommandsJSONBody,
-    Routes,
+    Routes
 } from "discord.js"
 import fs from "fs"
 type FileType = "js" | "ts"
@@ -47,27 +47,27 @@ export default async function autoDeployCommands(fileType: FileType) {
     const rest = new REST({ version: "10" }).setToken(env.dev.devtoken!)
 
     const currentCommands = (await rest.get(
-        Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
+        Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!)
     )) as RESTGetAPIApplicationGuildCommandResult[]
 
     const currentCommandsInfo = currentCommands.map(command => {
         return {
             name: command.name,
-            description: command.description,
+            description: command.description
         }
     })
     const newCommandsInfo = commands.map(command => {
         return {
             name: command.name,
-            description: command.description,
+            description: command.description
         }
     })
 
     const sortedCurrentCommandsInfo = currentCommandsInfo.sort((a, b) =>
-        a.name.localeCompare(b.name),
+        a.name.localeCompare(b.name)
     )
     const sortedNewCommandsInfo = newCommandsInfo.sort((a, b) =>
-        a.name.localeCompare(b.name),
+        a.name.localeCompare(b.name)
     )
 
     const newCmds = sortedNewCommandsInfo
@@ -86,7 +86,7 @@ export default async function autoDeployCommands(fileType: FileType) {
         JSON.stringify(sortedCurrentCommandsInfo)
     ) {
         console.log(
-            color("Commands are the same, skipping deploy.", "lavender"),
+            color("Commands are the same, skipping deploy.", "lavender")
         )
         console.log(color(newCmds, "lavender"))
         return
@@ -96,18 +96,18 @@ export default async function autoDeployCommands(fileType: FileType) {
         console.log(color("Commands are different, starting deploy.", "red"))
         console.log(color(currentCmds, "red"))
         console.log(
-            `Started refreshing ${commands.length} application (/) commands.`,
+            `Started refreshing ${commands.length} application (/) commands.`
         )
 
         const data = (await rest.put(
             Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
-            { body: commands },
+            { body: commands }
         )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
 
         console.log(color("New commands deployed.", "lavender"))
         console.log(color(newCmds, "lavender"))
         console.log(
-            `Successfully reloaded ${data.length} application (/) commands.`,
+            `Successfully reloaded ${data.length} application (/) commands.`
         )
     } catch (error) {
         console.error(error)

@@ -2,7 +2,7 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     userMention,
-    GuildMember,
+    GuildMember
 } from "discord.js"
 import { admin, helper } from "config/roles.json"
 import { color, devMessage } from "config/options.json"
@@ -22,12 +22,12 @@ export = {
             option
                 .setName("member")
                 .setDescription("Member to kick.")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("reason")
-                .setDescription("Reason for kicking the member."),
+                .setDescription("Reason for kicking the member.")
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
         .setDMPermission(false),
@@ -46,7 +46,7 @@ export = {
 
         if (!modRoles.includes(helper) && !modRoles.includes(admin)) {
             await interaction.editReply(
-                "You do not have permission to use this command.",
+                "You do not have permission to use this command."
             )
             return
         }
@@ -83,7 +83,7 @@ export = {
                 {
                     author: {
                         name: mod.user.username,
-                        icon_url: mod.user.avatarURL() || undefined,
+                        icon_url: mod.user.avatarURL() || undefined
                     },
                     title: "Member Kicked",
                     description: `
@@ -93,15 +93,15 @@ export = {
                 `,
                     color: embedColor,
                     thumbnail: {
-                        url: mod.user.avatarURL() || "",
+                        url: mod.user.avatarURL() || ""
                     },
                     footer: {
                         text: "ID: " + member.user.id,
-                        icon_url: member.user.avatarURL() || undefined,
+                        icon_url: member.user.avatarURL() || undefined
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
 
         await interaction.editReply({
@@ -119,14 +119,14 @@ export = {
                         mod.user.username,
                     color: embedColor,
                     thumbnail: {
-                        url: member.user.avatarURL() || "",
+                        url: member.user.avatarURL() || ""
                     },
                     footer: {
                         icon_url: interaction.guild!.iconURL() || undefined,
-                        text: interaction.guild!.name + " | " + devMessage,
-                    },
-                },
-            ],
+                        text: interaction.guild!.name + " | " + devMessage
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

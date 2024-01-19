@@ -25,8 +25,8 @@ export default function loadModalEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The modal at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -38,7 +38,7 @@ export default function loadModalEvents(client: Client, ft: FileType) {
 
         if (!modal) {
             console.error(
-                `No modal matching ${interaction.customId} was found.`,
+                `No modal matching ${interaction.customId} was found.`
             )
             return
         }
@@ -59,10 +59,10 @@ export default function loadModalEvents(client: Client, ft: FileType) {
                                 text:
                                     interaction.user.username +
                                     " | " +
-                                    interaction.customId,
-                            },
-                        },
-                    ],
+                                    interaction.customId
+                            }
+                        }
+                    ]
                 })
             }
 
@@ -73,9 +73,9 @@ export default function loadModalEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this modal!",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             } else {
                 await interaction.editReply({
@@ -83,9 +83,9 @@ export default function loadModalEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this modal!",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
         }

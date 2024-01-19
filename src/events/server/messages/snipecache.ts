@@ -20,16 +20,16 @@ export = {
             channel: message.channel.id,
             createdAt: message.createdTimestamp,
             deletedAt: Date.now(),
-            attachments: message.attachments.map(a => a.url) || [],
+            attachments: message.attachments.map(a => a.url) || []
         }
 
         const snipeCache = new snipeCacheSchema({
             _id: new mongoose.Types.ObjectId(),
             userid: message.author.id,
             channelid: message.channel.id,
-            data: msg,
+            data: msg
         })
 
         await snipeCache.save()
-    },
+    }
 } as Event

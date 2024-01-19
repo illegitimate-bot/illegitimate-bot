@@ -16,9 +16,9 @@ export = {
             embeds: [
                 {
                     description: "Bot is online!",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
-    },
+    }
 } as Event

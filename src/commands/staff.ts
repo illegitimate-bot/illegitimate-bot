@@ -18,7 +18,7 @@ export = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName("help")
-                .setDescription("Get help with staff commands"),
+                .setDescription("Get help with staff commands")
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -28,15 +28,13 @@ export = {
                     option
                         .setName("ign")
                         .setDescription("The IGN of the player.")
-                        .setRequired(true),
-                ),
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("updatediscordroles")
-                .setDescription(
-                    "Update the discord roles of all guild members",
-                ),
+                .setDescription("Update the discord roles of all guild members")
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -67,10 +65,10 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

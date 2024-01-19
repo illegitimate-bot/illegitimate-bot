@@ -1,7 +1,7 @@
 import {
     SlashCommandBuilder,
     PermissionFlagsBits,
-    userMention,
+    userMention
 } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import waitinglistSchema from "schemas/waitinglistSchema"
@@ -21,13 +21,13 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to remove.")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("reason")
                 .setDescription("The reason for removing the user.")
-                .setRequired(false),
+                .setRequired(false)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -50,9 +50,9 @@ export = {
                         description:
                             userMention(user.id) +
                             " is not on the waiting list.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -64,7 +64,7 @@ export = {
                 {
                     author: {
                         name: mod.username,
-                        icon_url: mod.avatarURL() || undefined,
+                        icon_url: mod.avatarURL() || undefined
                     },
                     title: "Waiting List - Remove User",
                     description: `
@@ -74,15 +74,15 @@ export = {
                 `,
                     color: embedColor,
                     thumbnail: {
-                        url: mod.avatarURL() || "",
+                        url: mod.avatarURL() || ""
                     },
                     footer: {
                         icon_url: user.avatarURL() || undefined,
-                        text: "ID: " + user.id,
+                        text: "ID: " + user.id
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
 
         await interaction.editReply({
@@ -99,10 +99,10 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

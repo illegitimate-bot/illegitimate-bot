@@ -27,9 +27,9 @@ export = {
                 embeds: [
                     {
                         description: "You are not verified!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -49,14 +49,14 @@ export = {
                         "`",
                     color: embedColor,
                     thumbnail: {
-                        url: head!,
+                        url: head!
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

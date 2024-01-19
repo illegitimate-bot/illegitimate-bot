@@ -17,7 +17,7 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to snipe")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDMPermission(false),
 
@@ -26,7 +26,7 @@ export = {
         const member = interaction.options.getMember("user") as GuildMember
         const snipeCache = await snipeCacheSchema.find({
             userid: member.user.id,
-            channelid: interaction.channel!.id,
+            channelid: interaction.channel!.id
         })
         const embedColor = Number(color.replace("#", "0x"))
         const messages: string[] = []
@@ -36,9 +36,9 @@ export = {
                 embeds: [
                     {
                         description: "No messages to snipe",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -51,7 +51,7 @@ export = {
             } else {
                 messages.push(`**Message #${i}:** ${data.content}`)
                 messages.push(
-                    `**Attachments:** ${data.attachments.join(", ")}\n`,
+                    `**Attachments:** ${data.attachments.join(", ")}\n`
                 )
             }
             i++
@@ -62,20 +62,20 @@ export = {
                 {
                     author: {
                         name: member.user.username,
-                        icon_url: member.user.avatarURL() || undefined,
+                        icon_url: member.user.avatarURL() || undefined
                     },
                     description: messages.join("\n"),
                     thumbnail: {
-                        url: member.user.avatarURL() || "",
+                        url: member.user.avatarURL() || ""
                     },
                     color: embedColor,
                     footer: {
                         text: "ID: " + member.user.id,
-                        icon_url: interaction.guild!.iconURL() || undefined,
+                        icon_url: interaction.guild!.iconURL() || undefined
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
-    },
+    }
 } as Command

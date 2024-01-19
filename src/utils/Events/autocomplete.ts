@@ -15,7 +15,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         "..",
         "..",
         "components",
-        "autocomplete",
+        "autocomplete"
     )
     const autocompleteFiles = fs
         .readdirSync(autocompletePath)
@@ -31,8 +31,8 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -44,7 +44,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
 
         if (!autocomplete) {
             console.error(
-                `No autocomplete matching ${interaction.commandName} was found.`,
+                `No autocomplete matching ${interaction.commandName} was found.`
             )
             return
         }
@@ -65,10 +65,10 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
                                 text:
                                     interaction.user.username +
                                     " | " +
-                                    interaction.commandName,
-                            },
-                        },
-                    ],
+                                    interaction.commandName
+                            }
+                        }
+                    ]
                 })
             }
             console.error(error)

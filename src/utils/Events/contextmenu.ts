@@ -14,7 +14,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
         __dirname,
         "..",
         "..",
-        "commands-contextmenu",
+        "commands-contextmenu"
     )
     const contextMenuFiles = fs
         .readdirSync(contextMenuPath)
@@ -30,8 +30,8 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -44,7 +44,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
 
         if (!command) {
             console.error(
-                `No command matching ${interaction.commandName} was found.`,
+                `No command matching ${interaction.commandName} was found.`
             )
             return
         }
@@ -65,10 +65,10 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
                                 text:
                                     interaction.user.username +
                                     " | " +
-                                    interaction.commandName,
-                            },
-                        },
-                    ],
+                                    interaction.commandName
+                            }
+                        }
+                    ]
                 })
             }
 
@@ -79,10 +79,10 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this contextmenu command!",
-                            color: embedColor,
-                        },
+                            color: embedColor
+                        }
                     ],
-                    ephemeral: true,
+                    ephemeral: true
                 })
             } else {
                 await interaction.editReply({
@@ -90,9 +90,9 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
                         {
                             description:
                                 "There was an error while executing this contextmenu command!",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
         }

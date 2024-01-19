@@ -3,7 +3,7 @@ import {
     PermissionFlagsBits,
     userMention,
     ChatInputCommandInteraction,
-    GuildMember,
+    GuildMember
 } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
@@ -23,18 +23,18 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to timeout")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("time")
                 .setDescription("The time to timeout the user for")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("reason")
-                .setDescription("The reason for the timeout"),
+                .setDescription("The reason for the timeout")
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -57,9 +57,9 @@ export = {
                 embeds: [
                     {
                         description: "You cannot timeout a bot.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -69,9 +69,9 @@ export = {
                 embeds: [
                     {
                         description: "You cannot timeout the server owner.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -85,9 +85,9 @@ export = {
                     {
                         description:
                             "I cannot timeout this user because their role is higher than mine.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -98,9 +98,9 @@ export = {
                     {
                         description:
                             "You cannot timeout this user because their role is higher than yours.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -110,9 +110,9 @@ export = {
                 embeds: [
                     {
                         description: "You cannot timeout yourself.",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
             return
         }
@@ -159,7 +159,7 @@ export = {
                 {
                     author: {
                         name: mod.user.username,
-                        icon_url: mod.user.avatarURL() || undefined,
+                        icon_url: mod.user.avatarURL() || undefined
                     },
                     title: title,
                     description: `
@@ -170,15 +170,15 @@ export = {
                 `,
                     color: embedColor,
                     thumbnail: {
-                        url: mod.user.avatarURL() || "",
+                        url: mod.user.avatarURL() || ""
                     },
                     footer: {
                         text: "ID: " + target.id,
-                        icon_url: target.user.avatarURL() || undefined,
+                        icon_url: target.user.avatarURL() || undefined
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
 
         await interaction.editReply({
@@ -188,10 +188,10 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
-    },
+    }
 } as Command

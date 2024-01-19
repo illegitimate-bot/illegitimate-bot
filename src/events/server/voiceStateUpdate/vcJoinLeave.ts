@@ -28,11 +28,11 @@ export = {
                         footer: {
                             text: "ID: " + newState.member!.id,
                             icon_url:
-                                newState.member!.user.avatarURL() || undefined,
+                                newState.member!.user.avatarURL() || undefined
                         },
-                        timestamp: new Date().toISOString(),
-                    },
-                ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
             })
         } else if (oldChannel !== null && newChannel === null) {
             logToChannel("bot", {
@@ -47,11 +47,11 @@ export = {
                         footer: {
                             text: "ID: " + oldState.member!.id,
                             icon_url:
-                                oldState.member!.user.avatarURL() || undefined,
+                                oldState.member!.user.avatarURL() || undefined
                         },
-                        timestamp: new Date().toISOString(),
-                    },
-                ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
             })
         } else if (oldChannel !== null && newChannel !== null) {
             if (oldChannel.id === newChannel.id) return
@@ -70,12 +70,12 @@ export = {
                         footer: {
                             text: "ID: " + oldState.member!.id,
                             icon_url:
-                                oldState.member!.user.avatarURL() || undefined,
+                                oldState.member!.user.avatarURL() || undefined
                         },
-                        timestamp: new Date().toISOString(),
-                    },
-                ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
             })
         }
-    },
+    }
 } as Event

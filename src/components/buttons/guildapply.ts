@@ -4,7 +4,7 @@ import {
     ActionRowBuilder,
     EmbedBuilder,
     GuildMember,
-    TextChannel,
+    TextChannel
 } from "discord.js"
 import { color } from "config/options.json"
 import { largeM, smallM, ignM } from "config/limitmessages.json"
@@ -40,7 +40,7 @@ export = {
 
             if (userRoles.includes(guildRole)) {
                 await interaction.editReply(
-                    "You are already a member of the guild.",
+                    "You are already a member of the guild."
                 )
                 return
             }
@@ -49,7 +49,7 @@ export = {
 
             if (application) {
                 await interaction.editReply(
-                    "You already have an application in progress.",
+                    "You already have an application in progress."
                 )
                 return
             }
@@ -62,7 +62,7 @@ export = {
                 .setColor(embedColor)
             const attachments = new EmbedBuilder()
                 .setDescription(
-                    "You have uploaded an attachment. Please do not upload images, videos, or GIFS.",
+                    "You have uploaded an attachment. Please do not upload images, videos, or GIFS."
                 )
                 .setColor(embedColor)
 
@@ -75,9 +75,9 @@ export = {
                                 "If you wish to proceed with your application, please type `yes` otherwise type `cancel`.\n\n" +
                                 "**Do not upload images, videos, or GIFS.**\n" +
                                 "You have a minute to respond to this message.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             } catch (error) {
                 await interaction.editReply("Please enable your DMs.")
@@ -89,7 +89,7 @@ export = {
             const input = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60,
+                time: 1000 * 60
             })
             if (input.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -116,15 +116,15 @@ export = {
                             "`",
                         color: embedColor,
                         footer: {
-                            text: "You have 5 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 5 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer1 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 5,
+                time: 1000 * 60 * 5
             })
             if (answer1.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -143,9 +143,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 16.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
                 return
             }
@@ -157,9 +157,9 @@ export = {
                             description:
                                 "That is not a valid Minecraft username.\n" +
                                 "Application cancelled.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
                 return
             }
@@ -176,15 +176,15 @@ export = {
                             "`(8 characters max)`",
                         color: embedColor,
                         footer: {
-                            text: "You have 15 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 15 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer2 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 15,
+                time: 1000 * 60 * 15
             })
             if (answer2.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -203,9 +203,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 8.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
                 return
             }
@@ -223,15 +223,15 @@ export = {
                             "`",
                         color: embedColor,
                         footer: {
-                            text: "You have 15 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 15 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer3 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 15,
+                time: 1000 * 60 * 15
             })
             if (answer3.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -250,9 +250,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 128.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
             const answer3_1 = answer3.first()!.content
@@ -270,15 +270,15 @@ export = {
                             "`",
                         color: embedColor,
                         footer: {
-                            text: "You have 15 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 15 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer4 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 15,
+                time: 1000 * 60 * 15
             })
             if (answer4.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -297,9 +297,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 256.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
             const answer4_1 = answer4.first()!.content
@@ -316,15 +316,15 @@ export = {
                             "`",
                         color: embedColor,
                         footer: {
-                            text: "You have 15 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 15 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer5 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 15,
+                time: 1000 * 60 * 15
             })
             if (answer5.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -343,9 +343,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 128.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
             const answer5_1 = answer5.first()!.content
@@ -362,15 +362,15 @@ export = {
                             "`",
                         color: embedColor,
                         footer: {
-                            text: "You have 15 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 15 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer6 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 15,
+                time: 1000 * 60 * 15
             })
             if (answer6.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -389,9 +389,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 256.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
             const answer6_1 = answer6.first()!.content
@@ -408,15 +408,15 @@ export = {
                             "`",
                         color: embedColor,
                         footer: {
-                            text: "You have 15 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 15 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer7 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 15,
+                time: 1000 * 60 * 15
             })
             if (answer7.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -435,9 +435,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 128.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
             const answer7_1 = answer7!.first()!.content
@@ -453,15 +453,15 @@ export = {
                             "`(64 characters max)`",
                         color: embedColor,
                         footer: {
-                            text: "You have 15 minutes to respond to this message.",
-                        },
-                    },
-                ],
+                            text: "You have 15 minutes to respond to this message."
+                        }
+                    }
+                ]
             })
             const answer8 = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 15,
+                time: 1000 * 60 * 15
             })
             if (answer8.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -480,9 +480,9 @@ export = {
                     embeds: [
                         {
                             description: "Max character limit is 64.",
-                            color: embedColor,
-                        },
-                    ],
+                            color: embedColor
+                        }
+                    ]
                 })
             }
             const answer8_1 = answer8.first()!.content
@@ -492,15 +492,15 @@ export = {
                     {
                         description:
                             "If you want to submit your application, type `yes` if not, type `no`",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
 
             const final = await user.dmChannel!.awaitMessages({
                 filter: m => m.author.id === user.user.id,
                 max: 1,
-                time: 1000 * 60 * 5,
+                time: 1000 * 60 * 5
             })
             if (final.size === 0) {
                 await user.send({ embeds: [tooLong] })
@@ -519,21 +519,21 @@ export = {
                 embeds: [
                     {
                         description: "Your application has been submitted!",
-                        color: embedColor,
-                    },
-                ],
+                        color: embedColor
+                    }
+                ]
             })
 
             const newGuildApp = new guildapp({
                 _id: new mongoose.Types.ObjectId(),
                 userID: user.user.id,
-                uuid: uuid,
+                uuid: uuid
             })
 
             await newGuildApp.save()
 
             const channel = guild.channels.cache.get(
-                applicationsChannel,
+                applicationsChannel
             ) as TextChannel
             await channel.send({
                 embeds: [
@@ -545,47 +545,47 @@ export = {
                             " - Guild Application",
                         color: embedColor,
                         thumbnail: {
-                            url: user.avatarURL() || "",
+                            url: user.avatarURL() || ""
                         },
                         fields: [
                             {
                                 name: rq(1),
-                                value: "```" + answer1_1 + "```",
+                                value: "```" + answer1_1 + "```"
                             },
                             {
                                 name: rq(2),
-                                value: "```" + answer2_1 + "```",
+                                value: "```" + answer2_1 + "```"
                             },
                             {
                                 name: rq(3),
-                                value: "```" + answer3_1 + "```",
+                                value: "```" + answer3_1 + "```"
                             },
                             {
                                 name: rq(4),
-                                value: "```" + answer4_1 + "```",
+                                value: "```" + answer4_1 + "```"
                             },
                             {
                                 name: rq(5),
-                                value: "```" + answer5_1 + "```",
+                                value: "```" + answer5_1 + "```"
                             },
                             {
                                 name: rq(6),
-                                value: "```" + answer6_1 + "```",
+                                value: "```" + answer6_1 + "```"
                             },
                             {
                                 name: rq(7),
-                                value: "```" + answer7_1 + "```",
+                                value: "```" + answer7_1 + "```"
                             },
                             {
                                 name: rq(8),
-                                value: "```" + answer8_1 + "```",
-                            },
+                                value: "```" + answer8_1 + "```"
+                            }
                         ],
                         footer: {
                             icon_url: guild.iconURL() || "",
-                            text: "ID: " + user.user.id,
-                        },
-                    },
+                            text: "ID: " + user.user.id
+                        }
+                    }
                 ],
                 components: [
                     new ActionRowBuilder<ButtonBuilder>().addComponents(
@@ -600,10 +600,10 @@ export = {
                         new ButtonBuilder()
                             .setCustomId("checkstats")
                             .setLabel("Check Stats")
-                            .setStyle(ButtonStyle.Secondary),
-                    ),
-                ],
+                            .setStyle(ButtonStyle.Secondary)
+                    )
+                ]
             })
         }
-    },
+    }
 } as Button

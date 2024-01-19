@@ -2,7 +2,7 @@ import {
     SlashCommandBuilder,
     PermissionFlagsBits,
     userMention,
-    GuildMember,
+    GuildMember
 } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
@@ -21,13 +21,13 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to set the nickname for")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("nickname")
                 .setDescription("The nickname to set")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames)
         .setDMPermission(false),
@@ -40,7 +40,7 @@ export = {
         if (!member.manageable) {
             interaction.reply({
                 content: "I cannot set the nickname for this user!",
-                ephemeral: true,
+                ephemeral: true
             })
             return
         }
@@ -52,7 +52,7 @@ export = {
                 {
                     author: {
                         name: interaction.user.username,
-                        icon_url: interaction.user.avatarURL() || undefined,
+                        icon_url: interaction.user.avatarURL() || undefined
                     },
                     title: "Nickname",
                     description: `
@@ -62,15 +62,15 @@ export = {
                 `,
                     color: embedColor,
                     thumbnail: {
-                        url: interaction.user.avatarURL() || "",
+                        url: interaction.user.avatarURL() || ""
                     },
                     footer: {
                         text: "ID: " + member.user.id,
-                        icon_url: member.user.avatarURL() || undefined,
+                        icon_url: member.user.avatarURL() || undefined
                     },
-                    timestamp: new Date().toISOString(),
-                },
-            ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
         })
 
         await interaction.reply({
@@ -80,11 +80,11 @@ export = {
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
             ],
-            ephemeral: true,
+            ephemeral: true
         })
-    },
+    }
 } as Command

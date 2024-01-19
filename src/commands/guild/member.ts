@@ -3,7 +3,7 @@ import { color, devMessage } from "config/options.json"
 import { ChatInputCommandInteraction } from "discord.js"
 
 export default async function guildMember(
-    interaction: ChatInputCommandInteraction,
+    interaction: ChatInputCommandInteraction
 ): Promise<void> {
     await interaction.deferReply()
 
@@ -14,9 +14,9 @@ export default async function guildMember(
         embeds: [
             {
                 description: "Fetching your uuid...",
-                color: embedColor,
-            },
-        ],
+                color: embedColor
+            }
+        ]
     })
 
     const uuid = await getUUID(ign)
@@ -25,9 +25,9 @@ export default async function guildMember(
             embeds: [
                 {
                     description: "This user does not exist",
-                    color: embedColor,
-                },
-            ],
+                    color: embedColor
+                }
+            ]
         })
         return
     }
@@ -36,9 +36,9 @@ export default async function guildMember(
         embeds: [
             {
                 description: "Fetching your player data...",
-                color: embedColor,
-            },
-        ],
+                color: embedColor
+            }
+        ]
     })
 
     const head = await getHeadURL(ign)
@@ -50,14 +50,14 @@ export default async function guildMember(
                     description: "This user never logged on to hypixel",
                     color: embedColor,
                     thumbnail: {
-                        url: head!,
+                        url: head!
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
         return
     }
@@ -83,9 +83,9 @@ export default async function guildMember(
         embeds: [
             {
                 description: "Fetching your guild data...",
-                color: embedColor,
-            },
-        ],
+                color: embedColor
+            }
+        ]
     })
 
     const guild = await getGuild(uuid)
@@ -96,14 +96,14 @@ export default async function guildMember(
                     description: "This user is not in a guild",
                     color: embedColor,
                     thumbnail: {
-                        url: head!,
+                        url: head!
                     },
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+                        icon_url: interaction.guild!.iconURL() || undefined
+                    }
+                }
+            ]
         })
         return
     }
@@ -129,16 +129,16 @@ export default async function guildMember(
     const expValue = allDaysGexp.join("")
     const totalWeeklyGexpUnformatted = Object.values(memberGexp).reduce(
         (a, b) => a + b,
-        0,
+        0
     )
     const totalWeeklyGexp = new Intl.NumberFormat("en-US").format(
-        totalWeeklyGexpUnformatted,
+        totalWeeklyGexpUnformatted
     )
     const averageWeeklyGexpUnformatted = Math.round(
-        totalWeeklyGexpUnformatted / 7,
+        totalWeeklyGexpUnformatted / 7
     )
     const averageWeeklyGexp = new Intl.NumberFormat("en-US").format(
-        averageWeeklyGexpUnformatted,
+        averageWeeklyGexpUnformatted
     )
 
     const guildMemberJoinMS = guildMember!.joined
@@ -176,12 +176,12 @@ export default async function guildMember(
                     "`\n",
                 color: embedColor,
                 thumbnail: {
-                    url: head!,
+                    url: head!
                 },
                 fields: [
                     {
                         name: "**Daily GEXP**",
-                        value: expValue,
+                        value: expValue
                     },
                     {
                         name: "**Weekly GEXP**",
@@ -191,18 +191,18 @@ export default async function guildMember(
                             "`\n" +
                             "**➺ Daily avarage:** `" +
                             averageWeeklyGexp +
-                            "`",
+                            "`"
                     },
                     {
                         name: "**Join date**",
-                        value: "**➺ **`" + guildMemberJoin + "`",
-                    },
+                        value: "**➺ **`" + guildMemberJoin + "`"
+                    }
                 ],
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL() || undefined,
-                },
-            },
-        ],
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }
+        ]
     })
 }

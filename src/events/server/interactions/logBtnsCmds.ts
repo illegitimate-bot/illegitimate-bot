@@ -17,8 +17,8 @@ export = {
                             interaction.commandName +
                             " " +
                             interaction.options.getSubcommand(),
-                        "pink",
-                    ),
+                        "pink"
+                    )
                 )
             } catch {
                 console.log(
@@ -26,8 +26,8 @@ export = {
                         interaction.user.username +
                             " ran " +
                             interaction.commandName,
-                        "pink",
-                    ),
+                        "pink"
+                    )
                 )
             }
         }
@@ -40,10 +40,10 @@ export = {
                         interaction.user.discriminator +
                         " clicked " +
                         interaction.customId,
-                    "pink",
-                ),
+                    "pink"
+                )
             )
             return
         }
-    },
+    }
 } as Event

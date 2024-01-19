@@ -7,7 +7,7 @@ export = {
     async execute(interaction) {
         await interaction.reply({
             content: "This button is currently disabled.",
-            ephemeral: true,
+            ephemeral: true
         })
-    },
+    }
 } as Button

@@ -6,9 +6,8 @@ import loadContextMenuEvents from "./contextmenu"
 import loadCronEvents from "./cron"
 import loadEvents from "./events"
 import loadModalEvents from "./modal"
-type FileType = "js" | "ts"
 
-export function loadAllEvents(client: Client, ft: FileType) {
+export default function loadAllEvents(client: Client, ft: "js" | "ts") {
     loadEvents(client)
     loadButtonEvents(client, ft)
     loadSlashCommandsEvents(client, ft)

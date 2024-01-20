@@ -3,13 +3,25 @@ import color from "utils/functions/colors"
 import { Redis } from "ioredis"
 import env from "utils/Env"
 import { connect } from "mongoose"
+import loadAllEvents from "./Events"
 const client = new Client()
 const redis = new Redis(env.prod.redisURI!)
+let ft: "js" | "ts"
+if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
+    ft = "ts"
+} else {
+    ft = "js"
+}
 
 class Bot {
     async start() {
         this.init()
+        loadAllEvents(client, ft)
         client.start()
+        this.databases()
+    }
+
+    private async databases() {
         redis.on("ready", () => {
             console.log(color("Connected to Redis", "green"))
         })

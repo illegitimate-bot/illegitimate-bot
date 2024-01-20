@@ -3,7 +3,6 @@ import color from "./functions/colors"
 import { Command, ContextMenu, Button, Modal, Autocomplete } from "interfaces"
 import env from "./Env"
 import autoDeployCommands from "./Autodeploy"
-import { loadAllEvents } from "./Events"
 
 export class ExtendedClient extends Client {
     commands: Collection<string, Command> = new Collection()
@@ -34,20 +33,15 @@ export class ExtendedClient extends Client {
     async start() {
         let token: string
         if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT) {
-            console.log(
-                color("Running in development mode. [ts-node]", "lavender")
-            )
-            loadAllEvents(this, "ts")
+            console.log(color("Running in development mode. [ts-node]", "lavender"))
             token = env.dev.devtoken!
             autoDeployCommands("ts")
         } else if (process.env.NODE_ENV === "dev" && !process.env.TYPESCRIPT) {
             console.log(color("Running in development mode.", "lavender"))
-            loadAllEvents(this, "js")
             token = env.dev.devtoken!
             autoDeployCommands("js")
         } else {
             console.log(color("Running in production mode.", "green"))
-            loadAllEvents(this, "js")
             token = env.prod.token!
         }
 

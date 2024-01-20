@@ -38,10 +38,8 @@ function guildLevel(exp: number): number {
 */
 function scaledGEXP(input: number): number {
     if (input <= 200000) return Number(input)
-    if (input <= 700000)
-        return Number(Math.round((input - 200000) / 10 + 200000))
-    if (input > 700000)
-        return Number(Math.round((input - 700000) / 33 + 250000))
+    if (input <= 700000) return Number(Math.round((input - 200000) / 10 + 200000))
+    if (input > 700000) return Number(Math.round((input - 700000) / 33 + 250000))
     return 0
 }
 

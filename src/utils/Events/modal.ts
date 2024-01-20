@@ -11,9 +11,7 @@ const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadModalEvents(client: Client, ft: FileType) {
     const modalPath = path.join(__dirname, "..", "..", "components", "modals")
-    const modalFiles = fs
-        .readdirSync(modalPath)
-        .filter(file => file.endsWith(ft))
+    const modalFiles = fs.readdirSync(modalPath).filter(file => file.endsWith(ft))
 
     for (const file of modalFiles) {
         const filePath = path.join(modalPath, file)
@@ -37,9 +35,7 @@ export default function loadModalEvents(client: Client, ft: FileType) {
         const modal = client.modals.get(interaction.customId)
 
         if (!modal) {
-            console.error(
-                `No modal matching ${interaction.customId} was found.`
-            )
+            console.error(`No modal matching ${interaction.customId} was found.`)
             return
         }
 
@@ -48,44 +44,32 @@ export default function loadModalEvents(client: Client, ft: FileType) {
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {
-                    embeds: [
-                        {
-                            title: "Button error occured",
-                            description: "```" + error + "```",
-                            color: embedColor,
-                            footer: {
-                                icon_url:
-                                    interaction.guild!.iconURL() || undefined,
-                                text:
-                                    interaction.user.username +
-                                    " | " +
-                                    interaction.customId
-                            }
+                    embeds: [{
+                        title: "Button error occured",
+                        description: "```" + error + "```",
+                        color: embedColor,
+                        footer: {
+                            icon_url: interaction.guild!.iconURL() || undefined,
+                            text: interaction.user.username + " | " + interaction.customId
                         }
-                    ]
+                    }]
                 })
             }
 
             console.error(error)
             if (!interaction.deferred) {
                 await interaction.reply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this modal!",
-                            color: embedColor
-                        }
-                    ]
+                    embeds: [{
+                        description: "There was an error while executing this modal!",
+                        color: embedColor
+                    }]
                 })
             } else {
                 await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this modal!",
-                            color: embedColor
-                        }
-                    ]
+                    embeds: [{
+                        description: "There was an error while executing this modal!",
+                        color: embedColor
+                    }]
                 })
             }
         }

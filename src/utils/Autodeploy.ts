@@ -1,12 +1,7 @@
 import { Command } from "interfaces"
 import color from "./functions/colors"
 import env from "./Env"
-import {
-    REST,
-    RESTGetAPIApplicationGuildCommandResult,
-    RESTPutAPIApplicationGuildCommandsJSONBody,
-    Routes
-} from "discord.js"
+import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPutAPIApplicationGuildCommandsJSONBody, Routes } from "discord.js"
 import fs from "fs"
 type FileType = "js" | "ts"
 
@@ -16,19 +11,11 @@ export default async function autoDeployCommands(fileType: FileType) {
     let contentMenuCommands: string[] = []
 
     if (fileType === "js") {
-        commandFiles = fs
-            .readdirSync("./dist/commands/")
-            .filter(file => file.endsWith(fileType))
-        contentMenuCommands = fs
-            .readdirSync("./dist/commands-contextmenu/")
-            .filter(file => file.endsWith(fileType))
+        commandFiles = fs.readdirSync("./dist/commands/").filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs.readdirSync("./dist/commands-contextmenu/").filter(file => file.endsWith(fileType))
     } else if (fileType === "ts") {
-        commandFiles = fs
-            .readdirSync("./src/commands/")
-            .filter(file => file.endsWith(fileType))
-        contentMenuCommands = fs
-            .readdirSync("./src/commands-contextmenu/")
-            .filter(file => file.endsWith(fileType))
+        commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(fileType))
     }
 
     for (const file of commandFiles) {
@@ -70,24 +57,15 @@ export default async function autoDeployCommands(fileType: FileType) {
         a.name.localeCompare(b.name)
     )
 
-    const newCmds = sortedNewCommandsInfo
-        .map(cmd => {
-            return " " + cmd.name + " was registered."
-        })
-        .join("\n")
-    const currentCmds = sortedCurrentCommandsInfo
-        .map(cmd => {
-            return " " + cmd.name + " was unregistered."
-        })
-        .join("\n")
+    const newCmds = sortedNewCommandsInfo.map(cmd => {
+        return " " + cmd.name + " was registered."
+    }).join("\n")
+    const currentCmds = sortedCurrentCommandsInfo.map(cmd => {
+        return " " + cmd.name + " was unregistered."
+    }).join("\n")
 
-    if (
-        JSON.stringify(sortedNewCommandsInfo) ===
-        JSON.stringify(sortedCurrentCommandsInfo)
-    ) {
-        console.log(
-            color("Commands are the same, skipping deploy.", "lavender")
-        )
+    if (JSON.stringify(sortedNewCommandsInfo) === JSON.stringify(sortedCurrentCommandsInfo)) {
+        console.log(color("Commands are the same, skipping deploy.", "lavender"))
         console.log(color(newCmds, "lavender"))
         return
     }
@@ -95,9 +73,7 @@ export default async function autoDeployCommands(fileType: FileType) {
     try {
         console.log(color("Commands are different, starting deploy.", "red"))
         console.log(color(currentCmds, "red"))
-        console.log(
-            `Started refreshing ${commands.length} application (/) commands.`
-        )
+        console.log(`Started refreshing ${commands.length} application (/) commands.`)
 
         const data = (await rest.put(
             Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
@@ -106,9 +82,7 @@ export default async function autoDeployCommands(fileType: FileType) {
 
         console.log(color("New commands deployed.", "lavender"))
         console.log(color(newCmds, "lavender"))
-        console.log(
-            `Successfully reloaded ${data.length} application (/) commands.`
-        )
+        console.log(`Successfully reloaded ${data.length} application (/) commands.`)
     } catch (error) {
         console.error(error)
     }

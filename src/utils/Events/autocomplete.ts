@@ -10,16 +10,8 @@ type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadAutocompleteEvents(client: Client, ft: FileType) {
-    const autocompletePath = path.join(
-        __dirname,
-        "..",
-        "..",
-        "components",
-        "autocomplete"
-    )
-    const autocompleteFiles = fs
-        .readdirSync(autocompletePath)
-        .filter(file => file.endsWith(ft))
+    const autocompletePath = path.join(__dirname, "..", "..", "components", "autocomplete")
+    const autocompleteFiles = fs.readdirSync(autocompletePath).filter(file => file.endsWith(ft))
 
     for (const file of autocompleteFiles) {
         const filePath = path.join(autocompletePath, file)
@@ -43,9 +35,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         const autocomplete = client.autocomplete.get(interaction.commandName)
 
         if (!autocomplete) {
-            console.error(
-                `No autocomplete matching ${interaction.commandName} was found.`
-            )
+            console.error(`No autocomplete matching ${interaction.commandName} was found.`)
             return
         }
 
@@ -54,21 +44,15 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {
-                    embeds: [
-                        {
-                            title: "Autocomplete error occured",
-                            description: String(error),
-                            color: embedColor,
-                            footer: {
-                                icon_url:
-                                    interaction.guild!.iconURL() || undefined,
-                                text:
-                                    interaction.user.username +
-                                    " | " +
-                                    interaction.commandName
-                            }
+                    embeds: [{
+                        title: "Autocomplete error occured",
+                        description: "```" + error + "```",
+                        color: embedColor,
+                        footer: {
+                            icon_url: interaction.guild!.iconURL() || undefined,
+                            text: interaction.user.username + " | " + interaction.commandName
                         }
-                    ]
+                    }]
                 })
             }
             console.error(error)

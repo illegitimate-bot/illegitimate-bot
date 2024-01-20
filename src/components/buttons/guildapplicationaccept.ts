@@ -1,15 +1,5 @@
-import {
-    ActionRowBuilder,
-    ButtonStyle,
-    ButtonBuilder,
-    TextChannel
-} from "discord.js"
-import {
-    color,
-    waitingListChannel,
-    waitingListMessage,
-    hypixelGuildID
-} from "config/options.json"
+import { ActionRowBuilder, ButtonStyle, ButtonBuilder, TextChannel } from "discord.js"
+import { color, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options.json"
 import colorLog from "utils/functions/colors"
 import mongoose from "mongoose"
 import guildapp from "schemas/guildAppSchema"
@@ -35,8 +25,7 @@ export = {
         const applicantIGN = embed.fields[0].value.replaceAll("`", "")
 
         const applicant = await guild.members.fetch(applicantId)
-        const applicantUsername =
-            applicant.user.username + "#" + applicant.user.discriminator
+        const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator
 
         await message.edit({
             components: [
@@ -61,14 +50,11 @@ export = {
         })
 
         await applicant.send({
-            embeds: [
-                {
-                    description:
-                        "Your application for the Illegitimate guild has been accepted.\n\n" +
-                        "Make sure to leave your current guild so that we can invite you.",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "Your application for the Illegitimate guild has been accepted.\n\n" +
+                    "Make sure to leave your current guild so that we can invite you.",
+                color: embedColor
+            }]
         })
 
         const applicantEntry = await guildapp.findOne({ userID: applicantId })
@@ -89,28 +75,23 @@ export = {
         await guildapp.findOneAndDelete({ userID: applicantId })
 
         await interaction.editReply({
-            embeds: [
-                {
-                    title: applicantUsername + " - Guild Application",
-                    description:
-                        "Application has been accepted by <@" + user.id + ">.",
-                    color: embedColor,
-                    thumbnail: {
-                        url: applicant.avatarURL() || ""
-                    },
-                    footer: {
-                        icon_url: guild.iconURL() || undefined,
-                        text: "ID: " + applicant.id
-                    }
+            embeds: [{
+                title: applicantUsername + " - Guild Application",
+                description: "Application has been accepted by <@" + user.id + ">.",
+                color: embedColor,
+                thumbnail: {
+                    url: applicant.avatarURL() || ""
+                },
+                footer: {
+                    icon_url: guild.iconURL() || undefined,
+                    text: "ID: " + applicant.id
                 }
-            ]
+            }]
         })
 
         if (process.env.NODE_ENV === "dev") return
         try {
-            const channel = guild.channels.cache.get(
-                waitingListChannel
-            ) as TextChannel
+            const channel = guild.channels.cache.get(waitingListChannel) as TextChannel
             const wlmessage = await channel!.messages.fetch(waitingListMessage)
 
             const wlembed = wlmessage.embeds[0]
@@ -138,20 +119,18 @@ export = {
             }
 
             await wlmessage.edit({
-                embeds: [
-                    {
-                        title: wlembed.title!,
-                        description: wlembed.description!,
-                        color: wlembed.color!,
-                        footer: {
-                            text: "Last updated by " + user.username,
-                            icon_url: user.avatarURL() || undefined
-                        },
-                        thumbnail: wlembed.thumbnail!,
-                        fields: fields,
-                        timestamp: new Date().toISOString()
-                    }
-                ]
+                embeds: [{
+                    title: wlembed.title!,
+                    description: wlembed.description!,
+                    color: wlembed.color!,
+                    footer: {
+                        text: "Last updated by " + user.username,
+                        icon_url: user.avatarURL() || undefined
+                    },
+                    thumbnail: wlembed.thumbnail!,
+                    fields: fields,
+                    timestamp: new Date().toISOString()
+                }]
             })
         } catch (err) {
             console.log(

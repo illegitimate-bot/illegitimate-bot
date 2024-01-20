@@ -1,9 +1,4 @@
-import {
-    ModalBuilder,
-    ActionRowBuilder,
-    TextInputBuilder,
-    TextInputStyle
-} from "discord.js"
+import { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
 import { Button } from "interfaces"
 
 export = {

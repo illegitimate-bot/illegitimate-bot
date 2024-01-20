@@ -1,9 +1,4 @@
-import {
-    ModalBuilder,
-    ActionRowBuilder,
-    TextInputBuilder,
-    TextInputStyle
-} from "discord.js"
+import { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
 import { Button } from "interfaces"
 
 export = {
@@ -20,9 +15,7 @@ export = {
                         .setLabel("Deny Reason")
                         .setCustomId("denyreason")
                         .setStyle(TextInputStyle.Paragraph)
-                        .setPlaceholder(
-                            "Enter a reason for denying the application"
-                        )
+                        .setPlaceholder("Enter a reason for denying the application")
                         .setRequired(false)
                 )
             )

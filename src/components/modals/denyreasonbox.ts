@@ -1,11 +1,4 @@
-import {
-    EmbedBuilder,
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    Message,
-    GuildMember
-} from "discord.js"
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, GuildMember } from "discord.js"
 import { color } from "config/options.json"
 import guildapp from "schemas/guildAppSchema"
 import { Modal } from "interfaces"
@@ -22,9 +15,7 @@ export = {
         const embed = message.embeds[0]
         const applicantId = embed.footer!.text.split(" ")[1]
 
-        const reason =
-            interaction.fields.fields.get("denyreason")!.value ||
-            "No reason provided"
+        const reason = interaction.fields.fields.get("denyreason")!.value || "No reason provided"
         const embedColor = Number(color.replace("#", "0x"))
 
         await message.edit({
@@ -57,29 +48,19 @@ export = {
         }
 
         const dmMessage = new EmbedBuilder()
-            .setDescription(
-                "Your application for the Illegitimate guild has been denied\n" +
-                    "**Reason:** `" +
-                    reason +
-                    "`"
+            .setDescription("Your application for the Illegitimate guild has been denied\n" +
+                "**Reason:** `" + reason + "`"
             )
             .setColor(embedColor)
 
         const missingUser = new EmbedBuilder()
-            .setDescription(
-                "[WARN] User has left the server and cannot be notified."
-            )
+            .setDescription("[WARN] User has left the server and cannot be notified.")
             .setColor(embedColor)
 
         const responseEmbed = new EmbedBuilder()
             .setTitle("Application Denied")
-            .setDescription(
-                "The application has been denied by <@" +
-                    interaction.user.id +
-                    ">.\n" +
-                    "**Reason:** `" +
-                    reason +
-                    "`"
+            .setDescription("The application has been denied by <@" + interaction.user.id + ">.\n" +
+                "**Reason:** `" + reason + "`"
             )
             .setColor(embedColor)
             .setThumbnail(guild.iconURL() || "")

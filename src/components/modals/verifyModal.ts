@@ -2,17 +2,7 @@ import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { color, hypixelGuildID, devMessage } from "config/options.json"
 import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
-import {
-    gm,
-    manager,
-    moderator,
-    beast,
-    elite,
-    member,
-    guildRole,
-    guildStaff,
-    defaultMember
-} from "config/roles.json"
+import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles.json"
 import { Modal } from "interfaces"
 import { GuildMember } from "discord.js"
 
@@ -29,23 +19,17 @@ export = {
 
         const verifyData = await verify.findOne({ userID: user.user.id })
         if (verifyData) {
-            interaction.editReply(
-                "You are already verified.\n" +
-                    "Try running /update to update your roles."
-            )
+            interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
             return
         }
 
         const uuid = await getUUID(ign)
         if (!uuid) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:questionmark_pink:1130206038008803488> That player does not exist.",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:questionmark_pink:1130206038008803488> That player does not exist.",
+                    color: embedColor
+                }]
             })
             return
         }
@@ -54,13 +38,10 @@ export = {
         const player = await getPlayer(uuid)
         if (!player) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
+                    color: embedColor
+                }]
             })
             return
         }
@@ -75,38 +56,22 @@ export = {
         const linkedDiscord = player?.socialMedia?.links?.DISCORD
         if (!linkedDiscord) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:cross_a:1087808606897983539> There is no Discord account linked to `" +
-                            player.displayname +
-                            "`.\n\n" +
-                            "**Please set your Discord tag on hypixel to `" +
-                            username +
-                            "` and try again.**",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + player.displayname + "`.\n\n" +
+                        "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
+                    color: embedColor
+                }]
             })
             return
         }
 
         if (linkedDiscord !== username) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:cross_a:1087808606897983539> The Discord account linked to `" +
-                            player.displayname +
-                            "` is currently `" +
-                            linkedDiscord +
-                            "`\n\n" +
-                            "**Please set your Discord tag on hypixel to `" +
-                            username +
-                            "` and try again.**",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:cross_a:1087808606897983539> The Discord account linked to `" + player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
+                        "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
+                    color: embedColor
+                }]
             })
             return
         }
@@ -121,9 +86,7 @@ export = {
 
         if (guildID === hypixelGuildID) {
             const GuildMembers = guild!.members
-            const guildRank = GuildMembers.find(
-                member => member.uuid === player.uuid
-            )!.rank
+            const guildRank = GuildMembers.find(member => member.uuid === player.uuid)!.rank
 
             if (guildRank === "Guild Master" && guildID === hypixelGuildID) {
                 await user.roles.add(gm, "Verification")
@@ -169,25 +132,18 @@ export = {
             await newVerify.save()
 
             await interaction.editReply({
-                embeds: [
-                    {
-                        title: interaction.guild!.name,
-                        description:
-                            "You have successfully verified `" +
-                            username +
-                            "` with the account `" +
-                            player.displayname +
-                            "`.",
-                        color: embedColor,
-                        thumbnail: {
-                            url: head!
-                        },
-                        footer: {
-                            icon_url: interaction.guild!.iconURL() || undefined,
-                            text: interaction.guild!.name + " | " + devMessage
-                        }
+                embeds: [{
+                    title: interaction.guild!.name,
+                    description: "You have successfully verified `" + username + "` with the account `" + player.displayname + "`.",
+                    color: embedColor,
+                    thumbnail: {
+                        url: head!
+                    },
+                    footer: {
+                        icon_url: interaction.guild!.iconURL() || undefined,
+                        text: interaction.guild!.name + " | " + devMessage
                     }
-                ]
+                }]
             })
         }
     }

@@ -126,8 +126,7 @@ export = {
 
             await interaction.editReply({
                 embeds: [{
-                    description:
-                        "Updated your roles to `" + replyRank + "`",
+                    description: "Updated your roles to `" + replyRank + "`",
                     color: embedColor,
                     thumbnail: {
                         url: head!

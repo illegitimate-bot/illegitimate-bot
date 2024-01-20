@@ -59,9 +59,7 @@ export = {
         const modRoles = mod.roles.cache.map(role => role.id)
 
         if (!modRoles.includes(admin)) {
-            await interaction.editReply(
-                "You do not have permission to use this command."
-            )
+            await interaction.editReply("You do not have permission to use this command.")
             return
         }
 

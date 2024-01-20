@@ -14,7 +14,8 @@ export = {
                     color(
                         interaction.user.username + " ran " +
                         interaction.commandName + " " +
-                        interaction.options.getSubcommand(), "pink"
+                        interaction.options.getSubcommand(),
+                        "pink"
                     )
                 )
             } catch {

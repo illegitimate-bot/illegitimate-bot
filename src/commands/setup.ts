@@ -79,11 +79,11 @@ export = {
         const subcommand = interaction.options.getSubcommand()
         const channel = interaction.options.getChannel("channel") as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
-        let title: string = ""
-        let description: string = ""
-        let customId: string = ""
-        let label: string = ""
-        let emoji: string = ""
+        let title = ""
+        let description = ""
+        let customId = ""
+        let label = ""
+        let emoji = ""
 
         if (subcommand === "sendguildapplication") {
             title = "Guild Application"

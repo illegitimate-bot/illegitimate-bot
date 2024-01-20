@@ -60,7 +60,8 @@ export = {
 
             await interaction.editReply({
                 embeds: [{
-                    description: "Successfully updated `" + setting + "` to value `" + value + "`."
+                    description: "Successfully updated `" + setting + "` to value `" + value + "`.",
+                    color: embedColor
                 }]
             })
         }

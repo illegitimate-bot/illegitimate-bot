@@ -143,8 +143,7 @@ export default async function guildMember(interaction: ChatInputCommandInteracti
                 },
                 {
                     name: "**Weekly GEXP**",
-                    value:
-                        "**➺ Total:** `" + totalWeeklyGexp + "`\n" +
+                    value: "**➺ Total:** `" + totalWeeklyGexp + "`\n" +
                         "**➺ Daily avarage:** `" + averageWeeklyGexp + "`"
                 },
                 {

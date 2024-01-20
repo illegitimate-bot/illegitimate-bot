@@ -152,7 +152,7 @@ export default async function guildTop(interaction: ChatInputCommandInteraction)
     let guildData: GuildTopData = []
     const fieldsValueRaw: string[] = []
     const allMembersSorted = allMembersDailyGEXP.sort((a, b) => b.gexp - a.gexp)
-    const allMembersSortedUUIDArray = allMembersSorted.map(member => { return member.uuid })
+    const allMembersSortedUUIDArray = allMembersSorted.map(member => member.uuid)
 
     if (!cachedData) {
         cacheStatus = false

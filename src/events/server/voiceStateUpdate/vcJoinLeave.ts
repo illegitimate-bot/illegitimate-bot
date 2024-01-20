@@ -47,8 +47,8 @@ export = {
             logToChannel("bot", {
                 embeds: [{
                     title: "Voice Channel Switch",
-                    description: userMention(oldState.member!.id) + " switched from " + channelMention(oldChannel.id) +
-                        " to " + channelMention(newChannel.id),
+                    description: userMention(oldState.member!.id) + " switched from " +
+                        channelMention(oldChannel.id) + " to " + channelMention(newChannel.id),
                     color: embedColor,
                     footer: {
                         text: "ID: " + oldState.member!.id,

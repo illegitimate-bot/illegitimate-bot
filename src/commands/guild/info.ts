@@ -129,8 +129,7 @@ export default async function guildInfo(interaction: ChatInputCommandInteraction
 
     const guildOwner = guildMembers.find(m => m.rank === "Guild Master")!.uuid
     const guildOwnerName = await getIGN(guildOwner)
-    const guildRanksUnsorted = guild!.ranks.sort((a, b) => b.priority - a.priority
-    )
+    const guildRanksUnsorted = guild!.ranks.sort((a, b) => b.priority - a.priority)
     const guildRanks = guildRanksUnsorted.map(r => "**➺ " + r.name + "** `[" + r.tag + "]`").join("\n")
 
     const allGuildMembersWeeklyXP = guildMembers.map(member => member.expHistory)
@@ -156,8 +155,7 @@ export default async function guildInfo(interaction: ChatInputCommandInteraction
                 },
                 {
                     name: "**GEXP**",
-                    value:
-                        "**➺ Total weekly GEXP:** `" + totalGuildMembersWeeklyXP + "`\n" +
+                    value: "**➺ Total weekly GEXP:** `" + totalGuildMembersWeeklyXP + "`\n" +
                         "**➺ Daily avarage:** `" + averageGuildMembersWeeklyXP + "`\n" +
                         "**➺ Total GEXP:** `" + guildExp + "`"
                 },

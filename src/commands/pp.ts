@@ -7,7 +7,7 @@ export = {
     name: "pp",
     description: "Shows pp size",
     public: true,
-    dev: true,
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("pp")

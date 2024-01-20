@@ -1,9 +1,4 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-    ChannelType,
-    TextChannel
-} from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
 
@@ -26,10 +21,7 @@ export = {
             option
                 .setName("channel")
                 .setDescription("The channel to send the message to.")
-                .addChannelTypes(
-                    ChannelType.GuildText,
-                    ChannelType.GuildAnnouncement
-                )
+                .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -38,38 +30,33 @@ export = {
         await interaction.deferReply({ ephemeral: true })
 
         const message = interaction.options.getString("message")!
-        const channel = (interaction.options.getChannel("channel") ||
-            interaction.channel) as TextChannel
+        const channel = (interaction.options.getChannel("channel") || interaction.channel) as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
 
         channel.send({
-            embeds: [
-                {
-                    title: interaction.guild!.name,
-                    description: message,
-                    color: embedColor,
-                    thumbnail: {
-                        url: interaction.guild!.iconURL() || ""
-                    },
-                    footer: {
-                        text: interaction.guild!.id + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined
-                    }
+            embeds: [{
+                title: interaction.guild!.name,
+                description: message,
+                color: embedColor,
+                thumbnail: {
+                    url: interaction.guild!.iconURL() || ""
+                },
+                footer: {
+                    text: interaction.guild!.id + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
                 }
-            ]
+            }]
         })
 
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "Message sent.",
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined
-                    }
+            embeds: [{
+                description: "Message sent.",
+                color: embedColor,
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
                 }
-            ]
+            }]
         })
     }
 } as Command

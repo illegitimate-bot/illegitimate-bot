@@ -21,8 +21,7 @@ export = {
         .setDMPermission(false),
 
     async execute(interaction) {
-        const user = (interaction.options.getUser("user") ||
-            interaction.user) as User
+        const user = (interaction.options.getUser("user") || interaction.user) as User
         const embedColor = Number(color.replace("#", "0x"))
         let size: number
 
@@ -33,13 +32,11 @@ export = {
         }
 
         await interaction.reply({
-            embeds: [
-                {
-                    title: `${user.username}'s pp size`,
-                    description: `8${"=".repeat(size)}D`,
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                title: `${user.username}'s pp size`,
+                description: `8${"=".repeat(size)}D`,
+                color: embedColor
+            }]
         })
     }
 } as Command

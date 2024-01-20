@@ -2,10 +2,7 @@ import { ChatInputCommandInteraction } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { ExtendedClient as Client } from "utils/Client"
 
-export default async function help(
-    interaction: ChatInputCommandInteraction,
-    client: Client
-): Promise<void> {
+export default async function help(interaction: ChatInputCommandInteraction, client: Client): Promise<void> {
     await interaction.deferReply({ ephemeral: true })
 
     type CommandList = {
@@ -48,20 +45,18 @@ export default async function help(
     const embedColor = Number(color.replace("#", "0x"))
 
     await interaction.editReply({
-        embeds: [
-            {
-                title: "Commands",
-                description: "List of commands",
-                fields: commandList,
-                color: embedColor,
-                thumbnail: {
-                    url: interaction.guild!.iconURL() || ""
-                },
-                footer: {
-                    icon_url: interaction.guild!.iconURL() || undefined,
-                    text: interaction.guild?.name + " | " + devMessage
-                }
+        embeds: [{
+            title: "Commands",
+            description: "List of commands",
+            fields: commandList,
+            color: embedColor,
+            thumbnail: {
+                url: interaction.guild!.iconURL() || ""
+            },
+            footer: {
+                icon_url: interaction.guild!.iconURL() || undefined,
+                text: interaction.guild?.name + " | " + devMessage
             }
-        ]
+        }]
     })
 }

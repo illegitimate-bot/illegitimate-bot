@@ -33,12 +33,10 @@ export = {
 
         if (!snipeCache.length) {
             await interaction.editReply({
-                embeds: [
-                    {
-                        description: "No messages to snipe",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "No messages to snipe",
+                    color: embedColor
+                }]
             })
             return
         }
@@ -50,32 +48,28 @@ export = {
                 messages.push(`**Message #${i}:** ${data.content}\n`)
             } else {
                 messages.push(`**Message #${i}:** ${data.content}`)
-                messages.push(
-                    `**Attachments:** ${data.attachments.join(", ")}\n`
-                )
+                messages.push(`**Attachments:** ${data.attachments.join(", ")}\n`)
             }
             i++
         }
 
         await interaction.editReply({
-            embeds: [
-                {
-                    author: {
-                        name: member.user.username,
-                        icon_url: member.user.avatarURL() || undefined
-                    },
-                    description: messages.join("\n"),
-                    thumbnail: {
-                        url: member.user.avatarURL() || ""
-                    },
-                    color: embedColor,
-                    footer: {
-                        text: "ID: " + member.user.id,
-                        icon_url: interaction.guild!.iconURL() || undefined
-                    },
-                    timestamp: new Date().toISOString()
-                }
-            ]
+            embeds: [{
+                author: {
+                    name: member.user.username,
+                    icon_url: member.user.avatarURL() || undefined
+                },
+                description: messages.join("\n"),
+                thumbnail: {
+                    url: member.user.avatarURL() || ""
+                },
+                color: embedColor,
+                footer: {
+                    text: "ID: " + member.user.id,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                },
+                timestamp: new Date().toISOString()
+            }]
         })
     }
 } as Command

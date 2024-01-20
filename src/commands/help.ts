@@ -58,21 +58,19 @@ export = {
         const embedColor = Number(color.replace("#", "0x"))
 
         await interaction.editReply({
-            embeds: [
-                {
-                    title: "Commands",
-                    description: "List of commands",
-                    fields: commandList,
-                    color: embedColor,
-                    thumbnail: {
-                        url: interaction.guild!.iconURL() || ""
-                    },
-                    footer: {
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                        text: interaction.guild!.name + " | " + devMessage
-                    }
+            embeds: [{
+                title: "Commands",
+                description: "List of commands",
+                fields: commandList,
+                color: embedColor,
+                thumbnail: {
+                    url: interaction.guild!.iconURL() || ""
+                },
+                footer: {
+                    icon_url: interaction.guild!.iconURL() || undefined,
+                    text: interaction.guild!.name + " | " + devMessage
                 }
-            ]
+            }]
         })
     }
 } as Command

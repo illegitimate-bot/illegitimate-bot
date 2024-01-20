@@ -59,16 +59,14 @@ export = {
         }
 
         await interaction.reply({
-            embeds: [
-                {
-                    description: "This command is currently under development",
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined
-                    }
+            embeds: [{
+                description: "This command is currently under development",
+                color: embedColor,
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
                 }
-            ]
+            }]
         })
     }
 } as Command

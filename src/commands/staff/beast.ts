@@ -1,27 +1,9 @@
-import {
-    bwwins,
-    beastbwfkdr,
-    beastbwstars,
-    beastswkdr,
-    beastswstars,
-    beastduelswins,
-    duelswlr
-} from "config/reqs.json"
+import { bwwins, beastbwfkdr, beastbwstars, beastswkdr, beastswstars, beastduelswins, duelswlr } from "config/reqs.json"
 import { color, devMessage } from "config/options.json"
-import {
-    hypixelLevel,
-    bedwarsLevel,
-    skywarsLevel,
-    getUUID,
-    getPlayer,
-    getGuild,
-    getHeadURL
-} from "utils/Hypixel"
+import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { ChatInputCommandInteraction } from "discord.js"
 
-export default async function beast(
-    interaction: ChatInputCommandInteraction
-): Promise<void> {
+export default async function beast(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
 
     const ign = interaction.options.getString("ign")!
@@ -33,46 +15,38 @@ export default async function beast(
     }
 
     await interaction.editReply({
-        embeds: [
-            {
-                description: "Fetching your uuid...",
-                color: embedColor
-            }
-        ]
+        embeds: [{
+            description: "Fetching your uuid...",
+            color: embedColor
+        }]
     })
 
     const uuid = await getUUID(ign)
     if (!uuid) {
         interaction.editReply({
-            embeds: [
-                {
-                    description: "That player doesn't exist.",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "That player doesn't exist.",
+                color: embedColor
+            }]
         })
         return
     }
 
     await interaction.editReply({
-        embeds: [
-            {
-                description: "Fetching your player data...",
-                color: embedColor
-            }
-        ]
+        embeds: [{
+            description: "Fetching your player data...",
+            color: embedColor
+        }]
     })
 
     const head = await getHeadURL(ign)
     const player = await getPlayer(uuid)
     if (!player) {
         interaction.editReply({
-            embeds: [
-                {
-                    description: "That player hasn't played Hypixel before.",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "That player hasn't played Hypixel before.",
+                color: embedColor
+            }]
         })
         return
     }
@@ -94,12 +68,10 @@ export default async function beast(
     }
 
     await interaction.editReply({
-        embeds: [
-            {
-                description: "Fetching your guild data...",
-                color: embedColor
-            }
-        ]
+        embeds: [{
+            description: "Fetching your guild data...",
+            color: embedColor
+        }]
     })
 
     const guild = await getGuild(uuid)
@@ -128,44 +100,28 @@ export default async function beast(
         })
     } else {
         if (player.stats.Bedwars) {
-            const hsbwexp = player.stats.Bedwars.Experience || 0
+            const hsbwexp = player.stats.Bedwars?.Experience || 0
+            const hsbwfk = player.stats.Bedwars?.final_kills_bedwars || 0
+            const hsbwfd = player.stats.Bedwars?.final_deaths_bedwars || 0
+            const hsbwwins = player.stats.Bedwars?.wins_bedwars || 0
             const hsbwstars = bedwarsLevel(hsbwexp)
-            const hsbwfk = player.stats?.Bedwars?.final_kills_bedwars || 0
-            const hsbwfd = player.stats?.Bedwars?.final_deaths_bedwars || 0
             const hsbwfkdr = hsbwfk / hsbwfd || 0
-            const hsbwwins = player.stats.Bedwars.wins_bedwars || 0
 
             let bwtitle = ""
-            if (
-                hsbwstars < beastbwstars ||
-                hsbwfkdr < beastbwfkdr ||
-                hsbwwins < bwwins
-            ) {
-                bwtitle =
-                    "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
+            if (hsbwstars < beastbwstars || hsbwfkdr < beastbwfkdr || hsbwwins < bwwins) {
+                bwtitle = "<a:cross_a:1087808606897983539> This player does not meet the BedWars requirements."
             } else {
-                bwtitle =
-                    "<a:check_a:1087808632172847134> This player meets the BedWars requirements."
+                bwtitle = "<a:check_a:1087808632172847134> This player meets the BedWars requirements."
             }
 
             statsFields.push({
                 name: bwtitle,
-                value:
-                    "**➺ Stars:** `" +
-                    hsbwstars.toFixed(2).toString() +
-                    " / " +
-                    beastbwstars.toString() +
-                    "`\n" +
-                    "**➺ FKDR:** `" +
-                    hsbwfkdr.toFixed(2).toString() +
-                    " / " +
-                    beastbwfkdr.toString() +
-                    "`\n" +
-                    "**➺ Wins:** `" +
-                    hsbwwins.toString() +
-                    " / " +
-                    bwwins.toString() +
-                    "`"
+                value: "**➺ Stars:** `" + hsbwstars.toFixed(2).toString() +
+                    " / " + beastbwstars.toString() + "`\n" +
+                    "**➺ FKDR:** `" + hsbwfkdr.toFixed(2).toString() +
+                    " / " + beastbwfkdr.toString() + "`\n" +
+                    "**➺ Wins:** `" + hsbwwins.toString() +
+                    " / " + bwwins.toString() + "`"
             })
         } else {
             statsFields.push({
@@ -175,38 +131,27 @@ export default async function beast(
         }
 
         if (player.stats.SkyWars) {
-            const hsswexp = player.stats?.SkyWars?.skywars_experience || 0
+            const hsswexp = player.stats.SkyWars?.skywars_experience || 0
+            const hsswkills = player.stats.SkyWars?.kills || 0
+            const hsswdeaths = player.stats.SkyWars?.deaths || 0
+            const hsswwins = player.stats.SkyWars?.wins || 0
             const hsswstars = skywarsLevel(hsswexp)
-            const hsswkills = player.stats?.SkyWars?.kills || 0
-            const hsswdeaths = player.stats?.SkyWars?.deaths || 0
             const hsswkd = hsswkills / hsswdeaths || 0
-            const hsswwins = player.stats?.SkyWars?.wins || 0
 
             let swtitle = ""
             if (hsswstars < beastswstars || hsswkd < beastswkdr) {
-                swtitle =
-                    "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements."
+                swtitle = "<a:cross_a:1087808606897983539> This player does not meet the SkyWars requirements."
             } else {
-                swtitle =
-                    "<a:check_a:1087808632172847134> This player meets the SkyWars requirements."
+                swtitle = "<a:check_a:1087808632172847134> This player meets the SkyWars requirements."
             }
 
             statsFields.push({
                 name: swtitle,
-                value:
-                    "**➺ Stars:** `" +
-                    hsswstars.toFixed(2).toString() +
-                    " / " +
-                    beastswstars.toString() +
-                    "`\n" +
-                    "**➺ KDR:** `" +
-                    hsswkd.toFixed(2).toString() +
-                    " / " +
-                    beastswkdr.toString() +
-                    "`\n" +
-                    "**➺ Wins:** `" +
-                    hsswwins.toString() +
-                    "`"
+                value: "**➺ Stars:** `" + hsswstars.toFixed(2).toString() +
+                    " / " + beastswstars.toString() + "`\n" +
+                    "**➺ KDR:** `" + hsswkd.toFixed(2).toString() +
+                    " / " + beastswkdr.toString() + "`\n" +
+                    "**➺ Wins:** `" + hsswwins.toString() + "`"
             })
         } else {
             statsFields.push({
@@ -216,38 +161,27 @@ export default async function beast(
         }
 
         if (player.stats.Duels) {
-            const hsduelskills = player.stats?.Duels?.kills || 0
-            const hsduelsdeaths = player.stats?.Duels?.deaths || 0
-            const hsduelskd = hsduelskills / hsduelsdeaths || 0
-            const hsduelswins = player.stats?.Duels?.wins || 0
-            const hsduelslosses = player.stats?.Duels?.losses || 0
-            const hsduelswlr = hsduelswins / hsduelslosses || 0
+            const hsduelskills = player.stats.Duels?.kills || 0
+            const hsduelsdeaths = player.stats.Duels?.deaths || 0
+            const hsduelswins = player.stats.Duels?.wins || 0
+            const hsduelslosses = player.stats.Duels?.losses || 0
+            const hsduelskd = hsduelskills / hsduelsdeaths
+            const hsduelswlr = hsduelswins / hsduelslosses
 
             let duelstitle = ""
             if (hsduelswins < beastduelswins || hsduelswlr < duelswlr) {
-                duelstitle =
-                    "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements."
+                duelstitle = "<a:cross_a:1087808606897983539> This player does not meet the Duels requirements."
             } else {
-                duelstitle =
-                    "<a:check_a:1087808632172847134> This player meets the Duels requirements."
+                duelstitle = "<a:check_a:1087808632172847134> This player meets the Duels requirements."
             }
 
             statsFields.push({
                 name: duelstitle,
-                value:
-                    "**➺ Wins:** `" +
-                    hsduelswins.toString() +
-                    " / " +
-                    beastduelswins.toString() +
-                    "`\n" +
-                    "**➺ WLR:** `" +
-                    hsduelswlr.toFixed(2).toString() +
-                    " / " +
-                    duelswlr.toString() +
-                    "`\n" +
-                    "**➺ KDR:** `" +
-                    hsduelskd.toFixed(2).toString() +
-                    "`\n"
+                value: "**➺ Wins:** `" + hsduelswins.toString() +
+                    " / " + beastduelswins.toString() + "`\n" +
+                    "**➺ WLR:** `" + hsduelswlr.toFixed(2).toString() +
+                    " / " + duelswlr.toString() + "`\n" +
+                    "**➺ KDR:** `" + hsduelskd.toFixed(2).toString() + "`"
             })
         } else {
             statsFields.push({
@@ -258,30 +192,23 @@ export default async function beast(
     }
 
     // network level
-    const hypixelExp = player.networkExp || 0
+    const hypixelExp = player?.networkExp || 0
     const level = hypixelLevel(hypixelExp)
 
     await interaction.editReply({
-        embeds: [
-            {
-                title: rank + player.displayname + guildTag,
-                description:
-                    "**Network Level:** `" +
-                    level.toFixed(2).toString() +
-                    "`\n" +
-                    "**Current Guild:** `" +
-                    guildName +
-                    "`",
-                color: embedColor,
-                thumbnail: {
-                    url: head!
-                },
-                footer: {
-                    text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL() || undefined
-                },
-                fields: statsFields
-            }
-        ]
+        embeds: [{
+            title: rank + player.displayname + guildTag,
+            description: "**Network Level:** `" + level.toFixed(2).toString() + "`\n" +
+                "**Current Guild:** `" + guildName + "`",
+            color: embedColor,
+            thumbnail: {
+                url: head!
+            },
+            footer: {
+                text: interaction.guild!.name + " | " + devMessage,
+                icon_url: interaction.guild!.iconURL() || undefined
+            },
+            fields: statsFields
+        }]
     })
 }

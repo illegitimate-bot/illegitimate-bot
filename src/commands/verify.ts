@@ -34,69 +34,53 @@ export = {
 
         const verifyData = await verify.findOne({ userID: user.id })
         if (verifyData) {
-            interaction.editReply(
-                "You are already verified.\n" +
-                    "Try running /update to update your roles."
-            )
+            interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
             return
         }
 
         if (!ign) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:cross_a:1087808606897983539> Please provide your in-game name.",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:cross_a:1087808606897983539> Please provide your in-game name.",
+                    color: embedColor
+                }]
             })
             return
         }
 
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "Fetching your uuid...",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "Fetching your uuid...",
+                color: embedColor
+            }]
         })
 
         const uuid = await getUUID(ign)
         if (!uuid) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:questionmark_pink:1130206038008803488> That player does not exist.",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:questionmark_pink:1130206038008803488> That player does not exist.",
+                    color: embedColor
+                }]
             })
             return
         }
 
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "Fetching your player data...",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "Fetching your player data...",
+                color: embedColor
+            }]
         })
 
         const head = await getHeadURL(ign)
         const player = (await getPlayer(uuid)) as PlayerData
         if (!player) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:questionmark_pink:1130206038008803488> That player hasn't played Hypixel before.",
+                    color: embedColor
+                }]
             })
             return
         }
@@ -109,60 +93,40 @@ export = {
         }
 
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "Checking your Discord tag...",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "Checking your Discord tag...",
+                color: embedColor
+            }]
         })
 
         const linkedDiscord = player?.socialMedia?.links?.DISCORD || null
         if (!linkedDiscord) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:cross_a:1087808606897983539> There is no Discord account linked to `" +
-                            player.displayname +
-                            "`.\n\n" +
-                            "**Please set your Discord tag on hypixel to `" +
-                            username +
-                            "` and try again.**",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:cross_a:1087808606897983539> There is no Discord account linked to `" + player.displayname + "`.\n\n" +
+                        "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
+                    color: embedColor
+                }]
             })
             return
         }
 
         if (linkedDiscord !== username) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description:
-                            "<a:cross_a:1087808606897983539> The Discord account linked to `" +
-                            player.displayname +
-                            "` is currently `" +
-                            linkedDiscord +
-                            "`\n\n" +
-                            "**Please set your Discord tag on hypixel to `" +
-                            username +
-                            "` and try again.**",
-                        color: embedColor
-                    }
-                ]
+                embeds: [{
+                    description: "<a:cross_a:1087808606897983539> The Discord account linked to `" + player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
+                        "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
+                    color: embedColor
+                }]
             })
             return
         }
 
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "Fetching your guild data...",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "Fetching your guild data...",
+                color: embedColor
+            }]
         })
 
         const guild = (await getGuild(uuid)) as GuildData | null
@@ -175,9 +139,7 @@ export = {
 
         if (guildID === hypixelGuildID) {
             const GuildMembers = guild!.members
-            const guildRank = GuildMembers.find(
-                member => member.uuid === player.uuid
-            )!.rank
+            const guildRank = GuildMembers.find(member => member.uuid === player.uuid)!.rank
 
             if (guildRank === "Guild Master") {
                 const roles = roleManage("gm")
@@ -221,25 +183,18 @@ export = {
         await newVerify.save()
 
         await interaction.editReply({
-            embeds: [
-                {
-                    title: interaction.guild!.name,
-                    description:
-                        "You have successfully verified `" +
-                        username +
-                        "` with the account `" +
-                        player.displayname +
-                        "`.",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head!
-                    },
-                    footer: {
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                        text: interaction.guild!.name + " | " + devMessage
-                    }
+            embeds: [{
+                title: interaction.guild!.name,
+                description: "You have successfully verified `" + username + "` with the account `" + player.displayname + "`.",
+                color: embedColor,
+                thumbnail: {
+                    url: head!
+                },
+                footer: {
+                    icon_url: interaction.guild!.iconURL() || undefined,
+                    text: interaction.guild!.name + " | " + devMessage
                 }
-            ]
+            }]
         })
     }
 } as Command

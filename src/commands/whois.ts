@@ -1,8 +1,4 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-    userMention
-} from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
 import { getIGN, getHeadURL } from "utils/Hypixel"
 import { color, devMessage } from "config/options.json"
 import verify from "schemas/verifySchema"
@@ -34,9 +30,7 @@ export = {
 
         const verifiedUser = await verify.findOne({ userID: user.id })
         if (!verifiedUser) {
-            interaction.editReply({
-                content: "This user has not verified their account."
-            })
+            interaction.editReply("You are not verified!")
             return
         }
 
@@ -44,24 +38,19 @@ export = {
         const head = await getHeadURL(ign)
 
         await interaction.editReply({
-            embeds: [
-                {
-                    title: interaction.guild!.name,
-                    description:
-                        "**User:** " +
-                        userMention(user.id) +
-                        "\n**IGN:** " +
-                        ign,
-                    color: embedColor,
-                    thumbnail: {
-                        url: head!
-                    },
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined
-                    }
+            embeds: [{
+                title: interaction.guild!.name,
+                description: "**User:** " + userMention(user.id) +
+                    "\n**IGN:** " + ign,
+                color: embedColor,
+                thumbnail: {
+                    url: head!
+                },
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
                 }
-            ]
+            }]
         })
     }
 } as Command

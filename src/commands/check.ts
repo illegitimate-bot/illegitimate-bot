@@ -120,10 +120,10 @@ export = {
             })
         } else {
             if (player.stats.Bedwars) {
-                const hsbwexp = player.stats?.Bedwars?.Experience || 0
-                const hsbwfk = player.stats?.Bedwars?.final_kills_bedwars || 0
-                const hsbwfd = player.stats?.Bedwars?.final_deaths_bedwars || 0
-                const hsbwwins = player.stats?.Bedwars?.wins_bedwars || 0
+                const hsbwexp = player.stats.Bedwars?.Experience || 0
+                const hsbwfk = player.stats.Bedwars?.final_kills_bedwars || 0
+                const hsbwfd = player.stats.Bedwars?.final_deaths_bedwars || 0
+                const hsbwwins = player.stats.Bedwars?.wins_bedwars || 0
                 const hsbwstars = bedwarsLevel(hsbwexp)
                 const hsbwfkdr = hsbwfk / hsbwfd || 0
 
@@ -151,10 +151,10 @@ export = {
             }
 
             if (player.stats.SkyWars) {
-                const hsswexp = player.stats?.SkyWars?.skywars_experience || 0
-                const hsswkills = player.stats?.SkyWars?.kills || 0
-                const hsswdeaths = player.stats?.SkyWars?.deaths || 0
-                const hsswwins = player.stats?.SkyWars?.wins || 0
+                const hsswexp = player.stats.SkyWars?.skywars_experience || 0
+                const hsswkills = player.stats.SkyWars?.kills || 0
+                const hsswdeaths = player.stats.SkyWars?.deaths || 0
+                const hsswwins = player.stats.SkyWars?.wins || 0
                 const hsswstars = skywarsLevel(hsswexp)
                 const hsswkd = hsswkills / hsswdeaths || 0
 
@@ -181,10 +181,10 @@ export = {
             }
 
             if (player.stats.Duels) {
-                const hsduelskills = player.stats?.Duels?.kills || 0
-                const hsduelsdeaths = player.stats?.Duels?.deaths || 0
-                const hsduelswins = player.stats?.Duels?.wins || 0
-                const hsduelslosses = player.stats?.Duels?.losses || 0
+                const hsduelskills = player.stats.Duels?.kills || 0
+                const hsduelsdeaths = player.stats.Duels?.deaths || 0
+                const hsduelswins = player.stats.Duels?.wins || 0
+                const hsduelslosses = player.stats.Duels?.losses || 0
                 const hsduelskd = hsduelskills / hsduelsdeaths || 0
                 const hsduelswlr = hsduelswins / hsduelslosses || 0
 
@@ -212,7 +212,7 @@ export = {
         }
 
         // network level
-        const hypixelExp = player.networkExp || 0
+        const hypixelExp = player?.networkExp || 0
         const level = hypixelLevel(hypixelExp)
 
         await interaction.editReply({

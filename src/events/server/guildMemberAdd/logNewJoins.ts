@@ -13,25 +13,20 @@ export = {
         const embedColor = Number(color.replace("#", "0x"))
 
         logToChannel("bot", {
-            embeds: [
-                {
-                    title: "New Member",
-                    description:
-                        userMention(member.id) +
-                        " has joined the server.\n" +
-                        "Account created: " +
-                        member.user.createdAt.toLocaleString(),
-                    color: embedColor,
-                    thumbnail: {
-                        url: member.user.avatarURL() || ""
-                    },
-                    footer: {
-                        text: "ID: " + member.id,
-                        icon_url: member.user.avatarURL() || undefined
-                    },
-                    timestamp: new Date().toISOString()
-                }
-            ]
+            embeds: [{
+                title: "New Member",
+                description: userMention(member.id) + " has joined the server.\n" +
+                    "Account created: " + member.user.createdAt.toLocaleString(),
+                color: embedColor,
+                thumbnail: {
+                    url: member.user.avatarURL() || ""
+                },
+                footer: {
+                    text: "ID: " + member.id,
+                    icon_url: member.user.avatarURL() || undefined
+                },
+                timestamp: new Date().toISOString()
+            }]
         })
     }
 } as Event

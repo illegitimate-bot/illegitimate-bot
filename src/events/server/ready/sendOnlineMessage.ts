@@ -13,12 +13,10 @@ export = {
         const embedColor = Number(color.replace("#", "0x"))
 
         logToChannel("online", {
-            embeds: [
-                {
-                    description: "Bot is online!",
-                    color: embedColor
-                }
-            ]
+            embeds: [{
+                description: "Bot is online!",
+                color: embedColor
+            }]
         })
     }
 } as Event

@@ -12,20 +12,16 @@ export = {
             try {
                 console.log(
                     color(
-                        interaction.user.username +
-                            " ran " +
-                            interaction.commandName +
-                            " " +
-                            interaction.options.getSubcommand(),
-                        "pink"
+                        interaction.user.username + " ran " +
+                        interaction.commandName + " " +
+                        interaction.options.getSubcommand(), "pink"
                     )
                 )
             } catch {
                 console.log(
                     color(
-                        interaction.user.username +
-                            " ran " +
-                            interaction.commandName,
+                        interaction.user.username + " ran " +
+                        interaction.commandName,
                         "pink"
                     )
                 )
@@ -35,11 +31,9 @@ export = {
         if (interaction.isButton()) {
             console.log(
                 color(
-                    interaction.user.username +
-                        "#" +
-                        interaction.user.discriminator +
-                        " clicked " +
-                        interaction.customId,
+                    interaction.user.username + "#" +
+                    interaction.user.discriminator + " clicked " +
+                    interaction.customId,
                     "pink"
                 )
             )

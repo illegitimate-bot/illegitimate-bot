@@ -7,10 +7,7 @@ export = {
     event: "messageCreate",
 
     async execute(message: Message) {
-        if (
-            message.content.toLowerCase().includes("ur mom") &&
-            message.author.username === "taken.lua"
-        ) {
+        if (message.content.toLowerCase().includes("ur mom") && message.author.username === "taken.lua") {
             message.react("Woot:734345936347725885")
         }
     }

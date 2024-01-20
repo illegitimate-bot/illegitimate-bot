@@ -23,8 +23,8 @@ export = {
                     option
                         .setName("ign")
                         .setDescription("The IGN of the player.")
-                        .setRequired(true),
-                ),
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -33,10 +33,8 @@ export = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription(
-                            "The query to search for. [Default: player]",
-                        )
-                        .setRequired(true),
+                        .setDescription("The query to search for. [Default: player]")
+                        .setRequired(true)
                 )
                 .addStringOption(option =>
                     option
@@ -45,9 +43,9 @@ export = {
                         .addChoices(
                             { name: "Guild Member", value: "ign" },
                             { name: "Guild Name", value: "name" },
-                            { name: "Guild Id", value: "id" },
-                        ),
-                ),
+                            { name: "Guild Id", value: "id" }
+                        )
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -56,10 +54,8 @@ export = {
                 .addStringOption(option =>
                     option
                         .setName("query")
-                        .setDescription(
-                            "The query to search for. [Default: player]",
-                        )
-                        .setRequired(true),
+                        .setDescription("The query to search for. [Default: player]")
+                        .setRequired(true)
                 )
                 .addStringOption(option =>
                     option
@@ -68,16 +64,14 @@ export = {
                         .addChoices(
                             { name: "Guild Member", value: "ign" },
                             { name: "Guild Name", value: "name" },
-                            { name: "Guild Id", value: "id" },
-                        ),
+                            { name: "Guild Id", value: "id" }
+                        )
                 )
                 .addNumberOption(option =>
                     option
                         .setName("amount")
-                        .setDescription(
-                            "The amount of guild members to show. [Default: 10]",
-                        ),
-                ),
+                        .setDescription("The amount of guild members to show. [Default: 10]")
+                )
         )
         .setDMPermission(false),
 
@@ -101,16 +95,14 @@ export = {
         }
 
         await interaction.reply({
-            embeds: [
-                {
-                    description: "This command is currently under development",
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+            embeds: [{
+                description: "This command is currently under development",
+                color: embedColor,
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }]
         })
-    },
+    }
 } as Command

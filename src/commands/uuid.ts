@@ -16,7 +16,7 @@ export = {
             option
                 .setName("ign")
                 .setDescription("Player's name")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDMPermission(false),
 
@@ -32,37 +32,28 @@ export = {
 
         if (!uuid) {
             interaction.editReply({
-                embeds: [
-                    {
-                        description: "That player doesn't exist!",
-                        color: embedColor,
-                    },
-                ],
+                embeds: [{
+                    description: "That player doesn't exist!",
+                    color: embedColor
+                }]
             })
             return
         }
 
         await interaction.editReply({
-            embeds: [
-                {
-                    title: newIgn,
-                    description:
-                        "**UUID:** `" +
-                        uuid +
-                        "`\n" +
-                        "**Formatted UUID:** `" +
-                        formattedUuid +
-                        "`",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head!,
-                    },
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
+            embeds: [{
+                title: newIgn,
+                description: "**UUID:** `" + uuid + "`\n" +
+                    "**Formatted UUID:** `" + formattedUuid + "`",
+                color: embedColor,
+                thumbnail: {
+                    url: head!
                 },
-            ],
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }]
         })
-    },
+    }
 } as Command

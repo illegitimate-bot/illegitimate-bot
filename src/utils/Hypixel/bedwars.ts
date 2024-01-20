@@ -10,14 +10,14 @@ function getExpForLevel(level: number): number {
     }
 
     switch (respectedLevel) {
-    case 1:
-        return 500
-    case 2:
-        return 1000
-    case 3:
-        return 2000
-    case 4:
-        return 3500
+        case 1:
+            return 500
+        case 2:
+            return 1000
+        case 3:
+            return 2000
+        case 4:
+            return 3500
     }
     return 5000
 }
@@ -31,7 +31,7 @@ function getLevelRespectingPrestige(level: number): number {
 }
 
 const EASY_LEVELS = 4
-const EASY_LEVELS_XP = 7000
+const EASY_LEVELS_XP = 7004
 const XP_PER_PRESTIGE = 96 * 5000 + EASY_LEVELS_XP
 const LEVELS_PER_PRESTIGE = 100
 const HIGHEST_PRESTIGE = 50

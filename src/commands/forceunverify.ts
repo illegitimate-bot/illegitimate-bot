@@ -1,9 +1,4 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-    userMention,
-    GuildMember,
-} from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import verify from "schemas/verifySchema"
 import { Command } from "interfaces"
@@ -24,7 +19,7 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to force unverify")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
@@ -37,12 +32,10 @@ export = {
 
         if (!verifiedUser) {
             return interaction.reply({
-                embeds: [
-                    {
-                        description: "This user is not verified",
-                        color: embedColor,
-                    },
-                ],
+                embeds: [{
+                    description: "This user is not verified",
+                    color: embedColor
+                }]
             })
         }
 
@@ -51,49 +44,43 @@ export = {
         await verify.findOneAndDelete({ userID: member.user.id })
         await member.roles.remove(
             roleManage("all").rolesToRemove,
-            "User force unverified by " + interaction.user.username,
+            "User force unverified by " + interaction.user.username
         )
 
         await logToChannel("mod", {
-            embeds: [
-                {
-                    title: "Force Unverified",
-                    author: {
-                        name: mod.username,
-                        icon_url: mod.avatarURL() || undefined,
-                    },
-                    description: `
+            embeds: [{
+                title: "Force Unverified",
+                author: {
+                    name: mod.username,
+                    icon_url: mod.avatarURL() || undefined
+                },
+                description: `
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${ign}\`
                 **UUID:** \`${uuid}\`
                 `,
-                    color: embedColor,
-                    thumbnail: {
-                        url: mod.avatarURL() || "",
-                    },
-                    footer: {
-                        icon_url: member.user.avatarURL() || undefined,
-                        text: "ID: " + member.user.id,
-                    },
-                    timestamp: new Date().toISOString(),
+                color: embedColor,
+                thumbnail: {
+                    url: mod.avatarURL() || ""
                 },
-            ],
+                footer: {
+                    icon_url: member.user.avatarURL() || undefined,
+                    text: "ID: " + member.user.id
+                },
+                timestamp: new Date().toISOString()
+            }]
         })
 
         await interaction.reply({
-            embeds: [
-                {
-                    description:
-                        "Successfully unverified " +
-                        userMention(member.user.id),
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
+            embeds: [{
+                description: "Successfully unverified " + userMention(member.user.id),
+                color: embedColor,
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }]
         })
-    },
+    }
 } as Command

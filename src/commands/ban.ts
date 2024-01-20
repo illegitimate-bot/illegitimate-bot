@@ -1,9 +1,4 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-    userMention,
-    GuildMember,
-} from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember, } from "discord.js"
 import { admin, helper } from "config/roles.json"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
@@ -22,10 +17,12 @@ export = {
             option
                 .setName("user")
                 .setDescription("User to ban")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
-            option.setName("reason").setDescription("Reason for ban"),
+            option
+                .setName("reason")
+                .setDescription("Reason for ban")
         )
         .addNumberOption(option =>
             option
@@ -39,7 +36,7 @@ export = {
                     { name: "5 days", value: 5 },
                     { name: "6 days", value: 6 },
                     { name: "7 days", value: 7 },
-                ),
+                )
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -47,13 +44,9 @@ export = {
     async execute(interaction) {
         await interaction.deferReply()
 
-        const member = interaction.options.getMember(
-            "user",
-        ) as GuildMember | null
-        const reason =
-            interaction.options.getString("reason") ?? "No reason provided."
-        const messageDeletionDays =
-            interaction.options.getNumber("messagedeletiondays") ?? 0
+        const member = interaction.options.getMember("user") as GuildMember | null
+        const reason = interaction.options.getString("reason") ?? "No reason provided."
+        const messageDeletionDays = interaction.options.getNumber("messagedeletiondays") ?? 0
         const embedColor = Number(color.replace("#", "0x"))
 
         if (!member) {
@@ -66,16 +59,11 @@ export = {
         const modRoles = mod.roles.cache.map(role => role.id)
 
         if (!modRoles.includes(admin)) {
-            await interaction.editReply(
-                "You do not have permission to use this command.",
-            )
+            await interaction.editReply("You do not have permission to use this command.")
             return
         }
 
-        if (
-            interaction.guild!.members.me!.roles.highest.position <=
-            member.roles.highest.position
-        ) {
+        if (interaction.guild!.members.me!.roles.highest.position <= member.roles.highest.position) {
             await interaction.editReply("I cannot ban this member.")
             return
         }
@@ -105,62 +93,48 @@ export = {
             return
         }
 
-        await member.ban({
-            reason: reason,
-            deleteMessageDays: messageDeletionDays,
-        })
+        await member.ban({ reason: reason, deleteMessageDays: messageDeletionDays })
 
         await logToChannel("mod", {
-            embeds: [
-                {
-                    author: {
-                        name: mod.user.username,
-                        icon_url: mod.user.avatarURL() || undefined,
-                    },
-                    title: "Member Banned",
-                    description: `
+            embeds: [{
+                author: {
+                    name: mod.user.username,
+                    icon_url: mod.user.avatarURL() || undefined
+                },
+                title: "Member Banned",
+                description: `
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.user.id)}
                 **Reason:** ${reason}
                 **Messages Deleted:** ${messageDeletionDays} days
                 `,
-                    color: embedColor,
-                    thumbnail: {
-                        url: mod.user.avatarURL() || "",
-                    },
-                    footer: {
-                        text: "ID: " + member.user.id,
-                        icon_url: member.user.avatarURL() || undefined,
-                    },
-                    timestamp: new Date().toISOString(),
+                color: embedColor,
+                thumbnail: {
+                    url: mod.user.avatarURL() || ""
                 },
-            ],
+                footer: {
+                    text: "ID: " + member.user.id,
+                    icon_url: member.user.avatarURL() || undefined
+                },
+                timestamp: new Date().toISOString()
+            }]
         })
 
         await interaction.editReply({
-            embeds: [
-                {
-                    title: "Member Banned",
-                    description:
-                        "**User:** " +
-                        userMention(member.user.id) +
-                        "\n" +
-                        "**Reason:** " +
-                        reason +
-                        "\n" +
-                        "**Messages Deleted:** " +
-                        messageDeletionDays +
-                        " days",
-                    color: embedColor,
-                    thumbnail: {
-                        url: member.user.avatarURL() || "",
-                    },
-                    footer: {
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                        text: interaction.guild!.name + " | " + devMessage,
-                    },
+            embeds: [{
+                title: "Member Banned",
+                description: "**User:** " + userMention(member.user.id) + "\n" +
+                    "**Reason:** " + reason + "\n" +
+                    "**Messages Deleted:** " + messageDeletionDays + " days",
+                color: embedColor,
+                thumbnail: {
+                    url: member.user.avatarURL() || ""
                 },
-            ],
+                footer: {
+                    icon_url: interaction.guild!.iconURL() || undefined,
+                    text: interaction.guild!.name + " | " + devMessage
+                }
+            }]
         })
     },
 } as Command

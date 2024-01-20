@@ -1,9 +1,4 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-    userMention,
-    GuildMember,
-} from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
@@ -21,13 +16,13 @@ export = {
             option
                 .setName("user")
                 .setDescription("The user to set the nickname for")
-                .setRequired(true),
+                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName("nickname")
                 .setDescription("The nickname to set")
-                .setRequired(true),
+                .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames)
         .setDMPermission(false),
@@ -40,7 +35,7 @@ export = {
         if (!member.manageable) {
             interaction.reply({
                 content: "I cannot set the nickname for this user!",
-                ephemeral: true,
+                ephemeral: true
             })
             return
         }
@@ -48,43 +43,39 @@ export = {
         await member.setNickname(nickname, `Set by ${interaction.user.tag}`)
 
         await logToChannel("mod", {
-            embeds: [
-                {
-                    author: {
-                        name: interaction.user.username,
-                        icon_url: interaction.user.avatarURL() || undefined,
-                    },
-                    title: "Nickname",
-                    description: `
+            embeds: [{
+                author: {
+                    name: interaction.user.username,
+                    icon_url: interaction.user.avatarURL() || undefined
+                },
+                title: "Nickname",
+                description: `
                 **User:** ${userMention(member.id)}
                 **Nickname:** ${nickname}
                 **Moderator:** ${userMention(interaction.user.id)}
                 `,
-                    color: embedColor,
-                    thumbnail: {
-                        url: interaction.user.avatarURL() || "",
-                    },
-                    footer: {
-                        text: "ID: " + member.user.id,
-                        icon_url: member.user.avatarURL() || undefined,
-                    },
-                    timestamp: new Date().toISOString(),
+                color: embedColor,
+                thumbnail: {
+                    url: interaction.user.avatarURL() || ""
                 },
-            ],
+                footer: {
+                    text: "ID: " + member.user.id,
+                    icon_url: member.user.avatarURL() || undefined
+                },
+                timestamp: new Date().toISOString()
+            }]
         })
 
         await interaction.reply({
-            embeds: [
-                {
-                    description: `Successfully set the nickname of ${userMention(member.id)} to ${nickname}`,
-                    color: embedColor,
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
-                },
-            ],
-            ephemeral: true,
+            embeds: [{
+                description: `Successfully set the nickname of ${userMention(member.id)} to ${nickname}`,
+                color: embedColor,
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }],
+            ephemeral: true
         })
-    },
+    }
 } as Command

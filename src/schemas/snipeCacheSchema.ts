@@ -5,7 +5,7 @@ const snipeCacheSchema = new Schema({
     userid: { type: String, required: true },
     channelid: { type: String, required: true },
     data: { type: Object, required: true },
-    date: { type: Date, default: Date.now(), expires: 600 },
+    date: { type: Date, default: Date.now(), expires: 600 }
 })
 
 export default model("snipeCache", snipeCacheSchema, "snipeCache")

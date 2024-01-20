@@ -23,8 +23,8 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -37,7 +37,7 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
 
         if (!command) {
             console.error(
-                `No command matching ${interaction.commandName} was found.`,
+                `No command matching ${interaction.commandName} was found.`
             )
             return
         }
@@ -47,45 +47,33 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {
-                    embeds: [
-                        {
-                            title: "Command error occured",
-                            description: "```" + error + "```",
-                            color: embedColor,
-                            footer: {
-                                icon_url:
-                                    interaction.guild!.iconURL() || undefined,
-                                text:
-                                    interaction.user.username +
-                                    " | " +
-                                    interaction.commandName,
-                            },
-                        },
-                    ],
+                    embeds: [{
+                        title: "Command error occured",
+                        description: "```" + error + "```",
+                        color: embedColor,
+                        footer: {
+                            icon_url: interaction.guild!.iconURL() || undefined,
+                            text: interaction.user.username + " | " + interaction.commandName
+                        }
+                    }]
                 })
             }
 
             console.error(error)
             if (!interaction.deferred) {
                 await interaction.reply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this command!",
-                            color: embedColor,
-                        },
-                    ],
-                    ephemeral: true,
+                    embeds: [{
+                        description: "There was an error while executing this command!",
+                        color: embedColor
+                    }],
+                    ephemeral: true
                 })
             } else {
                 await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this command!",
-                            color: embedColor,
-                        },
-                    ],
+                    embeds: [{
+                        description: "There was an error while executing this command!",
+                        color: embedColor
+                    }]
                 })
             }
         }

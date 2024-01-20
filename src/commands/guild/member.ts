@@ -2,62 +2,52 @@ import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { color, devMessage } from "config/options.json"
 import { ChatInputCommandInteraction } from "discord.js"
 
-export default async function guildMember(
-    interaction: ChatInputCommandInteraction,
-): Promise<void> {
+export default async function guildMember(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
 
     const ign = interaction.options.getString("ign")!
     const embedColor = Number(color.replace("#", "0x"))
 
     await interaction.editReply({
-        embeds: [
-            {
-                description: "Fetching your uuid...",
-                color: embedColor,
-            },
-        ],
+        embeds: [{
+            description: "Fetching your uuid...",
+            color: embedColor
+        }]
     })
 
     const uuid = await getUUID(ign)
     if (!uuid) {
         interaction.editReply({
-            embeds: [
-                {
-                    description: "This user does not exist",
-                    color: embedColor,
-                },
-            ],
+            embeds: [{
+                description: "This user does not exist",
+                color: embedColor
+            }]
         })
         return
     }
 
     await interaction.editReply({
-        embeds: [
-            {
-                description: "Fetching your player data...",
-                color: embedColor,
-            },
-        ],
+        embeds: [{
+            description: "Fetching your player data...",
+            color: embedColor
+        }]
     })
 
     const head = await getHeadURL(ign)
     const player = await getPlayer(uuid)
     if (!player) {
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "This user never logged on to hypixel",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head!,
-                    },
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
+            embeds: [{
+                description: "This user never logged on to hypixel",
+                color: embedColor,
+                thumbnail: {
+                    url: head!
                 },
-            ],
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }]
         })
         return
     }
@@ -80,30 +70,26 @@ export default async function guildMember(
     }
 
     await interaction.editReply({
-        embeds: [
-            {
-                description: "Fetching your guild data...",
-                color: embedColor,
-            },
-        ],
+        embeds: [{
+            description: "Fetching your guild data...",
+            color: embedColor
+        }]
     })
 
     const guild = await getGuild(uuid)
     if (!guild) {
         await interaction.editReply({
-            embeds: [
-                {
-                    description: "This user is not in a guild",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head!,
-                    },
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
+            embeds: [{
+                description: "This user is not in a guild",
+                color: embedColor,
+                thumbnail: {
+                    url: head!
                 },
-            ],
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }]
         })
         return
     }
@@ -116,30 +102,13 @@ export default async function guildMember(
     const guildRank = guildMember!.rank
     const memberGexp = guildMember!.expHistory
     const allDaysGexp = Object.keys(memberGexp).map(key => {
-        return (
-            "**➺ " +
-            key +
-            ":** " +
-            "`" +
-            new Intl.NumberFormat("en-US").format(memberGexp[key]) +
-            "`" +
-            "\n"
-        )
+        return ("**➺ " + key + ":** " + "`" + new Intl.NumberFormat("en-US").format(memberGexp[key]) + "`" + "\n")
     })
     const expValue = allDaysGexp.join("")
-    const totalWeeklyGexpUnformatted = Object.values(memberGexp).reduce(
-        (a, b) => a + b,
-        0,
-    )
-    const totalWeeklyGexp = new Intl.NumberFormat("en-US").format(
-        totalWeeklyGexpUnformatted,
-    )
-    const averageWeeklyGexpUnformatted = Math.round(
-        totalWeeklyGexpUnformatted / 7,
-    )
-    const averageWeeklyGexp = new Intl.NumberFormat("en-US").format(
-        averageWeeklyGexpUnformatted,
-    )
+    const totalWeeklyGexpUnformatted = Object.values(memberGexp).reduce((a, b) => a + b, 0)
+    const totalWeeklyGexp = new Intl.NumberFormat("en-US").format(totalWeeklyGexpUnformatted)
+    const averageWeeklyGexpUnformatted = Math.round(totalWeeklyGexpUnformatted / 7)
+    const averageWeeklyGexp = new Intl.NumberFormat("en-US").format(averageWeeklyGexpUnformatted)
 
     const guildMemberJoinMS = guildMember!.joined
     const guildMemberJoinTime = new Date(guildMemberJoinMS)
@@ -151,58 +120,41 @@ export default async function guildMember(
     const guildMemberJoinSeconds = guildMemberJoinTime.getSeconds()
 
     const guildMemberJoin =
-        guildMemberJoinDate +
-        "." +
-        guildMemberJoinMonth +
-        "." +
-        guildMemberJoinYear +
-        " " +
-        guildMemberJoinHours +
-        ":" +
-        guildMemberJoinMinutes +
-        ":" +
+        guildMemberJoinDate + "." +
+        guildMemberJoinMonth + "." +
+        guildMemberJoinYear + " " +
+        guildMemberJoinHours + ":" +
+        guildMemberJoinMinutes + ":" +
         guildMemberJoinSeconds
 
     await interaction.editReply({
-        embeds: [
-            {
-                title: rank + displayName + guildTag,
-                description:
-                    "**Guild Name:** `" +
-                    guildName +
-                    "`\n" +
-                    "**Guild Rank:** `" +
-                    guildRank +
-                    "`\n",
-                color: embedColor,
-                thumbnail: {
-                    url: head!,
-                },
-                fields: [
-                    {
-                        name: "**Daily GEXP**",
-                        value: expValue,
-                    },
-                    {
-                        name: "**Weekly GEXP**",
-                        value:
-                            "**➺ Total:** `" +
-                            totalWeeklyGexp +
-                            "`\n" +
-                            "**➺ Daily avarage:** `" +
-                            averageWeeklyGexp +
-                            "`",
-                    },
-                    {
-                        name: "**Join date**",
-                        value: "**➺ **`" + guildMemberJoin + "`",
-                    },
-                ],
-                footer: {
-                    text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL() || undefined,
-                },
+        embeds: [{
+            title: rank + displayName + guildTag,
+            description: "**Guild Name:** `" + guildName + "`\n" +
+                "**Guild Rank:** `" + guildRank + "`\n",
+            color: embedColor,
+            thumbnail: {
+                url: head!
             },
-        ],
+            fields: [
+                {
+                    name: "**Daily GEXP**",
+                    value: expValue
+                },
+                {
+                    name: "**Weekly GEXP**",
+                    value: "**➺ Total:** `" + totalWeeklyGexp + "`\n" +
+                        "**➺ Daily avarage:** `" + averageWeeklyGexp + "`"
+                },
+                {
+                    name: "**Join date**",
+                    value: "**➺ **`" + guildMemberJoin + "`"
+                }
+            ],
+            footer: {
+                text: interaction.guild!.name + " | " + devMessage,
+                icon_url: interaction.guild!.iconURL() || undefined
+            }
+        }]
     })
 }

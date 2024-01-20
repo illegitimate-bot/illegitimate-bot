@@ -11,7 +11,6 @@ scripts
 .eslintrc.js
 .gitignore
 .gitlab-ci.yml
-.prettierrc.js
 docker-compose.yml
 Dockerfile
 Dockerfile.cache

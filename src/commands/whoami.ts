@@ -24,12 +24,10 @@ export = {
 
         if (!verifyData) {
             await interaction.editReply({
-                embeds: [
-                    {
-                        description: "You are not verified!",
-                        color: embedColor,
-                    },
-                ],
+                embeds: [{
+                    description: "You are not verified!",
+                    color: embedColor
+                }]
             })
             return
         }
@@ -38,25 +36,19 @@ export = {
         const head = await getHeadURL(ign!)
 
         await interaction.editReply({
-            embeds: [
-                {
-                    title: "User Info",
-                    description:
-                        "**User:** " +
-                        userMention(user.id) +
-                        "\n**IGN:** `" +
-                        ign +
-                        "`",
-                    color: embedColor,
-                    thumbnail: {
-                        url: head!,
-                    },
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
+            embeds: [{
+                title: "User Info",
+                description: "**User:** " + userMention(user.id) +
+                    "\n**IGN:** `" + ign + "`",
+                color: embedColor,
+                thumbnail: {
+                    url: head!
                 },
-            ],
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }]
         })
-    },
+    }
 } as Command

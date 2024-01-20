@@ -1,9 +1,4 @@
-import {
-    ContextMenuCommandBuilder,
-    ApplicationCommandType,
-    PermissionFlagsBits,
-    userMention,
-} from "discord.js"
+import { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits, userMention } from "discord.js"
 import { ContextMenu } from "interfaces"
 
 export = {
@@ -23,25 +18,23 @@ export = {
         if (!message) {
             return interaction.reply({
                 content: "That user does not exist.",
-                ephemeral: true,
+                ephemeral: true
             })
         }
 
         const target = message.author
 
         await message.reply({
-            embeds: [
-                {
-                    title: "Congratulations!",
-                    description: `GG to ${userMention(target.id)}!`,
-                },
-            ],
+            embeds: [{
+                title: "Congratulations!",
+                description: `GG to ${userMention(target.id)}!`
+            }]
         })
         await message.react("🎉")
 
         await interaction.reply({
             content: "Sent a congrats message",
-            ephemeral: true,
+            ephemeral: true
         })
-    },
+    }
 } as ContextMenu

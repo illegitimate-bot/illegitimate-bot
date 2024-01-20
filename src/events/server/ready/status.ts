@@ -22,9 +22,9 @@ export = {
         let i = 1
         setInterval(
             () => user.setActivity(statuses[i++ % statuses.length]),
-            1000 * 60 * 10,
+            1000 * 60 * 10
         )
 
         user.setStatus("dnd")
-    },
+    }
 } as Event

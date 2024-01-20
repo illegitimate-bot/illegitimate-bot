@@ -4,7 +4,7 @@
 function guildLevel(exp: number): number {
     const EXP_NEEDED = [
         100000, 150000, 250000, 500000, 750000, 1000000, 1250000, 1500000,
-        2000000, 2500000, 2500000, 2500000, 2500000, 2500000, 3000000,
+        2000000, 2500000, 2500000, 2500000, 2500000, 2500000, 3000000
     ]
 
     let level = 0
@@ -38,10 +38,8 @@ function guildLevel(exp: number): number {
 */
 function scaledGEXP(input: number): number {
     if (input <= 200000) return Number(input)
-    if (input <= 700000)
-        return Number(Math.round((input - 200000) / 10 + 200000))
-    if (input > 700000)
-        return Number(Math.round((input - 700000) / 33 + 250000))
+    if (input <= 700000) return Number(Math.round((input - 200000) / 10 + 200000))
+    if (input > 700000) return Number(Math.round((input - 700000) / 33 + 250000))
     return 0
 }
 

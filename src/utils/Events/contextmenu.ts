@@ -10,15 +10,8 @@ type FileType = "js" | "ts"
 const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadContextMenuEvents(client: Client, ft: FileType) {
-    const contextMenuPath = path.join(
-        __dirname,
-        "..",
-        "..",
-        "commands-contextmenu",
-    )
-    const contextMenuFiles = fs
-        .readdirSync(contextMenuPath)
-        .filter(file => file.endsWith(ft))
+    const contextMenuPath = path.join(__dirname, "..", "..", "commands-contextmenu")
+    const contextMenuFiles = fs.readdirSync(contextMenuPath).filter(file => file.endsWith(ft))
 
     for (const file of contextMenuFiles) {
         const filePath = path.join(contextMenuPath, file)
@@ -30,8 +23,8 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -43,9 +36,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
         const command = client.contextmenus.get(interaction.commandName)
 
         if (!command) {
-            console.error(
-                `No command matching ${interaction.commandName} was found.`,
-            )
+            console.error(`No command matching ${interaction.commandName} was found.`)
             return
         }
 
@@ -54,45 +45,33 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {
-                    embeds: [
-                        {
-                            title: "Contextmenu error occured",
-                            description: "```" + error + "```",
-                            color: embedColor,
-                            footer: {
-                                icon_url:
-                                    interaction.guild!.iconURL() || undefined,
-                                text:
-                                    interaction.user.username +
-                                    " | " +
-                                    interaction.commandName,
-                            },
-                        },
-                    ],
+                    embeds: [{
+                        title: "Contextmenu error occured",
+                        description: "```" + error + "```",
+                        color: embedColor,
+                        footer: {
+                            icon_url: interaction.guild!.iconURL() || undefined,
+                            text: interaction.user.username + " | " + interaction.commandName
+                        }
+                    }]
                 })
             }
 
             console.error(error)
             if (!interaction.deferred) {
                 await interaction.reply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this contextmenu command!",
-                            color: embedColor,
-                        },
-                    ],
-                    ephemeral: true,
+                    embeds: [{
+                        description: "There was an error while executing this contextmenu command!",
+                        color: embedColor
+                    }],
+                    ephemeral: true
                 })
             } else {
                 await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this contextmenu command!",
-                            color: embedColor,
-                        },
-                    ],
+                    embeds: [{
+                        description: "There was an error while executing this contextmenu command!",
+                        color: embedColor
+                    }]
                 })
             }
         }

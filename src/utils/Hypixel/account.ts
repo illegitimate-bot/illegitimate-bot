@@ -8,7 +8,7 @@ const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"
 const hypixel = "https://api.hypixel.net/player"
 const guild = "https://api.hypixel.net/guild"
 const minotar = "https://minotar.net/helm/"
-type GuildQuerqType = "player" | "name" | "id"
+type GuildQueryType = "player" | "name" | "id"
 
 type Profile = {
     data: {
@@ -47,9 +47,11 @@ async function getIGN(uuid: string): Promise<string | null> {
 async function getPlayer(uuid: string): Promise<PlayerData | null> {
     const playerReq: Player = await fetch(hypixel, {
         params: {
-            key: apikey,
-            uuid: uuid,
+            uuid: uuid
         },
+        headers: {
+            "API-Key": apikey
+        }
     })
 
     if (!playerReq.data.player) {
@@ -59,17 +61,16 @@ async function getPlayer(uuid: string): Promise<PlayerData | null> {
     return playerReq.data.player
 }
 
-async function getGuild(
-    query: string,
-    type?: GuildQuerqType,
-): Promise<GuildData | null> {
+async function getGuild(query: string, type?: GuildQueryType): Promise<GuildData | null> {
     const reqType = type ? type : "player"
 
     const guildReq: Guild = await fetch(guild, {
         params: {
-            key: apikey,
-            [reqType]: query,
+            [reqType]: query
         },
+        headers: {
+            "API-Key": apikey
+        }
     })
 
     if (!guildReq.data.guild) {

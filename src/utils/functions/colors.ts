@@ -4,7 +4,7 @@ const colors = {
     red: "#f38ba8",
     lavender: "#b4befe",
     green: "#a6e3a1",
-    pink: "#f5c2e7",
+    pink: "#f5c2e7"
 }
 
 export default function color(text: string, type: keyof typeof colors) {

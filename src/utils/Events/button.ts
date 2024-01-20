@@ -23,8 +23,8 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
             console.log(
                 colorLog(
                     `[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                    "red",
-                ),
+                    "red"
+                )
             )
         }
     }
@@ -35,9 +35,7 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
         const button = client.buttons.get(interaction.customId)
 
         if (!button) {
-            console.error(
-                `No event matching ${interaction.customId} was found.`,
-            )
+            console.error(`No event matching ${interaction.customId} was found.`)
             return
         }
 
@@ -46,45 +44,33 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {
-                    embeds: [
-                        {
-                            title: "Button error occured",
-                            description: "```" + error + "```",
-                            color: embedColor,
-                            footer: {
-                                icon_url:
-                                    interaction.guild!.iconURL() || undefined,
-                                text:
-                                    interaction.user.username +
-                                    " | " +
-                                    interaction.customId,
-                            },
-                        },
-                    ],
+                    embeds: [{
+                        title: "Button error occured",
+                        description: "```" + error + "```",
+                        color: embedColor,
+                        footer: {
+                            icon_url: interaction.guild!.iconURL() || undefined,
+                            text: interaction.user.username + " | " + interaction.customId
+                        }
+                    }]
                 })
             }
 
             console.error(error)
             if (!interaction.deferred) {
                 await interaction.reply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this button!",
-                            color: embedColor,
-                        },
-                    ],
-                    ephemeral: true,
+                    embeds: [{
+                        description: "There was an error while executing this button!",
+                        color: embedColor
+                    }],
+                    ephemeral: true
                 })
             } else {
                 await interaction.editReply({
-                    embeds: [
-                        {
-                            description:
-                                "There was an error while executing this button! 2",
-                            color: embedColor,
-                        },
-                    ],
+                    embeds: [{
+                        description: "There was an error while executing this button! 2",
+                        color: embedColor
+                    }]
                 })
             }
         }

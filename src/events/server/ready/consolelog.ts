@@ -9,5 +9,5 @@ export = {
 
     execute(client: Client) {
         console.log(color("Logged in as " + client.user!.tag + "!", "green"))
-    },
+    }
 } as Event

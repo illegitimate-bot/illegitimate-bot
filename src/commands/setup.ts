@@ -1,12 +1,4 @@
-import {
-    SlashCommandBuilder,
-    PermissionFlagsBits,
-    ButtonBuilder,
-    ActionRowBuilder,
-    ButtonStyle,
-    ChannelType,
-    TextChannel,
-} from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, ChannelType, TextChannel } from "discord.js"
 import { color, devMessage } from "config/options.json"
 import { Command } from "interfaces"
 
@@ -27,15 +19,10 @@ export = {
                 .addChannelOption(option =>
                     option
                         .setName("channel")
-                        .setDescription(
-                            "The channel to send the application to.",
-                        )
-                        .addChannelTypes(
-                            ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
-                        )
-                        .setRequired(true),
-                ),
+                        .setDescription("The channel to send the application to.")
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -44,15 +31,10 @@ export = {
                 .addChannelOption(option =>
                     option
                         .setName("channel")
-                        .setDescription(
-                            "The channel to send the application to.",
-                        )
-                        .addChannelTypes(
-                            ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
-                        )
-                        .setRequired(true),
-                ),
+                        .setDescription("The channel to send the application to.")
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -61,15 +43,10 @@ export = {
                 .addChannelOption(option =>
                     option
                         .setName("channel")
-                        .setDescription(
-                            "The channel to send the verfiy message to.",
-                        )
-                        .addChannelTypes(
-                            ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
-                        )
-                        .setRequired(true),
-                ),
+                        .setDescription("The channel to send the verfiy message to.")
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -78,15 +55,10 @@ export = {
                 .addChannelOption(option =>
                     option
                         .setName("channel")
-                        .setDescription(
-                            "The channel to send the waiting list message to.",
-                        )
-                        .addChannelTypes(
-                            ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
-                        )
-                        .setRequired(true),
-                ),
+                        .setDescription("The channel to send the waiting list message to.")
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                        .setRequired(true)
+                )
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -95,15 +67,10 @@ export = {
                 .addChannelOption(option =>
                     option
                         .setName("channel")
-                        .setDescription(
-                            "The channel to send the application to.",
-                        )
-                        .addChannelTypes(
-                            ChannelType.GuildText,
-                            ChannelType.GuildAnnouncement,
-                        )
-                        .setRequired(true),
-                ),
+                        .setDescription("The channel to send the application to.")
+                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                        .setRequired(true)
+                )
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
@@ -112,16 +79,15 @@ export = {
         const subcommand = interaction.options.getSubcommand()
         const channel = interaction.options.getChannel("channel") as TextChannel
         const embedColor = Number(color.replace("#", "0x"))
-        let title: string = ""
-        let description: string = ""
-        let customId: string = ""
-        let label: string = ""
-        let emoji: string = ""
+        let title = ""
+        let description = ""
+        let customId = ""
+        let label = ""
+        let emoji = ""
 
         if (subcommand === "sendguildapplication") {
             title = "Guild Application"
-            description =
-                "You can apply for the guild by clicking the button below."
+            description = "You can apply for the guild by clicking the button below."
             customId = "guildapply"
             label = "Apply"
             emoji = "✅"
@@ -129,8 +95,7 @@ export = {
 
         if (subcommand === "sendstaffapplication") {
             title = "Staff Application"
-            description =
-                "You can apply for the staff team by clicking the button below."
+            description = "You can apply for the staff team by clicking the button below."
             customId = "staffapply"
             label = "Apply"
             emoji = "✅"
@@ -138,8 +103,7 @@ export = {
 
         if (subcommand === "sendinactivityapplication") {
             title = "Inactivity Log"
-            description =
-                "You can send an inactivity log by clicking the button below."
+            description = "You can send an inactivity log by clicking the button below."
             customId = "guildinactivitylog"
             label = "Submit"
             emoji = "✅"
@@ -162,34 +126,32 @@ export = {
         }
 
         await channel.send({
-            embeds: [
-                {
-                    title: title,
-                    description: description,
-                    color: embedColor,
-                    thumbnail: {
-                        url: interaction.guild!.iconURL() || "",
-                    },
-                    footer: {
-                        text: interaction.guild!.name + " | " + devMessage,
-                        icon_url: interaction.guild!.iconURL() || undefined,
-                    },
+            embeds: [{
+                title: title,
+                description: description,
+                color: embedColor,
+                thumbnail: {
+                    url: interaction.guild!.iconURL() || ""
                 },
-            ],
+                footer: {
+                    text: interaction.guild!.name + " | " + devMessage,
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
+            }],
             components: [
                 new ActionRowBuilder<ButtonBuilder>().addComponents(
                     new ButtonBuilder()
                         .setCustomId(customId)
                         .setLabel(label)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji({ name: emoji }),
-                ),
-            ],
+                        .setEmoji({ name: emoji })
+                )
+            ]
         })
 
         await interaction.reply({
             content: "Message sent",
-            ephemeral: true,
+            ephemeral: true
         })
-    },
+    }
 } as Command

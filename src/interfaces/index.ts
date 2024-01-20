@@ -25,5 +25,5 @@ export {
     Guild,
     GuildData,
     Player,
-    PlayerData,
+    PlayerData
 }

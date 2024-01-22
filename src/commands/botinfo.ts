@@ -9,7 +9,7 @@ export = {
     name: "botinfo",
     description: "Get information about the bot",
     public: true,
-    dev: false,
+    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("botinfo")
@@ -24,12 +24,12 @@ export = {
 
         const deps = Object.keys(castedDeps).map((p) => (`${p}@${castedDeps[p]}`).replace("^", "")).join(", ")
         const devDeps = Object.keys(castedDevDeps).map((p) => (`${p}@${castedDevDeps[p]}`).replace("^", "")).join(", ")
-        const distro = execSync("cat /etc/os-release | grep 'PRETTY_NAME'").toString().replace("PRETTY_NAME=", "").replace(/"/g, "")
 
         if (os.platform() === "win32") {
-            osInfo = `> **OS:** \`Windows\`
+            osInfo = `> **OS:** \`${os.type()}\`
             > **Version:** \`${os.release()}\``
         } else {
+            const distro = execSync("cat /etc/os-release | grep 'PRETTY_NAME'").toString().replace("PRETTY_NAME=", "").replace(/"/g, "")
             osInfo = `> **OS:** \`${os.type()}\`
             > **Kernel:** \`${os.version()}\`
             > **Distro:** \`${distro}\``

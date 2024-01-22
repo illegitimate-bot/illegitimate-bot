@@ -29,7 +29,11 @@ export = {
             osInfo = `> **OS:** \`${os.type()}\`
             > **Version:** \`${os.release()}\``
         } else {
-            const distro = execSync("cat /etc/os-release | grep 'PRETTY_NAME'").toString().replace("PRETTY_NAME=", "").replace(/"/g, "")
+            const distro = execSync("cat /etc/os-release | grep 'PRETTY_NAME'")
+                .toString()
+                .replace("PRETTY_NAME=", "")
+                .replaceAll("\"", "")
+                .replace("\n", "")
             osInfo = `> **OS:** \`${os.type()}\`
             > **Kernel:** \`${os.version()}\`
             > **Distro:** \`${distro}\``

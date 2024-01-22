@@ -5,6 +5,8 @@ services:
     build: https://gitlab.com/illegitimate/illegitimate-bot.git#main
     image: illegitimate:latest
     restart: unless-stopped
+    volumes:
+      - /home/illegitimate/pipe:/pipe
     logging:
       driver: journald
     environment:

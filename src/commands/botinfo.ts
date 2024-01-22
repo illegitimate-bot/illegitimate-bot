@@ -35,7 +35,7 @@ export = {
                 .replaceAll("\"", "")
                 .replace("\n", "")
             osInfo = `> **OS:** \`${os.type()}\`
-            > **Kernel:** \`${os.version()}\`
+            > **Kernel:** \`${os.release()}\`
             > **Distro:** \`${distro}\``
         }
 

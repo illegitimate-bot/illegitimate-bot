@@ -9,7 +9,7 @@ export = {
     name: "botinfo",
     description: "Get information about the bot",
     public: true,
-    dev: true,
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("botinfo")

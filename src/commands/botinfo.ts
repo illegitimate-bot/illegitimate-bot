@@ -24,7 +24,7 @@ export = {
 
         const deps = Object.keys(castedDeps).map((p) => (`${p}@${castedDeps[p]}`).replace("^", "")).join(", ")
         const devDeps = Object.keys(castedDevDeps).map((p) => (`${p}@${castedDevDeps[p]}`).replace("^", "")).join(", ")
-        const distro = execSync("cat os-release | grep 'PRETTY_NAME'").toString().replace("PRETTY_NAME=", "").replace(/"/g, "")
+        const distro = execSync("cat /etc/os-release | grep 'PRETTY_NAME'").toString().replace("PRETTY_NAME=", "").replace(/"/g, "")
 
         if (os.platform() === "win32") {
             osInfo = `> **OS:** \`Windows\`

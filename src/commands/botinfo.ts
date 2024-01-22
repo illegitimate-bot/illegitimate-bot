@@ -1,14 +1,15 @@
 import { SlashCommandBuilder } from "discord.js"
 import { Command } from "interfaces"
 import { color, devMessage } from "config/options.json"
-const { dependencies, devDependencies } = require("../../package.json")
 import os from "os"
+import { execSync } from "child_process"
+const { dependencies, devDependencies } = require("../../package.json")
 
 export = {
     name: "botinfo",
     description: "Get information about the bot",
     public: true,
-    dev: false,
+    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("botinfo")
@@ -19,9 +20,20 @@ export = {
         const embedColor = Number(color.replace("#", "0x"))
         const castedDeps = dependencies as { [key: string]: string }
         const castedDevDeps = devDependencies as { [key: string]: string }
+        let osInfo: string
 
         const deps = Object.keys(castedDeps).map((p) => (`${p}@${castedDeps[p]}`).replace("^", "")).join(", ")
         const devDeps = Object.keys(castedDevDeps).map((p) => (`${p}@${castedDevDeps[p]}`).replace("^", "")).join(", ")
+        const distro = execSync("cat os-release | grep 'PRETTY_NAME'").toString().replace("PRETTY_NAME=", "").replace(/"/g, "")
+
+        if (os.platform() === "win32") {
+            osInfo = `> **OS:** \`Windows\`
+            > **Version:** \`${os.release()}\``
+        } else {
+            osInfo = `> **OS:** \`${os.type()}\`
+            > **Kernel:** \`${os.version()}\`
+            > **Distro:** \`${distro}\``
+        }
 
         await interaction.reply({
             embeds: [{
@@ -31,8 +43,10 @@ export = {
                 > **Name**: \`${client.user!.username}\`
                 > **ID**: \`${client.user!.id}\`
 
+                __**System**__
+                ${osInfo}
+
                 __**Project**__
-                > **OS:** ${os.platform() === "linux" ? "`" + os.type() + "`" : "`Windows`"}
                 > **Node Version:** \`${process.version}\`
                 > **Typescript Version:** \`${(castedDevDeps.typescript).replace("^", "")}\`
                 > **Discord.js Version:** \`${(castedDeps["discord.js"]).replace("^", "")}\`

@@ -65,7 +65,7 @@ export = {
                 > **Roles:** \`${client.guilds.cache.reduce((a, b) => a + b.roles.cache.size, 0)}\`
                 `,
                 thumbnail: {
-                    url: interaction.guild!.iconURL() || "",
+                    url: client.user!.avatarURL() || "",
                 },
                 color: embedColor,
                 footer: {

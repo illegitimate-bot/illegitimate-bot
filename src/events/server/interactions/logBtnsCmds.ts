@@ -9,19 +9,29 @@ export = {
 
     execute(interaction: ChatInputCommandInteraction | ButtonInteraction) {
         if (interaction.isCommand()) {
+            let subcommand: string | null
+
             try {
+                subcommand = interaction.options.getSubcommand()
+            } catch (e) {
+                subcommand = null
+            }
+
+            if (subcommand) {
                 console.log(
                     color(
-                        interaction.user.username + " ran " +
+                        interaction.user.username + "#" +
+                        interaction.user.discriminator + " ran " +
                         interaction.commandName + " " +
-                        interaction.options.getSubcommand(),
+                        subcommand,
                         "pink"
                     )
                 )
-            } catch {
+            } else {
                 console.log(
                     color(
-                        interaction.user.username + " ran " +
+                        interaction.user.username + "#" +
+                        interaction.user.discriminator + " ran " +
                         interaction.commandName,
                         "pink"
                     )

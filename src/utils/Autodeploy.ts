@@ -1,12 +1,16 @@
-import { Command } from "interfaces"
+import { Command, ContextMenu } from "interfaces"
 import color from "./functions/colors"
 import env from "./Env"
-import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPutAPIApplicationGuildCommandsJSONBody, Routes } from "discord.js"
+import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPostAPIApplicationGuildCommandsJSONBody, RESTPutAPIApplicationGuildCommandsJSONBody, Routes } from "discord.js"
 import fs from "fs"
 type FileType = "js" | "ts"
 
 export default async function autoDeployCommands(fileType: FileType) {
-    const commands = []
+    const commands: {
+        name: string
+        description: string
+        data: RESTPostAPIApplicationGuildCommandsJSONBody
+    }[] = []
     let commandFiles: string[] = []
     let contentMenuCommands: string[] = []
 
@@ -19,15 +23,23 @@ export default async function autoDeployCommands(fileType: FileType) {
     }
 
     for (const file of commandFiles) {
-        const command = require(`../commands/${file}`)
+        const command: Command = require(`../commands/${file}`)
         if (command.dev) {
-            commands.push(command.data.toJSON())
+            commands.push({
+                name: command.name,
+                description: command.description,
+                data: command.data.toJSON()
+            })
         }
     }
     for (const file of contentMenuCommands) {
-        const command: Command = require(`../commands-contextmenu/${file}`)
+        const command: ContextMenu = require(`../commands-contextmenu/${file}`)
         if (command.dev) {
-            commands.push(command.data.toJSON())
+            commands.push({
+                name: command.name,
+                description: command.description,
+                data: command.data.toJSON()
+            })
         }
     }
 
@@ -40,13 +52,13 @@ export default async function autoDeployCommands(fileType: FileType) {
     const currentCommandsInfo = currentCommands.map(command => {
         return {
             name: command.name,
-            description: command.description
+            description: command.description,
         }
     })
     const newCommandsInfo = commands.map(command => {
         return {
             name: command.name,
-            description: command.description
+            description: command.description,
         }
     })
 

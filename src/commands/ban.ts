@@ -38,7 +38,7 @@ export = {
                     { name: "7 days", value: 7 },
                 )
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .setDMPermission(false),
 
     async execute(interaction) {

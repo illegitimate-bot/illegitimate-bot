@@ -14,7 +14,7 @@ export = {
     data: new SlashCommandBuilder()
         .setName("botinfo")
         .setDescription("Get information about the bot")
-        .setDMPermission(true),
+        .setDMPermission(false),
 
     async execute(interaction, client) {
         const embedColor = Number(color.replace("#", "0x"))

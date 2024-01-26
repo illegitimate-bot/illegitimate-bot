@@ -2,8 +2,7 @@ import { getUUID, getPlayer, getGuild, getIGN } from "utils/Hypixel"
 import { color, devMessage } from "config/options.json"
 import { ChannelType, ChatInputCommandInteraction } from "discord.js"
 import { GuildData } from "interfaces"
-import Illegitimate from "utils/Illegitimate"
-const redis = Illegitimate.redis
+import { redis } from "utils/Illegitimate"
 
 export default async function guildTop(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()

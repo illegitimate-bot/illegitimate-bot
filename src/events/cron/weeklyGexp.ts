@@ -2,9 +2,8 @@ import { hypixelGuildID, guildLogChannel, color, devMessage } from "config/optio
 import colorLog from "utils/functions/colors"
 import { getGuild, getIGN } from "utils/Hypixel"
 import { Cron, GuildData } from "interfaces"
-import Illegitimate from "utils/Illegitimate"
+import { client } from "utils/Illegitimate"
 import { TextChannel } from "discord.js"
-const client = Illegitimate.client
 
 async function guildWeekly() {
     const channel = client.channels.cache.get(guildLogChannel) as TextChannel

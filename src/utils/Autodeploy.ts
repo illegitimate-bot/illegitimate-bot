@@ -1,101 +1,113 @@
-import { Command, ContextMenu } from "interfaces"
-import color from "./functions/colors"
-import env from "./Env"
-import { REST, RESTGetAPIApplicationGuildCommandResult, RESTPostAPIApplicationGuildCommandsJSONBody, RESTPutAPIApplicationGuildCommandsJSONBody, Routes } from "discord.js"
 import fs from "fs"
+import { ExtendedClient } from "./Client"
+import env from "./Env"
+import { Command } from "interfaces"
+import { RESTPostAPIChatInputApplicationCommandsJSONBody } from "discord.js"
+import color from "./functions/colors"
 type FileType = "js" | "ts"
 
-export default async function autoDeployCommands(fileType: FileType) {
-    const commands: {
-        name: string
-        description: string
-        data: RESTPostAPIApplicationGuildCommandsJSONBody
-    }[] = []
+export default async function autoDeployCommands(fileType: FileType, client: ExtendedClient) {
+    const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = []
     let commandFiles: string[] = []
-    let contentMenuCommands: string[] = []
+    // let contentMenuCommands: string[] = []
 
     if (fileType === "js") {
         commandFiles = fs.readdirSync("./dist/commands/").filter(file => file.endsWith(fileType))
-        contentMenuCommands = fs.readdirSync("./dist/commands-contextmenu/").filter(file => file.endsWith(fileType))
+        // contentMenuCommands = fs.readdirSync("./dist/commands-contextmenu/").filter(file => file.endsWith(fileType))
     } else if (fileType === "ts") {
         commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(fileType))
-        contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(fileType))
+        // contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(fileType))
     }
 
     for (const file of commandFiles) {
         const command: Command = require(`../commands/${file}`)
         if (command.dev) {
-            commands.push({
-                name: command.name,
-                description: command.description,
-                data: command.data.toJSON()
-            })
-        }
-    }
-    for (const file of contentMenuCommands) {
-        const command: ContextMenu = require(`../commands-contextmenu/${file}`)
-        if (command.dev) {
-            commands.push({
-                name: command.name,
-                description: command.description,
-                data: command.data.toJSON()
-            })
+            commands.push(command.data.toJSON())
         }
     }
 
-    const rest = new REST({ version: "10" }).setToken(env.dev.devtoken!)
-
-    const currentCommands = (await rest.get(
-        Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!)
-    )) as RESTGetAPIApplicationGuildCommandResult[]
-
-    const currentCommandsInfo = currentCommands.map(command => {
+    const commandData = commands.map(command => {
         return {
             name: command.name,
             description: command.description,
+            options: command.options?.map(option => {
+                return {
+                    name: option.name,
+                    description: option.description,
+                    type: option.type,
+                }
+            }),
+            defaultPermission: command.default_member_permissions ?? null,
+        }
+    }).sort((a, b) => a.name > b.name ? 1 : -1)
+
+    client.on("ready", async (c) => {
+        const guildclient = c.guilds.cache.get(env.dev.guildid!)!
+        const currentCommands = await guildclient.commands.fetch()
+        if (!currentCommands) return
+
+        const currentCommandsData = currentCommands.map(command => {
+            return {
+                name: command.name,
+                description: command.description,
+                options: command.options?.map(option => {
+                    return {
+                        name: option.name,
+                        description: option.description,
+                        type: option.type,
+                    }
+                }),
+                defaultPermission: command.defaultMemberPermissions,
+            }
+        }).sort((a, b) => a.name > b.name ? 1 : -1)
+
+        const nc = commands.map(cmd => {
+            return " " + cmd.name
+        }).join("\n")
+
+        if (JSON.stringify(commandData) === JSON.stringify(currentCommandsData)) {
+            console.log(color("Commands are up to date.", "green"))
+            console.log(color(nc, "lavender"))
+        } else {
+            console.log(color("Commands are not up to date.", "red"))
+
+            if (currentCommands.size === 0) {
+                for (const cmd of commands) {
+                    await guildclient.commands.create(cmd)
+                }
+                console.log(color(nc, "lavender"))
+                console.log(color("All commands were registered.", "green"))
+                return
+            }
+
+            for (const cmd of currentCommandsData) {
+                if (!commandData.find(c => c.name === cmd.name)) {
+                    await guildclient.commands.delete(currentCommands.find(c => c.name === cmd.name)!.id)
+                    console.log(color(" " + cmd.name + " was unregistered.", "red"))
+                }
+            }
+
+            for (const cmd of commandData) {
+                if (!currentCommandsData.find(c => c.name === cmd.name)) {
+                    await guildclient.commands.create(commands.find(c => c.name === cmd.name)!)
+                    console.log(color(" " + cmd.name + " was registered.", "lavender"))
+                }
+            }
+
+            for (const cmd of commandData) {
+                const currentCommand = currentCommandsData.find(c => c.name === cmd.name)!
+                const newCmd = commands.find(c => c.name === cmd.name)!
+                const currentCommandID = currentCommands.find(c => c.name === cmd.name)!.id
+
+                if (JSON.stringify(cmd) !== JSON.stringify(currentCommand)) {
+                    await guildclient.commands.edit(currentCommandID, newCmd)
+                    console.log(color(" " + cmd.name + " was updated.", "lavender"))
+                }
+            }
+
+
+            console.log(color("-------------", "lavender"))
+            console.log(color(nc, "lavender"))
         }
     })
-    const newCommandsInfo = commands.map(command => {
-        return {
-            name: command.name,
-            description: command.description,
-        }
-    })
-
-    const sortedCurrentCommandsInfo = currentCommandsInfo.sort((a, b) =>
-        a.name.localeCompare(b.name)
-    )
-    const sortedNewCommandsInfo = newCommandsInfo.sort((a, b) =>
-        a.name.localeCompare(b.name)
-    )
-
-    const newCmds = sortedNewCommandsInfo.map(cmd => {
-        return " " + cmd.name + " was registered."
-    }).join("\n")
-    const currentCmds = sortedCurrentCommandsInfo.map(cmd => {
-        return " " + cmd.name + " was unregistered."
-    }).join("\n")
-
-    if (JSON.stringify(sortedNewCommandsInfo) === JSON.stringify(sortedCurrentCommandsInfo)) {
-        console.log(color("Commands are the same, skipping deploy.", "lavender"))
-        console.log(color(newCmds, "lavender"))
-        return
-    }
-
-    try {
-        console.log(color("Commands are different, starting deploy.", "red"))
-        console.log(color(currentCmds, "red"))
-        console.log(`Started refreshing ${commands.length} application (/) commands.`)
-
-        const data = (await rest.put(
-            Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
-            { body: commands }
-        )) as RESTPutAPIApplicationGuildCommandsJSONBody[]
-
-        console.log(color("New commands deployed.", "lavender"))
-        console.log(color(newCmds, "lavender"))
-        console.log(`Successfully reloaded ${data.length} application (/) commands.`)
-    } catch (error) {
-        console.error(error)
-    }
 }

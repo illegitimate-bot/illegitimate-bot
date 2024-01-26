@@ -35,11 +35,11 @@ export class ExtendedClient extends Client {
         if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT) {
             console.log(color("Running in development mode. [ts-node]", "lavender"))
             token = env.dev.devtoken!
-            autoDeployCommands("ts")
+            autoDeployCommands("ts", this)
         } else if (process.env.NODE_ENV === "dev" && !process.env.TYPESCRIPT) {
             console.log(color("Running in development mode.", "lavender"))
             token = env.dev.devtoken!
-            autoDeployCommands("js")
+            autoDeployCommands("js", this)
         } else {
             console.log(color("Running in production mode.", "green"))
             token = env.prod.token!

@@ -6,6 +6,7 @@ COPY . /app
 
 WORKDIR /app
 ENV NODE_PATH=dist/
+RUN corepack enable
 RUN yarn build
 
 CMD [ "yarn", "start" ]

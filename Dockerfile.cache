@@ -2,9 +2,11 @@ FROM node:20.9.0-alpine3.18
 
 RUN mkdir /cache
 
+COPY .yarnrc.yml /cache
 COPY package.json /cache
 COPY yarn.lock /cache
 
 WORKDIR /cache
 
+RUN corepack enable
 RUN yarn install

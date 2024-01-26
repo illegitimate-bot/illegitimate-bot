@@ -49,4 +49,4 @@ class Bot {
     }
 }
 
-export default { Bot, client, redis }
+export { Bot, client, redis }

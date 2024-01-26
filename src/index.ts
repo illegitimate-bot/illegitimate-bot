@@ -1,4 +1,3 @@
-import Illegitimate from "utils/Illegitimate"
-const illegitimate = new Illegitimate.Bot()
+import { Bot as Illegitimate } from "utils/Illegitimate"
 
-illegitimate.start()
+new Illegitimate().start()

@@ -8,7 +8,7 @@ import {
     devLogChannel
 } from "config/options.json"
 import { Guild, MessageCreateOptions, TextChannel } from "discord.js"
-import Illegitimate from "utils/Illegitimate"
+import { client } from "utils/Illegitimate"
 
 const channels = {
     online: onlineLogChannel,
@@ -22,7 +22,7 @@ const channels = {
 type Channel = keyof typeof channels
 
 export default async function logToChannel(channel: Channel, message: MessageCreateOptions): Promise<void | null> {
-    const guild = Illegitimate.client.guilds.cache.get(guildid) as Guild
+    const guild = client.guilds.cache.get(guildid) as Guild
     let logChannel: TextChannel
 
     if (process.env.NODE_ENV === "dev") {

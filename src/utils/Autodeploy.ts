@@ -95,12 +95,13 @@ export default async function autoDeployCommands(fileType: FileType, client: Ext
             }
 
             for (const cmd of commandData) {
-                const currentCommand = currentCommandsData.find(c => c.name === cmd.name)!
-                const newCmd = commands.find(c => c.name === cmd.name)!
-                const currentCommandID = currentCommands.find(c => c.name === cmd.name)!.id
+                if (!currentCommandsData.find(c => c.name === cmd.name)) continue
 
-                if (JSON.stringify(cmd) !== JSON.stringify(currentCommand)) {
-                    await guildclient.commands.edit(currentCommandID, newCmd)
+                const currentCommand = currentCommands.find(c => c.name === cmd.name)!
+                const currentCommandData = currentCommandsData.find(c => c.name === cmd.name)!
+
+                if (JSON.stringify(cmd) !== JSON.stringify(currentCommandData)) {
+                    await guildclient.commands.edit(currentCommand.id, cmd)
                     console.log(color(" " + cmd.name + " was updated.", "lavender"))
                 }
             }

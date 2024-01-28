@@ -23,6 +23,8 @@ export = {
                     option
                         .setName("ign")
                         .setDescription("The IGN of the player.")
+                        .setMinLength(3)
+                        .setMaxLength(16)
                         .setRequired(true)
                 )
         )

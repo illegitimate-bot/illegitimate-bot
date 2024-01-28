@@ -16,6 +16,8 @@ export = {
             option
                 .setName("ign")
                 .setDescription("Player's name")
+                .setMinLength(3)
+                .setMaxLength(16)
                 .setRequired(true)
         )
         .setDMPermission(false),

@@ -11,7 +11,7 @@ import { GuildData } from "interfaces"
 export = {
     name: "verify",
     description: "Verify yourself as a member of the server.",
-    dev: false,
+    dev: true,
     public: true,
 
     data: new SlashCommandBuilder()
@@ -21,6 +21,8 @@ export = {
             option
                 .setName("ign")
                 .setDescription("Your in-game name.")
+                .setMinLength(3)
+                .setMaxLength(16)
                 .setRequired(true)
         )
         .setDMPermission(false),

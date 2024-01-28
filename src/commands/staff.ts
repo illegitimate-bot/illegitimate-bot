@@ -4,6 +4,7 @@ import { Command } from "interfaces"
 import help from "./staff/help"
 import beast from "./staff/beast"
 import updateDiscordRoles from "./staff/updatediscordroles"
+import prune from "./staff/prune"
 
 export = {
     name: "staff",
@@ -33,6 +34,11 @@ export = {
         )
         .addSubcommand(subcommand =>
             subcommand
+                .setName("prune")
+                .setDescription("Update the discord roles of all guild members")
+        )
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName("updatediscordroles")
                 .setDescription("Update the discord roles of all guild members")
         )
@@ -50,6 +56,11 @@ export = {
 
         if (subcommand === "beast") {
             beast(interaction)
+            return
+        }
+
+        if (subcommand === "prune") {
+            prune(interaction)
             return
         }
 

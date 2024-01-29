@@ -7,7 +7,8 @@
         "start": "node dist/index.js",
         "build": "tsc",
         "watch": "tsc -w",
-        "dev": "nodemon",
+        "dev": "conc --names \"TSC,BOT\" --prefix-colors \"blue, magenta\" \"tsc -w\" \"yarn dev:js\"",
+        "dev:ts": "nodemon --config nodemon.json src/index.ts",
         "dev:js": "nodemon --config nodemon-js.json dist/index.js",
         "dev:build": "ts-node scripts/dev-deploy.ts",
         "dev:delete": "ts-node scripts/delete-commands.ts",
@@ -33,6 +34,7 @@
         "@types/node": "^20.11.7",
         "@typescript-eslint/eslint-plugin": "^6.19.1",
         "@typescript-eslint/parser": "^6.19.1",
+        "concurrently": "^8.2.2",
         "eslint": "^8.56.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.3.3"

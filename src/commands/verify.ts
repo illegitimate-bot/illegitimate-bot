@@ -11,7 +11,7 @@ import { GuildData } from "interfaces"
 export = {
     name: "verify",
     description: "Verify yourself as a member of the server.",
-    dev: true,
+    dev: false,
     public: true,
 
     data: new SlashCommandBuilder()

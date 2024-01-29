@@ -1,5 +1,7 @@
 import verify from "schemas/verifySchema"
 import { color, hypixelGuildID } from "config/options.json"
+import colorLog from "utils/functions/colors"
+import { verifyTick } from "config/roles.json"
 import roleManage from "utils/functions/rolesmanage"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
 import env from "utils/Env"
@@ -58,13 +60,20 @@ export default async function updateDiscordRoles(interaction: ChatInputCommandIn
         }]
     })
 
+    let i = 1
     for (const gmember of guildMembers) {
         const memberData = verifiedUsers.find(user => user.userID === gmember.id)
+
+        console.log(colorLog("Updating member " + i + " of " + guildMembers.length, "green"))
+        i++
 
         if (!memberData) {
             const rolesToremove = roleManage("default").rolesToRemove
             await gmember.member.roles.remove(rolesToremove, "Updating all discord members")
             continue
+        } else {
+            await gmember.member.roles.add(verifyTick)
+            console.log(colorLog(" Added verified tick to " + gmember.member.user.username, "lavender"))
         }
 
         if (!guildMemberIDs.includes(memberData?.uuid || "none")) {
@@ -73,7 +82,7 @@ export default async function updateDiscordRoles(interaction: ChatInputCommandIn
             continue
         } else if (guildMemberIDs.includes(memberData!.uuid)) {
             const guildMemberRank = hypixelGuildMembers.find(gmember => gmember.uuid === memberData!.uuid)!.rank
-            console.log("Updating roles for " + gmember.member.user.username)
+            console.log(colorLog(" Updating roles for " + gmember.member.user.username, "lavender"))
 
             if (guildMemberRank === "Guild Master") {
                 const rolesmanage = roleManage("gm")

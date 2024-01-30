@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
     ft = "js"
 }
 
-class Bot {
+class Illegitimate {
     async start() {
         this.init()
         loadAllEvents(client, ft)
@@ -49,4 +49,4 @@ class Bot {
     }
 }
 
-export { Bot, client, redis }
+export { Illegitimate, client, redis }

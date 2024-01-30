@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 
 export = {
@@ -54,8 +54,6 @@ export = {
                 }
             }
         }
-
-        const embedColor = Number(color.replace("#", "0x"))
 
         await interaction.editReply({
             embeds: [{

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, TextChannel, channelMention, userMention } from "discord.js"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
@@ -26,7 +26,6 @@ export = {
 
         const amount = interaction.options.getInteger("amount")!
         const channel = interaction.channel as TextChannel
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (amount < 1 || amount > 100) {
             await interaction.editReply({

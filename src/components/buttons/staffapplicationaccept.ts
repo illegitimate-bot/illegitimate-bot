@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import staffapp from "schemas/staffAppSchema"
 import { Button } from "interfaces"
 
@@ -12,8 +12,6 @@ export = {
 
         const user = interaction.user
         const guild = interaction.guild!
-        const embedColor = Number(color.replace("#", "0x"))
-
         const message = interaction.message
         const embed = message.embeds[0]
         const applicantId = embed.footer!.text.split(" ")[1]

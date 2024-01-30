@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js"
 import { Command } from "interfaces"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import os from "os"
 import { execSync } from "child_process"
 const { dependencies, devDependencies } = require("../../package.json")
@@ -17,7 +17,6 @@ export = {
         .setDMPermission(false),
 
     async execute(interaction, client) {
-        const embedColor = Number(color.replace("#", "0x"))
         const castedDeps = dependencies as { [key: string]: string }
         const castedDevDeps = devDependencies as { [key: string]: string }
         let osInfo: string

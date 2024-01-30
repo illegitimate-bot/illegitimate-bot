@@ -1,6 +1,6 @@
 import logToChannel from "utils/functions/logtochannel"
 import { Event } from "interfaces"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 
 export = {
     name: "sendonlinemessage",
@@ -9,8 +9,6 @@ export = {
 
     execute() {
         if (process.env.NODE_ENV === "dev") return
-
-        const embedColor = Number(color.replace("#", "0x"))
 
         logToChannel("online", {
             embeds: [{

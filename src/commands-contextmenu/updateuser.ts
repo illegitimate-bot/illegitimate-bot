@@ -1,5 +1,5 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
-import { color, devMessage, hypixelGuildID } from "config/options"
+import { embedColor, devMessage, hypixelGuildID } from "config/options"
 import { ContextMenu } from "interfaces"
 import verifySchema from "schemas/verifySchema"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
@@ -23,7 +23,6 @@ export = {
         const user = await interaction.guild!.members.fetch(targetId)
         const usermentioned = userMention(user.user.id)
         const verifyData = await verifySchema.findOne({ userID: user.user.id })
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (!verifyData) {
             await interaction.editReply({

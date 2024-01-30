@@ -1,5 +1,5 @@
 import { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, GuildMember, TextChannel } from "discord.js"
-import { color, applicationsChannel } from "config/options"
+import { embedColor, applicationsChannel } from "config/options"
 import { largeM, smallM, ignM } from "config/limitmessages"
 import questions from "config/questions"
 import { guildRole } from "config/roles"
@@ -16,7 +16,6 @@ export = {
         await interaction.deferReply({ ephemeral: true })
         const user = interaction.member as GuildMember
         const guild = interaction.guild!
-        const embedColor = Number(color.replace("#", "0x"))
         const userRoles = user.roles.cache.map(role => role.id)
         const guildQuestions = questions.guild
 

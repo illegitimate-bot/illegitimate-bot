@@ -1,4 +1,4 @@
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import guildapp from "schemas/guildAppSchema"
 import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
@@ -16,7 +16,6 @@ export = {
         const applicantId = embed.footer!.text.split(" ")[1]
         const guildappdata = await guildapp.findOne({ userID: applicantId })
         const uuid = guildappdata!.uuid
-        const embedColor = Number(color.replace("#", "0x"))
 
         const player = await getPlayer(uuid)
         if (!player) {

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, ChannelType, TextChannel } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 
 export = {
@@ -78,7 +78,6 @@ export = {
     async execute(interaction) {
         const subcommand = interaction.options.getSubcommand()
         const channel = interaction.options.getChannel("channel") as TextChannel
-        const embedColor = Number(color.replace("#", "0x"))
         let title = ""
         let description = ""
         let customId = ""

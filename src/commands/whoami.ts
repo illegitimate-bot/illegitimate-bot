@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, userMention } from "discord.js"
 import { Command } from "interfaces"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import { getIGN, getHeadURL } from "utils/Hypixel"
 
@@ -20,7 +20,6 @@ export = {
 
         const user = interaction.user
         const verifyData = await verify.findOne({ userID: user.id })
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (!verifyData) {
             await interaction.editReply({

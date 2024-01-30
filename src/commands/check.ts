@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js"
 import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { Command } from "interfaces"
 
@@ -27,7 +27,6 @@ export = {
         await interaction.deferReply({})
 
         const ign = interaction.options.getString("ign")!
-        const embedColor = Number(color.replace("#", "0x"))
 
         await interaction.editReply({
             embeds: [{

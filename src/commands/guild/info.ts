@@ -1,5 +1,5 @@
 import { getUUID, getIGN, getPlayer, getGuild, guildLevel } from "utils/Hypixel"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { ChatInputCommandInteraction } from "discord.js"
 import { GuildData } from "interfaces"
 
@@ -8,7 +8,6 @@ export default async function guildInfo(interaction: ChatInputCommandInteraction
 
     const query = interaction.options.getString("query")!
     const type = interaction.options.getString("type") || "ign"
-    const embedColor = Number(color.replace("#", "0x"))
     let guild: GuildData | null
 
     if (type === "ign") {

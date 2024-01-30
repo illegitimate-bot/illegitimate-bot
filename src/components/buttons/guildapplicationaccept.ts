@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonStyle, ButtonBuilder, TextChannel } from "discord.js"
-import { color, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options"
+import { embedColor, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options"
 import colorLog from "utils/functions/colors"
 import mongoose from "mongoose"
 import guildapp from "schemas/guildAppSchema"
@@ -17,8 +17,6 @@ export = {
 
         const user = interaction.user
         const guild = interaction.guild!
-        const embedColor = Number(color.replace("#", "0x"))
-
         const message = interaction.message
         const embed = message.embeds[0]
         const applicantId = embed.footer!.text.split(" ")[1]

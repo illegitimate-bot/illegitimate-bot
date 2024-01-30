@@ -1,5 +1,5 @@
 import { ChannelType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import setup from "./counting/setup"
 import ban from "./counting/ban"
@@ -54,7 +54,6 @@ export = {
 
     async execute(interaction) {
         const subcommand = interaction.options.getSubcommand()
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (subcommand === "setup") {
             setup(interaction)

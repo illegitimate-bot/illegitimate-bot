@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import settings from "schemas/settingsSchema"
 import mongoose from "mongoose"
 import { Command } from "interfaces"
@@ -37,7 +37,6 @@ export = {
 
         const setting = interaction.options.getString("setting")
         const value = interaction.options.getString("value")
-        const embedColor = Number(color.replace("#", "0x"))
         const settingsData = await settings.findOne({ name: setting })
 
         if (!settingsData) {

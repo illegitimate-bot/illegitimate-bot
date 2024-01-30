@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import guildMember from "./guild/member"
 import guildInfo from "./guild/info"
@@ -79,7 +79,6 @@ export = {
 
     async execute(interaction) {
         const subcommand = interaction.options.getSubcommand()
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (subcommand === "member") {
             await guildMember(interaction)

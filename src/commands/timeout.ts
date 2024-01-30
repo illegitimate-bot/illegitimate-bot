@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, ChatInputCommandInteraction, GuildMember } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import ms from "ms"
 import logToChannel from "utils/functions/logtochannel"
@@ -40,7 +40,6 @@ export = {
         const timeString = interaction.options.getString("time")!
         const reason = interaction.options.getString("reason") || "No reason provided"
         const mod = interaction.member! as GuildMember
-        const embedColor = Number(color.replace("#", "0x"))
         const time = ms(timeString)
         const { default: prettyMs } = await import("pretty-ms")
         const prettyTime = prettyMs(time, { verbose: true })

@@ -1,5 +1,5 @@
 import verify from "schemas/verifySchema"
-import { color, hypixelGuildID } from "config/options"
+import { embedColor, hypixelGuildID } from "config/options"
 import colorLog from "utils/functions/colors"
 import { verifyTick } from "config/roles"
 import roleManage from "utils/functions/rolesmanage"
@@ -9,9 +9,9 @@ import { getGuild } from "utils/Hypixel"
 import { GuildData } from "interfaces"
 
 export default async function updateDiscordRoles(interaction: ChatInputCommandInteraction): Promise<void> {
-    const discordMember = interaction.member as GuildMember
-    const embedColor = Number(color.replace("#", "0x"))
     await interaction.deferReply()
+
+    const discordMember = interaction.member as GuildMember
 
     if (discordMember.user.id !== env.prod.dev) {
         await interaction.editReply({

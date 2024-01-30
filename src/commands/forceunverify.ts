@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import { Command } from "interfaces"
 import roleManage from "utils/functions/rolesmanage"
@@ -26,7 +26,6 @@ export = {
 
     async execute(interaction) {
         const member = interaction.options.getMember("user") as GuildMember
-        const embedColor = Number(color.replace("#", "0x"))
         const verifiedUser = await verify.findOne({ userID: member.user.id })
         const mod = interaction.user
 

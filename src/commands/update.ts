@@ -1,7 +1,7 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
 import { getGuild, getIGN, getHeadURL } from "utils/Hypixel"
 import verify from "schemas/verifySchema"
-import { color, hypixelGuildID, devMessage } from "config/options"
+import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import roleManage from "utils/functions/rolesmanage"
 import { Command } from "interfaces"
 
@@ -21,7 +21,6 @@ export = {
 
         const user = interaction.member as GuildMember
         const verifyData = await verify.findOne({ userID: user.user.id })
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (!verifyData) {
             await interaction.editReply({

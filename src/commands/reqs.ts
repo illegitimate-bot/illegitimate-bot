@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
 import { Command } from "interfaces"
 
@@ -15,8 +15,6 @@ export = {
         .setDMPermission(false),
 
     async execute(interaction) {
-        const embedColor = Number(color.replace("#", "0x"))
-
         await interaction.reply({
             embeds: [{
                 title: "Requirements",

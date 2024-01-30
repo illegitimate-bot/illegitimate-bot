@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import help from "./staff/help"
 import beast from "./staff/beast"
@@ -47,7 +47,6 @@ export = {
 
     async execute(interaction, client) {
         const subcommand = interaction.options.getSubcommand()
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (subcommand === "help") {
             help(interaction, client)

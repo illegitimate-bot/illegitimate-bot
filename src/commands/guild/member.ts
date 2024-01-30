@@ -1,12 +1,11 @@
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { ChatInputCommandInteraction } from "discord.js"
 
 export default async function guildMember(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
 
     const ign = interaction.options.getString("ign")!
-    const embedColor = Number(color.replace("#", "0x"))
 
     await interaction.editReply({
         embeds: [{

@@ -2,7 +2,7 @@ import { ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder, GuildMember
 import { gm, manager, moderator, beast, member, guildStaff, guildRole } from "config/roles"
 import { ignM, smallM, largeM } from "config/limitmessages"
 import { inactivity } from "config/questions"
-import { color, inactivityLogChannel } from "config/options"
+import { embedColor, inactivityLogChannel } from "config/options"
 import { Button } from "interfaces"
 import { getIGN } from "utils/Hypixel"
 const guildRoles = [gm, manager, moderator, beast, member, guildStaff, guildRole]
@@ -14,7 +14,6 @@ export = {
     async execute(interaction) {
         const guild = interaction.guild!
         const user = interaction.member as GuildMember
-        const embedColor = Number(color.replace("#", "0x"))
         const userRoles = user.roles.cache
 
         if (!userRoles.some(role => guildRoles.includes(role.id))) {

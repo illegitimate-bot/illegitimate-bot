@@ -1,7 +1,6 @@
 import { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, GuildMember, TextChannel } from "discord.js"
-import { color } from "config/options"
+import { color, applicationsChannel } from "config/options"
 import { largeM, smallM, ignM } from "config/limitmessages"
-import { applicationsChannel } from "config/options"
 import questions from "config/questions"
 import { guildRole } from "config/roles"
 import { getUUID } from "utils/Hypixel"

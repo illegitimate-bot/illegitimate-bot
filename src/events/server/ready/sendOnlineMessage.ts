@@ -1,6 +1,6 @@
 import logToChannel from "utils/functions/logtochannel"
 import { Event } from "interfaces"
-import { color } from "config/options.json"
+import { color } from "config/options"
 
 export = {
     name: "sendonlinemessage",

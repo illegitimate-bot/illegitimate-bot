@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, GuildMember, userMention } from "discord.js"
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { color, hypixelGuildID, devMessage } from "config/options.json"
+import { color, hypixelGuildID, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
 import roleManage from "utils/functions/rolesmanage"
@@ -155,7 +155,7 @@ export = {
             }
         }
 
-        await user.roles.add( roleManage("default").rolesToAdd, "User was force verified by " + modName)
+        await user.roles.add(roleManage("default").rolesToAdd, "User was force verified by " + modName)
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),

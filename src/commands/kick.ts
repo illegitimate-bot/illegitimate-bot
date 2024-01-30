@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { admin, helper } from "config/roles.json"
-import { color, devMessage } from "config/options.json"
+import { admin, helper } from "config/roles"
+import { color, devMessage } from "config/options"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 

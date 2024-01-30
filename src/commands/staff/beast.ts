@@ -1,5 +1,5 @@
-import { bwwins, beastbwfkdr, beastbwstars, beastswkdr, beastswstars, beastduelswins, duelswlr } from "config/reqs.json"
-import { color, devMessage } from "config/options.json"
+import { bwwins, beastbwfkdr, beastbwstars, beastswkdr, beastswstars, beastduelswins, duelswlr } from "config/reqs"
+import { color, devMessage } from "config/options"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { ChatInputCommandInteraction } from "discord.js"
 

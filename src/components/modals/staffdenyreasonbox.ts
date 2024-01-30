@@ -1,5 +1,5 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
-import { color } from "config/options.json"
+import { color } from "config/options"
 import staffapp from "schemas/staffAppSchema"
 import { Modal } from "interfaces"
 

@@ -1,8 +1,8 @@
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { color, hypixelGuildID, devMessage } from "config/options.json"
+import { color, hypixelGuildID, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
-import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles.json"
+import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles"
 import { Modal } from "interfaces"
 import { GuildMember } from "discord.js"
 

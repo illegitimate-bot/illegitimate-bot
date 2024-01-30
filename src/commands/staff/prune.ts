@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction } from "discord.js"
-import { color, devMessage } from "config/options.json"
+import { color, devMessage } from "config/options"
 import env from "utils/Env"
 
 export default async function prune(interaction: ChatInputCommandInteraction): Promise<void> {

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, User } from "discord.js"
-import { color } from "config/options.json"
+import { color } from "config/options"
 import { Command } from "interfaces"
 import env from "utils/Env"
 

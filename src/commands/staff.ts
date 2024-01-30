@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { color, devMessage } from "config/options.json"
+import { color, devMessage } from "config/options"
 import { Command } from "interfaces"
 import help from "./staff/help"
 import beast from "./staff/beast"

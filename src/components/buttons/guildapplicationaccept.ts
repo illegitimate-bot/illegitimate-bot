@@ -1,10 +1,10 @@
 import { ActionRowBuilder, ButtonStyle, ButtonBuilder, TextChannel } from "discord.js"
-import { color, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options.json"
+import { color, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options"
 import colorLog from "utils/functions/colors"
 import mongoose from "mongoose"
 import guildapp from "schemas/guildAppSchema"
 import waitingList from "schemas/waitinglistSchema"
-import { waitingListRole } from "config/roles.json"
+import { waitingListRole } from "config/roles"
 import { Button } from "interfaces"
 import { getGuild } from "utils/Hypixel"
 

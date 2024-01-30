@@ -1,5 +1,5 @@
 import { getUUID, getPlayer, getGuild, getIGN } from "utils/Hypixel"
-import { color, devMessage } from "config/options.json"
+import { color, devMessage } from "config/options"
 import { ChannelType, ChatInputCommandInteraction } from "discord.js"
 import { GuildData } from "interfaces"
 import { redis } from "utils/Illegitimate"

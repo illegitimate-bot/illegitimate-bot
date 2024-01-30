@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { admin, helper } from "config/roles"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
@@ -32,8 +32,6 @@ export = {
 
         const member = interaction.options.getMember("member") as GuildMember
         const reason = interaction.options.getString("reason") ?? "No reason provided."
-        const embedColor = Number(color.replace("#", "0x"))
-
         const mod = await interaction.guild!.members.fetch(interaction.user.id)
         const memberRoles = member.roles.cache.map(role => role.id)
         const modRoles = mod.roles.cache.map(role => role.id)

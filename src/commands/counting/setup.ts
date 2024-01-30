@@ -1,13 +1,12 @@
 import { ChatInputCommandInteraction, TextChannel, channelMention } from "discord.js"
 import settingsSchema from "schemas/settingsSchema"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import mongoose from "mongoose"
 
 export default async function setup(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
 
     const channel = interaction.options.getChannel("channel") as TextChannel
-    const embedColor = Number(color.replace("#", "0x"))
 
     if (await settingsSchema.findOne({ name: "counting" })) {
         await settingsSchema.findOneAndUpdate(

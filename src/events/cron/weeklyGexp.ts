@@ -1,4 +1,4 @@
-import { hypixelGuildID, guildLogChannel, color, devMessage } from "config/options"
+import { hypixelGuildID, guildLogChannel, embedColor, devMessage } from "config/options"
 import colorLog from "utils/functions/colors"
 import { getGuild, getIGN } from "utils/Hypixel"
 import { Cron, GuildData } from "interfaces"
@@ -12,8 +12,6 @@ async function guildWeekly() {
         console.log(colorLog("Guild log channel not found", "red"))
         return
     }
-
-    const embedColor = Number(color.replace("#", "0x"))
 
     const message = await channel.send({
         embeds: [{

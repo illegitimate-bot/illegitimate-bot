@@ -1,13 +1,12 @@
 import { ExtendedClient as Client } from "utils/Client"
 import colorLog from "utils/functions/colors"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import { Modal } from "interfaces"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
 import logToChannel from "utils/functions/logtochannel"
 type FileType = "js" | "ts"
-const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadModalEvents(client: Client, ft: FileType) {
     const modalPath = path.join(__dirname, "..", "..", "components", "modals")

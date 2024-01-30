@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 
 export = {
@@ -15,9 +15,6 @@ export = {
 
     async execute(interaction, client) {
         await interaction.deferReply()
-
-        const embedColor = Number(color.replace("#", "0x"))
-
         await interaction.editReply({
             embeds: [{
                 description: "Ping of the bot is " + client.ws.ping + "ms.",

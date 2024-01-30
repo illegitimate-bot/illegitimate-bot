@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, GuildMember, userMention } from "discord.js"
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { color, hypixelGuildID, devMessage } from "config/options"
+import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
 import roleManage from "utils/functions/rolesmanage"
@@ -35,7 +35,6 @@ export = {
         const user = interaction.options.getMember("user") as GuildMember
         const ign = interaction.options.getString("ign")
         const mod = interaction.user
-        const embedColor = Number(color.replace("#", "0x"))
 
         const verifyData = await verify.findOne({ userID: user.user.id })
         if (verifyData) {

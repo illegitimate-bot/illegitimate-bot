@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel, channelMention, userMention } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
@@ -31,7 +31,6 @@ export = {
 
         const seconds = interaction.options.getInteger("seconds") ?? 5
         const channel = (interaction.options.getChannel("channel") || interaction.channel) as TextChannel
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (seconds > 21600) {
             await channel.setRateLimitPerUser(21600)

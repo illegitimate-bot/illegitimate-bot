@@ -1,10 +1,9 @@
 import { ChatInputCommandInteraction, GuildMember, userMention } from "discord.js"
 import { countingBanned } from "config/roles"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 
 export default async function ban(interaction: ChatInputCommandInteraction): Promise<void> {
     const member = interaction.options.getMember("user")! as GuildMember
-    const embedColor = Number(color.replace("#", "0x"))
 
     if (!member.roles.cache.has(countingBanned)) {
         await interaction.reply({

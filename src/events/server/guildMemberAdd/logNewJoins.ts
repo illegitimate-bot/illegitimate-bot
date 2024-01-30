@@ -1,5 +1,5 @@
 import { GuildMember, userMention } from "discord.js"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import { Event } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
@@ -10,8 +10,6 @@ export = {
 
     execute(member: GuildMember) {
         if (process.env.NODE_ENV === "dev") return
-        const embedColor = Number(color.replace("#", "0x"))
-
         logToChannel("bot", {
             embeds: [{
                 title: "New Member",

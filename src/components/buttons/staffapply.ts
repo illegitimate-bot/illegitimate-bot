@@ -1,5 +1,5 @@
 import { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, GuildMember, TextChannel } from "discord.js"
-import { color, staffApplicationsChannel } from "config/options"
+import { embedColor, staffApplicationsChannel } from "config/options"
 import { largeM, ignM } from "config/limitmessages"
 import questions from "config/questions"
 import { guildRole, guildStaff } from "config/roles"
@@ -17,7 +17,6 @@ export = {
     async execute(interaction) {
         const user = interaction.member as GuildMember
         const guild = interaction.guild!
-        const embedColor = Number(color.replace("#", "0x"))
         const userRoles = user.roles.cache
         const setting = await settings.findOne({ name: "staffAppStatus" })
         const status = setting!.value || "0"

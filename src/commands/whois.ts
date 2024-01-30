@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
 import { getIGN, getHeadURL } from "utils/Hypixel"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import { Command } from "interfaces"
 
@@ -26,8 +26,6 @@ export = {
         await interaction.deferReply()
 
         const user = interaction.options.getUser("user")!
-        const embedColor = Number(color.replace("#", "0x"))
-
         const verifiedUser = await verify.findOne({ userID: user.id })
         if (!verifiedUser) {
             interaction.editReply("You are not verified!")

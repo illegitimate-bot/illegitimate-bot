@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember, } from "discord.js"
 import { admin, helper } from "config/roles"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
@@ -47,7 +47,6 @@ export = {
         const member = interaction.options.getMember("user") as GuildMember | null
         const reason = interaction.options.getString("reason") ?? "No reason provided."
         const messageDeletionDays = interaction.options.getNumber("messagedeletiondays") ?? 0
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (!member) {
             await interaction.editReply("You must specify a user.")

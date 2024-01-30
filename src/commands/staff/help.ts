@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { ExtendedClient as Client } from "utils/Client"
 
 export default async function help(interaction: ChatInputCommandInteraction, client: Client): Promise<void> {
@@ -41,8 +41,6 @@ export default async function help(interaction: ChatInputCommandInteraction, cli
             }
         }
     }
-
-    const embedColor = Number(color.replace("#", "0x"))
 
     await interaction.editReply({
         embeds: [{

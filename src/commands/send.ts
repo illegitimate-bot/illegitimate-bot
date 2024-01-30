@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 
 export = {
@@ -31,7 +31,6 @@ export = {
 
         const message = interaction.options.getString("message")!
         const channel = (interaction.options.getChannel("channel") || interaction.channel) as TextChannel
-        const embedColor = Number(color.replace("#", "0x"))
 
         channel.send({
             embeds: [{

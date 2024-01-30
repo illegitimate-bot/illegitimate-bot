@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { color, devMessage, instructionsgif } from "config/options"
+import { embedColor, devMessage, instructionsgif } from "config/options"
 import { Command } from "interfaces"
 
 export = {
@@ -15,8 +15,6 @@ export = {
         .setDMPermission(false),
 
     async execute(interaction) {
-        const embedColor = Number(color.replace("#", "0x"))
-
         await interaction.reply({
             embeds: [{
                 title: "Verification",

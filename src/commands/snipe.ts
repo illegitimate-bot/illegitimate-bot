@@ -1,7 +1,7 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
 import snipeCacheSchema from "schemas/snipeCacheSchema"
 import { Command } from "interfaces"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import { SnipeCache } from "typings"
 
 export = {
@@ -28,7 +28,6 @@ export = {
             userid: member.user.id,
             channelid: interaction.channel!.id
         })
-        const embedColor = Number(color.replace("#", "0x"))
         const messages: string[] = []
 
         if (!snipeCache.length) {

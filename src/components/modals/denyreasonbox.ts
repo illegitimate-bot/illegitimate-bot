@@ -1,5 +1,5 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, GuildMember } from "discord.js"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import guildapp from "schemas/guildAppSchema"
 import { Modal } from "interfaces"
 
@@ -14,9 +14,7 @@ export = {
         const message = interaction.message as Message
         const embed = message.embeds[0]
         const applicantId = embed.footer!.text.split(" ")[1]
-
         const reason = interaction.fields.fields.get("denyreason")!.value || "No reason provided"
-        const embedColor = Number(color.replace("#", "0x"))
 
         await message.edit({
             components: [

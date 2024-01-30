@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { getUUID, getIGN, getHeadURL, formatUuid } from "utils/Hypixel"
 import { Command } from "interfaces"
 
@@ -30,7 +30,6 @@ export = {
         const formattedUuid = formatUuid(uuid)
         const newIgn = (await getIGN(uuid)) as string
         const head = await getHeadURL(ign)
-        const embedColor = Number(color.replace("#", "0x"))
 
         if (!uuid) {
             interaction.editReply({

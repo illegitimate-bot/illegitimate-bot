@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import waitinglistSchema from "schemas/waitinglistSchema"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
@@ -34,8 +34,6 @@ export = {
         const user = interaction.options.getUser("user")!
         const reason = interaction.options.getString("reason") ?? "No reason provided."
         const mod = interaction.user!
-        const embedColor = Number(color.replace("#", "0x"))
-
         const waitinglist = await waitinglistSchema.findOne({ userID: user.id })
 
         if (!waitinglist) {

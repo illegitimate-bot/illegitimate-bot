@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, User } from "discord.js"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import { Command } from "interfaces"
 import env from "utils/Env"
 
@@ -22,7 +22,6 @@ export = {
 
     async execute(interaction) {
         const user = (interaction.options.getUser("user") || interaction.user) as User
-        const embedColor = Number(color.replace("#", "0x"))
         let size: number
 
         if (user.id === env.prod.dev) {

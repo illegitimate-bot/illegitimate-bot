@@ -1,5 +1,5 @@
 import { bwwins, beastbwfkdr, beastbwstars, beastswkdr, beastswstars, beastduelswins, duelswlr } from "config/reqs"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { ChatInputCommandInteraction } from "discord.js"
 
@@ -7,7 +7,6 @@ export default async function beast(interaction: ChatInputCommandInteraction): P
     await interaction.deferReply()
 
     const ign = interaction.options.getString("ign")!
-    const embedColor = Number(color.replace("#", "0x"))
 
     if (!ign) {
         await interaction.editReply("Please provide a player's IGN.")

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, User } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
@@ -34,7 +34,6 @@ export = {
         const userid = interaction.options.getString("user")!
         const reason = interaction.options.getString("reason") || "No reason provided"
         const mod = interaction.user
-        const embedColor = Number(color.replace("#", "0x"))
         let user: User
 
         if (userid === "none") {

@@ -1,13 +1,12 @@
 import { ExtendedClient as Client } from "utils/Client"
 import colorLog from "utils/functions/colors"
 import { ContextMenu } from "interfaces"
-import { color } from "config/options"
+import { embedColor } from "config/options"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
 import logToChannel from "utils/functions/logtochannel"
 type FileType = "js" | "ts"
-const embedColor = Number(color.replace("#", "0x"))
 
 export default function loadContextMenuEvents(client: Client, ft: FileType) {
     const contextMenuPath = path.join(__dirname, "..", "..", "commands-contextmenu")

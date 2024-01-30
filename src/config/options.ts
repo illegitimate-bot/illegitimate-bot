@@ -1,5 +1,4 @@
 const options = {
-    color: "#eeaadb",
     embedColor: 0xeeaadb,
     guildid: "481741000365178881",
     devMessage: "Developed by taken.lua",

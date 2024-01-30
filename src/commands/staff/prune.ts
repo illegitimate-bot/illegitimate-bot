@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction } from "discord.js"
-import { color, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options"
 import env from "utils/Env"
 
 export default async function prune(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -10,7 +10,6 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
         return
     }
 
-    const embedColor = Number(color.replace("#", "0x"))
     const members = await interaction.guild!.members.fetch()
 
     await interaction.editReply({

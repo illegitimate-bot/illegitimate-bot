@@ -1,5 +1,5 @@
 import { ExtendedClient as Client } from "utils/Client"
-import colorLog from "utils/functions/colors"
+import color from "utils/functions/colors"
 import { ContextMenu } from "interfaces"
 import { embedColor } from "config/options"
 import { Events } from "discord.js"
@@ -20,7 +20,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
             client.contextmenus.set(cmd.data.name, cmd)
         } else {
             console.log(
-                colorLog(
+                color(
                     `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
                     "red"
                 )

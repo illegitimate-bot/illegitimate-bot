@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ButtonStyle, ButtonBuilder, TextChannel } from "discord.js"
 import { embedColor, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options"
-import colorLog from "utils/functions/colors"
+import color from "utils/functions/colors"
 import mongoose from "mongoose"
 import guildapp from "schemas/guildAppSchema"
 import waitingList from "schemas/waitinglistSchema"
@@ -132,7 +132,7 @@ export = {
             })
         } catch (err) {
             console.log(
-                colorLog("Error while trying to update waiting list.", "red")
+                color("Error while trying to update waiting list.", "red")
             )
         }
     }

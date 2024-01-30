@@ -2,7 +2,7 @@ import { ExtendedClient as Client } from "utils/Client"
 import { embedColor } from "config/options"
 import { Autocomplete } from "interfaces"
 import { Events } from "discord.js"
-import colorLog from "utils/functions/colors"
+import color from "utils/functions/colors"
 import path from "path"
 import fs from "fs"
 import logToChannel from "utils/functions/logtochannel"
@@ -20,7 +20,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
             client.autocomplete.set(autocomplete.name, autocomplete)
         } else {
             console.log(
-                colorLog(
+                color(
                     `[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`,
                     "red"
                 )

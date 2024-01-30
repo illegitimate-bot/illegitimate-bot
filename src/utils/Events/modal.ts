@@ -1,5 +1,5 @@
 import { ExtendedClient as Client } from "utils/Client"
-import colorLog from "utils/functions/colors"
+import color from "utils/functions/colors"
 import { embedColor } from "config/options"
 import { Modal } from "interfaces"
 import { Events } from "discord.js"
@@ -20,7 +20,7 @@ export default function loadModalEvents(client: Client, ft: FileType) {
             client.modals.set(modal.name, modal)
         } else {
             console.log(
-                colorLog(
+                color(
                     `[WARNING] The modal at ${filePath} is missing a required "name", "execute" or "type" property.`,
                     "red"
                 )

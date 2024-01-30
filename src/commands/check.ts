@@ -7,7 +7,7 @@ import { Command } from "interfaces"
 export = {
     name: "check",
     description: "Check a player's stats.",
-    dev: true,
+    dev: false,
     public: true,
 
     data: new SlashCommandBuilder()

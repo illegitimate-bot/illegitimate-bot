@@ -27,9 +27,6 @@ export = {
 
         const ign = interaction.options.getString("ign")!
         const uuid = (await getUUID(ign)) as string
-        const formattedUuid = formatUuid(uuid)
-        const newIgn = (await getIGN(uuid)) as string
-        const head = await getHeadURL(ign)
 
         if (!uuid) {
             interaction.editReply({
@@ -40,6 +37,10 @@ export = {
             })
             return
         }
+
+        const formattedUuid = formatUuid(uuid)
+        const newIgn = await getIGN(uuid) as string
+        const head = await getHeadURL(ign)
 
         await interaction.editReply({
             embeds: [{

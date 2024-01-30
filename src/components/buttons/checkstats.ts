@@ -1,6 +1,6 @@
-import { color, devMessage } from "config/options.json"
+import { color, devMessage } from "config/options"
 import guildapp from "schemas/guildAppSchema"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs.json"
+import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { Button } from "interfaces"
 

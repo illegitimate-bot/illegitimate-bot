@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { color } from "config/options.json"
+import { color } from "config/options"
 import settings from "schemas/settingsSchema"
 import mongoose from "mongoose"
 import { Command } from "interfaces"

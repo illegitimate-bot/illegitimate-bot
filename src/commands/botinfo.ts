@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js"
 import { Command } from "interfaces"
-import { color, devMessage } from "config/options.json"
+import { color, devMessage } from "config/options"
 import os from "os"
 import { execSync } from "child_process"
 const { dependencies, devDependencies } = require("../../package.json")

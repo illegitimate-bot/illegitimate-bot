@@ -9,7 +9,7 @@ import {
     guildRole,
     defaultMember,
     verifyTick
-} from "config/roles.json"
+} from "config/roles"
 const roles = [
     gm,
     manager,

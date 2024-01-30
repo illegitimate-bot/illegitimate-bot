@@ -6,7 +6,7 @@ import {
     errorLogChannel,
     moderationLogChannel,
     devLogChannel
-} from "config/options.json"
+} from "config/options"
 import { Guild, MessageCreateOptions, TextChannel } from "discord.js"
 import { client } from "utils/Illegitimate"
 

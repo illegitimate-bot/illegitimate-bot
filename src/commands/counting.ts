@@ -1,5 +1,5 @@
 import { ChannelType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options.json"
+import { color, devMessage } from "config/options"
 import { Command } from "interfaces"
 import setup from "./counting/setup"
 import ban from "./counting/ban"

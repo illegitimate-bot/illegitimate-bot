@@ -1,4 +1,4 @@
-import { hypixelGuildID, guildLogChannel, color, devMessage } from "config/options.json"
+import { hypixelGuildID, guildLogChannel, color, devMessage } from "config/options"
 import colorLog from "utils/functions/colors"
 import { getGuild, getIGN } from "utils/Hypixel"
 import { Cron, GuildData } from "interfaces"

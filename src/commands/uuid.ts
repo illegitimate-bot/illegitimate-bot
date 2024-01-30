@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { color, devMessage } from "config/options.json"
+import { color, devMessage } from "config/options"
 import { getUUID, getIGN, getHeadURL, formatUuid } from "utils/Hypixel"
 import { Command } from "interfaces"
 

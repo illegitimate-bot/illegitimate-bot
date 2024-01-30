@@ -1,7 +1,7 @@
 import { ExtendedClient as Client } from "utils/Client"
 import colorLog from "utils/functions/colors"
 import { ContextMenu } from "interfaces"
-import { color } from "config/options.json"
+import { color } from "config/options"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"

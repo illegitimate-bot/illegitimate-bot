@@ -1,6 +1,6 @@
 import waitinglist from "schemas/waitinglistSchema"
 import { getGuild } from "utils/Hypixel"
-import { hypixelGuildID } from "config/options.json"
+import { hypixelGuildID } from "config/options"
 import { Button } from "interfaces"
 
 export = {

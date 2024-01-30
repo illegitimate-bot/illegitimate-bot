@@ -1,5 +1,5 @@
 import { ExtendedClient as Client } from "utils/Client"
-import { color } from "config/options.json"
+import { color } from "config/options"
 import { Autocomplete } from "interfaces"
 import { Events } from "discord.js"
 import colorLog from "utils/functions/colors"

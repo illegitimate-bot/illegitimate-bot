@@ -1,7 +1,7 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
 import { getGuild, getIGN, getHeadURL } from "utils/Hypixel"
 import verify from "schemas/verifySchema"
-import { color, hypixelGuildID, devMessage } from "config/options.json"
+import { color, hypixelGuildID, devMessage } from "config/options"
 import roleManage from "utils/functions/rolesmanage"
 import { Command } from "interfaces"
 

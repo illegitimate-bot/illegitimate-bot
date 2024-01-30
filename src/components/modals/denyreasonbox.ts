@@ -1,5 +1,5 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, GuildMember } from "discord.js"
-import { color } from "config/options.json"
+import { color } from "config/options"
 import guildapp from "schemas/guildAppSchema"
 import { Modal } from "interfaces"
 

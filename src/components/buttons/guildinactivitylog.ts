@@ -1,8 +1,8 @@
 import { ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder, GuildMember, TextChannel } from "discord.js"
-import { gm, manager, moderator, beast, member, guildStaff, guildRole } from "config/roles.json"
-import { ignM, smallM, largeM } from "config/limitmessages.json"
-import { inactivity } from "config/questions.json"
-import { color, inactivityLogChannel } from "config/options.json"
+import { gm, manager, moderator, beast, member, guildStaff, guildRole } from "config/roles"
+import { ignM, smallM, largeM } from "config/limitmessages"
+import { inactivity } from "config/questions"
+import { color, inactivityLogChannel } from "config/options"
 import { Button } from "interfaces"
 import { getIGN } from "utils/Hypixel"
 const guildRoles = [gm, manager, moderator, beast, member, guildStaff, guildRole]

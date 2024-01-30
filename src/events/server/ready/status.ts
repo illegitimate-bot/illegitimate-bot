@@ -1,4 +1,4 @@
-import statuses from "config/statuses.json"
+import statuses from "config/statuses"
 import { Event } from "interfaces"
 import { ExtendedClient as Client } from "utils/Client"
 

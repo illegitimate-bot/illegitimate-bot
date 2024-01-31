@@ -8,8 +8,8 @@ const { dependencies, devDependencies } = require("../../package.json")
 export = {
     name: "botinfo",
     description: "Get information about the bot",
+    dev: false,
     public: true,
-    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("botinfo")

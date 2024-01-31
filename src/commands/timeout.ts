@@ -44,16 +44,6 @@ export = {
         const { default: prettyMs } = await import("pretty-ms")
         const prettyTime = prettyMs(time, { verbose: true })
 
-        if (!time) {
-            await interaction.editReply({
-                embeds: [{
-                    description: "Time is invalid for some reason",
-                    color: embedColor
-                }]
-            })
-            return
-        }
-
         if (time > 2419140000) {
             await interaction.editReply({
                 embeds: [{

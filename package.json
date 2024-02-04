@@ -1,8 +1,14 @@
 {
     "name": "illegitimate-bot",
+    "displayName": "Illegitimate Bot",
     "version": "1.0.0",
     "description": "",
     "main": "src/index.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.com/illegitimate/illegitimate-bot"
+    },
+    "homepage": "https://gitlab.com/illegitimate/illegitimate-bot",
     "scripts": {
         "start": "node dist/index.js",
         "build": "tsc",
@@ -31,9 +37,9 @@
     },
     "devDependencies": {
         "@types/ms": "^0.7.34",
-        "@types/node": "^20.11.7",
-        "@typescript-eslint/eslint-plugin": "^6.19.1",
-        "@typescript-eslint/parser": "^6.19.1",
+        "@types/node": "^20.11.16",
+        "@typescript-eslint/eslint-plugin": "^6.20.0",
+        "@typescript-eslint/parser": "^6.20.0",
         "concurrently": "^8.2.2",
         "eslint": "^8.56.0",
         "ts-node": "^10.9.2",

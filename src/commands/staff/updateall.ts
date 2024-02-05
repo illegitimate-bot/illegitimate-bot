@@ -8,7 +8,7 @@ import env from "utils/Env"
 import { getGuild } from "utils/Hypixel"
 import { GuildData } from "interfaces"
 
-export default async function updateDiscordRoles(interaction: ChatInputCommandInteraction): Promise<void> {
+export default async function updateAll(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
 
     const discordMember = interaction.member as GuildMember

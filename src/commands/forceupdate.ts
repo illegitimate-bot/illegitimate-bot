@@ -141,7 +141,9 @@ export = {
                 replyRank = "Member"
             }
 
-            await user.roles.remove(waitingListRole)
+            if (user.roles.cache.has(waitingListRole)) {
+                await user.roles.remove(waitingListRole, "User was force updated.")
+            }
 
             await interaction.editReply({
                 embeds: [{

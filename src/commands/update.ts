@@ -124,7 +124,9 @@ export = {
                 replyRank = "Member"
             }
 
-            await user.roles.remove(waitingListRole)
+            if (user.roles.cache.has(waitingListRole)) {
+                await user.roles.remove(waitingListRole, "User used the update command")
+            }
 
             await interaction.editReply({
                 embeds: [{

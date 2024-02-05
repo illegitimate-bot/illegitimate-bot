@@ -72,7 +72,7 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
             await gmember.member.roles.remove(rolesToremove, "Updating all discord members")
             continue
         } else {
-            await gmember.member.roles.add(verifyTick)
+            await gmember.member.roles.add(verifyTick, "Updating all discord members")
             console.log(color(" Added verified tick to " + gmember.member.user.username, "lavender"))
         }
 

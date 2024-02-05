@@ -41,7 +41,7 @@ export = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName("removeguildroles")
-                .setDescription("Update the discord roles of all guild members")
+                .setDescription("Remove guild roles from non members")
         )
         .addSubcommand(subcommand =>
             subcommand

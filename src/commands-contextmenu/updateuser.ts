@@ -4,6 +4,7 @@ import { ContextMenu } from "interfaces"
 import verifySchema from "schemas/verifySchema"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
 import roleManage from "utils/functions/rolesmanage"
+import { waitingListRole } from "config/roles"
 
 export = {
     name: "Update User",
@@ -132,6 +133,10 @@ export = {
                 await user.roles.remove(roles.rolesToRemove, "User was force updated.")
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
                 replyRank = "Member"
+            }
+
+            if (user.roles.cache.has(waitingListRole)) {
+                await user.roles.remove(waitingListRole, "User was force updated.")
             }
 
             await interaction.editReply({

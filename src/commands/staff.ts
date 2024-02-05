@@ -3,8 +3,9 @@ import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
 import help from "./staff/help"
 import beast from "./staff/beast"
-import updateDiscordRoles from "./staff/updatediscordroles"
+import updateAll from "./staff/updateall"
 import prune from "./staff/prune"
+import removeGuildRoles from "./staff/removeguildroles"
 
 export = {
     name: "staff",
@@ -39,7 +40,12 @@ export = {
         )
         .addSubcommand(subcommand =>
             subcommand
-                .setName("updatediscordroles")
+                .setName("removeguildroles")
+                .setDescription("Remove guild roles from non members")
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("updateall")
                 .setDescription("Update the discord roles of all guild members")
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
@@ -63,8 +69,13 @@ export = {
             return
         }
 
-        if (subcommand === "updatediscordroles") {
-            updateDiscordRoles(interaction)
+        if (subcommand === "removeguildroles") {
+            removeGuildRoles(interaction)
+            return
+        }
+
+        if (subcommand === "updateall") {
+            updateAll(interaction)
             return
         }
 

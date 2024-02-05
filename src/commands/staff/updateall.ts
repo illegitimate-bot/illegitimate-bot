@@ -8,7 +8,7 @@ import env from "utils/Env"
 import { getGuild } from "utils/Hypixel"
 import { GuildData } from "interfaces"
 
-export default async function updateDiscordRoles(interaction: ChatInputCommandInteraction): Promise<void> {
+export default async function updateAll(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
 
     const discordMember = interaction.member as GuildMember
@@ -72,7 +72,7 @@ export default async function updateDiscordRoles(interaction: ChatInputCommandIn
             await gmember.member.roles.remove(rolesToremove, "Updating all discord members")
             continue
         } else {
-            await gmember.member.roles.add(verifyTick)
+            await gmember.member.roles.add(verifyTick, "Updating all discord members")
             console.log(color(" Added verified tick to " + gmember.member.user.username, "lavender"))
         }
 

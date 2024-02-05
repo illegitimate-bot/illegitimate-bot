@@ -4,6 +4,7 @@ import verify from "schemas/verifySchema"
 import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import roleManage from "utils/functions/rolesmanage"
 import { Command } from "interfaces"
+import { waitingListRole } from "config/roles"
 
 export = {
     name: "update",
@@ -121,6 +122,10 @@ export = {
                 await user.roles.remove(roles.rolesToRemove, "User used the update command")
                 await user.roles.add(roles.rolesToAdd, "User used the update command")
                 replyRank = "Member"
+            }
+
+            if (user.roles.cache.has(waitingListRole)) {
+                await user.roles.remove(waitingListRole, "User used the update command")
             }
 
             await interaction.editReply({

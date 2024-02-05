@@ -4,6 +4,7 @@ import { hypixelGuildID, embedColor, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import { Command } from "interfaces"
 import roleManage from "utils/functions/rolesmanage"
+import { waitingListRole } from "config/roles"
 
 export = {
     name: "forceupdate",
@@ -139,6 +140,8 @@ export = {
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
                 replyRank = "Member"
             }
+
+            await user.roles.remove(waitingListRole)
 
             await interaction.editReply({
                 embeds: [{

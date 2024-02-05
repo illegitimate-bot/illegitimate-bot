@@ -4,6 +4,7 @@ import { ContextMenu } from "interfaces"
 import verifySchema from "schemas/verifySchema"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
 import roleManage from "utils/functions/rolesmanage"
+import { waitingListRole } from "config/roles"
 
 export = {
     name: "Update User",
@@ -133,6 +134,8 @@ export = {
                 await user.roles.add(roles.rolesToAdd, "User was force updated.")
                 replyRank = "Member"
             }
+
+            await user.roles.remove(waitingListRole)
 
             await interaction.editReply({
                 embeds: [{

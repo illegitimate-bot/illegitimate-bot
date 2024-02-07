@@ -26,6 +26,7 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
                 )
             )
         }
+        delete require.cache[require.resolve(filePath)]
     }
 
     client.on(Events.InteractionCreate, async interaction => {

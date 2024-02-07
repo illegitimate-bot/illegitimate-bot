@@ -14,6 +14,7 @@ export default function loadEvents(client: Client) {
             if (!event.disabled) {
                 client.on(event.event, event.execute)
             }
+            delete require.cache[require.resolve(eventPath)]
         }
     }
 }

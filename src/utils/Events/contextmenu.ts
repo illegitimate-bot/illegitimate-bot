@@ -26,6 +26,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
                 )
             )
         }
+        delete require.cache[require.resolve(filePath)]
     }
 
     //! context menu command handler

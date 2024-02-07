@@ -20,5 +20,6 @@ export default function loadCronEvents() {
             cron.time.dayOfWeek
 
         new CronJob(time, cron.execute, cron.onComplete, cron.start, cron.timeZone).start()
+        delete require.cache[require.resolve(filePath)]
     }
 }

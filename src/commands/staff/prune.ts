@@ -3,7 +3,7 @@ import { embedColor, devMessage } from "config/options"
 import env from "utils/Env"
 
 export default async function prune(interaction: ChatInputCommandInteraction): Promise<void> {
-    await interaction.deferReply({ ephemeral: true })
+    await interaction.deferReply()
 
     if (interaction.user.id !== env.prod.dev) {
         await interaction.editReply("You are not allowed to use this command.")
@@ -34,6 +34,10 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
         })
     }
 
+    const id = Math.random().toString(32).slice(2)
+    const buttonid = "button-" + id
+    const cancelid = "cancel-" + id
+
     await interaction.editReply({
         embeds: [{
             title: "Prune",
@@ -52,44 +56,65 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
             new ActionRowBuilder<ButtonBuilder>().addComponents(
                 new ButtonBuilder()
                     .setLabel("Confirm")
-                    .setCustomId("staff_prune_confirm")
+                    .setCustomId(buttonid)
                     .setStyle(ButtonStyle.Danger)
-                    .setEmoji("❗")
+                    .setEmoji("❗"),
+                new ButtonBuilder()
+                    .setLabel("Cancel")
+                    .setCustomId(cancelid)
+                    .setStyle(ButtonStyle.Primary)
+                    .setEmoji("❌")
             )
         ]
-    }).then(async () => {
-        const filter = (i: ButtonInteraction) => i.customId === "staff_prune_confirm" && i.user.id === interaction.user.id
-
+    }).then(async (m) => {
         const collector = interaction.channel!.createMessageComponentCollector({
             componentType: ComponentType.Button,
-            filter: filter,
+            filter: (i: ButtonInteraction) =>
+                (i.customId === buttonid || i.customId === cancelid) &&
+                i.user.id === interaction.user.id,
             time: 5 * 60 * 1000
-        })
-
-        collector.on("collect", async i => {
-            await i.deferUpdate()
-
-            const members = i.message.embeds[0].fields
-
-            for (const member of members) {
-                const guildMember = await interaction.guild!.members.fetch(member.value)
-
-                await i.guild?.members.kick(guildMember, "Pruned")
-            }
-
-            await i.editReply({
-                embeds: [{
-                    description: "Prruned all the members",
-                    color: embedColor
-                }],
-                components: []
-            }).then(() => {
-                collector.stop()
-            })
         })
 
         collector.on("end", async () => {
             // ...
+        })
+
+        collector.on("collect", async i => {
+            if (i.customId === cancelid) {
+                await m.edit({
+                    components: []
+                })
+
+                await i.reply({
+                    embeds: [{
+                        description: "Cancelled",
+                        color: embedColor
+                    }],
+                }).then(() => {
+                    collector.stop()
+                })
+                return
+            } else if (i.customId === buttonid) {
+                await i.deferUpdate()
+                const members = i.message.embeds[0].fields
+                // for (const member of members) {
+                //     const guildMember = await interaction.guild!.members.fetch(member.value)
+                //
+                //     await i.guild?.members.kick(guildMember, "Pruned")
+                // }
+
+                await m.edit({
+                    components: [],
+                })
+                await i.editReply({
+                    embeds: [{
+                        description: "Pruned all the members",
+                        color: embedColor
+                    }],
+                }).then(() => {
+                    collector.stop()
+                })
+            }
         })
     })
 }

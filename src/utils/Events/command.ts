@@ -26,6 +26,7 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
                 )
             )
         }
+        delete require.cache[require.resolve(filePath)]
     }
 
     //! command handler

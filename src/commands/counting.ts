@@ -1,7 +1,6 @@
-import { ChannelType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import { Command } from "interfaces"
-import setup from "./counting/setup"
 import ban from "./counting/ban"
 import unban from "./counting/unban"
 
@@ -15,18 +14,6 @@ export = {
     data: new SlashCommandBuilder()
         .setName("counting")
         .setDescription("counting subcommands")
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName("setup")
-                .setDescription("Setup counting channel")
-                .addChannelOption(option =>
-                    option
-                        .setName("channel")
-                        .setDescription("The channel to setup counting in")
-                        .setRequired(true)
-                        .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
-                )
-        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("ban")
@@ -54,11 +41,6 @@ export = {
 
     async execute(interaction) {
         const subcommand = interaction.options.getSubcommand()
-
-        if (subcommand === "setup") {
-            setup(interaction)
-            return
-        }
 
         if (subcommand === "ban") {
             ban(interaction)

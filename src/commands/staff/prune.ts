@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction } from "discord.js"
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import env from "utils/Env"
 
@@ -58,9 +58,13 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
             )
         ]
     }).then(async () => {
-        const filter = (i: any) => i.customId === "staff_prune_confirm" && i.user.id === interaction.user.id
+        const filter = (i: ButtonInteraction) => i.customId === "staff_prune_confirm" && i.user.id === interaction.user.id
 
-        const collector = interaction.channel!.createMessageComponentCollector({ filter, time: 60000 })
+        const collector = interaction.channel!.createMessageComponentCollector({
+            componentType: ComponentType.Button,
+            filter: filter,
+            time: 5 * 60 * 1000
+        })
 
         collector.on("collect", async i => {
             await i.deferUpdate()
@@ -79,7 +83,13 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
                     color: embedColor
                 }],
                 components: []
+            }).then(() => {
+                collector.stop()
             })
+        })
+
+        collector.on("end", async () => {
+            // ...
         })
     })
 }

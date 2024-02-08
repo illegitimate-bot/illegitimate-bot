@@ -97,11 +97,11 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
             } else if (i.customId === buttonid) {
                 await i.deferUpdate()
                 const members = i.message.embeds[0].fields
-                // for (const member of members) {
-                //     const guildMember = await interaction.guild!.members.fetch(member.value)
-                //
-                //     await i.guild?.members.kick(guildMember, "Pruned")
-                // }
+                for (const member of members) {
+                    const guildMember = await interaction.guild!.members.fetch(member.value)
+
+                    await i.guild?.members.kick(guildMember, "Pruned")
+                }
 
                 await m.edit({
                     components: [],

@@ -4,8 +4,12 @@ import { Redis } from "ioredis"
 import env from "utils/Env"
 import { connect } from "mongoose"
 import loadAllEvents from "./Events"
+import { Player } from "discord-player"
+
 const client = new Client()
 const redis = new Redis(env.prod.redisURI!)
+const player = new Player(client)
+
 let ft: "js" | "ts"
 if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
     ft = "ts"
@@ -15,10 +19,11 @@ if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
 
 class Illegitimate {
     async start() {
-        this.init()
+        await this.init()
         loadAllEvents(client, ft)
-        client.start()
-        this.databases()
+        await player.extractors.loadDefault()
+        await client.start()
+        await this.databases()
     }
 
     private async databases() {

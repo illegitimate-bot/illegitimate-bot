@@ -1,7 +1,8 @@
 .devcontainer
 .git
 .vscode
-dist/
+.yarn
+dist
 node_modules
 scripts
 .dockerignore

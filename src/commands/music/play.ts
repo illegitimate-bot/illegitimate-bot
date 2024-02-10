@@ -18,10 +18,12 @@ export default async function play(interaction: ChatInputCommandInteraction) {
         return
     }
 
+    // const bitRate = channel.bitrate / 1000
+
     const { track } = await player.play(channel, query, {
         requestedBy: interaction.user,
         nodeOptions: {
-            volume: 50,
+            volume: 25,
         }
     })
 

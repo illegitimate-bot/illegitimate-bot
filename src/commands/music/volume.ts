@@ -2,11 +2,15 @@ import { embedColor } from "config/options"
 import { useMainPlayer } from "discord-player"
 import { ChatInputCommandInteraction } from "discord.js"
 
-export default async function leave(interaction: ChatInputCommandInteraction) {
+export default async function volume(interaction: ChatInputCommandInteraction) {
+    await interaction.deferReply()
+
+    const volume = interaction.options.getNumber("volume")!
     const player = useMainPlayer()
     const queue = player.queues.get(interaction.guildId!)
+
     if (!queue) {
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [{
                 description: "There is no music playing",
                 color: embedColor
@@ -15,10 +19,10 @@ export default async function leave(interaction: ChatInputCommandInteraction) {
         return
     }
 
-    queue.delete()
-    await interaction.reply({
+    queue.node.setVolume(volume)
+    await interaction.editReply({
         embeds: [{
-            description: "Left the voice channel",
+            description: `Volume set to ${volume}`,
             color: embedColor
         }]
     })

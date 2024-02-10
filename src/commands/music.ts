@@ -6,6 +6,8 @@ import queue from "./music/queue"
 import volume from "./music/volume"
 import skip from "./music/skip"
 import nowplaying from "./music/nowplaying"
+import pause from "./music/pause"
+import unpause from "./music/unpause"
 
 export = {
     name: "music",
@@ -56,6 +58,14 @@ export = {
                 .setDescription("Show the currently playing song"))
         .addSubcommand(subcommand =>
             subcommand
+                .setName("pause")
+                .setDescription("Pause the music"))
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("unpause")
+                .setDescription("Unpause the music"))
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName("leave")
                 .setDescription("Leave the voice channel"))
         .setDMPermission(false)
@@ -86,6 +96,16 @@ export = {
 
         if (subcommand === "nowplaying") {
             nowplaying(interaction)
+            return
+        }
+
+        if (subcommand === "pause") {
+            pause(interaction)
+            return
+        }
+
+        if (subcommand === "unpause") {
+            unpause(interaction)
             return
         }
 

@@ -1,3 +1,4 @@
+import { embedColor } from "config/options"
 import { useMainPlayer } from "discord-player"
 import { ChatInputCommandInteraction } from "discord.js"
 
@@ -10,14 +11,20 @@ export default async function skip(interaction: ChatInputCommandInteraction) {
 
     if (!queue) {
         await interaction.editReply({
-            content: "There is no queue"
+            embeds: [{
+                description: "There is no queue",
+                color: embedColor
+            }]
         })
         return
     }
 
     if (amount > queue.size) {
         await interaction.editReply({
-            content: `There are only ${queue.size} songs in the queue`
+            embeds: [{
+                description: `There are only ${queue.size} song${queue.size === 1 ? "" : "s"} in the queue`,
+                color: embedColor
+            }]
         })
         return
     }
@@ -29,6 +36,9 @@ export default async function skip(interaction: ChatInputCommandInteraction) {
     }
 
     await interaction.editReply({
-        content: `Skipped ${amount} song${amount === 1 ? "" : "s"}`
+        embeds: [{
+            description: `Skipped ${amount === 1 ? "1 song" : `${amount} songs`}`,
+            color: embedColor
+        }]
     })
 }

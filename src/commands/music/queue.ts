@@ -8,7 +8,12 @@ export default async function queue(interaction: ChatInputCommandInteraction) {
     const queue = player.queues.get(interaction.guildId!)
 
     if (!queue) {
-        await interaction.editReply("There is nothing playing")
+        await interaction.editReply({
+            embeds: [{
+                description: "There is no queue",
+                color: embedColor
+            }]
+        })
         return
     }
 
@@ -20,8 +25,15 @@ export default async function queue(interaction: ChatInputCommandInteraction) {
 
     await interaction.editReply({
         embeds: [{
+            title: "Queue",
             description: nowPlaying + "\n\n" + tracks.join("\n"),
-            color: embedColor
+            thumbnail: {
+                url: currentSong?.thumbnail || ""
+            },
+            color: embedColor,
+            footer: {
+                text: `Total tracks: ${queue.tracks.size}`
+            }
         }]
     })
 }

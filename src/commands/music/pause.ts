@@ -2,10 +2,9 @@ import { embedColor } from "config/options"
 import { useMainPlayer } from "discord-player"
 import { ChatInputCommandInteraction } from "discord.js"
 
-export default async function volume(interaction: ChatInputCommandInteraction) {
+export default async function pause(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply()
 
-    const volume = interaction.options.getNumber("volume")!
     const player = useMainPlayer()
     const queue = player.queues.get(interaction.guildId!)
 
@@ -19,10 +18,20 @@ export default async function volume(interaction: ChatInputCommandInteraction) {
         return
     }
 
-    queue.node.setVolume(volume)
+    if (queue.node.isPaused()) {
+        await interaction.editReply({
+            embeds: [{
+                description: "The music is already paused",
+                color: embedColor
+            }]
+        })
+        return
+    }
+
+    queue.node.setPaused(true)
     await interaction.editReply({
         embeds: [{
-            description: `Volume set to ${volume}`,
+            description: "Paused the music",
             color: embedColor
         }]
     })

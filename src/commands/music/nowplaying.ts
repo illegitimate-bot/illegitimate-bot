@@ -10,25 +10,27 @@ export default async function nowplaying(interaction: ChatInputCommandInteractio
 
     if (!queue) {
         await interaction.editReply({
-            content: "There is no queue"
+            embeds: [{
+                description: "There is no music playing",
+                color: embedColor
+            }]
         })
         return
     }
 
     const current = queue.currentTrack
-
     if (!current) {
         await interaction.editReply({
-            content: "There is no current song"
+            embeds: [{
+                description: "There is no music playing",
+                color: embedColor
+            }]
         })
         return
     }
 
     await interaction.editReply({
         embeds: [{
-            author: {
-                name: current.author,
-            },
             title: "Now Playing",
             description: `[${current.title}](${current.url})`,
             color: embedColor,

@@ -5,7 +5,6 @@ import { ChatInputCommandInteraction } from "discord.js"
 export default async function queue(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply()
     const player = useMainPlayer()
-
     const queue = player.queues.get(interaction.guildId!)
 
     if (!queue) {
@@ -14,9 +13,7 @@ export default async function queue(interaction: ChatInputCommandInteraction) {
     }
 
     const currentSong = queue.currentTrack
-
     const nowPlaying = `Now playing: [${currentSong?.title}](${currentSong?.url})`
-
     const tracks = queue.tracks.map((track, index) => {
         return `${index + 1}. [${track.title}](${track.url})`
     })

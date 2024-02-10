@@ -23,7 +23,7 @@ export = {
         })
 
         const results = tracks.map(track => ({
-            name: track.title,
+            name: track.title.slice(0, 100),
             value: track.url
         }))
 

@@ -21,7 +21,7 @@ export default async function play(interaction: ChatInputCommandInteraction) {
     const { track } = await player.play(channel, query, {
         requestedBy: interaction.user,
         nodeOptions: {
-            volume: 50,
+            volume: 25,
         }
     })
 

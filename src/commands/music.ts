@@ -3,6 +3,8 @@ import { Command } from "interfaces"
 import play from "./music/play"
 import leave from "./music/leave"
 import queue from "./music/queue"
+import volume from "./music/volume"
+import skip from "./music/skip"
 
 export = {
     name: "music",
@@ -26,6 +28,25 @@ export = {
                         .setRequired(true)))
         .addSubcommand(subcommand =>
             subcommand
+                .setName("volume")
+                .setDescription("Change the volume of the music")
+                .addNumberOption(option =>
+                    option
+                        .setName("volume")
+                        .setDescription("The volume to set")
+                        .setMinValue(1)
+                        .setMaxValue(100)
+                        .setRequired(true)))
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("skip")
+                .setDescription("Skip the current song")
+                .addNumberOption(option =>
+                    option
+                        .setName("amount")
+                        .setDescription("The amount of songs to skip")))
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName("queue")
                 .setDescription("Show the queue"))
         .addSubcommand(subcommand =>
@@ -40,6 +61,16 @@ export = {
 
         if (subcommand === "play") {
             play(interaction)
+            return
+        }
+
+        if (subcommand === "volume") {
+            volume(interaction)
+            return
+        }
+
+        if (subcommand === "skip") {
+            skip(interaction)
             return
         }
 

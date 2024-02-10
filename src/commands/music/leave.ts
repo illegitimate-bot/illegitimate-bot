@@ -15,7 +15,6 @@ export default async function leave(interaction: ChatInputCommandInteraction) {
         return
     }
 
-
     queue.delete()
     await interaction.reply({
         embeds: [{

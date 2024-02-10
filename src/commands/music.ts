@@ -5,6 +5,7 @@ import leave from "./music/leave"
 import queue from "./music/queue"
 import volume from "./music/volume"
 import skip from "./music/skip"
+import nowplaying from "./music/nowplaying"
 
 export = {
     name: "music",
@@ -51,6 +52,10 @@ export = {
                 .setDescription("Show the queue"))
         .addSubcommand(subcommand =>
             subcommand
+                .setName("nowplaying")
+                .setDescription("Show the currently playing song"))
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName("leave")
                 .setDescription("Leave the voice channel"))
         .setDMPermission(false)
@@ -76,6 +81,11 @@ export = {
 
         if (subcommand === "queue") {
             queue(interaction)
+            return
+        }
+
+        if (subcommand === "nowplaying") {
+            nowplaying(interaction)
             return
         }
 

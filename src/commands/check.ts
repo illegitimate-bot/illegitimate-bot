@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js"
 import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
 import { embedColor, devMessage } from "config/options"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "check",
@@ -234,4 +234,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

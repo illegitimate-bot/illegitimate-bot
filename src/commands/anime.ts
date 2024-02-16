@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import search from "./anime/search"
 import { devMessage, embedColor } from "config/options"
 
@@ -45,4 +45,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

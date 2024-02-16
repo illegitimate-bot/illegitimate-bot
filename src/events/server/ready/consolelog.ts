@@ -1,4 +1,4 @@
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import { ExtendedClient as Client } from "utils/Client"
 import color from "utils/functions/colors"
 
@@ -10,4 +10,4 @@ export = {
     execute(client: Client) {
         console.log(color("Logged in as " + client.user!.tag + "!", "green"))
     }
-} as Event
+} as IEvent

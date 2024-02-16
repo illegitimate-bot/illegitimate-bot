@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import waitinglistSchema from "schemas/waitinglistSchema"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
 export = {
@@ -85,4 +85,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

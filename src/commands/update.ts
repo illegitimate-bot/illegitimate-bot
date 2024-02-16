@@ -3,7 +3,7 @@ import { getGuild, getIGN, getHeadURL } from "utils/Hypixel"
 import verify from "schemas/verifySchema"
 import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import roleManage from "utils/functions/rolesmanage"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import { waitingListRole } from "config/roles"
 
 export = {
@@ -143,4 +143,4 @@ export = {
             })
         }
     }
-} as Command
+} as ICommand

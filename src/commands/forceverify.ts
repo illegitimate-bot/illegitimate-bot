@@ -4,7 +4,7 @@ import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
 import roleManage from "utils/functions/rolesmanage"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
 export = {
@@ -204,4 +204,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

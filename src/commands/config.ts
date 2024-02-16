@@ -2,7 +2,7 @@ import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
 import { embedColor } from "config/options"
 import settings from "schemas/settingsSchema"
 import mongoose from "mongoose"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "config",
@@ -65,4 +65,4 @@ export = {
             })
         }
     }
-} as Command
+} as ICommand

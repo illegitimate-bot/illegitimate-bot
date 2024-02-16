@@ -1,5 +1,5 @@
 import { ChannelType, Message } from "discord.js"
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import snipeCacheSchema from "schemas/snipeCacheSchema"
 import mongoose from "mongoose"
 import { SnipeCache } from "typings"
@@ -32,4 +32,4 @@ export = {
 
         await snipeCache.save()
     }
-} as Event
+} as IEvent

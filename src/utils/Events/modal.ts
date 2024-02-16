@@ -1,7 +1,7 @@
 import { ExtendedClient as Client } from "utils/Client"
 import color from "utils/functions/colors"
 import { embedColor } from "config/options"
-import { Modal } from "interfaces"
+import { IModal } from "interfaces"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
@@ -14,7 +14,7 @@ export default function loadModalEvents(client: Client, ft: FileType) {
 
     for (const file of modalFiles) {
         const filePath = path.join(modalPath, file)
-        const modal: Modal = require(filePath)
+        const modal: IModal = require(filePath)
 
         if ("name" in modal && "execute" in modal) {
             client.modals.set(modal.name, modal)

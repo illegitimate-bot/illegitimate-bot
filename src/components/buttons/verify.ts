@@ -1,5 +1,5 @@
 import { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 
 export = {
     name: "verify",
@@ -23,4 +23,4 @@ export = {
             )
         await interaction.showModal(modal)
     }
-} as Button
+} as IButton

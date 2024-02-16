@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "reqs",
@@ -48,4 +48,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

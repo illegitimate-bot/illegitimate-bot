@@ -5,7 +5,7 @@ import mongoose from "mongoose"
 import guildapp from "schemas/guildAppSchema"
 import waitingList from "schemas/waitinglistSchema"
 import { waitingListRole } from "config/roles"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 import { getGuild } from "utils/Hypixel"
 
 export = {
@@ -136,4 +136,4 @@ export = {
             )
         }
     }
-} as Button
+} as IButton

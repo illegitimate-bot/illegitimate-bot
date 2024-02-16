@@ -1,7 +1,7 @@
 import { hypixelGuildID, guildLogChannel, embedColor, devMessage } from "config/options"
 import color from "utils/functions/colors"
 import { getGuild, getIGN } from "utils/Hypixel"
-import { Cron, GuildData } from "interfaces"
+import { ICron, IGuildData } from "interfaces"
 import { client } from "utils/Illegitimate"
 import { TextChannel } from "discord.js"
 
@@ -20,7 +20,7 @@ async function guildWeekly() {
         }]
     })
 
-    const guild = (await getGuild(hypixelGuildID, "id")) as GuildData
+    const guild = (await getGuild(hypixelGuildID, "id")) as IGuildData
     const guildMembersList: string[] = []
     const topWeeklyMembers: { name: string; value: string; inline: boolean }[] = []
 
@@ -99,4 +99,4 @@ export = {
     onComplete: null,
     start: true,
     timeZone: "Europe/Zagreb"
-} as Cron
+} as ICron

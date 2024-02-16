@@ -1,5 +1,5 @@
 import { Message } from "discord.js"
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import env from "utils/Env"
 
 export = {
@@ -31,4 +31,4 @@ export = {
             })
         }
     }
-} as Event
+} as IEvent

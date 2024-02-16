@@ -1,5 +1,5 @@
 import { ExtendedClient as Client } from "utils/Client"
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import path from "path"
 import fs from "fs"
 
@@ -10,7 +10,7 @@ export default function loadEvents(client: Client) {
         const eventFiles = fs.readdirSync(path.join(serverDir, eventDir))
         for (const eventFile of eventFiles) {
             const eventPath = path.join(serverDir, eventDir, eventFile)
-            const event: Event = require(eventPath)
+            const event: IEvent = require(eventPath)
             if (!event.disabled) {
                 client.on(event.event, event.execute)
             }

@@ -1,5 +1,5 @@
 import statuses from "config/statuses"
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import { ExtendedClient as Client } from "utils/Client"
 
 export = {
@@ -27,4 +27,4 @@ export = {
 
         user.setStatus("dnd")
     }
-} as Event
+} as IEvent

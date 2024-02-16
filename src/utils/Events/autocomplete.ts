@@ -1,6 +1,6 @@
 import { ExtendedClient as Client } from "utils/Client"
 import { embedColor } from "config/options"
-import { Autocomplete } from "interfaces"
+import { IAutocomplete } from "interfaces"
 import { Events } from "discord.js"
 import color from "utils/functions/colors"
 import path from "path"
@@ -14,7 +14,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
 
     for (const file of autocompleteFiles) {
         const filePath = path.join(autocompletePath, file)
-        const autocomplete: Autocomplete = require(filePath)
+        const autocomplete: IAutocomplete = require(filePath)
 
         if ("name" in autocomplete && "execute" in autocomplete) {
             client.autocomplete.set(autocomplete.name, autocomplete)

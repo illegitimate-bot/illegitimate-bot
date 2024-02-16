@@ -1,7 +1,7 @@
 import { getUUID, getPlayer, getGuild, getIGN } from "utils/Hypixel"
 import { embedColor, devMessage } from "config/options"
 import { ChannelType, ChatInputCommandInteraction } from "discord.js"
-import { GuildData } from "interfaces"
+import { IGuildData } from "interfaces"
 import { redis } from "utils/Illegitimate"
 
 export default async function guildTop(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -10,7 +10,7 @@ export default async function guildTop(interaction: ChatInputCommandInteraction)
     const query = interaction.options.getString("query")!
     const type = interaction.options.getString("type") || "ign"
     let amount = interaction.options.getNumber("amount") || 10
-    let guild: GuildData | null
+    let guild: IGuildData | null
 
     if (interaction.channel!.type === ChannelType.DM) {
         interaction.editReply({

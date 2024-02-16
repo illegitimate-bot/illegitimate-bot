@@ -6,7 +6,7 @@ import { guildRole } from "config/roles"
 import { getUUID } from "utils/Hypixel"
 import mongoose from "mongoose"
 import guildapp from "schemas/guildAppSchema"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 
 export = {
     name: "guildapply",
@@ -507,4 +507,4 @@ export = {
             ]
         })
     }
-} as Button
+} as IButton

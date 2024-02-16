@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import roleManage from "utils/functions/rolesmanage"
 import logToChannel from "utils/functions/logtochannel"
 import { getIGN } from "utils/Hypixel"
@@ -82,4 +82,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

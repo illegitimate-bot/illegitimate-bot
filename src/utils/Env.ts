@@ -1,7 +1,7 @@
-import { Env } from "interfaces"
+import { IEnv } from "interfaces"
 import "dotenv/config"
 
-const env: Env = {
+const env: IEnv = {
     prod: {
         token: process.env.TOKEN,
         mongoURI: process.env.MONGOURI,

@@ -1,7 +1,7 @@
 import waitinglist from "schemas/waitinglistSchema"
 import { getGuild } from "utils/Hypixel"
 import { hypixelGuildID } from "config/options"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 
 export = {
     name: "waitinglistupdate",
@@ -53,4 +53,4 @@ export = {
 
         await interaction.editReply("Updated the waiting list")
     }
-} as Button
+} as IButton

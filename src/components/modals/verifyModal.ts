@@ -3,7 +3,7 @@ import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import mongoose from "mongoose"
 import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles"
-import { Modal } from "interfaces"
+import { IModal } from "interfaces"
 import { GuildMember } from "discord.js"
 
 export = {
@@ -145,4 +145,4 @@ export = {
             })
         }
     }
-} as Modal
+} as IModal

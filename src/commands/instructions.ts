@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
 import { embedColor, devMessage, instructionsgif } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "instructions",
@@ -36,4 +36,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

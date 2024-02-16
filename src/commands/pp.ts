@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, User } from "discord.js"
 import { embedColor } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import env from "utils/Env"
 
 export = {
@@ -38,4 +38,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

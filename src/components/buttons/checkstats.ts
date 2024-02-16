@@ -2,7 +2,7 @@ import { embedColor, devMessage } from "config/options"
 import guildapp from "schemas/guildAppSchema"
 import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 
 export = {
     name: "checkstats",
@@ -176,4 +176,4 @@ export = {
             }]
         })
     }
-} as Button
+} as IButton

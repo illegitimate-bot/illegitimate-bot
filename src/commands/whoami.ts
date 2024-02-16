@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, userMention } from "discord.js"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import { embedColor, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
 import { getIGN, getHeadURL } from "utils/Hypixel"
@@ -50,4 +50,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

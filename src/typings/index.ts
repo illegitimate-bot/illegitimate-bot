@@ -1,5 +1,8 @@
 import { ChatInputCommandInteraction } from "discord.js"
 import { ExtendedClient } from "utils/Client"
+import TZs from "./TimeZones"
+
+export type TimeZones = typeof TZs[number]
 
 export type SubcommandFunc = (interaction: ChatInputCommandInteraction, client?: ExtendedClient) => Promise<void>
 

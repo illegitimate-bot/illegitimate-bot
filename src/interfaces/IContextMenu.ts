@@ -4,7 +4,7 @@ import {
     ContextMenuCommandBuilder
 } from "discord.js"
 
-export default interface ContextMenu {
+export default interface IContextMenu {
     name: string
     description: string
     dev?: boolean

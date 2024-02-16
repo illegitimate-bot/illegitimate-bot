@@ -13,7 +13,7 @@ interface DevEnv {
     guildid: string | undefined
 }
 
-export default interface Env {
+export default interface IEnv {
     prod: ProdEnv
     dev: DevEnv
 }

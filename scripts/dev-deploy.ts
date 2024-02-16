@@ -1,7 +1,7 @@
 import { REST, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 import fs from "fs"
 import env from "../src/utils/Env"
-import { Command } from "../src/interfaces"
+import { ICommand } from "../src/interfaces"
 const rest = new REST({ version: "10" }).setToken(env.dev.devtoken!)
 
 const commands: RESTPutAPIApplicationCommandsJSONBody = []
@@ -9,13 +9,13 @@ const commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsW
 const contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(".ts"))
 
 for (const file of commandFiles) {
-    const command: Command = require(`../src/commands/${file}`)
+    const command: ICommand = require(`../src/commands/${file}`)
     if (command.dev) {
         commands.push(command.data.toJSON())
     }
 }
 for (const file of contentMenuCommands) {
-    const command: Command = require(`../src/commands-contextmenu/${file}`)
+    const command: ICommand = require(`../src/commands-contextmenu/${file}`)
     if (command.dev) {
         commands.push(command.data.toJSON())
     }

@@ -3,10 +3,10 @@ import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import mongoose from "mongoose"
 import roleManage from "utils/functions/rolesmanage"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import verify from "schemas/verifySchema"
-import { PlayerData } from "interfaces"
-import { GuildData } from "interfaces"
+import { IPlayerData } from "interfaces"
+import { IGuildData } from "interfaces"
 
 export = {
     name: "verify",
@@ -75,7 +75,7 @@ export = {
         })
 
         const head = await getHeadURL(ign)
-        const player = (await getPlayer(uuid)) as PlayerData
+        const player = (await getPlayer(uuid)) as IPlayerData
         if (!player) {
             interaction.editReply({
                 embeds: [{
@@ -130,7 +130,7 @@ export = {
             }]
         })
 
-        const guild = (await getGuild(uuid)) as GuildData | null
+        const guild = (await getGuild(uuid)) as IGuildData | null
         let guildID: string | null
         if (!guild) {
             guildID = null
@@ -198,4 +198,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

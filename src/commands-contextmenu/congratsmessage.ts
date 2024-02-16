@@ -1,5 +1,5 @@
 import { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits, userMention } from "discord.js"
-import { ContextMenu } from "interfaces"
+import { IContextMenu } from "interfaces"
 
 export = {
     name: "congratsmessage",
@@ -37,4 +37,4 @@ export = {
             ephemeral: true
         })
     }
-} as ContextMenu
+} as IContextMenu

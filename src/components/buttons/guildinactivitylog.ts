@@ -3,7 +3,7 @@ import { gm, manager, moderator, beast, member, guildStaff, guildRole } from "co
 import { ignM, smallM, largeM } from "config/limitmessages"
 import { inactivity } from "config/questions"
 import { embedColor, inactivityLogChannel } from "config/options"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 import { getIGN } from "utils/Hypixel"
 const guildRoles = [gm, manager, moderator, beast, member, guildStaff, guildRole]
 
@@ -281,4 +281,4 @@ export = {
             ]
         })
     }
-} as Button
+} as IButton

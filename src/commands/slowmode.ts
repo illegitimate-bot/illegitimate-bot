@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel, channelMention, userMention } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
 export = {
@@ -83,4 +83,4 @@ export = {
         })
         await channel.setRateLimitPerUser(seconds)
     }
-} as Command
+} as ICommand

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "ping",
@@ -27,4 +27,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

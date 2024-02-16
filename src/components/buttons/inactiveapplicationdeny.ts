@@ -1,4 +1,4 @@
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 
 export = {
     name: "inactiveapplicationdeny",
@@ -10,4 +10,4 @@ export = {
             ephemeral: true
         })
     }
-} as Button
+} as IButton

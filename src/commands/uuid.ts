@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import { getUUID, getIGN, getHeadURL, formatUuid } from "utils/Hypixel"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "uuid",
@@ -58,4 +58,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

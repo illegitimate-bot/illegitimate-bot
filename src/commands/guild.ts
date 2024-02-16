@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import guildMember from "./guild/member"
 import guildInfo from "./guild/info"
 import guildTop from "./guild/top"
@@ -106,4 +106,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

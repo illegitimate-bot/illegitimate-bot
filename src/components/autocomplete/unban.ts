@@ -1,4 +1,4 @@
-import { Autocomplete } from "interfaces"
+import { IAutocomplete } from "interfaces"
 
 export = {
     name: "unban",
@@ -28,4 +28,4 @@ export = {
             console.log(err)
         })
     }
-} as Autocomplete
+} as IAutocomplete

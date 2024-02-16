@@ -1,5 +1,5 @@
 import { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits } from "discord.js"
-import { ContextMenu } from "interfaces"
+import { IContextMenu } from "interfaces"
 
 export = {
     name: "resetnick",
@@ -48,4 +48,4 @@ export = {
             ephemeral: true
         })
     }
-} as ContextMenu
+} as IContextMenu

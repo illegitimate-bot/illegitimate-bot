@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, TextChannel, channelMention, userMention } from "discord.js"
 import { embedColor } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
 export = {
@@ -77,4 +77,4 @@ export = {
             })
         })
     }
-} as Command
+} as ICommand

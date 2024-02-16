@@ -1,5 +1,5 @@
 import { QueryType, useMainPlayer } from "discord-player"
-import { Autocomplete } from "interfaces"
+import { IAutocomplete } from "interfaces"
 
 export = {
     name: "music",
@@ -29,4 +29,4 @@ export = {
 
         await interaction.respond(results.slice(0, 25)).catch()
     }
-} as Autocomplete
+} as IAutocomplete

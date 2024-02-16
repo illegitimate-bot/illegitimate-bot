@@ -1,6 +1,6 @@
 import { ExtendedClient as Client } from "utils/Client"
 import color from "utils/functions/colors"
-import { ContextMenu } from "interfaces"
+import { IContextMenu } from "interfaces"
 import { embedColor } from "config/options"
 import { Events } from "discord.js"
 import path from "path"
@@ -14,7 +14,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
 
     for (const file of contextMenuFiles) {
         const filePath = path.join(contextMenuPath, file)
-        const cmd: ContextMenu = require(filePath)
+        const cmd: IContextMenu = require(filePath)
 
         if ("data" in cmd && "execute" in cmd) {
             client.contextmenus.set(cmd.data.name, cmd)

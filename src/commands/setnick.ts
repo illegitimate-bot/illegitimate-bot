@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
 export = {
@@ -77,4 +77,4 @@ export = {
             ephemeral: true
         })
     }
-} as Command
+} as ICommand

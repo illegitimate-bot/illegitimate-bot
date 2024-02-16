@@ -2,7 +2,7 @@ import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.j
 import { getIGN, getHeadURL } from "utils/Hypixel"
 import { embedColor, devMessage } from "config/options"
 import verify from "schemas/verifySchema"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "whois",
@@ -51,4 +51,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

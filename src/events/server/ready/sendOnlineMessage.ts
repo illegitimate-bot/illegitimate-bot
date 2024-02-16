@@ -1,5 +1,5 @@
 import logToChannel from "utils/functions/logtochannel"
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import { embedColor } from "config/options"
 
 export = {
@@ -17,4 +17,4 @@ export = {
             }]
         })
     }
-} as Event
+} as IEvent

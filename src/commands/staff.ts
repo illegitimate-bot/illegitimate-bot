@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import help from "./staff/help"
 import beast from "./staff/beast"
 import updateAll from "./staff/updateall"
@@ -90,4 +90,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

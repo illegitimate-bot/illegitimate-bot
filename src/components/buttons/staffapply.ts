@@ -7,7 +7,7 @@ import mongoose from "mongoose"
 import staffapp from "schemas/staffAppSchema"
 import settings from "schemas/settingsSchema"
 import { getUUID } from "utils/Hypixel"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 import env from "utils/Env"
 
 export = {
@@ -441,4 +441,4 @@ export = {
             })
         }
     }
-} as Button
+} as IButton

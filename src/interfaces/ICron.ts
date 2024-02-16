@@ -1,4 +1,4 @@
-import { TimeZones } from "."
+import { TimeZones } from "typings"
 
 interface TimeFormat {
     seconds: "*" | number
@@ -9,10 +9,10 @@ interface TimeFormat {
     dayOfWeek: "*" | number
 }
 
-export default interface Cron {
+export default interface ICron {
     time: TimeFormat
     execute: () => void
     onComplete?: null | undefined
     start?: boolean | null | undefined
-    timeZone: keyof TimeZones
+    timeZone: TimeZones
 }

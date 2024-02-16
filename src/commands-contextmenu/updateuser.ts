@@ -1,6 +1,6 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
 import { embedColor, devMessage, hypixelGuildID } from "config/options"
-import { ContextMenu } from "interfaces"
+import { IContextMenu } from "interfaces"
 import verifySchema from "schemas/verifySchema"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
 import roleManage from "utils/functions/rolesmanage"
@@ -154,4 +154,4 @@ export = {
             })
         }
     }
-} as ContextMenu
+} as IContextMenu

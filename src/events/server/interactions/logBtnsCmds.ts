@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, ButtonInteraction } from "discord.js"
 import color from "utils/functions/colors"
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 
 export = {
     name: "logBtnsCmds",
@@ -51,4 +51,4 @@ export = {
             return
         }
     }
-} as Event
+} as IEvent

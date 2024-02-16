@@ -1,14 +1,14 @@
 import { getUUID, getIGN, getPlayer, getGuild, guildLevel } from "utils/Hypixel"
 import { embedColor, devMessage } from "config/options"
 import { ChatInputCommandInteraction } from "discord.js"
-import { GuildData } from "interfaces"
+import { IGuildData } from "interfaces"
 
 export default async function guildInfo(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
 
     const query = interaction.options.getString("query")!
     const type = interaction.options.getString("type") || "ign"
-    let guild: GuildData | null
+    let guild: IGuildData | null
 
     if (type === "ign") {
         await interaction.editReply({

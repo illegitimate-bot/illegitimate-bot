@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import { embedColor, devMessage } from "config/options"
 import os from "os"
 import { execSync } from "child_process"
@@ -74,4 +74,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

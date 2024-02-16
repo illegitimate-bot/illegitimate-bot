@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "send",
@@ -58,4 +58,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

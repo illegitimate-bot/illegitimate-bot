@@ -1,7 +1,7 @@
 import { CronJob } from "cron"
 import path from "path"
 import fs from "fs"
-import { Cron } from "interfaces"
+import { ICron } from "interfaces"
 
 export default function loadCronEvents() {
     const cronPath = path.join(__dirname, "..", "..", "events", "cron")
@@ -9,7 +9,7 @@ export default function loadCronEvents() {
 
     for (const file of cronFiles) {
         const filePath = path.join(cronPath, file)
-        const cron: Cron = require(filePath)
+        const cron: ICron = require(filePath)
 
         const time =
             cron.time.seconds + " " +

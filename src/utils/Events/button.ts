@@ -1,7 +1,7 @@
 import { ExtendedClient as Client } from "utils/Client"
 import color from "utils/functions/colors"
 import { embedColor } from "config/options"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
@@ -14,7 +14,7 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
 
     for (const file of btnFiles) {
         const filePath = path.join(btnPath, file)
-        const btn: Button = require(filePath)
+        const btn: IButton = require(filePath)
 
         if ("name" in btn && "execute" in btn) {
             client.buttons.set(btn.name, btn)

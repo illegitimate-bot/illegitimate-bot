@@ -1,5 +1,5 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import play from "./music/play"
 import leave from "./music/leave"
 import queue from "./music/queue"
@@ -114,4 +114,4 @@ export = {
             return
         }
     }
-} as Command
+} as ICommand

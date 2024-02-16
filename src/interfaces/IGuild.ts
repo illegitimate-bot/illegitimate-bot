@@ -1,11 +1,11 @@
-export interface Guild {
+export interface IGuild {
     data: {
         success: boolean
-        guild: GuildData
+        guild: IGuildData
     }
 }
 
-export interface GuildData {
+export interface IGuildData {
     _id: string
     name: string
     coins?: number

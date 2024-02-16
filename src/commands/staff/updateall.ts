@@ -6,7 +6,7 @@ import roleManage from "utils/functions/rolesmanage"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
 import env from "utils/Env"
 import { getGuild } from "utils/Hypixel"
-import { GuildData } from "interfaces"
+import { IGuildData } from "interfaces"
 
 export default async function updateAll(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
@@ -32,7 +32,7 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
         })
     )
 
-    const guildData = (await getGuild(hypixelGuildID, "id")) as GuildData
+    const guildData = (await getGuild(hypixelGuildID, "id")) as IGuildData
 
     const hypixelGuildMembers = guildData.members.map(gmember => {
         return {

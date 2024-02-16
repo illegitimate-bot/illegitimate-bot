@@ -1,7 +1,7 @@
 import { ExtendedClient as Client } from "utils/Client"
 import color from "utils/functions/colors"
 import { embedColor } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
@@ -14,7 +14,7 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
 
     for (const file of cmdFiles) {
         const filePath = path.join(cmdPath, file)
-        const cmd: Command = require(filePath)
+        const cmd: ICommand = require(filePath)
 
         if ("data" in cmd && "execute" in cmd) {
             client.commands.set(cmd.data.name, cmd)

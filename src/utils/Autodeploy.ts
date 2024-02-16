@@ -1,7 +1,7 @@
 import fs from "fs"
 import { ExtendedClient } from "./Client"
 import env from "./Env"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import { RESTPostAPIChatInputApplicationCommandsJSONBody } from "discord.js"
 import color from "./functions/colors"
 type FileType = "js" | "ts"
@@ -20,7 +20,7 @@ export default async function autoDeployCommands(fileType: FileType, client: Ext
     }
 
     for (const file of commandFiles) {
-        const command: Command = require(`../commands/${file}`)
+        const command: ICommand = require(`../commands/${file}`)
         if (command.dev) {
             commands.push(command.data.toJSON())
         }

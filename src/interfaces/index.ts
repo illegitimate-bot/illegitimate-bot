@@ -1,29 +1,27 @@
-import Autocomplete from "./Autocomplete"
-import Button from "./Button"
-import Command from "./Command"
-import ContextMenu from "./ContextMenu"
-import Event from "./Event"
-import Modal from "./Modal"
+import IAutocomplete from "./IAutocomplete"
+import IButton from "./IButton"
+import ICommand from "./ICommand"
+import IContextMenu from "./IContextMenu"
+import IEvent from "./IEvent"
+import IModal from "./IModal"
 
-import Env from "./Env"
-import Cron from "./Cron"
-import TimeZones from "./TimeZones"
+import IEnv from "./IEnv"
+import ICron from "./ICron"
 
-import { Guild, GuildData } from "./Guild"
-import { Player, PlayerData } from "./Player"
+import { IGuild, IGuildData } from "./IGuild"
+import { IPlayer, IPlayerData } from "./IPlayer"
 
 export {
-    Env,
-    Cron,
-    TimeZones,
-    Autocomplete,
-    Button,
-    Command,
-    ContextMenu,
-    Event,
-    Modal,
-    Guild,
-    GuildData,
-    Player,
-    PlayerData
+    IEnv,
+    ICron,
+    IAutocomplete,
+    IButton,
+    ICommand,
+    IContextMenu,
+    IEvent,
+    IModal,
+    IGuild,
+    IGuildData,
+    IPlayer,
+    IPlayerData
 }

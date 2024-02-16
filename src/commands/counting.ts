@@ -1,6 +1,6 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 import ban from "./counting/ban"
 import unban from "./counting/unban"
 
@@ -63,4 +63,4 @@ export = {
             }]
         })
     }
-} as Command
+} as ICommand

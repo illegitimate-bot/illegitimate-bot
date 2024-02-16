@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, ChannelType, TextChannel } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import { Command } from "interfaces"
+import { ICommand } from "interfaces"
 
 export = {
     name: "setup",
@@ -153,4 +153,4 @@ export = {
             ephemeral: true
         })
     }
-} as Command
+} as ICommand

@@ -1,7 +1,7 @@
 import fetch from "axios"
 import env from "utils/Env"
-import { Player, PlayerData } from "interfaces"
-import { Guild, GuildData } from "interfaces"
+import { IPlayer, IPlayerData } from "interfaces"
+import { IGuild, IGuildData } from "interfaces"
 const apikey = env.prod.hypixelapikey
 const mojang = "https://api.mojang.com/users/profiles/minecraft/"
 const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"
@@ -44,8 +44,8 @@ async function getIGN(uuid: string): Promise<string | null> {
     }
 }
 
-async function getPlayer(uuid: string): Promise<PlayerData | null> {
-    const playerReq: Player = await fetch(hypixel, {
+async function getPlayer(uuid: string): Promise<IPlayerData | null> {
+    const playerReq: IPlayer = await fetch(hypixel, {
         params: {
             uuid: uuid
         },
@@ -61,10 +61,10 @@ async function getPlayer(uuid: string): Promise<PlayerData | null> {
     return playerReq.data.player
 }
 
-async function getGuild(query: string, type?: GuildQueryType): Promise<GuildData | null> {
+async function getGuild(query: string, type?: GuildQueryType): Promise<IGuildData | null> {
     const reqType = type ? type : "player"
 
-    const guildReq: Guild = await fetch(guild, {
+    const guildReq: IGuild = await fetch(guild, {
         params: {
             [reqType]: query
         },

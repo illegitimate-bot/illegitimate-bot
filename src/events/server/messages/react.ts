@@ -1,4 +1,4 @@
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import { Message } from "discord.js"
 
 export = {
@@ -11,4 +11,4 @@ export = {
             message.react("Woot:734345936347725885")
         }
     }
-} as Event
+} as IEvent

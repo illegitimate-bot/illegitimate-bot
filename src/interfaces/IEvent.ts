@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { ClientEvents } from "discord.js"
 
-export default interface Event {
+export default interface IEvent {
     name: string
     description: string
     event: keyof ClientEvents

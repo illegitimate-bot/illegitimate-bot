@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
 import { embedColor } from "config/options"
 import staffapp from "schemas/staffAppSchema"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 
 export = {
     name: "staffapplicationaccept",
@@ -60,4 +60,4 @@ export = {
             }]
         })
     }
-} as Button
+} as IButton

@@ -1,7 +1,7 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, GuildMember } from "discord.js"
 import { embedColor } from "config/options"
 import guildapp from "schemas/guildAppSchema"
-import { Modal } from "interfaces"
+import { IModal } from "interfaces"
 
 export = {
     name: "denyreasonbox",
@@ -84,4 +84,4 @@ export = {
             embeds: responseEmbeds
         })
     }
-} as Modal
+} as IModal

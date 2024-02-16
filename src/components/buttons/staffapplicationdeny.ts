@@ -1,5 +1,5 @@
 import { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
-import { Button } from "interfaces"
+import { IButton } from "interfaces"
 
 export = {
     name: "staffapplicationdeny",
@@ -15,10 +15,10 @@ export = {
                         .setLabel("Deny Reason")
                         .setCustomId("staffdenyreason")
                         .setStyle(TextInputStyle.Paragraph)
-                        .setPlaceholder( "Enter a reason for denying the application")
+                        .setPlaceholder("Enter a reason for denying the application")
                         .setRequired(false)
                 )
             )
         await interaction.showModal(modal)
     }
-} as Button
+} as IButton

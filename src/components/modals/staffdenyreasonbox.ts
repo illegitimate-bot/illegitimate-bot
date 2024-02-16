@@ -1,7 +1,7 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
 import { embedColor } from "config/options"
 import staffapp from "schemas/staffAppSchema"
-import { Modal } from "interfaces"
+import { IModal } from "interfaces"
 
 export = {
     name: "staffdenyreasonbox",
@@ -60,4 +60,4 @@ export = {
             }]
         })
     }
-} as Modal
+} as IModal

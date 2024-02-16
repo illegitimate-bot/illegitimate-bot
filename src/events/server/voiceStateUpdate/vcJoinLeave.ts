@@ -1,6 +1,6 @@
 import { userMention, channelMention, VoiceState } from "discord.js"
 import { embedColor } from "config/options"
-import { Event } from "interfaces"
+import { IEvent } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 
 export = {
@@ -58,4 +58,4 @@ export = {
             })
         }
     }
-} as Event
+} as IEvent

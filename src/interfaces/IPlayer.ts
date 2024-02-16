@@ -1,11 +1,11 @@
-export interface Player {
+export interface IPlayer {
     data: {
         success: boolean
-        player: PlayerData
+        player: IPlayerData
     }
 }
 
-export interface PlayerData {
+export interface IPlayerData {
     _id?: string
     uuid?: string
     firstLogin?: number
@@ -8910,7 +8910,7 @@ export interface Active {
     started?: number
 }
 
-export interface Objectives {}
+export interface Objectives { }
 
 export interface DuelsKiller {
     completions?: Completion2[]
@@ -8926,7 +8926,7 @@ export interface Active2 {
     started?: number
 }
 
-export interface Objectives2 {}
+export interface Objectives2 { }
 
 export interface SkywarsArcadeWin {
     completions?: Completion3[]
@@ -8942,7 +8942,7 @@ export interface Active3 {
     started?: number
 }
 
-export interface Objectives3 {}
+export interface Objectives3 { }
 
 export interface PrototypePitDailyKills {
     completions?: Completion4[]
@@ -9020,7 +9020,7 @@ export interface Active7 {
     started?: number
 }
 
-export interface Objectives7 {}
+export interface Objectives7 { }
 
 export interface DuelsWeeklyWins {
     completions?: Completion9[]
@@ -9081,7 +9081,7 @@ export interface Active9 {
     started?: number
 }
 
-export interface Objectives9 {}
+export interface Objectives9 { }
 
 export interface SkywarsWeeklyFreeLootChest {
     completions?: Completion14[]
@@ -9115,7 +9115,7 @@ export interface Active11 {
     started?: number
 }
 
-export interface Objectives11 {}
+export interface Objectives11 { }
 
 export interface SkywarsWeeklyKills {
     completions?: Completion16[]
@@ -9149,7 +9149,7 @@ export interface Active13 {
     started?: number
 }
 
-export interface Objectives13 {}
+export interface Objectives13 { }
 
 export interface SkywarsSoloWin {
     completions?: Completion18[]
@@ -9165,7 +9165,7 @@ export interface Active14 {
     started?: number
 }
 
-export interface Objectives14 {}
+export interface Objectives14 { }
 
 export interface SkywarsWeeklyArcadeWinAll {
     active?: Active15
@@ -9231,7 +9231,7 @@ export interface Active17 {
     started?: number
 }
 
-export interface Objectives17 {}
+export interface Objectives17 { }
 
 export interface WallsWeekly {
     active?: Active18
@@ -9261,7 +9261,7 @@ export interface Active19 {
     started?: number
 }
 
-export interface Objectives19 {}
+export interface Objectives19 { }
 
 export interface QuakeDailyWin {
     completions?: Completion24[]
@@ -9277,7 +9277,7 @@ export interface Active20 {
     started?: number
 }
 
-export interface Objectives20 {}
+export interface Objectives20 { }
 
 export interface QuakeDailyKill {
     completions?: Completion25[]
@@ -9293,7 +9293,7 @@ export interface Active21 {
     started?: number
 }
 
-export interface Objectives21 {}
+export interface Objectives21 { }
 
 export interface PaintballExpert {
     active?: Active22
@@ -9318,7 +9318,7 @@ export interface Active23 {
     started?: number
 }
 
-export interface Objectives23 {}
+export interface Objectives23 { }
 
 export interface ArenaWeeklyPlay {
     active?: Active24
@@ -9387,7 +9387,7 @@ export interface Active28 {
     started?: number
 }
 
-export interface Objectives28 {}
+export interface Objectives28 { }
 
 export interface VampirezDailyPlay {
     completions?: Completion27[]
@@ -9470,7 +9470,7 @@ export interface Active33 {
     started?: number
 }
 
-export interface Objectives33 {}
+export interface Objectives33 { }
 
 export interface GingerbreadBlingBling {
     completions?: Completion30[]
@@ -9486,7 +9486,7 @@ export interface Active34 {
     started?: number
 }
 
-export interface Objectives34 {}
+export interface Objectives34 { }
 
 export interface GingerbreadMastery {
     active?: Active35
@@ -9564,7 +9564,7 @@ export interface Active39 {
     started?: number
 }
 
-export interface Objectives39 {}
+export interface Objectives39 { }
 
 export interface VampirezWeeklyHumanKill {
     active?: Active40
@@ -9588,7 +9588,7 @@ export interface Active41 {
     started?: number
 }
 
-export interface Objectives41 {}
+export interface Objectives41 { }
 
 export interface PrototypePitWeeklyGold {
     completions?: Completion34[]
@@ -9630,7 +9630,7 @@ export interface Active43 {
     started?: number
 }
 
-export interface Objectives43 {}
+export interface Objectives43 { }
 
 export interface ArcadeSpecialist {
     completions?: Completion37[]
@@ -9726,7 +9726,7 @@ export interface Active49 {
     started?: number
 }
 
-export interface Objectives49 {}
+export interface Objectives49 { }
 
 export interface TntPvprunDaily {
     completions?: Completion41[]
@@ -9760,7 +9760,7 @@ export interface Active51 {
     started?: number
 }
 
-export interface Objectives51 {}
+export interface Objectives51 { }
 
 export interface TntPvprunWeekly {
     completions?: Completion43[]
@@ -9794,7 +9794,7 @@ export interface Active53 {
     started?: number
 }
 
-export interface Objectives53 {}
+export interface Objectives53 { }
 
 export interface TntTnttagDaily {
     completions?: Completion45[]
@@ -9810,7 +9810,7 @@ export interface Active54 {
     started?: number
 }
 
-export interface Objectives54 {}
+export interface Objectives54 { }
 
 export interface TntTntrunWeekly {
     completions?: Completion46[]
@@ -9826,7 +9826,7 @@ export interface Active55 {
     started?: number
 }
 
-export interface Objectives55 {}
+export interface Objectives55 { }
 
 export interface TntTntrunDaily {
     completions?: Completion47[]
@@ -9842,7 +9842,7 @@ export interface Active56 {
     started?: number
 }
 
-export interface Objectives56 {}
+export interface Objectives56 { }
 
 export interface CvcKillDailyNormal {
     completions?: Completion48[]
@@ -9858,7 +9858,7 @@ export interface Active57 {
     started?: number
 }
 
-export interface Objectives57 {}
+export interface Objectives57 { }
 
 export interface CvcKillWeekly {
     active?: Active58
@@ -9883,7 +9883,7 @@ export interface Active59 {
     started?: number
 }
 
-export interface Objectives59 {}
+export interface Objectives59 { }
 
 export interface CvcWinDailyNormal {
     completions?: Completion49[]
@@ -9899,7 +9899,7 @@ export interface Active60 {
     started?: number
 }
 
-export interface Objectives60 {}
+export interface Objectives60 { }
 
 export interface CvcKill {
     active?: Active61
@@ -9947,7 +9947,7 @@ export interface Active63 {
     started?: number
 }
 
-export interface Objectives63 {}
+export interface Objectives63 { }
 
 export interface BlitzLootChestWeekly {
     completions?: Completion52[]
@@ -9982,7 +9982,7 @@ export interface Active65 {
     started?: number
 }
 
-export interface Objectives65 {}
+export interface Objectives65 { }
 
 export interface BlitzLootChestDaily {
     completions?: Completion54[]
@@ -10052,7 +10052,7 @@ export interface Active69 {
     started?: number
 }
 
-export interface Objectives69 {}
+export interface Objectives69 { }
 
 export interface MmDailyPowerPlay {
     completions?: Completion58[]
@@ -10068,7 +10068,7 @@ export interface Active70 {
     started?: number
 }
 
-export interface Objectives70 {}
+export interface Objectives70 { }
 
 export interface MmWeeklyWins {
     completions?: Completion59[]
@@ -10084,7 +10084,7 @@ export interface Active71 {
     started?: number
 }
 
-export interface Objectives71 {}
+export interface Objectives71 { }
 
 export interface MmDailyTargetKill {
     completions?: Completion60[]
@@ -10100,7 +10100,7 @@ export interface Active72 {
     started?: number
 }
 
-export interface Objectives72 {}
+export interface Objectives72 { }
 
 export interface MmWeeklyMurdererKills {
     completions?: Completion61[]
@@ -10147,7 +10147,7 @@ export interface Active75 {
     started?: number
 }
 
-export interface Objectives75 {}
+export interface Objectives75 { }
 
 export interface UhcTeam {
     completions?: Completion63[]
@@ -10163,7 +10163,7 @@ export interface Active76 {
     started?: number
 }
 
-export interface Objectives76 {}
+export interface Objectives76 { }
 
 export interface UhcWeekly {
     active?: Active77
@@ -10192,7 +10192,7 @@ export interface Active78 {
     started?: number
 }
 
-export interface Objectives78 {}
+export interface Objectives78 { }
 
 export interface UhcWeeklySpecialCookie {
     active?: Active79
@@ -10203,7 +10203,7 @@ export interface Active79 {
     started?: number
 }
 
-export interface Objectives79 {}
+export interface Objectives79 { }
 
 export interface UhcSolo {
     active?: Active80
@@ -10214,7 +10214,7 @@ export interface Active80 {
     started?: number
 }
 
-export interface Objectives80 {}
+export interface Objectives80 { }
 
 export interface UhcMadness {
     completions?: Completion65[]
@@ -10261,7 +10261,7 @@ export interface Active83 {
     started?: number
 }
 
-export interface Objectives83 {}
+export interface Objectives83 { }
 
 export interface TntWeeklySpecial {
     active?: Active84
@@ -10272,7 +10272,7 @@ export interface Active84 {
     started?: number
 }
 
-export interface Objectives84 {}
+export interface Objectives84 { }
 
 export interface SupersmashSoloWin {
     completions?: Completion67[]
@@ -10288,7 +10288,7 @@ export interface Active85 {
     started?: number
 }
 
-export interface Objectives85 {}
+export interface Objectives85 { }
 
 export interface SupersmashTeamWin {
     active?: Active86
@@ -10299,7 +10299,7 @@ export interface Active86 {
     started?: number
 }
 
-export interface Objectives86 {}
+export interface Objectives86 { }
 
 export interface SupersmashTeamKills {
     active?: Active87
@@ -10310,7 +10310,7 @@ export interface Active87 {
     started?: number
 }
 
-export interface Objectives87 {}
+export interface Objectives87 { }
 
 export interface SupersmashSoloKills {
     completions?: Completion68[]
@@ -10326,7 +10326,7 @@ export interface Active88 {
     started?: number
 }
 
-export interface Objectives88 {}
+export interface Objectives88 { }
 
 export interface SupersmashWeeklyKills {
     active?: Active89
@@ -10372,7 +10372,7 @@ export interface Active91 {
     started?: number
 }
 
-export interface Objectives91 {}
+export interface Objectives91 { }
 
 export interface WarlordsDedication {
     active?: Active92
@@ -10383,7 +10383,7 @@ export interface Active92 {
     started?: number
 }
 
-export interface Objectives92 {}
+export interface Objectives92 { }
 
 export interface WarlordsVictorious {
     active?: Active93
@@ -10394,7 +10394,7 @@ export interface Active93 {
     started?: number
 }
 
-export interface Objectives93 {}
+export interface Objectives93 { }
 
 export interface WarlordsDomination {
     active?: Active94
@@ -10405,7 +10405,7 @@ export interface Active94 {
     started?: number
 }
 
-export interface Objectives94 {}
+export interface Objectives94 { }
 
 export interface WarlordsCtf {
     active?: Active95
@@ -10416,7 +10416,7 @@ export interface Active95 {
     started?: number
 }
 
-export interface Objectives95 {}
+export interface Objectives95 { }
 
 export interface BuildBattlePlayer {
     completions?: Completion70[]
@@ -10468,7 +10468,7 @@ export interface Active98 {
     started?: number
 }
 
-export interface Objectives98 {}
+export interface Objectives98 { }
 
 export interface MegaWallsWeekly {
     active?: Active99
@@ -10498,7 +10498,7 @@ export interface Active100 {
     started?: number
 }
 
-export interface Objectives100 {}
+export interface Objectives100 { }
 
 export interface MegaWallsFaithful {
     active?: Active101
@@ -10535,7 +10535,7 @@ export interface Active103 {
     started?: number
 }
 
-export interface Objectives103 {}
+export interface Objectives103 { }
 
 export interface MmSpecialWeeklyKillerInstinct2020 {
     active?: Active104
@@ -10546,7 +10546,7 @@ export interface Active104 {
     started?: number
 }
 
-export interface Objectives104 {}
+export interface Objectives104 { }
 
 export interface SkywarsHalloweenHarvest2020 {
     active?: Active105
@@ -10575,7 +10575,7 @@ export interface Active106 {
     started?: number
 }
 
-export interface Objectives106 {}
+export interface Objectives106 { }
 
 export interface BuildBattleChristmas {
     active?: Active107
@@ -10586,7 +10586,7 @@ export interface Active107 {
     started?: number
 }
 
-export interface Objectives107 {}
+export interface Objectives107 { }
 
 export interface BuildBattleChristmasWeekly {
     active?: Active108
@@ -10597,7 +10597,7 @@ export interface Active108 {
     started?: number
 }
 
-export interface Objectives108 {}
+export interface Objectives108 { }
 
 export interface MmDailyInfector {
     active?: Active109
@@ -10621,7 +10621,7 @@ export interface Active110 {
     started?: number
 }
 
-export interface Objectives110 {}
+export interface Objectives110 { }
 
 export interface BuildBattleHalloween {
     active?: Active111
@@ -10632,7 +10632,7 @@ export interface Active111 {
     started?: number
 }
 
-export interface Objectives111 {}
+export interface Objectives111 { }
 
 export interface SkywarsHalloweenHarvest2021 {
     active?: Active112
@@ -10669,7 +10669,7 @@ export interface Active113 {
     started?: number
 }
 
-export interface Objectives113 {}
+export interface Objectives113 { }
 
 export interface WoolWarsDailyWins {
     completions?: Completion77[]
@@ -10756,7 +10756,7 @@ export interface Active119 {
     started?: number
 }
 
-export interface Objectives119 {}
+export interface Objectives119 { }
 
 export interface PitWeeklyGold {
     active?: Active120
@@ -10806,7 +10806,7 @@ export interface Active122 {
     started?: number
 }
 
-export interface Objectives122 {}
+export interface Objectives122 { }
 
 export interface BedwarsDailyFinalKiller {
     completions?: Completion81[]
@@ -10833,7 +10833,7 @@ export interface Active123 {
     started?: number
 }
 
-export interface Objectives123 {}
+export interface Objectives123 { }
 
 export interface MmSpecialWeeklyKillerInstinct2023 {
     active?: Active124
@@ -10844,7 +10844,7 @@ export interface Active124 {
     started?: number
 }
 
-export interface Objectives124 {}
+export interface Objectives124 { }
 
 export interface Dmcrates102019 {
     MVP_PLUS?: boolean

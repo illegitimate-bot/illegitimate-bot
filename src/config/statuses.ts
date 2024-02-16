@@ -1,11 +1,12 @@
+import { ActivityType, Guild } from "discord.js"
+
 const statuses = [
-    { name: "over the Illegitimate Server", type: 3 },
-    { name: "jon and pit edate", type: 3 },
-    { name: "for Martina's return", type: 3 },
-    { name: "w vri's feelings", type: 0 },
-    { name: "urCryhard steal finals again", type: 3 },
-    { name: "with Perlcence the AI", type: 0 },
-    { name: "with ur mom in my bed", type: 0 },
-    { name: "with Jone the idiot", type: 0 }
+    { name: (guild: Guild) => { return `over ${guild.memberCount} members` }, type: ActivityType.Watching },
+    { name: "over the Illegitimate Server", type: ActivityType.Watching },
+    { name: "jon and pit edate", type: ActivityType.Watching },
+    { name: "for Martina's return", type: ActivityType.Watching },
+    { name: "w vri's feelings", type: ActivityType.Playing },
+    { name: "urCryhard steal finals again", type: ActivityType.Watching },
+    { name: "with Perlcence the AI", type: ActivityType.Playing },
 ]
 export = statuses

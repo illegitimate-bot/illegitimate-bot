@@ -29,10 +29,23 @@ export default async function nowplaying(interaction: ChatInputCommandInteractio
         return
     }
 
+    const progressBar = queue.node.createProgressBar({
+        leftChar: "▬",
+        rightChar: "▬",
+        separator: "|",
+        indicator: "🔘",
+        timecodes: true,
+        length: 15
+    })
+
     await interaction.editReply({
         embeds: [{
             title: "Now Playing",
-            description: `[${current.title}](${current.url})`,
+            description: `
+            [${current.title}](${current.url})
+
+            ${progressBar}
+            `,
             color: embedColor,
             thumbnail: {
                 url: current.thumbnail

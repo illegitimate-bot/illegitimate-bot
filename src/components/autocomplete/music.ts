@@ -19,14 +19,14 @@ export = {
 
         const player = useMainPlayer()
         const { tracks } = await player.search(focusedOption.value, {
-            searchEngine: QueryType.YOUTUBE_SEARCH
+            searchEngine: QueryType.AUTO_SEARCH
         })
 
         const results = tracks.map(track => ({
-            name: track.title.slice(0, 100),
+            name: `${track.title} [${track.author}]`,
             value: track.url
         }))
 
-        await interaction.respond(results.slice(0, 25)).catch()
+        await interaction.respond(results.slice(0, 10)).catch()
     }
 } as IAutocomplete

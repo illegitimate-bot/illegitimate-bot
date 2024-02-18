@@ -17,6 +17,7 @@ export = {
         .setDMPermission(false),
 
     async execute(interaction, client) {
+        const { default: prettyMs } = await import("pretty-ms")
         const castedDeps = dependencies as { [key: string]: string }
         const castedDevDeps = devDependencies as { [key: string]: string }
         let osInfo: string
@@ -55,7 +56,7 @@ export = {
                 > **Discord.js Version:** \`${(castedDeps["discord.js"]).replace("^", "")}\`
                 > **Dependencies (${Object.keys(castedDeps).length}):** \`${deps}\`
                 > **Dev Dependencies (${Object.keys(castedDevDeps).length}):** \`${devDeps}\`
-                > **Uptime:** \`${Math.floor(client.uptime! / 1000 / 60)} minutes\`
+                > **Uptime:** \`${prettyMs(client.uptime!, { verbose: true })}\`
 
                 __**Cache**__
                 > **Guilds:** \`${client.guilds.cache.size}\`

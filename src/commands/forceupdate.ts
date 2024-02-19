@@ -32,9 +32,12 @@ export = {
         const verifyData = await verify.findOne({ userID: user.user.id })
 
         if (!verifyData) {
+            await user.setNickname(`${user.user.username} (X)`, "User used the update command").catch(() => {
+                // Do nothing
+            })
             await interaction.editReply({
                 embeds: [{
-                    description: "User is not verified.",
+                    description: "User is not verified.\n\n" + "Updating username to `Username (X)`",
                     color: embedColor,
                     footer: {
                         text: interaction.guild!.name + " | " + devMessage,

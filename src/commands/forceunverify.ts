@@ -45,6 +45,9 @@ export = {
             roleManage("all").rolesToRemove,
             "User force unverified by " + interaction.user.username
         )
+        await member.setNickname(null, "User force unverified by " + interaction.user.username).catch(() => {
+            // Do nothing
+        })
 
         await logToChannel("mod", {
             embeds: [{

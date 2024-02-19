@@ -120,6 +120,9 @@ export = {
             }
 
             await user.roles.add(defaultMember, "Verification")
+            await user.setNickname(player.displayname!, "Verification").catch(() => {
+                // Do nothing
+            })
 
             const newVerify = new verify({
                 _id: new mongoose.Types.ObjectId(),

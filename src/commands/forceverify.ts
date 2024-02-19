@@ -155,6 +155,9 @@ export = {
         }
 
         await user.roles.add(roleManage("default").rolesToAdd, "User was force verified by " + modName)
+        await user.setNickname(player.displayname!, "User was force verified by " + modName).catch(() => {
+            // Do nothing
+        })
 
         const newVerify = new verify({
             _id: new mongoose.Types.ObjectId(),

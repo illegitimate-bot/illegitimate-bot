@@ -58,10 +58,17 @@ export = {
             const roles = roleManage("default")
             await user.roles.remove(roles.rolesToRemove, "User used the update command")
             await user.roles.add(roles.rolesToAdd, "User used the update command")
+            await user.setNickname(ign, "User used the update command").catch(() => {
+                // Do nothing
+            })
 
             await interaction.editReply({
                 embeds: [{
-                    description: "Updated your roles to `Default Member`",
+                    description: `
+                    Updated your roles to \`Default Member\`
+                    
+                    IGN: \`${ign}\`
+                    `,
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -124,13 +131,22 @@ export = {
                 replyRank = "Member"
             }
 
+            // FIXME: need to check if user is on waiting list
             if (user.roles.cache.has(waitingListRole)) {
                 await user.roles.remove(waitingListRole, "User used the update command")
             }
 
+            await user.setNickname(ign, "Verification").catch(() => {
+                // Do nothing
+            })
+
             await interaction.editReply({
                 embeds: [{
-                    description: "Updated your roles to `" + replyRank + "`",
+                    description: `
+                    Updated your roles to \`${replyRank}\`
+
+                    IGN: \`${ign}\`
+                    `,
                     color: embedColor,
                     thumbnail: {
                         url: head!

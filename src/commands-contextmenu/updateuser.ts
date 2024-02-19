@@ -69,10 +69,17 @@ export = {
             const roles = roleManage("default")
             await user.roles.remove(roles.rolesToRemove, "User was force updated.")
             await user.roles.add(roles.rolesToAdd, "User was force updated.")
+            await user.setNickname(ign, "User was force updated.").catch(() => {
+                // Do nothing
+            })
 
             await interaction.editReply({
                 embeds: [{
-                    description: usermentioned + " was given the the Default Member role.",
+                    description: `
+                    ${usermentioned} was given the \`Default Member\` role.
+
+                    IGN: \`${ign}\`
+                    `,
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -135,13 +142,22 @@ export = {
                 replyRank = "Member"
             }
 
+            // FIXME: check if user is on waiting list
             if (user.roles.cache.has(waitingListRole)) {
                 await user.roles.remove(waitingListRole, "User was force updated.")
             }
 
+            await user.setNickname(ign, "User was force updated.").catch(() => {
+                // Do nothing
+            })
+
             await interaction.editReply({
                 embeds: [{
-                    description: usermentioned + " was given the " + replyRank + " role.",
+                    description: `
+                    ${usermentioned} was given the \`${replyRank}\` role.
+                    
+                    IGN: \`${ign}\`
+                    `,
                     color: embedColor,
                     thumbnail: {
                         url: head!

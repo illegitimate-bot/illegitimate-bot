@@ -5,7 +5,7 @@ import { verifyTick } from "config/roles"
 import roleManage from "utils/functions/rolesmanage"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
 import env from "utils/Env"
-import { getGuild } from "utils/Hypixel"
+import { getGuild, getIGN } from "utils/Hypixel"
 import { IGuildData } from "interfaces"
 
 export default async function updateAll(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -70,52 +70,50 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
         if (!memberData) {
             const rolesToremove = roleManage("default").rolesToRemove
             await gmember.member.roles.remove(rolesToremove, "Updating all discord members")
-            continue
         } else {
-            await gmember.member.roles.add(verifyTick, "Updating all discord members")
-            console.log(color(" Added verified tick to " + gmember.member.user.username, "lavender"))
-        }
-
-        if (!guildMemberIDs.includes(memberData?.uuid || "none")) {
-            const rolesToremove = roleManage("default").rolesToRemove
-            await gmember.member.roles.remove(rolesToremove, "Updating all discord members")
-            continue
-        } else if (guildMemberIDs.includes(memberData!.uuid)) {
-            const guildMemberRank = hypixelGuildMembers.find(gmember => gmember.uuid === memberData!.uuid)!.rank
-            console.log(color(" Updating roles for " + gmember.member.user.username, "lavender"))
-
-            if (guildMemberRank === "Guild Master") {
-                const rolesmanage = roleManage("gm")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
-                continue
-            } else if (guildMemberRank === "Manager") {
-                const rolesmanage = roleManage("manager")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
-                continue
-            } else if (guildMemberRank === "Moderator") {
-                const rolesmanage = roleManage("moderator")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
-                continue
-            } else if (guildMemberRank === "Beast") {
-                const rolesmanage = roleManage("beast")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
-                continue
-            } else if (guildMemberRank === "Elite") {
-                const rolesmanage = roleManage("elite")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
-                continue
-            } else if (guildMemberRank === "Member") {
-                const rolesmanage = roleManage("member")
-                gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
-                gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
-                continue
+            const uuid = memberData.uuid
+            const ign = await getIGN(uuid)
+            if (!gmember.member.roles.cache.has(verifyTick)) {
+                await gmember.member.roles.add(verifyTick, "Updating all discord members")
+                console.log(color(" Added verified tick to " + gmember.member.user.username, "lavender"))
             }
-            continue
+
+            if (!guildMemberIDs.includes(memberData?.uuid || "none")) {
+                const rolesToremove = roleManage("default").rolesToRemove
+                await gmember.member.roles.remove(rolesToremove, "Updating all discord members")
+            } else if (guildMemberIDs.includes(memberData!.uuid)) {
+                const guildMemberRank = hypixelGuildMembers.find(gmember => gmember.uuid === memberData!.uuid)!.rank
+                console.log(color(" Updating roles for " + gmember.member.user.username, "lavender"))
+
+                if (guildMemberRank === "Guild Master") {
+                    const rolesmanage = roleManage("gm")
+                    gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
+                    gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
+                } else if (guildMemberRank === "Manager") {
+                    const rolesmanage = roleManage("manager")
+                    gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
+                    gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
+                } else if (guildMemberRank === "Moderator") {
+                    const rolesmanage = roleManage("moderator")
+                    gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
+                    gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
+                } else if (guildMemberRank === "Beast") {
+                    const rolesmanage = roleManage("beast")
+                    gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
+                    gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
+                } else if (guildMemberRank === "Elite") {
+                    const rolesmanage = roleManage("elite")
+                    gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
+                    gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
+                } else if (guildMemberRank === "Member") {
+                    const rolesmanage = roleManage("member")
+                    gmember.member.roles.remove(rolesmanage.rolesToRemove, "Updating all discord members")
+                    gmember.member.roles.add(rolesmanage.rolesToAdd, "Updating all discord members")
+                }
+            }
+            await gmember.member.setNickname(ign, "Updating all discord members").catch(() => {
+                // Do nothing
+            })
         }
     }
 

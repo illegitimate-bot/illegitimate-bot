@@ -64,12 +64,19 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
     for (const gmember of guildMembers) {
         const memberData = verifiedUsers.find(user => user.userID === gmember.id)
 
-        console.log(color("Updating member " + i + " of " + guildMembers.length, "green"))
+        console.log(color(`Updating ${gmember.member.user.username} [${i}/${guildMembers.length}]`, "green"))
         i++
 
         if (!memberData) {
+            if (gmember.member.user.bot) {
+                console.log(color(" Skipped bot", "lavender"))
+                continue
+            }
             const rolesToremove = roleManage("default").rolesToRemove
             await gmember.member.roles.remove(rolesToremove, "Updating all discord members")
+            await gmember.member.setNickname(`${gmember.member.user.username} (X)`, "Updating all discord members").catch(() => {
+                // Do nothing
+            })
         } else {
             const uuid = memberData.uuid
             const ign = await getIGN(uuid)
@@ -119,7 +126,7 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
 
     console.log("Successfully updated all roles.")
 
-    await interaction.editReply({
+    await interaction.channel?.send({
         embeds: [{
             description: "Successfully updated all roles.",
             color: embedColor

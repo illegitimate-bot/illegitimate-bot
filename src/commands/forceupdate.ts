@@ -151,11 +151,7 @@ export = {
                 replyRank = "Member"
             }
 
-            // FIXME: need to check if user is on waiting list
-            if (user.roles.cache.has(waitingListRole)) {
-                await user.roles.remove(waitingListRole, "User was force updated.")
-            }
-
+            await user.roles.remove(waitingListRole, "User was force updated.")
             await user.setNickname(ign, "User was force updated.").catch(() => {
                 // Do nothing
             })
@@ -164,7 +160,7 @@ export = {
                 embeds: [{
                     description: `
                     ${usermentioned} was given the \`${replyRank}\` role.
-                    
+
                     IGN: \`${ign}\`
                     `,
                     color: embedColor,

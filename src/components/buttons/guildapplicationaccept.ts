@@ -6,7 +6,7 @@ import guildapp from "schemas/guildAppSchema"
 import waitingList from "schemas/waitinglistSchema"
 import { waitingListRole } from "config/roles"
 import { IButton } from "interfaces"
-import { getGuild } from "utils/Hypixel"
+import { getGuild, getIGN } from "utils/Hypixel"
 
 export = {
     name: "guildapplicationaccept",
@@ -20,7 +20,6 @@ export = {
         const message = interaction.message
         const embed = message.embeds[0]
         const applicantId = embed.footer!.text.split(" ")[1]
-        const applicantIGN = embed.fields[0].value.replaceAll("`", "")
 
         const applicant = await guild.members.fetch(applicantId)
         const applicantUsername = applicant.user.username + "#" + applicant.user.discriminator
@@ -63,7 +62,6 @@ export = {
             _id: new mongoose.Types.ObjectId(),
             userID: applicantId,
             uuid: applicantUUID,
-            IGN: applicantIGN,
             timestamp: time
         })
 
@@ -108,10 +106,11 @@ export = {
             const fields: { name: string; value: string }[] = []
 
             for (let i = 0; i < accepted.length; i++) {
+                const ign = await getIGN(accepted[i].uuid)
                 const timestamp = Math.floor(accepted[i].timestamp / 1000)
 
                 fields.push({
-                    name: `${i + 1}. ${accepted[i].IGN}`,
+                    name: `${i + 1}. ${ign}`,
                     value: `TS: <t:${timestamp}:R>`
                 })
             }

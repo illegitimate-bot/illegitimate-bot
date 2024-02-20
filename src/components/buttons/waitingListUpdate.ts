@@ -1,5 +1,5 @@
 import waitinglist from "schemas/waitinglistSchema"
-import { getGuild } from "utils/Hypixel"
+import { getGuild, getIGN } from "utils/Hypixel"
 import { hypixelGuildID } from "config/options"
 import { IButton } from "interfaces"
 
@@ -28,10 +28,11 @@ export = {
         const fields = []
 
         for (let i = 0; i < accepted.length; i++) {
+            const ign = await getIGN(accepted[i].uuid)
             const timestamp = Math.floor(accepted[i].timestamp / 1000)
 
             fields.push({
-                name: `${i + 1}. ${accepted[i].IGN}`,
+                name: `${i + 1}. ${ign}`,
                 value: `TS: <t:${timestamp}:R>`
             })
         }

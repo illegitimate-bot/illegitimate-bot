@@ -28,7 +28,12 @@ export = {
         const user = interaction.options.getUser("user")!
         const verifiedUser = await verify.findOne({ userID: user.id })
         if (!verifiedUser) {
-            interaction.editReply("You are not verified!")
+            interaction.editReply({
+                embeds: [{
+                    description: userMention(user.id) + " is not verified.",
+                    color: embedColor
+                }]
+            })
             return
         }
 

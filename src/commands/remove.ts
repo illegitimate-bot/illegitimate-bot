@@ -1,13 +1,14 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import waitinglistSchema from "schemas/waitinglistSchema"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { waitingListRole } from "config/roles"
 
 export = {
     name: "remove",
     description: "Remove a person on the waiting list.",
-    false: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()
@@ -31,22 +32,23 @@ export = {
     async execute(interaction) {
         await interaction.deferReply()
 
-        const user = interaction.options.getUser("user")!
+        const member = interaction.options.getMember("user") as GuildMember
         const reason = interaction.options.getString("reason") ?? "No reason provided."
         const mod = interaction.user!
-        const waitinglist = await waitinglistSchema.findOne({ userID: user.id })
+        const waitinglist = await waitinglistSchema.findOne({ userID: member.user.id })
 
         if (!waitinglist) {
             await interaction.editReply({
                 embeds: [{
-                    description: userMention(user.id) + " is not on the waiting list.",
+                    description: userMention(member.user.id) + " is not on the waiting list.",
                     color: embedColor
                 }]
             })
             return
         }
 
-        await waitinglistSchema.findOneAndDelete({ userID: user.id })
+        await waitinglistSchema.findOneAndDelete({ userID: member.user.id })
+        await member.roles.remove(waitingListRole, "Removed from waiting list.")
 
         await logToChannel("mod", {
             embeds: [{
@@ -56,7 +58,7 @@ export = {
                 },
                 title: "Waiting List - Remove User",
                 description: `
-                **User:** ${userMention(user.id)}
+                **User:** ${userMention(member.user.id)}
                 **Reason:** ${reason}
                 **Mod:** ${userMention(mod.id)}
                 `,
@@ -65,8 +67,8 @@ export = {
                     url: mod.avatarURL() || ""
                 },
                 footer: {
-                    icon_url: user.avatarURL() || undefined,
-                    text: "ID: " + user.id
+                    icon_url: member.avatarURL() || undefined,
+                    text: "ID: " + member.user.id
                 },
                 timestamp: new Date().toISOString()
             }]
@@ -75,7 +77,7 @@ export = {
         await interaction.editReply({
             embeds: [{
                 title: "Waiting List - Remove User",
-                description: "**User:** " + userMention(user.id) + "\n" +
+                description: "**User:** " + userMention(member.user.id) + "\n" +
                     "**Reason:** `" + reason + "`",
                 color: embedColor,
                 footer: {

@@ -134,10 +134,7 @@ export = {
                 replyRank = "Member"
             }
 
-            // FIXME: need to check if user is on waiting list
-            if (user.roles.cache.has(waitingListRole)) {
-                await user.roles.remove(waitingListRole, "User used the update command")
-            }
+            await user.roles.remove(waitingListRole, "User used the update command")
 
             await user.setNickname(ign, "Verification").catch(() => {
                 // Do nothing

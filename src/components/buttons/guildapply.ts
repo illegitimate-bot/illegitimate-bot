@@ -1,12 +1,12 @@
-import { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, GuildMember, TextChannel } from "discord.js"
+import { ButtonBuilder, ButtonStyle, ActionRowBuilder, GuildMember, TextChannel } from "discord.js"
 import { embedColor, applicationsChannel } from "config/options"
 import { largeM, smallM, ignM } from "config/limitmessages"
 import questions from "config/questions"
 import { guildRole } from "config/roles"
-import { getUUID } from "utils/Hypixel"
 import mongoose from "mongoose"
 import guildapp from "schemas/guildAppSchema"
 import { IButton } from "interfaces"
+import applicationQuestions from "utils/functions/applicationquestions"
 
 export = {
     name: "guildapply",
@@ -39,16 +39,6 @@ export = {
             return
         }
 
-        const tooLong = new EmbedBuilder()
-            .setDescription("You took too long to respond.")
-            .setColor(embedColor)
-        const cancelled = new EmbedBuilder()
-            .setDescription("You have cancelled your application.")
-            .setColor(embedColor)
-        const attachments = new EmbedBuilder()
-            .setDescription("You have uploaded an attachment. Please do not upload images, videos, or GIFS.")
-            .setColor(embedColor)
-
         try {
             await user.send({
                 embeds: [{
@@ -71,18 +61,8 @@ export = {
             max: 1,
             time: 1000 * 60
         })
-        if (input.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (input.first()!.content.toLowerCase() !== "yes") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (input.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
+        const confirm1 = await applicationQuestions(input, user, 0, "confirmation")
+        if (!confirm1) return
 
         // first question
         await user.send({
@@ -95,44 +75,16 @@ export = {
                 }
             }]
         })
-        const answer1 = await user.dmChannel!.awaitMessages({
+
+        const useranswer1 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 5
         })
-        if (answer1.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer1.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer1.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer1.first()!.content.length > 16) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 16.",
-                    color: embedColor
-                }]
-            })
-            return
-        }
-        const uuid = await getUUID(answer1.first()!.content)
-        if (!uuid) {
-            await user.send({
-                embeds: [{
-                    description: "That is not a valid Minecraft username.\n" +
-                        "Application cancelled.",
-                    color: embedColor
-                }]
-            })
-            return
-        }
-        const answer1_1 = answer1.first()!.content
+        const answer1Obj = await applicationQuestions(useranswer1, user, 16, "ign") as boolean | { answer: string, uuid: string }
+        if (answer1Obj === false || answer1Obj === true) return
+        const answer1 = answer1Obj.answer
+        const uuid = answer1Obj.uuid
 
         // second question
         await user.send({
@@ -145,33 +97,14 @@ export = {
                 }
             }]
         })
-        const answer2 = await user.dmChannel!.awaitMessages({
+
+        const useranswer2 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 15
         })
-        if (answer2.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer2.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer2.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer2.first()!.content.length > 8) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 8.",
-                    color: embedColor
-                }]
-            })
-            return
-        }
-        const answer2_1 = answer2.first()!.content
+        const answer2 = await applicationQuestions(useranswer2, user, 8, "normal")
+        if (!answer2) return
 
         // third question
         await user.send({
@@ -184,32 +117,14 @@ export = {
                 }
             }]
         })
-        const answer3 = await user.dmChannel!.awaitMessages({
+
+        const useranswer3 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 15
         })
-        if (answer3.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer3.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer3.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer3.first()!.content.length > 128) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 128.",
-                    color: embedColor
-                }]
-            })
-        }
-        const answer3_1 = answer3.first()!.content
+        const answer3 = await applicationQuestions(useranswer3, user, 128, "normal")
+        if (!answer3) return
 
         // fourth question
         await user.send({
@@ -223,32 +138,14 @@ export = {
                 }
             }]
         })
-        const answer4 = await user.dmChannel!.awaitMessages({
+
+        const useranswer4 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 15
         })
-        if (answer4.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer4.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer4.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer4.first()!.content.length > 256) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 256.",
-                    color: embedColor
-                }]
-            })
-        }
-        const answer4_1 = answer4.first()!.content
+        const answer4 = await applicationQuestions(useranswer4, user, 256, "normal")
+        if (!answer4) return
 
         // fifth question
         await user.send({
@@ -261,32 +158,14 @@ export = {
                 }
             }]
         })
-        const answer5 = await user.dmChannel!.awaitMessages({
+
+        const useranswer5 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 15
         })
-        if (answer5.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer5.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer5.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer5.first()!.content.length > 128) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 128.",
-                    color: embedColor
-                }]
-            })
-        }
-        const answer5_1 = answer5.first()!.content
+        const answer5 = await applicationQuestions(useranswer5, user, 128, "normal")
+        if (!answer5) return
 
         // sixth question
         await user.send({
@@ -299,32 +178,14 @@ export = {
                 }
             }]
         })
-        const answer6 = await user.dmChannel!.awaitMessages({
+
+        const useranswer6 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 15
         })
-        if (answer6.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer6.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer6.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer6.first()!.content.length > 256) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 256.",
-                    color: embedColor
-                }]
-            })
-        }
-        const answer6_1 = answer6.first()!.content
+        const answer6 = await applicationQuestions(useranswer6, user, 256, "normal")
+        if (!answer6) return
 
         // seventh question
         await user.send({
@@ -337,32 +198,14 @@ export = {
                 }
             }]
         })
-        const answer7 = await user.dmChannel!.awaitMessages({
+
+        const useranswer7 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 15
         })
-        if (answer7.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer7.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer7.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer7.first()!.content.length > 128) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 128.",
-                    color: embedColor
-                }]
-            })
-        }
-        const answer7_1 = answer7!.first()!.content
+        const answer7 = await applicationQuestions(useranswer7, user, 128, "normal")
+        if (!answer7) return
 
         // eighth question
         await user.send({
@@ -375,32 +218,14 @@ export = {
                 }
             }]
         })
-        const answer8 = await user.dmChannel!.awaitMessages({
+
+        const useranswer8 = await user.dmChannel!.awaitMessages({
             filter: m => m.author.id === user.user.id,
             max: 1,
             time: 1000 * 60 * 15
         })
-        if (answer8.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (answer8.first()!.content.toLowerCase() === "cancel") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (answer8.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
-        if (answer8.first()!.content.length > 64) {
-            await user.send({
-                embeds: [{
-                    description: "Max character limit is 64.",
-                    color: embedColor
-                }]
-            })
-        }
-        const answer8_1 = answer8.first()!.content
+        const answer8 = await applicationQuestions(useranswer8, user, 64, "normal")
+        if (!answer8) return
 
         await user.send({
             embeds: [{
@@ -414,18 +239,8 @@ export = {
             max: 1,
             time: 1000 * 60 * 5
         })
-        if (final.size === 0) {
-            await user.send({ embeds: [tooLong] })
-            return
-        }
-        if (final.first()!.content.toLowerCase() !== "yes") {
-            await user.send({ embeds: [cancelled] })
-            return
-        }
-        if (final.first()!.attachments.size > 0) {
-            await user.send({ embeds: [attachments] })
-            return
-        }
+        const confirm2 = await applicationQuestions(final, user, 0, "confirmation")
+        if (!confirm2) return
 
         await user.send({
             embeds: [{
@@ -453,35 +268,35 @@ export = {
                 fields: [
                     {
                         name: rq(1),
-                        value: "```" + answer1_1 + "```"
+                        value: "```" + answer1 + "```"
                     },
                     {
                         name: rq(2),
-                        value: "```" + answer2_1 + "```"
+                        value: "```" + answer2 + "```"
                     },
                     {
                         name: rq(3),
-                        value: "```" + answer3_1 + "```"
+                        value: "```" + answer3 + "```"
                     },
                     {
                         name: rq(4),
-                        value: "```" + answer4_1 + "```"
+                        value: "```" + answer4 + "```"
                     },
                     {
                         name: rq(5),
-                        value: "```" + answer5_1 + "```"
+                        value: "```" + answer5 + "```"
                     },
                     {
                         name: rq(6),
-                        value: "```" + answer6_1 + "```"
+                        value: "```" + answer6 + "```"
                     },
                     {
                         name: rq(7),
-                        value: "```" + answer7_1 + "```"
+                        value: "```" + answer7 + "```"
                     },
                     {
                         name: rq(8),
-                        value: "```" + answer8_1 + "```"
+                        value: "```" + answer8 + "```"
                     }
                 ],
                 footer: {

@@ -88,7 +88,7 @@ export = {
                     ${usermentioned} was given the \`Default Member\` role.
 
                     IGN: \`${ign}\`
-                    `,
+                    `.replace(/\n */g, "\n"),
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -162,7 +162,7 @@ export = {
                     ${usermentioned} was given the \`${replyRank}\` role.
 
                     IGN: \`${ign}\`
-                    `,
+                    `.replace(/\n */g, "\n"),
                     color: embedColor,
                     thumbnail: {
                         url: head!

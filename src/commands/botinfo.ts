@@ -8,7 +8,7 @@ const { dependencies, devDependencies } = require("../../package.json")
 export = {
     name: "botinfo",
     description: "Get information about the bot",
-    dev: false,
+    dev: true,
     public: true,
 
     data: new SlashCommandBuilder()
@@ -63,7 +63,7 @@ export = {
                 > **Channels:** \`${client.channels.cache.size}\`
                 > **Users:** \`${client.users.cache.size}\`
                 > **Roles:** \`${client.guilds.cache.reduce((a, b) => a + b.roles.cache.size, 0)}\`
-                `,
+                `.replace(/\n */g, "\n"),
                 thumbnail: {
                     url: client.user!.avatarURL() || "",
                 },

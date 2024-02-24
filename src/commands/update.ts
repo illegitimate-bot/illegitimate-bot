@@ -71,7 +71,7 @@ export = {
                     Updated your roles to \`Default Member\`
                     
                     IGN: \`${ign}\`
-                    `,
+                    `.replace(/\n */g, "\n"),
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -146,7 +146,7 @@ export = {
                     Updated your roles to \`${replyRank}\`
 
                     IGN: \`${ign}\`
-                    `,
+                    `.replace(/\n */g, "\n"),
                     color: embedColor,
                     thumbnail: {
                         url: head!

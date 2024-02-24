@@ -106,7 +106,7 @@ export = {
                 **Mod:** ${userMention(mod.user.id)}
                 **Reason:** ${reason}
                 **Messages Deleted:** ${messageDeletionDays} days
-                `,
+                `.replace(/\n */g, "\n"),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""

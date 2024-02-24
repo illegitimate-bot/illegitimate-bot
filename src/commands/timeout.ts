@@ -137,7 +137,7 @@ export = {
                 ${timeouttime === null ? "**Time:** `None`" : "**Time:** `" + prettyTime + "`"}
                 **Reason:** \`${reason}\`
                 **Mod:** ${userMention(mod.id)}
-                `,
+                `.replace(/\n */g, "\n"),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""

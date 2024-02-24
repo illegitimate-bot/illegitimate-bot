@@ -45,7 +45,7 @@ export default async function nowplaying(interaction: ChatInputCommandInteractio
             [${current.title}](${current.url})
 
             ${progressBar}
-            `,
+            `.replace(/\n */g, "\n"),
             color: embedColor,
             thumbnail: {
                 url: current.thumbnail

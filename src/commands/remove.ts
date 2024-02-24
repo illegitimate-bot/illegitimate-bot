@@ -4,6 +4,7 @@ import waitinglistSchema from "schemas/waitinglistSchema"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 import { waitingListRole } from "config/roles"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "remove",
@@ -57,11 +58,11 @@ export = {
                     icon_url: mod.avatarURL() || undefined
                 },
                 title: "Waiting List - Remove User",
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(member.user.id)}
                 **Reason:** ${reason}
                 **Mod:** ${userMention(mod.id)}
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

@@ -5,6 +5,7 @@ import verify from "schemas/verifySchema"
 import { ICommand } from "interfaces"
 import roleManage from "utils/functions/rolesmanage"
 import { waitingListRole } from "config/roles"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "forceupdate",
@@ -84,11 +85,11 @@ export = {
 
             await interaction.editReply({
                 embeds: [{
-                    description: `
+                    description: removeIndents(`
                     ${usermentioned} was given the \`Default Member\` role.
 
                     IGN: \`${ign}\`
-                    `.replace(/\n */g, "\n"),
+                    `),
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -158,11 +159,11 @@ export = {
 
             await interaction.editReply({
                 embeds: [{
-                    description: `
+                    description: removeIndents(`
                     ${usermentioned} was given the \`${replyRank}\` role.
 
                     IGN: \`${ign}\`
-                    `.replace(/\n */g, "\n"),
+                    `),
                     color: embedColor,
                     thumbnail: {
                         url: head!

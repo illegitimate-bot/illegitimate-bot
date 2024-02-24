@@ -2,6 +2,7 @@ import { SlashCommandBuilder, PermissionFlagsBits, TextChannel, channelMention, 
 import { embedColor } from "config/options"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "clear",
@@ -52,11 +53,11 @@ export = {
                         icon_url: interaction.user.avatarURL() || undefined
                     },
                     title: "Messages Cleared",
-                    description: `
+                    description: removeIndents(`
                     **Channel:** ${channelMention(channel.id)}
                     **Amount:** \`${messages.size}\` messages
                     **Mod:** ${userMention(interaction.user.id)}
-                    `.replace(/\n */g, "\n"),
+                    `),
                     color: embedColor,
                     thumbnail: {
                         url: interaction.user.avatarURL() || ""

@@ -2,6 +2,7 @@ import { SlashCommandBuilder, PermissionFlagsBits, userMention, User } from "dis
 import { embedColor, devMessage } from "config/options"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "unban",
@@ -67,11 +68,11 @@ export = {
                     icon_url: mod.avatarURL() || undefined
                 },
                 title: "Member Unbanned",
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(user!.id)}
                 **Mod:** ${userMention(mod.id)}
                 **Reason:** ${reason}
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

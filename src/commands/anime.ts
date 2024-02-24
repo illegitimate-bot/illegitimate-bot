@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import { devMessage, embedColor } from "config/options"
 import { anilist } from "anilist"
-import { capitalizeFirstLetter } from "utils/functions/funcs"
+import { capitalizeFirstLetter, removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "anime",
@@ -66,7 +66,7 @@ export = {
             embeds: [{
                 title: romaji + " | " + english,
                 url: anime.siteUrl || "",
-                description: `
+                description: removeIndents(`
                 **Description:** ${animeDescription}
                 
                 **Genres:** ${anime.genres.join(", ")}
@@ -76,7 +76,7 @@ export = {
                 **Season:** ${animeSeason}
                 **Start Date:** ${animeStartDate}
                 **End Date:** ${animeEndDate}
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: anime.coverImage?.medium || ""

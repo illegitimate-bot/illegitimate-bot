@@ -58,7 +58,7 @@ export = {
                 **Channel:** ${channelMention(channel.id)}
                 **Slowmode:** ${seconds} seconds
                 **Mod:** ${userMention(interaction.user.id)}
-                `,
+                `.replace(/\n */g, "\n"),
                 color: embedColor,
                 thumbnail: {
                     url: interaction.user.avatarURL() || ""

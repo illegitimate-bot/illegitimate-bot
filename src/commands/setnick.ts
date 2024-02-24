@@ -52,7 +52,7 @@ export = {
                 **User:** ${userMention(member.id)}
                 **Nickname:** ${nickname}
                 **Moderator:** ${userMention(interaction.user.id)}
-                `,
+                `.replace(/\n */g, "\n"),
                 color: embedColor,
                 thumbnail: {
                     url: interaction.user.avatarURL() || ""

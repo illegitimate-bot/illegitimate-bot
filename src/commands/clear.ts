@@ -56,7 +56,7 @@ export = {
                     **Channel:** ${channelMention(channel.id)}
                     **Amount:** \`${messages.size}\` messages
                     **Mod:** ${userMention(interaction.user.id)}
-                    `,
+                    `.replace(/\n */g, "\n"),
                     color: embedColor,
                     thumbnail: {
                         url: interaction.user.avatarURL() || ""

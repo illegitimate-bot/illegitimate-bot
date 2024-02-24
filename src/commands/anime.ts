@@ -76,7 +76,7 @@ export = {
                 **Season:** ${animeSeason}
                 **Start Date:** ${animeStartDate}
                 **End Date:** ${animeEndDate}
-                `,
+                `.replace(/\n */g, "\n"),
                 color: embedColor,
                 thumbnail: {
                     url: anime.coverImage?.medium || ""

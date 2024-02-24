@@ -61,7 +61,7 @@ export = {
                 **User:** ${userMention(member.user.id)}
                 **Reason:** ${reason}
                 **Mod:** ${userMention(mod.id)}
-                `,
+                `.replace(/\n */g, "\n"),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

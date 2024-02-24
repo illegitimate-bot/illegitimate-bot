@@ -179,7 +179,7 @@ export = {
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${player.displayname}\`
                 **UUID:** \`${uuid}\`
-                `,
+                `.replace(/\n */g, "\n"),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

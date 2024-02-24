@@ -2,6 +2,7 @@ import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } fr
 import { embedColor, devMessage } from "config/options"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "setnick",
@@ -48,11 +49,11 @@ export = {
                     icon_url: interaction.user.avatarURL() || undefined
                 },
                 title: "Nickname",
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(member.id)}
                 **Nickname:** ${nickname}
                 **Moderator:** ${userMention(interaction.user.id)}
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: interaction.user.avatarURL() || ""

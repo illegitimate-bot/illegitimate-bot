@@ -2,6 +2,7 @@ import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel, cha
 import { embedColor, devMessage } from "config/options"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "slowmode",
@@ -54,11 +55,11 @@ export = {
                     icon_url: interaction.user.avatarURL() || undefined
                 },
                 title: "Slowmode Update",
-                description: `
+                description: removeIndents(`
                 **Channel:** ${channelMention(channel.id)}
                 **Slowmode:** ${seconds} seconds
                 **Mod:** ${userMention(interaction.user.id)}
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: interaction.user.avatarURL() || ""

@@ -5,6 +5,7 @@ import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import roleManage from "utils/functions/rolesmanage"
 import { ICommand } from "interfaces"
 import { waitingListRole } from "config/roles"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "update",
@@ -67,11 +68,11 @@ export = {
 
             await interaction.editReply({
                 embeds: [{
-                    description: `
+                    description: removeIndents(`
                     Updated your roles to \`Default Member\`
                     
                     IGN: \`${ign}\`
-                    `.replace(/\n */g, "\n"),
+                    `),
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -142,11 +143,11 @@ export = {
 
             await interaction.editReply({
                 embeds: [{
-                    description: `
+                    description: removeIndents(`
                     Updated your roles to \`${replyRank}\`
 
                     IGN: \`${ign}\`
-                    `.replace(/\n */g, "\n"),
+                    `),
                     color: embedColor,
                     thumbnail: {
                         url: head!

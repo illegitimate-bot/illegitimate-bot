@@ -3,12 +3,13 @@ import { ICommand } from "interfaces"
 import { embedColor, devMessage } from "config/options"
 import os from "os"
 import { execSync } from "child_process"
+import { removeIndents } from "utils/functions/funcs"
 const { dependencies, devDependencies } = require("../../package.json")
 
 export = {
     name: "botinfo",
     description: "Get information about the bot",
-    dev: true,
+    dev: false,
     public: true,
 
     data: new SlashCommandBuilder()
@@ -42,7 +43,7 @@ export = {
         await interaction.reply({
             embeds: [{
                 title: "Bot Info",
-                description: `
+                description: removeIndents(`
                 __**Bot**__
                 > **Name**: \`${client.user!.username}\`
                 > **ID**: \`${client.user!.id}\`
@@ -63,7 +64,7 @@ export = {
                 > **Channels:** \`${client.channels.cache.size}\`
                 > **Users:** \`${client.users.cache.size}\`
                 > **Roles:** \`${client.guilds.cache.reduce((a, b) => a + b.roles.cache.size, 0)}\`
-                `.replace(/\n */g, "\n"),
+                `),
                 thumbnail: {
                     url: client.user!.avatarURL() || "",
                 },

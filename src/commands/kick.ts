@@ -3,6 +3,7 @@ import { admin, helper } from "config/roles"
 import { embedColor, devMessage } from "config/options"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "kick",
@@ -75,11 +76,11 @@ export = {
                     icon_url: mod.user.avatarURL() || undefined
                 },
                 title: "Member Kicked",
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.user.id)}
                 **Reason:** ${reason}
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""

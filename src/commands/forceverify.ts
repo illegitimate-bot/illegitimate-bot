@@ -6,6 +6,7 @@ import mongoose from "mongoose"
 import roleManage from "utils/functions/rolesmanage"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "forceverify",
@@ -174,12 +175,12 @@ export = {
                     icon_url: mod.avatarURL() || undefined
                 },
                 title: "Force Verified",
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${player.displayname}\`
                 **UUID:** \`${uuid}\`
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

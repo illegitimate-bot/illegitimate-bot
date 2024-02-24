@@ -3,6 +3,7 @@ import { admin, helper } from "config/roles"
 import { embedColor, devMessage } from "config/options"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "ban",
@@ -101,12 +102,12 @@ export = {
                     icon_url: mod.user.avatarURL() || undefined
                 },
                 title: "Member Banned",
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.user.id)}
                 **Reason:** ${reason}
                 **Messages Deleted:** ${messageDeletionDays} days
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""

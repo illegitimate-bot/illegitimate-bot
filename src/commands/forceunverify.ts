@@ -5,6 +5,7 @@ import { ICommand } from "interfaces"
 import roleManage from "utils/functions/rolesmanage"
 import logToChannel from "utils/functions/logtochannel"
 import { getIGN } from "utils/Hypixel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "forceunverify",
@@ -56,12 +57,12 @@ export = {
                     name: mod.username,
                     icon_url: mod.avatarURL() || undefined
                 },
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${ign}\`
                 **UUID:** \`${uuid}\`
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

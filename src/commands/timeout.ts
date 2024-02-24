@@ -3,6 +3,7 @@ import { embedColor, devMessage } from "config/options"
 import { ICommand } from "interfaces"
 import ms from "ms"
 import logToChannel from "utils/functions/logtochannel"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "timeout",
@@ -132,12 +133,12 @@ export = {
                     icon_url: mod.user.avatarURL() || undefined
                 },
                 title: title,
-                description: `
+                description: removeIndents(`
                 **User:** ${userMention(target.id)}
                 ${timeouttime === null ? "**Time:** `None`" : "**Time:** `" + prettyTime + "`"}
                 **Reason:** \`${reason}\`
                 **Mod:** ${userMention(mod.id)}
-                `.replace(/\n */g, "\n"),
+                `),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""

@@ -10,7 +10,7 @@ export = {
     name: "verifybox",
     description: "Verify box.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })
 
         const user = interaction.member as GuildMember

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, ChatInputCommandInteraction, GuildMember } from "discord.js"
+import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { embedColor, devMessage } from "config/options"
 import { ICommand } from "interfaces"
 import ms from "ms"
@@ -34,7 +34,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
-    async execute(interaction: ChatInputCommandInteraction) {
+    async execute({ interaction }) {
         await interaction.deferReply()
 
         const target = interaction.options.getMember("user")! as GuildMember

@@ -51,7 +51,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
-    async execute(interaction, client) {
+    async execute({ interaction, client }) {
         const subcommand = interaction.options.getSubcommand()
 
         if (subcommand === "help") {

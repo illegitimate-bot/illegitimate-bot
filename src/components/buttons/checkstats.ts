@@ -8,7 +8,7 @@ export = {
     name: "checkstats",
     description: "Check your stats.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply()
 
         const message = interaction.message

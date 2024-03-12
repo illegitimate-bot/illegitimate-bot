@@ -39,7 +39,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()
 
         if (subcommand === "ban") {

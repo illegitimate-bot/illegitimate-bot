@@ -40,7 +40,7 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
         }
 
         try {
-            await autocomplete.execute(interaction)
+            await autocomplete.execute({ interaction, client })
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {

@@ -14,7 +14,7 @@ export = {
     name: "staffapply",
     description: "Apply for the staff team.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const user = interaction.member as GuildMember
         const guild = interaction.guild!
         const userRoles = user.roles.cache

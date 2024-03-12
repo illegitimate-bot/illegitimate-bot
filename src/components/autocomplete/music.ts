@@ -5,7 +5,7 @@ export = {
     name: "music",
     description: "Music",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const focusedOption = interaction.options.getFocused(true)
         if (interaction.options.getSubcommand() !== "play" && focusedOption.name !== "query") return
 

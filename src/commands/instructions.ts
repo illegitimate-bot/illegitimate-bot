@@ -14,7 +14,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.reply({
             embeds: [{
                 title: "Verification",

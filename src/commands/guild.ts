@@ -77,7 +77,7 @@ export = {
         )
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()
 
         if (subcommand === "member") {

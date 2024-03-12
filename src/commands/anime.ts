@@ -22,7 +22,7 @@ export = {
         )
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply()
         const query = interaction.options.getString("query")!
 

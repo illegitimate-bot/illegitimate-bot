@@ -11,7 +11,7 @@ export = {
     name: "guildinactivitylog",
     description: "Configure the bot.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const guild = interaction.guild!
         const user = interaction.member as GuildMember
         const userRoles = user.roles.cache

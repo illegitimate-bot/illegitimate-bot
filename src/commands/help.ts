@@ -13,7 +13,7 @@ export = {
         .setDescription("List's all commands usable by a member")
         .setDMPermission(false),
 
-    async execute(interaction, client) {
+    async execute({ interaction, client }) {
         await interaction.deferReply({ ephemeral: true })
 
         type CommandList = {

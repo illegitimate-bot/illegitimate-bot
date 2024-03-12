@@ -7,7 +7,7 @@ export = {
     name: "staffdenyreasonbox",
     description: "Deny reason box.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply()
 
         const guild = interaction.guild

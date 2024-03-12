@@ -7,7 +7,7 @@ export = {
     name: "waitinglistupdate",
     description: "Update the waiting list.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })
 
         const user = interaction.user

@@ -13,7 +13,7 @@ export = {
         .setDescription("Get's the bot's ping.")
         .setDMPermission(false),
 
-    async execute(interaction, client) {
+    async execute({ interaction, client }) {
         await interaction.deferReply()
         await interaction.editReply({
             embeds: [{

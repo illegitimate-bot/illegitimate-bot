@@ -12,7 +12,7 @@ export = {
     name: "guildapply",
     description: "Guild application button.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })
         const user = interaction.member as GuildMember
         const guild = interaction.guild!

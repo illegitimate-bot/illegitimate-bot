@@ -11,7 +11,7 @@ export = {
         .setType(ApplicationCommandType.Message)
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const { targetId } = interaction
         const message = await interaction.channel!.messages.fetch(targetId)
 

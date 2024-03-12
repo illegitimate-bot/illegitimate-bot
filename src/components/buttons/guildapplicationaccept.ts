@@ -12,7 +12,7 @@ export = {
     name: "guildapplicationaccept",
     description: "Accept a guild application.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply()
 
         const user = interaction.user

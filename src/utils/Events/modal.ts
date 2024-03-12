@@ -40,7 +40,7 @@ export default function loadModalEvents(client: Client, ft: FileType) {
         }
 
         try {
-            await modal.execute(interaction)
+            await modal.execute({ interaction, client })
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {

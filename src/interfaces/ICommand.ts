@@ -9,5 +9,5 @@ export default interface ICommand {
     public: boolean
     subcommands?: boolean
     data: SlashCommandBuilder
-    execute: (interaction: ChatInputCommandInteraction, client: Client) => Promise<void>
+    execute: (arg: { interaction: ChatInputCommandInteraction, client: Client }) => Promise<void>
 }

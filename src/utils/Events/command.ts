@@ -43,7 +43,7 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
         }
 
         try {
-            await command.execute(interaction, client)
+            await command.execute({ interaction, client })
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {

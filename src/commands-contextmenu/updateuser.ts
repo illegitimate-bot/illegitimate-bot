@@ -17,7 +17,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })
 
         const targetId = interaction.targetId

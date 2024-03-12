@@ -11,7 +11,7 @@ export = {
         .setType(ApplicationCommandType.User)
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const { targetId } = interaction
         const target = await interaction.guild!.members.fetch(targetId)
 

@@ -32,7 +32,7 @@ export = {
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply()
 
         const setting = interaction.options.getString("setting")

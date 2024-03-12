@@ -14,7 +14,7 @@ export = {
         .setDescription("Displays the requirements for the guild.")
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.reply({
             embeds: [{
                 title: "Requirements",

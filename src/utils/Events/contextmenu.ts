@@ -41,7 +41,7 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
         }
 
         try {
-            await command.execute(interaction)
+            await command.execute({ interaction, client })
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {

@@ -75,7 +75,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()
         const channel = interaction.options.getChannel("channel") as TextChannel
         let title = ""

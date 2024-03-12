@@ -5,7 +5,7 @@ export = {
     name: "verify",
     description: "Configure the bot.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const modal = new ModalBuilder()
             .setTitle("Verification")
             .setCustomId("verifybox")

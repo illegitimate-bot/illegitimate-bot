@@ -29,7 +29,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         await interaction.deferReply()
 
         const userid = interaction.options.getString("user")!

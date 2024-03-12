@@ -17,7 +17,7 @@ export = {
         .setDescription("Get information about the bot")
         .setDMPermission(false),
 
-    async execute(interaction, client) {
+    async execute({ interaction, client }) {
         const { default: prettyMs } = await import("pretty-ms")
         const castedDeps = dependencies as { [key: string]: string }
         const castedDevDeps = devDependencies as { [key: string]: string }

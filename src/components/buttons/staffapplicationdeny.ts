@@ -5,7 +5,7 @@ export = {
     name: "staffapplicationdeny",
     description: "Deny a guild application.",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const modal = new ModalBuilder()
             .setTitle("Deny Reason")
             .setCustomId("staffdenyreasonbox")

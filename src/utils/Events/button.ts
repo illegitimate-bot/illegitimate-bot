@@ -40,7 +40,7 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
         }
 
         try {
-            await button.execute(interaction)
+            await button.execute({ interaction, client })
         } catch (error) {
             if (process.env.NODE_ENV !== "dev") {
                 await logToChannel("error", {

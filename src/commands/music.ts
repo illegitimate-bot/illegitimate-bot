@@ -71,7 +71,7 @@ export = {
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()
 
         if (subcommand === "play") {

@@ -25,7 +25,7 @@ export = {
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const member = interaction.options.getMember("user") as GuildMember
         const verifiedUser = await verify.findOne({ userID: member.user.id })
         const mod = interaction.user

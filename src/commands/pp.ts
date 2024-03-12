@@ -20,7 +20,7 @@ export = {
         )
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const user = (interaction.options.getUser("user") || interaction.user) as User
         let size: number
 

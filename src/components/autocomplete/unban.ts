@@ -4,7 +4,7 @@ export = {
     name: "unban",
     description: "Unban a user from the server",
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const focusedOption = interaction.options.getFocused(true)
         if (focusedOption.name !== "user") return
 

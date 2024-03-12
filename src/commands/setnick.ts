@@ -28,7 +28,7 @@ export = {
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames)
         .setDMPermission(false),
 
-    async execute(interaction) {
+    async execute({ interaction }) {
         const member = interaction.options.getMember("user") as GuildMember
         const nickname = interaction.options.getString("nickname")
 

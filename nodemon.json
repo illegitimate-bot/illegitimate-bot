@@ -1,17 +1,17 @@
 {
-  "restartable": "rs",
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules",
-    "dist/config"
-  ],
-  "verbose": true,
-  "env": {
-    "NODE_PATH": "src/",
-    "NODE_ENV": "dev",
-    "TYPESCRIPT": "true",
-    "TS_NODE_FILES": "true",
-    "TS_NODE_TRANSPILE_ONLY": "true"
-  },
-  "ext": "ts, json"
+    "restartable": "rs",
+    "ignore": [
+        ".git",
+        "node_modules/**/node_modules",
+        "dist/config"
+    ],
+    "verbose": true,
+    "env": {
+        "NODE_PATH": "src/",
+        "NODE_ENV": "dev",
+        "TYPESCRIPT": "true",
+        "TS_NODE_FILES": "true",
+        "TS_NODE_TRANSPILE_ONLY": "true"
+    },
+    "ext": "ts, json"
 }

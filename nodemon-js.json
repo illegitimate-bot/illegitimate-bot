@@ -1,15 +1,15 @@
 {
-  "restartable": "rs",
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules",
-    "dist/config",
-    "src"
-  ],
-  "verbose": true,
-  "env": {
-    "NODE_PATH": "dist/",
-    "NODE_ENV": "dev"
-  },
-  "ext": "js, json"
+    "restartable": "rs",
+    "ignore": [
+        ".git",
+        "node_modules/**/node_modules",
+        "dist/config",
+        "src"
+    ],
+    "verbose": true,
+    "env": {
+        "NODE_PATH": "dist/",
+        "NODE_ENV": "dev"
+    },
+    "ext": "js, json"
 }

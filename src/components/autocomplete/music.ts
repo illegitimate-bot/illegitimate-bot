@@ -23,10 +23,10 @@ export = {
         })
 
         const results = tracks.map(track => ({
-            name: `${track.title} [${track.author}]`,
+            name: `${track.title.slice(0, 20)} [${track.author}]`,
             value: track.url
         }))
 
-        await interaction.respond(results.slice(0, 10)).catch()
+        await interaction.respond(results.slice(0, 6)).catch()
     }
 } as IAutocomplete

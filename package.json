@@ -16,11 +16,11 @@
         "dev": "conc --names \"TSC,BOT\" --prefix-colors \"blue, magenta\" \"tsc -w\" \"yarn dev:js\"",
         "dev:ts": "nodemon --config nodemon.json src/index.ts",
         "dev:js": "nodemon --config nodemon-js.json dist/index.js",
-        "dev:build": "ts-node scripts/dev-deploy.ts",
+        "dev:build": "cross-env NODE_PATH=src/ \"ts-node scripts/dev-deploy.ts\"",
         "dev:delete": "ts-node scripts/delete-commands.ts",
         "lint": "eslint src",
         "lint:fix": "eslint --fix src",
-        "prod:build": "ts-node scripts/deploy-commands.ts"
+        "prod:build": "cross-env NODE_PATH=src/ \"ts-node scripts/deploy-commands.ts\""
     },
     "author": "Taken",
     "license": "GPL-3.0-only",
@@ -46,6 +46,7 @@
         "@typescript-eslint/eslint-plugin": "^7.0.2",
         "@typescript-eslint/parser": "^7.0.2",
         "concurrently": "^8.2.2",
+        "cross-env": "^7.0.3",
         "eslint": "^8.56.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.3.3"

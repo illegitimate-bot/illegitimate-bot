@@ -27,7 +27,7 @@ export = {
         setInterval(() => {
             const status = i++ % statuses.length
             user.setActivity({ name: getActivity(statuses[status].name), type: statuses[status].type })
-        }, 1000 * 60 * 10)
+        }, 1000 * 60)
 
         user.setStatus("dnd")
     }

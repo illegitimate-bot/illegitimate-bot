@@ -35,9 +35,9 @@ export = {
     async execute({ interaction }) {
         await interaction.deferReply()
 
-        const setting = interaction.options.getString("setting")
-        const value = interaction.options.getString("value")
-        const settingsData = await settings.findOne({ filter: { name: setting } })
+        const setting = interaction.options.getString("setting")!
+        const value = interaction.options.getString("value")!
+        const settingsData = await settings.findOne({ name: setting })
 
         if (!settingsData) {
             const newSetting = new settings({
@@ -55,7 +55,7 @@ export = {
                 }]
             })
         } else {
-            await settings.findOneAndUpdate({ filter: { name: setting } }, { value: value })
+            await settings.findOneAndUpdate({ name: setting }, { value: value })
 
             await interaction.editReply({
                 embeds: [{

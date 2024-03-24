@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
 import { embedColor, devMessage, instructionsgif } from "config/options"
 import { ICommand } from "interfaces"
+import { removeIndents } from "utils/functions/funcs"
 
 export = {
     name: "instructions",
@@ -18,12 +19,17 @@ export = {
         await interaction.reply({
             embeds: [{
                 title: "Verification",
-                description: "1. Log onto hypixel.\n" +
-                    "2. Right click with the head in your hotbar.\n" +
-                    "3. Click on the social media icon.\n" +
-                    "4. Click on the discord icon.\n" +
-                    "5. Type your username in the chat and press enter.\n" +
-                    "6. Run the `/verify` command in this channel.\n",
+                description: removeIndents(`
+                   - Log onto hypixel.
+                   - Right click with the head in your hotbar.
+                   - Click on the social media icon.
+                   - Click on the discord icon.
+                   - Type your username in the chat and press enter.
+                   - Run the \`/verify\` command in this channel.
+                `),
+                thumbnail: {
+                    url: interaction.guild?.iconURL() || ""
+                },
                 color: embedColor,
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
@@ -31,7 +37,6 @@ export = {
                 },
                 image: {
                     url: instructionsgif,
-                    proxy_url: instructionsgif
                 }
             }]
         })

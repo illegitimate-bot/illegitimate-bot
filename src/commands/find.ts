@@ -1,13 +1,13 @@
 import { devMessage, embedColor } from "config/options"
 import { PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import verifySchema from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { getHeadURL, getIGN, getUUID } from "utils/Hypixel"
 
 export = {
     name: "find",
     description: "Find a person by the ign",
-    dev: false,
+    dev: true,
     public: false,
 
     data: new SlashCommandBuilder()
@@ -37,7 +37,7 @@ export = {
             return
         }
 
-        const verifyData = await verifySchema.findOne({ uuid: uuid })
+        const verifyData = await verify.findOne({ where: { uuid: uuid } })
         if (!verifyData) {
             await interaction.editReply({
                 embeds: [{

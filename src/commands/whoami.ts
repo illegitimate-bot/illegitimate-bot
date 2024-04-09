@@ -1,14 +1,14 @@
 import { SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import { embedColor, devMessage } from "config/options"
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { getIGN, getHeadURL } from "utils/Hypixel"
 
 export = {
     name: "whoami",
     description: "Get your user info",
     public: true,
-    dev: false,
+    dev: true,
 
     data: new SlashCommandBuilder()
         .setName("whoami")
@@ -19,7 +19,7 @@ export = {
         await interaction.deferReply()
 
         const user = interaction.user
-        const verifyData = await verify.findOne({ userID: user.id })
+        const verifyData = await verify.findOne({ where: { userID: user.id } })
 
         if (!verifyData) {
             await interaction.editReply({

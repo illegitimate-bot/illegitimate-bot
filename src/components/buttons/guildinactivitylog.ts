@@ -17,10 +17,11 @@ export = {
         const userRoles = user.roles.cache
 
         if (!userRoles.some(role => guildRoles.includes(role.id))) {
-            return await interaction.reply({
+            await interaction.reply({
                 content: "Only guild members can use this button.",
                 ephemeral: true
             })
+            return
         }
 
         function sq(n: number): string {
@@ -44,10 +45,11 @@ export = {
                 }]
             })
         } catch (error) {
-            return await interaction.reply({
+            await interaction.reply({
                 content: "Please enable your DMs.",
                 ephemeral: true
             })
+            return
         }
 
         await interaction.reply({

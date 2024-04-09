@@ -1,4 +1,4 @@
-import waitinglist from "schemas/waitinglistSchema"
+import waitinglist from "schemas/waitinglistTag"
 import { getGuild, getIGN } from "utils/Hypixel"
 import { hypixelGuildID } from "config/options"
 import { IButton } from "interfaces"
@@ -13,14 +13,14 @@ export = {
         const user = interaction.user
         const message = interaction.message
         const embed = message.embeds[0]
-        const accepted = await waitinglist.find()
+        const accepted = await waitinglist.findAll()
 
         for (let i = 0; i < accepted.length; i++) {
             const uuid = accepted[i].uuid
             const guild = await getGuild(uuid)
 
             if (guild && guild._id === hypixelGuildID) {
-                await waitinglist.findOneAndDelete({ uuid: uuid })
+                await accepted[i].destroy()
                 continue
             }
         }

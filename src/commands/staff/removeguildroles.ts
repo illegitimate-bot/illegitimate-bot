@@ -1,6 +1,6 @@
 import { embedColor, hypixelGuildID } from "config/options"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { IGuildData } from "interfaces"
 import env from "utils/Env"
 import { getGuild } from "utils/Hypixel"
@@ -34,17 +34,7 @@ export default async function removeGuildRoles(interaction: ChatInputCommandInte
 
     const hypixelGuildMembers = guildData.members.map(gmember => gmember.uuid)
 
-    const allVerifiedUsers = (await verify.find({})) as {
-        userID: string
-        uuid: string
-    }[]
-
-    const verifiedUsers = allVerifiedUsers.map(user => {
-        return {
-            userID: user.userID,
-            uuid: user.uuid
-        }
-    })
+    const verifiedUsers = await verify.findAll({})
 
     for (const gmember of guildMembers) {
         const gmemberuuid = verifiedUsers.find(user => user.userID === gmember.id)?.uuid

@@ -1,13 +1,13 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
 import { getIGN, getHeadURL } from "utils/Hypixel"
 import { embedColor, devMessage } from "config/options"
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { ICommand } from "interfaces"
 
 export = {
     name: "whois",
     description: "Get's the ign of a user.",
-    dev: false,
+    dev: true,
     public: false,
 
     data: new SlashCommandBuilder()
@@ -26,7 +26,7 @@ export = {
         await interaction.deferReply()
 
         const user = interaction.options.getUser("user")!
-        const verifiedUser = await verify.findOne({ userID: user.id })
+        const verifiedUser = await verify.findOne({ where: { userID: user.id } })
         if (!verifiedUser) {
             interaction.editReply({
                 embeds: [{

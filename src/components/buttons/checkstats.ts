@@ -1,5 +1,5 @@
 import { embedColor, devMessage } from "config/options"
-import guildapp from "schemas/guildAppSchema"
+import guildapp from "schemas/guildAppTag"
 import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
 import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { IButton } from "interfaces"
@@ -14,7 +14,7 @@ export = {
         const message = interaction.message
         const embed = message.embeds[0]
         const applicantId = embed.footer!.text.split(" ")[1]
-        const guildappdata = await guildapp.findOne({ userID: applicantId })
+        const guildappdata = await guildapp.findOne({ where: { userID: applicantId } })
         const uuid = guildappdata!.uuid
 
         const player = await getPlayer(uuid)

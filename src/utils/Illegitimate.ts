@@ -5,10 +5,17 @@ import env from "utils/Env"
 import { connect } from "mongoose"
 import loadAllEvents from "./Events"
 import { Player } from "discord-player"
+import { Sequelize } from "sequelize"
 
 const client = new Client()
 const redis = new Redis(env.prod.redisURI!)
 const player = new Player(client)
+const sequelize = new Sequelize("illegitimate", "root", "password", {
+    host: "localhost",
+    dialect: "sqlite",
+    logging: false,
+    storage: "data/database.sqlite",
+})
 
 let ft: "js" | "ts"
 if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
@@ -33,6 +40,9 @@ class Illegitimate {
         connect(env.prod.mongoURI!, {}).then(() => {
             console.log(color("Connected to MongoDB", "green"))
         })
+        sequelize.sync().then(() => {
+            console.log(color("Connected to SQLite", "green"))
+        })
     }
 
     private async init() {
@@ -54,4 +64,4 @@ class Illegitimate {
     }
 }
 
-export { Illegitimate, client, redis }
+export { Illegitimate, client, redis, sequelize }

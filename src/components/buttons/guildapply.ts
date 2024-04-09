@@ -3,8 +3,7 @@ import { embedColor, applicationsChannel } from "config/options"
 import { largeM, smallM, ignM } from "config/limitmessages"
 import questions from "config/questions"
 import { guildRole } from "config/roles"
-import mongoose from "mongoose"
-import guildapp from "schemas/guildAppSchema"
+import guildapp from "schemas/guildAppTag"
 import { IButton } from "interfaces"
 import applicationQuestions from "utils/functions/applicationquestions"
 
@@ -32,7 +31,7 @@ export = {
             return
         }
 
-        const application = await guildapp.findOne({ userID: user.user.id })
+        const application = await guildapp.findOne({ where: { userID: user.user.id } })
 
         if (application) {
             await interaction.editReply("You already have an application in progress.")
@@ -249,13 +248,10 @@ export = {
             }]
         })
 
-        const newGuildApp = new guildapp({
-            _id: new mongoose.Types.ObjectId(),
+        await guildapp.create({
             userID: user.user.id,
-            uuid: uuid
+            uuid: uuid,
         })
-
-        await newGuildApp.save()
 
         const channel = guild.channels.cache.get(applicationsChannel) as TextChannel
         await channel.send({

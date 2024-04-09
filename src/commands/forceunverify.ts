@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { ICommand } from "interfaces"
 import roleManage from "utils/functions/rolesmanage"
 import logToChannel from "utils/functions/logtochannel"
@@ -10,7 +10,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "forceunverify",
     description: "Force unverify a user",
-    dev: false,
+    dev: true,
     public: false,
 
     data: new SlashCommandBuilder()
@@ -27,21 +27,22 @@ export = {
 
     async execute({ interaction }) {
         const member = interaction.options.getMember("user") as GuildMember
-        const verifiedUser = await verify.findOne({ userID: member.user.id })
+        const verifiedUser = await verify.findOne({ where: { userID: member.user.id } })
         const mod = interaction.user
 
         if (!verifiedUser) {
-            return interaction.reply({
+            interaction.reply({
                 embeds: [{
                     description: "This user is not verified",
                     color: embedColor
                 }]
             })
+            return
         }
 
         const uuid = verifiedUser.uuid
         const ign = await getIGN(uuid)
-        await verify.findOneAndDelete({ userID: member.user.id })
+        await verifiedUser.destroy()
         await member.roles.remove(
             roleManage("all").rolesToRemove,
             "User force unverified by " + interaction.user.username

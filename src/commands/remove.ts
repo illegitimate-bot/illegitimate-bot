@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { embedColor, devMessage } from "config/options"
-import waitinglistSchema from "schemas/waitinglistSchema"
+import waitinglist from "schemas/waitinglistTag"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
 import { waitingListRole } from "config/roles"
@@ -9,7 +9,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "remove",
     description: "Remove a person on the waiting list.",
-    dev: false,
+    dev: true,
     public: false,
 
     data: new SlashCommandBuilder()
@@ -36,7 +36,7 @@ export = {
         const member = interaction.options.getMember("user") as GuildMember
         const reason = interaction.options.getString("reason") ?? "No reason provided."
         const mod = interaction.user!
-        const waitinglist = await waitinglistSchema.findOne({ userID: member.user.id })
+        const waiting = await waitinglist.findOne({ where: { userID: member.user.id } })
 
         if (!waitinglist) {
             await interaction.editReply({
@@ -48,7 +48,7 @@ export = {
             return
         }
 
-        await waitinglistSchema.findOneAndDelete({ userID: member.user.id })
+        await waiting?.destroy()
         await member.roles.remove(waitingListRole, "Removed from waiting list.")
 
         await logToChannel("mod", {

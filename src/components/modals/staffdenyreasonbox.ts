@@ -1,6 +1,6 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
 import { embedColor } from "config/options"
-import staffapp from "schemas/staffAppSchema"
+import staffapp from "schemas/staffAppTag"
 import { IModal } from "interfaces"
 
 export = {
@@ -42,7 +42,8 @@ export = {
 
         await applicant.send({ embeds: [dmMessage] })
 
-        await staffapp.findOneAndDelete({ userID: applicantId })
+        const app = await staffapp.findOne({ where: { userID: applicantId } })
+        await app?.destroy()
 
         await interaction.editReply({
             embeds: [{

@@ -3,9 +3,8 @@ import { embedColor, staffApplicationsChannel } from "config/options"
 import { largeM, ignM } from "config/limitmessages"
 import questions from "config/questions"
 import { guildRole, guildStaff } from "config/roles"
-import mongoose from "mongoose"
-import staffapp from "schemas/staffAppSchema"
-import settings from "schemas/settingsSchema"
+import staffapp from "schemas/staffAppTag"
+import settings from "schemas/settingsTag"
 import { IButton } from "interfaces"
 import env from "utils/Env"
 import applicationQuestions from "utils/functions/applicationquestions"
@@ -18,8 +17,8 @@ export = {
         const user = interaction.member as GuildMember
         const guild = interaction.guild!
         const userRoles = user.roles.cache
-        const setting = await settings.findOne({ name: "staffAppStatus" })
-        const status = setting!.value || "0"
+        const setting = await settings.findOne({ where: { name: "staffAppStatus" } })
+        const status = setting?.value || "0"
         const staffQuestions = questions.staff
 
         function sq(n: number): string {
@@ -50,7 +49,7 @@ export = {
                 return
             }
 
-            const application = await staffapp.findOne({ userID: user.user.id })
+            const application = await staffapp.findOne({ where: { userID: user.user.id } })
 
             if (application) {
                 await interaction.editReply("You already have an application in progress.")
@@ -222,13 +221,11 @@ export = {
                 }]
             })
 
-            const newStaffApp = new staffapp({
-                _id: new mongoose.Types.ObjectId(),
+            await staffapp.create({
                 userID: user.user.id,
                 uuid: uuid
             })
 
-            await newStaffApp.save()
             await user.deleteDM()
 
             const channel = guild.channels.cache.get(staffApplicationsChannel) as TextChannel

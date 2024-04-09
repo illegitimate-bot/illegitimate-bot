@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
 import { hypixelGuildID, embedColor, devMessage } from "config/options"
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { ICommand } from "interfaces"
 import roleManage from "utils/functions/rolesmanage"
 import { waitingListRole } from "config/roles"
@@ -10,7 +10,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "forceupdate",
     description: "Force update the user",
-    dev: false,
+    dev: true,
     public: false,
 
     data: new SlashCommandBuilder()
@@ -30,7 +30,7 @@ export = {
 
         const user = interaction.options.getMember("user") as GuildMember
         const usermentioned = userMention(user.user.id)
-        const verifyData = await verify.findOne({ userID: user.user.id })
+        const verifyData = await verify.findOne({ where: { userID: user.user.id } })
 
         if (!verifyData) {
             await user.setNickname(`${user.user.username} (X)`, "User used the update command").catch(() => {

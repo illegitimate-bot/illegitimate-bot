@@ -1,17 +1,16 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { embedColor, hypixelGuildID, devMessage } from "config/options"
-import mongoose from "mongoose"
 import roleManage from "utils/functions/rolesmanage"
 import { ICommand } from "interfaces"
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { IPlayerData } from "interfaces"
 import { IGuildData } from "interfaces"
 
 export = {
     name: "verify",
     description: "Verify yourself as a member of the server.",
-    dev: false,
+    dev: true,
     public: true,
 
     data: new SlashCommandBuilder()
@@ -33,7 +32,7 @@ export = {
         const user = interaction.member! as GuildMember
         const ign = interaction.options.getString("ign")!
 
-        const verifyData = await verify.findOne({ userID: user.id })
+        const verifyData = await verify.findOne({ where: { userID: user.id } })
         if (verifyData) {
             interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
             return
@@ -178,13 +177,10 @@ export = {
             // Do nothing
         })
 
-        const newVerify = new verify({
-            _id: new mongoose.Types.ObjectId(),
+        await verify.create({
             userID: user.id,
             uuid: uuid
         })
-
-        await newVerify.save()
 
         await interaction.editReply({
             embeds: [{

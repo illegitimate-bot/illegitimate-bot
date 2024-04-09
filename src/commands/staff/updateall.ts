@@ -1,4 +1,4 @@
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { embedColor, hypixelGuildID } from "config/options"
 import color from "utils/functions/colors"
 import { verifyTick } from "config/roles"
@@ -42,16 +42,7 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
     })
     const guildMemberIDs = hypixelGuildMembers.map(gmember => gmember.uuid)
 
-    const allVerifiedUsers = (await verify.find({})) as {
-        userID: string
-        uuid: string
-    }[]
-    const verifiedUsers = allVerifiedUsers.map(user => {
-        return {
-            userID: user.userID,
-            uuid: user.uuid
-        }
-    })
+    const verifiedUsers = await verify.findAll({})
 
     await interaction.editReply({
         embeds: [{

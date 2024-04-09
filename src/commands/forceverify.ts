@@ -1,8 +1,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits, GuildMember, userMention } from "discord.js"
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { embedColor, hypixelGuildID, devMessage } from "config/options"
-import verify from "schemas/verifySchema"
-import mongoose from "mongoose"
+import verify from "schemas/verifyTag"
 import roleManage from "utils/functions/rolesmanage"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel"
@@ -11,7 +10,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "forceverify",
     description: "Force verify a user.",
-    dev: false,
+    dev: true,
     public: false,
 
     data: new SlashCommandBuilder()
@@ -37,7 +36,7 @@ export = {
         const ign = interaction.options.getString("ign")
         const mod = interaction.user
 
-        const verifyData = await verify.findOne({ userID: user.user.id })
+        const verifyData = await verify.findOne({ where: { userID: user.user.id } })
         if (verifyData) {
             interaction.editReply("That user is already verified.")
             return
@@ -160,13 +159,10 @@ export = {
             // Do nothing
         })
 
-        const newVerify = new verify({
-            _id: new mongoose.Types.ObjectId(),
-            userID: user.id,
-            uuid: uuid
+        await verify.create({
+            userID: user.user.id,
+            uuid: uuid,
         })
-
-        await newVerify.save()
 
         await logToChannel("mod", {
             embeds: [{

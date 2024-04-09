@@ -16,10 +16,11 @@ export = {
         const message = await interaction.channel!.messages.fetch(targetId)
 
         if (!message) {
-            return interaction.reply({
+            interaction.reply({
                 content: "That user does not exist.",
                 ephemeral: true
             })
+            return
         }
 
         const target = message.author

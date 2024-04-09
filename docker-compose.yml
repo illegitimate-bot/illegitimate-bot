@@ -9,6 +9,8 @@ services:
     restart: unless-stopped
     logging:
       driver: journald
+    volumes:
+      - ${DB_PATH}:/app/data
     environment:
       - TOKEN=${TOKEN}
       - MONGOURI=${MONGOURI}

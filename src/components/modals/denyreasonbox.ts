@@ -1,6 +1,6 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, GuildMember } from "discord.js"
 import { embedColor } from "config/options"
-import guildapp from "schemas/guildAppSchema"
+import guildapp from "schemas/guildAppTag"
 import { IModal } from "interfaces"
 
 export = {
@@ -78,7 +78,8 @@ export = {
             responseEmbeds = [responseEmbed]
         }
 
-        await guildapp.findOneAndDelete({ userID: applicantId })
+        const app = await guildapp.findOne({ where: { userID: applicantId } })
+        await app?.destroy()
 
         await interaction.editReply({
             embeds: responseEmbeds

@@ -1,7 +1,7 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
 import { embedColor, devMessage, hypixelGuildID } from "config/options"
 import { IContextMenu } from "interfaces"
-import verifySchema from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
 import roleManage from "utils/functions/rolesmanage"
 import { waitingListRole } from "config/roles"
@@ -23,7 +23,7 @@ export = {
         const targetId = interaction.targetId
         const user = await interaction.guild!.members.fetch(targetId)
         const usermentioned = userMention(user.user.id)
-        const verifyData = await verifySchema.findOne({ userID: user.user.id })
+        const verifyData = await verify.findOne({ where: { userID: user.user.id } })
 
         if (!verifyData) {
             await user.setNickname(`${user.user.username} (X)`, "User used the update command").catch(() => {

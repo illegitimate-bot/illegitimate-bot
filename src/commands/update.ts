@@ -1,6 +1,6 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
 import { getGuild, getIGN, getHeadURL } from "utils/Hypixel"
-import verify from "schemas/verifySchema"
+import verify from "schemas/verifyTag"
 import { embedColor, hypixelGuildID, devMessage } from "config/options"
 import roleManage from "utils/functions/rolesmanage"
 import { ICommand } from "interfaces"
@@ -10,7 +10,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "update",
     description: "Update your guild rank.",
-    dev: false,
+    dev: true,
     public: true,
 
     data: new SlashCommandBuilder()
@@ -22,7 +22,7 @@ export = {
         await interaction.deferReply()
 
         const user = interaction.member as GuildMember
-        const verifyData = await verify.findOne({ userID: user.user.id })
+        const verifyData = await verify.findOne({ where: { userID: user.user.id } })
 
         if (!verifyData) {
             await user.setNickname(`${user.user.username} (X)`, "User used the update command").catch(() => {

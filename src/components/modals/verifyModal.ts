@@ -1,7 +1,6 @@
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
 import { embedColor, hypixelGuildID, devMessage } from "config/options"
-import verify from "schemas/verifySchema"
-import mongoose from "mongoose"
+import verify from "schemas/verifyTag"
 import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles"
 import { IModal } from "interfaces"
 import { GuildMember } from "discord.js"
@@ -15,7 +14,7 @@ export = {
 
         const user = interaction.member as GuildMember
         const ign = interaction.fields.fields.get("verifyign")!.value
-        const verifyData = await verify.findOne({ userID: user.user.id })
+        const verifyData = await verify.findOne({ where: { userID: user.user.id } })
         if (verifyData) {
             interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
             return
@@ -124,13 +123,10 @@ export = {
                 // Do nothing
             })
 
-            const newVerify = new verify({
-                _id: new mongoose.Types.ObjectId(),
+            await verify.create({
                 userID: user.id,
                 uuid: uuid
             })
-
-            await newVerify.save()
 
             await interaction.editReply({
                 embeds: [{

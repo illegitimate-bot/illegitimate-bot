@@ -1,9 +1,8 @@
 import { ActionRowBuilder, ButtonStyle, ButtonBuilder, TextChannel } from "discord.js"
 import { embedColor, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options"
 import color from "utils/functions/colors"
-import mongoose from "mongoose"
-import guildapp from "schemas/guildAppSchema"
-import waitingList from "schemas/waitinglistSchema"
+import guildapp from "schemas/guildAppTag"
+import waitingList from "schemas/waitinglistTag"
 import { waitingListRole } from "config/roles"
 import { IButton } from "interfaces"
 import { getGuild, getIGN } from "utils/Hypixel"
@@ -54,21 +53,18 @@ export = {
             }]
         })
 
-        const applicantEntry = await guildapp.findOne({ userID: applicantId })
+        const applicantEntry = await guildapp.findOne({ where: { userID: applicantId } })
         const applicantUUID = applicantEntry!.uuid
         const time = Date.now()
 
-        const waitingListAdd = new waitingList({
-            _id: new mongoose.Types.ObjectId(),
+        await waitingList.create({
             userID: applicantId,
             uuid: applicantUUID,
             timestamp: time
         })
 
-        await waitingListAdd.save()
-
         await applicant.roles.add(waitingListRole)
-        await guildapp.findOneAndDelete({ userID: applicantId })
+        await applicantEntry?.destroy()
 
         await interaction.editReply({
             embeds: [{
@@ -91,14 +87,14 @@ export = {
             const wlmessage = await channel!.messages.fetch(waitingListMessage)
 
             const wlembed = wlmessage.embeds[0]
-            const accepted = await waitingList.find()
+            const accepted = await waitingList.findAll()
 
             for (let i = 0; i < accepted.length; i++) {
                 const uuid = accepted[i].uuid
                 const guild = await getGuild(uuid)
 
                 if (guild && guild._id === hypixelGuildID) {
-                    await waitingList.findOneAndDelete({ uuid: uuid })
+                    await waitingList.destroy({ where: { uuid: uuid } })
                     continue
                 }
             }

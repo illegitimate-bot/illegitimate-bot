@@ -2,7 +2,7 @@ import { ExtendedClient as Client } from "utils/Client"
 import color from "utils/functions/colors"
 import { Redis } from "ioredis"
 import env from "utils/Env"
-import { connect } from "mongoose"
+// import { connect } from "mongoose"
 import loadAllEvents from "./Events"
 import { Player } from "discord-player"
 import { Sequelize } from "sequelize"
@@ -32,9 +32,9 @@ class Illegitimate {
         redis.on("ready", () => {
             console.log(color("Connected to Redis", "green"))
         })
-        connect(env.prod.mongoURI!, {}).then(() => {
-            console.log(color("Connected to MongoDB", "green"))
-        })
+        // connect(env.prod.mongoURI!, {}).then(() => {
+        //     console.log(color("Connected to MongoDB", "green"))
+        // })
         sequelize.sync().then(() => {
             console.log(color("Connected to Postgres", "green"))
         })

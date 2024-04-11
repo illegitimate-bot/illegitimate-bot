@@ -9,11 +9,22 @@ services:
     restart: unless-stopped
     logging:
       driver: journald
-    volumes:
-      - ${DB_PATH}:/app/data
     environment:
       - TOKEN=${TOKEN}
       - MONGOURI=${MONGOURI}
       - DEV=${DEV}
       - HYPIXELAPIKEY=${HYPIXELAPIKEY}
       - REDISURI=${REDISURI}
+      - POSTGRESURI=${POSTGRESURI}
+  db:
+    container_name: postgres
+    image: postgres
+    restart: unless-stopped
+    logging:
+      driver: journald
+    volumes:
+      - ${DB_PATH}:/app/data
+    environment:
+      - POSTGRES_PASSWORD=${PG_PASSWD}
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_DB=illegitimate

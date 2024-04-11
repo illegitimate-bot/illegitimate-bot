@@ -2,7 +2,7 @@ import { ExtendedClient as Client } from "utils/Client"
 import color from "utils/functions/colors"
 import { Redis } from "ioredis"
 import env from "utils/Env"
-import { connect } from "mongoose"
+// import { connect } from "mongoose"
 import loadAllEvents from "./Events"
 import { Player } from "discord-player"
 import { Sequelize } from "sequelize"
@@ -10,12 +10,7 @@ import { Sequelize } from "sequelize"
 const client = new Client()
 const redis = new Redis(env.prod.redisURI!)
 const player = new Player(client)
-const sequelize = new Sequelize("illegitimate", "root", "password", {
-    host: "localhost",
-    dialect: "sqlite",
-    logging: false,
-    storage: "data/database.sqlite",
-})
+const sequelize = new Sequelize(env.prod.postgresURI!, { dialect: "postgres" })
 
 let ft: "js" | "ts"
 if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
@@ -37,11 +32,11 @@ class Illegitimate {
         redis.on("ready", () => {
             console.log(color("Connected to Redis", "green"))
         })
-        connect(env.prod.mongoURI!, {}).then(() => {
-            console.log(color("Connected to MongoDB", "green"))
-        })
+        // connect(env.prod.mongoURI!, {}).then(() => {
+        //     console.log(color("Connected to MongoDB", "green"))
+        // })
         sequelize.sync().then(() => {
-            console.log(color("Connected to SQLite", "green"))
+            console.log(color("Connected to Postgres", "green"))
         })
     }
 

@@ -4,6 +4,7 @@ interface ProdEnv {
     dev: string | undefined
     hypixelapikey: string | undefined
     redisURI: string | undefined
+    postgresURI: string | undefined
 }
 
 interface DevEnv {

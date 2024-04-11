@@ -10,12 +10,7 @@ import { Sequelize } from "sequelize"
 const client = new Client()
 const redis = new Redis(env.prod.redisURI!)
 const player = new Player(client)
-const sequelize = new Sequelize("illegitimate", "root", "password", {
-    host: "localhost",
-    dialect: "sqlite",
-    logging: false,
-    storage: "data/database.sqlite",
-})
+const sequelize = new Sequelize(env.prod.postgresURI!, { dialect: "postgres" })
 
 let ft: "js" | "ts"
 if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
@@ -41,7 +36,7 @@ class Illegitimate {
             console.log(color("Connected to MongoDB", "green"))
         })
         sequelize.sync().then(() => {
-            console.log(color("Connected to SQLite", "green"))
+            console.log(color("Connected to Postgres", "green"))
         })
     }
 

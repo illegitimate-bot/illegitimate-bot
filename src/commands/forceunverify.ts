@@ -10,7 +10,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "forceunverify",
     description: "Force unverify a user",
-    dev: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()

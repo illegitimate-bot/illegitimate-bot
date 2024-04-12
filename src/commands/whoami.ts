@@ -8,7 +8,7 @@ export = {
     name: "whoami",
     description: "Get your user info",
     public: true,
-    dev: true,
+    dev: false,
 
     data: new SlashCommandBuilder()
         .setName("whoami")

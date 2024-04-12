@@ -7,7 +7,7 @@ import { ICommand } from "interfaces"
 export = {
     name: "whois",
     description: "Get's the ign of a user.",
-    dev: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()

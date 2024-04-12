@@ -10,7 +10,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "forceupdate",
     description: "Force update the user",
-    dev: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()

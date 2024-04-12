@@ -6,7 +6,7 @@ import settings from "schemas/settingsTag"
 export = {
     name: "config",
     description: "Configure the bot",
-    dev: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()

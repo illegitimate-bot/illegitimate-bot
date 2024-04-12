@@ -9,7 +9,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "remove",
     description: "Remove a person on the waiting list.",
-    dev: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()

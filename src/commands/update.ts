@@ -10,7 +10,7 @@ import { removeIndents } from "utils/functions/funcs"
 export = {
     name: "update",
     description: "Update your guild rank.",
-    dev: true,
+    dev: false,
     public: true,
 
     data: new SlashCommandBuilder()

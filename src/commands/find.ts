@@ -7,7 +7,7 @@ import { getHeadURL, getIGN, getUUID } from "utils/Hypixel"
 export = {
     name: "find",
     description: "Find a person by the ign",
-    dev: true,
+    dev: false,
     public: false,
 
     data: new SlashCommandBuilder()

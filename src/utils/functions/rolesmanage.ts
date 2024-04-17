@@ -29,6 +29,7 @@ type RoleType =
     | "elite"
     | "member"
     | "default"
+    | "defaultnoverify"
     | "all"
 
 export default function roleManage(role: RoleType): { rolesToRemove: string[], rolesToAdd: string[] } {
@@ -71,6 +72,12 @@ export default function roleManage(role: RoleType): { rolesToRemove: string[], r
     if (role === "default") {
         const rolesToRemove = roles
         const rolesToAdd = [defaultMember, verifyTick]
+        return { rolesToRemove, rolesToAdd }
+    }
+
+    if (role === "defaultnoverify") {
+        const rolesToRemove = roles
+        const rolesToAdd = [defaultMember]
         return { rolesToRemove, rolesToAdd }
     }
 

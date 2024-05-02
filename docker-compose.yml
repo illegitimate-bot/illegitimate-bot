@@ -23,7 +23,7 @@ services:
     logging:
       driver: journald
     volumes:
-      - ${DB_PATH}:/app/data
+      - ${DB_PATH}:/var/lib/postgresql/data
     ports:
       - 127.0.0.1:5432:5432
     environment:

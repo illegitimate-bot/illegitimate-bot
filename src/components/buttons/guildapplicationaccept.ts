@@ -125,6 +125,7 @@ export = {
                     timestamp: new Date().toISOString()
                 }]
             })
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             console.log(
                 color("Error while trying to update waiting list.", "red")

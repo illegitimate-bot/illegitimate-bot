@@ -13,6 +13,7 @@ export = {
 
             try {
                 subcommand = interaction.options.getSubcommand()
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (e) {
                 subcommand = null
             }

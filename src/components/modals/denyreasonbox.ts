@@ -41,6 +41,7 @@ export = {
         let applicant: GuildMember | null
         try {
             applicant = await guild.members.fetch(applicantId)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             applicant = null
         }

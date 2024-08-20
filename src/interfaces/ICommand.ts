@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
 import { ExtendedClient as Client } from "utils/Client"
 

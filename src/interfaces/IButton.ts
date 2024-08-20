@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ButtonInteraction } from "discord.js"
 import { ExtendedClient } from "utils/Client"
 

@@ -49,6 +49,7 @@ export = {
 
         try {
             user = await interaction.client.users.fetch(userid)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             await interaction.editReply({
                 embeds: [{

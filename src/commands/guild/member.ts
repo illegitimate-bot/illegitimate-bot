@@ -94,7 +94,7 @@ export default async function guildMember(interaction: ChatInputCommandInteracti
     }
 
     const guildName = guild.name
-    const guildTag = " [" + guild.tag + "]" ?? ""
+    const guildTag = guild.tag ? " [" + guild.tag + "]" : ""
 
     const guildMembers = guild.members
     const guildMember = guildMembers.find(member => member.uuid === uuid)

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ModalSubmitInteraction } from "discord.js"
 import { ExtendedClient } from "utils/Client"
 

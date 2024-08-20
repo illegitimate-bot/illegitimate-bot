@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ContextMenuCommandInteraction, ContextMenuCommandBuilder } from "discord.js"
 import { ExtendedClient } from "utils/Client"
 

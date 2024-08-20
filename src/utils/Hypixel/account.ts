@@ -30,6 +30,7 @@ async function getUUID(ign: string): Promise<string | null> {
     try {
         const req: Profile = await fetch(mojang + ign)
         return req.data.id
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
         return null
     }
@@ -39,6 +40,7 @@ async function getIGN(uuid: string): Promise<string | null> {
     try {
         const req: Profile2 = await fetch(mojanguuid + uuid)
         return req.data.name
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
         return null
     }

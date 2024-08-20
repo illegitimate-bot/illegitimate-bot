@@ -48,6 +48,7 @@ export = {
                     color: embedColor
                 }]
             })
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             await interaction.editReply("Please enable your DMs.")
             return

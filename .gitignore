@@ -5,5 +5,3 @@ node_modules/*
 dist/
 data/
 dev/
-.pnp.cjs
-.pnp.loader.mjs

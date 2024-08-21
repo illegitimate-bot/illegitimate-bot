@@ -2,7 +2,7 @@
     "restartable": "rs",
     "ignore": [
         ".git",
-        "node_modules/**/node_modules",
+        "node_modules",
         "data"
     ],
     "verbose": true,
@@ -13,5 +13,5 @@
         "TS_NODE_FILES": "true",
         "TS_NODE_TRANSPILE_ONLY": "true"
     },
-    "ext": "ts, json"
+    "ext": "ts"
 }

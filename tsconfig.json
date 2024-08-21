@@ -18,7 +18,7 @@
             "schemas/*": ["src/schemas/*"],
             "config/*": ["src/config/*"],
             "interfaces": ["src/interfaces/index"],
-            "typings": ["src/typings/index"],
+            "typings": ["src/typings/index"]
         }
     },
     "include": ["src"],

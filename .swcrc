@@ -26,7 +26,8 @@
         "strict": true,
         "strictMode": true,
         "noInterop": false,
-        "lazy": false
+        "lazy": false,
+        "ignoreDynamic": true
     },
     "minify": false,
     "sourceMaps": false

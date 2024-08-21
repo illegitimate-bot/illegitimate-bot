@@ -9,6 +9,7 @@ scripts
 .env.example
 .gitignore
 .gitlab-ci.yml
+.node-version
 docker-compose.yml
 Dockerfile
 Dockerfile.cache

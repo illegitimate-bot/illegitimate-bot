@@ -15,4 +15,5 @@ Dockerfile
 Dockerfile.cache
 eslint.config.mjs
 nodemon-js.json
+nodemon-swc.json
 nodemon.json

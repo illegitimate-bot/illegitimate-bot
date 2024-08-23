@@ -1,13 +1,13 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js"
-import { getGuild, getIGN, getHeadURL } from "utils/Hypixel"
-import verify from "schemas/verifyTag"
-import { embedColor, hypixelGuildID, devMessage } from "config/options"
-import roleManage from "utils/functions/rolesmanage"
+import { getGuild, getIGN, getHeadURL } from "utils/Hypixel.js"
+import verify from "schemas/verifyTag.js"
+import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
+import roleManage from "utils/functions/rolesmanage.js"
 import { ICommand } from "interfaces"
-import { waitingListRole } from "config/roles"
-import { removeIndents } from "utils/functions/funcs"
+import { waitingListRole } from "config/roles.js"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "update",
     description: "Update your guild rank.",
     dev: false,

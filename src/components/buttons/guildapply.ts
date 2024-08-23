@@ -1,13 +1,13 @@
 import { ButtonBuilder, ButtonStyle, ActionRowBuilder, GuildMember, TextChannel } from "discord.js"
-import { embedColor, applicationsChannel } from "config/options"
-import { largeM, smallM, ignM } from "config/limitmessages"
-import questions from "config/questions"
-import { guildRole } from "config/roles"
-import guildapp from "schemas/guildAppTag"
+import { embedColor, applicationsChannel } from "config/options.js"
+import { largeM, smallM, ignM } from "config/limitmessages.js"
+import { guild as guildQuestions } from "config/questions.js"
+import { guildRole } from "config/roles.js"
+import guildapp from "schemas/guildAppTag.js"
 import { IButton } from "interfaces"
-import applicationQuestions from "utils/functions/applicationquestions"
+import applicationQuestions from "utils/functions/applicationquestions.js"
 
-export = {
+export default {
     name: "guildapply",
     description: "Guild application button.",
 
@@ -16,7 +16,6 @@ export = {
         const user = interaction.member as GuildMember
         const guild = interaction.guild!
         const userRoles = user.roles.cache.map(role => role.id)
-        const guildQuestions = questions.guild
 
         function qu(n: number): string {
             return guildQuestions[n - 1].q

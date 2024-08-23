@@ -1,12 +1,12 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
-import { embedColor, devMessage, hypixelGuildID } from "config/options"
+import { embedColor, devMessage, hypixelGuildID } from "config/options.js"
 import { IContextMenu } from "interfaces"
-import verify from "schemas/verifyTag"
-import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
-import roleManage from "utils/functions/rolesmanage"
-import { waitingListRole } from "config/roles"
+import verify from "schemas/verifyTag.js"
+import { getGuild, getHeadURL, getIGN } from "utils/Hypixel.js"
+import roleManage from "utils/functions/rolesmanage.js"
+import { waitingListRole } from "config/roles.js"
 
-export = {
+export default {
     name: "Update User",
     description: "Updates a user's roles",
     dev: false,

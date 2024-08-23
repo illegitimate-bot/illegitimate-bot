@@ -1,10 +1,10 @@
-import { devMessage, embedColor } from "config/options"
+import { devMessage, embedColor } from "config/options.js"
 import { PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import verify from "schemas/verifyTag"
-import { getHeadURL, getIGN, getUUID } from "utils/Hypixel"
+import verify from "schemas/verifyTag.js"
+import { getHeadURL, getIGN, getUUID } from "utils/Hypixel.js"
 
-export = {
+export default {
     name: "find",
     description: "Find a person by the ign",
     dev: false,

@@ -1,8 +1,8 @@
-import { hypixelGuildID, guildLogChannel, embedColor, devMessage } from "config/options"
-import color from "utils/functions/colors"
-import { getGuild, getIGN } from "utils/Hypixel"
+import { hypixelGuildID, guildLogChannel, embedColor, devMessage } from "config/options.js"
+import color from "utils/functions/colors.js"
+import { getGuild, getIGN } from "utils/Hypixel.js"
 import { ICron, IGuildData } from "interfaces"
-import { client } from "utils/Illegitimate"
+import { client } from "utils/Illegitimate.js"
 import { TextChannel } from "discord.js"
 
 async function guildWeekly() {
@@ -86,7 +86,7 @@ async function guildWeekly() {
     })
 }
 
-export = {
+export default {
     time: {
         seconds: 0,
         minutes: 0,

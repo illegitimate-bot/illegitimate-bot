@@ -1,9 +1,9 @@
 import { GuildMember, userMention } from "discord.js"
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { IEvent } from "interfaces"
-import logToChannel from "utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel.js"
 
-export = {
+export default {
     name: "logNewJoins",
     description: "Logs new joins",
     event: "guildMemberAdd",

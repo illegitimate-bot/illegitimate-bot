@@ -1,9 +1,9 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
-import { embedColor } from "config/options"
-import staffapp from "schemas/staffAppTag"
+import { embedColor } from "config/options.js"
+import staffapp from "schemas/staffAppTag.js"
 import { IModal } from "interfaces"
 
-export = {
+export default {
     name: "staffdenyreasonbox",
     description: "Deny reason box.",
 

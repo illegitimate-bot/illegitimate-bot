@@ -1,10 +1,10 @@
-import { guildid } from "config/options"
-import statuses from "config/statuses"
+import { guildid } from "config/options.js"
+import statuses from "config/statuses.js"
 import { Guild } from "discord.js"
 import { IEvent } from "interfaces"
-import { ExtendedClient as Client } from "utils/Client"
+import { ExtendedClient as Client } from "utils/Client.js"
 
-export = {
+export default {
     name: "status",
     description: "Sets the status of the bot",
     event: "ready",

@@ -1,13 +1,13 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { getGuild, getHeadURL, getIGN } from "utils/Hypixel"
-import { hypixelGuildID, embedColor, devMessage } from "config/options"
-import verify from "schemas/verifyTag"
+import { getGuild, getHeadURL, getIGN } from "utils/Hypixel.js"
+import { hypixelGuildID, embedColor, devMessage } from "config/options.js"
+import verify from "schemas/verifyTag.js"
 import { ICommand } from "interfaces"
-import roleManage from "utils/functions/rolesmanage"
-import { waitingListRole } from "config/roles"
-import { removeIndents } from "utils/functions/funcs"
+import roleManage from "utils/functions/rolesmanage.js"
+import { waitingListRole } from "config/roles.js"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "forceupdate",
     description: "Force update the user",
     dev: false,

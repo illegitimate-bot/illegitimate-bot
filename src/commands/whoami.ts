@@ -1,10 +1,10 @@
 import { SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import { embedColor, devMessage } from "config/options"
-import verify from "schemas/verifyTag"
-import { getIGN, getHeadURL } from "utils/Hypixel"
+import { embedColor, devMessage } from "config/options.js"
+import verify from "schemas/verifyTag.js"
+import { getIGN, getHeadURL } from "utils/Hypixel.js"
 
-export = {
+export default {
     name: "whoami",
     description: "Get your user info",
     public: true,

@@ -1,8 +1,8 @@
 import { Message } from "discord.js"
 import { IEvent } from "interfaces"
-import env from "utils/Env"
+import env from "utils/Env.js"
 
-export = {
+export default {
     name: "eval",
     description: "Evaluate a JavaScript expression",
     event: "messageCreate",

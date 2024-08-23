@@ -1,15 +1,15 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import play from "./music/play"
-import leave from "./music/leave"
-import queue from "./music/queue"
-import volume from "./music/volume"
-import skip from "./music/skip"
-import nowplaying from "./music/nowplaying"
-import pause from "./music/pause"
-import unpause from "./music/unpause"
+import play from "./music/play.js"
+import leave from "./music/leave.js"
+import queue from "./music/queue.js"
+import volume from "./music/volume.js"
+import skip from "./music/skip.js"
+import nowplaying from "./music/nowplaying.js"
+import pause from "./music/pause.js"
+import unpause from "./music/unpause.js"
 
-export = {
+export default {
     name: "music",
     description: "Subcommands for music commands",
     dev: true,

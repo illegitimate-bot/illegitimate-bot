@@ -1,4 +1,4 @@
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { useMainPlayer } from "discord-player"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
 

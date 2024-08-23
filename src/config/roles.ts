@@ -1,18 +1,33 @@
-const roles = {
-    gm: "815893218246787080",
-    manager: "815880752683679824",
-    moderator: "815880910019887134",
-    elite: "1137654165884129310",
-    beast: "815880942345519104",
-    member: "815880984301404190",
-    guildStaff: "1175860041652379718",
-    guildRole: "1043224015722000514",
-    waitingListRole: "1092543315053908120",
-    defaultMember: "722386801930797056",
-    admin: "528549814846095360",
-    helper: "592371991294771226",
-    muted: "594355088932339732",
-    countingBanned: "1192183486128341072",
-    verifyTick: "1201624332674273290"
+const gm = "815893218246787080"
+const manager = "815880752683679824"
+const moderator = "815880910019887134"
+const elite = "1137654165884129310"
+const beast = "815880942345519104"
+const member = "815880984301404190"
+const guildStaff = "1175860041652379718"
+const guildRole = "1043224015722000514"
+const waitingListRole = "1092543315053908120"
+const defaultMember = "722386801930797056"
+const admin = "528549814846095360"
+const helper = "592371991294771226"
+const muted = "594355088932339732"
+const countingBanned = "1192183486128341072"
+const verifyTick = "1201624332674273290"
+
+export {
+    gm,
+    manager,
+    moderator,
+    elite,
+    beast,
+    member,
+    guildStaff,
+    guildRole,
+    waitingListRole,
+    defaultMember,
+    admin,
+    helper,
+    muted,
+    countingBanned,
+    verifyTick
 }
-export = roles

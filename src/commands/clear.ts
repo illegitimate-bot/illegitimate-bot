@@ -1,10 +1,10 @@
 import { SlashCommandBuilder, PermissionFlagsBits, TextChannel, channelMention, userMention } from "discord.js"
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel"
-import { removeIndents } from "utils/functions/funcs"
+import logToChannel from "utils/functions/logtochannel.js"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "clear",
     description: "Clears messages",
     dev: false,

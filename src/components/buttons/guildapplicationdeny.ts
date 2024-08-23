@@ -1,7 +1,7 @@
 import { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
 import { IButton } from "interfaces"
 
-export = {
+export default {
     name: "guildapplicationdeny",
     description: "Deny a guild application.",
 

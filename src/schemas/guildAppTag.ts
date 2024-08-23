@@ -1,5 +1,5 @@
 import Sequelize, { InferAttributes, InferCreationAttributes, Model } from "sequelize"
-import { sequelize } from "utils/Illegitimate"
+import { sequelize } from "utils/Illegitimate.js"
 
 interface GuildApp extends Model<InferAttributes<GuildApp>, InferCreationAttributes<GuildApp>> {
     userID: string

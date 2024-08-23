@@ -1,20 +1,22 @@
-import { ExtendedClient as Client } from "utils/Client"
-import color from "utils/functions/colors"
-import { embedColor } from "config/options"
+import { ExtendedClient as Client } from "utils/Client.js"
+import color from "utils/functions/colors.js"
+import { embedColor } from "config/options.js"
 import { IModal } from "interfaces"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
-import logToChannel from "utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
+const __dirname = import.meta.dirname
 
-export default function loadModalEvents(client: Client, ft: FileType) {
+export default async function loadModalEvents(client: Client, ft: FileType) {
     const modalPath = path.join(__dirname, "..", "..", "components", "modals")
     const modalFiles = fs.readdirSync(modalPath).filter(file => file.endsWith(ft))
 
     for (const file of modalFiles) {
         const filePath = path.join(modalPath, file)
-        const modal: IModal = require(filePath)
+        const { default: modalImport } = await import("file://" + filePath)
+        const modal: IModal = modalImport
 
         if ("name" in modal && "execute" in modal) {
             client.modals.set(modal.name, modal)
@@ -26,7 +28,6 @@ export default function loadModalEvents(client: Client, ft: FileType) {
                 )
             )
         }
-        delete require.cache[require.resolve(filePath)]
     }
 
     client.on(Events.InteractionCreate, async interaction => {

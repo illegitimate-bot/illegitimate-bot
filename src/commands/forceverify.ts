@@ -1,13 +1,13 @@
 import { SlashCommandBuilder, PermissionFlagsBits, GuildMember, userMention } from "discord.js"
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { embedColor, hypixelGuildID, devMessage } from "config/options"
-import verify from "schemas/verifyTag"
-import roleManage from "utils/functions/rolesmanage"
+import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
+import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
+import verify from "schemas/verifyTag.js"
+import roleManage from "utils/functions/rolesmanage.js"
 import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel"
-import { removeIndents } from "utils/functions/funcs"
+import logToChannel from "utils/functions/logtochannel.js"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "forceverify",
     description: "Force verify a user.",
     dev: false,

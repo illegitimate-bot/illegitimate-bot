@@ -1,10 +1,10 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
-import { getIGN, getHeadURL } from "utils/Hypixel"
-import { embedColor, devMessage } from "config/options"
-import verify from "schemas/verifyTag"
+import { getIGN, getHeadURL } from "utils/Hypixel.js"
+import { embedColor, devMessage } from "config/options.js"
+import verify from "schemas/verifyTag.js"
 import { ICommand } from "interfaces"
 
-export = {
+export default {
     name: "whois",
     description: "Get's the ign of a user.",
     dev: false,

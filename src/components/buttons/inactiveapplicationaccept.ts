@@ -1,6 +1,6 @@
 import { IButton } from "interfaces"
 
-export = {
+export default {
     name: "inactiveapplicationaccept",
     description: "Accept an inactivity application.",
 

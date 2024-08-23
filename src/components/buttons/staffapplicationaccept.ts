@@ -1,9 +1,9 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
-import { embedColor } from "config/options"
-import staffapp from "schemas/staffAppTag"
+import { embedColor } from "config/options.js"
+import staffapp from "schemas/staffAppTag.js"
 import { IButton } from "interfaces"
 
-export = {
+export default {
     name: "staffapplicationaccept",
     description: "Accept a staff application.",
 

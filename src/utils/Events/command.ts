@@ -1,20 +1,22 @@
-import { ExtendedClient as Client } from "utils/Client"
-import color from "utils/functions/colors"
-import { embedColor } from "config/options"
+import { ExtendedClient as Client } from "utils/Client.js"
+import color from "utils/functions/colors.js"
+import { embedColor } from "config/options.js"
 import { ICommand } from "interfaces"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
-import logToChannel from "utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
+const __dirname = import.meta.dirname
 
-export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
+export default async function loadSlashCommandsEvents(client: Client, ft: FileType) {
     const cmdPath = path.join(__dirname, "..", "..", "commands")
     const cmdFiles = fs.readdirSync(cmdPath).filter(file => file.endsWith(ft))
 
     for (const file of cmdFiles) {
         const filePath = path.join(cmdPath, file)
-        const cmd: ICommand = require(filePath)
+        const { default: cmdImport } = await import("file://" + filePath)
+        const cmd: ICommand = cmdImport
 
         if ("data" in cmd && "execute" in cmd) {
             client.commands.set(cmd.data.name, cmd)
@@ -26,7 +28,6 @@ export default function loadSlashCommandsEvents(client: Client, ft: FileType) {
                 )
             )
         }
-        delete require.cache[require.resolve(filePath)]
     }
 
     //! command handler

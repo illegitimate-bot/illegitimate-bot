@@ -1,6 +1,6 @@
-import { bwwins, beastbwfkdr, beastbwstars, beastswkdr, beastswstars, beastduelswins, duelswlr } from "config/reqs"
-import { embedColor, devMessage } from "config/options"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
+import { bwwins, beastbwfkdr, beastbwstars, beastswkdr, beastswstars, beastduelswins, duelswlr } from "config/reqs.js"
+import { embedColor, devMessage } from "config/options.js"
+import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
 import { ChatInputCommandInteraction } from "discord.js"
 
 export default async function beast(interaction: ChatInputCommandInteraction): Promise<void> {

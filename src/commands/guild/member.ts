@@ -1,5 +1,5 @@
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { embedColor, devMessage } from "config/options"
+import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
+import { embedColor, devMessage } from "config/options.js"
 import { ChatInputCommandInteraction } from "discord.js"
 
 export default async function guildMember(interaction: ChatInputCommandInteraction): Promise<void> {

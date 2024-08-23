@@ -1,9 +1,9 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, GuildMember } from "discord.js"
-import { embedColor } from "config/options"
-import guildapp from "schemas/guildAppTag"
+import { embedColor } from "config/options.js"
+import guildapp from "schemas/guildAppTag.js"
 import { IModal } from "interfaces"
 
-export = {
+export default {
     name: "denyreasonbox",
     description: "Deny reason box.",
 

@@ -1,10 +1,10 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
-import ban from "./counting/ban"
-import unban from "./counting/unban"
+import ban from "./counting/ban.js"
+import unban from "./counting/unban.js"
 
-export = {
+export default {
     name: "counting",
     description: "counting subcommands",
     dev: false,

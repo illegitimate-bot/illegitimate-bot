@@ -1,9 +1,9 @@
 import { SlashCommandBuilder, User } from "discord.js"
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { ICommand } from "interfaces"
-import env from "utils/Env"
+import env from "utils/Env.js"
 
-export = {
+export default {
     name: "pp",
     description: "Shows pp size",
     public: true,

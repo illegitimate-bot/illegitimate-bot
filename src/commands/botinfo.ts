@@ -1,12 +1,16 @@
 import { SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import os from "os"
+import prettyMs from "pretty-ms"
 import { execSync } from "child_process"
-import { removeIndents } from "utils/functions/funcs"
+import { removeIndents } from "utils/functions/funcs.js"
+import { createRequire } from "node:module"
+
+const require = createRequire(import.meta.url)
 const { dependencies, devDependencies } = require("../../package.json")
 
-export = {
+export default {
     name: "botinfo",
     description: "Get information about the bot",
     dev: false,
@@ -18,7 +22,6 @@ export = {
         .setDMPermission(false),
 
     async execute({ interaction, client }) {
-        const { default: prettyMs } = await import("pretty-ms")
         const castedDeps = dependencies as { [key: string]: string }
         const castedDevDeps = devDependencies as { [key: string]: string }
         let osInfo: string

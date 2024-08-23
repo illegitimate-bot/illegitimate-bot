@@ -1,13 +1,13 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { embedColor, devMessage } from "config/options"
-import verify from "schemas/verifyTag"
+import { embedColor, devMessage } from "config/options.js"
+import verify from "schemas/verifyTag.js"
 import { ICommand } from "interfaces"
-import roleManage from "utils/functions/rolesmanage"
-import logToChannel from "utils/functions/logtochannel"
-import { getIGN } from "utils/Hypixel"
-import { removeIndents } from "utils/functions/funcs"
+import roleManage from "utils/functions/rolesmanage.js"
+import logToChannel from "utils/functions/logtochannel.js"
+import { getIGN } from "utils/Hypixel.js"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "forceunverify",
     description: "Force unverify a user",
     dev: false,

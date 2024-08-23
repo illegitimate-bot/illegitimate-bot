@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options"
-import { getUUID, getIGN, getHeadURL, formatUuid } from "utils/Hypixel"
+import { embedColor, devMessage } from "config/options.js"
+import { getUUID, getIGN, getHeadURL, formatUuid } from "utils/Hypixel.js"
 import { ICommand } from "interfaces"
 
-export = {
+export default {
     name: "uuid",
     description: "Get a player's UUID",
     dev: false,

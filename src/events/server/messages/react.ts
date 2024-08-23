@@ -1,7 +1,7 @@
 import { IEvent } from "interfaces"
 import { Message } from "discord.js"
 
-export = {
+export default {
     name: "ur mom",
     description: "ur moms someone",
     event: "messageCreate",

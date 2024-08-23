@@ -1,9 +1,9 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { ICommand } from "interfaces"
-import settings from "schemas/settingsTag"
+import settings from "schemas/settingsTag.js"
 
-export = {
+export default {
     name: "config",
     description: "Configure the bot",
     dev: false,

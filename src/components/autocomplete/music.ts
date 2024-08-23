@@ -1,7 +1,7 @@
 import { QueryType, useMainPlayer } from "discord-player"
 import { IAutocomplete } from "interfaces"
 
-export = {
+export default {
     name: "music",
     description: "Music",
 

@@ -1,5 +1,5 @@
 import { ButtonInteraction } from "discord.js"
-import { ExtendedClient } from "utils/Client"
+import { ExtendedClient } from "utils/Client.js"
 
 export default interface IButton {
     name: string

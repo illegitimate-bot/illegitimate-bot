@@ -1,11 +1,11 @@
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
-import { embedColor, hypixelGuildID, devMessage } from "config/options"
-import verify from "schemas/verifyTag"
-import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles"
+import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
+import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
+import verify from "schemas/verifyTag.js"
+import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles.js"
 import { IModal } from "interfaces"
 import { GuildMember } from "discord.js"
 
-export = {
+export default {
     name: "verifybox",
     description: "Verify box.",
 

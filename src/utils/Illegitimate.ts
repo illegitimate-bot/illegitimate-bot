@@ -6,6 +6,7 @@ import env from "utils/Env.js"
 import loadAllEvents from "./Events/loadevents.js"
 import { Player } from "discord-player"
 import { Sequelize } from "sequelize"
+import { YoutubeiExtractor } from "discord-player-youtubei"
 
 const client = new Client()
 const redis = new Redis(env.prod.redisURI!)
@@ -32,7 +33,9 @@ class Illegitimate {
     async start() {
         await this.init()
         await loadAllEvents(client, ft)
-        await player.extractors.loadDefault()
+        // await player.extractors.loadDefault()
+        await player.extractors.loadDefault(ext => ext != "YouTubeExtractor")
+        await player.extractors.register(YoutubeiExtractor, {})
         await client.start()
         await this.databases()
     }
@@ -41,12 +44,14 @@ class Illegitimate {
         redis.on("ready", () => {
             console.log(color("Connected to Redis", "green"))
         })
+        // if (process.env.NODE_ENV === "dev") {
+        //     sequelize.sync().then(() => {
+        //         console.log(color("Synced the db [dev]", "green"))
+        //     })
+        // }
         // connect(env.prod.mongoURI!, {}).then(() => {
         //     console.log(color("Connected to MongoDB", "green"))
         // })
-        sequelize.sync().then(() => {
-            console.log(color("Connected to Postgres", "green"))
-        })
     }
 
     private async init() {

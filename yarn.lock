@@ -1285,6 +1285,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "chalk@npm:5.3.0"
+  checksum: 10c0/8297d436b2c0f95801103ff2ef67268d362021b8210daf8ddbe349695333eb3610a71122172ff3b0272f1ef2cf7cc2c41fdaa4715f52e49ffe04c56340feed09
+  languageName: node
+  linkType: hard
+
 "chokidar@npm:^3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
@@ -2558,7 +2565,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.2.0"
     anilist: "npm:^0.12.4"
     axios: "npm:^1.7.5"
-    chalk: "npm:^4.1.2"
+    chalk: "npm:^5.3.0"
     chokidar: "npm:^3.6.0"
     concurrently: "npm:^8.2.2"
     cron: "npm:^3.1.7"

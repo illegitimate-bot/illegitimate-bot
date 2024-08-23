@@ -32,7 +32,7 @@
                 "@evan/opus": "^1.0.3",
                 "anilist": "^0.12.4",
                 "axios": "^1.7.5",
-                "chalk": "^4.1.2",
+                "chalk": "^5.3.0",
                 "cron": "^3.1.7",
                 "discord-player": "^6.7.1",
                 "discord.js": "^14.15.3",

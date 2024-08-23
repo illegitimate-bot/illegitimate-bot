@@ -1,7 +1,7 @@
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { useMainPlayer } from "discord-player"
 import { ChatInputCommandInteraction } from "discord.js"
-import { removeIndents } from "utils/functions/funcs"
+import { removeIndents } from "utils/functions/funcs.js"
 
 export default async function nowplaying(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply()

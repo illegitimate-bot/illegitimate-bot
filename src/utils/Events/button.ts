@@ -1,20 +1,22 @@
-import { ExtendedClient as Client } from "utils/Client"
-import color from "utils/functions/colors"
-import { embedColor } from "config/options"
+import { ExtendedClient as Client } from "utils/Client.js"
+import color from "utils/functions/colors.js"
+import { embedColor } from "config/options.js"
 import { IButton } from "interfaces"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
-import logToChannel from "utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
+const __dirname = import.meta.dirname
 
-export default function loadButtonEvents(client: Client, ft: FileType) {
+export default async function loadButtonEvents(client: Client, ft: FileType) {
     const btnPath = path.join(__dirname, "..", "..", "components", "buttons")
     const btnFiles = fs.readdirSync(btnPath).filter(file => file.endsWith(ft))
 
     for (const file of btnFiles) {
         const filePath = path.join(btnPath, file)
-        const btn: IButton = require(filePath)
+        const { default: btnImport } = await import("file://" + filePath)
+        const btn: IButton = btnImport
 
         if ("name" in btn && "execute" in btn) {
             client.buttons.set(btn.name, btn)
@@ -26,7 +28,6 @@ export default function loadButtonEvents(client: Client, ft: FileType) {
                 )
             )
         }
-        delete require.cache[require.resolve(filePath)]
     }
 
     client.on(Events.InteractionCreate, async interaction => {

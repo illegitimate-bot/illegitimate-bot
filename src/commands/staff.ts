@@ -1,13 +1,13 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
-import help from "./staff/help"
-import beast from "./staff/beast"
-import updateAll from "./staff/updateall"
-import prune from "./staff/prune"
-import removeGuildRoles from "./staff/removeguildroles"
+import help from "./staff/help.js"
+import beast from "./staff/beast.js"
+import updateAll from "./staff/updateall.js"
+import prune from "./staff/prune.js"
+import removeGuildRoles from "./staff/removeguildroles.js"
 
-export = {
+export default {
     name: "staff",
     description: "Subcommands for staff",
     dev: false,

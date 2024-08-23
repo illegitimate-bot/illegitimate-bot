@@ -1,15 +1,15 @@
 import { ButtonBuilder, ButtonStyle, ActionRowBuilder, GuildMember, TextChannel } from "discord.js"
-import { embedColor, staffApplicationsChannel } from "config/options"
-import { largeM, ignM } from "config/limitmessages"
-import questions from "config/questions"
-import { guildRole, guildStaff } from "config/roles"
-import staffapp from "schemas/staffAppTag"
-import settings from "schemas/settingsTag"
+import { embedColor, staffApplicationsChannel } from "config/options.js"
+import { largeM, ignM } from "config/limitmessages.js"
+import { staff as staffQuestions } from "config/questions.js"
+import { guildRole, guildStaff } from "config/roles.js"
+import staffapp from "schemas/staffAppTag.js"
+import settings from "schemas/settingsTag.js"
 import { IButton } from "interfaces"
-import env from "utils/Env"
-import applicationQuestions from "utils/functions/applicationquestions"
+import env from "utils/Env.js"
+import applicationQuestions from "utils/functions/applicationquestions.js"
 
-export = {
+export default {
     name: "staffapply",
     description: "Apply for the staff team.",
 
@@ -19,7 +19,6 @@ export = {
         const userRoles = user.roles.cache
         const setting = await settings.findOne({ where: { name: "staffAppStatus" } })
         const status = setting?.value || "0"
-        const staffQuestions = questions.staff
 
         function sq(n: number): string {
             return staffQuestions[n - 1].q

@@ -1,9 +1,9 @@
-import waitinglist from "schemas/waitinglistTag"
-import { getGuild, getIGN } from "utils/Hypixel"
-import { hypixelGuildID } from "config/options"
+import waitinglist from "schemas/waitinglistTag.js"
+import { getGuild, getIGN } from "utils/Hypixel.js"
+import { hypixelGuildID } from "config/options.js"
 import { IButton } from "interfaces"
 
-export = {
+export default {
     name: "waitinglistupdate",
     description: "Update the waiting list.",
 

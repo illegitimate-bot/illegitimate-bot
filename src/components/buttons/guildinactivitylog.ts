@@ -1,13 +1,13 @@
 import { ButtonBuilder, ActionRowBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
-import { gm, manager, moderator, beast, member, guildStaff, guildRole } from "config/roles"
-import { ignM, smallM, largeM } from "config/limitmessages"
-import { inactivity } from "config/questions"
-import { embedColor, inactivityLogChannel } from "config/options"
+import { gm, manager, moderator, beast, member, guildStaff, guildRole } from "config/roles.js"
+import { ignM, smallM, largeM } from "config/limitmessages.js"
+import { inactivity } from "config/questions.js"
+import { embedColor, inactivityLogChannel } from "config/options.js"
 import { IButton } from "interfaces"
-import applicationQuestions from "utils/functions/applicationquestions"
+import applicationQuestions from "utils/functions/applicationquestions.js"
 const guildRoles = [gm, manager, moderator, beast, member, guildStaff, guildRole]
 
-export = {
+export default {
     name: "guildinactivitylog",
     description: "Configure the bot.",
 

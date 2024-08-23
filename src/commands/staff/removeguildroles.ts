@@ -1,10 +1,10 @@
-import { embedColor, hypixelGuildID } from "config/options"
+import { embedColor, hypixelGuildID } from "config/options.js"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
-import verify from "schemas/verifyTag"
+import verify from "schemas/verifyTag.js"
 import { IGuildData } from "interfaces"
-import env from "utils/Env"
-import { getGuild } from "utils/Hypixel"
-import roleManage from "utils/functions/rolesmanage"
+import env from "utils/Env.js"
+import { getGuild } from "utils/Hypixel.js"
+import roleManage from "utils/functions/rolesmanage.js"
 
 export default async function removeGuildRoles(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()

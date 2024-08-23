@@ -22,7 +22,7 @@
         }
     },
     "module": {
-        "type": "commonjs",
+        "type": "es6",
         "strict": true,
         "strictMode": true,
         "noInterop": false,

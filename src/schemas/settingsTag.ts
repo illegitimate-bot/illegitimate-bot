@@ -1,5 +1,5 @@
 import Sequelize, { InferAttributes, InferCreationAttributes, Model } from "sequelize"
-import { sequelize } from "utils/Illegitimate"
+import { sequelize } from "utils/Illegitimate.js"
 
 interface Settings extends Model<InferAttributes<Settings>, InferCreationAttributes<Settings>> {
     name: string

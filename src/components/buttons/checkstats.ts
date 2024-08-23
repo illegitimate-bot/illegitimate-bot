@@ -1,10 +1,10 @@
-import { embedColor, devMessage } from "config/options"
-import guildapp from "schemas/guildAppTag"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
+import { embedColor, devMessage } from "config/options.js"
+import guildapp from "schemas/guildAppTag.js"
+import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs.js"
+import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
 import { IButton } from "interfaces"
 
-export = {
+export default {
     name: "checkstats",
     description: "Check your stats.",
 

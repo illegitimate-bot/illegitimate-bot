@@ -1,8 +1,8 @@
-import { getUUID, getPlayer, getGuild, getIGN } from "utils/Hypixel"
-import { embedColor, devMessage } from "config/options"
+import { getUUID, getPlayer, getGuild, getIGN } from "utils/Hypixel.js"
+import { embedColor, devMessage } from "config/options.js"
 import { ChannelType, ChatInputCommandInteraction } from "discord.js"
 import { IGuildData } from "interfaces"
-import { redis } from "utils/Illegitimate"
+import { redis } from "utils/Illegitimate.js"
 
 export default async function guildTop(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()

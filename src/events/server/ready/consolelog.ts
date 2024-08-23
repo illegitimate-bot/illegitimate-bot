@@ -1,8 +1,8 @@
 import { IEvent } from "interfaces"
-import { ExtendedClient as Client } from "utils/Client"
-import color from "utils/functions/colors"
+import { ExtendedClient as Client } from "utils/Client.js"
+import color from "utils/functions/colors.js"
 
-export = {
+export default {
     name: "conolelog",
     description: "console log",
     event: "ready",

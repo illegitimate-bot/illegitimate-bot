@@ -1,12 +1,12 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { embedColor, devMessage } from "config/options"
-import waitinglist from "schemas/waitinglistTag"
+import { embedColor, devMessage } from "config/options.js"
+import waitinglist from "schemas/waitinglistTag.js"
 import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel"
-import { waitingListRole } from "config/roles"
-import { removeIndents } from "utils/functions/funcs"
+import logToChannel from "utils/functions/logtochannel.js"
+import { waitingListRole } from "config/roles.js"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "remove",
     description: "Remove a person on the waiting list.",
     dev: false,

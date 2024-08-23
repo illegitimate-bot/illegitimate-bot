@@ -1,20 +1,22 @@
-import { ExtendedClient as Client } from "utils/Client"
-import { embedColor } from "config/options"
+import { ExtendedClient as Client } from "utils/Client.js"
+import { embedColor } from "config/options.js"
 import { IAutocomplete } from "interfaces"
 import { Events } from "discord.js"
-import color from "utils/functions/colors"
+import color from "utils/functions/colors.js"
 import path from "path"
 import fs from "fs"
-import logToChannel from "utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
+const __dirname = import.meta.dirname
 
-export default function loadAutocompleteEvents(client: Client, ft: FileType) {
+export default async function loadAutocompleteEvents(client: Client, ft: FileType) {
     const autocompletePath = path.join(__dirname, "..", "..", "components", "autocomplete")
     const autocompleteFiles = fs.readdirSync(autocompletePath).filter(file => file.endsWith(ft))
 
     for (const file of autocompleteFiles) {
         const filePath = path.join(autocompletePath, file)
-        const autocomplete: IAutocomplete = require(filePath)
+        const { default: autocompleteImport } = await import("file://" + filePath)
+        const autocomplete: IAutocomplete = autocompleteImport
 
         if ("name" in autocomplete && "execute" in autocomplete) {
             client.autocomplete.set(autocomplete.name, autocomplete)
@@ -26,7 +28,6 @@ export default function loadAutocompleteEvents(client: Client, ft: FileType) {
                 )
             )
         }
-        delete require.cache[require.resolve(filePath)]
     }
 
     client.on(Events.InteractionCreate, async interaction => {

@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import { devMessage, embedColor } from "config/options"
+import { devMessage, embedColor } from "config/options.js"
 import { anilist } from "anilist"
-import { capitalizeFirstLetter, removeIndents } from "utils/functions/funcs"
+import { capitalizeFirstLetter, removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "anime",
     description: "Anime subcommands",
     public: true,

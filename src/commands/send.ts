@@ -1,8 +1,8 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel } from "discord.js"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
 
-export = {
+export default {
     name: "send",
     description: "Send a message to a channel.",
     dev: false,

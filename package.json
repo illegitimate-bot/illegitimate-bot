@@ -4,6 +4,7 @@
         "version": "1.0.0",
         "description": "",
         "main": "src/index.ts",
+        "type": "module",
         "repository": {
                 "type": "git",
                 "url": "https://gitlab.com/illegitimate/illegitimate-bot"

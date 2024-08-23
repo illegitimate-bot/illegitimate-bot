@@ -1,9 +1,9 @@
-import { ExtendedClient as Client } from "utils/Client"
-import color from "utils/functions/colors"
+import { ExtendedClient as Client } from "utils/Client.js"
+import color from "utils/functions/colors.js"
 import { Redis } from "ioredis"
-import env from "utils/Env"
+import env from "utils/Env.js"
 // import { connect } from "mongoose"
-import loadAllEvents from "./Events"
+import loadAllEvents from "./Events/loadevents.js"
 import { Player } from "discord-player"
 import { Sequelize } from "sequelize"
 
@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
 class Illegitimate {
     async start() {
         await this.init()
-        loadAllEvents(client, ft)
+        await loadAllEvents(client, ft)
         await player.extractors.loadDefault()
         await client.start()
         await this.databases()

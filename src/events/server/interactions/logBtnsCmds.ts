@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction, ButtonInteraction } from "discord.js"
-import color from "utils/functions/colors"
+import color from "utils/functions/colors.js"
 import { IEvent } from "interfaces"
 
-export = {
+export default {
     name: "logBtnsCmds",
     description: "Logs all button and command interactions",
     event: "interactionCreate",

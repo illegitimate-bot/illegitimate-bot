@@ -1,7 +1,7 @@
 import { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits } from "discord.js"
 import { IContextMenu } from "interfaces"
 
-export = {
+export default {
     name: "resetnick",
     description: "Reset your nickname.",
     dev: false,

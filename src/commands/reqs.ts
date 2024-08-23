@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
+import { embedColor, devMessage } from "config/options.js"
+import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs.js"
 import { ICommand } from "interfaces"
 
-export = {
+export default {
     name: "reqs",
     description: "Displays the requirements for the guild.",
     dev: false,

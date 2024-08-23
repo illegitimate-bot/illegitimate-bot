@@ -1,5 +1,5 @@
-import { getUUID, getIGN, getPlayer, getGuild, guildLevel } from "utils/Hypixel"
-import { embedColor, devMessage } from "config/options"
+import { getUUID, getIGN, getPlayer, getGuild, guildLevel } from "utils/Hypixel.js"
+import { embedColor, devMessage } from "config/options.js"
 import { ChatInputCommandInteraction } from "discord.js"
 import { IGuildData } from "interfaces"
 

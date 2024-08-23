@@ -1,11 +1,11 @@
 import { SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
-import guildMember from "./guild/member"
-import guildInfo from "./guild/info"
-import guildTop from "./guild/top"
+import guildMember from "./guild/member.js"
+import guildInfo from "./guild/info.js"
+import guildTop from "./guild/top.js"
 
-export = {
+export default {
     name: "guild",
     description: "Subcommands for guilds",
     dev: false,

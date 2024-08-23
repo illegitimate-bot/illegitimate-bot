@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from "discord.js"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs"
-import { embedColor, devMessage } from "config/options"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel"
+import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs.js"
+import { embedColor, devMessage } from "config/options.js"
+import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
 import { ICommand } from "interfaces"
 
-export = {
+export default {
     name: "check",
     description: "Check a player's stats.",
     dev: false,

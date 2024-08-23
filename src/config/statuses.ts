@@ -12,4 +12,4 @@ const statuses = [
     { name: "urCryhard steal finals again", type: ActivityType.Watching },
     { name: "with Perlcence the AI", type: ActivityType.Playing },
 ]
-export = statuses
+export default statuses

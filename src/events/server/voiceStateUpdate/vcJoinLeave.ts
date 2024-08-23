@@ -1,9 +1,9 @@
 import { userMention, channelMention, VoiceState } from "discord.js"
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { IEvent } from "interfaces"
-import logToChannel from "utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel.js"
 
-export = {
+export default {
     name: "vcJoinLeave",
     description: "Logs when a user joins or leaves a voice channel.",
     event: "voiceStateUpdate",

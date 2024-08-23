@@ -1,6 +1,5 @@
-const limitMessages = {
-    largeM: "(256 characters max)",
-    smallM: "(128 characters max)",
-    ignM: "(16 characters max)"
-}
-export = limitMessages
+const largeM = "(256 characters max)"
+const smallM = "(128 characters max)"
+const ignM = "(16 characters max)"
+
+export { largeM, smallM, ignM }

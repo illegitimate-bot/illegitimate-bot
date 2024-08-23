@@ -1,11 +1,12 @@
 import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
 import ms from "ms"
-import logToChannel from "utils/functions/logtochannel"
-import { removeIndents } from "utils/functions/funcs"
+import prettyMs from "pretty-ms"
+import logToChannel from "utils/functions/logtochannel.js"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "timeout",
     description: "Times out a memeber",
     dev: false,
@@ -42,7 +43,17 @@ export = {
         const reason = interaction.options.getString("reason") || "No reason provided"
         const mod = interaction.member! as GuildMember
         const time = ms(timeString)
-        const { default: prettyMs } = await import("pretty-ms")
+
+        if (!time) {
+            await interaction.editReply({
+                embeds: [{
+                    description: "There was an error parsing the time.",
+                    color: embedColor
+                }]
+            })
+            return
+        }
+
         const prettyTime = prettyMs(time, { verbose: true })
 
         if (time > 2419140000) {

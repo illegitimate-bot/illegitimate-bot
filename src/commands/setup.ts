@@ -1,8 +1,8 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle, ChannelType, TextChannel } from "discord.js"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
 
-export = {
+export default {
     name: "setup",
     description: "Used for setup of the bot.",
     dev: true,

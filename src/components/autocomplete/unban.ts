@@ -1,6 +1,6 @@
 import { IAutocomplete } from "interfaces"
 
-export = {
+export default {
     name: "unban",
     description: "Unban a user from the server",
 

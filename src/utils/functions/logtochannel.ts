@@ -6,9 +6,9 @@ import {
     errorLogChannel,
     moderationLogChannel,
     devLogChannel
-} from "config/options"
+} from "config/options.js"
 import { Guild, MessageCreateOptions, TextChannel } from "discord.js"
-import { client } from "utils/Illegitimate"
+import { client } from "utils/Illegitimate.js"
 
 const channels = {
     online: onlineLogChannel,

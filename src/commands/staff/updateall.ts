@@ -1,10 +1,10 @@
-import verify from "schemas/verifyTag"
-import { embedColor, hypixelGuildID } from "config/options"
-import color from "utils/functions/colors"
-import roleManage from "utils/functions/rolesmanage"
+import verify from "schemas/verifyTag.js"
+import { embedColor, hypixelGuildID } from "config/options.js"
+import color from "utils/functions/colors.js"
+import roleManage from "utils/functions/rolesmanage.js"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
-import env from "utils/Env"
-import { getGuild, getIGN } from "utils/Hypixel"
+import env from "utils/Env.js"
+import { getGuild, getIGN } from "utils/Hypixel.js"
 import { IGuildData } from "interfaces"
 
 export default async function updateAll(interaction: ChatInputCommandInteraction): Promise<void> {

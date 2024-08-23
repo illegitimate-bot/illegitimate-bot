@@ -1,5 +1,5 @@
 import fetch from "axios"
-import env from "utils/Env"
+import env from "utils/Env.js"
 import { IPlayer, IPlayerData } from "interfaces"
 import { IGuild, IGuildData } from "interfaces"
 const apikey = env.prod.hypixelapikey

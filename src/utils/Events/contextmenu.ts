@@ -1,20 +1,22 @@
-import { ExtendedClient as Client } from "utils/Client"
-import color from "utils/functions/colors"
+import { ExtendedClient as Client } from "utils/Client.js"
+import color from "utils/functions/colors.js"
 import { IContextMenu } from "interfaces"
-import { embedColor } from "config/options"
+import { embedColor } from "config/options.js"
 import { Events } from "discord.js"
 import path from "path"
 import fs from "fs"
-import logToChannel from "utils/functions/logtochannel"
+import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
+const __dirname = import.meta.dirname
 
-export default function loadContextMenuEvents(client: Client, ft: FileType) {
+export default async function loadContextMenuEvents(client: Client, ft: FileType) {
     const contextMenuPath = path.join(__dirname, "..", "..", "commands-contextmenu")
     const contextMenuFiles = fs.readdirSync(contextMenuPath).filter(file => file.endsWith(ft))
 
     for (const file of contextMenuFiles) {
         const filePath = path.join(contextMenuPath, file)
-        const cmd: IContextMenu = require(filePath)
+        const { default: cmdImport } = await import("file://" + filePath)
+        const cmd: IContextMenu = cmdImport
 
         if ("data" in cmd && "execute" in cmd) {
             client.contextmenus.set(cmd.data.name, cmd)
@@ -26,7 +28,6 @@ export default function loadContextMenuEvents(client: Client, ft: FileType) {
                 )
             )
         }
-        delete require.cache[require.resolve(filePath)]
     }
 
     //! context menu command handler

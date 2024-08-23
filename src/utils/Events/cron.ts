@@ -2,14 +2,16 @@ import { CronJob } from "cron"
 import path from "path"
 import fs from "fs"
 import { ICron } from "interfaces"
+const __dirname = import.meta.dirname
 
-export default function loadCronEvents() {
+export default async function loadCronEvents() {
     const cronPath = path.join(__dirname, "..", "..", "events", "cron")
     const cronFiles = fs.readdirSync(cronPath).filter(file => file.endsWith(".js"))
 
     for (const file of cronFiles) {
         const filePath = path.join(cronPath, file)
-        const cron: ICron = require(filePath)
+        const { default: cronImport } = await import("file://" + filePath)
+        const cron: ICron = cronImport
 
         const time =
             cron.time.seconds + " " +
@@ -20,6 +22,5 @@ export default function loadCronEvents() {
             cron.time.dayOfWeek
 
         new CronJob(time, cron.execute, cron.onComplete, cron.start, cron.timeZone).start()
-        delete require.cache[require.resolve(filePath)]
     }
 }

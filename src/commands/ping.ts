@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options"
+import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
 
-export = {
+export default {
     name: "ping",
     description: "Get the bot's ping.",
     dev: false,

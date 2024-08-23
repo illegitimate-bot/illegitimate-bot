@@ -1,9 +1,9 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { embedColor, devMessage, instructionsgif } from "config/options"
+import { embedColor, devMessage, instructionsgif } from "config/options.js"
 import { ICommand } from "interfaces"
-import { removeIndents } from "utils/functions/funcs"
+import { removeIndents } from "utils/functions/funcs.js"
 
-export = {
+export default {
     name: "instructions",
     description: "Instructions for verification",
     dev: false,

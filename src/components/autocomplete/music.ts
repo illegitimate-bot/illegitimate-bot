@@ -19,7 +19,7 @@ export default {
 
         const player = useMainPlayer()
         const { tracks } = await player.search(focusedOption.value, {
-            searchEngine: QueryType.AUTO_SEARCH
+            searchEngine: QueryType.YOUTUBE_SEARCH
         })
 
         const results = tracks.map(track => ({

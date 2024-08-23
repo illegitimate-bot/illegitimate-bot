@@ -32,7 +32,7 @@ export class ExtendedClient extends Client {
 
     async start() {
         let token: string
-        if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT) {
+        if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
             console.log(color("Running in development mode. [ts-node]", "lavender"))
             token = env.dev.devtoken!
             autoDeployCommands("ts", this)

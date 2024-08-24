@@ -15,8 +15,7 @@ export default async function loadModalEvents(client: Client, ft: FileType) {
 
     for (const file of modalFiles) {
         const filePath = path.join(modalPath, file)
-        const { default: modalImport } = await import("file://" + filePath)
-        const modal: IModal = modalImport
+        const { default: modal } = await import("file://" + filePath) as { default: IModal }
 
         if ("name" in modal && "execute" in modal) {
             client.modals.set(modal.name, modal)

@@ -15,8 +15,7 @@ export default async function loadContextMenuEvents(client: Client, ft: FileType
 
     for (const file of contextMenuFiles) {
         const filePath = path.join(contextMenuPath, file)
-        const { default: cmdImport } = await import("file://" + filePath)
-        const cmd: IContextMenu = cmdImport
+        const { default: cmd } = await import("file://" + filePath) as { default: IContextMenu }
 
         if ("data" in cmd && "execute" in cmd) {
             client.contextmenus.set(cmd.data.name, cmd)

@@ -15,8 +15,7 @@ export default async function loadButtonEvents(client: Client, ft: FileType) {
 
     for (const file of btnFiles) {
         const filePath = path.join(btnPath, file)
-        const { default: btnImport } = await import("file://" + filePath)
-        const btn: IButton = btnImport
+        const { default: btn } = await import("file://" + filePath) as { default: IButton }
 
         if ("name" in btn && "execute" in btn) {
             client.buttons.set(btn.name, btn)

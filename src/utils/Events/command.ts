@@ -15,8 +15,7 @@ export default async function loadSlashCommandsEvents(client: Client, ft: FileTy
 
     for (const file of cmdFiles) {
         const filePath = path.join(cmdPath, file)
-        const { default: cmdImport } = await import("file://" + filePath)
-        const cmd: ICommand = cmdImport
+        const { default: cmd } = await import("file://" + filePath) as { default: ICommand }
 
         if ("data" in cmd && "execute" in cmd) {
             client.commands.set(cmd.data.name, cmd)

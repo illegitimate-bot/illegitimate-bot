@@ -16,77 +16,87 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 })
 
-export default [{
-    ignores: ["**/node_modules", "**/dist"],
-}, ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended"), {
-    plugins: {
-        "@typescript-eslint": typescriptEslint,
+export default [
+    {
+        ignores: ["**/node_modules", "**/dist"]
     },
-
-    languageOptions: {
-        globals: {
-            ...globals.node,
-            ...globals.browser,
+    ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended"),
+    {
+        plugins: {
+            "@typescript-eslint": typescriptEslint,
         },
 
-        parser: tsParser,
-        ecmaVersion: "latest",
-        sourceType: "module",
-    },
+        languageOptions: {
+            globals: {
+                ...globals.node,
+                ...globals.browser,
+            },
 
-    rules: {
-        indent: ["error", 4, {
-            SwitchCase: 1,
-        }],
-
-        "linebreak-style": ["error", "unix"],
-        quotes: ["warn", "double"],
-        semi: ["error", "never"],
-        "no-unused-vars": "off",
-        "prefer-const": "warn",
-        "no-var": "error",
-
-        "no-multiple-empty-lines": ["error", {
-            max: 2,
-            maxEOF: 1,
-            maxBOF: 0,
-        }],
-
-        "no-lonely-if": "error",
-        "no-empty-function": "error",
-        "no-inline-comments": "error",
-        "no-trailing-spaces": ["error"],
-
-        "arrow-spacing": ["warn", {
-            before: true,
-            after: true,
-        }],
-
-        "space-before-function-paren": ["error", {
-            anonymous: "never",
-            named: "never",
-            asyncArrow: "always",
-        }],
-
-        "comma-spacing": "error",
-        "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-
-        "@typescript-eslint/no-unused-vars": ["warn", {
-            vars: "all",
-            args: "after-used",
-            ignoreRestSiblings: false,
-        }],
-        "@typescript-eslint/no-empty-object-type": "off",
-        "@typescript-eslint/no-require-imports": "off",
-    },
-}, {
-    languageOptions: {
-        globals: {
-            ...globals.node,
+            parser: tsParser,
+            ecmaVersion: "latest",
+            sourceType: "module",
         },
 
-        ecmaVersion: 5,
-        sourceType: "commonjs",
-    },
-}]
+        rules: {
+            indent: ["error", 4, {
+                SwitchCase: 1,
+            }],
+
+            "linebreak-style": ["error", "unix"],
+            quotes: ["warn", "double"],
+            semi: ["error", "never"],
+            "no-unused-vars": "off",
+            "prefer-const": "warn",
+            "no-var": "error",
+
+            "no-multiple-empty-lines": ["error", {
+                max: 2,
+                maxEOF: 1,
+                maxBOF: 0,
+            }],
+
+            "no-lonely-if": "error",
+            "no-empty-function": "error",
+            "no-inline-comments": "error",
+            "no-trailing-spaces": ["error"],
+
+            "arrow-spacing": ["warn", {
+                before: true,
+                after: true,
+            }],
+
+            "space-before-function-paren": ["error", {
+                anonymous: "never",
+                named: "never",
+                asyncArrow: "always",
+            }],
+
+            "comma-spacing": "error",
+            "@typescript-eslint/no-var-requires": "off",
+            "@typescript-eslint/no-explicit-any": "off",
+
+            "@typescript-eslint/no-unused-vars": ["warn", {
+                vars: "all",
+                args: "after-used",
+                ignoreRestSiblings: false,
+            }],
+            "@typescript-eslint/no-empty-object-type": "off",
+            "@typescript-eslint/no-require-imports": "off",
+            "@typescript-eslint/ban-ts-comment": ["error", {
+                "ts-expect-error": "allow-with-description",
+                "ts-ignore": "allow-with-description",
+                "ts-nocheck": "allow-with-description",
+                "ts-check": "allow-with-description",
+            }],
+        },
+    }, {
+        languageOptions: {
+            globals: {
+                ...globals.node,
+            },
+
+            ecmaVersion: 5,
+            sourceType: "commonjs",
+        },
+    }
+]

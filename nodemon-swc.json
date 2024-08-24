@@ -1,4 +1,5 @@
 {
+    "$schema": "https://json.schemastore.org/nodemon.json",
     "ignore": [
         ".git",
         "node_modules",

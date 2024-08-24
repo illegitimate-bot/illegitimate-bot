@@ -44,11 +44,11 @@ class Illegitimate {
         redis.on("ready", () => {
             console.log(color("Connected to Redis", "green"))
         })
-        // if (process.env.NODE_ENV === "dev") {
-        //     sequelize.sync().then(() => {
-        //         console.log(color("Synced the db [dev]", "green"))
-        //     })
-        // }
+        if (process.env.NODE_ENV === "dev") {
+            sequelize.sync().then(() => {
+                console.log(color("Synced the db [dev]", "green"))
+            })
+        }
         // connect(env.prod.mongoURI!, {}).then(() => {
         //     console.log(color("Connected to MongoDB", "green"))
         // })

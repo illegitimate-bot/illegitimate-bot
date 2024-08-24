@@ -10,8 +10,7 @@ export default async function loadCronEvents() {
 
     for (const file of cronFiles) {
         const filePath = path.join(cronPath, file)
-        const { default: cronImport } = await import("file://" + filePath)
-        const cron: ICron = cronImport
+        const { default: cron } = await import("file://" + filePath) as { default: ICron }
 
         const time =
             cron.time.seconds + " " +

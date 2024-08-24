@@ -11,8 +11,7 @@ export default async function loadEvents(client: Client) {
         const eventFiles = fs.readdirSync(path.join(serverDir, eventDir))
         for (const eventFile of eventFiles) {
             const eventPath = path.join(serverDir, eventDir, eventFile)
-            const { default: eventImport } = await import("file://" + eventPath)
-            const event: IEvent = eventImport
+            const { default: event } = await import("file://" + eventPath) as { default: IEvent }
             if (!event.disabled) {
                 client.on(event.event, event.execute)
             }

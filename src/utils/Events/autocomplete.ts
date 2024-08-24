@@ -15,8 +15,7 @@ export default async function loadAutocompleteEvents(client: Client, ft: FileTyp
 
     for (const file of autocompleteFiles) {
         const filePath = path.join(autocompletePath, file)
-        const { default: autocompleteImport } = await import("file://" + filePath)
-        const autocomplete: IAutocomplete = autocompleteImport
+        const { default: autocomplete } = await import("file://" + filePath) as { default: IAutocomplete }
 
         if ("name" in autocomplete && "execute" in autocomplete) {
             client.autocomplete.set(autocomplete.name, autocomplete)

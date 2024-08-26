@@ -44,7 +44,7 @@ export default async function autoDeployCommands(fileType: FileType, client: Ext
     }).sort((a, b) => a.name > b.name ? 1 : -1)
 
     client.on("ready", async (c) => {
-        const guildclient = c.guilds.cache.get(env.dev.guildid!)!
+        const guildclient = c.guilds.cache.get(env.dev.guildid)!
         const currentCommands = await guildclient.commands.fetch()
         if (!currentCommands) return
 

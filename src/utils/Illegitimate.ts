@@ -9,7 +9,7 @@ import { Sequelize } from "sequelize"
 import { YoutubeiExtractor } from "discord-player-youtubei"
 
 const client = new Client()
-const redis = new Redis(env.prod.redisURI!)
+const redis = new Redis(env.prod.redisURI)
 const player = new Player(client)
 let sequelize: Sequelize
 
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "dev") {
         storage: "data/db.sqlite"
     })
 } else {
-    sequelize = new Sequelize(env.prod.postgresURI!, { dialect: "postgres" })
+    sequelize = new Sequelize(env.prod.postgresURI, { dialect: "postgres" })
 }
 
 let ft: "js" | "ts"
@@ -49,7 +49,7 @@ class Illegitimate {
                 console.log(color("Synced the db [dev]", "green"))
             })
         }
-        // connect(env.prod.mongoURI!, {}).then(() => {
+        // connect(env.prod.mongoURI, {}).then(() => {
         //     console.log(color("Connected to MongoDB", "green"))
         // })
     }

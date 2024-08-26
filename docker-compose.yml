@@ -1,4 +1,4 @@
-version: '3.7'
+---
 services:
   illegitimate:
     container_name: illegitimate
@@ -16,9 +16,11 @@ services:
       - HYPIXELAPIKEY=${HYPIXELAPIKEY}
       - REDISURI=${REDISURI}
       - POSTGRESURI=${POSTGRESURI}
+    depends_on: 
+      - db
   db:
     container_name: postgres
-    image: postgres
+    image: illegitimate-postgres
     restart: unless-stopped
     logging:
       driver: journald

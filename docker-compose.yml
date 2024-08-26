@@ -19,8 +19,8 @@ services:
     depends_on: 
       - db
   db:
-    container_name: postgres
-    image: illegitimate-postgres
+    container_name: illegitimate-postgres
+    image: postgres
     restart: unless-stopped
     logging:
       driver: journald

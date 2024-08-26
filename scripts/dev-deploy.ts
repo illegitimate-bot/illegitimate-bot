@@ -2,7 +2,7 @@ import { REST, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 import fs from "fs"
 import env from "../src/utils/Env"
 import { ICommand } from "../src/interfaces"
-const rest = new REST({ version: "10" }).setToken(env.dev.devtoken!)
+const rest = new REST({ version: "10" }).setToken(env.dev.devtoken)
 
 const commands: RESTPutAPIApplicationCommandsJSONBody = []
 const commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(".ts"))
@@ -26,7 +26,7 @@ for (const file of contentMenuCommands) {
         console.log(`Started refreshing ${commands.length} application (/) commands.`)
 
         await rest.put(
-            Routes.applicationGuildCommands(env.dev.devid!, env.dev.guildid!),
+            Routes.applicationGuildCommands(env.dev.devid, env.dev.guildid),
             { body: commands },
         ).then(() => {
             console.log(`Successfully reloaded ${commands.length} application (/) commands.`)

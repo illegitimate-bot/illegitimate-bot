@@ -1,17 +1,17 @@
 interface ProdEnv {
-    token: string | undefined
-    mongoURI: string | undefined
-    dev: string | undefined
-    hypixelapikey: string | undefined
-    redisURI: string | undefined
-    postgresURI: string | undefined
+    token: string
+    mongoURI: string
+    dev: string
+    hypixelapikey: string
+    redisURI: string
+    postgresURI: string
 }
 
 interface DevEnv {
-    devtoken: string | undefined
-    clientid: string | undefined
-    devid: string | undefined
-    guildid: string | undefined
+    devtoken: string
+    clientid: string
+    devid: string
+    guildid: string
 }
 
 export default interface IEnv {

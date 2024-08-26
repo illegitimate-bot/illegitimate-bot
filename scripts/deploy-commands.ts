@@ -3,7 +3,7 @@ import fs from "node:fs"
 import { ICommand } from "../src/interfaces"
 import env from "../src/utils/Env"
 import color from "../src/utils/functions/colors"
-const rest = new REST({ version: "10" }).setToken(env.prod.token!)
+const rest = new REST({ version: "10" }).setToken(env.prod.token)
 
 const commands: RESTPutAPIApplicationCommandsJSONBody = []
 const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".ts"))
@@ -26,7 +26,7 @@ for (const file of contentMenuCommands) {
         console.log(color(commandsString.join("\n"), "lavender"))
 
         await rest.put(
-            Routes.applicationCommands(env.dev.clientid!),
+            Routes.applicationCommands(env.dev.clientid),
             { body: commands },
         ).then(() => {
             console.log(color(`Successfully reloaded ${commands.length} application (/) commands.`, "green"))

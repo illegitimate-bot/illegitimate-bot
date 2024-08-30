@@ -10,9 +10,8 @@
     "env": {
         "NODE_PATH": "src/",
         "NODE_ENV": "dev",
-        "TYPESCRIPT": "true",
-        "TS_NODE_FILES": "true",
-        "TS_NODE_TRANSPILE_ONLY": "true"
+        "TYPESCRIPT": "true"
     },
-    "ext": "ts"
+    "ext": "ts",
+    "exec": "tsx"
 }

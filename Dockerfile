@@ -1,4 +1,4 @@
-FROM node-cache as cache
+FROM node-cache AS cache
 FROM node:21.7.3-alpine3.18
 
 COPY --from=cache /cache/node_modules /app/node_modules

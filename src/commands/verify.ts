@@ -99,7 +99,7 @@ export default {
             }]
         })
 
-        const linkedDiscord = player?.socialMedia?.links?.DISCORD || null
+        const linkedDiscord = player?.socialMedia?.links?.DISCORD
         if (!linkedDiscord) {
             interaction.editReply({
                 embeds: [{

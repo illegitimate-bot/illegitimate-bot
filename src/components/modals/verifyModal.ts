@@ -1,9 +1,9 @@
 import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
 import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
 import verify from "schemas/verifyTag.js"
-import { gm, manager, moderator, beast, elite, member, guildRole, guildStaff, defaultMember } from "config/roles.js"
 import { IModal } from "interfaces"
 import { GuildMember } from "discord.js"
+import roleManage from "utils/functions/rolesmanage.js"
 
 export default {
     name: "verifybox",
@@ -20,6 +20,13 @@ export default {
             return
         }
 
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching your uuid...",
+                color: embedColor
+            }]
+        })
+
         const uuid = await getUUID(ign)
         if (!uuid) {
             interaction.editReply({
@@ -30,6 +37,13 @@ export default {
             })
             return
         }
+
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching your player data...",
+                color: embedColor
+            }]
+        })
 
         const head = await getHeadURL(ign)
         const player = await getPlayer(uuid)
@@ -49,6 +63,14 @@ export default {
         } else {
             username = user.user.username + "#" + user.user.discriminator
         }
+
+        await interaction.editReply({
+            embeds: [{
+                description: "Checking your Discord tag...",
+                color: embedColor
+            }]
+        })
+
 
         const linkedDiscord = player?.socialMedia?.links?.DISCORD
         if (!linkedDiscord) {
@@ -73,6 +95,13 @@ export default {
             return
         }
 
+        await interaction.editReply({
+            embeds: [{
+                description: "Fetching your guild data...",
+                color: embedColor
+            }]
+        })
+
         const guild = await getGuild(uuid)
         let guildID: string | null
         if (!guild) {
@@ -85,40 +114,37 @@ export default {
             const GuildMembers = guild!.members
             const guildRank = GuildMembers.find(member => member.uuid === player.uuid)!.rank
 
-            if (guildRank === "Guild Master" && guildID === hypixelGuildID) {
-                await user.roles.add(gm, "Verification")
-                await user.roles.add(guildRole, "Verification")
-                await user.roles.add(guildStaff, "Verification")
+            if (guildRank === "Guild Master") {
+                const roles = roleManage("gm")
+                await user.roles.add(roles.rolesToAdd, "Verification")
             }
 
-            if (guildRank === "Manager" && guildID === hypixelGuildID) {
-                await user.roles.add(manager, "Verification")
-                await user.roles.add(guildRole, "Verification")
-                await user.roles.add(guildStaff, "Verification")
+            if (guildRank === "Manager") {
+                const roles = roleManage("manager")
+                await user.roles.add(roles.rolesToAdd, "Verification")
             }
 
-            if (guildRank === "Moderator" && guildID === hypixelGuildID) {
-                await user.roles.add(moderator, "Verification")
-                await user.roles.add(guildRole, "Verification")
-                await user.roles.add(guildStaff, "Verification")
+            if (guildRank === "Moderator") {
+                const roles = roleManage("moderator")
+                await user.roles.add(roles.rolesToAdd, "Verification")
             }
 
-            if (guildRank === "Beast" && guildID === hypixelGuildID) {
-                await user.roles.add(beast, "Verification")
-                await user.roles.add(guildRole, "Verification")
+            if (guildRank === "Beast") {
+                const roles = roleManage("beast")
+                await user.roles.add(roles.rolesToAdd, "Verification")
             }
 
-            if (guildRank === "Elite" && guildID === hypixelGuildID) {
-                await user.roles.add(elite, "Verification")
-                await user.roles.add(guildRole, "Verification")
+            if (guildRank === "Elite") {
+                const roles = roleManage("elite")
+                await user.roles.add(roles.rolesToAdd, "Verification")
             }
 
-            if (guildRank === "Member" && guildID === hypixelGuildID) {
-                await user.roles.add(member, "Verification")
-                await user.roles.add(guildRole, "Verification")
+            if (guildRank === "Member") {
+                const roles = roleManage("member")
+                await user.roles.add(roles.rolesToAdd, "Verification")
             }
 
-            await user.roles.add(defaultMember, "Verification")
+            await user.roles.add(roleManage("default").rolesToAdd, "Verification")
             await user.setNickname(player.displayname!, "Verification").catch(() => {
                 // Do nothing
             })

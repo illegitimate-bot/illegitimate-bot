@@ -87,7 +87,8 @@ export default {
         if (linkedDiscord !== username) {
             interaction.editReply({
                 embeds: [{
-                    description: "<a:cross_a:1087808606897983539> The Discord account linked to `" + player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
+                    description: "<a:cross_a:1087808606897983539> The Discord account linked to `" +
+                        player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
                         "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
                     color: embedColor
                 }]

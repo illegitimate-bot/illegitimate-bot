@@ -139,6 +139,62 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dprint/darwin-arm64@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/darwin-arm64@npm:0.47.2"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@dprint/darwin-x64@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/darwin-x64@npm:0.47.2"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@dprint/linux-arm64-glibc@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/linux-arm64-glibc@npm:0.47.2"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@dprint/linux-arm64-musl@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/linux-arm64-musl@npm:0.47.2"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@dprint/linux-x64-glibc@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/linux-x64-glibc@npm:0.47.2"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@dprint/linux-x64-musl@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/linux-x64-musl@npm:0.47.2"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@dprint/win32-arm64@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/win32-arm64@npm:0.47.2"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@dprint/win32-x64@npm:0.47.2":
+  version: 0.47.2
+  resolution: "@dprint/win32-x64@npm:0.47.2"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.23.1":
   version: 0.23.1
   resolution: "@esbuild/aix-ppc64@npm:0.23.1"
@@ -1829,6 +1885,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dprint@npm:^0.47.2":
+  version: 0.47.2
+  resolution: "dprint@npm:0.47.2"
+  dependencies:
+    "@dprint/darwin-arm64": "npm:0.47.2"
+    "@dprint/darwin-x64": "npm:0.47.2"
+    "@dprint/linux-arm64-glibc": "npm:0.47.2"
+    "@dprint/linux-arm64-musl": "npm:0.47.2"
+    "@dprint/linux-x64-glibc": "npm:0.47.2"
+    "@dprint/linux-x64-musl": "npm:0.47.2"
+    "@dprint/win32-arm64": "npm:0.47.2"
+    "@dprint/win32-x64": "npm:0.47.2"
+  dependenciesMeta:
+    "@dprint/darwin-arm64":
+      optional: true
+    "@dprint/darwin-x64":
+      optional: true
+    "@dprint/linux-arm64-glibc":
+      optional: true
+    "@dprint/linux-arm64-musl":
+      optional: true
+    "@dprint/linux-x64-glibc":
+      optional: true
+    "@dprint/linux-x64-musl":
+      optional: true
+    "@dprint/win32-arm64":
+      optional: true
+    "@dprint/win32-x64":
+      optional: true
+  bin:
+    dprint: bin.js
+  checksum: 10c0/9add4613862613d3c3085b0eb29fd663bf59be904a22b36f06e3bb309f8a8007f555f8a34982b7d8c0574a1e6870952484cebf04c4684f83316f54984f20d95a
+  languageName: node
+  linkType: hard
+
 "eastasianwidth@npm:^0.2.0":
   version: 0.2.0
   resolution: "eastasianwidth@npm:0.2.0"
@@ -2762,6 +2853,7 @@ __metadata:
     discord-player-youtubei: "npm:^1.2.6"
     discord.js: "npm:^14.15.3"
     dotenv: "npm:^16.4.5"
+    dprint: "npm:^0.47.2"
     eslint: "npm:^9.9.0"
     globals: "npm:^15.9.0"
     ioredis: "npm:^5.4.1"

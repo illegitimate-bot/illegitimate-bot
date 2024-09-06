@@ -1,8 +1,8 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, User } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
+import { PermissionFlagsBits, SlashCommandBuilder, User, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel.js"
 import { removeIndents } from "utils/functions/funcs.js"
+import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
     name: "unban",

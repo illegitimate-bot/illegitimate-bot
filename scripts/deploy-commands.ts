@@ -18,7 +18,7 @@ for (const file of contentMenuCommands) {
     commands.push(command.data.toJSON())
 }
 
-(async () => {
+;(async () => {
     try {
         console.log(color(`Started refreshing ${commands.length} application (/) commands.`, "green"))
 
@@ -27,12 +27,11 @@ for (const file of contentMenuCommands) {
 
         await rest.put(
             Routes.applicationCommands(env.dev.clientid),
-            { body: commands },
+            { body: commands }
         ).then(() => {
             console.log(color(`Successfully reloaded ${commands.length} application (/) commands.`, "green"))
             process.exit(0)
         })
-
     } catch (error) {
         console.error(error)
     }

@@ -1,7 +1,7 @@
 import { CronJob } from "cron"
-import path from "path"
 import fs from "fs"
 import { ICron } from "interfaces"
+import path from "path"
 const __dirname = import.meta.dirname
 
 export default async function loadCronEvents() {
@@ -12,8 +12,7 @@ export default async function loadCronEvents() {
         const filePath = path.join(cronPath, file)
         const { default: cron } = await import("file://" + filePath) as { default: ICron }
 
-        const time =
-            cron.time.seconds + " " +
+        const time = cron.time.seconds + " " +
             cron.time.minutes + " " +
             cron.time.hours + " " +
             cron.time.dayOfMonth + " " +

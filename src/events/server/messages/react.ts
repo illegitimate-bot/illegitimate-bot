@@ -1,5 +1,5 @@
-import { IEvent } from "interfaces"
 import { Message } from "discord.js"
+import { IEvent } from "interfaces"
 
 export default {
     name: "ur mom",

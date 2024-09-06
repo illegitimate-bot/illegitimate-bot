@@ -1,11 +1,11 @@
+import { execSync } from "child_process"
+import { devMessage, embedColor } from "config/options.js"
 import { SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import { embedColor, devMessage } from "config/options.js"
+import { createRequire } from "node:module"
 import os from "os"
 import prettyMs from "pretty-ms"
-import { execSync } from "child_process"
 import { removeIndents } from "utils/functions/funcs.js"
-import { createRequire } from "node:module"
 
 const require = createRequire(import.meta.url)
 const { dependencies, devDependencies } = require("../../package.json")
@@ -56,8 +56,8 @@ export default {
 
                 __**Project**__
                 > **Node Version:** \`${process.version}\`
-                > **Typescript Version:** \`${(castedDevDeps.typescript).replace("^", "")}\`
-                > **Discord.js Version:** \`${(castedDeps["discord.js"]).replace("^", "")}\`
+                > **Typescript Version:** \`${castedDevDeps.typescript.replace("^", "")}\`
+                > **Discord.js Version:** \`${castedDeps["discord.js"].replace("^", "")}\`
                 > **Dependencies (${Object.keys(castedDeps).length}):** \`${deps}\`
                 > **Dev Dependencies (${Object.keys(castedDevDeps).length}):** \`${devDeps}\`
                 > **Uptime:** \`${prettyMs(client.uptime!, { verbose: true })}\`
@@ -69,13 +69,13 @@ export default {
                 > **Roles:** \`${client.guilds.cache.reduce((a, b) => a + b.roles.cache.size, 0)}\`
                 `),
                 thumbnail: {
-                    url: client.user!.avatarURL() || "",
+                    url: client.user!.avatarURL() || ""
                 },
                 color: embedColor,
                 footer: {
                     text: interaction.guild!.name + " | " + devMessage,
-                    icon_url: interaction.guild!.iconURL() || undefined,
-                },
+                    icon_url: interaction.guild!.iconURL() || undefined
+                }
             }]
         })
     }

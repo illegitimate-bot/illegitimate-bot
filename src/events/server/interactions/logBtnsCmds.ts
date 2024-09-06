@@ -1,6 +1,6 @@
-import { ChatInputCommandInteraction, ButtonInteraction } from "discord.js"
-import color from "utils/functions/colors.js"
+import { ButtonInteraction, ChatInputCommandInteraction } from "discord.js"
 import { IEvent } from "interfaces"
+import color from "utils/functions/colors.js"
 
 export default {
     name: "logBtnsCmds",
@@ -22,9 +22,9 @@ export default {
                 console.log(
                     color(
                         interaction.user.username + "#" +
-                        interaction.user.discriminator + " ran " +
-                        interaction.commandName + " " +
-                        subcommand,
+                            interaction.user.discriminator + " ran " +
+                            interaction.commandName + " " +
+                            subcommand,
                         "pink"
                     )
                 )
@@ -32,8 +32,8 @@ export default {
                 console.log(
                     color(
                         interaction.user.username + "#" +
-                        interaction.user.discriminator + " ran " +
-                        interaction.commandName,
+                            interaction.user.discriminator + " ran " +
+                            interaction.commandName,
                         "pink"
                     )
                 )
@@ -44,8 +44,8 @@ export default {
             console.log(
                 color(
                     interaction.user.username + "#" +
-                    interaction.user.discriminator + " clicked " +
-                    interaction.customId,
+                        interaction.user.discriminator + " clicked " +
+                        interaction.customId,
                     "pink"
                 )
             )

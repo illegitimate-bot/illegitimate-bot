@@ -1,10 +1,10 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
-import waitinglist from "schemas/waitinglistTag.js"
-import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel.js"
+import { devMessage, embedColor } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
+import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { ICommand } from "interfaces"
+import waitinglist from "schemas/waitinglistTag.js"
 import { removeIndents } from "utils/functions/funcs.js"
+import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
     name: "remove",

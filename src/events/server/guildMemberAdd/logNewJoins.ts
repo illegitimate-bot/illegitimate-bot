@@ -1,5 +1,5 @@
-import { GuildMember, userMention } from "discord.js"
 import { embedColor } from "config/options.js"
+import { GuildMember, userMention } from "discord.js"
 import { IEvent } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 

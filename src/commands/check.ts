@@ -1,8 +1,8 @@
+import { devMessage, embedColor } from "config/options.js"
+import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
 import { SlashCommandBuilder } from "discord.js"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs.js"
-import { embedColor, devMessage } from "config/options.js"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
 import { ICommand } from "interfaces"
+import { bedwarsLevel, getGuild, getHeadURL, getPlayer, getUUID, hypixelLevel, skywarsLevel } from "utils/Hypixel.js"
 
 export default {
     name: "check",
@@ -202,7 +202,7 @@ export default {
                         " / " + duelswins.toString() + "`\n" +
                         "**➺ WLR:** `" + hsduelswlr.toFixed(2).toString() +
                         " / " + duelswlr.toString() + "`\n" +
-                        "**➺ KDR:** `" + hsduelskd.toFixed(2).toString() + "`",
+                        "**➺ KDR:** `" + hsduelskd.toFixed(2).toString() + "`"
                 })
             } else {
                 statsFields.push({

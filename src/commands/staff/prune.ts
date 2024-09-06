@@ -1,5 +1,5 @@
+import { devMessage, embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
 import env from "utils/Env.js"
 
 export default async function prune(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -89,7 +89,7 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
                     embeds: [{
                         description: "Cancelled",
                         color: embedColor
-                    }],
+                    }]
                 }).then(() => {
                     collector.stop()
                 })
@@ -104,13 +104,13 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
                 }
 
                 await m.edit({
-                    components: [],
+                    components: []
                 })
                 await i.editReply({
                     embeds: [{
                         description: "Pruned all the members",
                         color: embedColor
-                    }],
+                    }]
                 }).then(() => {
                     collector.stop()
                 })

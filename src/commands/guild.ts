@@ -1,8 +1,8 @@
+import { devMessage, embedColor } from "config/options.js"
 import { SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
-import guildMember from "./guild/member.js"
 import guildInfo from "./guild/info.js"
+import guildMember from "./guild/member.js"
 import guildTop from "./guild/top.js"
 
 export default {

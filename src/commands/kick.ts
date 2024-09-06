@@ -1,9 +1,9 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
+import { devMessage, embedColor } from "config/options.js"
 import { admin, helper } from "config/roles.js"
-import { embedColor, devMessage } from "config/options.js"
+import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel.js"
 import { removeIndents } from "utils/functions/funcs.js"
+import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
     name: "kick",

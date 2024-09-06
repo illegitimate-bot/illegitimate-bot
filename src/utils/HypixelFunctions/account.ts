@@ -1,7 +1,7 @@
 import fetch from "axios"
-import env from "utils/Env.js"
 import { IPlayer, IPlayerData } from "interfaces"
 import { IGuild, IGuildData } from "interfaces"
+import env from "utils/Env.js"
 const apikey = env.prod.hypixelapikey
 const mojang = "https://api.mojang.com/users/profiles/minecraft/"
 const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"
@@ -21,7 +21,7 @@ type Profile2 = {
     data: {
         id: string
         name: string
-        properties: { name: string; value: string }[]
+        properties: { name: string, value: string }[]
         profileActions: []
     }
 }
@@ -86,4 +86,4 @@ async function getHeadURL(ign: string): Promise<string | null> {
     return minotar + ign
 }
 
-export { getUUID, getIGN, getPlayer, getGuild, getHeadURL }
+export { getGuild, getHeadURL, getIGN, getPlayer, getUUID }

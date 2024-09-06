@@ -1,5 +1,5 @@
-import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { embedColor, devMessage, instructionsgif } from "config/options.js"
+import { devMessage, embedColor, instructionsgif } from "config/options.js"
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import { removeIndents } from "utils/functions/funcs.js"
 
@@ -36,7 +36,7 @@ export default {
                     icon_url: interaction.guild!.iconURL() || undefined
                 },
                 image: {
-                    url: instructionsgif,
+                    url: instructionsgif
                 }
             }]
         })

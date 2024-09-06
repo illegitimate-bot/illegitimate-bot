@@ -1,8 +1,8 @@
+import { devMessage, embedColor } from "config/options.js"
 import { SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import { embedColor, devMessage } from "config/options.js"
 import verify from "schemas/verifyTag.js"
-import { getIGN, getHeadURL } from "utils/Hypixel.js"
+import { getHeadURL, getIGN } from "utils/Hypixel.js"
 
 export default {
     name: "whoami",

@@ -5,23 +5,10 @@ import IContextMenu from "./IContextMenu"
 import IEvent from "./IEvent"
 import IModal from "./IModal"
 
-import IEnv from "./IEnv"
 import ICron from "./ICron"
+import IEnv from "./IEnv"
 
 import { IGuild, IGuildData } from "./IGuild"
 import { IPlayer, IPlayerData } from "./IPlayer"
 
-export {
-    IEnv,
-    ICron,
-    IAutocomplete,
-    IButton,
-    ICommand,
-    IContextMenu,
-    IEvent,
-    IModal,
-    IGuild,
-    IGuildData,
-    IPlayer,
-    IPlayerData
-}
+export { IAutocomplete, IButton, ICommand, IContextMenu, ICron, IEnv, IEvent, IGuild, IGuildData, IModal, IPlayer, IPlayerData }

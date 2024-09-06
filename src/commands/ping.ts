@@ -1,5 +1,5 @@
+import { devMessage, embedColor } from "config/options.js"
 import { SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
 
 export default {

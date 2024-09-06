@@ -1,10 +1,10 @@
-import { ExtendedClient as Client } from "utils/Client.js"
-import color from "utils/functions/colors.js"
-import { IContextMenu } from "interfaces"
 import { embedColor } from "config/options.js"
 import { Events } from "discord.js"
-import path from "path"
 import fs from "fs"
+import { IContextMenu } from "interfaces"
+import path from "path"
+import { ExtendedClient as Client } from "utils/Client.js"
+import color from "utils/functions/colors.js"
 import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
@@ -29,7 +29,7 @@ export default async function loadContextMenuEvents(client: Client, ft: FileType
         }
     }
 
-    //! context menu command handler
+    // ! context menu command handler
     client.on(Events.InteractionCreate, async interaction => {
         if (!interaction.isContextMenuCommand()) return
 

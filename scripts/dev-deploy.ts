@@ -1,7 +1,7 @@
 import { REST, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 import fs from "fs"
-import env from "../src/utils/Env"
 import { ICommand } from "../src/interfaces"
+import env from "../src/utils/Env"
 const rest = new REST({ version: "10" }).setToken(env.dev.devtoken)
 
 const commands: RESTPutAPIApplicationCommandsJSONBody = []
@@ -21,13 +21,13 @@ for (const file of contentMenuCommands) {
     }
 }
 
-(async () => {
+;(async () => {
     try {
         console.log(`Started refreshing ${commands.length} application (/) commands.`)
 
         await rest.put(
             Routes.applicationGuildCommands(env.dev.devid, env.dev.guildid),
-            { body: commands },
+            { body: commands }
         ).then(() => {
             console.log(`Successfully reloaded ${commands.length} application (/) commands.`)
             process.exit(0)

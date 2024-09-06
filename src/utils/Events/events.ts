@@ -1,7 +1,7 @@
-import { ExtendedClient as Client } from "utils/Client.js"
+import fs from "fs"
 import { IEvent } from "interfaces"
 import path from "path"
-import fs from "fs"
+import { ExtendedClient as Client } from "utils/Client.js"
 const __dirname = import.meta.dirname
 
 export default async function loadEvents(client: Client) {

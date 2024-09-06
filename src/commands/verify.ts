@@ -1,11 +1,11 @@
+import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember, SlashCommandBuilder } from "discord.js"
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
-import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
-import roleManage from "utils/functions/rolesmanage.js"
 import { ICommand } from "interfaces"
-import verify from "schemas/verifyTag.js"
 import { IPlayerData } from "interfaces"
 import { IGuildData } from "interfaces"
+import verify from "schemas/verifyTag.js"
+import roleManage from "utils/functions/rolesmanage.js"
+import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
 
 export default {
     name: "verify",

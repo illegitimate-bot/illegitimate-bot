@@ -1,10 +1,10 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
+import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import ms from "ms"
 import prettyMs from "pretty-ms"
-import logToChannel from "utils/functions/logtochannel.js"
 import { removeIndents } from "utils/functions/funcs.js"
+import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
     name: "timeout",

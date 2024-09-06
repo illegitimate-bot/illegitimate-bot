@@ -1,3 +1,4 @@
+// dprint-ignore-file
 export interface IGuild {
     data: {
         success: boolean

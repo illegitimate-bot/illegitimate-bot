@@ -10,7 +10,8 @@
         "bracePosition": "sameLine",
         "trailingCommas": "never",
         "operatorPosition": "maintain",
-        "typeLiteral.separatorKind": "comma"
+        "typeLiteral.separatorKind.singleLine": "comma",
+        "typeLiteral.separatorKind.multiLine": "semiColon"
     },
     "json": {
         "indentWidth": "4"

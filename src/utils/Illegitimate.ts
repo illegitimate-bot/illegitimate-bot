@@ -1,12 +1,12 @@
-import { ExtendedClient as Client } from "utils/Client.js"
-import color from "utils/functions/colors.js"
 import { Redis } from "ioredis"
+import { ExtendedClient as Client } from "utils/Client.js"
 import env from "utils/Env.js"
+import color from "utils/functions/colors.js"
 // import { connect } from "mongoose"
-import loadAllEvents from "./Events/loadevents.js"
 import { Player } from "discord-player"
-import { Sequelize } from "sequelize"
 import { YoutubeiExtractor } from "discord-player-youtubei"
+import { Sequelize } from "sequelize"
+import loadAllEvents from "./Events/loadevents.js"
 
 const client = new Client()
 const redis = new Redis(env.prod.redisURI)
@@ -73,4 +73,4 @@ class Illegitimate {
     }
 }
 
-export { Illegitimate, client, redis, sequelize }
+export { client, Illegitimate, redis, sequelize }

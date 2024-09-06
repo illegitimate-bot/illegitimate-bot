@@ -1,13 +1,13 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import play from "./music/play.js"
 import leave from "./music/leave.js"
-import queue from "./music/queue.js"
-import volume from "./music/volume.js"
-import skip from "./music/skip.js"
 import nowplaying from "./music/nowplaying.js"
 import pause from "./music/pause.js"
+import play from "./music/play.js"
+import queue from "./music/queue.js"
+import skip from "./music/skip.js"
 import unpause from "./music/unpause.js"
+import volume from "./music/volume.js"
 
 export default {
     name: "music",
@@ -28,7 +28,9 @@ export default {
                         .setName("query")
                         .setDescription("The song to play")
                         .setAutocomplete(true)
-                        .setRequired(true)))
+                        .setRequired(true)
+                )
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("volume")
@@ -39,7 +41,9 @@ export default {
                         .setDescription("The volume to set")
                         .setMinValue(1)
                         .setMaxValue(100)
-                        .setRequired(true)))
+                        .setRequired(true)
+                )
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("skip")
@@ -47,27 +51,34 @@ export default {
                 .addNumberOption(option =>
                     option
                         .setName("amount")
-                        .setDescription("The amount of songs to skip")))
+                        .setDescription("The amount of songs to skip")
+                )
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("queue")
-                .setDescription("Show the queue"))
+                .setDescription("Show the queue")
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("nowplaying")
-                .setDescription("Show the currently playing song"))
+                .setDescription("Show the currently playing song")
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("pause")
-                .setDescription("Pause the music"))
+                .setDescription("Pause the music")
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("unpause")
-                .setDescription("Unpause the music"))
+                .setDescription("Unpause the music")
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("leave")
-                .setDescription("Leave the voice channel"))
+                .setDescription("Leave the voice channel")
+        )
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 

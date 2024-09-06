@@ -12,7 +12,6 @@ const attachments = new EmbedBuilder()
     .setDescription("You have uploaded an attachment. Please do not upload images, videos, or GIFS.")
     .setColor(embedColor)
 
-
 export default async function applicationQuestions(
     input: Collection<string, Message<boolean>>,
     user: GuildMember,

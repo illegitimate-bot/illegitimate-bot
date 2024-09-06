@@ -1,5 +1,5 @@
+import { devMessage, embedColor } from "config/options.js"
 import { ChatInputCommandInteraction } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
 import { ExtendedClient as Client } from "utils/Client.js"
 
 export default async function help(interaction: ChatInputCommandInteraction, client: Client): Promise<void> {

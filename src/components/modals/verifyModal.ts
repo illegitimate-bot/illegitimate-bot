@@ -1,9 +1,9 @@
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
-import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
-import verify from "schemas/verifyTag.js"
-import { IModal } from "interfaces"
+import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember } from "discord.js"
+import { IModal } from "interfaces"
+import verify from "schemas/verifyTag.js"
 import roleManage from "utils/functions/rolesmanage.js"
+import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
 
 export default {
     name: "verifybox",
@@ -70,7 +70,6 @@ export default {
                 color: embedColor
             }]
         })
-
 
         const linkedDiscord = player?.socialMedia?.links?.DISCORD
         if (!linkedDiscord) {

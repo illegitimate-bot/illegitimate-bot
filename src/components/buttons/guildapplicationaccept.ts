@@ -1,10 +1,10 @@
-import { ActionRowBuilder, ButtonStyle, ButtonBuilder, TextChannel } from "discord.js"
-import { embedColor, waitingListChannel, waitingListMessage, hypixelGuildID } from "config/options.js"
-import color from "utils/functions/colors.js"
+import { embedColor, hypixelGuildID, waitingListChannel, waitingListMessage } from "config/options.js"
+import { waitingListRole } from "config/roles.js"
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, TextChannel } from "discord.js"
+import { IButton } from "interfaces"
 import guildapp from "schemas/guildAppTag.js"
 import waitingList from "schemas/waitinglistTag.js"
-import { waitingListRole } from "config/roles.js"
-import { IButton } from "interfaces"
+import color from "utils/functions/colors.js"
 import { getGuild, getIGN } from "utils/Hypixel.js"
 
 export default {
@@ -99,7 +99,7 @@ export default {
                 }
             }
 
-            const fields: { name: string; value: string }[] = []
+            const fields: { name: string, value: string }[] = []
 
             for (let i = 0; i < accepted.length; i++) {
                 const ign = await getIGN(accepted[i].uuid)

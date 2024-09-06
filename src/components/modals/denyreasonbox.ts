@@ -1,7 +1,7 @@
-import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, GuildMember } from "discord.js"
 import { embedColor } from "config/options.js"
-import guildapp from "schemas/guildAppTag.js"
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, GuildMember, Message } from "discord.js"
 import { IModal } from "interfaces"
+import guildapp from "schemas/guildAppTag.js"
 
 export default {
     name: "denyreasonbox",
@@ -47,8 +47,9 @@ export default {
         }
 
         const dmMessage = new EmbedBuilder()
-            .setDescription("Your application for the Illegitimate guild has been denied\n" +
-                "**Reason:** `" + reason + "`"
+            .setDescription(
+                "Your application for the Illegitimate guild has been denied\n" +
+                    "**Reason:** `" + reason + "`"
             )
             .setColor(embedColor)
 
@@ -58,8 +59,9 @@ export default {
 
         const responseEmbed = new EmbedBuilder()
             .setTitle("Application Denied")
-            .setDescription("The application has been denied by <@" + interaction.user.id + ">.\n" +
-                "**Reason:** `" + reason + "`"
+            .setDescription(
+                "The application has been denied by <@" + interaction.user.id + ">.\n" +
+                    "**Reason:** `" + reason + "`"
             )
             .setColor(embedColor)
             .setThumbnail(guild.iconURL() || "")

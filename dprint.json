@@ -10,7 +10,6 @@
         "bracePosition": "sameLine",
         "trailingCommas": "never",
         "operatorPosition": "maintain",
-        "preferHanging": true,
         "typeLiteral.separatorKind": "comma"
     },
     "json": {

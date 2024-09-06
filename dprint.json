@@ -10,7 +10,8 @@
         "bracePosition": "sameLine",
         "trailingCommas": "never",
         "operatorPosition": "maintain",
-        "preferHanging": true
+        "preferHanging": true,
+        "typeLiteral.separatorKind": "comma"
     },
     "json": {
         "indentWidth": "4"

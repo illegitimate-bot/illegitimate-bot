@@ -3,7 +3,7 @@ import { ChatInputCommandInteraction, GuildMember } from "discord.js"
 import { IGuildData } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import env from "utils/Env.js"
-import color from "utils/functions/colors.js"
+import { color } from "utils/functions/colors.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getGuild, getIGN } from "utils/Hypixel.js"
 

@@ -1,7 +1,6 @@
 import { devMessage, embedColor } from "config/options.js"
 import { PermissionFlagsBits, SlashCommandBuilder, User, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import { removeIndents } from "utils/functions/funcs.js"
 import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
@@ -69,11 +68,11 @@ export default {
                     icon_url: mod.avatarURL() || undefined
                 },
                 title: "Member Unbanned",
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(user!.id)}
                 **Mod:** ${userMention(mod.id)}
                 **Reason:** ${reason}
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

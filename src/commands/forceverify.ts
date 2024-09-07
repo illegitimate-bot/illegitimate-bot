@@ -2,7 +2,6 @@ import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
-import { removeIndents } from "utils/functions/funcs.js"
 import logToChannel from "utils/functions/logtochannel.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
@@ -173,12 +172,12 @@ export default {
                     icon_url: mod.avatarURL() || undefined
                 },
                 title: "Force Verified",
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${player.displayname}\`
                 **UUID:** \`${uuid}\`
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

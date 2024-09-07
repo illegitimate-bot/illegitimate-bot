@@ -1,7 +1,7 @@
 import { Redis } from "ioredis"
 import { ExtendedClient as Client } from "utils/Client.js"
 import env from "utils/Env.js"
-import color from "utils/functions/colors.js"
+import { color } from "utils/functions/colors.js"
 // import { connect } from "mongoose"
 import { Player } from "discord-player"
 import { YoutubeiExtractor } from "discord-player-youtubei"
@@ -38,6 +38,7 @@ class Illegitimate {
         await player.extractors.register(YoutubeiExtractor, {})
         await client.start()
         await this.databases()
+        this.loadMethods()
     }
 
     private async databases() {
@@ -69,6 +70,16 @@ class Illegitimate {
             for (const [key, value] of Object.entries(prodValues)) {
                 if (!value) throw new Error(`No ${key} specified`)
             }
+        }
+    }
+
+    private loadMethods() {
+        String.prototype.removeIndents = function(this: string) {
+            return this.replace(/^ */gm, "")
+        }
+
+        String.prototype.capitalizeFirstLetter = function(this: string) {
+            return this[0].toUpperCase() + this.slice(1).toLowerCase()
         }
     }
 }

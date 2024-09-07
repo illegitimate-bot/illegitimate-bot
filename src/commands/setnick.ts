@@ -1,7 +1,6 @@
 import { devMessage, embedColor } from "config/options.js"
 import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import { removeIndents } from "utils/functions/funcs.js"
 import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
@@ -49,11 +48,11 @@ export default {
                     icon_url: interaction.user.avatarURL() || undefined
                 },
                 title: "Nickname",
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(member.id)}
                 **Nickname:** ${nickname}
                 **Moderator:** ${userMention(interaction.user.id)}
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: interaction.user.avatarURL() || ""

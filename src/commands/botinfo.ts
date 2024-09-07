@@ -5,7 +5,6 @@ import { ICommand } from "interfaces"
 import { createRequire } from "node:module"
 import os from "os"
 import prettyMs from "pretty-ms"
-import { removeIndents } from "utils/functions/funcs.js"
 
 const require = createRequire(import.meta.url)
 const { dependencies, devDependencies } = require("../../package.json")
@@ -46,7 +45,7 @@ export default {
         await interaction.reply({
             embeds: [{
                 title: "Bot Info",
-                description: removeIndents(`
+                description: `
                 __**Bot**__
                 > **Name**: \`${client.user!.username}\`
                 > **ID**: \`${client.user!.id}\`
@@ -67,7 +66,7 @@ export default {
                 > **Channels:** \`${client.channels.cache.size}\`
                 > **Users:** \`${client.users.cache.size}\`
                 > **Roles:** \`${client.guilds.cache.reduce((a, b) => a + b.roles.cache.size, 0)}\`
-                `),
+                `.removeIndents(),
                 thumbnail: {
                     url: client.user!.avatarURL() || ""
                 },

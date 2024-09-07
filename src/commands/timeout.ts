@@ -3,7 +3,6 @@ import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } fr
 import { ICommand } from "interfaces"
 import ms from "ms"
 import prettyMs from "pretty-ms"
-import { removeIndents } from "utils/functions/funcs.js"
 import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
@@ -144,12 +143,12 @@ export default {
                     icon_url: mod.user.avatarURL() || undefined
                 },
                 title: title,
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(target.id)}
                 ${timeouttime === null ? "**Time:** `None`" : "**Time:** `" + prettyTime + "`"}
                 **Reason:** \`${reason}\`
                 **Mod:** ${userMention(mod.id)}
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""

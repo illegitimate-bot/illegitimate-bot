@@ -3,7 +3,6 @@ import { waitingListRole } from "config/roles.js"
 import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
-import { removeIndents } from "utils/functions/funcs.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel.js"
 
@@ -85,11 +84,11 @@ export default {
 
             await interaction.editReply({
                 embeds: [{
-                    description: removeIndents(`
+                    description: `
                     ${usermentioned} was given the \`Default Member\` role.
 
                     IGN: \`${ign}\`
-                    `),
+                    `.removeIndents(),
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -159,11 +158,11 @@ export default {
 
             await interaction.editReply({
                 embeds: [{
-                    description: removeIndents(`
+                    description: `
                     ${usermentioned} was given the \`${replyRank}\` role.
 
                     IGN: \`${ign}\`
-                    `),
+                    `.removeIndents(),
                     color: embedColor,
                     thumbnail: {
                         url: head!

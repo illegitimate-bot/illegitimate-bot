@@ -2,14 +2,12 @@ import { anilist } from "anilist"
 import { devMessage, embedColor } from "config/options.js"
 import { SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import { capitalizeFirstLetter, removeIndents } from "utils/functions/funcs.js"
 
 export default {
     name: "anime",
     description: "Anime subcommands",
     public: true,
     dev: false,
-    subcommands: true,
 
     data: new SlashCommandBuilder()
         .setName("anime")
@@ -59,14 +57,14 @@ export default {
         const animeEpisodes = anime.episodes ? animeEpisodesRaw : "No episodes available"
         const animeStartDate = [anime.startDate?.day || "??", anime.startDate?.month || "??", anime.startDate?.year || "????"].join(".")
         const animeEndDate = [anime.endDate?.day || "??", anime.endDate?.month || "??", anime.endDate?.year || "????"].join(".")
-        const animeSeasonRaw = capitalizeFirstLetter(anime.season ?? "null") + " " + anime.startDate?.year
+        const animeSeasonRaw = anime.season?.capitalizeFirstLetter() + " " + anime.startDate?.year
         const animeSeason = anime.season ? animeSeasonRaw : "No season available"
 
         await interaction.editReply({
             embeds: [{
                 title: romaji + " | " + english,
                 url: anime.siteUrl || "",
-                description: removeIndents(`
+                description: `
                 **Description:** ${animeDescription}
                 
                 **Genres:** ${anime.genres.join(", ")}
@@ -76,7 +74,7 @@ export default {
                 **Season:** ${animeSeason}
                 **Start Date:** ${animeStartDate}
                 **End Date:** ${animeEndDate}
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: anime.coverImage?.medium || ""

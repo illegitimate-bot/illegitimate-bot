@@ -2,7 +2,7 @@ import { REST, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 import fs from "node:fs"
 import { ICommand } from "../src/interfaces"
 import env from "../src/utils/Env"
-import color from "../src/utils/functions/colors"
+import { color } from "../src/utils/functions/colors"
 const rest = new REST({ version: "10" }).setToken(env.prod.token)
 
 const commands: RESTPutAPIApplicationCommandsJSONBody = []

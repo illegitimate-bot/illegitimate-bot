@@ -2,7 +2,6 @@ import { devMessage, embedColor } from "config/options.js"
 import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
-import { removeIndents } from "utils/functions/funcs.js"
 import logToChannel from "utils/functions/logtochannel.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getIGN } from "utils/Hypixel.js"
@@ -58,12 +57,12 @@ export default {
                     name: mod.username,
                     icon_url: mod.avatarURL() || undefined
                 },
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${ign}\`
                 **UUID:** \`${uuid}\`
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

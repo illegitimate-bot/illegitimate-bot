@@ -1,6 +1,6 @@
 import { IEvent } from "interfaces"
 import { ExtendedClient as Client } from "utils/Client.js"
-import color from "utils/functions/colors.js"
+import { color } from "utils/functions/colors.js"
 
 export default {
     name: "conolelog",

@@ -3,7 +3,6 @@ import { waitingListRole } from "config/roles.js"
 import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import waitinglist from "schemas/waitinglistTag.js"
-import { removeIndents } from "utils/functions/funcs.js"
 import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
@@ -58,11 +57,11 @@ export default {
                     icon_url: mod.avatarURL() || undefined
                 },
                 title: "Waiting List - Remove User",
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(member.user.id)}
                 **Reason:** ${reason}
                 **Mod:** ${userMention(mod.id)}
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

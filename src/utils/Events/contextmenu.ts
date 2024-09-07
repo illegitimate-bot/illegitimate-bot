@@ -4,7 +4,7 @@ import fs from "fs"
 import { IContextMenu } from "interfaces"
 import path from "path"
 import { ExtendedClient as Client } from "utils/Client.js"
-import color from "utils/functions/colors.js"
+import { color } from "utils/functions/colors.js"
 import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname

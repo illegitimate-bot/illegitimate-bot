@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, TextChannel } from "disco
 import { IButton } from "interfaces"
 import guildapp from "schemas/guildAppTag.js"
 import waitingList from "schemas/waitinglistTag.js"
-import color from "utils/functions/colors.js"
+import { color } from "utils/functions/colors.js"
 import { getGuild, getIGN } from "utils/Hypixel.js"
 
 export default {

@@ -1,7 +1,7 @@
 import { devMessage, embedColor, guildLogChannel, hypixelGuildID } from "config/options.js"
 import { TextChannel } from "discord.js"
 import { ICron, IGuildData } from "interfaces"
-import color from "utils/functions/colors.js"
+import { color } from "utils/functions/colors.js"
 import { getGuild, getIGN } from "utils/Hypixel.js"
 import { client } from "utils/Illegitimate.js"
 

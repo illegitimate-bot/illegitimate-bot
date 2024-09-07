@@ -3,7 +3,7 @@ import fs from "fs"
 import { ICommand } from "interfaces"
 import { ExtendedClient } from "./Client.js"
 import env from "./Env.js"
-import color from "./functions/colors.js"
+import { color } from "./functions/colors.js"
 type FileType = "js" | "ts"
 
 export default async function autoDeployCommands(fileType: FileType, client: ExtendedClient) {

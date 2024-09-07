@@ -1,11 +1,11 @@
-import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import help from "./staff/help.js"
 import beast from "./staff/beast.js"
-import updateAll from "./staff/updateall.js"
+import help from "./staff/help.js"
 import prune from "./staff/prune.js"
 import removeGuildRoles from "./staff/removeguildroles.js"
+import updateAll from "./staff/updateall.js"
 
 export default {
     name: "staff",

@@ -2,9 +2,9 @@ import Sequelize, { InferAttributes, InferCreationAttributes, Model } from "sequ
 import { sequelize } from "utils/Illegitimate.js"
 
 interface WaitingList extends Model<InferAttributes<WaitingList>, InferCreationAttributes<WaitingList>> {
-    userID: string;
-    uuid: string;
-    timestamp: number;
+    userID: string
+    uuid: string
+    timestamp: number
 }
 
 const tag = sequelize.define<WaitingList>("waitingList", {

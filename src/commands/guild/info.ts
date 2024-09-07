@@ -1,7 +1,7 @@
-import { getUUID, getIGN, getPlayer, getGuild, guildLevel } from "utils/Hypixel.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
 import { ChatInputCommandInteraction } from "discord.js"
 import { IGuildData } from "interfaces"
+import { getGuild, getIGN, getPlayer, getUUID, guildLevel } from "utils/Hypixel.js"
 
 export default async function guildInfo(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
@@ -118,8 +118,7 @@ export default async function guildInfo(interaction: ChatInputCommandInteraction
     const guildCreatedMinute = guildCreated.getMinutes()
     const guildCreatedSecond = guildCreated.getSeconds()
 
-    const guildCreatedTime =
-        guildCreatedDate + "." +
+    const guildCreatedTime = guildCreatedDate + "." +
         guildCreatedMonth + "." +
         guildCreatedYear + " " +
         guildCreatedHour + ":" +
@@ -132,7 +131,9 @@ export default async function guildInfo(interaction: ChatInputCommandInteraction
     const guildRanks = guildRanksUnsorted.map(r => "**➺ " + r.name + "** `[" + r.tag + "]`").join("\n")
 
     const allGuildMembersWeeklyXP = guildMembers.map(member => member.expHistory)
-    const guildMembersWeeklyXP = allGuildMembersWeeklyXP.map(member => { return Object.values(member).reduce((a, b) => a + b, 0) })
+    const guildMembersWeeklyXP = allGuildMembersWeeklyXP.map(member => {
+        return Object.values(member).reduce((a, b) => a + b, 0)
+    })
 
     const totalGuildMembersWeeklyXPUnformatted = guildMembersWeeklyXP.reduce((a, b) => a + b, 0)
     const totalGuildMembersWeeklyXP = new Intl.NumberFormat("en-US").format(totalGuildMembersWeeklyXPUnformatted)

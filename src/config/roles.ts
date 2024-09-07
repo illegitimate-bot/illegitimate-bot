@@ -15,19 +15,19 @@ const countingBanned = "1192183486128341072"
 const verifyTick = "1201624332674273290"
 
 export {
-    gm,
-    manager,
-    moderator,
-    elite,
-    beast,
-    member,
-    guildStaff,
-    guildRole,
-    waitingListRole,
-    defaultMember,
     admin,
-    helper,
-    muted,
+    beast,
     countingBanned,
-    verifyTick
+    defaultMember,
+    elite,
+    gm,
+    guildRole,
+    guildStaff,
+    helper,
+    manager,
+    member,
+    moderator,
+    muted,
+    verifyTick,
+    waitingListRole
 }

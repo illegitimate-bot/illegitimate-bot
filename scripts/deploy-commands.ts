@@ -2,7 +2,7 @@ import { REST, RESTPutAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 import fs from "node:fs"
 import { ICommand } from "../src/interfaces"
 import env from "../src/utils/Env"
-import color from "../src/utils/functions/colors"
+import { color } from "../src/utils/functions/colors"
 const rest = new REST({ version: "10" }).setToken(env.prod.token)
 
 const commands: RESTPutAPIApplicationCommandsJSONBody = []
@@ -18,7 +18,7 @@ for (const file of contentMenuCommands) {
     commands.push(command.data.toJSON())
 }
 
-(async () => {
+;(async () => {
     try {
         console.log(color(`Started refreshing ${commands.length} application (/) commands.`, "green"))
 
@@ -27,12 +27,11 @@ for (const file of contentMenuCommands) {
 
         await rest.put(
             Routes.applicationCommands(env.dev.clientid),
-            { body: commands },
+            { body: commands }
         ).then(() => {
             console.log(color(`Successfully reloaded ${commands.length} application (/) commands.`, "green"))
             process.exit(0)
         })
-
     } catch (error) {
         console.error(error)
     }

@@ -1,5 +1,5 @@
-import { SlashCommandBuilder, PermissionFlagsBits, ChannelType, TextChannel } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
+import { ChannelType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {

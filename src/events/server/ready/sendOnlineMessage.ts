@@ -1,6 +1,6 @@
-import logToChannel from "utils/functions/logtochannel.js"
-import { IEvent } from "interfaces"
 import { embedColor } from "config/options.js"
+import { IEvent } from "interfaces"
+import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
     name: "sendonlinemessage",

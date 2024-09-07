@@ -7,8 +7,12 @@ const colors = {
     pink: "#f5c2e7"
 }
 
-export default function color(text: string, type: keyof typeof colors) {
+export function color(text: string, type: keyof typeof colors) {
     return chalk.hex(colors[type])(text)
+}
+
+export function colorCustom(text: string, color: string) {
+    return chalk.hex(color)(text)
 }
 
 /* const colors = {

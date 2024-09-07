@@ -1,9 +1,9 @@
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
-import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
-import verify from "schemas/verifyTag.js"
-import { IModal } from "interfaces"
+import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember } from "discord.js"
+import { IModal } from "interfaces"
+import verify from "schemas/verifyTag.js"
 import roleManage from "utils/functions/rolesmanage.js"
+import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
 
 export default {
     name: "verifybox",
@@ -71,7 +71,6 @@ export default {
             }]
         })
 
-
         const linkedDiscord = player?.socialMedia?.links?.DISCORD
         if (!linkedDiscord) {
             interaction.editReply({
@@ -87,7 +86,8 @@ export default {
         if (linkedDiscord !== username) {
             interaction.editReply({
                 embeds: [{
-                    description: "<a:cross_a:1087808606897983539> The Discord account linked to `" + player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
+                    description: "<a:cross_a:1087808606897983539> The Discord account linked to `" +
+                        player.displayname + "` is currently `" + linkedDiscord + "`\n\n" +
                         "**Please set your Discord tag on hypixel to `" + username + "` and try again.**",
                     color: embedColor
                 }]

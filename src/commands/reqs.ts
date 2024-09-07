@@ -1,6 +1,6 @@
+import { devMessage, embedColor } from "config/options.js"
+import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
 import { SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs.js"
 import { ICommand } from "interfaces"
 
 export default {

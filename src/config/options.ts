@@ -14,24 +14,25 @@ const moderationLogChannel = "1193329771795447818"
 const devLogChannel = "1193688673632391280"
 const waitingListChannel = "1145773618291298384"
 const waitingListMessage = "1146027645415473193"
-const instructionsgif = "https =//cdn.discordapp.com/attachments/838716950723952640/1188211176300089384/4DMu513uNxbM.gif?ex=6599b2e4&is=65873de4&hm=e727c7a39aacbc47d6a5453f4b5f792a45679983c30d662cd258a311381b6df0&"
+const instructionsgif =
+    "https =//cdn.discordapp.com/attachments/838716950723952640/1188211176300089384/4DMu513uNxbM.gif?ex=6599b2e4&is=65873de4&hm=e727c7a39aacbc47d6a5453f4b5f792a45679983c30d662cd258a311381b6df0&"
 
 export {
-    embedColor,
-    guildid,
-    devMessage,
     applicationsChannel,
-    staffApplicationsChannel,
-    inactivityLogChannel,
-    staffOtherChannel,
-    hypixelGuildID,
-    onlineLogChannel,
     botLogChannel,
-    guildLogChannel,
-    errorLogChannel,
-    moderationLogChannel,
     devLogChannel,
+    devMessage,
+    embedColor,
+    errorLogChannel,
+    guildid,
+    guildLogChannel,
+    hypixelGuildID,
+    inactivityLogChannel,
+    instructionsgif,
+    moderationLogChannel,
+    onlineLogChannel,
+    staffApplicationsChannel,
+    staffOtherChannel,
     waitingListChannel,
-    waitingListMessage,
-    instructionsgif
+    waitingListMessage
 }

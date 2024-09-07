@@ -11,17 +11,4 @@ const beastswstars = 20
 const beastswkdr = 2.5
 const beastduelswins = 12000
 
-export {
-    bwstars,
-    bwfkdr,
-    bwwins,
-    swstars,
-    swkdr,
-    duelswins,
-    duelswlr,
-    beastbwstars,
-    beastbwfkdr,
-    beastswstars,
-    beastswkdr,
-    beastduelswins
-}
+export { beastbwfkdr, beastbwstars, beastduelswins, beastswkdr, beastswstars, bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars }

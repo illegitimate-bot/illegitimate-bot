@@ -1,12 +1,4 @@
-import {
-    guildid,
-    onlineLogChannel,
-    botLogChannel,
-    guildLogChannel,
-    errorLogChannel,
-    moderationLogChannel,
-    devLogChannel
-} from "config/options.js"
+import { botLogChannel, devLogChannel, errorLogChannel, guildid, guildLogChannel, moderationLogChannel, onlineLogChannel } from "config/options.js"
 import { Guild, MessageCreateOptions, TextChannel } from "discord.js"
 import { client } from "utils/Illegitimate.js"
 

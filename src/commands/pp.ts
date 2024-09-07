@@ -1,5 +1,5 @@
-import { SlashCommandBuilder, User } from "discord.js"
 import { embedColor } from "config/options.js"
+import { SlashCommandBuilder, User } from "discord.js"
 import { ICommand } from "interfaces"
 import env from "utils/Env.js"
 

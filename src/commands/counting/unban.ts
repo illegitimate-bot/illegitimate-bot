@@ -1,6 +1,6 @@
-import { ChatInputCommandInteraction, GuildMember, userMention } from "discord.js"
+import { devMessage, embedColor } from "config/options.js"
 import { countingBanned } from "config/roles.js"
-import { embedColor, devMessage } from "config/options.js"
+import { ChatInputCommandInteraction, GuildMember, userMention } from "discord.js"
 
 export default async function ban(interaction: ChatInputCommandInteraction): Promise<void> {
     const member = interaction.options.getMember("user")! as GuildMember

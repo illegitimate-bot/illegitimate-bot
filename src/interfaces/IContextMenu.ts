@@ -1,4 +1,4 @@
-import { ContextMenuCommandInteraction, ContextMenuCommandBuilder } from "discord.js"
+import { ContextMenuCommandBuilder, ContextMenuCommandInteraction } from "discord.js"
 import { ExtendedClient } from "utils/Client.js"
 
 export default interface IContextMenu {

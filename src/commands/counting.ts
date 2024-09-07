@@ -1,5 +1,5 @@
+import { devMessage, embedColor } from "config/options.js"
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
 import { ICommand } from "interfaces"
 import ban from "./counting/ban.js"
 import unban from "./counting/unban.js"

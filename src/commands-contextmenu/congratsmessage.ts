@@ -1,4 +1,4 @@
-import { ContextMenuCommandBuilder, ApplicationCommandType, PermissionFlagsBits, userMention } from "discord.js"
+import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
 import { IContextMenu } from "interfaces"
 
 export default {

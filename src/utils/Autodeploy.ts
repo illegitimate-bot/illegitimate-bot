@@ -1,9 +1,9 @@
+import { RESTPostAPIChatInputApplicationCommandsJSONBody } from "discord.js"
 import fs from "fs"
+import { ICommand } from "interfaces"
 import { ExtendedClient } from "./Client.js"
 import env from "./Env.js"
-import { ICommand } from "interfaces"
-import { RESTPostAPIChatInputApplicationCommandsJSONBody } from "discord.js"
-import color from "./functions/colors.js"
+import { color } from "./functions/colors.js"
 type FileType = "js" | "ts"
 
 export default async function autoDeployCommands(fileType: FileType, client: ExtendedClient) {
@@ -36,10 +36,10 @@ export default async function autoDeployCommands(fileType: FileType, client: Ext
                 return {
                     name: option.name,
                     description: option.description,
-                    type: option.type,
+                    type: option.type
                 }
             }),
-            defaultPermission: command.default_member_permissions ?? null,
+            defaultPermission: command.default_member_permissions ?? null
         }
     }).sort((a, b) => a.name > b.name ? 1 : -1)
 
@@ -56,10 +56,10 @@ export default async function autoDeployCommands(fileType: FileType, client: Ext
                     return {
                         name: option.name,
                         description: option.description,
-                        type: option.type,
+                        type: option.type
                     }
                 }),
-                defaultPermission: command.defaultMemberPermissions,
+                defaultPermission: command.defaultMemberPermissions
             }
         }).sort((a, b) => a.name > b.name ? 1 : -1)
 
@@ -107,7 +107,6 @@ export default async function autoDeployCommands(fileType: FileType, client: Ext
                     console.log(color(" " + cmd.name + " was updated.", "lavender"))
                 }
             }
-
 
             console.log(color("-------------", "lavender"))
             console.log(color(nc, "lavender"))

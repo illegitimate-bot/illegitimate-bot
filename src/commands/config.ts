@@ -1,5 +1,5 @@
-import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js"
 import { embedColor } from "config/options.js"
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import settings from "schemas/settingsTag.js"
 

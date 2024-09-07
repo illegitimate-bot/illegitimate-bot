@@ -1,7 +1,6 @@
 import { embedColor } from "config/options.js"
 import { useMainPlayer } from "discord-player"
 import { ChatInputCommandInteraction } from "discord.js"
-import { removeIndents } from "utils/functions/funcs.js"
 
 export default async function nowplaying(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply()
@@ -42,11 +41,11 @@ export default async function nowplaying(interaction: ChatInputCommandInteractio
     await interaction.editReply({
         embeds: [{
             title: "Now Playing",
-            description: removeIndents(`
+            description: `
             [${current.title}](${current.url})
 
             ${progressBar}
-            `),
+            `.removeIndents(),
             color: embedColor,
             thumbnail: {
                 url: current.thumbnail

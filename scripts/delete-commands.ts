@@ -8,7 +8,7 @@ async function deleteCommands() {
         console.log("Started deleting application (/) commands.")
         await rest.put(
             Routes.applicationGuildCommands(env.dev.devid, env.dev.guildid),
-            { body: [] },
+            { body: [] }
         )
         console.log("Successfully deleted application (/) commands.")
     } catch (error) {

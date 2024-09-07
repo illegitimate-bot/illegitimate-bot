@@ -1,11 +1,10 @@
-import { GuildMember, SlashCommandBuilder } from "discord.js"
-import { getGuild, getIGN, getHeadURL } from "utils/Hypixel.js"
-import verify from "schemas/verifyTag.js"
-import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
-import roleManage from "utils/functions/rolesmanage.js"
-import { ICommand } from "interfaces"
+import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
-import { removeIndents } from "utils/functions/funcs.js"
+import { GuildMember, SlashCommandBuilder } from "discord.js"
+import { ICommand } from "interfaces"
+import verify from "schemas/verifyTag.js"
+import roleManage from "utils/functions/rolesmanage.js"
+import { getGuild, getHeadURL, getIGN } from "utils/Hypixel.js"
 
 export default {
     name: "update",
@@ -68,11 +67,11 @@ export default {
 
             await interaction.editReply({
                 embeds: [{
-                    description: removeIndents(`
+                    description: `
                     Updated your roles to \`Default Member\`
                     
                     IGN: \`${ign}\`
-                    `),
+                    `.removeIndents(),
                     color: embedColor,
                     thumbnail: {
                         url: head!
@@ -143,11 +142,11 @@ export default {
 
             await interaction.editReply({
                 embeds: [{
-                    description: removeIndents(`
+                    description: `
                     Updated your roles to \`${replyRank}\`
 
                     IGN: \`${ign}\`
-                    `),
+                    `.removeIndents(),
                     color: embedColor,
                     thumbnail: {
                         url: head!

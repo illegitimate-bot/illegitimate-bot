@@ -1,7 +1,7 @@
-import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
 import { embedColor } from "config/options.js"
-import staffapp from "schemas/staffAppTag.js"
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js"
 import { IModal } from "interfaces"
+import staffapp from "schemas/staffAppTag.js"
 
 export default {
     name: "staffdenyreasonbox",
@@ -35,8 +35,9 @@ export default {
         })
 
         const dmMessage = new EmbedBuilder()
-            .setDescription("Your application for the Illegitimate guild staff has been denied\n" +
-                "**Reason:** `" + reason + "`"
+            .setDescription(
+                "Your application for the Illegitimate guild staff has been denied\n" +
+                    "**Reason:** `" + reason + "`"
             )
             .setColor(embedColor)
 

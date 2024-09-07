@@ -1,11 +1,10 @@
-import { SlashCommandBuilder, PermissionFlagsBits, GuildMember, userMention } from "discord.js"
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
-import { embedColor, hypixelGuildID, devMessage } from "config/options.js"
-import verify from "schemas/verifyTag.js"
-import roleManage from "utils/functions/rolesmanage.js"
+import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
+import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
+import verify from "schemas/verifyTag.js"
 import logToChannel from "utils/functions/logtochannel.js"
-import { removeIndents } from "utils/functions/funcs.js"
+import roleManage from "utils/functions/rolesmanage.js"
+import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
 
 export default {
     name: "forceverify",
@@ -43,8 +42,10 @@ export default {
         }
 
         if (!user) {
-            interaction.editReply("Please provide a user to force verify.\n" +
-                "This can also mean the user is not in the server.")
+            interaction.editReply(
+                "Please provide a user to force verify.\n" +
+                    "This can also mean the user is not in the server."
+            )
             return
         }
 
@@ -161,7 +162,7 @@ export default {
 
         await verify.create({
             userID: user.user.id,
-            uuid: uuid,
+            uuid: uuid
         })
 
         await logToChannel("mod", {
@@ -171,12 +172,12 @@ export default {
                     icon_url: mod.avatarURL() || undefined
                 },
                 title: "Force Verified",
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(user.id)}
                 **Mod:** ${userMention(mod.id)}
                 **IGN:** \`${player.displayname}\`
                 **UUID:** \`${uuid}\`
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.avatarURL() || ""

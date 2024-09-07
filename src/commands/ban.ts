@@ -1,9 +1,8 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember, } from "discord.js"
+import { devMessage, embedColor } from "config/options.js"
 import { admin, helper } from "config/roles.js"
-import { embedColor, devMessage } from "config/options.js"
+import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
-import { removeIndents } from "utils/functions/funcs.js"
 
 export default {
     name: "ban",
@@ -36,7 +35,7 @@ export default {
                     { name: "4 days", value: 4 },
                     { name: "5 days", value: 5 },
                     { name: "6 days", value: 6 },
-                    { name: "7 days", value: 7 },
+                    { name: "7 days", value: 7 }
                 )
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
@@ -102,12 +101,12 @@ export default {
                     icon_url: mod.user.avatarURL() || undefined
                 },
                 title: "Member Banned",
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(member.user.id)}
                 **Mod:** ${userMention(mod.user.id)}
                 **Reason:** ${reason}
                 **Messages Deleted:** ${messageDeletionDays} days
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""
@@ -136,5 +135,5 @@ export default {
                 }
             }]
         })
-    },
+    }
 } as ICommand

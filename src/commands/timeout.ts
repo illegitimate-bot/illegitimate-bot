@@ -1,10 +1,9 @@
-import { SlashCommandBuilder, PermissionFlagsBits, userMention, GuildMember } from "discord.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
+import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import ms from "ms"
 import prettyMs from "pretty-ms"
 import logToChannel from "utils/functions/logtochannel.js"
-import { removeIndents } from "utils/functions/funcs.js"
 
 export default {
     name: "timeout",
@@ -144,12 +143,12 @@ export default {
                     icon_url: mod.user.avatarURL() || undefined
                 },
                 title: title,
-                description: removeIndents(`
+                description: `
                 **User:** ${userMention(target.id)}
                 ${timeouttime === null ? "**Time:** `None`" : "**Time:** `" + prettyTime + "`"}
                 **Reason:** \`${reason}\`
                 **Mod:** ${userMention(mod.id)}
-                `),
+                `.removeIndents(),
                 color: embedColor,
                 thumbnail: {
                     url: mod.user.avatarURL() || ""

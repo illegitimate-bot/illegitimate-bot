@@ -1,10 +1,10 @@
-import { ButtonBuilder, ButtonStyle, ActionRowBuilder, GuildMember, TextChannel } from "discord.js"
-import { embedColor, applicationsChannel } from "config/options.js"
-import { largeM, smallM, ignM } from "config/limitmessages.js"
+import { ignM, largeM, smallM } from "config/limitmessages.js"
+import { applicationsChannel, embedColor } from "config/options.js"
 import { guild as guildQuestions } from "config/questions.js"
 import { guildRole } from "config/roles.js"
-import guildapp from "schemas/guildAppTag.js"
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
 import { IButton } from "interfaces"
+import guildapp from "schemas/guildAppTag.js"
 import applicationQuestions from "utils/functions/applicationquestions.js"
 
 export default {
@@ -250,7 +250,7 @@ export default {
 
         await guildapp.create({
             userID: user.user.id,
-            uuid: uuid,
+            uuid: uuid
         })
 
         const channel = guild.channels.cache.get(applicationsChannel) as TextChannel

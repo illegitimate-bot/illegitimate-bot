@@ -1,3 +1,4 @@
+// dprint-ignore-file
 export interface IPlayer {
     data: {
         success: boolean

@@ -1,8 +1,8 @@
-import { embedColor, devMessage } from "config/options.js"
-import guildapp from "schemas/guildAppTag.js"
-import { bwfkdr, bwstars, bwwins, swstars, swkdr, duelswins, duelswlr } from "config/reqs.js"
-import { hypixelLevel, bedwarsLevel, skywarsLevel, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
+import { devMessage, embedColor } from "config/options.js"
+import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
 import { IButton } from "interfaces"
+import guildapp from "schemas/guildAppTag.js"
+import { bedwarsLevel, getGuild, getHeadURL, getPlayer, hypixelLevel, skywarsLevel } from "utils/Hypixel.js"
 
 export default {
     name: "checkstats",

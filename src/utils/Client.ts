@@ -1,8 +1,8 @@
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js"
-import color from "./functions/colors.js"
-import { ICommand, IContextMenu, IButton, IModal, IAutocomplete } from "interfaces"
-import env from "./Env.js"
+import { IAutocomplete, IButton, ICommand, IContextMenu, IModal } from "interfaces"
 import autoDeployCommands from "./Autodeploy.js"
+import env from "./Env.js"
+import { color } from "./functions/colors.js"
 
 export class ExtendedClient extends Client {
     commands: Collection<string, ICommand> = new Collection()

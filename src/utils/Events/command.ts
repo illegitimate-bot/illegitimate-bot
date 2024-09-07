@@ -1,10 +1,10 @@
-import { ExtendedClient as Client } from "utils/Client.js"
-import color from "utils/functions/colors.js"
 import { embedColor } from "config/options.js"
-import { ICommand } from "interfaces"
 import { Events } from "discord.js"
-import path from "path"
 import fs from "fs"
+import { ICommand } from "interfaces"
+import path from "path"
+import { ExtendedClient as Client } from "utils/Client.js"
+import { color } from "utils/functions/colors.js"
 import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
@@ -29,7 +29,7 @@ export default async function loadSlashCommandsEvents(client: Client, ft: FileTy
         }
     }
 
-    //! command handler
+    // ! command handler
     client.on(Events.InteractionCreate, async interaction => {
         if (!interaction.isChatInputCommand()) return
 

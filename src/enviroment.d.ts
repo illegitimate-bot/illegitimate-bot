@@ -7,4 +7,11 @@ declare global {
     }
 }
 
-export { }
+declare global {
+    interface String {
+        removeIndents(): string
+        capitalizeFirstLetter(): string
+    }
+}
+
+export {}

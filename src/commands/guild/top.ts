@@ -1,7 +1,7 @@
-import { getUUID, getPlayer, getGuild, getIGN } from "utils/Hypixel.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
 import { ChannelType, ChatInputCommandInteraction } from "discord.js"
 import { IGuildData } from "interfaces"
+import { getGuild, getIGN, getPlayer, getUUID } from "utils/Hypixel.js"
 import { redis } from "utils/Illegitimate.js"
 
 export default async function guildTop(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -143,8 +143,8 @@ export default async function guildTop(interaction: ChatInputCommandInteraction)
         amount = 1
     }
 
-    type GuildTopData = { ign: string; uuid: string }[]
-    type NewList = { name: string; value: string; inline: boolean }[]
+    type GuildTopData = { ign: string, uuid: string }[]
+    type NewList = { name: string, value: string, inline: boolean }[]
 
     let cacheStatus: boolean
     let guildData: GuildTopData = []

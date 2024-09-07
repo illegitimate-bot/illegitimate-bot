@@ -1,9 +1,9 @@
-import { hypixelGuildID, guildLogChannel, embedColor, devMessage } from "config/options.js"
-import color from "utils/functions/colors.js"
-import { getGuild, getIGN } from "utils/Hypixel.js"
-import { ICron, IGuildData } from "interfaces"
-import { client } from "utils/Illegitimate.js"
+import { devMessage, embedColor, guildLogChannel, hypixelGuildID } from "config/options.js"
 import { TextChannel } from "discord.js"
+import { ICron, IGuildData } from "interfaces"
+import { color } from "utils/functions/colors.js"
+import { getGuild, getIGN } from "utils/Hypixel.js"
+import { client } from "utils/Illegitimate.js"
 
 async function guildWeekly() {
     const channel = client.channels.cache.get(guildLogChannel) as TextChannel
@@ -22,7 +22,7 @@ async function guildWeekly() {
 
     const guild = (await getGuild(hypixelGuildID, "id")) as IGuildData
     const guildMembersList: string[] = []
-    const topWeeklyMembers: { name: string; value: string; inline: boolean }[] = []
+    const topWeeklyMembers: { name: string, value: string, inline: boolean }[] = []
 
     const guildName = guild.name
     const guildMembers = guild.members
@@ -44,9 +44,7 @@ async function guildWeekly() {
         guildMembersList.push("**#" + position + " " + ign + ":** `" + gexp + "`")
     }
 
-    const list = Array.from({ length: sliceSize }, (_, i) =>
-        guildMembersList.slice(i * sliceSize, (i + 1) * sliceSize)
-    )
+    const list = Array.from({ length: sliceSize }, (_, i) => guildMembersList.slice(i * sliceSize, (i + 1) * sliceSize))
 
     list.forEach((item, index) => {
         if (item.length === 0) return

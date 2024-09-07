@@ -1,6 +1,6 @@
-import { getUUID, getPlayer, getGuild, getHeadURL } from "utils/Hypixel.js"
-import { embedColor, devMessage } from "config/options.js"
+import { devMessage, embedColor } from "config/options.js"
 import { ChatInputCommandInteraction } from "discord.js"
+import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
 
 export default async function guildMember(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()
@@ -118,8 +118,7 @@ export default async function guildMember(interaction: ChatInputCommandInteracti
     const guildMemberJoinMinutes = guildMemberJoinTime.getMinutes()
     const guildMemberJoinSeconds = guildMemberJoinTime.getSeconds()
 
-    const guildMemberJoin =
-        guildMemberJoinDate + "." +
+    const guildMemberJoin = guildMemberJoinDate + "." +
         guildMemberJoinMonth + "." +
         guildMemberJoinYear + " " +
         guildMemberJoinHours + ":" +

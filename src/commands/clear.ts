@@ -1,8 +1,7 @@
-import { SlashCommandBuilder, PermissionFlagsBits, TextChannel, channelMention, userMention } from "discord.js"
 import { embedColor } from "config/options.js"
+import { channelMention, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
-import { removeIndents } from "utils/functions/funcs.js"
 
 export default {
     name: "clear",
@@ -53,11 +52,11 @@ export default {
                         icon_url: interaction.user.avatarURL() || undefined
                     },
                     title: "Messages Cleared",
-                    description: removeIndents(`
+                    description: `
                     **Channel:** ${channelMention(channel.id)}
                     **Amount:** \`${messages.size}\` messages
                     **Mod:** ${userMention(interaction.user.id)}
-                    `),
+                    `.removeIndents(),
                     color: embedColor,
                     thumbnail: {
                         url: interaction.user.avatarURL() || ""

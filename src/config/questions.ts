@@ -73,4 +73,4 @@ const inactivity = [
     }
 ]
 
-export { guild, staff, inactivity }
+export { guild, inactivity, staff }

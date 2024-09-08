@@ -22,9 +22,9 @@
         "check": "tsc --noEmit",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
-        "push:prod": "cross-env NODE_PATH=src/ \"ts-node scripts/deploy-commands.ts\"",
-        "push:dev": "cross-env NODE_PATH=src/ \"ts-node scripts/dev-deploy.ts\"",
-        "delete:dev": "ts-node scripts/delete-commands.ts"
+        "push:prod": "tsx scripts/deploy-commands.ts",
+        "push:dev": "tsx scripts/dev-deploy.ts",
+        "delete:dev": "tsx scripts/delete-commands.ts"
     },
     "author": "Taken",
     "license": "GPL-3.0-only",
@@ -59,7 +59,6 @@
         "@typescript-eslint/eslint-plugin": "^8.4.0",
         "@typescript-eslint/parser": "^8.4.0",
         "chokidar": "^3.6.0",
-        "cross-env": "^7.0.3",
         "dprint": "^0.47.2",
         "eslint": "^9.10.0",
         "globals": "^15.9.0",

@@ -10,29 +10,27 @@ const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWi
 const contentMenuCommands = fs.readdirSync("./src/commands-contextmenu").filter(file => file.endsWith(".ts"))
 
 for (const file of commandFiles) {
-    const command: ICommand = require(`../src/commands/${file}`)
+    const { default: command } = await import(`../src/commands/${file}`) as { default: ICommand }
     commands.push(command.data.toJSON())
 }
 for (const file of contentMenuCommands) {
-    const command: ICommand = require(`../src/commands-contextmenu/${file}`)
+    const { default: command } = await import(`../src/commands-contextmenu/${file}`) as { default: ICommand }
     commands.push(command.data.toJSON())
 }
 
-;(async () => {
-    try {
-        console.log(color(`Started refreshing ${commands.length} application (/) commands.`, "green"))
+try {
+    console.log(color(`Started refreshing ${commands.length} application (/) commands.`, "green"))
 
-        const commandsString = commands.map(command => " " + command.name)
-        console.log(color(commandsString.join("\n"), "lavender"))
+    const commandsString = commands.map(command => " " + command.name)
+    console.log(color(commandsString.join("\n"), "lavender"))
 
-        await rest.put(
-            Routes.applicationCommands(env.dev.clientid),
-            { body: commands }
-        ).then(() => {
-            console.log(color(`Successfully reloaded ${commands.length} application (/) commands.`, "green"))
-            process.exit(0)
-        })
-    } catch (error) {
-        console.error(error)
-    }
-})()
+    await rest.put(
+        Routes.applicationCommands(env.dev.clientid),
+        { body: commands }
+    ).then(() => {
+        console.log(color(`Successfully reloaded ${commands.length} application (/) commands.`, "green"))
+        process.exit(0)
+    })
+} catch (error) {
+    console.error(error)
+}

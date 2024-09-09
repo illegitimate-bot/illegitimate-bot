@@ -1,6 +1,6 @@
 import { execSync } from "child_process"
 import { devMessage, embedColor } from "config/options.js"
-import { SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import { createRequire } from "node:module"
 import os from "os"
@@ -17,7 +17,8 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("botinfo")
-        .setDescription("Get information about the bot"),
+        .setDescription("Get information about the bot")
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction, client }) {
         const castedDeps = dependencies as { [key: string]: string }

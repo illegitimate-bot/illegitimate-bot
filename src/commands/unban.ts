@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { PermissionFlagsBits, SlashCommandBuilder, User, userMention } from "discord.js"
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, User, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 
@@ -25,7 +25,8 @@ export default {
                 .setDescription("The reason for unbanning the user")
                 .setRequired(false)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

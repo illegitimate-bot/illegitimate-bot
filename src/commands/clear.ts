@@ -1,5 +1,5 @@
 import { embedColor } from "config/options.js"
-import { channelMention, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
+import { channelMention, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 
@@ -18,7 +18,8 @@ export default {
                 .setDescription("Amount of messages to clear")
                 .setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

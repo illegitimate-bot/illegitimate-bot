@@ -1,5 +1,5 @@
 import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
-import { GuildMember, SlashCommandBuilder } from "discord.js"
+import { GuildMember, InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import { IPlayerData } from "interfaces"
 import { IGuildData } from "interfaces"
@@ -23,7 +23,8 @@ export default {
                 .setMinLength(3)
                 .setMaxLength(16)
                 .setRequired(true)
-        ),
+        )
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

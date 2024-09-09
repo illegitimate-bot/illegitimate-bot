@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 
@@ -24,7 +24,8 @@ export default {
                 .setDescription("The nickname to set")
                 .setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames),
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageNicknames)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         const member = interaction.options.getMember("user") as GuildMember

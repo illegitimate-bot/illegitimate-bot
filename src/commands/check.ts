@@ -1,6 +1,6 @@
 import { devMessage, embedColor } from "config/options.js"
 import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
-import { SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import { bedwarsLevel, getGuild, getHeadURL, getPlayer, getUUID, hypixelLevel, skywarsLevel } from "utils/Hypixel.js"
 
@@ -20,7 +20,8 @@ export default {
                 .setMinLength(3)
                 .setMaxLength(16)
                 .setRequired(true)
-        ),
+        )
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply({})

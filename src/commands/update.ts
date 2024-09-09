@@ -1,6 +1,6 @@
 import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
-import { GuildMember, SlashCommandBuilder } from "discord.js"
+import { GuildMember, InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import roleManage from "utils/functions/rolesmanage.js"
@@ -14,7 +14,8 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("update")
-        .setDescription("Update your discord roles."),
+        .setDescription("Update your discord roles.")
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

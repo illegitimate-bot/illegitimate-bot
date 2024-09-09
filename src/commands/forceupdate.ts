@@ -1,6 +1,6 @@
 import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
-import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import roleManage from "utils/functions/rolesmanage.js"
@@ -21,7 +21,8 @@ export default {
                 .setDescription("The user to force update")
                 .setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

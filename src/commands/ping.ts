@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {
@@ -10,7 +10,8 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("ping")
-        .setDescription("Get's the bot's ping."),
+        .setDescription("Get's the bot's ping.")
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction, client }) {
         await interaction.deferReply()

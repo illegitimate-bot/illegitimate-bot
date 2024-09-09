@@ -1,5 +1,14 @@
 import { devMessage, embedColor } from "config/options.js"
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js"
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ChannelType,
+    InteractionContextType,
+    PermissionFlagsBits,
+    SlashCommandBuilder,
+    TextChannel
+} from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {
@@ -72,7 +81,8 @@ export default {
                         .setRequired(true)
                 )
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()

@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { ChannelType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js"
+import { ChannelType, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {
@@ -23,7 +23,8 @@ export default {
                 .setDescription("The channel to send the message to.")
                 .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

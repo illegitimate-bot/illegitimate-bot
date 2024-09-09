@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { channelMention, ChannelType, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
+import { channelMention, ChannelType, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 
@@ -23,7 +23,8 @@ export default {
                 .setDescription("The channel to set the slowmode of.")
                 .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

@@ -1,6 +1,6 @@
 import { devMessage, embedColor } from "config/options.js"
 import { admin, helper } from "config/roles.js"
-import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 
@@ -24,7 +24,8 @@ export default {
                 .setName("reason")
                 .setDescription("Reason for kicking the member.")
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

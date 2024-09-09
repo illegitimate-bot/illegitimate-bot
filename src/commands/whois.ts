@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import { getHeadURL, getIGN } from "utils/Hypixel.js"
@@ -19,7 +19,8 @@ export default {
                 .setDescription("The user to get the ign of.")
                 .setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

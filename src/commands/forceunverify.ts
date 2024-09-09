@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import logToChannel from "utils/functions/logtochannel.js"
@@ -21,7 +21,8 @@ export default {
                 .setDescription("The user to force unverify")
                 .setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         const member = interaction.options.getMember("user") as GuildMember

@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import guildInfo from "./guild/info.js"
 import guildMember from "./guild/member.js"
@@ -74,7 +74,8 @@ export default {
                         .setName("amount")
                         .setDescription("The amount of guild members to show. [Default: 10]")
                 )
-        ),
+        )
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()

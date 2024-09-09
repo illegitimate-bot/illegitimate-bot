@@ -1,4 +1,4 @@
-import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import leave from "./music/leave.js"
 import nowplaying from "./music/nowplaying.js"
@@ -79,7 +79,8 @@ export default {
                 .setName("leave")
                 .setDescription("Leave the voice channel")
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()

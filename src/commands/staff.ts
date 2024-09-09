@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import beast from "./staff/beast.js"
 import help from "./staff/help.js"
@@ -49,7 +49,7 @@ export default {
                 .setDescription("Update the discord roles of all guild members")
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction, client }) {
         const subcommand = interaction.options.getSubcommand()

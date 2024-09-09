@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {
@@ -11,7 +11,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName("help")
         .setDescription("List's all commands usable by a member")
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction, client }) {
         await interaction.deferReply({ ephemeral: true })

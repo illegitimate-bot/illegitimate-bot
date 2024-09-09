@@ -1,6 +1,6 @@
 import { devMessage, embedColor } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
-import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import waitinglist from "schemas/waitinglistTag.js"
 import logToChannel from "utils/functions/logtochannel.js"
@@ -27,7 +27,7 @@ export default {
                 .setRequired(false)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

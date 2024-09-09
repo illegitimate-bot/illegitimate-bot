@@ -1,6 +1,6 @@
 import { devMessage, embedColor } from "config/options.js"
 import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
-import { SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {
@@ -12,7 +12,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName("reqs")
         .setDescription("Displays the requirements for the guild.")
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.reply({

@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import { formatUuid, getHeadURL, getIGN, getUUID } from "utils/Hypixel.js"
 
@@ -20,7 +20,7 @@ export default {
                 .setMaxLength(16)
                 .setRequired(true)
         )
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

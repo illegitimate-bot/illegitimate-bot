@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { channelMention, ChannelType, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
+import { channelMention, ChannelType, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 
@@ -24,7 +24,7 @@ export default {
                 .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

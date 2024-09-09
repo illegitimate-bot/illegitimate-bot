@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { ChannelType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js"
+import { ChannelType, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {
@@ -24,7 +24,7 @@ export default {
                 .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

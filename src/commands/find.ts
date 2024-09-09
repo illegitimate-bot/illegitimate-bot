@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import { getHeadURL, getIGN, getUUID } from "utils/Hypixel.js"
@@ -20,7 +20,7 @@ export default {
                 .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

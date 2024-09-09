@@ -14,8 +14,7 @@ export default {
     data: new ContextMenuCommandBuilder()
         .setName("Update User")
         .setType(ApplicationCommandType.User)
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

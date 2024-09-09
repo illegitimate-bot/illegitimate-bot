@@ -1,5 +1,5 @@
 import { embedColor } from "config/options.js"
-import { channelMention, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
+import { channelMention, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import logToChannel from "utils/functions/logtochannel.js"
 
@@ -19,7 +19,7 @@ export default {
                 .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

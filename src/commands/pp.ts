@@ -1,5 +1,5 @@
 import { embedColor } from "config/options.js"
-import { SlashCommandBuilder, User } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder, User } from "discord.js"
 import { ICommand } from "interfaces"
 import env from "utils/Env.js"
 
@@ -18,7 +18,7 @@ export default {
                 .setDescription("User to show pp size")
                 .setRequired(false)
         )
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         const user = (interaction.options.getUser("user") || interaction.user) as User

@@ -1,5 +1,5 @@
 import { devMessage, embedColor, instructionsgif } from "config/options.js"
-import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 
 export default {
@@ -12,7 +12,7 @@ export default {
         .setName("instructions")
         .setDescription("Instructions for verification")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.reply({

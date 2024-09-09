@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { GuildMember, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import ms from "ms"
 import prettyMs from "pretty-ms"
@@ -32,7 +32,7 @@ export default {
                 .setDescription("The reason for the timeout")
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

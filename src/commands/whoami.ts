@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { SlashCommandBuilder, userMention } from "discord.js"
+import { InteractionContextType, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import { getHeadURL, getIGN } from "utils/Hypixel.js"
@@ -13,7 +13,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName("whoami")
         .setDescription("Get your user info")
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

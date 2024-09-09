@@ -1,5 +1,5 @@
 import { embedColor } from "config/options.js"
-import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
 import settings from "schemas/settingsTag.js"
 
@@ -28,8 +28,8 @@ export default {
                 .setDescription("The value to set")
                 .setRequired(true)
         )
-        .setDMPermission(false)
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setContexts(InteractionContextType.Guild),
 
     async execute({ interaction }) {
         await interaction.deferReply()

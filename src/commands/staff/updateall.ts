@@ -1,5 +1,5 @@
 import { embedColor, hypixelGuildID } from "config/options.js"
-import { ChatInputCommandInteraction, GuildMember } from "discord.js"
+import { ChatInputCommandInteraction, GuildMember, TextChannel } from "discord.js"
 import { IGuildData } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import env from "utils/Env.js"
@@ -117,7 +117,7 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
 
     console.log("Successfully updated all roles.")
 
-    await interaction.channel?.send({
+    await (interaction.channel as TextChannel)?.send({
         embeds: [{
             description: "Successfully updated all roles.",
             color: embedColor

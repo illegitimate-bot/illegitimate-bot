@@ -1,4 +1,4 @@
-import { Message } from "discord.js"
+import { ChannelType, Message } from "discord.js"
 import { IEvent } from "interfaces"
 import env from "utils/Env.js"
 
@@ -14,17 +14,20 @@ export default {
         if (!message.content.startsWith("!eval")) return
 
         const code = message.content.split(" ").slice(1).join(" ")
+        const channel = message.channel
+
+        if (channel.type !== ChannelType.GuildText) return
 
         try {
             const output = eval(code)
             const outputString = String(output)
-            await message.channel.send({
+            await channel.send({
                 embeds: [{
                     description: `\`\`\`js\n${outputString}\`\`\``
                 }]
             })
         } catch (error) {
-            await message.channel.send({
+            await channel.send({
                 embeds: [{
                     description: `\`\`\`js\n${error}\`\`\``
                 }]

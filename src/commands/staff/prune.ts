@@ -67,7 +67,7 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
             )
         ]
     }).then(async (m) => {
-        const collector = interaction.channel!.createMessageComponentCollector({
+        const collector = m.createMessageComponentCollector({
             componentType: ComponentType.Button,
             filter: (i: ButtonInteraction) =>
                 (i.customId === buttonid || i.customId === cancelid) &&

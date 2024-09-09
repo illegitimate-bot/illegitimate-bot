@@ -13,7 +13,7 @@ services:
       - HYPIXELAPIKEY=${HYPIXELAPIKEY}
       - REDISURI=${REDISURI}
       - POSTGRESURI=${POSTGRESURI}
-    depends_on: 
+    depends_on:
       - db
     pull_policy: always
   db:

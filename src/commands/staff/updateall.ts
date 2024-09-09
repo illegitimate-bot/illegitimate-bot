@@ -1,5 +1,5 @@
 import { embedColor, hypixelGuildID } from "config/options.js"
-import { ChannelType, ChatInputCommandInteraction, GuildMember, TextChannel } from "discord.js"
+import { ChannelType, ChatInputCommandInteraction, GuildMember } from "discord.js"
 import { IGuildData } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import env from "utils/Env.js"

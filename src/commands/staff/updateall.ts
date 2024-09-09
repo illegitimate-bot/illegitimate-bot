@@ -1,5 +1,5 @@
 import { embedColor, hypixelGuildID } from "config/options.js"
-import { ChatInputCommandInteraction, GuildMember, TextChannel } from "discord.js"
+import { ChannelType, ChatInputCommandInteraction, GuildMember, TextChannel } from "discord.js"
 import { IGuildData } from "interfaces"
 import verify from "schemas/verifyTag.js"
 import env from "utils/Env.js"
@@ -11,6 +11,17 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
     await interaction.deferReply()
 
     const discordMember = interaction.member as GuildMember
+    const channel = interaction.channel
+
+    if (channel?.type !== ChannelType.GuildText) {
+        await interaction.editReply({
+            embeds: [{
+                description: "This command can only be used in a server.",
+                color: embedColor
+            }]
+        })
+        return
+    }
 
     if (discordMember.user.id !== env.prod.dev) {
         await interaction.editReply({
@@ -117,7 +128,7 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
 
     console.log("Successfully updated all roles.")
 
-    await (interaction.channel as TextChannel)?.send({
+    await channel.send({
         embeds: [{
             description: "Successfully updated all roles.",
             color: embedColor

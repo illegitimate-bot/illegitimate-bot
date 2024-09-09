@@ -15,6 +15,7 @@ services:
       - POSTGRESURI=${POSTGRESURI}
     depends_on: 
       - db
+    pull_policy: always
   db:
     container_name: illegitimate-postgres
     image: postgres

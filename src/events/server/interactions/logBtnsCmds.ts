@@ -41,11 +41,19 @@ export default {
         }
 
         if (interaction.isButton()) {
+            const customId = interaction.customId
+            let btnId: string = ""
+
+            if (customId.startsWith("tempbutton-")) {
+                btnId = customId.split("-")[1]
+                btnId = btnId.split("-")[0]
+            }
+
             console.log(
                 color(
                     interaction.user.username + "#" +
                         interaction.user.discriminator + " clicked " +
-                        interaction.customId,
+                        btnId,
                     "pink"
                 )
             )

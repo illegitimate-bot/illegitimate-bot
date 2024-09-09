@@ -35,8 +35,8 @@ export default async function prune(interaction: ChatInputCommandInteraction): P
     }
 
     const id = Math.random().toString(32).slice(2)
-    const buttonid = "button-" + id
-    const cancelid = "cancel-" + id
+    const buttonid = `tempbutton-pruneconfirm-${id}`
+    const cancelid = `tempbutton-prunecancel-${id}`
 
     await interaction.editReply({
         embeds: [{

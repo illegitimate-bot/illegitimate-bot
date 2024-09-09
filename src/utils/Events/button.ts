@@ -32,7 +32,10 @@ export default async function loadButtonEvents(client: Client, ft: FileType) {
     client.on(Events.InteractionCreate, async interaction => {
         if (!interaction.isButton()) return
 
-        const button = client.buttons.get(interaction.customId)
+        const customId = interaction.customId
+        if (customId.startsWith("tempbutton-")) return
+
+        const button = client.buttons.get(customId)
 
         if (!button) {
             console.error(`No event matching ${interaction.customId} was found.`)

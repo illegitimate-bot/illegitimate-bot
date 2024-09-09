@@ -19,8 +19,7 @@ export default {
                 .setDescription("The user to get the ign of.")
                 .setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.deferReply()

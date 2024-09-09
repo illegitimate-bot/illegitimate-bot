@@ -21,8 +21,7 @@ export default {
                 .setDescription("The user to force update")
                 .setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.deferReply()

@@ -25,8 +25,7 @@ export default {
                 .setName("ign")
                 .setDescription("The user's in-game name.")
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.deferReply()

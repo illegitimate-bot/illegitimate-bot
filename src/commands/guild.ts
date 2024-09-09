@@ -74,8 +74,7 @@ export default {
                         .setName("amount")
                         .setDescription("The amount of guild members to show. [Default: 10]")
                 )
-        )
-        .setDMPermission(false),
+        ),
 
     async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()

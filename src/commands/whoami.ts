@@ -12,8 +12,7 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("whoami")
-        .setDescription("Get your user info")
-        .setDMPermission(false),
+        .setDescription("Get your user info"),
 
     async execute({ interaction }) {
         await interaction.deferReply()

@@ -14,8 +14,7 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("update")
-        .setDescription("Update your discord roles.")
-        .setDMPermission(false),
+        .setDescription("Update your discord roles."),
 
     async execute({ interaction }) {
         await interaction.deferReply()

@@ -17,8 +17,7 @@ export default {
                 .setName("user")
                 .setDescription("User to show pp size")
                 .setRequired(false)
-        )
-        .setDMPermission(false),
+        ),
 
     async execute({ interaction }) {
         const user = (interaction.options.getUser("user") || interaction.user) as User

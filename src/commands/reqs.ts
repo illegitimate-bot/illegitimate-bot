@@ -11,8 +11,7 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("reqs")
-        .setDescription("Displays the requirements for the guild.")
-        .setDMPermission(false),
+        .setDescription("Displays the requirements for the guild."),
 
     async execute({ interaction }) {
         await interaction.reply({

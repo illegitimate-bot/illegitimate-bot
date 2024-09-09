@@ -24,8 +24,7 @@ export default {
                 .setName("reason")
                 .setDescription("Reason for kicking the member.")
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 
     async execute({ interaction }) {
         await interaction.deferReply()

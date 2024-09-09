@@ -28,7 +28,6 @@ export default {
                 .setDescription("The value to set")
                 .setRequired(true)
         )
-        .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {

@@ -36,8 +36,7 @@ export default {
                         .setRequired(true)
                 )
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         const subcommand = interaction.options.getSubcommand()

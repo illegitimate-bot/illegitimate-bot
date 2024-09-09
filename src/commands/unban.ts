@@ -25,8 +25,7 @@ export default {
                 .setDescription("The reason for unbanning the user")
                 .setRequired(false)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 
     async execute({ interaction }) {
         await interaction.deferReply()

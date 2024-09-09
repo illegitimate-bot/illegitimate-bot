@@ -26,8 +26,7 @@ export default {
                 .setDescription("The reason for removing the user.")
                 .setRequired(false)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.deferReply()

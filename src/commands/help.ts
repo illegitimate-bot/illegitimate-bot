@@ -10,8 +10,7 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("help")
-        .setDescription("List's all commands usable by a member")
-        .setDMPermission(false),
+        .setDescription("List's all commands usable by a member"),
 
     async execute({ interaction, client }) {
         await interaction.deferReply({ ephemeral: true })

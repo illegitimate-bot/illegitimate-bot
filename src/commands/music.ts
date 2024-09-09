@@ -79,7 +79,6 @@ export default {
                 .setName("leave")
                 .setDescription("Leave the voice channel")
         )
-        .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {

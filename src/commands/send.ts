@@ -23,8 +23,7 @@ export default {
                 .setDescription("The channel to send the message to.")
                 .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.deferReply({ ephemeral: true })

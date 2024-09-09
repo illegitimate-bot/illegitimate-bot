@@ -17,8 +17,7 @@ export default {
                 .setName("query")
                 .setDescription("The anime to search for")
                 .setRequired(true)
-        )
-        .setDMPermission(false),
+        ),
 
     async execute({ interaction }) {
         await interaction.deferReply()

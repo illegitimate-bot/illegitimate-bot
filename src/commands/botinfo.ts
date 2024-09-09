@@ -17,8 +17,7 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("botinfo")
-        .setDescription("Get information about the bot")
-        .setDMPermission(false),
+        .setDescription("Get information about the bot"),
 
     async execute({ interaction, client }) {
         const castedDeps = dependencies as { [key: string]: string }

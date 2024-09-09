@@ -48,8 +48,7 @@ export default {
                 .setName("updateall")
                 .setDescription("Update the discord roles of all guild members")
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction, client }) {
         const subcommand = interaction.options.getSubcommand()

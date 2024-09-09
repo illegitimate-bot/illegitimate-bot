@@ -10,8 +10,7 @@ export default {
 
     data: new SlashCommandBuilder()
         .setName("ping")
-        .setDescription("Get's the bot's ping.")
-        .setDMPermission(false),
+        .setDescription("Get's the bot's ping."),
 
     async execute({ interaction, client }) {
         await interaction.deferReply()

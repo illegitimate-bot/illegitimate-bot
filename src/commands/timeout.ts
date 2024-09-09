@@ -31,8 +31,7 @@ export default {
                 .setName("reason")
                 .setDescription("The reason for the timeout")
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.deferReply()

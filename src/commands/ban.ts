@@ -38,8 +38,7 @@ export default {
                     { name: "7 days", value: 7 }
                 )
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 
     async execute({ interaction }) {
         await interaction.deferReply()

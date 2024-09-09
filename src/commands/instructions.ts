@@ -11,8 +11,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName("instructions")
         .setDescription("Instructions for verification")
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .setDMPermission(false),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {
         await interaction.reply({

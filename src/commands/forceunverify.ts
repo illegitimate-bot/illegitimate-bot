@@ -21,7 +21,6 @@ export default {
                 .setDescription("The user to force unverify")
                 .setRequired(true)
         )
-        .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute({ interaction }) {

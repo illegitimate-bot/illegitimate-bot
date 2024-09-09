@@ -19,8 +19,7 @@ export default {
                 .setMinLength(3)
                 .setMaxLength(16)
                 .setRequired(true)
-        )
-        .setDMPermission(false),
+        ),
 
     async execute({ interaction }) {
         await interaction.deferReply()

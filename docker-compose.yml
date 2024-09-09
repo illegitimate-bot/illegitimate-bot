@@ -2,10 +2,7 @@
 services:
   illegitimate:
     container_name: illegitimate
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: illegitimate:latest
+    image: registry.gitlab.com/illegitimate/illegitimate-bot:main
     restart: unless-stopped
     logging:
       driver: journald

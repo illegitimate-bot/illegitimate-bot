@@ -1,28 +1,34 @@
-import { RESTPostAPIChatInputApplicationCommandsJSONBody } from "discord.js"
+import { RESTPostAPIChatInputApplicationCommandsJSONBody, RESTPostAPIContextMenuApplicationCommandsJSONBody } from "discord.js"
 import fs from "fs"
-import { ICommand } from "interfaces"
+import { ICommand, IContextMenu } from "interfaces"
 import { ExtendedClient } from "./Client.js"
 import env from "./Env.js"
 import { color } from "./functions/colors.js"
 type FileType = "js" | "ts"
 
 export default async function autoDeployCommands(fileType: FileType, client: ExtendedClient) {
-    const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = []
+    type CommandsType = RESTPostAPIChatInputApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody
+    const commands: CommandsType[] = []
     let commandFiles: string[] = []
-    // let contentMenuCommands: string[] = []
+    let contentMenuCommands: string[] = []
 
     if (fileType === "js") {
         commandFiles = fs.readdirSync("./dist/commands/").filter(file => file.endsWith(fileType))
-        // contentMenuCommands = fs.readdirSync("./dist/commands-contextmenu/").filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs.readdirSync("./dist/commands-contextmenu/").filter(file => file.endsWith(fileType))
     } else if (fileType === "ts") {
         commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(fileType))
-        // contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(fileType))
+        contentMenuCommands = fs.readdirSync("./src/commands-contextmenu/").filter(file => file.endsWith(fileType))
     }
 
     for (const file of commandFiles) {
-        // const command: ICommand = require(`../commands/${file}`)
-        const { default: commandImport } = await import(`../commands/${file}`)
-        const command: ICommand = commandImport
+        const { default: command } = await import(`../commands/${file}`) as { default: ICommand }
+        if (command.dev) {
+            commands.push(command.data.toJSON())
+        }
+    }
+
+    for (const file of contentMenuCommands) {
+        const { default: command } = await import(`../commands-contextmenu/${file}`) as { default: IContextMenu }
         if (command.dev) {
             commands.push(command.data.toJSON())
         }
@@ -31,27 +37,25 @@ export default async function autoDeployCommands(fileType: FileType, client: Ext
     const commandData = commands.map(command => {
         return {
             name: command.name,
-            description: command.description,
             options: command.options?.map(option => {
                 return {
                     name: option.name,
                     description: option.description,
                     type: option.type
                 }
-            }),
+            }) ?? [],
             defaultPermission: command.default_member_permissions ?? null
         }
     }).sort((a, b) => a.name > b.name ? 1 : -1)
 
     client.on("ready", async (c) => {
         const guildclient = c.guilds.cache.get(env.dev.guildid)!
-        const currentCommands = await guildclient.commands.fetch()
+        const currentCommands = await guildclient.commands.fetch({})
         if (!currentCommands) return
 
         const currentCommandsData = currentCommands.map(command => {
             return {
                 name: command.name,
-                description: command.description,
                 options: command.options?.map(option => {
                     return {
                         name: option.name,

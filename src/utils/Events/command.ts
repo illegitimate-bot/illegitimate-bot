@@ -4,7 +4,6 @@ import fs from "fs"
 import { ICommand } from "interfaces"
 import path from "path"
 import { ExtendedClient as Client } from "utils/Client.js"
-import { color } from "utils/functions/colors.js"
 import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
@@ -16,17 +15,7 @@ export default async function loadSlashCommandsEvents(client: Client, ft: FileTy
     for (const file of cmdFiles) {
         const filePath = path.join(cmdPath, file)
         const { default: cmd } = await import("file://" + filePath) as { default: ICommand }
-
-        if ("data" in cmd && "execute" in cmd) {
-            client.commands.set(cmd.data.name, cmd)
-        } else {
-            console.log(
-                color(
-                    `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-                    "red"
-                )
-            )
-        }
+        client.commands.set(cmd.data.name, cmd)
     }
 
     // ! command handler
@@ -36,9 +25,11 @@ export default async function loadSlashCommandsEvents(client: Client, ft: FileTy
         const command = client.commands.get(interaction.commandName)
 
         if (!command) {
-            console.error(
-                `No command matching ${interaction.commandName} was found.`
-            )
+            interaction.reply({
+                content: "Command logic not implemented. This is most likely an old command",
+                ephemeral: true
+            })
+            console.error(`No command matching ${interaction.commandName} was found.`)
             return
         }
 

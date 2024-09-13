@@ -14,5 +14,5 @@ export default async function loadAllEvents(client: Client, ft: "js" | "ts") {
     await loadContextMenuEvents(client, ft)
     await loadModalEvents(client, ft)
     await loadAutocompleteEvents(client, ft)
-    await loadCronEvents()
+    await loadCronEvents(ft)
 }

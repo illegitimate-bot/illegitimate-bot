@@ -4,7 +4,6 @@ import fs from "fs"
 import { IContextMenu } from "interfaces"
 import path from "path"
 import { ExtendedClient as Client } from "utils/Client.js"
-import { color } from "utils/functions/colors.js"
 import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
@@ -16,17 +15,7 @@ export default async function loadContextMenuEvents(client: Client, ft: FileType
     for (const file of contextMenuFiles) {
         const filePath = path.join(contextMenuPath, file)
         const { default: cmd } = await import("file://" + filePath) as { default: IContextMenu }
-
-        if ("data" in cmd && "execute" in cmd) {
-            client.contextmenus.set(cmd.data.name, cmd)
-        } else {
-            console.log(
-                color(
-                    `[WARNING] The command at ${filePath} is missing a required "data", "execute" or "type" property.`,
-                    "red"
-                )
-            )
-        }
+        client.contextmenus.set(cmd.data.name, cmd)
     }
 
     // ! context menu command handler
@@ -36,6 +25,10 @@ export default async function loadContextMenuEvents(client: Client, ft: FileType
         const command = client.contextmenus.get(interaction.commandName)
 
         if (!command) {
+            interaction.reply({
+                content: "Command logic not implemented. This is most likely an old command",
+                ephemeral: true
+            })
             console.error(`No command matching ${interaction.commandName} was found.`)
             return
         }

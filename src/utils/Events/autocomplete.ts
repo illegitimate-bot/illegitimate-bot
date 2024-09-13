@@ -4,7 +4,6 @@ import fs from "fs"
 import { IAutocomplete } from "interfaces"
 import path from "path"
 import { ExtendedClient as Client } from "utils/Client.js"
-import { color } from "utils/functions/colors.js"
 import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
@@ -16,17 +15,7 @@ export default async function loadAutocompleteEvents(client: Client, ft: FileTyp
     for (const file of autocompleteFiles) {
         const filePath = path.join(autocompletePath, file)
         const { default: autocomplete } = await import("file://" + filePath) as { default: IAutocomplete }
-
-        if ("name" in autocomplete && "execute" in autocomplete) {
-            client.autocomplete.set(autocomplete.name, autocomplete)
-        } else {
-            console.log(
-                color(
-                    `[WARNING] The autocomplete at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                    "red"
-                )
-            )
-        }
+        client.autocomplete.set(autocomplete.name, autocomplete)
     }
 
     client.on(Events.InteractionCreate, async interaction => {

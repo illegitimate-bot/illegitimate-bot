@@ -1,9 +1,9 @@
 {
     "$schema": "https://plugins.dprint.dev/dprint/dprint-plugin-typescript/latest/schema.json",
+    "indentWidth": 4,
+    "lineWidth": 150,
+    "useTabs": false,
     "typescript": {
-        "lineWidth": 150,
-        "indentWidth": 4,
-        "useTabs": false,
         "semiColons": "asi",
         "quoteStyle": "alwaysDouble",
         "newLineKind": "lf",
@@ -14,7 +14,6 @@
         "typeLiteral.separatorKind.multiLine": "semiColon"
     },
     "json": {
-        "indentWidth": "4"
     },
     "markdown": {
     },

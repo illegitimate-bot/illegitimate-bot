@@ -4,7 +4,6 @@ import fs from "fs"
 import { IButton } from "interfaces"
 import path from "path"
 import { ExtendedClient as Client } from "utils/Client.js"
-import { color } from "utils/functions/colors.js"
 import logToChannel from "utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
@@ -16,17 +15,7 @@ export default async function loadButtonEvents(client: Client, ft: FileType) {
     for (const file of btnFiles) {
         const filePath = path.join(btnPath, file)
         const { default: btn } = await import("file://" + filePath) as { default: IButton }
-
-        if ("name" in btn && "execute" in btn) {
-            client.buttons.set(btn.name, btn)
-        } else {
-            console.log(
-                color(
-                    `[WARNING] The button at ${filePath} is missing a required "name", "execute" or "type" property.`,
-                    "red"
-                )
-            )
-        }
+        client.buttons.set(btn.name, btn)
     }
 
     client.on(Events.InteractionCreate, async interaction => {
@@ -38,6 +27,10 @@ export default async function loadButtonEvents(client: Client, ft: FileType) {
         const button = client.buttons.get(customId)
 
         if (!button) {
+            interaction.reply({
+                content: "Button logic not implemented. This is most likely an old button",
+                ephemeral: true
+            })
             console.error(`No event matching ${interaction.customId} was found.`)
             return
         }

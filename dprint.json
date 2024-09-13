@@ -1,5 +1,5 @@
 {
-    "$schima": "https://plugins.dprint.dev/dprint/dprint-plugin-typescript/latest/schema.json",
+    "$schema": "https://plugins.dprint.dev/dprint/dprint-plugin-typescript/latest/schema.json",
     "indentWidth": 4,
     "lineWidth": 150,
     "useTabs": false,

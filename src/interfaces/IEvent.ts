@@ -1,9 +1,6 @@
 import { ClientEvents } from "discord.js"
 
-export default interface IEvent {
-    name: string
-    description: string
-    event: keyof ClientEvents
-    disabled?: boolean
-    execute(...args: any[]): void
+export default interface IEvent<E extends keyof ClientEvents> {
+    event: E
+    execute(...args: ClientEvents[E]): void
 }

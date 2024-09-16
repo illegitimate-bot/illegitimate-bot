@@ -1,5 +1,4 @@
 import fs from "fs"
-import { IEvent } from "interfaces"
 import path from "path"
 import { ExtendedClient as Client } from "utils/Client.js"
 const __dirname = import.meta.dirname
@@ -11,7 +10,7 @@ export default async function loadEvents(client: Client) {
         const eventFiles = fs.readdirSync(path.join(serverDir, eventDir))
         for (const eventFile of eventFiles) {
             const eventPath = path.join(serverDir, eventDir, eventFile)
-            const { default: event } = await import("file://" + eventPath) as { default: IEvent }
+            const { default: event } = await import("file://" + eventPath)
             if (!event.disabled) {
                 client.on(event.event, event.execute)
             }

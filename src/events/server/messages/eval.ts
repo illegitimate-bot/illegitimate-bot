@@ -1,14 +1,10 @@
-import { ChannelType, Message } from "discord.js"
+import { ChannelType } from "discord.js"
 import { IEvent } from "interfaces"
 import env from "utils/Env.js"
 
 export default {
-    name: "eval",
-    description: "Evaluate a JavaScript expression",
     event: "messageCreate",
-    disabled: true,
-
-    async execute(message: Message) {
+    async execute(message) {
         if (message.author.bot) return
         if (message.author.id !== env.prod.dev) return
         if (!message.content.startsWith("!eval")) return
@@ -34,4 +30,4 @@ export default {
             })
         }
     }
-} as IEvent
+} as IEvent<"messageCreate">

@@ -1,12 +1,8 @@
-import { VoiceState } from "discord.js"
 import { IEvent } from "interfaces"
 
 export default {
-    name: "updatecache",
-    description: "Updates the voice states cache",
     event: "voiceStateUpdate",
-
-    async execute(_o: VoiceState, n: VoiceState) {
+    async execute(_o, n) {
         const guild = n.guild
 
         if (!guild) return
@@ -15,4 +11,4 @@ export default {
             guild.voiceStates.cache.delete(n.id)
         }
     }
-} as IEvent
+} as IEvent<"voiceStateUpdate">

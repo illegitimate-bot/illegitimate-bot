@@ -1,14 +1,10 @@
-import { ButtonInteraction, ChatInputCommandInteraction } from "discord.js"
 import { IEvent } from "interfaces"
 import { color } from "utils/functions/colors.js"
 
 export default {
-    name: "logBtnsCmds",
-    description: "Logs all button and command interactions",
     event: "interactionCreate",
-
-    execute(interaction: ChatInputCommandInteraction | ButtonInteraction) {
-        if (interaction.isCommand()) {
+    execute(interaction) {
+        if (interaction.isChatInputCommand()) {
             let subcommand: string | null
 
             try {
@@ -60,4 +56,4 @@ export default {
             return
         }
     }
-} as IEvent
+} as IEvent<"interactionCreate">

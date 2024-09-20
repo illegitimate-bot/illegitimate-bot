@@ -6,6 +6,7 @@ import { color } from "utils/functions/colors.js"
 import { Player } from "discord-player"
 import { YoutubeiExtractor } from "discord-player-youtubei"
 import { Sequelize } from "sequelize"
+import { MissingEnvVarsError } from "./Classes.js"
 import loadAllEvents from "./Events/loadevents.js"
 
 const client = new Client()
@@ -61,14 +62,14 @@ class Illegitimate {
 
         if (process.env.NODE_ENV === "dev") {
             for (const [key, value] of Object.entries(devValues)) {
-                if (!value) throw new Error(`No ${key} specified`)
+                if (!value) throw new MissingEnvVarsError(`No ${key} specified`)
             }
             for (const [key, value] of Object.entries(prodValues)) {
-                if (!value) throw new Error(`No ${key} specified`)
+                if (!value) throw new MissingEnvVarsError(`No ${key} specified`)
             }
         } else {
             for (const [key, value] of Object.entries(prodValues)) {
-                if (!value) throw new Error(`No ${key} specified`)
+                if (!value) throw new MissingEnvVarsError(`No ${key} specified`)
             }
         }
     }

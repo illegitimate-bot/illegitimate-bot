@@ -59,7 +59,7 @@
         "@types/pg": "^8",
         "@typescript-eslint/eslint-plugin": "^8.6.0",
         "@typescript-eslint/parser": "^8.6.0",
-        "chokidar": "^3.6.0",
+        "chokidar": "^4.0.0",
         "dprint": "^0.47.2",
         "eslint": "^9.11.0",
         "globals": "^15.9.0",

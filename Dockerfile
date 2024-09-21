@@ -5,7 +5,6 @@ COPY --from=cache /cache/node_modules /app/node_modules
 COPY . /app
 WORKDIR /app
 
-
 RUN apk add --no-cache ffmpeg
 RUN corepack enable
 RUN yarn build

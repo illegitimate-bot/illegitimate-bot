@@ -1,4 +1,18 @@
-docker-build:
+merge:
+  image: docker:cli
+  stage: test
+  services:
+    - docker:dind
+  variables:
+    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  script:
+    - |
+        docker build . -f Dockerfile.cache -t node-cache
+        docker build -t "$DOCKER_IMAGE_NAME" .
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+build:
   image: docker:cli
   stage: build
   services:
@@ -8,14 +22,10 @@ docker-build:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build . -f Dockerfile.cache -t node-cache
-    - docker build -t "$DOCKER_IMAGE_NAME" .
     - |
-      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+        docker build . -f Dockerfile.cache -t node-cache
+        docker build -t "$DOCKER_IMAGE_NAME" .
         docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:main"
         docker push "$CI_REGISTRY_IMAGE:main"
-      fi
   rules:
-    - if: $CI_COMMIT_BRANCH
-      exists:
-        - Dockerfile
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

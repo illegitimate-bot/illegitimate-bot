@@ -13,6 +13,7 @@ scripts
 docker-compose.yml
 Dockerfile
 Dockerfile.cache
+dprint.json
 eslint.config.mjs
 nodemon-js.json
 nodemon-swc.json

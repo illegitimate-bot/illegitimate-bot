@@ -6,9 +6,7 @@ merge:
   variables:
     DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   script:
-    - |
-        docker build . -f Dockerfile.cache -t node-cache
-        docker build -t "$DOCKER_IMAGE_NAME" .
+    - docker build -t "$DOCKER_IMAGE_NAME" .
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
@@ -23,7 +21,6 @@ build:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - |
-        docker build . -f Dockerfile.cache -t node-cache
         docker build -t "$DOCKER_IMAGE_NAME" .
         docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:main"
         docker push "$CI_REGISTRY_IMAGE:main"

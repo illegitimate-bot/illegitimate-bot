@@ -67,5 +67,11 @@
         "tsx": "^4.19.1",
         "typescript": "^5.6.2"
     },
-    "packageManager": "pnpm@9.11.0+sha256.1c0e33f70e5df9eede84a357bdfa0b1f9dba6e58194628d48a1055756f553754"
+    "packageManager": "pnpm@9.11.0+sha256.1c0e33f70e5df9eede84a357bdfa0b1f9dba6e58194628d48a1055756f553754",
+    "pnpm": {
+        "patchedDependencies": {
+            "whatwg-url@5.0.0": "patches/whatwg-url@5.0.0.patch",
+            "tr46@0.0.3": "patches/tr46@0.0.3.patch"
+        }
+    }
 }

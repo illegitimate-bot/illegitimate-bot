@@ -7,5 +7,5 @@
         "NODE_ENV": "dev"
     },
     "ext": "ts",
-    "exec": "yarn build && yarn start"
+    "exec": "pnpm build && pnpm start"
 }

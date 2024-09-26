@@ -2,12 +2,11 @@ FROM node:21.7.3-alpine3.18 AS cache
 
 WORKDIR /cache
 
-COPY .yarnrc.yml .
 COPY package.json .
-COPY yarn.lock .
+COPY pnpm-lock.yaml .
 
 RUN corepack enable
-RUN yarn install
+RUN pnpm install
 
 # main image
 FROM node:21.7.3-alpine3.18
@@ -18,6 +17,6 @@ COPY . .
 
 RUN apk add --no-cache ffmpeg
 RUN corepack enable
-RUN yarn build
+RUN pnpm build
 
-CMD [ "yarn", "start" ]
+CMD [ "pnpm", "start" ]

@@ -19,7 +19,7 @@
         "dev:ts": "nodemon --config nodemon.json src/index.ts",
         "dev:js": "nodemon --config nodemon-js.json dist/index.js",
         "format": "dprint fmt \"**/*.ts\"",
-        "check": "yarn tscheck && yarn lint",
+        "check": "pnpm tscheck && pnpm lint",
         "tscheck": "tsc && echo \"TypeScript check passed!\"",
         "lint": "eslint && echo \"Linting passed!\"",
         "lint:fix": "eslint --fix",
@@ -54,8 +54,8 @@
         "@swc/cli": "^0.4.0",
         "@swc/core": "^1.7.28",
         "@types/ms": "^0.7.34",
-        "@types/node": "^22.6.1",
-        "@types/pg": "^8",
+        "@types/node": "^22.7.2",
+        "@types/pg": "^8.11.10",
         "@typescript-eslint/eslint-plugin": "^8.7.0",
         "@typescript-eslint/parser": "^8.7.0",
         "chokidar": "^4.0.1",
@@ -66,5 +66,5 @@
         "tsx": "^4.19.1",
         "typescript": "^5.6.2"
     },
-    "packageManager": "yarn@4.5.0"
+    "packageManager": "pnpm@9.11.0+sha256.1c0e33f70e5df9eede84a357bdfa0b1f9dba6e58194628d48a1055756f553754"
 }

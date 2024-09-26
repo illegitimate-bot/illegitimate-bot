@@ -1,5 +1,6 @@
 .git
 .nodemon
+.vscode
 dev
 dist
 old

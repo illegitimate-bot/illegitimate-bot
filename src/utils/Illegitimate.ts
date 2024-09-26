@@ -75,11 +75,11 @@ class Illegitimate {
     }
 
     private loadMethods() {
-        String.prototype.removeIndents = function (this: string) {
+        String.prototype.removeIndents = function(this: string) {
             return this.replace(/^ */gm, "")
         }
 
-        String.prototype.capitalizeFirstLetter = function (this: string) {
+        String.prototype.capitalizeFirstLetter = function(this: string) {
             return this[0].toUpperCase() + this.slice(1).toLowerCase()
         }
     }

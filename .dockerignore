@@ -1,5 +1,7 @@
 .git
-.yarn
+.nodemon
+.vscode
+dev
 dist
 old
 node_modules
@@ -12,9 +14,5 @@ scripts
 .node-version
 docker-compose.yml
 Dockerfile
-Dockerfile.cache
 dprint.json
 eslint.config.mjs
-nodemon-js.json
-nodemon-swc.json
-nodemon.json

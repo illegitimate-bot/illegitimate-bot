@@ -1,7 +1,5 @@
 .vscode/
-.yarn/
 node_modules/*
 .env
 dist/
-data/
 dev/

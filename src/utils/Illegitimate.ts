@@ -47,7 +47,7 @@ class Illegitimate {
             console.log(color("Connected to Redis", "green"))
         })
         if (process.env.NODE_ENV === "dev") {
-            sequelize.sync().then(() => {
+            sequelize.sync({ logging: false }).then(() => {
                 console.log(color("Synced the db [dev]", "green"))
             })
         }

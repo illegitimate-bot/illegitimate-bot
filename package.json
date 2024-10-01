@@ -19,7 +19,7 @@
         "dev:ts": "nodemon --config .nodemon/ts.json src/index.ts",
         "dev:ts:inspect": "nodemon --config .nodemon/debug.json src/index.ts",
         "dev:js": "nodemon --config .nodemon/js.json dist/index.js",
-        "format": "dprint fmt \"**/*.ts\"",
+        "fmt": "dprint fmt \"**/*.ts\"",
         "check": "pnpm tscheck && pnpm lint",
         "tscheck": "tsc && echo \"TypeScript check passed!\"",
         "lint": "eslint && echo \"Linting passed!\"",

@@ -3,8 +3,10 @@ import { applicationsChannel, embedColor } from "config/options.js"
 import { guild as guildQuestions } from "config/questions.js"
 import { guildRole } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
+import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
-import guildapp from "schemas/guildAppTag.js"
+import db from "src/db/db.js"
+import { guildApps } from "src/db/schema.js"
 import applicationQuestions from "utils/functions/applicationquestions.js"
 
 export default {
@@ -30,7 +32,9 @@ export default {
             return
         }
 
-        const application = await guildapp.findOne({ where: { userID: user.user.id } })
+        const application = await db.query.guildApps.findFirst({
+            where: eq(guildApps.userID, user.user.id)
+        })
 
         if (application) {
             await interaction.editReply("You already have an application in progress.")
@@ -248,7 +252,7 @@ export default {
             }]
         })
 
-        await guildapp.create({
+        await db.insert(guildApps).values({
             userID: user.user.id,
             uuid: uuid
         })

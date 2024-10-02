@@ -19,11 +19,14 @@
         "dev:ts": "nodemon --config .nodemon/ts.json src/index.ts",
         "dev:ts:inspect": "nodemon --config .nodemon/debug.json src/index.ts",
         "dev:js": "nodemon --config .nodemon/js.json dist/index.js",
-        "format": "dprint fmt \"**/*.ts\"",
+        "fmt": "dprint fmt \"**/*.ts\"",
         "check": "pnpm tscheck && pnpm lint",
         "tscheck": "tsc && echo \"TypeScript check passed!\"",
         "lint": "eslint && echo \"Linting passed!\"",
         "lint:fix": "eslint --fix",
+        "db:generate": "drizzle-kit generate",
+        "db:migrate": "drizzle-kit migrate",
+        "db:studio": "drizzle-kit studio",
         "push:prod": "tsx scripts/deploy-commands.ts",
         "push:dev": "tsx scripts/dev-deploy.ts",
         "delete:dev": "tsx scripts/delete-commands.ts"
@@ -41,11 +44,11 @@
         "discord-player-youtubei": "^1.3.2",
         "discord.js": "^14.16.2",
         "dotenv": "^16.4.5",
+        "drizzle-orm": "^0.33.0",
         "ioredis": "^5.4.1",
         "mongoose": "^8.6.3",
         "ms": "^2.1.3",
-        "pg": "^8.13.0",
-        "pg-hstore": "^2.3.4",
+        "postgres": "^3.4.4",
         "pretty-ms": "^9.1.0",
         "sequelize": "^6.37.3"
     },
@@ -56,16 +59,22 @@
         "@swc/core": "^1.7.28",
         "@types/ms": "^0.7.34",
         "@types/node": "^22.7.2",
-        "@types/pg": "^8.11.10",
         "@typescript-eslint/eslint-plugin": "^8.7.0",
         "@typescript-eslint/parser": "^8.7.0",
         "chokidar": "^4.0.1",
         "dprint": "^0.47.2",
+        "drizzle-kit": "^0.24.2",
         "eslint": "^9.11.1",
         "globals": "^15.9.0",
         "sqlite3": "^5.1.7",
         "tsx": "^4.19.1",
         "typescript": "^5.6.2"
     },
-    "packageManager": "pnpm@9.11.0+sha256.1c0e33f70e5df9eede84a357bdfa0b1f9dba6e58194628d48a1055756f553754"
+    "packageManager": "pnpm@9.11.0+sha256.1c0e33f70e5df9eede84a357bdfa0b1f9dba6e58194628d48a1055756f553754",
+    "pnpm": {
+        "patchedDependencies": {
+            "whatwg-url@5.0.0": "patches/whatwg-url@5.0.0.patch",
+            "tr46@0.0.3": "patches/tr46@0.0.3.patch"
+        }
+    }
 }

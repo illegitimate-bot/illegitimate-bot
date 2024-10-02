@@ -3,9 +3,10 @@ import { embedColor, staffApplicationsChannel } from "config/options.js"
 import { staff as staffQuestions } from "config/questions.js"
 import { guildRole, guildStaff } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
+import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
-import settings from "schemas/settingsTag.js"
-import staffapp from "schemas/staffAppTag.js"
+import db from "src/db/db.js"
+import { settings, staffApps } from "src/db/schema.js"
 import env from "utils/Env.js"
 import applicationQuestions from "utils/functions/applicationquestions.js"
 
@@ -17,7 +18,9 @@ export default {
         const user = interaction.member as GuildMember
         const guild = interaction.guild!
         const userRoles = user.roles.cache
-        const setting = await settings.findOne({ where: { name: "staffAppStatus" } })
+        const setting = await db.query.settings.findFirst({
+            where: eq(settings.name, "staffApplications")
+        })
         const status = setting?.value || "0"
 
         function sq(n: number): string {
@@ -48,7 +51,9 @@ export default {
                 return
             }
 
-            const application = await staffapp.findOne({ where: { userID: user.user.id } })
+            const application = await db.query.staffApps.findFirst({
+                where: eq(staffApps.userID, user.user.id)
+            })
 
             if (application) {
                 await interaction.editReply("You already have an application in progress.")
@@ -221,7 +226,7 @@ export default {
                 }]
             })
 
-            await staffapp.create({
+            await db.insert(staffApps).values({
                 userID: user.user.id,
                 uuid: uuid
             })

@@ -1,7 +1,9 @@
 import { embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
+import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
-import staffapp from "schemas/staffAppTag.js"
+import db from "src/db/db.js"
+import { staffApps } from "src/db/schema.js"
 
 export default {
     name: "staffapplicationaccept",
@@ -43,8 +45,7 @@ export default {
             ]
         })
 
-        const app = await staffapp.findOne({ where: { userID: applicantId } })
-        await app?.destroy()
+        await db.delete(staffApps).where(eq(staffApps.userID, applicantId))
 
         await interaction.editReply({
             embeds: [{

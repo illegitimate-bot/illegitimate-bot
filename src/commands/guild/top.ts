@@ -1,5 +1,5 @@
 import { devMessage, embedColor } from "config/options.js"
-import { ChannelType, ChatInputCommandInteraction } from "discord.js"
+import { ChatInputCommandInteraction } from "discord.js"
 import { IGuildData } from "interfaces"
 import { getGuild, getIGN, getPlayer, getUUID } from "utils/Hypixel.js"
 import { redis } from "utils/Illegitimate.js"
@@ -11,16 +11,6 @@ export default async function guildTop(interaction: ChatInputCommandInteraction)
     const type = interaction.options.getString("type") || "ign"
     let amount = interaction.options.getNumber("amount") || 10
     let guild: IGuildData | null
-
-    if (interaction.channel!.type === ChannelType.DM) {
-        interaction.editReply({
-            embeds: [{
-                description: "You can't use this command in DMs!",
-                color: embedColor
-            }]
-        })
-        return
-    }
 
     if (type === "ign") {
         await interaction.editReply({

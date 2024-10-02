@@ -1,7 +1,8 @@
 import { embedColor } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { ICommand } from "interfaces"
-import settings from "schemas/settingsTag.js"
+import db from "src/db/db.js"
+import { settings } from "src/db/schema.js"
 
 export default {
     name: "config",
@@ -36,10 +37,12 @@ export default {
 
         const setting = interaction.options.getString("setting")!
         const value = interaction.options.getString("value")!
-        const settingsData = await settings.findOne({ where: { name: setting } })
+        const settingsData = await db.query.settings.findFirst({
+            where: (settings, { eq }) => eq(settings.name, setting)
+        })
 
         if (!settingsData) {
-            await settings.create({
+            await db.insert(settings).values({
                 name: setting,
                 value: value
             })
@@ -51,7 +54,9 @@ export default {
                 }]
             })
         } else {
-            await settingsData.destroy()
+            await db.update(settings).set({
+                value: value
+            })
 
             await interaction.editReply({
                 embeds: [{

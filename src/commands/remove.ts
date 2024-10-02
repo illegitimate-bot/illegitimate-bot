@@ -1,8 +1,10 @@
 import { devMessage, embedColor } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
 import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
-import waitinglist from "schemas/waitinglistTag.js"
+import db from "src/db/db.js"
+import { waitingLists } from "src/db/schema.js"
 import logToChannel from "utils/functions/logtochannel.js"
 
 export default {
@@ -35,9 +37,11 @@ export default {
         const member = interaction.options.getMember("user") as GuildMember
         const reason = interaction.options.getString("reason") ?? "No reason provided."
         const mod = interaction.user!
-        const waiting = await waitinglist.findOne({ where: { userID: member.user.id } })
+        const waiting = await db.query.waitingLists.findFirst({
+            where: eq(waitingLists.userID, member.user.id)
+        })
 
-        if (!waitinglist) {
+        if (!waiting) {
             await interaction.editReply({
                 embeds: [{
                     description: userMention(member.user.id) + " is not on the waiting list.",
@@ -47,7 +51,7 @@ export default {
             return
         }
 
-        await waiting?.destroy()
+        await db.delete(waitingLists).where(eq(waitingLists.userID, member.user.id))
         await member.roles.remove(waitingListRole, "Removed from waiting list.")
 
         await logToChannel("mod", {

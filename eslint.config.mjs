@@ -1,10 +1,10 @@
+import { FlatCompat } from "@eslint/eslintrc"
+import js from "@eslint/js"
 import typescriptEslint from "@typescript-eslint/eslint-plugin"
-import globals from "globals"
 import tsParser from "@typescript-eslint/parser"
+import globals from "globals"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import js from "@eslint/js"
-import { FlatCompat } from "@eslint/eslintrc"
 
 // eslint-disable-next-line no-redeclare
 const __filename = fileURLToPath(import.meta.url)
@@ -18,28 +18,28 @@ const compat = new FlatCompat({
 
 export default [
     {
-        ignores: ["**/node_modules", "**/dist"]
+        ignores: ["**/node_modules", "**/dist", "**/dev"]
     },
     ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended"),
     {
         plugins: {
-            "@typescript-eslint": typescriptEslint,
+            "@typescript-eslint": typescriptEslint
         },
 
         languageOptions: {
             globals: {
                 ...globals.node,
-                ...globals.browser,
+                ...globals.browser
             },
 
             parser: tsParser,
             ecmaVersion: "latest",
-            sourceType: "module",
+            sourceType: "module"
         },
 
         rules: {
             indent: ["error", 4, {
-                SwitchCase: 1,
+                SwitchCase: 1
             }],
 
             "linebreak-style": ["error", "unix"],
@@ -52,7 +52,7 @@ export default [
             "no-multiple-empty-lines": ["error", {
                 max: 2,
                 maxEOF: 1,
-                maxBOF: 0,
+                maxBOF: 0
             }],
 
             "no-lonely-if": "error",
@@ -62,13 +62,13 @@ export default [
 
             "arrow-spacing": ["warn", {
                 before: true,
-                after: true,
+                after: true
             }],
 
             "space-before-function-paren": ["error", {
                 anonymous: "never",
                 named: "never",
-                asyncArrow: "always",
+                asyncArrow: "always"
             }],
 
             "comma-spacing": "error",
@@ -78,7 +78,7 @@ export default [
             "@typescript-eslint/no-unused-vars": ["warn", {
                 vars: "all",
                 args: "after-used",
-                ignoreRestSiblings: false,
+                ignoreRestSiblings: false
             }],
             "@typescript-eslint/no-empty-object-type": "off",
             "@typescript-eslint/no-require-imports": "off",
@@ -86,17 +86,18 @@ export default [
                 "ts-expect-error": "allow-with-description",
                 "ts-ignore": "allow-with-description",
                 "ts-nocheck": "allow-with-description",
-                "ts-check": "allow-with-description",
-            }],
-        },
-    }, {
+                "ts-check": "allow-with-description"
+            }]
+        }
+    },
+    {
         languageOptions: {
             globals: {
-                ...globals.node,
+                ...globals.node
             },
 
             ecmaVersion: 5,
-            sourceType: "commonjs",
-        },
+            sourceType: "commonjs"
+        }
     }
 ]

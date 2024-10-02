@@ -15,4 +15,5 @@ scripts
 docker-compose.yml
 Dockerfile
 dprint.json
+drizzle.config.ts
 eslint.config.mjs

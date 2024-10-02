@@ -110,20 +110,7 @@ export default async function guildInfo(interaction: ChatInputCommandInteraction
     const guildExp = new Intl.NumberFormat("en-US").format(guildExpUnformatted)
     const guildLvl = guildLevel(guildExpUnformatted)
     const guildMembers = guild!.members
-
-    const guildCreatedDate = guildCreated.getDate()
-    const guildCreatedMonth = guildCreated.getMonth() + 1
-    const guildCreatedYear = guildCreated.getFullYear()
-    const guildCreatedHour = guildCreated.getHours()
-    const guildCreatedMinute = guildCreated.getMinutes()
-    const guildCreatedSecond = guildCreated.getSeconds()
-
-    const guildCreatedTime = guildCreatedDate + "." +
-        guildCreatedMonth + "." +
-        guildCreatedYear + " " +
-        guildCreatedHour + ":" +
-        guildCreatedMinute + ":" +
-        guildCreatedSecond
+    const guildCreatedTime = guildCreated.toLocaleString("hr-HR", {})
 
     const guildOwner = guildMembers.find(m => m.rank === "Guild Master")!.uuid
     const guildOwnerName = await getIGN(guildOwner)

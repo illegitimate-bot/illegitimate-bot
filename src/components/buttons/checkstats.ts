@@ -1,7 +1,9 @@
 import { devMessage, embedColor } from "config/options.js"
 import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
+import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
-import guildapp from "schemas/guildAppTag.js"
+import db from "src/db/db.js"
+import { guildApps } from "src/db/schema.js"
 import { bedwarsLevel, getGuild, getHeadURL, getPlayer, hypixelLevel, skywarsLevel } from "utils/Hypixel.js"
 
 export default {
@@ -14,7 +16,9 @@ export default {
         const message = interaction.message
         const embed = message.embeds[0]
         const applicantId = embed.footer!.text.split(" ")[1]
-        const guildappdata = await guildapp.findOne({ where: { userID: applicantId } })
+        const guildappdata = await db.query.guildApps.findFirst({
+            where: eq(guildApps.userID, applicantId)
+        })
         const uuid = guildappdata!.uuid
 
         const player = await getPlayer(uuid)

@@ -1,7 +1,9 @@
 import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, SlashCommandBuilder, userMention } from "discord.js"
+import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
-import verify from "schemas/verifyTag.js"
+import db from "src/db/db.js"
+import { verifies } from "src/db/schema.js"
 import { getHeadURL, getIGN } from "utils/Hypixel.js"
 
 export default {
@@ -19,7 +21,9 @@ export default {
         await interaction.deferReply()
 
         const user = interaction.user
-        const verifyData = await verify.findOne({ where: { userID: user.id } })
+        const verifyData = await db.query.verifies.findFirst({
+            where: eq(verifies.userID, user.id)
+        })
 
         if (!verifyData) {
             await interaction.editReply({

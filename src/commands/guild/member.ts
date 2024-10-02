@@ -111,19 +111,7 @@ export default async function guildMember(interaction: ChatInputCommandInteracti
 
     const guildMemberJoinMS = guildMember!.joined
     const guildMemberJoinTime = new Date(guildMemberJoinMS)
-    const guildMemberJoinDate = guildMemberJoinTime.getDate()
-    const guildMemberJoinMonth = guildMemberJoinTime.getMonth() + 1
-    const guildMemberJoinYear = guildMemberJoinTime.getFullYear()
-    const guildMemberJoinHours = guildMemberJoinTime.getHours()
-    const guildMemberJoinMinutes = guildMemberJoinTime.getMinutes()
-    const guildMemberJoinSeconds = guildMemberJoinTime.getSeconds()
-
-    const guildMemberJoin = guildMemberJoinDate + "." +
-        guildMemberJoinMonth + "." +
-        guildMemberJoinYear + " " +
-        guildMemberJoinHours + ":" +
-        guildMemberJoinMinutes + ":" +
-        guildMemberJoinSeconds
+    const guildMemberJoin = guildMemberJoinTime.toLocaleString("hr-HR", {})
 
     await interaction.editReply({
         embeds: [{

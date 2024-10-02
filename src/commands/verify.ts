@@ -1,9 +1,11 @@
 import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember, InteractionContextType, SlashCommandBuilder } from "discord.js"
+import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
 import { IPlayerData } from "interfaces"
 import { IGuildData } from "interfaces"
-import verify from "schemas/verifyTag.js"
+import db from "src/db/db.js"
+import { verifies } from "src/db/schema.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
 
@@ -32,7 +34,9 @@ export default {
         const user = interaction.member! as GuildMember
         const ign = interaction.options.getString("ign")!
 
-        const verifyData = await verify.findOne({ where: { userID: user.id } })
+        const verifyData = await db.query.verifies.findFirst({
+            where: eq(verifies.userID, user.user.id)
+        })
         if (verifyData) {
             interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")
             return
@@ -178,7 +182,7 @@ export default {
             // Do nothing
         })
 
-        await verify.create({
+        await db.insert(verifies).values({
             userID: user.id,
             uuid: uuid
         })

@@ -4,6 +4,7 @@ WORKDIR /cache
 
 COPY package.json .
 COPY pnpm-lock.yaml .
+COPY patches ./patches
 
 RUN corepack enable
 RUN pnpm install

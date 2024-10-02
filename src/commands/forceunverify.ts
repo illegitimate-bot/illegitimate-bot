@@ -1,7 +1,9 @@
 import { devMessage, embedColor } from "config/options.js"
 import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
+import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
-import verify from "schemas/verifyTag.js"
+import db from "src/db/db.js"
+import { verifies } from "src/db/schema.js"
 import logToChannel from "utils/functions/logtochannel.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getIGN } from "utils/Hypixel.js"
@@ -26,7 +28,9 @@ export default {
 
     async execute({ interaction }) {
         const member = interaction.options.getMember("user") as GuildMember
-        const verifiedUser = await verify.findOne({ where: { userID: member.user.id } })
+        const verifiedUser = await db.query.verifies.findFirst({
+            where: eq(verifies.userID, member.user.id)
+        })
         const mod = interaction.user
 
         if (!verifiedUser) {
@@ -41,7 +45,7 @@ export default {
 
         const uuid = verifiedUser.uuid
         const ign = await getIGN(uuid)
-        await verifiedUser.destroy()
+        await db.delete(verifies).where(eq(verifies.userID, member.user.id))
         await member.roles.remove(
             roleManage("all").rolesToRemove,
             "User force unverified by " + interaction.user.username

@@ -1,7 +1,9 @@
 import { embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, GuildMember, Message } from "discord.js"
+import { eq } from "drizzle-orm"
 import { IModal } from "interfaces"
-import guildapp from "schemas/guildAppTag.js"
+import db from "src/db/db.js"
+import { guildApps } from "src/db/schema.js"
 
 export default {
     name: "denyreasonbox",
@@ -81,8 +83,7 @@ export default {
             responseEmbeds = [responseEmbed]
         }
 
-        const app = await guildapp.findOne({ where: { userID: applicantId } })
-        await app?.destroy()
+        await db.delete(guildApps).where(eq(guildApps.userID, applicantId))
 
         await interaction.editReply({
             embeds: responseEmbeds

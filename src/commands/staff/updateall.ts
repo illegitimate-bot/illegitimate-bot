@@ -1,7 +1,7 @@
 import { embedColor, hypixelGuildID } from "config/options.js"
 import { ChannelType, ChatInputCommandInteraction, GuildMember } from "discord.js"
 import { IGuildData } from "interfaces"
-import verify from "schemas/verifyTag.js"
+import db from "src/db/db.js"
 import env from "utils/Env.js"
 import { color } from "utils/functions/colors.js"
 import roleManage from "utils/functions/rolesmanage.js"
@@ -53,7 +53,7 @@ export default async function updateAll(interaction: ChatInputCommandInteraction
     })
     const guildMemberIDs = hypixelGuildMembers.map(gmember => gmember.uuid)
 
-    const verifiedUsers = await verify.findAll({})
+    const verifiedUsers = await db.query.verifies.findMany()
 
     await interaction.editReply({
         embeds: [{

@@ -1,9 +1,10 @@
 import { embedColor, hypixelGuildID, waitingListChannel, waitingListMessage } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, TextChannel } from "discord.js"
+import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
-import guildapp from "schemas/guildAppTag.js"
-import waitingList from "schemas/waitinglistTag.js"
+import db from "src/db/db.js"
+import { guildApps, waitingLists } from "src/db/schema.js"
 import { color } from "utils/functions/colors.js"
 import { getGuild, getIGN } from "utils/Hypixel.js"
 
@@ -53,18 +54,20 @@ export default {
             }]
         })
 
-        const applicantEntry = await guildapp.findOne({ where: { userID: applicantId } })
+        const applicantEntry = await db.query.guildApps.findFirst({
+            where: eq(guildApps.userID, applicantId)
+        })
         const applicantUUID = applicantEntry!.uuid
         const time = Date.now()
 
-        await waitingList.create({
+        await db.insert(waitingLists).values({
             userID: applicantId,
             uuid: applicantUUID,
             timestamp: time
         })
 
         await applicant.roles.add(waitingListRole)
-        await applicantEntry?.destroy()
+        await db.delete(guildApps).where(eq(guildApps.userID, applicantId))
 
         await interaction.editReply({
             embeds: [{
@@ -87,14 +90,14 @@ export default {
             const wlmessage = await channel!.messages.fetch(waitingListMessage)
 
             const wlembed = wlmessage.embeds[0]
-            const accepted = await waitingList.findAll()
+            const accepted = await db.query.waitingLists.findMany()
 
             for (let i = 0; i < accepted.length; i++) {
                 const uuid = accepted[i].uuid
                 const guild = await getGuild(uuid)
 
                 if (guild && guild._id === hypixelGuildID) {
-                    await waitingList.destroy({ where: { uuid: uuid } })
+                    await db.delete(waitingLists).where(eq(waitingLists.uuid, uuid))
                     continue
                 }
             }

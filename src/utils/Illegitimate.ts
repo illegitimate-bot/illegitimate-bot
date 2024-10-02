@@ -5,23 +5,17 @@ import { color } from "utils/functions/colors.js"
 // import { connect } from "mongoose"
 import { Player } from "discord-player"
 import { YoutubeiExtractor } from "discord-player-youtubei"
-import { Sequelize } from "sequelize"
+// import { Sequelize } from "sequelize"
 import { MissingEnvVarsError } from "./Classes.js"
 import loadAllEvents from "./Events/loadevents.js"
 
 const client = new Client()
 const redis = new Redis(env.prod.redisURI)
 const player = new Player(client)
-let sequelize: Sequelize
-
-if (process.env.NODE_ENV === "dev") {
-    sequelize = new Sequelize({
-        dialect: "sqlite",
-        storage: "dev/db.sqlite"
-    })
-} else {
-    sequelize = new Sequelize(env.prod.postgresURI, { dialect: "postgres" })
-}
+// const sequelize = new Sequelize({
+//     dialect: "sqlite",
+//     storage: "dev/db.sqlite"
+// })
 
 let ft: "js" | "ts"
 if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
@@ -46,11 +40,11 @@ class Illegitimate {
         redis.on("ready", () => {
             console.log(color("Connected to Redis", "green"))
         })
-        if (process.env.NODE_ENV === "dev") {
-            sequelize.sync({ logging: false }).then(() => {
-                console.log(color("Synced the db [dev]", "green"))
-            })
-        }
+        // if (process.env.NODE_ENV === "dev") {
+        //     sequelize.sync({ logging: false }).then(() => {
+        //         console.log(color("Synced the db [dev]", "green"))
+        //     })
+        // }
         // connect(env.prod.mongoURI, {}).then(() => {
         //     console.log(color("Connected to MongoDB", "green"))
         // })
@@ -85,4 +79,4 @@ class Illegitimate {
     }
 }
 
-export { client, Illegitimate, redis, sequelize }
+export { client, Illegitimate, redis }

@@ -1,6 +1,8 @@
 import { hypixelGuildID } from "config/options.js"
+import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
-import waitinglist from "schemas/waitinglistTag.js"
+import db from "src/db/db.js"
+import { waitingLists } from "src/db/schema.js"
 import { getGuild, getIGN } from "utils/Hypixel.js"
 
 export default {
@@ -13,14 +15,14 @@ export default {
         const user = interaction.user
         const message = interaction.message
         const embed = message.embeds[0]
-        const accepted = await waitinglist.findAll()
+        const accepted = await db.query.waitingLists.findMany()
 
         for (let i = 0; i < accepted.length; i++) {
             const uuid = accepted[i].uuid
             const guild = await getGuild(uuid)
 
             if (guild && guild._id === hypixelGuildID) {
-                await accepted[i].destroy()
+                await db.delete(waitingLists).where(eq(waitingLists.uuid, uuid))
                 continue
             }
         }

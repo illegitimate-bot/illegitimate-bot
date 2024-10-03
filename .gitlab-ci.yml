@@ -1,18 +1,19 @@
-merge:
-  image: docker:cli
-  stage: test
-  services:
-    - docker:dind
-  variables:
-    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+install:
+  image: node:21.7.3
+  before_script:
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
   script:
-    - docker build -t "$DOCKER_IMAGE_NAME" .
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - pnpm install
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store
 
 build:
   image: docker:cli
-  stage: build
   services:
     - docker:dind
   variables:
@@ -26,3 +27,5 @@ build:
         docker push "$CI_REGISTRY_IMAGE:main"
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  dependencies:
+    - install

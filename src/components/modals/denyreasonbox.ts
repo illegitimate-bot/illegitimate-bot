@@ -2,8 +2,8 @@ import { embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, GuildMember, Message } from "discord.js"
 import { eq } from "drizzle-orm"
 import { IModal } from "interfaces"
-import db from "src/db/db.js"
-import { guildApps } from "src/db/schema.js"
+import db from "src/drizzle/db.js"
+import { guildApps } from "src/drizzle/schema.js"
 
 export default {
     name: "denyreasonbox",

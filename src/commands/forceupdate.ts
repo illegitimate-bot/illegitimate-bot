@@ -2,7 +2,7 @@ import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
 import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { ICommand } from "interfaces"
-import db from "src/db/db.js"
+import db from "src/drizzle/db.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel.js"
 

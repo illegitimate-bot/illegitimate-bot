@@ -1,7 +1,7 @@
 import { devMessage, embedColor } from "config/options.js"
 import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
 import { IButton } from "interfaces"
-import db from "src/db/db.js"
+import db from "src/drizzle/db.js"
 import { bedwarsLevel, getGuild, getHeadURL, getPlayer, hypixelLevel, skywarsLevel } from "utils/Hypixel.js"
 
 export default {

@@ -4,8 +4,8 @@ import { guild as guildQuestions } from "config/questions.js"
 import { guildRole } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
 import { IButton } from "interfaces"
-import db from "src/db/db.js"
-import { guildApps } from "src/db/schema.js"
+import db from "src/drizzle/db.js"
+import { guildApps } from "src/drizzle/schema.js"
 import applicationQuestions from "utils/functions/applicationquestions.js"
 
 export default {

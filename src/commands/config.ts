@@ -1,5 +1,6 @@
 import { embedColor } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
+import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
 import db from "src/db/db.js"
 import { settings } from "src/db/schema.js"
@@ -38,7 +39,7 @@ export default {
         const setting = interaction.options.getString("setting")!
         const value = interaction.options.getString("value")!
         const settingsData = await db.query.settings.findFirst({
-            where: (settings, { eq }) => eq(settings.name, setting)
+            where: ({ name }, { eq }) => eq(name, setting)
         })
 
         if (!settingsData) {
@@ -56,7 +57,7 @@ export default {
         } else {
             await db.update(settings).set({
                 value: value
-            })
+            }).where(eq(settings.name, setting))
 
             await interaction.editReply({
                 embeds: [{

@@ -29,7 +29,7 @@ export default {
     async execute({ interaction }) {
         const member = interaction.options.getMember("user") as GuildMember
         const verifiedUser = await db.query.verifies.findFirst({
-            where: eq(verifies.userID, member.user.id)
+            where: ({ userID }, { eq }) => eq(userID, member.user.id)
         })
         const mod = interaction.user
 

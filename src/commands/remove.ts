@@ -38,7 +38,7 @@ export default {
         const reason = interaction.options.getString("reason") ?? "No reason provided."
         const mod = interaction.user!
         const waiting = await db.query.waitingLists.findFirst({
-            where: eq(waitingLists.userID, member.user.id)
+            where: ({ userID }, { eq }) => eq(userID, member.user.id)
         })
 
         if (!waiting) {

@@ -55,7 +55,7 @@ export default {
         })
 
         const applicantEntry = await db.query.guildApps.findFirst({
-            where: eq(guildApps.userID, applicantId)
+            where: ({ userID }, { eq }) => eq(userID, applicantId)
         })
         const applicantUUID = applicantEntry!.uuid
         const time = Date.now()

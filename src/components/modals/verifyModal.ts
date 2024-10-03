@@ -1,6 +1,5 @@
 import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember } from "discord.js"
-import { eq } from "drizzle-orm"
 import { IModal } from "interfaces"
 import db from "src/db/db.js"
 import { verifies } from "src/db/schema.js"
@@ -17,7 +16,7 @@ export default {
         const user = interaction.member as GuildMember
         const ign = interaction.fields.fields.get("verifyign")!.value
         const verifyData = await db.query.verifies.findFirst({
-            where: eq(verifies.userID, user.user.id)
+            where: ({ userID }, { eq }) => eq(userID, user.id)
         })
         if (verifyData) {
             interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")

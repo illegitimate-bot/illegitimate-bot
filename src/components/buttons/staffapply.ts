@@ -3,10 +3,9 @@ import { embedColor, staffApplicationsChannel } from "config/options.js"
 import { staff as staffQuestions } from "config/questions.js"
 import { guildRole, guildStaff } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
-import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
 import db from "src/db/db.js"
-import { settings, staffApps } from "src/db/schema.js"
+import { staffApps } from "src/db/schema.js"
 import env from "utils/Env.js"
 import applicationQuestions from "utils/functions/applicationquestions.js"
 
@@ -19,7 +18,7 @@ export default {
         const guild = interaction.guild!
         const userRoles = user.roles.cache
         const setting = await db.query.settings.findFirst({
-            where: eq(settings.name, "staffApplications")
+            where: ({ name }, { eq }) => eq(name, "staffApplications")
         })
         const status = setting?.value || "0"
 
@@ -52,7 +51,7 @@ export default {
             }
 
             const application = await db.query.staffApps.findFirst({
-                where: eq(staffApps.userID, user.user.id)
+                where: ({ userID }, { eq }) => eq(userID, user.user.id)
             })
 
             if (application) {

@@ -1,9 +1,7 @@
 import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, SlashCommandBuilder, userMention } from "discord.js"
-import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
 import db from "src/db/db.js"
-import { verifies } from "src/db/schema.js"
 import { getHeadURL, getIGN } from "utils/Hypixel.js"
 
 export default {
@@ -22,7 +20,7 @@ export default {
 
         const user = interaction.user
         const verifyData = await db.query.verifies.findFirst({
-            where: eq(verifies.userID, user.id)
+            where: ({ userID }, { eq }) => eq(userID, user.id)
         })
 
         if (!verifyData) {

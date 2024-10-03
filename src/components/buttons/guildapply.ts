@@ -3,7 +3,6 @@ import { applicationsChannel, embedColor } from "config/options.js"
 import { guild as guildQuestions } from "config/questions.js"
 import { guildRole } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
-import { eq } from "drizzle-orm"
 import { IButton } from "interfaces"
 import db from "src/db/db.js"
 import { guildApps } from "src/db/schema.js"
@@ -33,7 +32,7 @@ export default {
         }
 
         const application = await db.query.guildApps.findFirst({
-            where: eq(guildApps.userID, user.user.id)
+            where: ({ userID }, { eq }) => eq(userID, user.user.id)
         })
 
         if (application) {

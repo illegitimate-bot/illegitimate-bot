@@ -2,6 +2,7 @@ import { FlatCompat } from "@eslint/eslintrc"
 import js from "@eslint/js"
 import typescriptEslint from "@typescript-eslint/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
+import drizzle from "eslint-plugin-drizzle"
 import globals from "globals"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -20,10 +21,11 @@ export default [
     {
         ignores: ["**/node_modules", "**/dist", "**/dev"]
     },
-    ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended"),
+    ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:drizzle/all"),
     {
         plugins: {
-            "@typescript-eslint": typescriptEslint
+            "@typescript-eslint": typescriptEslint,
+            "drizzle": drizzle
         },
 
         languageOptions: {
@@ -87,6 +89,12 @@ export default [
                 "ts-ignore": "allow-with-description",
                 "ts-nocheck": "allow-with-description",
                 "ts-check": "allow-with-description"
+            }],
+            "drizzle/enforce-delete-with-where": ["error", {
+                "drizzleObjectName": ["db"]
+            }],
+            "drizzle/enforce-update-with-where": ["error", {
+                "drizzleObjectName": ["db"]
             }]
         }
     },

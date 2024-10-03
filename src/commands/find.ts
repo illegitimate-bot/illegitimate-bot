@@ -1,9 +1,7 @@
 import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
-import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
 import db from "src/db/db.js"
-import { verifies } from "src/db/schema.js"
 import { getHeadURL, getIGN, getUUID } from "utils/Hypixel.js"
 
 export default {
@@ -40,7 +38,7 @@ export default {
         }
 
         const verifyData = await db.query.verifies.findFirst({
-            where: eq(verifies.uuid, uuid)
+            where: ({ uuid: uuidfromdb }, { eq }) => eq(uuidfromdb, uuid)
         })
         if (!verifyData) {
             await interaction.editReply({

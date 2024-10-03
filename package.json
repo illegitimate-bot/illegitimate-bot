@@ -27,6 +27,8 @@
         "db:generate": "drizzle-kit generate",
         "db:migrate": "drizzle-kit migrate",
         "db:studio": "drizzle-kit studio",
+        "db:start": "docker compose -f dev-db.yml up -d",
+        "db:stop": "docker compose -f dev-db.yml down",
         "push:prod": "tsx scripts/deploy-commands.ts",
         "push:dev": "tsx scripts/dev-deploy.ts",
         "delete:dev": "tsx scripts/delete-commands.ts"

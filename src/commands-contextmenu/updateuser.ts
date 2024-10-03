@@ -1,10 +1,8 @@
 import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { waitingListRole } from "config/roles.js"
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
-import { eq } from "drizzle-orm"
 import { IContextMenu } from "interfaces"
 import db from "src/db/db.js"
-import { verifies } from "src/db/schema.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getGuild, getHeadURL, getIGN } from "utils/Hypixel.js"
 
@@ -25,7 +23,7 @@ export default {
         const user = await interaction.guild!.members.fetch(targetId)
         const usermentioned = userMention(user.user.id)
         const verifyData = await db.query.verifies.findFirst({
-            where: eq(verifies.userID, user.user.id)
+            where: ({ userID }, { eq }) => eq(userID, user.id)
         })
 
         if (!verifyData) {

@@ -38,7 +38,7 @@ export default {
         const setting = interaction.options.getString("setting")!
         const value = interaction.options.getString("value")!
         const settingsData = await db.query.settings.findFirst({
-            where: (settings, { eq }) => eq(settings.name, setting)
+            where: ({ name }, { eq }) => eq(name, setting)
         })
 
         if (!settingsData) {

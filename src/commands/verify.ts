@@ -1,6 +1,5 @@
 import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember, InteractionContextType, SlashCommandBuilder } from "discord.js"
-import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
 import { IPlayerData } from "interfaces"
 import { IGuildData } from "interfaces"
@@ -35,7 +34,7 @@ export default {
         const ign = interaction.options.getString("ign")!
 
         const verifyData = await db.query.verifies.findFirst({
-            where: eq(verifies.userID, user.user.id)
+            where: ({ userID }, { eq }) => eq(userID, user.id)
         })
         if (verifyData) {
             interaction.editReply("You are already verified.\n" + "Try running /update to update your roles.")

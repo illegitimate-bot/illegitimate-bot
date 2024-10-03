@@ -2,8 +2,8 @@ import { embedColor } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
 import { eq } from "drizzle-orm"
 import { ICommand } from "interfaces"
-import db from "src/db/db.js"
-import { settings } from "src/db/schema.js"
+import db from "src/drizzle/db.js"
+import { settings } from "src/drizzle/schema.js"
 
 export default {
     name: "config",

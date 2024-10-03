@@ -3,8 +3,8 @@ import { GuildMember, InteractionContextType, SlashCommandBuilder } from "discor
 import { ICommand } from "interfaces"
 import { IPlayerData } from "interfaces"
 import { IGuildData } from "interfaces"
-import db from "src/db/db.js"
-import { verifies } from "src/db/schema.js"
+import db from "src/drizzle/db.js"
+import { verifies } from "src/drizzle/schema.js"
 import roleManage from "utils/functions/rolesmanage.js"
 import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
 

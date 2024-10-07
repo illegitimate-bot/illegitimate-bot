@@ -1,12 +1,12 @@
-import { ignM, largeM, smallM } from "config/limitmessages.js"
-import { applicationsChannel, embedColor } from "config/options.js"
-import { guild as guildQuestions } from "config/questions.js"
-import { guildRole } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
-import { IButton } from "interfaces"
 import db from "src/drizzle/db.js"
 import { guildApps } from "src/drizzle/schema.js"
-import applicationQuestions from "utils/functions/applicationquestions.js"
+import { ignM, largeM, smallM } from "~/config/limitmessages.js"
+import { applicationsChannel, embedColor } from "~/config/options.js"
+import { guild as guildQuestions } from "~/config/questions.js"
+import { guildRole } from "~/config/roles.js"
+import { IButton } from "~/interfaces"
+import applicationQuestions from "~/utils/functions/applicationquestions.js"
 
 export default {
     name: "guildapply",

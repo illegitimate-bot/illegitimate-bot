@@ -1,4 +1,4 @@
-import { TimeZones } from "typings"
+import { TimeZones } from "~/typings"
 
 interface TimeFormat {
     seconds: "*" | number

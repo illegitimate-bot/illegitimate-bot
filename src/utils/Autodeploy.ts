@@ -1,6 +1,6 @@
 import { RESTPostAPIChatInputApplicationCommandsJSONBody, RESTPostAPIContextMenuApplicationCommandsJSONBody } from "discord.js"
 import fs from "fs"
-import { ICommand, IContextMenu } from "interfaces"
+import { ICommand, IContextMenu } from "~/interfaces"
 import { ExtendedClient } from "./Client.js"
 import env from "./Env.js"
 import { color } from "./functions/colors.js"

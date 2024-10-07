@@ -5,7 +5,7 @@ services:
     image: postgres
     restart: unless-stopped
     volumes:
-      - ./dev/data:/var/lib/postgresql/data
+      - ./dev/pgdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:

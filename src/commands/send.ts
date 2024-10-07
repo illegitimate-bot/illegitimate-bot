@@ -1,6 +1,6 @@
-import { devMessage, embedColor } from "config/options.js"
 import { ChannelType, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js"
-import { ICommand } from "interfaces"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
 
 export default {
     name: "send",

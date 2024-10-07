@@ -1,6 +1,6 @@
-import { embedColor } from "config/options.js"
 import { useMainPlayer } from "discord-player"
 import { ChatInputCommandInteraction, GuildMember } from "discord.js"
+import { embedColor } from "~/config/options.js"
 
 export default async function play(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply()

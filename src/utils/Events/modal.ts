@@ -1,10 +1,10 @@
-import { embedColor } from "config/options.js"
 import { Events } from "discord.js"
 import fs from "fs"
-import { IModal } from "interfaces"
 import path from "path"
-import { ExtendedClient as Client } from "utils/Client.js"
-import logToChannel from "utils/functions/logtochannel.js"
+import { embedColor } from "~/config/options.js"
+import { IModal } from "~/interfaces"
+import { ExtendedClient as Client } from "~/utils/Client.js"
+import logToChannel from "~/utils/functions/logtochannel.js"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
 

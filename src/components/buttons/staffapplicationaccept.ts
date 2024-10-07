@@ -1,9 +1,9 @@
-import { embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js"
 import { eq } from "drizzle-orm"
-import { IButton } from "interfaces"
 import db from "src/drizzle/db.js"
 import { staffApps } from "src/drizzle/schema.js"
+import { embedColor } from "~/config/options.js"
+import { IButton } from "~/interfaces"
 
 export default {
     name: "staffapplicationaccept",

@@ -1,6 +1,6 @@
 import { ChannelType } from "discord.js"
-import { IEvent } from "interfaces"
-import env from "utils/Env.js"
+import { IEvent } from "~/interfaces"
+import env from "~/utils/Env.js"
 
 export default {
     event: "messageCreate",

@@ -1,6 +1,6 @@
-import { embedColor } from "config/options.js"
 import { Collection, EmbedBuilder, GuildMember, Message } from "discord.js"
-import { getUUID } from "utils/Hypixel.js"
+import { embedColor } from "~/config/options.js"
+import { getUUID } from "~/utils/Hypixel.js"
 
 const tooLong = new EmbedBuilder()
     .setDescription("You took too long to respond.")

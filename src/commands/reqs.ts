@@ -1,7 +1,7 @@
-import { devMessage, embedColor } from "config/options.js"
-import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
 import { InteractionContextType, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
+import { devMessage, embedColor } from "~/config/options.js"
+import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "~/config/reqs.js"
+import { ICommand } from "~/interfaces"
 
 export default {
     name: "reqs",

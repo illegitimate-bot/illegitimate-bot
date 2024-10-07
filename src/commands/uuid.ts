@@ -1,7 +1,7 @@
-import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
-import { formatUuid, getHeadURL, getIGN, getUUID } from "utils/Hypixel.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
+import { formatUuid, getHeadURL, getIGN, getUUID } from "~/utils/Hypixel.js"
 
 export default {
     name: "uuid",

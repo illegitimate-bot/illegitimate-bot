@@ -1,11 +1,11 @@
-import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
-import { ICommand } from "interfaces"
 import db from "src/drizzle/db.js"
 import { verifies } from "src/drizzle/schema.js"
-import logToChannel from "utils/functions/logtochannel.js"
-import roleManage from "utils/functions/rolesmanage.js"
-import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
+import { devMessage, embedColor, hypixelGuildID } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
+import logToChannel from "~/utils/functions/logtochannel.js"
+import roleManage from "~/utils/functions/rolesmanage.js"
+import { getGuild, getHeadURL, getPlayer, getUUID } from "~/utils/Hypixel.js"
 
 export default {
     name: "forceverify",

@@ -1,6 +1,6 @@
-import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
 import ban from "./counting/ban.js"
 import unban from "./counting/unban.js"
 

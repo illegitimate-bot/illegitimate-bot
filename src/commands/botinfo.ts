@@ -1,10 +1,10 @@
 import { execSync } from "child_process"
-import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
 import { createRequire } from "node:module"
 import os from "os"
 import prettyMs from "pretty-ms"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
 
 const require = createRequire(import.meta.url)
 const { dependencies, devDependencies } = require("../../package.json")

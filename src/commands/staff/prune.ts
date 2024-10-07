@@ -1,6 +1,6 @@
-import { devMessage, embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js"
-import env from "utils/Env.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import env from "~/utils/Env.js"
 
 export default async function prune(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()

@@ -1,6 +1,6 @@
-import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
 import beast from "./staff/beast.js"
 import help from "./staff/help.js"
 import prune from "./staff/prune.js"

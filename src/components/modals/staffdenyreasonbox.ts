@@ -1,9 +1,9 @@
-import { embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js"
 import { eq } from "drizzle-orm"
-import { IModal } from "interfaces"
 import db from "src/drizzle/db.js"
 import { staffApps } from "src/drizzle/schema.js"
+import { embedColor } from "~/config/options.js"
+import { IModal } from "~/interfaces"
 
 export default {
     name: "staffdenyreasonbox",

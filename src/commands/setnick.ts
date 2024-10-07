@@ -1,7 +1,7 @@
-import { devMessage, embedColor } from "config/options.js"
 import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
-import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
+import logToChannel from "~/utils/functions/logtochannel.js"
 
 export default {
     name: "setnick",

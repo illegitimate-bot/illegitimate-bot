@@ -1,7 +1,7 @@
-import { embedColor } from "config/options.js"
 import { channelMention, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, TextChannel, userMention } from "discord.js"
-import { ICommand } from "interfaces"
-import logToChannel from "utils/functions/logtochannel.js"
+import { embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
+import logToChannel from "~/utils/functions/logtochannel.js"
 
 export default {
     name: "clear",

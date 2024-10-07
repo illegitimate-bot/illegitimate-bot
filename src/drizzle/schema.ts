@@ -1,4 +1,4 @@
-import { bigint, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core"
+import { bigint, index, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core"
 
 const createdAt = timestamp("createdAt").notNull().defaultNow()
 const updatedAt = timestamp("updatedAt").notNull().defaultNow().$onUpdate(() => new Date())
@@ -9,6 +9,11 @@ export const verifies = pgTable("verifies", {
     uuid: varchar("uuid", { length: 32 }).notNull(),
     createdAt,
     updatedAt
+}, table => {
+    return {
+        useridIndex: index("verifies_userid_index").on(table.userID),
+        uuidIndex: index("verifies_uuid_index").on(table.uuid)
+    }
 })
 
 export const guildApps = pgTable("guildApps", {
@@ -17,6 +22,11 @@ export const guildApps = pgTable("guildApps", {
     uuid: varchar("uuid", { length: 32 }).notNull(),
     createdAt,
     updatedAt
+}, table => {
+    return {
+        useridIndex: index("guildapps_userid_index").on(table.userID),
+        uuidIndex: index("guildapps_uuid_index").on(table.uuid)
+    }
 })
 
 export const staffApps = pgTable("staffApps", {
@@ -25,6 +35,11 @@ export const staffApps = pgTable("staffApps", {
     uuid: varchar("uuid", { length: 32 }).notNull(),
     createdAt,
     updatedAt
+}, table => {
+    return {
+        useridIndex: index("staffapps_userid_index").on(table.userID),
+        uuidIndex: index("staffapps_uuid_index").on(table.uuid)
+    }
 })
 
 export const waitingLists = pgTable("waitingLists", {
@@ -34,6 +49,11 @@ export const waitingLists = pgTable("waitingLists", {
     timestamp: bigint("timestamp", { mode: "number" }).notNull(),
     createdAt,
     updatedAt
+}, table => {
+    return {
+        useridIndex: index("wl_userid_index").on(table.userID),
+        uuidIndex: index("wl_uuid_index").on(table.uuid)
+    }
 })
 
 export const settings = pgTable("settings", {
@@ -42,6 +62,10 @@ export const settings = pgTable("settings", {
     value: varchar("value", { length: 256 }).notNull(),
     createdAt,
     updatedAt
+}, table => {
+    return {
+        nameIndex: index("settings_name_index").on(table.name)
+    }
 })
 
 export type SelectVerify = typeof verifies.$inferSelect

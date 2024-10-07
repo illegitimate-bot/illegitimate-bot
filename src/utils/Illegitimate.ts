@@ -1,9 +1,6 @@
 import { Player } from "discord-player"
 import { YoutubeiExtractor } from "discord-player-youtubei"
-import { drizzle } from "drizzle-orm/postgres-js"
-import { migrate } from "drizzle-orm/postgres-js/migrator"
 import { Redis } from "ioredis"
-import postgres from "postgres"
 import { ExtendedClient as Client } from "~/utils/Client.js"
 import env from "~/utils/Env.js"
 import { color } from "~/utils/functions/colors.js"
@@ -24,7 +21,6 @@ if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
 class Illegitimate {
     async start() {
         await this.init()
-        await this.migrations()
         await loadAllEvents(client, ft)
         // await player.extractors.loadDefault()
         await player.extractors.loadDefault(ext => ext != "YouTubeExtractor")
@@ -56,14 +52,6 @@ class Illegitimate {
                 if (!value) throw new MissingEnvVarsError(`No ${key} specified`)
             }
         }
-    }
-
-    private async migrations() {
-        const migrationsClient = postgres(env.prod.postgresURI)
-        const migrations = drizzle(migrationsClient)
-        await migrate(migrations, {
-            migrationsFolder: "./src/drizzle/migrations/"
-        })
     }
 
     private loadMethods() {

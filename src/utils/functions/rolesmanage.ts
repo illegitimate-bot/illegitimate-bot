@@ -1,4 +1,4 @@
-import { beast, defaultMember, elite, gm, guildRole, guildStaff, manager, member, moderator, verifyTick } from "config/roles.js"
+import { beast, defaultMember, elite, gm, guildRole, guildStaff, manager, member, moderator, verifyTick } from "~/config/roles.js"
 const roles = [
     gm,
     manager,

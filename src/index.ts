@@ -1,3 +1,3 @@
-import { Illegitimate } from "utils/Illegitimate.js"
+import { Illegitimate } from "~/utils/Illegitimate.js"
 
 new Illegitimate().start()

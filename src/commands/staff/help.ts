@@ -1,6 +1,6 @@
-import { devMessage, embedColor } from "config/options.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js"
-import { ExtendedClient as Client } from "utils/Client.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ExtendedClient as Client } from "~/utils/Client.js"
 
 export default async function help(interaction: ChatInputCommandInteraction, client: Client): Promise<void> {
     await interaction.deferReply()

@@ -1,11 +1,11 @@
-import { devMessage, embedColor } from "config/options.js"
-import { waitingListRole } from "config/roles.js"
 import { GuildMember, InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
 import { eq } from "drizzle-orm"
-import { ICommand } from "interfaces"
 import db from "src/drizzle/db.js"
 import { waitingLists } from "src/drizzle/schema.js"
-import logToChannel from "utils/functions/logtochannel.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import { waitingListRole } from "~/config/roles.js"
+import { ICommand } from "~/interfaces"
+import logToChannel from "~/utils/functions/logtochannel.js"
 
 export default {
     name: "remove",

@@ -1,7 +1,7 @@
 import { anilist } from "anilist"
-import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
 
 export default {
     name: "anime",

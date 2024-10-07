@@ -1,8 +1,8 @@
-import { devMessage, embedColor } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder, userMention } from "discord.js"
-import { ICommand } from "interfaces"
 import db from "src/drizzle/db.js"
-import { getHeadURL, getIGN } from "utils/Hypixel.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
+import { getHeadURL, getIGN } from "~/utils/Hypixel.js"
 
 export default {
     name: "whois",

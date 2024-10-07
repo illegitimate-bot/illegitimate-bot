@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
-import { IButton } from "interfaces"
+import { IButton } from "~/interfaces"
 
 export default {
     name: "staffapplicationdeny",

@@ -1,9 +1,9 @@
-import { devMessage, embedColor, guildLogChannel, hypixelGuildID } from "config/options.js"
 import { TextChannel } from "discord.js"
-import { ICron, IGuildData } from "interfaces"
-import { color } from "utils/functions/colors.js"
-import { getGuild, getIGN } from "utils/Hypixel.js"
-import { client } from "utils/Illegitimate.js"
+import { devMessage, embedColor, guildLogChannel, hypixelGuildID } from "~/config/options.js"
+import { ICron, IGuildData } from "~/interfaces"
+import { color } from "~/utils/functions/colors.js"
+import { getGuild, getIGN } from "~/utils/Hypixel.js"
+import { client } from "~/utils/Illegitimate.js"
 
 async function guildWeekly() {
     const channel = client.channels.cache.get(guildLogChannel) as TextChannel

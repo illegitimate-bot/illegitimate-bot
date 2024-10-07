@@ -1,5 +1,5 @@
-import { IEvent } from "interfaces"
-import { color } from "utils/functions/colors.js"
+import { IEvent } from "~/interfaces"
+import { color } from "~/utils/functions/colors.js"
 
 export default {
     event: "ready",

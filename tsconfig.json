@@ -16,13 +16,24 @@
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {
-            "utils/*": ["src/utils/*"],
-            "schemas/*": ["src/schemas/*"],
-            "config/*": ["src/config/*"],
-            "interfaces": ["src/interfaces/index"],
-            "typings": ["src/typings/index"]
+            "~/utils/*": [
+                "src/utils/*"
+            ],
+            "~/config/*": [
+                "src/config/*"
+            ],
+            "~/interfaces": [
+                "src/interfaces/index"
+            ],
+            "~/typings": [
+                "src/typings/index"
+            ]
         }
     },
-    "include": ["src"],
-    "exclude": ["node_modules"]
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

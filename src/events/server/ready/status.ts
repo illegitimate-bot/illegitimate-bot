@@ -1,7 +1,7 @@
-import { guildid } from "config/options.js"
-import statuses from "config/statuses.js"
 import { Guild } from "discord.js"
-import { IEvent } from "interfaces"
+import { guildid } from "~/config/options.js"
+import statuses from "~/config/statuses.js"
+import { IEvent } from "~/interfaces"
 
 export default {
     event: "ready",

@@ -1,10 +1,10 @@
-import { ignM, largeM, smallM } from "config/limitmessages.js"
-import { embedColor, inactivityLogChannel } from "config/options.js"
-import { inactivity } from "config/questions.js"
-import { beast, gm, guildRole, guildStaff, manager, member, moderator } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
-import { IButton } from "interfaces"
-import applicationQuestions from "utils/functions/applicationquestions.js"
+import { ignM, largeM, smallM } from "~/config/limitmessages.js"
+import { embedColor, inactivityLogChannel } from "~/config/options.js"
+import { inactivity } from "~/config/questions.js"
+import { beast, gm, guildRole, guildStaff, manager, member, moderator } from "~/config/roles.js"
+import { IButton } from "~/interfaces"
+import applicationQuestions from "~/utils/functions/applicationquestions.js"
 const guildRoles = [gm, manager, moderator, beast, member, guildStaff, guildRole]
 
 export default {

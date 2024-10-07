@@ -1,4 +1,4 @@
-import { IAutocomplete } from "interfaces"
+import { IAutocomplete } from "~/interfaces"
 
 export default {
     name: "unban",

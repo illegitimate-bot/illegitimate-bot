@@ -1,4 +1,4 @@
-import { IEnv } from "interfaces"
+import { IEnv } from "~/interfaces"
 import "dotenv/config"
 
 const env: IEnv = {

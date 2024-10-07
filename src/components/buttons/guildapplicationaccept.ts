@@ -1,12 +1,12 @@
-import { embedColor, hypixelGuildID, waitingListChannel, waitingListMessage } from "config/options.js"
-import { waitingListRole } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, TextChannel } from "discord.js"
 import { eq } from "drizzle-orm"
-import { IButton } from "interfaces"
 import db from "src/drizzle/db.js"
 import { guildApps, waitingLists } from "src/drizzle/schema.js"
-import { color } from "utils/functions/colors.js"
-import { getGuild, getIGN } from "utils/Hypixel.js"
+import { embedColor, hypixelGuildID, waitingListChannel, waitingListMessage } from "~/config/options.js"
+import { waitingListRole } from "~/config/roles.js"
+import { IButton } from "~/interfaces"
+import { color } from "~/utils/functions/colors.js"
+import { getGuild, getIGN } from "~/utils/Hypixel.js"
 
 export default {
     name: "guildapplicationaccept",

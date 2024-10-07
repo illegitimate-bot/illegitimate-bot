@@ -1,5 +1,5 @@
 import { ModalSubmitInteraction } from "discord.js"
-import { ExtendedClient } from "utils/Client.js"
+import { ExtendedClient } from "~/utils/Client.js"
 
 export default interface IModal {
     name: string

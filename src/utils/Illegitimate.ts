@@ -1,21 +1,18 @@
+import { Player } from "discord-player"
+import { YoutubeiExtractor } from "discord-player-youtubei"
+import { drizzle } from "drizzle-orm/postgres-js"
+import { migrate } from "drizzle-orm/postgres-js/migrator"
 import { Redis } from "ioredis"
+import postgres from "postgres"
 import { ExtendedClient as Client } from "~/utils/Client.js"
 import env from "~/utils/Env.js"
 import { color } from "~/utils/functions/colors.js"
-// import { connect } from "mongoose"
-import { Player } from "discord-player"
-import { YoutubeiExtractor } from "discord-player-youtubei"
-// import { Sequelize } from "sequelize"
 import { MissingEnvVarsError } from "./Classes.js"
 import loadAllEvents from "./Events/loadevents.js"
 
 const client = new Client()
 const redis = new Redis(env.prod.redisURI)
 const player = new Player(client)
-// const sequelize = new Sequelize({
-//     dialect: "sqlite",
-//     storage: "dev/db.sqlite"
-// })
 
 let ft: "js" | "ts"
 if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
@@ -27,6 +24,7 @@ if (process.env.NODE_ENV === "dev" && process.env.TYPESCRIPT === "true") {
 class Illegitimate {
     async start() {
         await this.init()
+        await this.migrations()
         await loadAllEvents(client, ft)
         // await player.extractors.loadDefault()
         await player.extractors.loadDefault(ext => ext != "YouTubeExtractor")
@@ -40,14 +38,6 @@ class Illegitimate {
         redis.on("ready", () => {
             console.log(color("Connected to Redis", "green"))
         })
-        // if (process.env.NODE_ENV === "dev") {
-        //     sequelize.sync({ logging: false }).then(() => {
-        //         console.log(color("Synced the db [dev]", "green"))
-        //     })
-        // }
-        // connect(env.prod.mongoURI, {}).then(() => {
-        //     console.log(color("Connected to MongoDB", "green"))
-        // })
     }
 
     private async init() {
@@ -66,6 +56,14 @@ class Illegitimate {
                 if (!value) throw new MissingEnvVarsError(`No ${key} specified`)
             }
         }
+    }
+
+    private async migrations() {
+        const migrationsClient = postgres(env.prod.postgresURI)
+        const migrations = drizzle(migrationsClient)
+        await migrate(migrations, {
+            migrationsFolder: "./src/drizzle/migrations/"
+        })
     }
 
     private loadMethods() {

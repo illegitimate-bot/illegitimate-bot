@@ -1,5 +1,5 @@
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
+import { ICommand } from "~/interfaces"
 import leave from "./music/leave.js"
 import nowplaying from "./music/nowplaying.js"
 import pause from "./music/pause.js"

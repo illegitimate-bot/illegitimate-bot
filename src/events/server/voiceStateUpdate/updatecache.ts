@@ -1,4 +1,4 @@
-import { IEvent } from "interfaces"
+import { IEvent } from "~/interfaces"
 
 export default {
     event: "voiceStateUpdate",

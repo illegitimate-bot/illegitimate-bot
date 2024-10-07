@@ -1,13 +1,13 @@
-import { ignM, largeM } from "config/limitmessages.js"
-import { embedColor, staffApplicationsChannel } from "config/options.js"
-import { staff as staffQuestions } from "config/questions.js"
-import { guildRole, guildStaff } from "config/roles.js"
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, GuildMember, TextChannel } from "discord.js"
-import { IButton } from "interfaces"
 import db from "src/drizzle/db.js"
 import { staffApps } from "src/drizzle/schema.js"
-import env from "utils/Env.js"
-import applicationQuestions from "utils/functions/applicationquestions.js"
+import { ignM, largeM } from "~/config/limitmessages.js"
+import { embedColor, staffApplicationsChannel } from "~/config/options.js"
+import { staff as staffQuestions } from "~/config/questions.js"
+import { guildRole, guildStaff } from "~/config/roles.js"
+import { IButton } from "~/interfaces"
+import env from "~/utils/Env.js"
+import applicationQuestions from "~/utils/functions/applicationquestions.js"
 
 export default {
     name: "staffapply",

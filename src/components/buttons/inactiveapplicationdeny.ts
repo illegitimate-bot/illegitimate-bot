@@ -1,4 +1,4 @@
-import { IButton } from "interfaces"
+import { IButton } from "~/interfaces"
 
 export default {
     name: "inactiveapplicationdeny",

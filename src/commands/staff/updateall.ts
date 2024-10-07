@@ -1,11 +1,11 @@
-import { embedColor, hypixelGuildID } from "config/options.js"
 import { ChannelType, ChatInputCommandInteraction, GuildMember } from "discord.js"
-import { IGuildData } from "interfaces"
 import db from "src/drizzle/db.js"
-import env from "utils/Env.js"
-import { color } from "utils/functions/colors.js"
-import roleManage from "utils/functions/rolesmanage.js"
-import { getGuild, getIGN } from "utils/Hypixel.js"
+import { embedColor, hypixelGuildID } from "~/config/options.js"
+import { IGuildData } from "~/interfaces"
+import env from "~/utils/Env.js"
+import { color } from "~/utils/functions/colors.js"
+import roleManage from "~/utils/functions/rolesmanage.js"
+import { getGuild, getIGN } from "~/utils/Hypixel.js"
 
 export default async function updateAll(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()

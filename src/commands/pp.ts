@@ -1,7 +1,7 @@
-import { embedColor } from "config/options.js"
 import { InteractionContextType, SlashCommandBuilder, User } from "discord.js"
-import { ICommand } from "interfaces"
-import env from "utils/Env.js"
+import { embedColor } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
+import env from "~/utils/Env.js"
 
 export default {
     name: "pp",

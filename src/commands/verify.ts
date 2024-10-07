@@ -1,12 +1,12 @@
-import { devMessage, embedColor, hypixelGuildID } from "config/options.js"
 import { GuildMember, InteractionContextType, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
-import { IPlayerData } from "interfaces"
-import { IGuildData } from "interfaces"
 import db from "src/drizzle/db.js"
 import { verifies } from "src/drizzle/schema.js"
-import roleManage from "utils/functions/rolesmanage.js"
-import { getGuild, getHeadURL, getPlayer, getUUID } from "utils/Hypixel.js"
+import { devMessage, embedColor, hypixelGuildID } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
+import { IPlayerData } from "~/interfaces"
+import { IGuildData } from "~/interfaces"
+import roleManage from "~/utils/functions/rolesmanage.js"
+import { getGuild, getHeadURL, getPlayer, getUUID } from "~/utils/Hypixel.js"
 
 export default {
     name: "verify",

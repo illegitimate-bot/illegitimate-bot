@@ -1,9 +1,9 @@
-import { hypixelGuildID } from "config/options.js"
 import { eq } from "drizzle-orm"
-import { IButton } from "interfaces"
 import db from "src/drizzle/db.js"
 import { waitingLists } from "src/drizzle/schema.js"
-import { getGuild, getIGN } from "utils/Hypixel.js"
+import { hypixelGuildID } from "~/config/options.js"
+import { IButton } from "~/interfaces"
+import { getGuild, getIGN } from "~/utils/Hypixel.js"
 
 export default {
     name: "waitinglistupdate",

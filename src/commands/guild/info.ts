@@ -1,7 +1,7 @@
-import { devMessage, embedColor } from "config/options.js"
 import { ChatInputCommandInteraction } from "discord.js"
-import { IGuildData } from "interfaces"
-import { getGuild, getIGN, getPlayer, getUUID, guildLevel } from "utils/Hypixel.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import { IGuildData } from "~/interfaces"
+import { getGuild, getIGN, getPlayer, getUUID, guildLevel } from "~/utils/Hypixel.js"
 
 export default async function guildInfo(interaction: ChatInputCommandInteraction): Promise<void> {
     await interaction.deferReply()

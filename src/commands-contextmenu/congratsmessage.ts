@@ -1,5 +1,5 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits, userMention } from "discord.js"
-import { IContextMenu } from "interfaces"
+import { IContextMenu } from "~/interfaces"
 
 export default {
     name: "congratsmessage",

@@ -1,8 +1,8 @@
-import { devMessage, embedColor } from "config/options.js"
-import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "config/reqs.js"
 import { InteractionContextType, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
-import { bedwarsLevel, getGuild, getHeadURL, getPlayer, getUUID, hypixelLevel, skywarsLevel } from "utils/Hypixel.js"
+import { devMessage, embedColor } from "~/config/options.js"
+import { bwfkdr, bwstars, bwwins, duelswins, duelswlr, swkdr, swstars } from "~/config/reqs.js"
+import { ICommand } from "~/interfaces"
+import { bedwarsLevel, getGuild, getHeadURL, getPlayer, getUUID, hypixelLevel, skywarsLevel } from "~/utils/Hypixel.js"
 
 export default {
     name: "check",

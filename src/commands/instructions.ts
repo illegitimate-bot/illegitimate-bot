@@ -1,6 +1,6 @@
-import { devMessage, embedColor, instructionsgif } from "config/options.js"
 import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { ICommand } from "interfaces"
+import { devMessage, embedColor, instructionsgif } from "~/config/options.js"
+import { ICommand } from "~/interfaces"
 
 export default {
     name: "instructions",

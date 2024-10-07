@@ -1,7 +1,7 @@
 import { CronJob } from "cron"
 import fs from "fs"
-import { ICron } from "interfaces"
 import path from "path"
+import { ICron } from "~/interfaces"
 type FileType = "js" | "ts"
 const __dirname = import.meta.dirname
 

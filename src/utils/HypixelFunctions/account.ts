@@ -1,7 +1,7 @@
 import fetch from "axios"
-import { IPlayer, IPlayerData } from "interfaces"
-import { IGuild, IGuildData } from "interfaces"
-import env from "utils/Env.js"
+import { IPlayer, IPlayerData } from "~/interfaces"
+import { IGuild, IGuildData } from "~/interfaces"
+import env from "~/utils/Env.js"
 const apikey = env.prod.hypixelapikey
 const mojang = "https://api.mojang.com/users/profiles/minecraft/"
 const mojanguuid = "https://sessionserver.mojang.com/session/minecraft/profile/"
